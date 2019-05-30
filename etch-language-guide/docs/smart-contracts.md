@@ -84,8 +84,6 @@ function balance(address : Address) : UInt64
 endfunction
 ```
 
-
-
 ## Data confirmation
 
 If you run an `etch` contract containing one or more `State` types and flag the compiler with `-data` and a filename, it will create a `json` file containing data details.
@@ -97,6 +95,11 @@ If you run an `etch` contract containing one or more `State` types and flag the 
 ``` json
 	{"var": "0a000000"}
 ```
+
+## Utility functions
+
+```getBlockNumber()``` : returns the number of the current block in `UInt64`.
+
 
 
 ## Python compilation

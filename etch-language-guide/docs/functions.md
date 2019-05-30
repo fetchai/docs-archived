@@ -77,6 +77,7 @@ function fibonacci(n: Int32) : Int32
 
 endfunction
 
+
 function main()
 
 	 var nterms = 10;
@@ -113,6 +114,26 @@ function change_value(value :Int32)
   	// value = 20; // error: assignment operand is not writeable. Failed to compile.
 
 endfunction
+
+```
+
+The same is true of complex types.
+
+``` java
+function main() 
+
+    var myArray = Array<Int32>(5);
+    change_value(myArray);
+
+endfunction
+
+
+function change_value(value :Array<Int32>)
+
+    // value = Array<Int32>(3); // error: assignment operand is not writeable. Failed to compile.
+
+endfunction
+
 ```
 
 However, this is not the case with object types such as `State`.

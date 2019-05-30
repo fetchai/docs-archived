@@ -3,7 +3,7 @@
 `etch` supports ASCII and UTF-8 for string representation.
 
 !!! note
-	Coming soon: length attribute, string indexing, and common string functions.
+	Coming soon: length attribute and string indexing.
 
 
 
@@ -162,17 +162,110 @@ endfunction
 
 
 
-## Common functions
+## Utility functions
 
-!!! note 
-	Coming soon.
+You can use the following utility functions to manipulate strings:
 
+* [find()](strings.md#find)
+* [length()](strings.md#length)
+* [reverse()](strings.md#reverse)
+* [substr()](strings.md#substr)
+* [trim()](strings.md#trim)
 
+### Find
 
+The `find()` function searches a string for the first occurrence of a specified substring. 
+
+* The search is case sensitive.
+* The first character in the string occurs at index 0.
+* Returns the index of the first occurrence of the substring.
+* Returns -1 if the substring is not found.
+* Returns -1 if either the string or the substring are empty.
+
+``` c++
+function main()
+
+	var myString : String = "Hello World";
+	var output = Array<Int32>(3);
+    output[0] = myString.find("Hello");
+    output[1] = myString.find("World");
+    output[2] = myString.find("o");
+	printLn(output);
+
+endfunction
+```
+
+### Length
+
+The `Length()` function returns the number of characters in a string.
+
+* Returns -1 if the string is empty.
+
+``` c++
+function main()
+
+	var output = Array<Int32>(2);
+	output[0] = "Hello".length();
+	output[1] = "Wo rld ".length();
+	printLn(output);
+    
+endfunction
+```
+
+### Reverse
+
+The `Reverse()` function reverses the order of characters in a string.
+
+``` c++
+function main()
+
+	var myString : String = "xyz";
+	myString.reverse();
+	printLn(myString);
+
+endfunction
+```
+
+### Substr
+
+The `substr()` function extracts a substring from a string, based on specified starting and ending indexes (but excluding the final character):
+
+`string.substr(start, end)`
+
+* The first character in the string occurs at index 0.
+* The final character is excluded from the substring.
+* Returns an empty string if *start* and *end* are equal.
+* Returns the whole string if *start* equals 0 and *end* is equal to the length of the string.
+* Fails if *start* is greater than *end*.
+* Fails if *start* is negative.
+* Fails if *end* is greater than the length of the string.
+
+``` c++
+function main()
+
+	printLn("Hello World".substr(6, 11));
+
+endfunction
+```
+
+### Trim
+
+The `trim()` function removes any whitespace from the start and end of a string.
+
+* Returns an empty string if the original string contains only whitespace.
+
+``` c++
+function main()
+
+	var myString : String = "   Hello World  ";
+	myString.trim();
+	printLn(myString);
+
+endfunction
+```
 
 ## Formatting
 
 !!! note 
 	Coming soon.
-
 

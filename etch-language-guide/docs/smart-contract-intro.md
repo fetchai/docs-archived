@@ -2,20 +2,23 @@
 
 A <a href="https://en.wikipedia.org/wiki/Smart_contract" target="_blank">smart contract</a> facilitates, verifies, and enforces a transaction between two or more parties on a distributed ledger or blockchain. 
 
-A smart contract stores transaction data on the permanent and irreversible blockchain ledger and, on doing so, changes the state of the ledger. 
+Smart contracts store transactional data on the permanent and irreversible blockchain ledger and, on doing so, change the state of the ledger. 
 
 Smart contract programming languages are scripting languages specific to the cryptocurrency or platform, such Bitcoin's Script or Ethereum's Solidity. 
 
-Fetch.AI smart contracts run on the `etch` virtual machine (VM) which is a logical computation layer for running smart contract code. The `etch` VM and smart contract code resides on every node of the distributed ledger.
+Fetch.AI smart contracts run on the `etch` virtual machine (VM) which is a logical computation layer used to execute smart contract code. The `etch` VM and smart contract code reside on every node of the Fetch distributed ledger.
 
-Smart contracts can be used for voting, crowdfunding, auctions, multi-signature wallets, identity verification, and much more.
+Smart contracts can be used for voting applications, crowdfunding, auctions, multi-signature wallets, identity verification, and much more.
 
-`etch` builds up smart contracts with `State` and `PersistentMap` data structures and the `Address` type which represents account owners and their balances. 
+`etch` builds up smart contracts using `State` and `PersistentMap` data structures and the `Address` type which represents account owners and their balances. 
+
+
+
 
 
 ## The Ledger
 
-Smart contract transactions are etched onto the distributed ledger, or blockchain, and are therefore permanent, traceable, and irreversible.
+Smart contract transactions are etched onto the Fetch.AI distributed ledger, or blockchain, and are therefore permanent, traceable, and irreversible.
 
 The Fetch.AI ledger is the blockchain foundation of the `etch` VM. Quick start instructions for spinning up a Fetch.AI ledger node are <a href="https://community.fetch.ai/getting-started/building-fetchai-ledger-node/develop" target="_blank">here</a>.
 
@@ -23,15 +26,33 @@ The Fetch.AI ledger is unlike more traditional blockchain designs. Instead of a 
 
 <center>![Memory mapping on the Fetch.AI ledger shards](img/shards-basic.png)</center>
 
-Contracts can execute concurrently and the blockchain sharding design significantly speeds up the network.
+Contracts can execute concurrently and so the blockchain sharding design significantly speeds up the network.
+
+
+## Determinism
+
+In computer science, <a href="https://en.wikipedia.org/wiki/Deterministic_system#In_computer_science" target="_blank">determinism</a> ensures that an input to an algorithm will always produce the same output. 
+
+When designing `etch` smart contract code which will execute on Fetch ledger nodes, it is essential to avoid non-deterministic behaviour that may break consensus. Any code that causes separate nodes to have different values for the same thing breaks consensus.
+
+Smart contract developers should therefore consider the following: 
+
+* Randomness: along with random functions, non-deterministic randomness can arise in other places, such as HashMap implementations and Map iterations, for example.
+* Concurrency: multiple processes targeting the same state transactions can break consensus.
+* Unconsidered imports: libraries containing non-deterministic functions, such as time functions or APIs that access external and unpredictable systems should be avoided.
+* Timestamps: watch out for non-deterministic timestamp implementations.
+* Asynchronous behaviour can break consensus.
+
+It may be better to implement non-deterministic behaviour outside of smart contract ledger code.
+
 
 
 
 ## Fees
 
-Fetch.AI charges developers for computation and storing data onto the ledger in a manner which incentivizes good coding practices.
+Fetch.AI charges developers for computation and storage of data on the ledger in a manner which incentivizes good coding practices.
 
-Limit the fees paid for smart contract execution by using a random distribution of contract data on a shard and a minimum number of shard lanes.
+You can limit the fees paid for smart contract execution by distributing data storage over a single shard and a minimum number of shard lanes.
 
 Fees rise in a linear manner per number of shards used until the maximum number of shards is reached, at which point the fees start to go up exponentially.
 
