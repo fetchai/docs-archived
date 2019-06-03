@@ -142,8 +142,8 @@ In the code below we first create an `Address` type. We can then define the tran
 ``` c++
 function main()
 
- 	var from = Address("AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+Pw==");
-	var from_account = State<UInt64>(from, 0u64);
+  var from = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+  var from_account = State<UInt64>(from, 0u64);
 
 endfunction
 ```
