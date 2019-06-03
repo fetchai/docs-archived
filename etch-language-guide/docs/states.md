@@ -68,7 +68,7 @@ There is an option in `//5.` to uncomment and test the `set()` function.
 
 function main()
 
-  var myState = State<Int32>("balance", 0);
+  var myState = State<Int32>("contract_owner_balance", 0);
   // 1. print empty state
   print("1: ");
   printLn(toString(myState.get()));
