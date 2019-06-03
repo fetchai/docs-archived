@@ -23,7 +23,7 @@ function linear_search(an_array :Array<Int32>, search_for :Int32) : Bool
   
     var found : Bool = false;
 
-    for (i in 0:4) // will use length operator when ready
+    for (i in 0:an_array.count()-1) 
       if (an_array[i] == search_for)
         found = true;
       endif
@@ -60,7 +60,7 @@ endfunction
 function binary_search(an_array :Array<Int32>, search_for :Int32) : Bool
 
     var start = 0;
-    var end = 4; // waiting for string length function
+    var end = an_array.count(); 
     var found : Bool = false;
 
     while(start <= end && found == false) 

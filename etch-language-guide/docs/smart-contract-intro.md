@@ -10,7 +10,7 @@ Fetch.AI smart contracts run on the `etch` virtual machine (VM) which is a logic
 
 Smart contracts can be used for voting applications, crowdfunding, auctions, multi-signature wallets, identity verification, and much more.
 
-`etch` builds up smart contracts using `State` and `PersistentMap` data structures and the `Address` type which represents account owners and their balances. 
+`etch` builds up smart contracts using `State` and `PersistentMap` data structures and the `Address` type which represents account owners and gives access to respective balances. 
 
 
 
@@ -26,24 +26,24 @@ The Fetch.AI ledger is unlike more traditional blockchain designs. Instead of a 
 
 <center>![Memory mapping on the Fetch.AI ledger shards](img/shards-basic.png)</center>
 
-Contracts can execute concurrently and so the blockchain sharding design significantly speeds up the network.
+This blockchain sharding design speeds up the network as contracts can execute concurrently.
 
 
 ## Determinism
 
 In computer science, <a href="https://en.wikipedia.org/wiki/Deterministic_system#In_computer_science" target="_blank">determinism</a> ensures that an input to an algorithm will always produce the same output. 
 
-When designing `etch` smart contract code which will execute on Fetch ledger nodes, it is essential to avoid non-deterministic behaviour that may break consensus. Any code that causes separate nodes to have different values for the same thing breaks consensus.
+When designing `etch` smart contract code which will execute on Fetch ledger nodes, it is essential to avoid non-deterministic behaviour that may break consensus. Any code that causes separate nodes to have different values for the same thing may break consensus.
 
 Smart contract developers should therefore consider the following: 
 
-* Randomness: along with random functions, non-deterministic randomness can arise in other places, such as HashMap implementations and Map iterations, for example.
+* Randomness: along with random functions, non-deterministic randomness can arise in other places, such as `Hash Map` implementations and `Map` iterations, for example.
 * Concurrency: multiple processes targeting the same state transactions can break consensus.
-* Unconsidered imports: libraries containing non-deterministic functions, such as time functions or APIs that access external and unpredictable systems should be avoided.
+* Ill-considered imports: e.g. libraries containing non-deterministic functions, such as time functions, or APIs that access external and unpredictable systems.
 * Timestamps: watch out for non-deterministic timestamp implementations.
 * Asynchronous behaviour can break consensus.
 
-It may be better to implement non-deterministic behaviour outside of smart contract ledger code.
+It may be better to implement any essential non-deterministic behaviour outside of smart contract ledger code.
 
 
 
@@ -54,7 +54,7 @@ Fetch.AI charges developers for computation and storage of data on the ledger in
 
 You can limit the fees paid for smart contract execution by distributing data storage over a single shard and a minimum number of shard lanes.
 
-Fees rise in a linear manner per number of shards used until the maximum number of shards is reached, at which point the fees start to go up exponentially.
+Fees rise in a linear manner per number of shards up to the maximum number of shards, after which point the fees increase exponentially.
 
 !!! note 
 	Coming soon: details of developer fee structures for smart contract data.
