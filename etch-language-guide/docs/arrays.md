@@ -102,7 +102,7 @@ endfunction
 
 The `count()` function returns the number of items in a one dimensional array, or the number of arrays in a two dimensional array.
 
-* Returns 0 is the array is empty.
+* Returns 0 if the array is empty.
 
 ``` java
 function main()
