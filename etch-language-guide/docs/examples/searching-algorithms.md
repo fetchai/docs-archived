@@ -1,3 +1,5 @@
+<h1>Creating a search algorithm</h1>
+
 ## Linear search
 
 ``` java

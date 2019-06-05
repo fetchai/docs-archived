@@ -1,3 +1,5 @@
+<h1>Designing a sorting algorithm</h1>
+
 ## Bubble sort
 
 ``` java
