@@ -1,4 +1,5 @@
 <h1>PersistentMaps</h1>
+<h2>Deprecating in favour of ShardedStates</h2>
 
 A `PersistentMap` is a data structure like `State` but is more flexible. 
 

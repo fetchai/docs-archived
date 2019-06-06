@@ -1,6 +1,6 @@
 <h1>States</h1>
 
-Smart contracts store data on the Fetch.AI distributed ledger with `State` and `PersistentMap` data structures. 
+Smart contracts store data on the Fetch.AI distributed ledger using `State` and `PersistentMap` data structures.
 
 A `State` is declared as a `State<ValueType>(name : String, value : ValueType)` like this:
 
@@ -8,7 +8,9 @@ A `State` is declared as a `State<ValueType>(name : String, value : ValueType)` 
 	var myState = State<Int32>("balance", 0);
 ```
 
-In the above `State`, the `Int32` value `0` maps to the key `balance`.
+In the above `State`, the key on the left maps to the `Int32` value on the right. 
+
+The key can be a `String` or an `Address`. Wherever referenced, the key gives access to the `State`, regardless of whether or not the variable name pointing to the `State` has changed.
 
 The value set at declaration is the default value. The following snippet prints `0`. 
 
@@ -26,48 +28,76 @@ endfunction
 
 ```
 
+You can only update the default value using a `set()` function.
+
+## Getters and setters
+
+Getters and setters are available for `State` types.
+
+``` c++
+function main()
+
+  var myAccount = State<Int32>("balance", 0);
+  printLn("My balance = " + toString(myAccount.get()));
+  myAccount.set(10);
+  printLn("My balance = " + toString(myAccount.get()));
+
+endfunction
+```
+
+Currently, `State` getters and setters support primitive types only.
+
+
+
 ## State behaviour
 
-`State` behaviour currently has a few surprises. For example, in the code example below we see that we can happily print the value of a state after declaration `// 1. `.
+Currently `State` behaviour is fairly trivial. The code below gives a number of examples.
 
-It is possible to change the `State` value within the same method with `set()` and print the change successfully `// 2.`.
+First, we see that we can happily print the value of a state after declaration `// 1. `.
 
-However, sending `State` variables to other functions is challenging. In the function `change_state()` we can assign our `State` object to a new name and reset the value and this is the value that `main()` prints in `` 3.``, even though we create a new `State` using the same `"balance"` key and reset the value to `42`. The second statement has no effect on the original `State` object. 
+In `// 2.` it is possible to change the `State` value within the same method with `set()`.
 
-However, in the `query()` function (no connection to `@query`) we call the original `State` in the same way by using the `"balance"` key but without changing the default value from `0`. This time we *do* get access to the original value in `// 4.`.
+In the function `change_state()` we can assign our `State` object to a new name and reset the value to `100` which `main()` prints at `` // 3.``, even though we also create a new `State` using the same `"balance"` key and reset the value to `42`. The second statement has no effect on the original `State` object. 
 
-Interestingly, in `//5.`, if we reset the value with `set()` and return the value with `get()`, the new value is returns by the function. However, there is no change to the `State`.
+The `query()` function (no connection to `@query`) also references the original `State` by using the `"balance"` key and declares the default value as `0`. However, this time we *do* get access to the original `State` and the value returned is `100` again.
+
+There is an option in `//5.` to uncomment and test the `set()` function.
 
 
 ``` java
 
 function main()
-    
-  var myState = State<Int32>("balance", 0);
+
+  var myState = State<Int32>("contract_owner_balance", 0);
   // 1. print empty state
   print("1: ");
   printLn(toString(myState.get()));
+  // PRINTS 0
 
   // 2. change state inside main
   myState.set(33);
   print("2: ");
   printLn(toString(myState.get()));
+  // PRINTS 33
 
   change_state(myState);
   // 3. print state after change_state call
   print("3: ");
   printLn(toString(myState.get()));
+  // PRINTS 100
 
   var result = query();
   // 4. print state after query call - notice how query function doesn't change state of the original
   print("4: ");
   printLn(toString(result));
+  // PRINTS 100
 
   // 5. alter comments in query method to see that state value is not alterable even though
   // accessible from another function
   // print("5: ");
   // printLn(toString(result));
   // printLn(toString(myState.get()));
+  // PRINTS 55
 
 endfunction
 
@@ -79,48 +109,31 @@ function change_state(state : State<Int32>)
   var newState = state;
   newState.set(100);
 
-  // but notice that creating a new local state with the same key string does not change the original
+  // this has no effect on the original State
   var anotherState = State<Int32>("balance", 42);
 
 endfunction
 
 
-
 function query() : Int32
 
-  // HOWEVER, notice that creating a new state with the original key accesses the original state
+  // this gives a default value
   var myState = State<Int32>("balance", 0);
-  
-  // 4. and returns it, this returns 100!
+
+  // 4. this returns 100
   return myState.get();
 
   // 5. 
-  // BUT if you set a new variable into the state, it will return the new variable but not 
-  // alter the state!!
+  // If you set a new variable into the state, it will return the new variable 
   // myState.set(55);
   // return myState.get();
 
-
 endfunction
+
 
 ```
 
-You can add complex types to a `State`:
-
-``` java
-function main()
-
-    var myArray = Array<Int32>(5);
-    myArray[0] = 23;
-    printLn(toString(myArray[0]));
-
-    var myState = State<Array<Int32>>("var", myArray);
-    
-    // myState.set(myArray[0]=24); // error at '=', expected ')'
-    // printLn("My state array index [0] value = " + toString(myState.get(myArray[0]))); // error: unable to find matching function for 'get'
-
-endfunction
-```
+## Non-primitive types
 
 A common use for the `State` type is to represent account owner `Address` types with their respective balances. To this end, you can declare a `State` where the first parameter is an `Address` type.
 
@@ -129,8 +142,8 @@ In the code below we first create an `Address` type. We can then define the tran
 ``` c++
 function main()
 
- 	var from = Address("AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+Pw==");
-	var from_account = State<UInt64>(from, 0u64);
+  var from = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+  var from_account = State<UInt64>(from, 0u64);
 
 endfunction
 ```
@@ -145,22 +158,7 @@ endfunction
 
 
 
-## Getters and setters
 
-Getters and setters are available for `State` types.
-
-``` c++
-function main()
-
-	var myAccount = State<Int32>("balance", 0);
-	printLn("My balance = " + toString(myAccount.get()));
-	myAccount.set(10);
-	printLn("My balance = " + toString(myAccount.get()));
-
-endfunction
-```
-
-Currently, `State` getters and setters support primitive types only.
 
 
 

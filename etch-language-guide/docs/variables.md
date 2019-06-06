@@ -15,6 +15,28 @@ Any numerical variable not explicitly initialised receives a default value, such
 [!comment]: <> (## Assignments TODO:)
 
 
+## Naming
+
+Variable naming follows the same rules as C++.
+
+``` c++
+function main()
+
+    var ABC = 1;
+    var abc = 2;
+    var _abc = 3;
+    // var *abc = 4; // error at '*', expected variable name
+    // var 123 = 5; // error at '123', expected variable name
+    var a123 = 6;
+    var a_123 = 7;
+
+endfunction
+```
+
+
+
+
+
 ## Integers
 
 Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits.
@@ -538,26 +560,6 @@ function main()
 
 endfunction
 ```
-
-## Naming
-
-Variable naming follows the same rules as C++.
-
-``` c++
-function main()
-
-	var ABC = 1;
-	var abc = 2;
-	var _abc = 3;
-	// var *abc = 4; // error at '*', expected variable name
-	// var 123 = 5; // error at '123', expected variable name
-	var a123 = 6;
-	var a_123 = 7;
-
-endfunction
-```
-
-Naming conventions are up to you. 
 
 
 

@@ -23,29 +23,39 @@ This is an economical way to manage memory on the ledger shards. However, there 
 For example, given a voting function such as the one below, the code may aggregate the `State` variables tracking every vote in an inefficient manner:
 
 ``` c++
-// example code snippet which will not compile
+
+function main()
+
+  vote();
+
+endfunction
+
 function vote()
 
-	// declare and set brexit account
-	
-	var votes_for = State<Int64>(brexit, 0u64);
-	var votes_against = State<Int64>(brexit, 0u64);
-	var votes_total = State<Int64>(brexit, 0u64);
+    // declare and set brexit account
+    
+    var brexit = "nightmare business";
 
-	// ..and further along..
+    var votes_for = State<Int32>(brexit, 0);
+    var votes_against = State<Int32>(brexit, 0);
+    var votes_total = State<Int32>(brexit, 0);
+    var votes_sum = State<Int32>(brexit, 0);
 
-	if (vote)
-			// update the aggregate votes for
-			votes_for.set(votes_for.get() + 1u64);
-		else 
-			// update the aggregate votes against
-			votes_against.set(votes_against.get() + 1u64);
-		endif
+    // ..and further along..
 
-		// update the aggregate of total votes
-		votes_sum.set(votes_total.get() + 1u64);
+    if (true)
+            // update the aggregate votes for
+            votes_for.set(votes_for.get() + 1);
+        else 
+            // update the aggregate votes against
+            votes_against.set(votes_against.get() + 1);
+        endif
 
-end function
+        // update the aggregate of total votes
+        votes_sum.set(votes_total.get() + 1);
+
+endfunction
+
 ```
 
 Each time a `State` increments, the new data value takes up a new section on the shard.

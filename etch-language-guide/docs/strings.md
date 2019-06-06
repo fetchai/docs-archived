@@ -1,4 +1,4 @@
-# Strings
+<h1>Strings</h1>
 
 `etch` supports ASCII and UTF-8 for string representation.
 
@@ -172,7 +172,7 @@ You can use the following utility functions to manipulate strings:
 * [substr()](strings.md#substr)
 * [trim()](strings.md#trim)
 
-### Find
+<h3 id="find">Find</h3>
 
 The `find()` function searches a string for the first occurrence of a specified substring. 
 
@@ -186,35 +186,29 @@ The `find()` function searches a string for the first occurrence of a specified 
 function main()
 
 	var myString : String = "Hello World";
-	var output = Array<Int32>(3);
-    output[0] = myString.find("Hello");
-    output[1] = myString.find("World");
-    output[2] = myString.find("o");
-	printLn(output);
+	printLn(myString.find("o"));
 
 endfunction
 ```
 
-### Length
+<h3 id="length">Length</h3>
 
-The `Length()` function returns the number of characters in a string.
+The `length()` function returns the number of characters in a string.
 
 * Returns -1 if the string is empty.
 
 ``` c++
 function main()
 
-	var output = Array<Int32>(2);
-	output[0] = "Hello".length();
-	output[1] = "Wo rld ".length();
-	printLn(output);
+var myString : String = "Hello World";
+printLn(myString.length());
     
 endfunction
 ```
 
-### Reverse
+<h3 id="reverse">Reverse</h3>
 
-The `Reverse()` function reverses the order of characters in a string.
+The `reverse()` function reverses the order of characters in a string.
 
 ``` c++
 function main()
@@ -226,7 +220,7 @@ function main()
 endfunction
 ```
 
-### Substr
+<h3 id="substr">Substr</h3>
 
 The `substr()` function extracts a substring from a string, based on specified starting and ending indexes (but excluding the final character):
 
@@ -248,7 +242,7 @@ function main()
 endfunction
 ```
 
-### Trim
+<h3 id="trim">Trim</h3>
 
 The `trim()` function removes any whitespace from the start and end of a string.
 
