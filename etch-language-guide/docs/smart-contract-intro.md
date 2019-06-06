@@ -10,7 +10,7 @@ Fetch.AI smart contracts run on the `etch` virtual machine (VM) which is a logic
 
 Smart contracts can be used for voting applications, crowdfunding, auctions, multi-signature wallets, identity verification, and much more.
 
-`etch` builds up smart contracts using `State` and `PersistentMap` data structures and the `Address` type which represents account owners and gives access to respective balances. 
+`etch` builds up smart contracts using `State` data structures and the `Address` type which represents account owners and gives access to respective balances. 
 
 
 

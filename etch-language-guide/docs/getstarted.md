@@ -10,7 +10,7 @@ Full initial installation and build instructions are <a href="https://community.
 
 `cd` into `build` folder.
 
-Run `make -j vm-lang`.
+Run `make -j 4 vm-lang`.
 
 ### Setup
 

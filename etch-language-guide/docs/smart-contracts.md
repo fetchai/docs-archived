@@ -23,7 +23,7 @@ Smart contract functions are annotated depending on the activity they perform.
 
 <H3>@init</H3>	
 
-The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation.
+The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment.
 
 The name of the `@init` function can be anything you like.
 
@@ -99,23 +99,3 @@ If you run an `etch` contract containing one or more `State` types and flag the 
 ## Utility functions
 
 ```getBlockNumber()``` : returns the number of the current block in `UInt64`.
-
-
-
-## Python compilation
-
-!!! note 
-	Coming soon: author is researching this.
-
-
-## Run against testnet
-
-!!! note 
-
-	Coming soon: author is researching how the Fetch Ledger Python API communicates with `etch` smart contract code.
-
-	Research includes the following documentation:
-
-	* Spinning up some test nodes - instructions <a href="https://community.fetch.ai/getting-started/building-fetchai-ledger-node/develop/" target="_blank">here</a>.
-
-	* Setting up the Python API - instructions <a href="https://community.fetch.ai/getting-started/send-transaction-over-http-using-python-sdk/develop/" target="_blank">here</a>.

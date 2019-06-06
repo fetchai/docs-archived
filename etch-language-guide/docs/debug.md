@@ -20,7 +20,7 @@ Our compiler is very strict. It will complain about:
 * Unmatched and unexpected beginnings, middles, and endings in selections, iterations, statements, and blocks.
 * Incorrectly formed statements.
 * Incorrect amount, or lack of, operands in boolean tests.
-* `Break` and `continue` statements outside `while` or `for` loops.
+* `break` and `continue` statements outside `while` or `for` loops.
 * Non-functions, unmatched functions, and functions that do not return a value.
 * Local function definitions.
 * Returning `null` or no value from functions.
@@ -48,7 +48,7 @@ function main()
 endfunction
 ```
 
-Running the code from the command line with zero flags `--` sends arguments to the `vm-lang` executable. 
+Running the code from the command line with zero flags `--` sends arguments to the `vm-lang` executable.  
 
 For example, run the code snippet above with zero flags `--` and an example argument `hello` like this:
 

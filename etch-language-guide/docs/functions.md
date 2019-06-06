@@ -136,29 +136,8 @@ endfunction
 
 ```
 
-However, this is not the case with object types such as `State`.
+However, this is not the case with object types such as `Array`
 
-``` java
-function main() 
-
-	var myState = State<Int32>("balance", 10);
-	printLn(myState.get());
-
-	change_value(myState);
-	printLn(myState.get());
-
-endfunction
-
-
-function change_value(state :State<Int32>)
-  	
-  	state.set(30);
-
-endfunction
-
-```
-
-And `Array`.
 
 ``` java
 function main() 
@@ -237,7 +216,7 @@ endfunction
 
 ## Utility functions
 
-<H3>Random</H3>
+<H3>Random (non deterministic)</H3>
 
 You can currently generate non-deterministic, random, signed and unsigned integers and floats.
 
@@ -302,7 +281,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `System.Argv()`
 
 !!! note 
-	Coming soon: common utility maths functions such as `pow()`, `exp()`, `Abs()`, `Sine()`, `Cosine()`, etc.
+	Coming soon: common utility maths functions such as `pow()`, `exp()`, `abs()`, `Sine()`, `Cosine()`, etc.
 
 !!! tip
 	`etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
@@ -314,7 +293,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `toInt8()`
 * `toInt16()`
 * `toInt64()`
-* `toByte()`
+* `toUInt8()`
 * `toUInt16()`
 * `toUInt32()`
 * `toUInt64()`

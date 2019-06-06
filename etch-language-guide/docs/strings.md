@@ -1,9 +1,7 @@
 <h1>Strings</h1>
 
-`etch` supports ASCII and UTF-8 for string representation.
+`etch` supports ASCII for string representation.
 
-!!! note
-	Coming soon: length attribute and string indexing.
 
 
 
@@ -16,7 +14,6 @@ function main()
 
 	var myString : String = "hello";
 	var myInferredString = "hello again";
-	var myChineseUTFString : String = "提供"; // prints on console, not in playground
 	var x: String = null;
 
 	printLn(myString);
@@ -155,12 +152,6 @@ endfunction
 ```
 
 
-## Indexing
-
-!!! note 
-	Coming soon.
-
-
 
 ## Utility functions
 
@@ -258,8 +249,4 @@ function main()
 endfunction
 ```
 
-## Formatting
-
-!!! note 
-	Coming soon.
 

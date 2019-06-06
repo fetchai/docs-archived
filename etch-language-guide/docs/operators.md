@@ -1,7 +1,6 @@
 <h1>Operators</h1>
 
 !!!	note
-	Coming soon: support for greyed out operators.
 
 
 <table align="center">
@@ -26,14 +25,14 @@
         <td align="center">*=</td>
         <td align="center">></td>
         <td align="center">>=</td>
-        <td align="center"><span style="color:lightgray">{   }</span></td>
+        <td align="center"></td>
         <td align="center">/</td>
     </tr>
     <tr>
         <td align="center">/=</td>
         <td align="center">++</td>
         <td align="center">=</td>
-        <td align="center"><span style="color:lightgray">:=</span></td>
+        <td align="center"></td>
         <td align="center">:</td>
         <td align="center">,</td>
     </tr>
@@ -42,13 +41,13 @@
         <td align="center">%=</td>
         <td align="center">--</td>
         <td align="center">!</td>
-        <td align="center"><span style="color:lightgray">...</span></td>
+        <td align="center"></td>
         <td align="center">.</td>
     </tr>
 </table>
 
 
-## + and -
+## -
 
 ``` c++
 function main()
@@ -179,22 +178,6 @@ function main()
 	printLn(toString(z));
 
 endfunction
-```
-
-
-## Power
-
-``` c++
-    Coming soon:
-```
-
-[!comment]: <> (pow(base, exponent), exp(exponent); or x^y)
-
-
-## Bitwise
-
-``` c++
-    Coming soon:
 ```
 
 

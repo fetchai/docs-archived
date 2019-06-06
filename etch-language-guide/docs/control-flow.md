@@ -13,11 +13,11 @@ function main()
 
 	if (x == y)
 		printLn("they are equal");
-		elseif (x > y)
+	elseif (x > y)
 		printLn("x is more than y");
-		else if (x > y)
+	else if (x > y)
 		printLn("x is more than y");
-		else
+	else
 		printLn("y is more than x");
 		endif
 	endif
@@ -106,7 +106,8 @@ function main()
 
 	for(i in 0:10)
 	    printLn(toString(i));
-	    if (i == 5) break;
+	    if (i == 5) 
+	    	break;
 	    endif
 	endfor
 

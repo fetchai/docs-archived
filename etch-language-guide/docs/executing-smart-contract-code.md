@@ -12,21 +12,15 @@ To run a standalone ledger node listening on port 8000, use the following comman
 
 ```
 
-Next, download the Python Ledger API with git and checkout the `develop` branch:
+Next, download the Python Ledger API with:
 
 
 ``` bash
 
-	git clone git@github.com:fetchai/ledger-api-py.git -b develop
+	pip install -u fetchai-ledger-api
 
 ```
-Run the installation script:
 
-``` bash
-
-	python3 setup.py install
-
-```
 
 In the examples folder, you will see some scripts. 
 
