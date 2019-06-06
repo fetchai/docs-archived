@@ -281,7 +281,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `System.Argv()`
 
 !!! note 
-	Coming soon: common utility maths functions such as `pow()`, `exp()`, `Abs()`, `Sine()`, `Cosine()`, etc.
+	Coming soon: common utility maths functions such as `pow()`, `exp()`, `abs()`, `Sine()`, `Cosine()`, etc.
 
 !!! tip
 	`etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
@@ -293,7 +293,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `toInt8()`
 * `toInt16()`
 * `toInt64()`
-* `toByte()`
+* `toUInt8()`
 * `toUInt16()`
 * `toUInt32()`
 * `toUInt64()`

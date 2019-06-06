@@ -65,7 +65,7 @@ The ledger shards could look something like this after this `vote()` function ru
 
 This is highly uneconomical. Every aggregate value for a single `State` accumulates upon a ledger shard. Furthermore, multiple `States` take up multiple shards. 
 
-Data is chargeable per lane in order to disincentivize code like the above which can slow the network. The current maximum lanes allowed is 5.
+Data is chargeable per lane in order to disincentivize code like the above which can slow the network. The current maximum lanes is configurable.
 
 There are better approaches to the voting problem. For example, by encapsulating the data with a `Map` like this:
 

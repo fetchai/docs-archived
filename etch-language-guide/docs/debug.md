@@ -48,7 +48,7 @@ function main()
 endfunction
 ```
 
-Running the code from the command line with zero flags `--` sends arguments to the `vm-lang` executable. 
+Running the code from the command line with zero flags `--` sends arguments to the `vm-lang` executable.  
 
 For example, run the code snippet above with zero flags `--` and an example argument `hello` like this:
 

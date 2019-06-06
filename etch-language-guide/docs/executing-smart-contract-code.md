@@ -20,13 +20,7 @@ Next, download the Python Ledger API with:
 	pip install -u fetchai-ledger-api
 
 ```
-Run the installation script:
 
-``` bash
-
-	python3 setup.py install
-
-```
 
 In the examples folder, you will see some scripts. 
 

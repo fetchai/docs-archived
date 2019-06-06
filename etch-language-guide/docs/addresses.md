@@ -28,7 +28,7 @@ endfunction
 
 ## Verification
 
-The `Address` type has a function `signed_tx()` which allows you to verify the signature. It returns a boolean.
+The `Address` type has a function `signed_tx()` which allows you to verify the signature. It returns a boolean. This is only valid in an `@action` function, else it will return false.
 
 ``` java
 function main()
