@@ -1,6 +1,6 @@
 <h1>States</h1>
 
-Smart contracts store data on the Fetch.AI distributed ledger using `State` and `PersistentMap` data structures.
+Smart contracts store data on the Fetch.AI distributed ledger using `State`.
 
 A `State` is declared as a `State<ValueType>(name : String, value : ValueType)` like this:
 
@@ -147,18 +147,6 @@ function main()
 
 endfunction
 ```
-
-!!! note 
-	Coming soon: support for including a `Map` in a `State`.
-
-	``` java
-
-	// var myMapState = State<Map<String, Int32>>(myMap, null); // error: unable to find matching constructor for type/function 'State<Map<String, Int32>>'
-	```
-
-
-
-
 
 
 

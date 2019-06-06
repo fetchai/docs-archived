@@ -20,7 +20,7 @@ Our compiler is very strict. It will complain about:
 * Unmatched and unexpected beginnings, middles, and endings in selections, iterations, statements, and blocks.
 * Incorrectly formed statements.
 * Incorrect amount, or lack of, operands in boolean tests.
-* `Break` and `continue` statements outside `while` or `for` loops.
+* `break` and `continue` statements outside `while` or `for` loops.
 * Non-functions, unmatched functions, and functions that do not return a value.
 * Local function definitions.
 * Returning `null` or no value from functions.

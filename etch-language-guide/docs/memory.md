@@ -1,12 +1,12 @@
 <h1>Memory</h1> 
 
-A `State` type saves data to the shards that make up the ledger. There are 16 parallel shards on the ledger that accept permanent, irreversible storage. 
+A `State` type saves data to the shards that make up the ledger. There are a configurable number of parallel shards on the ledger that accept permanent, irreversible storage. 
 
-Developers have to pay to store data on ledger shards so they should take care when constructing `State` and `PersistentMap` types to avoid unnecessary fees. 
+Developers have to pay to store data on ledger shards so they should take care when constructing `State` types to avoid unnecessary fees. 
 
 Ensuring that smart contract data is evenly spread across ledger shards is the most efficient and economical way to code and execute smart contracts in `etch`.
 
-The trick is to ensure that `etch` code avoids taking up too much memory on a single shard or taking up too much memory on too many shards. 
+The trick is to ensure that `etch` code avoids taking up too much memory on a single shard or taking up too much memory on too many shards, more memory will cost more to deploy.
 
 It is possible to exceed `etch` imposed limits on data storage in which case an `etch` smart contract will fail. For example, aggregate functions may store too much data on too many shards on the ledger if coded inappropriately. Code like this can block other users and slow the network. Data fees will reflect this. 
 
@@ -32,25 +32,24 @@ endfunction
 
 function vote()
 
-    // declare and set brexit account
+    // declare and set politics account
     
-    var brexit = "nightmare business";
+    var politics = "nightmare business";
 
-    var votes_for = State<Int32>(brexit, 0);
-    var votes_against = State<Int32>(brexit, 0);
-    var votes_total = State<Int32>(brexit, 0);
-    var votes_sum = State<Int32>(brexit, 0);
+    var votes_for = State<Int32>(politics, 0);
+    var votes_against = State<Int32>(politics, 0);
+    var votes_total = State<Int32>(politics, 0);
+    var votes_sum = State<Int32>(politics, 0);
 
     // ..and further along..
 
     if (true)
-            // update the aggregate votes for
-            votes_for.set(votes_for.get() + 1);
-        else 
-            // update the aggregate votes against
-            votes_against.set(votes_against.get() + 1);
-        endif
-
+        // update the aggregate votes for
+        votes_for.set(votes_for.get() + 1);
+    else 
+        // update the aggregate votes against
+        votes_against.set(votes_against.get() + 1);
+    endif
         // update the aggregate of total votes
         votes_sum.set(votes_total.get() + 1);
 

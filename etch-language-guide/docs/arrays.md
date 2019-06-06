@@ -53,7 +53,7 @@ You can use the following utility functions to manipulate arrays:
 
 * [append()](arrays.md#append)
 * [count()](arrays.md#count)
-* [pop_back() and pop_front()](arrays.md#pop)
+* [popBack() and popFront()](arrays.md#pop)
 * [reverse()](arrays.md#reverse)
 
 <h3 id="append">Append</h3>
@@ -125,7 +125,7 @@ function main()
 endfunction
 ```
 
-<h3 id="pop">Pop_back and pop_front</h3>
+<h3 id="pop">Popback and popfront</h3>
 
 The `pop_back()` function removes and returns the last item from a one dimensional array, or the last array from a two dimensional array. The `pop_front` function removes and returns the first item or array.
 
@@ -139,8 +139,8 @@ function main()
     myArray[1] = 20;
     myArray[2] = 30;
 
-    var backItem = myArray.pop_back();
-	var frontItem = myArray.pop_front();
+    var backItem = myArray.popBack();
+	var frontItem = myArray.popFront();
     printLn((toString(backItem)) + " removed from the end of myArray");
 	printLn((toString(frontItem)) + " removed from the start of myArray");
     printLn(myArray);
