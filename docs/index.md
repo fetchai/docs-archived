@@ -1,17 +1,13 @@
-# Welcome to MkDocs
+# Welcome to the <a href="https://fetch.ai/" target=_blank>Fetch.AI</a> documentation.
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
 
-## Commands
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
 
-## Project layout
+Navigate with the menu buttons above, or click through to:
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+1. <a href="oef/index.html">Open Economic Framework</a> <br/>
+Learn how to create agents, interface to the digital world, and get things done
+
+2. <a href="etch-language/index.html">Etch Language Guide</a> <br/>
+Smart contracts on Fetch.AI are written with the Etch programming language. This is the complete reference and language guide
+

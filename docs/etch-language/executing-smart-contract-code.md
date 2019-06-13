@@ -7,18 +7,14 @@ To run smart contract code on your local machine, first download, build, and run
 To run a standalone ledger node listening on port 8000, use the following command:
 
 ``` bash
-
 	./apps/constellation/constellation -port 8000 -block-interval 3000 -standalone
-
 ```
 
 Next, download the Python Ledger API with:
 
 
 ``` bash
-
 	pip install -u fetchai-ledger-api
-
 ```
 
 
@@ -121,7 +117,7 @@ Once the contract is deployed to the ledger, the second account receives a trans
 
 
 
-
+<br/>
 ## Test network
 
 !!! note

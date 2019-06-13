@@ -30,7 +30,7 @@ The name of the `@init` function can be anything you like.
 For example, the following function initialises a contract by creating a `State` type that represents the owner's account which sets an initial supply of FET tokens. 
 
 
-``` java
+``` c++
 @init
 function initialise(owner: Address)
 
@@ -48,7 +48,7 @@ The `@action` annotation signifies a function which deals with transaction detai
 
 The following function performs a transaction between two parties.
 
-``` java
+``` c++
 @action
 function transfer(from: Address, to: Address, amount: UInt64)
 	var from_balance = State<UInt64>(from, 0u64); 
@@ -74,7 +74,7 @@ Query functions are read-only functions that allow you to view data on the ledge
 
 The following function queries the balance of an `Address`.
 
-``` java
+``` c++
 @query
 function balance(address : Address) : UInt64
 
@@ -99,3 +99,6 @@ If you run an `etch` contract containing one or more `State` types and flag the 
 ## Utility functions
 
 ```getBlockNumber()``` : returns the number of the current block in `UInt64`.
+
+
+<br/>

@@ -58,3 +58,6 @@ Fees rise in a linear manner per number of shards up to the maximum number of sh
 
 !!! note 
 	Coming soon: details of developer fee structures for smart contract data.
+
+
+<br/>

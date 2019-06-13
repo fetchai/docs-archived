@@ -19,7 +19,6 @@ function main()
 	printLn(myString);
 	printLn(myInferredString);
 	printLn(myInferredString + " " + myString);
-	printLn(myChineseUTFString);
 	// printLn(toString(x)); // error: unable to find matching function for 'toString'
 
     // myString2[0]; // error: operand does not support index operator
@@ -249,4 +248,4 @@ function main()
 endfunction
 ```
 
-
+<br/>

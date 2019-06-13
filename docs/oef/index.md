@@ -6,13 +6,13 @@ Autonomous Economic Agents are digital entities that run complex dynamic decisio
 ![3-layered view of the Agent layer on top, the Open Economic Framework layer in the middle, and the Fetch ledger on the bottom.](./img/OEF_overview.png "High level view of the Fetch.AI Open Economic Framework OEF")
 </center>
 
-The Fetch.AI ledger foundation ensures the truth and integrity of the entire system.
+The Fetch.AI blockchain ledger ensures the truth and integrity of the entire system.
 
-These documents will show you how to build and register an agent, how to advertise and search for services, and how the negotiation protocol works.
+The OEF documentation will show you how to build and register an agent, how to advertise and search for services, and explain how the negotiation protocol works.
 
-We have detailed API documentation in Python which include a set of working examples you can try out.
+We have detailed API documentation in Python and a set of working examples you can try out.
 
-But before you can do anything at all, you need a running node. Let's do that right now.
+But before you can do anything at all, you need to be running a node. Let's get that sorted right away.
 
 
 <br/>

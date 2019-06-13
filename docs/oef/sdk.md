@@ -1,21 +1,26 @@
+We will focus solely on Python SDK examples throughout the documentation. 
+
 ## Python
 
 First, run the pip installation command:
 
 ``` bash
-	pip3 install -v -v -v --no-cache-dir oef
+pip3 install -v -v -v --no-cache-dir oef
 ```
 
-After that, let's check we installed the SKD correctly:
+After that, let's check we installed the SDK correctly:
 
 ``` bash
-	python3
-	from oef import agents
+python3
+from oef import agents
 ```
 
-Now you can play around with the examples in the `examples` directory.
+When a function needs a core address, use `127.0.0.1` and port `10000`.
+
+Now download the <a href="/oef/assets/examples.tgz" download="">working examples bundle</a>.
 
 
+<!--
 ## Java/Kotlin
 
 First clone the repo:
@@ -24,21 +29,21 @@ First clone the repo:
 	This is an internal private repo.
 
 ``` bash
-	git clone git@github.com:uvue-git/oef-sdk-kotlin.git
+git clone git@github.com:uvue-git/oef-sdk-kotlin.git
 ```
 
 In your IDE in the `oef-sdk-kotlin` directory, build and install to your local maven with:
 
 ``` bash
-	./gradlew clean
-	./gradlew build -x test
-	./gradlew publishToMavenLocal
+./gradlew clean
+./gradlew build -x test
+./gradlew publishToMavenLocal
 ```
 
 To run some examples, clone the following repo:
 
 ``` bash
-	git clone git@github.com:uvue-git/oef-sdk-kj-examples.git
+git clone git@github.com:uvue-git/oef-sdk-kj-examples.git
 ```
 
 !!! Warning
@@ -48,8 +53,8 @@ To run some examples, clone the following repo:
 In your IDE, run:
 
 ``` bash
-	./gradlew clean
-	./gradlew build -x test
+./gradlew clean
+./gradlew build -x test
 ```
 
 You can now run the `WeatherClient` example.
@@ -60,12 +65,12 @@ You can now run the `WeatherClient` example.
 Run the following commands:
 
 ``` bash
-	git clone git@github.com:uvue-git/oef-sdk-cpp.git
-	cd oef-sdk-cpp
-	cmake .
+git clone git@github.com:uvue-git/oef-sdk-cpp.git
+cd oef-sdk-cpp
+cmake .
 ```
+-->
 
 
-<br/>
 
 

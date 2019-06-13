@@ -14,7 +14,7 @@ The key can be a `String` or an `Address`. Wherever referenced, the key gives ac
 
 The value set at declaration is the default value. The following snippet prints `0`. 
 
-``` java
+``` c++
 
 function main()
     
@@ -64,7 +64,7 @@ The `query()` function (no connection to `@query`) also references the original 
 There is an option in `//5.` to uncomment and test the `set()` function.
 
 
-``` java
+``` c++
 
 function main()
 
@@ -149,5 +149,6 @@ endfunction
 ```
 
 
+<br/>
 
 

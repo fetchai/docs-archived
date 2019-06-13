@@ -5,10 +5,9 @@ Instead of calling Agents directly, communication between Agents is more akin to
 !!! quote
 	Objects do it for free; agents do it because they want to. 
 
-FIPA (Foundation for Intelligent Physical Agents) is a well known standard for agent negotiation. In the OEF, communication follows a minimal subset of the FIPA language. For instance:
+<a href="https://en.wikipedia.org/wiki/Foundation_for_Intelligent_Physical_Agents" target=_blank>FIPA</a> (Foundation for Intelligent Physical Agents) is a well known standard for agent negotiation. In the OEF, communication follows a minimal subset of the FIPA language. For instance:
 
-* Buying Agent `b` requests a resource `r` from Selling Agent `s`.
-* Buying Agent `b` sends a call for proposal `cfp(r)`,  
+* Buying Agent `b` requests a resource `r` from Selling Agent `s` by sending a call for proposal `cfp(r)`.
 * Selling Agent `s` replies by sending a proposal to `b` with `propose(r, p)`, where `r` is the resource requested and `p` is the seller’s asking price. 
 
 Specifically, the negotiation system has the following components: 
@@ -18,7 +17,7 @@ Specifically, the negotiation system has the following components:
 		{cfp(r), propose(r,p), accept(), decline()}
 
 2. A reply structure, where each locution is only a valid reply to some other locutions. This is denoted in the following table:
-<center>
+
 
 
 
@@ -30,7 +29,7 @@ Specifically, the negotiation system has the following components:
 	| decline()|    cfp(r) |
 
 
-</center>
+
 
 
 3. A set of *moves* where each move has the following format: 
@@ -89,7 +88,7 @@ Every message contains the following:
 * `message id`: the message identifier for the dialogue.
 * `target`: the identifier of the message to whom this message is answering.
 
-Some other parameters, are included depending on the message.
+<!--Some other parameters, are included depending on the message.-->
 
 
 <br/>

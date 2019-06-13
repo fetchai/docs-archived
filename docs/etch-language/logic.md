@@ -2,7 +2,7 @@
 
 ## Equal to
 
-``` java
+``` c++
 function main()
 
 	var x = 12;
@@ -17,7 +17,7 @@ endfunction
 
 ## Not equal to
 
-``` java
+``` c++
 function main()
 
 	var x = 12;
@@ -32,7 +32,7 @@ endfunction
 
 ## Less than
 
-``` java
+``` c++
 function main()
 
 	var x = 12;
@@ -51,7 +51,7 @@ endfunction
 
 ## More than
 
-``` java
+``` c++
 function main()
 
 	var x = 12;
@@ -70,7 +70,7 @@ endfunction
 
 ## And
 
-``` java
+``` c++
 function main()
 
 	var f : Bool = false;
@@ -89,7 +89,7 @@ endfunction
 
 ## Or
 
-``` java
+``` c++
 function main()
 
 	var f : Bool = false;
@@ -109,3 +109,5 @@ endfunction
 
 !!! note
 	Coming soon: support for `xor`.
+
+<br/>
