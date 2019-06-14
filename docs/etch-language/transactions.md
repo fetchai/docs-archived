@@ -15,3 +15,5 @@ Currently, these are built-in transaction types executed in Python which have re
 !!! note 
 	Coming soon: support for smart contract transaction types.
 
+
+<br/>

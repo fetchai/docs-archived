@@ -62,7 +62,7 @@ Run `./vm-lang hello-world.etch`.
 
 You should see the following output:
 
-``` java
+``` c++
 $ ./vm-lang hello-world.etch
  F E ╱     vm-lang v0.1.0-23-gd7622f98
    T C     Copyright 2018-2019 (c) Fetch AI Ltd.
@@ -70,4 +70,4 @@ $ ./vm-lang hello-world.etch
 
 Hello world!
 ```
-
+<br/>

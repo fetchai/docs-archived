@@ -89,8 +89,10 @@ endfunction
 
 Here is a current list of `etch` keywords:
 
+<center>
 
-<table align="center" style="font-family: monospace;">
+
+<table align="center" style="font-family: monospace; font-size: 16px;">
     <tr>
         <td align="center">var</td>
         <td align="center">if</td>
@@ -118,6 +120,8 @@ Here is a current list of `etch` keywords:
 </table>
 
 
+</center>
+
 ## Comments
 
 Both line and block comments are possible:  
@@ -143,5 +147,7 @@ Both line and block comments are possible:
 
 
 
-We tell you all about these functions in the section on [smart contracts](smart-contract-intro.md).
+We tell you all about these functions in the section on [Smart Contracts](smart-contract-intro.md).
 
+
+<br/>

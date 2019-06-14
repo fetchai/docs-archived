@@ -10,7 +10,7 @@ In the example below, Agent Alice is looking for hotel rooms. Agent Bob is a nod
 
 1. Agent Alice is a node connected to the OEF `001`. She wants to book a hotel room and sends a search request to the OEF. Exactly what a search looks like is up to the agent. In this case, a search should contain the rough location and other specifics. For example, a hotel room provider may advertise a schema containing `room availability`, `parking available`, `breakfast included`, etc.
 2. The OEF nodes communicate with each other to find suitable matching agents. Agent Bob looks ideal. OEF `001` returns a list of Agents, their IDs, the OEF node they're attached to, and how to reach it, i.e. an IP address or hostname and port number.
-3. Alice decides to talk to Bob. She connects to a shared OEF `078` with the host and port combination she received. At connection time, Alice supplies her ID and answers a verifiication challenge given by the OEF.
+3. Alice decides to talk to Bob. She connects to a shared OEF `078` with the host and port combination she received. At connection time, Alice supplies her ID and answers a verification challenge given by the OEF.
 4. Agent Alice verifies successfully and OEF `078` starts talking to Alice.
 5. Alice can now ask the OEF to send a message to Bob on her behalf. She uses the ID from the search results as the target and adds her message; in this case a suitable CFP (Call For Proposal) to initiate a conversation with Bob.
 6. The OEF sends Alice's message on to Bob along with any other messages Bob is currently receiving from other agents.

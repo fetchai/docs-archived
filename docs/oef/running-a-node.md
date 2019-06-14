@@ -1,44 +1,63 @@
+<!--
 ## Pull
 
 Clone the repo:
 
 ```python
-	git clone https://github.com/fetchai/oef-search-pluto && cd oef-search-pluto
+git clone https://github.com/fetchai/oef-search-pluto && cd oef-search-pluto
 ```
 
 !!! Warning
-	At 6/6/2019, the correct code was still in private repo and the above link did not work.
+	At 13/6/2019, the correct code was still in private repo and cloning the above link did not function correctly.
 	
 
 Checkout the master branch:
 
 ``` bash
-	git checkout master
+git checkout master
 ```
 
+If you are only going to run a standalone single node, you only need the `scripts` directory from the repo.
 
-## Launch
+-->
 
-Launch a node on Docker:
+First, get <a href="https://www.docker.com/get-started">Docker</a>.
+
+Next, pull and launch our published image.
 
 ``` bash
-	python3 scripts/launch.py -c ./scripts/launch_config.json
+docker pull fetchai/oef-search:latest
 ```
+
+Now download the <a href="/oef/assets/node_config.json" download="">`node_config.json`</a> file.
+
+And run the Docker image with the configuration.
+
+``` bash
+docker run -it -v `pwd`:/config -p 20000:20000 -p 10000:10000 -p 40000:40000 -p 7500 fetchai/oef-search:latest node no_sh --config_file /config/node_config.json
+```
+
+A successful run will start producing stats dumps after a few seconds. 
+
+You'll need to have several ports available on your machine: `10000`, `20000`, `30000`, and `7500`.
+
+<!--
+``` bash
+sudo python3 scripts/launch.py -c ./scripts/launch_config.json
+```
+
 
 You are now running a full OEF node. It contains a core node on `port 10000` connected to a search node on `port 20000`.
 
 The `launch_config.json` file in the `scripts` directory configures port forwarding on the host machine. By default, the `scripts` directory is mounted onto the container.
 
-The `image` entry in the same file defaults to the Fetch.AI public image on <a href="https://hub.docker.com/r/fetchai/oef-search" target=_blank>Docker Hub: oef-search</a>. 
+The `image` entry in the same file defaults to the Fetch.AI public image on 
 
 The `config_file` entry points to `/config/node_config.json` which has a whole bunch of options for each node's setup.
 
 Node content is in `/docker-images/config`. 
 
 
-!!! Warning
-	Error on 6/6/2019:</br>
-	```Failed to save state file, because:  [Errno 2] No such file or directory: '/storage/state.json'```
 
 
 
@@ -53,12 +72,13 @@ First, configure logging on the node.
 Now launch the node with the `background` flag.
 
 ``` bash
-	python3 scripts/launch.py -c ./scripts/launch_config.json --background
+python3 scripts/launch.py -c ./scripts/launch_config.json --background
 ```
 
 You will see `search.log`, `core.log`, etc. in the `/logs` directory.
 
 To stop a running Docker image, run `docker ps` and copy the `CONTAINERID`. Then run `docker kill CONTAINERID`. To kill all running Docker images, run `docker kill $(docker ps -q)`.
+
 
 
 
@@ -78,7 +98,7 @@ Use `docker-images/demo_network.py` to start multiple nodes at once. There are a
 For example, start two connected nodes:
 
 ```bash
-	python3 docker-images/demo_network.py --num_nodes 2 --link 0:1 --http_port_map 0:7500 --log_dir `pwd`/docker-images/logs/ --run_director
+python3 docker-images/demo_network.py --num_nodes 2 --link 0:1 --http_port_map 0:7500 --log_dir `pwd`/docker-images/logs/ --run_director
 ```
 
 The above command runs two full nodes, two search nodes, and two oef-core nodes. Core nodes are connected to their search nodes. 
@@ -100,9 +120,9 @@ The ports for the running nodes are as follows:
 Let's try another example. Start three connected nodes, where every node is connected to every other node, and two of the nodes have `http` interfaces:
 
 ```bash
-	python3 docker-images/demo_network.py --num_nodes 3 --link 0:1 0:2 1:0 1:2 2:0 2:0 --http_port_map 0:7500 1:7501 --log_dir `pwd`/docker-images/logs/ --run_director
+python3 docker-images/demo_network.py --num_nodes 3 --link 0:1 0:2 1:0 1:2 2:0 2:0 --http_port_map 0:7500 1:7501 --log_dir `pwd`/docker-images/logs/ --run_director
 ```
 
-Now you have some nodes up and running, let's get the SDK.
+-->
 
-<br/>
+Now we have a node up and running, let's get the SDK.

@@ -49,7 +49,7 @@ Initialise an 8 bit unsigned integer with a `Byte` type.
 
 Below is a selection of example integer assignations including any errors on operations currently unsupported.
 
-``` java
+``` c++
 function main()
 
 	// default signed 32 bit integer type
@@ -62,7 +62,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
     // assigning various signed integer types explicitly and with label
@@ -78,7 +78,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
     // Int32 is default but can be explicit also
     var int32a = 0i32;
@@ -93,7 +93,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
     // assigning various unsigned integer types
@@ -108,7 +108,7 @@ function main()
 endfunction
 ``` 
 
-``` java
+``` c++
 function main()
 
     var uint32a = 0u32;
@@ -137,7 +137,7 @@ A `Float` declared with `f` is `Float32`.
 
 Float types are declared as `Float32`, `Float64`.
 
-``` java
+``` c++
 function main()
 
 	// default 64 bit float declaration
@@ -160,11 +160,11 @@ endfunction
 ```
 
 
-## Byte - to be deprecated
+## Byte - deprecating in favour of UInt8
 
 Declare and initialise an 8 bit unsigned integer with the `Byte` type.
 
-``` java
+``` c++
 function main()
 
 	// unsigned 8 bit integer type
@@ -196,7 +196,7 @@ endfunction
 
 Declare and initialise strings as follows:
 
-``` java
+``` c++
 function main()
 
 	var myString : String = "hello";
@@ -279,7 +279,7 @@ endfunction
 
 Declare the `Matrix` type with `Matrix<ElementType>(Rows, Cols)`.
 
-``` java
+``` c++
 function main()
 
 	// var myMatrix : Matrix<Int32>(5, 5); // error at '(', expected '=' or ';'
@@ -317,7 +317,7 @@ Find out more about `etch` States [here](states.md).
 
 
 
-## PersistentMap
+## PersistentMap - deprecating in favour of ShardedState
 
 !!! note
 	Coming soon: `PersistentMap` full implementation.
@@ -328,7 +328,7 @@ Declare a `PersistentMap` with `PersistentMap<K, V>` where `K` is the key and `V
 
 Note that `K` must be a `String` or an `Address` type.
 
-``` java
+``` c++
 function main()
 
 	// var myPm : PersistentMap<String, Int32>; 
@@ -439,8 +439,7 @@ endfunction
 
 In the table below, we detail the exact memory size of each data type when added to the network.
 
-!!! note 
-	Coming soon: details on memory used on the ledger per variable type plus relative cost.
+<center>
 
 
 <table align="center" style="font-family: monospace;">
@@ -531,6 +530,11 @@ In the table below, we detail the exact memory size of each data type when added
 </table>
 
 
+</center>
+
+!!! note 
+    Coming soon: details on memory used on the ledger per variable type plus relative cost.
+
 
 ## Scope
 
@@ -545,7 +549,7 @@ Non-primitives can be set to null.
 !!! note
 	You cannot print a null value.
 
-``` java
+``` c++
 function main()
 
 	//  var myInt = null; // error: unable to infer type
@@ -562,7 +566,7 @@ endfunction
 ```
 
 
-
+<br/>
 
 
 

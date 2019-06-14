@@ -26,7 +26,7 @@ Currently, we support the following attribute types:
 
 An attribute of a schema can be `optional` in the case where an attribute is inapplicable.
 
-Attribues can also have descriptions. Let's look at a bookshop scenario.
+Attributes can also have descriptions. Let's look at a bookshop scenario.
 
 A bookshop may like to include the following properties of its books as attributes in the SDK:
 
