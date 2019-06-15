@@ -153,7 +153,7 @@ docker run -it -v `pwd`:/config \
 A successful run will start producing stats dumps after a few seconds. You will need to have several ports available on your machine — 10000, 20000, 30000 and 7500 — the core may not start properly if something else is running on them.
 
 ### Installing the SDK
-
+TODO: more text
 ```
 pip3 install -v -v -v --no-cache-dir oef
 ```

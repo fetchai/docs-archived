@@ -3,6 +3,8 @@ We will discuss smart contracts examples in more details in one of the later tut
 but before we dive into the examples, we will TODO.
 
 ## Developing contracts with vm-lang
+TODO
+
 We will develop a small test contract
 ```
 @testCase
@@ -32,7 +34,7 @@ endfunction
 You can test this contract by using the `vm-lang` executable. To test the script by running following from your 
 build directory:
 ```
-curl TODO
+curl https://raw.githubusercontent.com/fetchai/etch-examples/master/01_submitting_contract/hello_world.etch --output hello_world.etch
 ./apps/vm-lang/vm-lang hello_world.etch
 ```
 This produce an output similar to:

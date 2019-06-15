@@ -110,5 +110,5 @@ function allowance(owner: Address, spender: Address) : UInt256
   return state.get(owner, UInt256(0u64));
 endfunction
 ```
-The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. You can find the full contract here TODO.
+The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. You can find the full contract here https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch.
 
