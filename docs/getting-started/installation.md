@@ -4,7 +4,6 @@ In this tutorial we will build the full Fetch.AI system. At the present, the led
 
 
 ## Supported platforms
-
 Currently, we officially support:
 
 - MacOS Darwin 10.13x and higher (64bit)
@@ -74,7 +73,7 @@ Then start a standalone test node:
 ```
 You should see output similar to following
 ```
-F E ╱     Constellation v0.3.1-rc1
+F E ╱     Constellation v0.4.1-rc1
    T C     Copyright 2018-2019 (c) Fetch AI Ltd.
      H
 
@@ -105,14 +104,21 @@ manifest.......:
 ```
 Once you see the message
 ```
-TODO
+[ 2019-06-15 15:24:39.383, # 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101
+[ 2019-06-15 15:24:39.383, # 1 INFO  :                          P2PService ] Num Initial Peers: 0
+[ 2019-06-15 15:24:39.383, # 1 INFO  :                          P2PService ] Starting P2PService...
+[ 2019-06-15 15:24:39.484, # 5 INFO  :                          HTTPServer ] Starting HTTPServer on http://127.0.0.1:8100
+[ 2019-06-15 15:24:39.524, # 6 WARN  :       NewVersionedRandomAccessStack ] Attempted to find if hash exists, but history is empty!
+[ 2019-06-15 15:24:39.524, # 6 WARN  :       NewVersionedRandomAccessStack ] Attempted to find if hash exists, but history is empty!
+[ 2019-06-15 15:24:39.525, # 7 INFO  :                    BlockCoordinator ] Chain Sync complete on 0x780bbb1c050cd3d5c20fce89fa6f4e61c884315efeb44c54ceb956a50563683a (block: 0 prev: 0xd3efbefbefbefbefbefbefbefbe19e9deb22b3efbefbefbefbefbefbefbefbed)
+[ 2019-06-15 15:24:40.487, # 1 INFO  :                       constellation ] Startup complete
 ```
 you are ready to start exploring the ledger functionality as we will do in the next tutorial.
 
 ### Installing Python API
 We download and install the Python library that will allow us to interact with the running node ledger:
 ```
-git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.3.x
+git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.4.x
 ```
 Make sure you are on the latest release branch in order to have all the latest features. Install the library with the following command:
 ```
@@ -135,7 +141,7 @@ Start the network connecting to the alpha test network.
 ```
 
 ## Open economic framework
-In order to start a core running you will need to install docker. Then you can run a core by pulling and launching our published image:
+In order to start a open economic framework (OEF) core running you will need to install docker. You can then start a core by pulling and launching our published image:
 ```
 
 docker pull fetchai/oef-search:latest
@@ -152,18 +158,19 @@ docker run -it -v `pwd`:/config \
 
 A successful run will start producing stats dumps after a few seconds. You will need to have several ports available on your machine — 10000, 20000, 30000 and 7500 — the core may not start properly if something else is running on them.
 
-### Installing the SDK
-TODO: more text
+### Installing the OEF SDK
+To install the OEF Python SDK use the Python package manager:
 ```
 pip3 install -v -v -v --no-cache-dir oef
 ```
-You can now use the classes inside python code by saying:
+You can now start developing agents using the SDK. The first step is to important the agents SDK:
 ```
 from oef import agents
 ```
-When a function needs a core address you can use 127.0.0.1 and port 10000.
+When a function needs a core address you should use 127.0.0.1 and port 10000.
 
 ### Getting the example code
+Later, we will go through an example of an agent in more detail, but get quickly started, you can download the examples here:
 ```
 curl http://etch-docs.fetch.ai/oef/assets/examples.tgz \
   --output examples.tgz
