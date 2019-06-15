@@ -1,11 +1,33 @@
 # Developing smart contracts
-We will discuss smart contracts examples in more details in one of the later tutorials, 
-but before we dive into the examples, we will TODO.
+We will discuss smart contracts in more details in one of the later tutorials, 
+but before we dive into the examples, we will explore the Python API for the 
+ledger and discuss the contract simulator tool `vm-lang`. We will be develop a
+very simple `Hello world` contract and submit it to local ledger node to 
+familiarize ourselves with the development process.
 
 ## Developing contracts with vm-lang
-TODO
+In this section we will develop a `Hello world` contract. When the contract
+is submitted, the contract initialisation function 
+engraves a name into the state database and then a single query function 
+that provides the greeting sentence `Hello {name}!` where `{name}` is the name 
+in the state database.
 
-We will develop a small test contract
+The contract itself is short and simple, providing the two above described functions:
+```
+@init
+function createMessage()
+  var name = "world";
+  var state = State< String >("greetings");
+  state.set(name);
+endfunction
+
+@query
+function persistentGreeting() : String
+  var state = State< String >("greetings");
+  return "Hello, " + state.get() + "!";
+endfunction
+```
+When developing a contract, it is often useful to use `vm-lang` for the development process. To this end, we also provide a `main` function that is invoked by `vm-lang`:
 ```
 @testCase
 function main()
@@ -17,18 +39,6 @@ function main()
   endif
 
   printLn(greeting);
-endfunction
-
-@init
-function createMessage(name : String)
-  var state = State< String >("greetings");
-  state.set(name);
-endfunction
-
-@query
-function persistentGreeting() : String
-  var state = State< String >("greetings");
-  return "Hello, " + state.get() + "!";
 endfunction
 ```
 You can test this contract by using the `vm-lang` executable. To test the script by running following from your 
@@ -48,80 +58,37 @@ Hello, world!
 We note that `vm-lang` executes `main` as the default function. When submitting the script to the ledger, we can leave `main` as it will not be accessible since it is not annotated as being invokable by the ledger code.
 
 ## Submitting the contract to the ledger
-To submit the contract to the ledger, we develop a Python helper script that makes use of the Python API to interact with the ledger. We assume that the ledger will be running with 
+To submit the contract to the ledger, we use the Python API. The components needed are
 ```
-import base64
-import time
-import hashlib
-import json
-import binascii
-import msgpack
-
-from fetchai.ledger.serialisation.objects.transaction_api import create_json_tx
-from fetchai.ledger.api import ContractsApi, TransactionApi, submit_json_transaction
-from fetchai.ledger.crypto import Identity
-
-HOST = '127.0.0.1'
-PORT = 8100
-
-identity = Identity()
-next_identity = Identity()
-
-status_api = TransactionApi(HOST, PORT)
-contract_api = ContractsApi(HOST, PORT)
-
-create_tx = contract_api.create(identity, contract_source, init_resources = ["owner", identity.public_key])
-
-print('CreateTX:', create_tx)
-
-while True:
-    status = status_api.status(create_tx)
-
-    print(status)
-    if status == "Executed":
-        break
-
-    time.sleep(1)
-
-# re-calc the digest
-hash_func = hashlib.sha256()
-hash_func.update(contract_source.encode())
-source_digest = base64.b64encode(hash_func.digest()).decode()
-
-print('transfer N times')
-
-for index in range(3):
-
-    # create the tx
-    tx = create_json_tx(
-        contract_name=source_digest + '.' + identity.public_key + '.transfer',
-        json_data=msgpack.packb([msgpack.ExtType(77, identity.public_key_bytes), msgpack.ExtType(77, next_identity.public_key_bytes), 1000 + index]),
-        resources=['owner', identity.public_key, next_identity.public_key],
-        raw_resources=[source_digest],
-    )
-
-    # sign the transaction contents
-    tx.sign(identity.signing_key)
-
-    wire_fmt = json.loads(tx.to_wire_format())
-    print(wire_fmt)
-
-    # # submit that transaction
-    code = submit_json_transaction(HOST, PORT, wire_fmt)
-
-    print(code)
-
-    time.sleep(5)
-
-print('Query for owner funds')
-
-source_digest_hex = binascii.hexlify(base64.b64decode(source_digest)).decode()
-
-url = 'http://{}:{}/api/contract/{}/{}/owner_funds'.format(HOST, PORT, source_digest_hex, identity.public_key_hex)
-
-print(url)
-
-r = status_api._session.post(url, json={})
-print(r.status_code)
-print(r.json())
+from fetchai.ledger.api import LedgerApi
+from fetchai.ledger.contract import SmartContract
+from fetchai.ledger.crypto import Entity, Address
 ```
+We first create an identity and corresponding address:
+```
+# Create keypair for the contract owner
+entity = Entity()
+address = Address(entity)
+```
+Next, we connect using the API and generate some wealth in order to be able to pay the fees for programming the ledger:
+```
+# Setting API up
+api = LedgerApi('127.0.0.1', 8100)
+
+# Need funds to deploy contract
+api.sync(api.tokens.wealth(entity, 100000))
+```
+Finally, we submit the contract, paying 10000 gas units in fee:
+```
+# Create contract
+contract = SmartContract(source)
+
+# Deploy contract
+api.sync(api.contracts.create(entity, contract, 10000))
+```
+After the contract has been successfully added, we can test it by using the query `persistentGreeting`:
+```
+# Printing message
+print(contract.query(api, 'persistentGreeting'))    
+```
+This should produce a `Hello world!` message.
