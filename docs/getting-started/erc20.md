@@ -1,105 +1,114 @@
 # Making an ERC20 contract
-The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the TODO.
+The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the the Python API.
+
+## Requirements
+The ERC20 contract implements following functions:
+
+- `totalSupply() : UInt256` -- Get the total token supply
+- `balanceOf(owner: Address): UInt256` -- Get the account balance of another account with address `owner`.
+- `transfer(to: Address, value: UInt256) : Bool` -- Send `value` amount of tokens to address `to`.
+- `transferFrom(from: Address, to: Address, value: UInt256): Bool` -- Send `value` amount of tokens from address `from` to address `to`.
+- `approve(spender: Address, value: UInt256) : Bool` -- Allow `spender` to withdraw from your account, multiple times, up to the `value` amount. If this function is called again it overwrites the current allowance with `value`.
+- `allowance(owner: Address, spender: Address)` -- Returns the amount which `spender` is still allowed to withdraw from `owner`.
+
+We will in the following implement most of these functions. As the Fetch.AI smart contracts do not have implicit addresses as in Ethereum, the function signatures are will be slightly different as will be seen below, but the overall functionality remains the same.
 
 
-## Basic contract
-The contract will be comprised of three components:
-
-Initialisation of the contract
-A token transfer mechanism
-A balance query function
-In the subsequent sections we will describe the code of each the these components in detail. The initialisation contract will be responsible for creating the tokens in the Fetch.AI state database, the transfer mechanism will allow us to transfer tokens from one address to the other and the balance query ensures that we can get the balance of our account at any given time.
-
-### Init
-First, we need to create an init function. This is the first thing that will be executed.
-
+## Initialisation function
+We first define the contract constructor function which is annotated with the `@init` keyword. This tells the ledger that this function should be invoked upon instating the contract:
 ```
 @init
-function initialise(owner: Address)
-    var supply = 987654321987654321000000000ul;
-    var account = State<UInt64>(owner, 0ul);
-    account.set(supply);
+function createSupply(owner: Address, supply: UInt256)
+  var supply_state = State< UInt256 >("total_supply");  
+  supply_state.set(supply);
+
+  var balance_state = State< UInt256 >(owner);
+  balance_state.set( supply );
 endfunction
 ```
-In Etch, an init function is indicated by an `@init` tag. This 'decorator' tells the compiler that this function should be called just once on contract initialisation.
+The transaction that submits the contract to the ledger is responsible for providing the constructor arguments. The above init function creates a state for the `owner` issuing `supply` tokens. Furthermore, for this specific contract we have made the total supply programmable such that the contract can be reused as well as to make it easy to write tests for the contract.
 
-Any contract in Etch can have an `initialise()` function, though its name can be anything as long as it is annotated with `@init`. Upon compilation, the owner of the contract will have the tokens sent to their address. We pass the owner of type Address as a parameter of the `initialise()` function. In Etch a variable as a parameter is followed by its type delimited by a colon.
+## Queries
+The ERC20 contract provides three query functions: `totalSupply`, `balanceOf` and `allowance`. We will define `totalSupply` and `balanceOf` in this section and dicuss `allowance` in a section later on.
 
-Once we've defined the init function, we set the owner of the contract, and give the contract some details:
-
-```
-var supply = 987654321987654321000000000ul;
-```
-`supply` is a hardcoded token amount, this could be passed as a parameter too, if you wanted.
-
-These are the only two values necessary to create a token on Fetch.AI, on compilation the contract will have an owner and its initial supply set.
-
-Now, we're starting to get into the core syntax of Etch, and how we handle variable storage and type:
-```
-var account = State<UInt64>(owner, 0ul);
-account.set(supply);
-```
-With var account we're setting a variable account, account is a variable referencing a persistent State. This State is stored outside of the contract, on the node(s).
-
-State<UInt64>("balances");
-
-Here, we tell the compiler that we're accessing a Persistent State, in this instance a Map. This has a key of the OWNER_PUB_KEY
-
-If not already constructed we pass 0ul, a 0 valued unsigned long.
-
-Now we have a reference to the Persistent Map, we can then set the balance as account.set(INTIITAL_SUPPLY);.
-
-### Transfer
-Now, we need the logic to be able to transfer a token, from one address to another.
-```
-@action
-function transfer(from: Address, to: Address, amount: UInt64)
-  // define the accounts
-  var from_account = State<UInt64>(from, 0ul);
-  var to_account = State<UInt64>(to, 0ul); // if new sets to 0u
-  // Check if the sender has enough balance to proceed
-  if (from_account.get() >= amount)
-    from_account.set(from_account.get() - amount);
-    to_account.set(to_account.get() + amount);
-  endif
-endfunction
-```
-There is a new tag for the compiler @action, this tells the compiler that the function that follows has a cost applied; one that you will pay when you call this function on the contract (to pay for the compute).
-
-No token contract on Fetch.AI can be created without a transfer function, not one that is usable anyway:
-```
-function transfer(from : Address, to : Address, amount : Int32) : Bool
-```
-Then we get a reference to the from and to addresses.
-```
-var from_account = State<UInt64>(from, 0ul);
-var to_account = State<UInt64>(to, 0ul);
-```
-Again, we're initialising references to States, they are keys of type Int32 names from and to, with a default value of 0ul if not already constructed.
-
-Next, we make sure the from account has enough tokens in their account to transact, if it does we're going to set some balances:
-
-Next, we make sure the from account has enough tokens in their account to transact, and set the new balance for the from and to addresses.
-```
-if (from_account.get() >= amount)
-       from_account.set(from_account.get() - amount);
-       to_account.set(to_account.get() + amount);
-   endif
-endfunction
-```
-`.get()` and `.set()` are functions of the object Address, these are generated by the base class.
-
-### Balance
-Finally, we create a balance() function. The balance() function is wrapped by a new tag @query. @query are free functions to call on a contract, requiring no charge.
-
+Both `totalSupply` and `balanceOf` are straight forward to implement. Total supply queries the `State` variable `total_supply` and returns it as a result:
 ```
 @query
-function balance(address : Address) : UInt64
-  var account = State<UInt64>(address, 0ul);
-  return account.get();
+function totalSupply(): UInt256
+  var supply_state = State< UInt256 >("total_supply"); 
+  return supply_state.get(0u64); 
 endfunction
 ```
-`balance()` takes an argument of a type Address named address; `balance()` returns an Uint64 - an Address.
+Balance of, on the other hand, makes a dynamic look up based on the address of `owner`:
+```
+@qeury
+function balanceOf(owner: Address) : UInt256
+  var balance_state = State< UInt256 >(owner);
 
-The body of `balance()` does not introduce anything we have not discussed previously.
+  if(!balance_state.existed())
+    return UInt256(0u64);
+  endif
+
+  return balance_state.get(UInt256(0u64));
+endfunction
+```
+These two query mechanisms demonstrate two different ways of handling undefined states. In the first query, we request the `total_supply` by calling `get` on the state variable and supplying a default value if the state does not exist. In the second query, we manually check whether the variable existed at the beginning of the contract call and if not, we return `0`. Both are valid ways to manage a state existance.
+
+## Actions
+The ERC20 contract defines three queries: `transfer`, `transferFrom` and `approve`. We will discuss `approve` in the next section. In Etch, `transfer` and `transferFrom` are one and the same function as Etch does not have an implicitly provided sender. Rather `from` and `to` are explicit function arguments and whether these addresses signed the transaction needs to be checked within the `@action`:
+```
+@action
+function transfer(from: Address, to: Address, value: UInt256) : Bool
+  if(!from.signedTx())
+    return false;
+  endif
+
+  var from_state = State< UInt256 >(from);
+  var from_balance = from_state.get( UInt256(0u64) );
+  if(from_balance < value)
+    return false;
+  endif
+
+  var to_state = State< UInt256 >(to);
+  var to_balance = to_state.get( UInt256(0u64) );
+
+  // TODO: Polyfilling due to missing UInt256 functionality
+  var u_from = toUInt64(from_balance);  
+  var u_to = toUInt64(to_balance);
+  var u_amount = toUInt64(value);
+  u_from -= u_amount;
+  u_to += u_amount;
+  from_balance = UInt256(u_from);
+  to_balance = UInt256(u_to);  
+
+  from_state.set(from_balance);
+  to_state.set(to_balance);
+  return true;
+endfunction
+```
+The above demonstrates one of the simplest possible token contracts that can be implemented: It merely keeps a balance associated with each address and allows transfers from one address to the other if the address holds sufficient tokens.
+
+## Implementing allowance
+The functions up until now constitues a basic token contract that allows creation of tokens and transfer between participants. The more interesting functionality is the `allowance` mechanism in the ERC20 contract that gives one address the possibility of spending some amount based on the allowance details. 
+
+To create this functionality we could use the normal `State` object by simply definining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropiate shard within the system. Implementing the `approve` mechanism using the `ShardedState` is relatively easy as it provides dictionary-like functionality:
+```
+@action
+function approve(owner: Address, spender: Address, value: UInt256) : Bool
+  var state = ShardedState< UInt256 >(spender);
+  state.set(owner, value);
+  return true;
+endfunction
+```
+The above constructs object addresses by concatnating the `spender` address with the `owner` address. However, unlike a normal dictionary, the `StateShard` does not keep a record of which entries exists and which not. Such functionality could be added by simply adding another state variable keeping track of owners. We will see an example on a similar type of functionality in the next part of this guide.
+
+Finally, implementing a query mechanism is equally straight foward:
+```
+@query
+function allowance(owner: Address, spender: Address) : UInt256
+  var state = ShardedState< UInt256 >(spender);
+  return state.get(owner, UInt256(0u64));
+endfunction
+```
+The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. You can find the full contract here TODO.
 

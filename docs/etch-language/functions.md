@@ -31,7 +31,7 @@ The iterative `fibonacci` function below takes a parameter `n: Int32` which is a
 
 The function will return an `Int32` and declares this with `: Int32`.
 
-``` java
+``` c++
 function fibonacci(n: Int32) : Int32
 
     var a = 0;
@@ -66,7 +66,7 @@ Below is an example of the fibonacci function implemented with recursion.
 	Take care with recursion in smart contract code.
 
 
-``` java
+``` c++
 function fibonacci(n: Int32) : Int32
   	
   	if(n <= 1)
@@ -97,7 +97,7 @@ All variables in `etch` are passed by reference.
 Attempting to reassign the value of a primitive variable passed to another function will cause a compilation error.
 
 
-``` java
+``` c++
 function main() 
 
 	var original_value = 10;
@@ -119,7 +119,7 @@ endfunction
 
 The same is true of complex types.
 
-``` java
+``` c++
 function main() 
 
     var myArray = Array<Int32>(5);
@@ -139,7 +139,7 @@ endfunction
 However, this is not the case with object types such as `Array`
 
 
-``` java
+``` c++
 function main() 
 
 	var myArray = Array<Int32>(5);
@@ -165,7 +165,7 @@ endfunction
 
 Reassigning a primitive type to a new variable does not affect the original.
 
-``` java
+``` c++
 function main() 
 
 	var x = 10;
@@ -189,7 +189,7 @@ endfunction
 ```
 However, reassigning an object and changing any of its values does affect the original.
 
-``` java
+``` c++
 function main() 
 
 	var myArray = Array<String>(2);
@@ -222,7 +222,7 @@ You can currently generate non-deterministic, random, signed and unsigned intege
 
 There is one restriction: the beginning value of the range *must* be less than the end value.
 
-``` java
+``` c++
 function main()
 
     // var randUInt8 = Rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
@@ -344,4 +344,4 @@ Getters and setters are available for `State` types.
 * `get()`
 
 
-
+<br/>

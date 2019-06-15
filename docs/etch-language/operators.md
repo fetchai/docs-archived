@@ -1,6 +1,6 @@
 <h1>Operators</h1>
 
-!!!	note
+<center>
 
 
 <table align="center">
@@ -47,7 +47,10 @@
 </table>
 
 
-## -
+</center>
+
+
+## Minus
 
 ``` c++
 function main()
@@ -200,3 +203,5 @@ Not currently supported.
 9. = += -= *= /= 
 10. ,	
 ```
+
+<br/>

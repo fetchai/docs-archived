@@ -4,7 +4,7 @@
 
 Declare and iterate over an array like this:
 
-``` java
+``` c++
 function main()
 
 	// var mySizelessArray = Array<String>(); // error: unable to find matching constructor for type/function 'Array<String>'
@@ -34,7 +34,7 @@ endfunction
 
 ## Two dimensional arrays
 
-``` java
+``` c++
 function main()
 
     var x = Array< Array<Int32>>(1);
@@ -62,7 +62,7 @@ The `append()` function adds one new item to the end of a one dimensional array,
 
 * Statically type safe.
 
-``` java
+``` c++
 function main()
 
 	var myArray = Array<UInt32>(2);
@@ -74,7 +74,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
 	var my2dArray = Array<Array<Int32>>(3);
@@ -104,7 +104,7 @@ The `count()` function returns the number of items in a one dimensional array, o
 
 * Returns 0 if the array is empty.
 
-``` java
+``` c++
 function main()
 
 	var myArray = Array<Int32>(2);
@@ -117,7 +117,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
 	printLn(Array<Array<UInt32>>(10).count());
@@ -131,7 +131,7 @@ The `pop_back()` function removes and returns the last item from a one dimension
 
 * Fails if the array is empty.
   
-``` java
+``` c++
 function main()
 
 	var myArray = Array<Int32>(3);
@@ -148,7 +148,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
 	//create a 3 by 3 array
@@ -177,7 +177,7 @@ Use `pop_back(n)` to remove the last `n` items from a one dimensional array, or 
 * Fails if n is negative or n is greater than the number of items or arrays.
 * Returns an empty array if n equals 0, leaving the original array unchanged.
 
-``` java
+``` c++
 function main()
 	
 	var myArray = Array<Int32>(5);
@@ -197,7 +197,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 	
     var my2dArray = Array<Array<Int32>>(10);
@@ -225,7 +225,7 @@ endfunction
 <h3 id="reverse">Reverse</h3>
 The reverse() function reverses the order of items in a one dimensional array, or the order of arrays in a two dimensional array.
 
-``` java
+``` c++
 function main()
 	
 	var myArray = Array<Int32>(3);
@@ -239,7 +239,7 @@ function main()
 endfunction
 ```
 
-``` java
+``` c++
 function main()
 
     var my2dArray = Array<Array<Int32>>(5);
@@ -262,3 +262,5 @@ endfunction
 ```
 
 [comment]: <> (<a href="https://github.com/uvue-git/fetch-ledger/issues/812" target=_blank>https://github.com/uvue-git/fetch-ledger/issues/812</a>)
+
+<br/>
