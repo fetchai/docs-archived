@@ -1,18 +1,17 @@
 A valid public key in the OEF contains only Base58 characters, which consist of alphanumeric characters, excluding the following characters: `0` (zero), `O` (capital o), `I` (capital i)
 and `l` (lower case L).
 
-Generate a public key for your Agent with the `crypto.py` script which uses the Python `cryptography` library.
-
-!!!	warning
-	Need to tell them where this code is.
-
+Generate a public key for your Agent with the <a href="/oef/assets/crypto.py" download="">`crypto.py`</a> script which uses the Python `cryptography` library.
 
 Simply instantiate a `Crypto` object and call the `public_key()` function. 
 
 ``` python
 @property
-def public_key(self):
-	return self._public_key
+def public_key(self) -> str:
+    """
+    Returns a 219 character public key in base58 format
+    """
+    return self._public_key_b58
 ```
 
 The library generates a private key and the function returns a Base58 public key string. 

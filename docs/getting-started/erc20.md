@@ -4,7 +4,7 @@ The following tutorial assumes that you already have a `constellation` instance 
 ## Requirements
 The ERC20 contract implements following functions:
 
-- `totalSupply() : UInt256` -- Get the total token supply
+- `totalSupply() : UInt256` -- Get the total token supply.
 - `balanceOf(owner: Address): UInt256` -- Get the account balance of another account with address `owner`.
 - `transfer(to: Address, value: UInt256) : Bool` -- Send `value` amount of tokens to address `to`.
 - `transferFrom(from: Address, to: Address, value: UInt256): Bool` -- Send `value` amount of tokens from address `from` to address `to`.
@@ -31,7 +31,7 @@ The transaction that submits the contract to the ledger is responsible for provi
 ## Queries
 The ERC20 contract provides three query functions: `totalSupply`, `balanceOf` and `allowance`. We will define `totalSupply` and `balanceOf` in this section and dicuss `allowance` in a section later on.
 
-Both `totalSupply` and `balanceOf` are straight forward to implement. Total supply queries the `State` variable `total_supply` and returns it as a result:
+Both `totalSupply` and `balanceOf` are straightforward to implement. Total supply queries the `State` variable `total_supply` and returns it as a result:
 ```
 @query
 function totalSupply(): UInt256
@@ -39,7 +39,7 @@ function totalSupply(): UInt256
   return supply_state.get(0u64); 
 endfunction
 ```
-Balance of, on the other hand, makes a dynamic look up based on the address of `owner`:
+`balanceOf`, on the other hand, makes a dynamic look up based on the address of `owner`:
 ```
 @qeury
 function balanceOf(owner: Address) : UInt256
@@ -89,7 +89,7 @@ endfunction
 The above demonstrates one of the simplest possible token contracts that can be implemented: It merely keeps a balance associated with each address and allows transfers from one address to the other if the address holds sufficient tokens.
 
 ## Implementing allowance
-The functions up until now constitues a basic token contract that allows creation of tokens and transfer between participants. The more interesting functionality is the `allowance` mechanism in the ERC20 contract that gives one address the possibility of spending some amount based on the allowance details. 
+The functions up until now constitute a basic token contract that allows creation of tokens and transfer between participants. The more interesting functionality is the `allowance` mechanism in the ERC20 contract that gives one address the possibility of spending some amount based on the allowance details. 
 
 To create this functionality we could use the normal `State` object by simply definining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropiate shard within the system. Implementing the `approve` mechanism using the `ShardedState` is relatively easy as it provides dictionary-like functionality:
 ```
@@ -100,7 +100,7 @@ function approve(owner: Address, spender: Address, value: UInt256) : Bool
   return true;
 endfunction
 ```
-The above constructs object addresses by concatnating the `spender` address with the `owner` address. However, unlike a normal dictionary, the `StateShard` does not keep a record of which entries exists and which not. Such functionality could be added by simply adding another state variable keeping track of owners. We will see an example on a similar type of functionality in the next part of this guide.
+The above constructs object addresses by concatenating the `spender` address with the `owner` address. However, unlike a normal dictionary, the `StateShard` does not keep a record of which entries exists and which not. Such functionality could be added by simply adding another state variable keeping track of owners. We will see an example on a similar type of functionality in the next part of this guide.
 
 Finally, implementing a query mechanism is equally straight foward:
 ```
@@ -110,5 +110,8 @@ function allowance(owner: Address, spender: Address) : UInt256
   return state.get(owner, UInt256(0u64));
 endfunction
 ```
-The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. You can find the full contract here https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch.
+The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. 
 
+You can find the full contract here https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch.
+
+<br/>
