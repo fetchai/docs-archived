@@ -335,7 +335,7 @@ Download the <a href="/oef/assets/examples.tgz" download="">working examples bun
 Or curl them here:
 
 ``` bash
-curl http://etch-docs.fetch.ai/oef/assets/examples.tgz \
+curl https://docs.fetch.ai/oef/assets/examples.tgz \
   --output examples.tgz
 ```
 
