@@ -30,14 +30,17 @@ You can also test more complex data types for equality.
 ``` c++
 function main()
 
-	var x = State<Int32>("var", 3);
-	var y = State<Int32>("var", 5);
+    var x = State<Int32>("account1");
+    var y = State<Int32>("account2");
 
-	if (x.get() > y.get())
-		printLn("object x is greater than object y");
-	else 
-		printLn("object x is less than or equal to object y");
-	endif
+    x.set(5);
+    y.set(8);
+
+    if (x.get() > y.get())
+        printLn("object x is greater than object y");
+    else 
+        printLn("object x is less than or equal to object y");
+    endif
 
 endfunction
 
@@ -68,30 +71,30 @@ endfunction
 
 ``` c++
 function main()
-	
-	// ascending
-	printLn("Ascending and inclusive for loop");
-	for(i in 0:5)
-	    printLn(toString(i));
-	endfor
 
-	// descending
-	printLn("Descending and inclusive for loop");
-	for(j in 5:0:-1)
-	    printLn(toString(j));
-	endfor
+    // ascending
+    printLn("Ascending and inclusive for loop");
+    for(i in 0:5)
+        printLn(toString(i));
+    endfor
 
-	// stepwise ascent
-	printLn("Ascending stepwise");
-	for(k in 0:10:2)
-		printLn(toString(k));
-	endfor
+    // descending
+    printLn("Descending and inclusive for loop");
+    for(j in 5:0:-1)
+        printLn(toString(j));
+    endfor
 
-	// stepwise descent
-	printLn("Descending stepwise");
-	for(l in 10:0:-2)
-		printLn(toString(l));
-	endfor
+    // stepwise ascent
+    printLn("Ascending and inclusive stepwise");
+    for(k in 0:10:2)
+        printLn(toString(k));
+    endfor
+
+    // stepwise descent
+    printLn("Descending and inclusive stepwise");
+    for(l in 10:0:-2)
+        printLn(toString(l));
+    endfor
 
 endfunction
 ```

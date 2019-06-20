@@ -1,139 +1,158 @@
 <h1>States</h1>
 
-Smart contracts store data on the Fetch.AI distributed ledger using `State`.
+Smart contracts store data on the Fetch.AI distributed ledger using `State` data structures.
 
-A `State` is declared as a `State<ValueType>(name : String, value : ValueType)` like this:
-
-``` c++
-	var myState = State<Int32>("balance", 0);
-```
-
-In the above `State`, the key on the left maps to the `Int32` value on the right. 
-
-The key can be a `String` or an `Address`. Wherever referenced, the key gives access to the `State`, regardless of whether or not the variable name pointing to the `State` has changed.
-
-The value set at declaration is the default value. The following snippet prints `0`. 
+A `State` is declared as a `State<ValueType>(name : String)` like this:
 
 ``` c++
-
-function main()
-    
-  var x : Int32;
-  var myState = State<Int32>("balance", x);
-
-  var y = myState.get();
-  print(toString(y));
-
-endfunction
-
+var myState = State<Int32>("account");
 ```
 
-You can only update the default value using a `set()` function.
+Now we can set a value on the `State` with `set()`:
 
-## Getters and setters
+``` c++
+myState.set(100);
+```
 
-Getters and setters are available for `State` types.
+And retrieve the value with `get()`:
+``` c++
+myState.get();
+```
+
+The `State` constructor value inside the parentheses is a pointer to a memory location on the ledger. It takes a string, as above, or an `Address` type.
 
 ``` c++
 function main()
 
-  var myAccount = State<Int32>("balance", 0);
-  printLn("My balance = " + toString(myAccount.get()));
-  myAccount.set(10);
-  printLn("My balance = " + toString(myAccount.get()));
+    var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    var myState = State<Int32>(account);
+    myState.set(100);
+    printLn("My state value = " + toString(myState.get()));
 
 endfunction
 ```
 
-Currently, `State` getters and setters support primitive types only.
+Any number of `var` identifiers can point to the same `State` object.
 
-
-
-## State behaviour
-
-Currently `State` behaviour is fairly trivial. The code below gives a number of examples.
-
-First, we see that we can happily print the value of a state after declaration `// 1. `.
-
-In `// 2.` it is possible to change the `State` value within the same method with `set()`.
-
-In the function `change_state()` we can assign our `State` object to a new name and reset the value to `100` which `main()` prints at `` // 3.``, even though we also create a new `State` using the same `"balance"` key and reset the value to `42`. The second statement has no effect on the original `State` object. 
-
-The `query()` function (no connection to `@query`) also references the original `State` by using the `"balance"` key and declares the default value as `0`. However, this time we *do* get access to the original `State` and the value returned is `100` again.
-
-There is an option in `//5.` to uncomment and test the `set()` function.
+In the example below, `ownerState` and `contractState` point to the same memory location and therefore reference the same `State` object on the ledger.
 
 
 ``` c++
-
 function main()
 
-  var myState = State<Int32>("contract_owner_balance", 0);
-  // 1. print empty state
-  print("1: ");
-  printLn(toString(myState.get()));
-  // PRINTS 0
+  var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+  var ownerState = State<Int32>(owner);
+  ownerState.set(333);
+  printLn("My state value = " + toString(ownerState.get()));
+  var contractState = State<Int32>(owner);
+  // printLn("My state value = " + toString(contractState.get())); // runtime error: line 7: The state does not represent any value. 
+  //The value has not been assigned and/or it does not exist in data storage.
 
-  // 2. change state inside main
+endfunction
+```
+
+Attempting to print the value of the second `State` generates an error. This is because the data set in `ownerState` has not yet been written to storage, so when `contractState` tries to access it, it finds no value and this generates a runtime error.
+
+
+## Writing `State` data to the ledger
+
+Currently, `State` data is written to the ledger only after control has passed out of scope and the `destructor()` function has been called behind the scenes.
+
+While the `State` variables are still in function scope, data is written to an intermediate object cache mechanism.
+
+Once control reaches the end of the function, data is written to an intermediate ledger cache mechanism.
+
+Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.
+
+
+## Anonymous `State` types
+
+Declaring an anonymous `State` type without a `var` name performs an immediate data write.
+
+``` c++
+function main()
+  
+  State<String>("account1").set("owner1_name");
+
+  var account1 = State<String>("account1");
+  printLn(account1.get());
+
+endfunction
+```
+
+
+## Default values
+
+Although it is possible to declare a `State` without a value, attempting to `get()` from such a `State` results in a runtime error.
+
+``` c++
+function main()
+
+  State<Int32>("myNumber");
+  // printLn(State<Int32>("myNumber").get());
+  // The state does not represent any value. 
+  // The value has not been assigned and/or it does not exist in data storage.
+
+  var x = State<Int32>("myNumber2");
+  // printLn(x.get());
+  // The state does not represent any value. 
+  // The value has not been assigned and/or it does not exist in data storage.
+
+endfunction
+```
+
+
+
+## Passing States around
+
+The following code shows the behaviour of `State` types as they are passed around functions.
+
+Any `State` value out of original scope is available to `get()`.
+
+
+``` c++
+function main()
+
+  var myState = State<Int32>("contract_owner_balance");
   myState.set(33);
-  print("2: ");
   printLn(toString(myState.get()));
   // PRINTS 33
 
   change_state(myState);
-  // 3. print state after change_state call
-  print("3: ");
   printLn(toString(myState.get()));
-  // PRINTS 100
+  // PRINTS 44
 
   var result = query();
-  // 4. print state after query call - notice how query function doesn't change state of the original
-  print("4: ");
   printLn(toString(result));
-  // PRINTS 100
-
-  // 5. alter comments in query method to see that state value is not alterable even though
-  // accessible from another function
-  // print("5: ");
-  // printLn(toString(result));
-  // printLn(toString(myState.get()));
   // PRINTS 55
 
 endfunction
-
 
 
 function change_state(state : State<Int32>)
 
   // you can pass around a State parameter and get access to the original state
   var newState = state;
-  newState.set(100);
+  newState.set(44);
 
-  // this has no effect on the original State
-  var anotherState = State<Int32>("balance", 42);
-
+  // a new state with pointer = "balance"
+  var anotherState = State<Int32>("balance");
+  anotherState.set(55);
+  // all states from this function are written now
 endfunction
 
 
 function query() : Int32
 
-  // this gives a default value
-  var myState = State<Int32>("balance", 0);
-
-  // 4. this returns 100
+  // accessing the State at pointer = "balance", a value out of scope 
+  var myState = State<Int32>("balance");
+  // returns the 55 set in change_state()
   return myState.get();
 
-  // 5. 
-  // If you set a new variable into the state, it will return the new variable 
-  // myState.set(55);
-  // return myState.get();
-
 endfunction
-
-
 ```
 
-## Non-primitive types
+## Common use
 
 A common use for the `State` type is to represent account owner `Address` types with their respective balances. To this end, you can declare a `State` where the first parameter is an `Address` type.
 
@@ -143,7 +162,8 @@ In the code below we first create an `Address` type. We can then define the tran
 function main()
 
   var from = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-  var from_account = State<UInt64>(from, 0u64);
+  var from_account = State<UInt64>(from);
+  from_account.set(100u64);
 
 endfunction
 ```

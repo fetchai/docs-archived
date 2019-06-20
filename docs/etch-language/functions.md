@@ -136,30 +136,30 @@ endfunction
 
 ```
 
-However, this is not the case with object types such as `Array`
+However, this is not the case with accessing the internal state of object types such as `Array`.
 
 
 ``` c++
 function main() 
 
-	var myArray = Array<Int32>(5);
+    var myArray = Array<Int32>(5);
     myArray[0] = 40;
     myArray[1] = 41;
     myArray[2] = 42;
     myArray[3] = 43;
     myArray[4] = 44;
 
-    printLn(toString(myArray[2]));
-	change_value(myArray);
-	printLn(toString(myArray[2]));
+    printLn(myArray);
+    change_value(myArray);
+    printLn(myArray);
 
 endfunction
 
 
 function change_value(myArray :Array<Int32>)
-  	
-  	myArray[2] = 100;
-  	
+
+    myArray[2] = 100;
+
 endfunction
 ```
 
@@ -187,7 +187,7 @@ function change_value(value :Int32)
 endfunction
 
 ```
-However, reassigning an object and changing any of its values does affect the original.
+However, reassigning an object and changing any of its internal values does affect the original.
 
 ``` c++
 function main() 
@@ -267,7 +267,7 @@ endfunction
 
 `print()` is available without a line break.
 
-If the variable is a string, you don't have to cast it before printing, otherwise you should cast it with `toString()`.
+Often, if the variable is a string, you don't have to cast it before printing, otherwise you should cast it with `toString()`.
 
 !!! note
 	`etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
@@ -275,7 +275,7 @@ If the variable is a string, you don't have to cast it before printing, otherwis
 
 <H3>Sysargs</H3>
 
-The following `System` functions `Argc()` and `Argv()` return the number of arguments to `vm-lang` and their value.
+The following `System` functions `Argc()` and `Argv()` return the number of arguments to `vm-lang` and their value. These functions are only useful on the `etch` simulator outside of smart contract development.
 
 * `System.Argc()`
 * `System.Argv()`
@@ -306,19 +306,19 @@ For example:
 ``` c++
 function main()
 
-	var x = 10;
-	var y = toByte(x);
-	var z = toInt8(x);
-	var a = toInt16(x);
-	var b = toInt32(x);
-	var c = toInt64(x);
-	var d = toUInt16(x);
-	var e = toUInt32(x);
-	var f = toUInt64(x);
-	var g = toFloat32(x);
-	var h = toFloat64(x);
-	// var i = toFixed32(x); // error: unknown symbol 'toFixed32'
-	// var j = toFixed64(x); // error: unknown symbol 'toFixed64'
+    var x = 10;
+    var y = toInt8(x);
+    var z = toInt16(x);
+    var a = toInt32(x);
+    var b = toInt64(x);
+    var c = toUInt8(x);
+    var d = toUInt16(x);
+    var e = toUInt32(x);
+    var f = toUInt64(x);
+    var g = toFloat32(x);
+    var h = toFloat64(x);
+    // var i = toFixed32(x); // error: unknown symbol 'toFixed32'
+    // var j = toFixed64(x); // error: unknown symbol 'toFixed64'
 
 endfunction
 ```

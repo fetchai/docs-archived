@@ -2,25 +2,45 @@
 
 ## Locally
 
-To run smart contract code on your local machine, first download, build, and run a ledger node. You can find the details of how to do that <a href="https://community.fetch.ai/getting-started/building-fetchai-ledger-node/develop/" target=_blank>here</a>.
+To run smart contract code on your local machine, first download, build, and run a ledger node. You can find the full details of how to do that <a href="../.././getting-started/installation/" target=_blank>here</a>.
 
-To run a standalone ledger node listening on port 8000, use the following command:
+For this version of documentation alone, run `git checkout master` before building the ledger and running a node.
 
-``` bash
-	./apps/constellation/constellation -port 8000 -block-interval 3000 -standalone
-```
-
-Next, download the Python Ledger API with:
-
+If you have been running constellation nodes previously, you should remove the databases as they will be incompatible with a fresh node:
 
 ``` bash
-	pip install -u fetchai-ledger-api
+rm *.db 
 ```
 
+For example, to run a standalone ledger node listening on port 8000 from the `build` directory, use the following command:
 
-In the examples folder, you will see some scripts. 
+``` bash
+./apps/constellation/constellation -port 8000 -block-interval 3000 -standalone
+```
 
-Open the `contracts.py` script:
+Build the Python API libraries like this:
+
+``` bash
+pip3 install -U fetchai-ledger-api
+```
+
+The API will install to ```tbc```.
+
+
+### Running a smart contract example in Python
+
+If you want to examine the code in more detail and look at some examples, you may prefer to clone the repo.
+
+``` bash 
+git clone https://github.com/fetchai/ledger-api-py.git 
+```
+And run the installation script:
+
+``` bash
+python3 ledger-api-py/setup.py install
+```
+
+Open the `contracts.py` script in the `examples` directory:
 
 ``` python
 from typing import List
@@ -100,13 +120,13 @@ def main():
     fet_tx_fee = 40
     api.sync(contract.action(api, 'transfer', fet_tx_fee, [entity1], address1, address2, tok_transfer_amount))
 
-    print('-- BEFORE --')
+    print('-- AFTER --')
     print_address_balances(api, contract, [address1, address2])
 
 
 if __name__ == '__main__':
     main()
-
+    
 ```
 
 The `etch` smart contract is embedded into Python as a string.
@@ -130,3 +150,6 @@ Once the contract is deployed to the ledger, the second account receives a trans
 
 !!! note
 	In development.
+
+
+<br/>

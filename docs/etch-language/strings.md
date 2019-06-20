@@ -12,16 +12,16 @@ Concatenate strings like this:
 ``` c++
 function main()
 
-	var myString : String = "hello";
-	var myInferredString = "hello again";
-	var x: String = null;
+    var myString : String = "hello";
+    var myInferredString = "hello again";
+    var x: String = null;
 
-	printLn(myString);
-	printLn(myInferredString);
-	printLn(myInferredString + " " + myString);
-	// printLn(toString(x)); // error: unable to find matching function for 'toString'
+    printLn(myString);
+    printLn(myInferredString);
+    printLn(myInferredString + " " + myString);
+    // printLn(toString(x)); // error: unable to find matching function for 'toString'
 
-    // myString2[0]; // error: operand does not support index operator
+    // var y = myString[0]; // error: unable to find matching index operator for type 'String'
 
 endfunction
 ```
@@ -36,7 +36,7 @@ You can test strings for equality.
 function main()
 
 	var myString1 : String = "hello";
-	var myString2 : String = "again";
+	var myString2 : String = "hello";
 
 	if (myString1 == myString2)
 		printLn("They are equal.");
@@ -123,7 +123,7 @@ function main()
 	// var myString1 : String = "aa";
 	// var myString2 : String = "a";
 
-	if (myString1 >= myString2)
+	if (myString1 > myString2)
         printLn("myString1 is greater than or equal to myString2.");
 	else
         printLn("myString1 is not greater than or equal to myString2.");
@@ -154,7 +154,7 @@ endfunction
 
 ## Utility functions
 
-You can use the following utility functions to manipulate strings:
+You can use the following utility functions for string manipulation:
 
 * [find()](strings.md#find)
 * [length()](strings.md#length)
@@ -190,8 +190,8 @@ The `length()` function returns the number of characters in a string.
 ``` c++
 function main()
 
-var myString : String = "Hello World";
-printLn(myString.length());
+	var myString : String = "Hello World";
+	printLn(myString.length());
     
 endfunction
 ```
@@ -216,13 +216,13 @@ The `substr()` function extracts a substring from a string, based on specified s
 
 `string.substr(start, end)`
 
-* The first character in the string occurs at index 0.
-* The final character is excluded from the substring.
-* Returns an empty string if *start* and *end* are equal.
-* Returns the whole string if *start* equals 0 and *end* is equal to the length of the string.
-* Fails if *start* is greater than *end*.
-* Fails if *start* is negative.
-* Fails if *end* is greater than the length of the string.
+* The `start` character in the string occurs at index 0.
+* The `end` character is excluded from the substring.
+* Returns an empty string if `start` and `end` indexes are equal.
+* Returns the whole string if `start` equals 0 and `end` is equal to the length of the string.
+* Fails if `start` is greater than `end`.
+* Fails if `start` is negative.
+* Fails if `end` is greater than the length of the string.
 
 ``` c++
 function main()
