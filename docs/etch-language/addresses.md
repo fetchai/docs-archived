@@ -35,7 +35,7 @@ function main()
 
   var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
   var verified : Bool;
-  verified = account.signedtx(); 
+  verified = account.signedTx(); 
   printLn(toString(verified)); // False in v0.3.0 ledger code
 
 endfunction

@@ -4,9 +4,7 @@
 
 Declare a variable with the keyword `var`. Declare numeric values with literals where possible. You can also use an explicit type cast operation. See below for explicit type declaration rules.
 
-Any numerical variable not explicitly initialised receives a default value, such as `0` for integers and `0.0` for floats.
 
-[comment]: <> (To clarify: how a default value is added to a variable, with a scenario and an example.)
 
 !!! warning
 	The `toString` function does not yet support all variable types.
@@ -41,11 +39,9 @@ endfunction
 
 Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits.
 
-They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt16`, `UInt32`, `UInt64`.
+They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt8`, `UInt16`, `UInt32`, `UInt64`.
 
 `Int32` is the compiler default so you don't need to explicitly declare this type.
-
-Initialise an 8 bit unsigned integer with a `Byte` type. 
 
 Below is a selection of example integer assignations including any errors on operations currently unsupported.
 
@@ -98,8 +94,9 @@ function main()
 
     // assigning various unsigned integer types
     var uint8a = 45u8; 
-    // printLn(toString(uint8a));   // error: unable to find matching function for 'toString'
-    // var uint8b : UInt8 = 1u16; // error: unknown type 'UInt8'
+    // printLn(toString(uint8a)); // error: unable to find matching function for 'toString'
+    var uint8b : UInt8 = 1u8; 
+    // printLn(toString(uint8b)); // error: unable to find matching function for 'toString'
     var uint16a = 0u16; 
     // printLn(toString(uint16a)); // error: unable to find matching function for 'toString'
     var uint16b : UInt16 = 1u16; 
@@ -160,21 +157,6 @@ endfunction
 ```
 
 
-## Byte - deprecating in favour of UInt8
-
-Declare and initialise an 8 bit unsigned integer with the `Byte` type.
-
-``` c++
-function main()
-
-	// unsigned 8 bit integer type
-	// var uint8bit : Byte = 42u8; // error: internal error at '42u8'
-    // printLn(toString(uint8bit)); // error: unable to find matching function for 'toString'
-
-endfunction
-```
-
-
 ## Boolean
 
 Declare and initialise `Bool` types as follows:
@@ -216,11 +198,6 @@ Find out more about `etch` Strings [here](strings.md).
 
 ## Arrays
 
-!!! note
-	Coming soon: common `Array` operations.
-
-[comment]: <> (<a href="https://github.com/uvue-git/fetch-ledger/issues/812" target=_blank>https://github.com/uvue-git/fetch-ledger/issues/812</a>)
-
 You must explicitly declare array element types and array size. 
 
 `Array<Type>(size)` declares an array with elements of type `Type` and size `size`.
@@ -259,19 +236,16 @@ Declare the dictionary `Map` type with `Map<KeyType, ValueType>`.
 ``` c++
 function main()
 
-	var myMap : Map<String, Int32>;
-	// myMap["balance1"] = 1000; // runtime error: line 5: null reference
+    var myMap : Map<String, Int32>;
+    // myMap["balance1"] = 1000; // runtime error: line 5: null reference
     // myMap["balance2"] = 2000; // runtime error: line 6: null reference
     // myMap["balance3"] = 3000; // runtime error: line 7: null reference
-
-    // TODO:
-    // var myMapState = State<Map<String, Int32>>(myMap, null); // error: unable to find matching constructor for type/function 'State<Map<String, Int32>>'
 
 endfunction
 ```
 
 
-
+<!--
 ## Matrices
 
 !!! note
@@ -287,72 +261,56 @@ function main()
 
 endfunction
 ```
+-->
 
 
 
 ## States 
 
-A `State` is a data structure used by `etch` Smart Contracts for storing and querying data on the ledger. The data stored by a `State` is held on shards on the ledger. 
+A `State` is a data structure used by `etch` smart contracts for storing and querying data on the ledger. The data stored by a `State` is held on shards on the ledger. 
 
-Declare and initialise a `State` type with `State<ValueType>` where values are mapped to a key:
+Declare and initialise a `State` type with `State<ValueType>` where values set with `set()` are mapped to a unique identifier, in this case `account`:
 
-`var myState = State<Int32>("var", 200);`
+``` bash
+var myState = State<Int32>("account");
+```
 
 Getters and setters are available for `State` types.
 
 ``` c++
 function main()
 
-	var myState = State<Int32>("var", 200);
-	myState.set(10);
-	printLn("My state var value = " + toString(myState.get()));
+    var myState = State<Int32>("account");
+    myState.set(10);
+    printLn("My state var value = " + toString(myState.get()));
 
 endfunction
 ```
-
-Currently, the `State` type supports primitive types only.
 
 Find out more about `etch` States [here](states.md).
 
 
 
 
-## PersistentMap - deprecating in favour of ShardedState
+## ShardedState
 
-!!! note
-	Coming soon: `PersistentMap` full implementation.
+!!! Note
+    Coming soon. Replacing PersistentMap implementation.
 
-The `PersistentMap` type is similar to `State` but more flexible.
-
-Declare a `PersistentMap` with `PersistentMap<K, V>` where `K` is the key and `V` is the value. 
-
-Note that `K` must be a `String` or an `Address` type.
-
-``` c++
-function main()
-
-	// var myPm : PersistentMap<String, Int32>; 
-	// error at '<', expected '=' or ';'
-	// Failed to compile.
-
-endfunction
-```
-
-Find out more about `etch` PersistentMaps [here](persistent-maps.md).
-
+Find out more about `etch` ShardedStates [here](sharded-state.md).
 
 
 
 ## Addresses
 
-The cryptographic `Address` type is currently represented by a 64 byte binary canonical <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank">ECDSA public key</a>. 
+The cryptographic `Address` type is currently represented by a 64 byte binary canonical <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank">ECDSA public key</a> which is then base 58 encoded. 
 
 Declare and initialise an `Address` like this:
 
 ``` c++
 function main()
 
-    var myAddress = Address("AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+Pw==");
+  var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
 
 endfunction
 ```
@@ -390,8 +348,6 @@ function main()
 
     // signed 32 bit integer type
     var int32bit = 42;
-    // cast to byte
-    var byteVariable = toByte(int32bit);
     // cast to Int8
     var int8Variable = toInt8(int32bit);
     // cast to Int16
@@ -399,7 +355,7 @@ function main()
     // cast to Int64
     var int64Variable = toInt64(int32bit);
     // cast to UInt8
-    // var uint8Variable = toUInt8(int32bit); // error: unknown symbol 'toUInt8'
+    var uint8Variable = toUInt8(int32bit); // error: unknown symbol 'toUInt8'
     // cast to UInt16
     var uint16Variable = toUInt16(int32bit);
     // cast to UInt32
@@ -407,19 +363,15 @@ function main()
     // cast to UInt64
     var uint64Variable = toUInt64(int32bit);
 
-    //cast to Byte
-    var mybyte = toByte(5);
 
     // float casting
     var float64bit = 42.0;
-    // cast to byte
-    var byteFVariable = toByte(float64bit);
     // cast to Int8
     var intFVariable = toInt32(float64bit);
     // cast to Float32
-    var float32Variable = toFloat32(mybyte);
+    var float32Variable = toFloat32(float64bit);
     // cast to Float64
-    var float64variable = toFloat64(mybyte);
+    var float64variable = toFloat64(int32bit);
 
     // cast to string
     var stringVariable = toString(int32bit);
@@ -437,103 +389,32 @@ endfunction
 
 ## Data measures
 
-In the table below, we detail the exact memory size of each data type when added to the network.
+In the table below, we detail the exact memory size of each data type when etched onto the network.
 
-<center>
+Type | Memory size 
+------------ | ------------- 
+Int8 | tbc 
+Int16 | tbc  
+Int32 | tbc  
+Int64 | tbc  
+UInt8 | tbc 
+UInt16 | tbc 
+UInt32 | tbc  
+UInt64 | tbc
+Float32 | tbc
+Float64 | tbc
+Bool | tbc
+String | tbc
+Array | tbc
+Map | tbc
+State | tbc
+ShardedState | tbc
+Address | tbc
+null | tbc
 
-
-<table align="center" style="font-family: monospace;">
-	<tr style="font-family: sans-serif;">
-        <th align="center">Data type</th>
-        <th align="center">Memory etched upon the ledger</th>
-    </tr>
-    <tr>
-        <td align="center">Int8</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Int16</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Int32</td>
-        <td align="center"></td>
-    </tr>
-     <tr>
-        <td align="center">Int64</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Byte</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">UInt16</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">UInt32</td>
-        <td align="center"></td>
-    </tr>
-     <tr>
-        <td align="center">UInt64</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Float32</td>
-        <td align="center"></td>
-    </tr>
-     <tr>
-        <td align="center">Float64</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Bool</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">String</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Array</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Map</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Matrix</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">State</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">PersistentMap</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Address</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">Null</td>
-        <td align="center"></td>
-    </tr>
-    <tr>
-        <td align="center">etc.</td>
-        <td align="center"></td>
-    </tr>
-</table>
-
-
-</center>
 
 !!! note 
-    Coming soon: details on memory used on the ledger per variable type plus relative cost.
+    Coming soon: relative cost.
 
 
 ## Scope
@@ -552,18 +433,38 @@ Non-primitives can be set to null.
 ``` c++
 function main()
 
-	//  var myInt = null; // error: unable to infer type
-	var str : String = null;
-	var myArray : Array<Int32> = null;
-	var myMap : Map<Int32, Int32> = null;
-	var myState : State<Int32> = null;
-	var myAddress : Address = null;
+    //  var myInt = null; // error: unable to infer type
+    var str : String = null;
+    var myArray : Array<Int32> = null;
+    var myMap : Map<Int32, Int32> = null;
+    var myState : State<Int32> = null;
+    var myAddress : Address = null;
 
-	var myString : String = null;
-	// printLn(myString); // Segmentation fault: 11	
+    var myString : String = null;
+    printLn(myString); // (nullptr)
 
 endfunction
 ```
+
+## Default values
+
+Certain types not explicitly initialised receive a default value.
+
+
+Type | Default value 
+------------ | ------------- 
+Int8 | tbc 
+Int16 | tbc  
+Int32 | 0  
+Int64 | 0  
+UInt8 | tbc 
+UInt16 | tbc 
+UInt32 | 0  
+UInt64 | 0 
+Float32 | 0.000000
+Float64 | 0.000000
+Bool | false
+String | no default
 
 
 <br/>

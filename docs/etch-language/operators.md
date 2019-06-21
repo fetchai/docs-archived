@@ -117,11 +117,11 @@ endfunction
 function main()
 
     var x = 42;
-	var y = 66;
-	var z = y - x;
-	printLn(toString(z));
-	z =- 2;
-	printLn(toString(z));
+    var y = 66;
+    var z = y - x;
+    printLn(toString(z));
+    z -= 2;
+    printLn(toString(z));
 
 endfunction
 ```

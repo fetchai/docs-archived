@@ -1,6 +1,6 @@
 <h1>Logical operators</h1>
 
-## Equal to
+## Equal to 
 
 ``` c++
 function main()
@@ -15,7 +15,7 @@ function main()
 endfunction
 ```
 
-## Not equal to
+## Not equal to 
 
 ``` c++
 function main()
@@ -49,7 +49,7 @@ function main()
 endfunction
 ```
 
-## More than
+## More than 
 
 ``` c++
 function main()
@@ -68,7 +68,7 @@ function main()
 endfunction
 ```
 
-## And
+## And 
 
 ``` c++
 function main()
@@ -109,5 +109,28 @@ endfunction
 
 !!! note
 	Coming soon: support for `xor`.
+
+
+## Short circuiting
+
+Currently, we don't short circuit. This may cause unexpected results.
+
+``` c++
+function foo() : Bool
+  Print('1');
+  return true;
+endfunction
+
+function bar() : Bool
+  Print('2');
+  return false;
+endfunction
+
+function main()
+    if (foo() || bar())
+       Print('3');
+    endif
+endfunction
+```
 
 <br/>
