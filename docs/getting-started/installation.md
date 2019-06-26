@@ -167,7 +167,7 @@ cmake ..
 make -j constellation
 ```
 
-If you have memory issues on `make`, limit the number of cores:
+You may have memory issues on `make`, so limit the number of cores (we chose 4):
 
 ``` bash
 make -j 4 constellation
@@ -175,12 +175,12 @@ make -j 4 constellation
 
 If you want, you can build all the libraries:
 ``` bash
-make -j
+make -j 4
 ```
 
 For the `etch` simulator, build the `vm-lang` library:
 ``` bash
-make -j vm-lang
+make vm-lang
 ```
 
 

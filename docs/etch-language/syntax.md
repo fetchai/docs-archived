@@ -53,7 +53,7 @@ For multivariate types, all the types must be declared:
 
 ``` c++
 
-    var multitype-variable-name : Type<Type<Type>>();
+var multitype-variable-name : Type<Type<Type>>();
 
 ```
 
@@ -88,6 +88,8 @@ endfunction
 ## Keywords
 
 Here is a current list of `etch` keywords:
+
+<br/>
 
 <center>
 
@@ -147,7 +149,7 @@ Both line and block comments are possible:
 
 
 
-We tell you all about these functions in the section on [Smart Contracts](smart-contract-intro.md).
+We tell you all about these functions in the [section on smart contracts](smart-contract-intro.md).
 
 
 <br/>

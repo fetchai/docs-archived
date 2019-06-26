@@ -1,8 +1,8 @@
 <h1>States</h1>
 
-Smart contracts store data on the Fetch.AI distributed ledger using `State` data structures.
+Smart contracts store data on the Fetch.AI distributed ledger using `State` and `ShardedState` data structures.
 
-A `State` is declared as a `State<ValueType>(name : String)` like this:
+A `State` is declared as a `State<ValueType>(name : String)` where `name` is the unique memory location identifier for data residing on the ledger, like this:
 
 ``` c++
 var myState = State<Int32>("account");
@@ -19,7 +19,9 @@ And retrieve the value with `get()`:
 myState.get();
 ```
 
-The `State` constructor value inside the parentheses is a pointer to a memory location on the ledger. It takes a string, as above, or an `Address` type.
+The `State` constructor value inside the parentheses is a pointer to a memory location on the ledger. 
+
+It takes a string, as above, or an `Address` type.
 
 ``` c++
 function main()
@@ -32,7 +34,7 @@ function main()
 endfunction
 ```
 
-Any number of `var` identifiers can point to the same `State` object.
+In smart contract code, any number of `var` identifiers can point to the same `State` object on the ledger.
 
 In the example below, `ownerState` and `contractState` point to the same memory location and therefore reference the same `State` object on the ledger.
 
@@ -51,16 +53,18 @@ function main()
 endfunction
 ```
 
-Attempting to print the value of the second `State` generates an error. This is because the data set in `ownerState` has not yet been written to storage, so when `contractState` tries to access it, it finds no value and this generates a runtime error.
+Attempting to print the value of the second `State` object generates an error. This is because the data set in `ownerState` has not yet been written to the intermediate cache or ledger storage, so when `contractState` tries to access it, it finds no value and this generates a runtime error.
 
 
 ## Writing `State` data to the ledger
 
-Currently, `State` data is written to the ledger only after control has passed out of scope and the `destructor()` function has been called behind the scenes.
+The following is true for `State` variables with a `var` identifier.
 
-While the `State` variables are still in function scope, data is written to an intermediate object cache mechanism.
+Currently, `State` data is written to smart contract intermediate cache only after control has passed out of scope and the `destructor()` function has been called behind the scenes.
 
-Once control reaches the end of the function, data is written to an intermediate ledger cache mechanism.
+While identifiable `State` variables remain in function scope, data is written to an intermediate object cache mechanism at construction time. Within the same scope, such data is inaccessible to new `State` identifiers which do not explicitly call `set()`.
+
+Once control reaches the end of the function, data is written to an intermediate ledger cache mechanism and is available throughout the contract.
 
 Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.
 
@@ -79,6 +83,8 @@ function main()
 
 endfunction
 ```
+
+This is useful for `ShardedState` types which build up on immediate write anonymouse `State` types behind the scenes.
 
 
 ## Default values
@@ -107,7 +113,7 @@ endfunction
 
 The following code shows the behaviour of `State` types as they are passed around functions.
 
-Any `State` value out of original scope is available to `get()`.
+`State` values are available to `get()` if the scope they were created in originally has closed.
 
 
 ``` c++
@@ -149,6 +155,31 @@ function query() : Int32
   // returns the 55 set in change_state()
   return myState.get();
 
+endfunction
+```
+
+Similarly, you cannot access a value set on a `State` if the function scope in which it was created is still open.
+
+``` c++
+function main()
+
+    var state = State<Int32>("value");
+    state.set(11);  
+    printLn(state.get()); 
+
+    var value1 = value();     
+    printLn(toString(value1));
+    // scope not yet closed therefore runtime error: 
+    // The state does not represent any value. 
+    // The value has not been assigned and/or it does not exist in data storage.
+
+endfunction    
+
+function value() : Int32      
+    
+    var state = State<Int32>("value");
+    return state.get();
+ 
 endfunction
 ```
 

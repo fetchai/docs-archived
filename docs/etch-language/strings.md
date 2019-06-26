@@ -161,6 +161,7 @@ You can use the following utility functions for string manipulation:
 * [reverse()](strings.md#reverse)
 * [substr()](strings.md#substr)
 * [trim()](strings.md#trim)
+* [split()](strings.md#split)
 
 <h3 id="find">Find</h3>
 
@@ -247,5 +248,32 @@ function main()
 
 endfunction
 ```
+
+
+<h3 id="substr">Split</h3>
+
+The `split()` function takes an input string and a character(s) sequence to split on and returns an array of strings that does not include the split character(s). 
+
+* Returns a one element array if there is no tokenizer within it or if the input string is empty.
+* Returns an empty string if more than one tokenizer is encountered consecutively.
+* Returns an empty string as the first element in the output array if the first element of the input is a tokenizer.
+* Returns an empty string as the last element in the output array if the last element of the input is a tokenizer.
+
+The following code takes a string and splits it on the tokenizer ` --` returning an array of strings which it then outputs.
+
+``` c++
+function main()
+
+	var text = 'xxx --yyy --zzz';
+	printLn(text);
+    var output = text.split(' --');
+    printLn(output[0]);
+    printLn(output[1]);
+    printLn(output[2]);
+
+endfunction
+```
+
+[!comment]: <> (More examples when there is more time.)
 
 <br/>

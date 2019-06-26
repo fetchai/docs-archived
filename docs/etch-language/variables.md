@@ -39,7 +39,7 @@ endfunction
 
 Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits.
 
-They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt8`, `UInt16`, `UInt32`, `UInt64`.
+They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt8`, `UInt16`, `UInt32`, `UInt64`, `UInt256`.
 
 `Int32` is the compiler default so you don't need to explicitly declare this type.
 
@@ -120,13 +120,23 @@ function main()
 endfunction
 ```
 
+In the current version, `UInt256` is built from a `UInt64` literal, like this:
+``` c++
+function main()
+
+   var uint256 = UInt256(100u64); 
+   printLn(toString(uint256));
+
+endfunction
+```
+
 
 ## Floats
 
 Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation.
 
 !!! note
-	Fixed point variables  `Fixed32` and `Fixed64` are coming soon.
+	Fixed point variables  `Fixed32` and `Fixed64` will be available in version release/0.5.x.
 
 Unspecified floats default to `Float64`. 
 
@@ -181,14 +191,14 @@ Declare and initialise strings as follows:
 ``` c++
 function main()
 
-	var myString : String = "hello";
-	var myInferredString = "hello again";
-	var x: String = null;
+    var myString : String = "hello";
+    var myInferredString = "hello again";
+    var x: String = null;
 
-	printLn(myString);
-	printLn(myInferredString);
-	printLn(myInferredString + " " + myString);
-	// printLn(toString(x)); // error: unable to find matching function for 'toString'
+    printLn(myString);
+    printLn(myInferredString);
+    printLn(myInferredString + " " + myString);
+    printLn(x); 
 
 endfunction
 ```
@@ -219,31 +229,45 @@ function main()
 		printLn(toString(myArray[i]));
 	endfor
 
+    printLn(myArray);
+
 endfunction
 ```
 
 Find out more about `etch` Arrays [here](arrays.md).
 
 
+## Byte array
+
+Create a byte array like this:
+
+``` c++
+var byteArray = Buffer(8);
+```
+
 
 ## Maps
 
-!!! note
-	Coming soon: common `Map` operations.
-
-Declare the dictionary `Map` type with `Map<KeyType, ValueType>`.
+Declare the dictionary `Map` type with `Map<KeyType, ValueType>()`.
 
 ``` c++
 function main()
 
-    var myMap : Map<String, Int32>;
-    // myMap["balance1"] = 1000; // runtime error: line 5: null reference
-    // myMap["balance2"] = 2000; // runtime error: line 6: null reference
-    // myMap["balance3"] = 3000; // runtime error: line 7: null reference
+    var myMap = Map<String, Int32>();
+    myMap["balance1"] = 1000; 
+    myMap["balance2"] = 2000; 
+    myMap["balance3"] = 3000; 
+
+    printLn(toString(myMap["balance1"]));
+    printLn(toString(myMap["balance2"]));
+    printLn(toString(myMap["balance3"]));
 
 endfunction
 ```
 
+!!! note
+    Coming soon: common `Map` operations.
+    
 
 <!--
 ## Matrices
@@ -267,9 +291,11 @@ endfunction
 
 ## States 
 
-A `State` is a data structure used by `etch` smart contracts for storing and querying data on the ledger. The data stored by a `State` is held on shards on the ledger. 
+A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.AI ledger shards. 
 
-Declare and initialise a `State` type with `State<ValueType>` where values set with `set()` are mapped to a unique identifier, in this case `account`:
+Unique identifiers for ledger data are created at `State` construction time.
+
+Declare and initialise a `State` type with `State<ValueType>` where values set with `set()` are mapped to the unique ledger identifier`account`:
 
 ``` bash
 var myState = State<Int32>("account");
@@ -294,8 +320,22 @@ Find out more about `etch` States [here](states.md).
 
 ## ShardedState
 
-!!! Note
-    Coming soon. Replacing PersistentMap implementation.
+A `ShardedState` is also used for reading and writing data to the Fetch.AI ledger. However, it is much more efficient and powerful. 
+
+`ShardedState` uses `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with keys and values.
+
+In the following code, we create a `ShardedState`, `set()` a key/value pair on it, and finally we print the value using `get()` on a key with a default value.
+
+``` c++
+function main()
+
+    var myShardedState = ShardedState<Int32>("account1");
+    myShardedState.set("salary", 45000i32);
+    printLn(toString(myShardedState.get("salary", 0i32)));
+
+endfunction
+
+```
 
 Find out more about `etch` ShardedStates [here](sharded-state.md).
 
@@ -321,14 +361,27 @@ Find out more about `etch` Addresses [here](addresses.md).
 
 ## Mathematical, ML, and AI
 
-!!! note
-	Coming soon: full implementation of mathematical, machine learning, and AI libraries.
+`etch` provides powerful mathematical, machine learning, and AI specific data types and functions. 
 
-`etch` has powerful mathematical, machine learning, and AI specific data types and processes. 
+In the current version, `release/v0.4.x`, the following maths functions are available:
 
-For example, `etch` provides a number of powerful data types such as `Graph`, `Tensor`, `TrainingPair`, and `CrossEntropy`.
+* Log values.
+* Absolute values.
+* Exponents.
+* Square roots.
+* Random generator.
+* Trigonometry functions such as `sin`, `cos`, `tan`, `asin`, `sinh`, `asinh`, etc.
 
-We will look at these more complex data structures in a later section.
+For more details on the mathematical computation functions above, please check the section on [maths libraries and functions](./maths-libs.md).
+
+The following types and functions commonly used for machine learning are also available:
+
+* Graphs.
+* Tensors.
+* Cross entropy.
+* Mean square error.
+
+For more details on the machine learning implementations, please check the section on [machine learning and artificial intelligence](./ML-AI.md).
 
 
 
@@ -355,7 +408,7 @@ function main()
     // cast to Int64
     var int64Variable = toInt64(int32bit);
     // cast to UInt8
-    var uint8Variable = toUInt8(int32bit); // error: unknown symbol 'toUInt8'
+    var uint8Variable = toUInt8(int32bit); 
     // cast to UInt16
     var uint16Variable = toUInt16(int32bit);
     // cast to UInt32
@@ -378,39 +431,41 @@ function main()
 
 endfunction
 ```
- 
+
+<!--
 
 ## Constants
 
 !!! note
 	Coming soon: support for constants.
+-->
 
 
+## Data size
 
-## Data measures
+In the table below, we detail the exact memory size of each data type, and when etched onto the network.
 
-In the table below, we detail the exact memory size of each data type when etched onto the network.
-
-Type | Memory size 
------------- | ------------- 
-Int8 | tbc 
-Int16 | tbc  
-Int32 | tbc  
-Int64 | tbc  
-UInt8 | tbc 
-UInt16 | tbc 
-UInt32 | tbc  
-UInt64 | tbc
-Float32 | tbc
-Float64 | tbc
-Bool | tbc
-String | tbc
-Array | tbc
-Map | tbc
-State | tbc
-ShardedState | tbc
-Address | tbc
-null | tbc
+Type | Memory size | Size on ledger
+------------ | ------------- | ---------
+Int8 | 8 byte | tbc
+Int16 | 16 byte | tbc
+Int32 | 32 byte | tbc 
+Int64 | 64 byte | tbc  
+UInt8 | 8 byte | tbc
+UInt16 | 16 byte | tbc
+UInt32 | 32 byte | tbc  
+UInt64 | 64 byte | tbc
+UInt256 | 256 byte | tbc
+Float32 | 32 byte | tbc
+Float64 | 64 byte | tbc
+Bool | tbc | tbc
+String | tbc | tbc
+Array | tbc | tbc
+Map | tbc | tbc
+State | tbc | tbc
+ShardedState | tbc | tbc
+Address | tbc | tbc
+null | tbc | tbc
 
 
 !!! note 
@@ -426,9 +481,6 @@ null | tbc
 ## Null
 
 Non-primitives can be set to null. 
-
-!!! note
-	You cannot print a null value.
 
 ``` c++
 function main()
@@ -461,6 +513,7 @@ UInt8 | tbc
 UInt16 | tbc 
 UInt32 | 0  
 UInt64 | 0 
+UInt256 | tbc
 Float32 | 0.000000
 Float64 | 0.000000
 Bool | false

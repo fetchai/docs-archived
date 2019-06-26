@@ -216,54 +216,11 @@ endfunction
 
 ## Utility functions
 
-<H3>Random (non deterministic)</H3>
 
-You can currently generate non-deterministic, random, signed and unsigned integers and floats.
-
-There is one restriction: the beginning value of the range *must* be less than the end value.
-
-``` c++
-function main()
-
-    // var randUInt8 = Rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
-    // printLn(toString(randUInt8));
-
-    // unpermitted range
-    // var rand_test = Rand(100u16, 0u16); // runtime error: Invalid argument: Rand(a, b) must satisfy a < b
-
-    var randUInt16 = Rand(0u16, 1000u16);
-    // printLn(toString(randUInt16));
-
-    var randUInt32 = Rand(0u32, 1000u32);
-    printLn(toString(randUInt32));
-
-    var randUInt64 = Rand(0u64, 1000u64);
-    printLn(toString(randUInt64));
-
-    // var randInt8 = Rand(0u8, 1000u8);
-    // printLn(toString(randInt8));
-
-    var randInt16 = Rand(0i16, 1000i16);
-    // printLn(toString(randInt16));
-
-    var randInt32 = Rand(0i32, 1000i32);
-    printLn(toString(randInt32));
-
-    var randInt64 = Rand(0i64, 1000i64);
-    printLn(toString(randInt64));
-
-    var randFloat32 = Rand(0.0f, 1000.0f);
-    printLn(toString(randFloat32));
-
-    var randFloat64 = Rand(0.0, 1000.0);
-    printLn(toString(randFloat64));
-
-endfunction
-```
 
 <H3>Print</H3> 
 
-`printLn()` is available for printing variables to the console.
+`printLn()` is available for printing variables to the console with a line break.
 
 `print()` is available without a line break.
 
@@ -280,8 +237,6 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `System.Argc()`
 * `System.Argv()`
 
-!!! note 
-	Coming soon: common utility maths functions such as `pow()`, `exp()`, `abs()`, `Sine()`, `Cosine()`, etc.
 
 !!! tip
 	`etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
@@ -297,6 +252,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `toUInt16()`
 * `toUInt32()`
 * `toUInt64()`
+<!-- `toUInt256()` -->
 * `toFloat32()`
 * `toFloat64()`
 * `toString()`

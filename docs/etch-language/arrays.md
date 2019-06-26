@@ -71,11 +71,41 @@ endfunction
 
 You can use the following utility functions to manipulate arrays:
 
+* [count()](arrays.md#count)
 * [append()](arrays.md#append)
 * [extend()](arrays.md#extend)
-* [count()](arrays.md#count)
 * [popBack() and popFront()](arrays.md#pop)
 * [reverse()](arrays.md#reverse)
+
+
+<h3 id="count">Count</h3>
+
+The `count()` function returns the number of items in a one dimensional array, or the number of arrays in a two dimensional array.
+
+* Returns 0 if the array is empty.
+
+``` c++
+function main()
+
+    var myArray = Array<Int32>(2);
+    myArray[0] = 40;
+    myArray[1] = 41;
+    printLn(myArray.count());
+    myArray.append(42);
+    printLn(myArray.count());
+
+endfunction
+```
+
+``` c++
+function main()
+
+    printLn(Array<Array<UInt32>>(10).count());
+
+endfunction
+```
+
+
 
 <h3 id="append">Append</h3>
 
@@ -124,7 +154,9 @@ endfunction
 
 <h3 id="extend">Extend</h3>
 
-Use `extend()` to append the contents of one array to another. Array types must be the same.
+Use `extend()` to append the contents of one array to another in order. 
+
+* Array types must be the same.
 
 ``` c++
 function main()
@@ -147,32 +179,6 @@ endfunction
 
 
 
-<h3 id="count">Count</h3>
-
-The `count()` function returns the number of items in a one dimensional array, or the number of arrays in a two dimensional array.
-
-* Returns 0 if the array is empty.
-
-``` c++
-function main()
-
-	var myArray = Array<Int32>(2);
-    myArray[0] = 40;
-    myArray[1] = 41;
-    printLn(myArray.count());
-	myArray.append(42);
-	printLn(myArray.count());
-
-endfunction
-```
-
-``` c++
-function main()
-
-	printLn(Array<Array<UInt32>>(10).count());
-
-endfunction
-```
 
 <h3 id="pop">Pop back and pop front</h3>
 

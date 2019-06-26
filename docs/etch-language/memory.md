@@ -1,6 +1,6 @@
 <h1>Memory</h1> 
 
-A `State` and a `ShardedState` saves data to the shards that make up the ledger. There are a configurable number of parallel shards on the ledger that accept permanent, irreversible storage. 
+`State` and a `ShardedState` save data onto the shards that make up the ledger. There are a configurable number of parallel shards on the ledger that accept permanent, irreversible storage. 
 
 Developers have to pay to store data on ledger shards so they should take care when constructing `State` and `ShardedState` types to avoid unnecessary fees. 
 
@@ -12,21 +12,21 @@ It is possible to exceed `etch` imposed limits on data storage in which case an 
 
 You can visualise the ledger shards as a series of swim lanes. 
 
-Data etches onto a shard depending on the smart contract design. The contents of a `State` map onto a single shard on the ledger. 
+Data etches onto a shard depending on the smart contract design. The contents of a `State` etch onto a single shard on the ledger. 
 
 For example, `State<Int32>("balance").set(200);` may map to a shard like this:
 
 <center>![Memory mapping on the Fetch.AI ledger shards](img/shards.png)</center>
 
-This is an economical way to manage memory on the ledger shards. However, there are scenarios in which data maps onto the ledger in an inefficient way. 
+This is an economical way to manage memory on the ledger shards. However, there are scenarios in which `State` data etches onto the ledger in an inefficient way. 
 
-For example, given a voting function such as the one below, the code may aggregate the `State` variables tracking every vote in an inefficient manner:
+For example, given a `vote()` function such as the one below, the code may aggregate the `State` variables tracking every vote in an inefficient manner:
 
 ``` c++
 
 function main()
 
-  vote();
+    vote();
 
 endfunction
 
@@ -54,8 +54,9 @@ function vote()
         // update the aggregate votes against
         votes_against.set(votes_against.get() + 1);
     endif
-        // update the aggregate of total votes
-        votes_sum.set(votes_total.get() + 1);
+    
+    // update the aggregate of total votes
+    votes_sum.set(votes_total.get() + 1);
 
 endfunction
 
@@ -63,13 +64,13 @@ endfunction
 
 Each time a `State` increments, the new data value takes up new memory space on the shard.
 
-The ledger shards could look something like this after this `vote()` function runs.
+The ledger shards could look something like this after this `vote()` function runs over a short period of time.
 
 <center>![Bad memory mapping on the Fetch.AI ledger shards](img/bad-sharding.png)</center>
 
 This is highly uneconomical. Every aggregate value for a single `State` accumulates upon a ledger shard. Furthermore, multiple `States` take up multiple shards. 
 
-Data is chargeable per lane in order to disincentivize code like the above which can slow the network. The current maximum lanes is configurable.
+Data is chargeable per lane in order to disincentivize code like the above which can slow the network. 
 
 There are better approaches to the voting problem. For example, by encapsulating the data with a `ShardedState` like this:
 
@@ -83,12 +84,16 @@ endfunction
 
 function vote()
 
-    var race_for_prime_minister = ShardedState<Int32>("votes_for");
-    race_for_prime_minister.set("Alice", 0);
-    race_for_prime_minister.set("Bob", 0);
-    race_for_prime_minister.set("Charlene", 0);
-    race_for_prime_minister.set("Damien", 0);
+    var fors = ShardedState<Int32>("votes_for");
+    fors.set("Alice", increment(fors.get("Alice", 0)));
     // etc.
+
+endfunction
+
+function increment(x : Int32) : Int32
+    
+    var y = x + 1;
+    return y;
 
 endfunction
 
