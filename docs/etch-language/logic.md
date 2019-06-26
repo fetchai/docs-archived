@@ -117,18 +117,18 @@ Currently, we don't short circuit. This may cause unexpected results.
 
 ``` c++
 function foo() : Bool
-  Print('1');
-  return true;
+  	printLn('1');
+  	return true;
 endfunction
 
 function bar() : Bool
-  Print('2');
-  return false;
+  	printLn('2');
+  	return false;
 endfunction
 
 function main()
-    if (foo() || bar())
-       Print('3');
+ 	if (foo() || bar())
+       printLn('3');
     endif
 endfunction
 ```

@@ -1,6 +1,6 @@
 <h1>Sharded States</h1>
 
-A `ShardedState` functions like a `State` type in that data contained within a `ShardedState` will be etched upon the ledger.
+A `ShardedState` is like a `State` type in that data contained within a `ShardedState` will be etched upon the ledger.
 
 The key difference is that a `ShardedState` is a map, containing key/value pairs. 
 
@@ -32,7 +32,6 @@ function main()
 
 endfunction
 
-
 function set_values_on_state()
       var state = ShardedState<Int32>("account1");
       state.set("sales", 2000000);
@@ -41,7 +40,7 @@ function set_values_on_state()
 endfunction
 ```
 
-Let's add some query functions to get the `ShardedState` values. Notice that when you query the data, you can provide default values and you will receive an actual value.
+Let's add some query functions to get the `ShardedState` values. Notice that when you query the data, you provide default values and receive the actual value.
 
 ``` c++
 function main()
@@ -58,14 +57,12 @@ function main()
 
 endfunction
 
-
 function set_values_on_state()
       var state = ShardedState<Int32>("account1");
       state.set("sales", 2000000);
       state.set("gross_profit", 1800000);
       state.set("net_profit", 1300000);
 endfunction
-
  
 function query_sales() : Int32
     var state = ShardedState<Int32>("account1");
@@ -114,9 +111,9 @@ function main()
 endfunction
 ```
 
-Because `ShardedState` uses anonymous `State` types to write data as soon as it is created, we can access values with keys using any identifier.
+Because `ShardedState` uses anonymous `State` types to write data as soon as it is created, we can access values with keys using any `var` identifier.
 
-This makes the `ShardedState` type much more flexible and powerful than a `State` type.
+This makes the `ShardedState` type much more powerful than a `State` type.
 
 
 

@@ -4,13 +4,13 @@
 
 Get the Fetch.AI ledger code from Git. 
 
-Full initial installation and build instructions are <a href="https://community.fetch.ai/getting-started/building-fetchai-ledger-node/develop/" target="_blank">here</a>.
+Full initial installation and build instructions are <a href="../.././getting-started/installation/" target=_blank>here</a>.
 
 ### Installation
 
 `cd` into `build` folder.
 
-Run `make -j 4 vm-lang`.
+Run `make vm-lang`.
 
 ### Setup
 

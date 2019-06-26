@@ -2,9 +2,7 @@
 
 !!! note
 
-	Coming soon: machine learning and AI libraries for `etch` smart contracts. 
-
-	The libraries will support:
+	Coming soon: 
 
 	* Tensors.
 	* Graphs.

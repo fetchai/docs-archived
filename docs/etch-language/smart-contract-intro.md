@@ -1,4 +1,4 @@
-<h1>Introduction</h1>
+<h1>Introduction to Smart Contracts</h1>
 
 A <a href="https://en.wikipedia.org/wiki/Smart_contract" target="_blank">smart contract</a> facilitates, verifies, and enforces a transaction between two or more parties on a distributed ledger or blockchain. 
 
