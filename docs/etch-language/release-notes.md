@@ -3,7 +3,7 @@
 Significant changes in this version of the `etch` virtual machine include the following:
 
 * `Byte` type deprecated in favour of `UInt8` - *breaking change*.
-* `ByteArray` type now available.
+* `Buffer` type now available.
 * New unsigned integer 256 byte type available `UInt256`.
 * Null pointer included for uninitialised `String` types.
 * `panic` support for possible runtime errors included.
