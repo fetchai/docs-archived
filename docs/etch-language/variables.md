@@ -237,12 +237,12 @@ endfunction
 Find out more about `etch` Arrays [here](arrays.md).
 
 
-## Byte array
+## Buffer
 
-Create a byte array like this:
+Create a `Buffer` byte array type like this:
 
 ``` c++
-var byteArray = Buffer(8);
+var myBuffer = Buffer(8);
 ```
 
 
