@@ -4,7 +4,7 @@ The `etch` language was initially integrated with the Fetch.AI C++ ledger projec
 
 `etch` is inspired by Rust, C++, and Python, but it also has some idiosyncrasies. 
 
-The `etch` language is extremely restrictive to avoid costly errors on the ledger. See [Smart Contract](smart-contract-intro.md) section for more information. 
+The `etch` language is extremely restrictive to avoid costly errors on the ledger. See [Smart Contract](.././smart-contracts/smart-contract-intro.md) section for more information. 
 
 `etch` is a statically typed language and static typing is enforced by the compiler. 
 
@@ -149,7 +149,7 @@ Both line and block comments are possible:
 
 
 
-We tell you all about these functions in the [section on smart contracts](smart-contract-intro.md).
+We tell you all about these functions in the [section on smart contracts](.././smart-contracts/smart-contract-intro.md).
 
 
 <br/>
