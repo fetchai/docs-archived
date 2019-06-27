@@ -66,8 +66,10 @@ System args: 2
 1 = hello
 ```
 
-`etch` features like this are useful for playing around with and for debugging in a dev environment. They should not be included in smart contract code. 
+`etch` features like this are useful for experimentation and debugging in a dev environment. For example, you can use these system arguments to load machine learning training data. 
 
-For smart contracts, there are more flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts [here](smart-contracts.md).
+System arguments should not be included in smart contract code. 
+
+For smart contracts, there are more flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts <a href="../smart-contracts/" target=_blank> here</a>.
 
 <br/>

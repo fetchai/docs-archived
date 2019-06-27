@@ -355,7 +355,7 @@ function main()
 endfunction
 ```
 
-Find out more about `etch` Addresses [here](addresses.md).
+Find out more about `etch` Addresses [here](.././smart-contracts/addresses.md).
 
 
 
