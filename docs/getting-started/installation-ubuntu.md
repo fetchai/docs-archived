@@ -75,7 +75,7 @@ git submodule status
 If any submodules are missing, please check your installation.
 
 
-## Building the ledger
+## Build the ledger
 
 From the `ledger` directory, follow the steps to build the library:
 

@@ -68,6 +68,12 @@ Once control reaches the end of the function, data is written to an intermediate
 
 Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.
 
+<center>
+
+![How smart contracts manage State and ShardedState memory allocation](img/memory-caching.png)
+
+</center>
+
 
 ## Anonymous `State` types
 
