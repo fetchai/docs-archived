@@ -1,4 +1,4 @@
-## The most basic introduction
+## The most basic introduction
 
 `etch` is a high-level, statically-typed programming language designed for creating smart contracts on the Fetch.AI constellation ledger. Unlike similar languages, `etch` allows developers to code advanced compute-intensive logic for high performance scenarios such as machine learning and AI.
 
