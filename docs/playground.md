@@ -20,7 +20,7 @@ Copy/paste the code into the window on the left. Click run and you will see the 
 
 The `main` function is where execution starts. The `for` loop prints out “Hello world” along with a number representing the loop index.
 
-## Flow control and looping
+## Flow control and looping
 
 As well as `for`, `etch` also supports `while`:
 
