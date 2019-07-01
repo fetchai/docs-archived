@@ -13,7 +13,7 @@ cd ledger-api-py/
 python3 setup.py install
 ```
 
-Find out how to build a smart contract using the Python API [here](submitting_contract.md).
+Find out how to build a smart contract using the Python API [here](../smart-contracts/submitting_contract.md).
 
 <!--### Connecting to testnet
 

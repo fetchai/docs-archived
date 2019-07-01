@@ -15,3 +15,4 @@ Registered miners begin to solve the problem **at the same time** and the miner 
 !!! Note
 	The winning miner is not necessarily the miner who verifies the block.
 
+<br/>
