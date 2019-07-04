@@ -277,8 +277,8 @@ function main()
     var f = toUInt64(x);
     var g = toFloat32(x);
     var h = toFloat64(x);
-    // var i = toFixed32(x); // coming in v0.5.x
-    // var j = toFixed64(x); // coming in v0.5.x
+    var i = toFixed32(x); 
+    var j = toFixed64(x); 
 
 endfunction
 ```
