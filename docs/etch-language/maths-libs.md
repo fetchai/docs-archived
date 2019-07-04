@@ -1,7 +1,7 @@
 <h1>Maths libraries and functions</h1>
 
 
-In the current version, `release/v0.4.x`, the following maths functions are available:
+In the current version, `release/v0.5.x`, the following maths functions are available:
 
 ## Logarithm
 
@@ -18,7 +18,6 @@ function main()
      printLn(logY); // prints -inf
 
 endfunction
-
 ```
 
 In a future release, log values will be available for all types as well as in base 2 and 10.
@@ -77,14 +76,14 @@ The beginning value of the range *must* be less than the end value.
 ``` c++
 function main()
 
-    // var randUInt8 = Rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
-    // printLn(toString(randUInt8));
+    //var randUInt8 = Rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
+    //printLn(toString(randUInt8));
 
     // unpermitted range
     // var rand_test = Rand(100u16, 0u16); // runtime error: Invalid argument: Rand(a, b) must satisfy a < b
 
     var randUInt16 = Rand(0u16, 1000u16);
-    // printLn(toString(randUInt16));
+    printLn(toString(randUInt16));
 
     var randUInt32 = Rand(0u32, 1000u32);
     printLn(toString(randUInt32));
@@ -96,7 +95,7 @@ function main()
     // printLn(toString(randInt8));
 
     var randInt16 = Rand(0i16, 1000i16);
-    // printLn(toString(randInt16));
+    printLn(toString(randInt16));
 
     var randInt32 = Rand(0i32, 1000i32);
     printLn(toString(randInt32));
@@ -115,20 +114,78 @@ endfunction
 
 ## Exponent
 
-* exp - next release.
+The exponential function returns the value of `e` to the number given, <code>exp(x) = e<sup>x</sup></code> where `e` is Euler's base of natural logarithms.
 
+Currently, the square root function is limited to fixed and floating point variables.
+
+``` c++
+function main()
+
+    var a = 2.0fp32;
+    var b = 3.0fp64;
+    printLn(toString(exp(a)));
+    printLn(toString(exp(b)));
+
+    var c = 4.0f;
+    var d = 5.0;
+    printLn(toString(exp(c)));
+    printLn(toString(exp(d)));
+
+endfunction
+```
+
+## Power
+
+The power function returns the value of the first parameter raised to the second.
+
+Currently, the power function is limited to fixed and floating point variables.
+
+``` c++
+function main()
+
+    var a = 2.0fp64;
+    var b = 3.0fp64;
+    printLn(toString(pow(a, b)));
+
+    var c = 4.0fp32;
+    var d = 5.0fp32;
+    printLn(toString(pow(c, d)));
+
+    var e = 2.0f;
+    var f = 3.0f;
+    printLn(toString(pow(e, f)));
+
+    var g = 4.0;
+    var h = 5.0;
+    printLn(toString(pow(g, h)));
+
+endfunction
+```
 
 
 ## Square root
 
-* sqrt - next release.
+The square root of a number is found with the `sqrt()` function.
 
+Currently, the square root function is limited to fixed and floating point variables.
 
-## Trig
+``` c++
+function main()
 
-* trig functions - next release.
+    var a = 4.0fp32;
+    var b = 49.0fp64;
+    printLn(toString(sqrt(a)));
+    printLn(toString(sqrt(b)));
 
-<!--
+    var c = 4.0f;
+    var d = 49.0;
+    printLn(toString(sqrt(c)));
+    printLn(toString(sqrt(d)));
+
+endfunction
+```
+
+## Trigonometry
 
 `etch` supports trigonometric functions `Sin`, `Cos`, and `Tan`.
 
@@ -306,7 +363,6 @@ function main()
 endfunction
 ```
 
--->
 
 <br/>
 

@@ -2,7 +2,7 @@
 
 ## Locally
 
-To run smart contract code on your local machine, first download, build, and run a ledger node. You can find the full details of how to do that <a href="../.././getting-started/installation/" target=_blank>here</a>.
+To run smart contract code on your local machine, first download, build, and run a ledger node. You can find the full details of how to do that <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
 
 For this version of documentation alone, run `git checkout master` before building the ledger and running a node.
 

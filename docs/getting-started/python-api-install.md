@@ -1,10 +1,11 @@
-Download and install the Python library which interacts with the running ledger node:
+Download and install the Python library which interacts with a running ledger node.
 
 ``` bash
-git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.4.x
+git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.5.x
 ```
 
-Make sure you are on the latest release branch in order to have the latest features. 
+!!!	Tip
+	Make sure you are on the latest release branch in order to have the latest features. 
 
 Install the library with the following command:
 

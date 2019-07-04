@@ -20,7 +20,7 @@ Smart contracts can be used for voting applications, crowdfunding, auctions, mul
 
 Smart contract transactions are etched onto the Fetch.AI distributed ledger, or blockchain, and are therefore permanent, traceable, and irreversible.
 
-The Fetch.AI ledger is the blockchain foundation of the `etch` VM. Quick start instructions for spinning up a Fetch.AI ledger node are <a href="../.././getting-started/installation/" target=_blank>here</a>.
+The Fetch.AI ledger is the blockchain foundation of the `etch` VM. Quick start instructions for spinning up a Fetch.AI ledger node are <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
 
 The Fetch.AI ledger is unlike more traditional blockchain designs. Instead of a single chain of truth, the Fetch.AI ledger is sharded into parallel lanes. 
 

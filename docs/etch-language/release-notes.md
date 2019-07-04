@@ -2,20 +2,17 @@
 
 Significant changes in this version of the `etch` virtual machine include the following:
 
-tbc...
+* Integer type `UInt256` included.
+* Fixed point decimal types `Fixed32` and `Fixed64` included.
+* New map type `StructuredData` included.
+* Arrays now support the following functions: `append()`, `count()`, `erase()`, `extend()`, `popBack()`, `popFront()`, and `reverse()`.
+* Strings now support the following functions: `find()`, `length()`, `reverse()`, `split()`, `substr()`, and `trim()`.
+* Support for nested arrays included.
+* Nested arrays allowed in `State` objects.
+* Mathematical function `abs()` included.
+* `State` and `ShardedState` ojbects improved implementation.
+* `SHA256()` function included.
 
-* Arrays now have support for the following methods: append, count, erase, extend, popBack, popBack, popFront, popFront, and reverse.
-* Strings now have support for the following methods: find, length, reverse, split, substr, and trim.
-* Mathematical function abs included.
-* Improved handling of null references.
-* Improved handling of break and continue.
-* Disabled serialisation of null objects.
-* Added new object StructuredData that can be used for storing JSON like objects.
-* Improved interface to state handling objects State and ShardedState state.
-* Improve serialisation support for complex data types.
-* Added UInt256 support.
-* Improved type support for updating SHA256 hashes.
-* Added support for fixed point types Fixed32 & Fixed64.
 
 
 <br/>

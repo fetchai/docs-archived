@@ -70,6 +70,6 @@ System args: 2
 
 System arguments should not be included in smart contract code. 
 
-For smart contracts, there are more flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts <a href="../smart-contracts/" target=_blank> here</a>.
+For smart contracts, there are more flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts <a href="../.././smart-contracts/smart-contract-intro/" target=_blank> here</a>.
 
 <br/>

@@ -112,6 +112,6 @@ endfunction
 ```
 The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance. 
 
-You can find the full contract here https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch.
+You can find the full contract <a href="https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch" target=_blank>here</a>.
 
 <br/>

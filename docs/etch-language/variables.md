@@ -5,11 +5,6 @@
 Declare a variable with the keyword `var`. Declare numeric values with literals where possible. You can also use an explicit type cast operation. See below for explicit type declaration rules.
 
 
-
-!!! warning
-	The `toString` function does not yet support all variable types.
-
-
 [!comment]: <> (## Assignments TODO:)
 
 
@@ -37,7 +32,7 @@ endfunction
 
 ## Integers
 
-Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits.
+Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits (1 to 8 bytes).
 
 They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt8`, `UInt16`, `UInt32`, `UInt64`, `UInt256`.
 
@@ -63,19 +58,20 @@ function main()
 
     // assigning various signed integer types explicitly and with label
     var int8a = 0i8; 
-    // printLn(toString(int8a)); // error: unable to find matching function for 'toString'
+    printLn(toString(int8a)); // error: unable to find matching function for 'toString'
     var int8b : Int8 = -0i8; 
-    // printLn(toString(int8b)); // error: unable to find matching function for 'toString'
+    printLn(toString(int8b)); // error: unable to find matching function for 'toString'
     var int16a = 0i16; 
-    // printLn(toString(int16a)); // error: unable to find matching function for 'toString'
+    printLn(toString(int16a)); // error: unable to find matching function for 'toString'
     var int16b : Int16 = -1i16; 
-    // printLn(toString(int16b)); // error: unable to find matching function for 'toString'
+    printLn(toString(int16b)); // error: unable to find matching function for 'toString'
 
 endfunction
 ```
 
 ``` c++
 function main()
+
     // Int32 is default but can be explicit also
     var int32a = 0i32;
     printLn(toString(int32a));
@@ -94,13 +90,13 @@ function main()
 
     // assigning various unsigned integer types
     var uint8a = 45u8; 
-    // printLn(toString(uint8a)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint8a)); // error: unable to find matching function for 'toString'
     var uint8b : UInt8 = 1u8; 
-    // printLn(toString(uint8b)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint8b)); // error: unable to find matching function for 'toString'
     var uint16a = 0u16; 
-    // printLn(toString(uint16a)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint16a)); // error: unable to find matching function for 'toString'
     var uint16b : UInt16 = 1u16; 
-    // printLn(toString(uint16b)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint16b)); // error: unable to find matching function for 'toString'
 
 endfunction
 ``` 
@@ -108,6 +104,7 @@ endfunction
 ``` c++
 function main()
 
+    // assigning various unsigned integer types
     var uint32a = 0u32;
     printLn(toString(uint32a));
     var uint32b : UInt32 = 1u32; 
@@ -133,10 +130,7 @@ endfunction
 
 ## Floats
 
-Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation.
-
-!!! note
-	Fixed point variables  `Fixed32` and `Fixed64` will be available in version release/0.5.x.
+Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation (4 and 8 bytes).
 
 Unspecified floats default to `Float64`. 
 
@@ -159,13 +153,44 @@ function main()
 	var float32bit = 32.0f;
 	printLn(toString(float32bit));
 
-	// fixed point types - wip
-	// var fixed32bit : Fixed32 = 32.1; // error: unknown type 'Fixed32'
-	// var fixed64bit : Fixed64 = 64.1; // error: unknown type 'Fixed64'
-
 endfunction
 ```
 
+
+## Fixed Points
+
+Fixed point variables are available as  `Fixed32` and `Fixed64` types.
+
+You must declare `FixedPoint` variables with the postfix literals `fp32` and `fp64`.
+
+
+
+``` c++
+function main()
+
+    var fixed32bit : Fixed32 = 32.1fp32; 
+    var fixed64bit : Fixed64 = 64.1fp64; 
+
+    printLn(toString(fixed32bit));
+    printLn(toString(fixed64bit));
+
+endfunction
+
+```
+
+For brevity, you do not need the full declaration.
+
+``` c++
+function main()
+
+    var fixed32bit = 2.0fp32;
+    var fixed64bit = 3.0fp64;
+
+    printLn(toString(fixed32bit));
+    printLn(toString(fixed64bit));
+
+endfunction
+```
 
 ## Boolean
 
@@ -269,6 +294,30 @@ endfunction
     Coming soon: common `Map` operations.
     
 
+## StructuredData types
+
+A `StructuredData` type is another map type containing key/value pairs. 
+
+The main difference with `Map` is that a `StructuredData` type will always be able to generate `yaml`, `json`, or similar.
+
+``` c++
+function main()
+
+    var data = StructuredData();
+
+    data.set("key1", 200i32);
+    data.set("key2", 500u64);
+    data.set("key3", "hello world");
+
+    printLn(toString(data.getInt32("key1")));
+    printLn(toString(data.getUInt64("key2")));
+    printLn(data.getString("key3"));
+
+endfunction
+
+```
+
+
 <!--
 ## Matrices
 
@@ -355,7 +404,7 @@ function main()
 endfunction
 ```
 
-Find out more about `etch` Addresses [here](.././smart-contracts/addresses.md).
+Find out more about `etch` Addresses [here](./addresses.md).
 
 
 
@@ -363,23 +412,7 @@ Find out more about `etch` Addresses [here](.././smart-contracts/addresses.md).
 
 `etch` provides powerful mathematical, machine learning, and AI specific data types and functions. 
 
-In the current version, `release/v0.4.x`, the following maths functions are available:
-
-* Log values.
-* Absolute values.
-* Exponents.
-* Square roots.
-* Random generator.
-* Trigonometry functions such as `sin`, `cos`, `tan`, `asin`, `sinh`, `asinh`, etc.
-
 For more details on the mathematical computation functions above, please check the section on [maths libraries and functions](./maths-libs.md).
-
-The following types and functions commonly used for machine learning are also available:
-
-* Graphs.
-* Tensors.
-* Cross entropy.
-* Mean square error.
 
 For more details on the machine learning implementations, please check the section on [machine learning and artificial intelligence](./ML-AI.md).
 
@@ -392,9 +425,6 @@ If you need a specific non-default numerical type, you can make an explicit cast
 Use `to<Type>Name` to type cast. 
 
 There is no implicit type casting in `etch`.
-
-!!! warning
-	`toString` is not currently universal.
  
 ``` c++
 function main()
@@ -443,33 +473,29 @@ endfunction
 
 ## Data size
 
-In the table below, we detail the exact memory size of each data type, and when etched onto the network.
+In the table below, we detail the memory size of each data type.
 
-Type | Memory size | Size on ledger
------------- | ------------- | ---------
-Int8 | 8 byte | tbc
-Int16 | 16 byte | tbc
-Int32 | 32 byte | tbc 
-Int64 | 64 byte | tbc  
-UInt8 | 8 byte | tbc
-UInt16 | 16 byte | tbc
-UInt32 | 32 byte | tbc  
-UInt64 | 64 byte | tbc
-UInt256 | 256 byte | tbc
-Float32 | 32 byte | tbc
-Float64 | 64 byte | tbc
-Bool | tbc | tbc
-String | tbc | tbc
-Array | tbc | tbc
-Map | tbc | tbc
-State | tbc | tbc
-ShardedState | tbc | tbc
-Address | tbc | tbc
-null | tbc | tbc
+Type | Memory size 
+------------ | ------------- 
+Int8 | 1 byte 
+Int16 | 2 bytes 
+Int32 | 4 bytes  
+Int64 | 8 bytes   
+UInt8 | 1 byte 
+UInt16 | 2 bytes 
+UInt32 | 4 bytes   
+UInt64 | 8 bytes 
+UInt256 | 32 bytes 
+Float32 | 4 bytes 
+Float64 | 8 bytes 
+Bool | 1 byte 
+String | 8 bytes + length character size (changing with UTF-8) 
+Array | 8 bytes + length x element size 
+Map | 8 bytes +  n x (key + value) storage 
+Address | 32 bytes 
 
 
-!!! note 
-    Coming soon: relative cost.
+Currently, there is a 2 unit charge per 1 byte of ledger storage.
 
 
 ## Scope

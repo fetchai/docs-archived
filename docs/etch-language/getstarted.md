@@ -4,7 +4,7 @@
 
 Get the Fetch.AI ledger code from Git. 
 
-Full initial installation and build instructions are <a href="../.././getting-started/installation/" target=_blank>here</a>.
+Full initial installation and build instructions are <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
 
 ### Installation
 
