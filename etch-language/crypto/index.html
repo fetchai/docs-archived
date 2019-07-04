@@ -285,11 +285,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1-2" type="checkbox" id="nav-1-2">
     
     <label class="md-nav__link" for="nav-1-2">
-      Fetch Ledger
+      Install the Fetch.AI Ledger
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-1-2">
-        Fetch Ledger
+        Install the Fetch.AI Ledger
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -341,8 +341,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../getting-started/python-api-install/" title="Python API" class="md-nav__link">
-      Python API
+    <a href="../../getting-started/python-api-install/" title="Python Ledger API" class="md-nav__link">
+      Python Ledger API
     </a>
   </li>
 
@@ -880,7 +880,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../etch-addresses/" title="Addresses" class="md-nav__link">
+    <a href="../addresses/" title="Addresses" class="md-nav__link">
       Addresses
     </a>
   </li>
@@ -1108,8 +1108,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
-      Memory
+    <a href="../../smart-contracts/data-types/" title="Data types" class="md-nav__link">
+      Data types
     </a>
   </li>
 
@@ -1120,8 +1120,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/addresses/" title="Addresses" class="md-nav__link">
-      Addresses
+    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
+      Memory
     </a>
   </li>
 
@@ -1232,7 +1232,21 @@
                 
                 <H2>SHA256</H2>
 
-<p><code>etch</code> supports a SHA256 object.</p>
+<p>The <code>SHA256()</code> object gives you a number of ways to generate random 32 byte hashes which are returned as a 64 digit hexadecimal number.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="c1">// create a SHA256 object</span>
+    <span class="n">var</span> <span class="n">sha_obj</span> <span class="o">=</span> <span class="n">SHA256</span><span class="p">();</span>
+    <span class="c1">// finalise and print it</span>
+    <span class="n">var</span> <span class="n">print_sha</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="k">final</span><span class="p">();</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">print_sha</span><span class="p">));</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<p>Use <code>update()</code> on the <code>SHA256()</code> object to include <code>String</code> or <code>Buffer</code> types into the context before finalising the hash. </p>
+<p>The <code>final()</code> function generates the hash and returns the value. </p>
+<p>The <code>reset()</code> function allows you to start over with the same object.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="c1">// construct a SHA256 object</span>
@@ -1240,12 +1254,49 @@
     <span class="c1">// update the object with a string</span>
     <span class="n">s</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
     <span class="c1">// update the object with a Buffer</span>
-    <span class="n">var</span> <span class="n">byteArray</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-    <span class="n">s</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">byteArray</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
     <span class="c1">// finalise the object</span>
     <span class="n">s</span><span class="p">.</span><span class="k">final</span><span class="p">();</span>
     <span class="c1">// reset the object</span>
     <span class="n">s</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<p>Here's another example which builds a SHA256 hash by concatenating strings into the context object.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">var</span> <span class="n">my_string_value_1</span> <span class="o">=</span> <span class="s">&quot;sdkjfhiuwehfesdfno</span><span class="p">;</span><span class="n">s</span><span class="p">;</span><span class="err">&#39;</span><span class="n">mADF</span><span class="p">;</span><span class="n">LK</span><span class="s">&quot;;</span>
+    <span class="n">var</span> <span class="n">my_string_value_2</span> <span class="o">=</span> <span class="s">&quot;ipoiuwr8934jklnwlkj0892;m&quot;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">my_string_value_3</span> <span class="o">=</span> <span class="s">&quot;vvvowywnklhjxlmxxxxxxxxxxxxxxxxxxxxxxxxtreretrgy653wre6548&quot;</span><span class="p">;</span>
+
+    <span class="c1">// create a SHA256() context object</span>
+    <span class="n">var</span> <span class="n">sha256_hasher_context</span> <span class="o">=</span> <span class="n">SHA256</span><span class="p">();</span>
+    <span class="c1">// give it your strings</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_1</span><span class="p">);</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_2</span><span class="p">);</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_3</span><span class="p">);</span>
+
+    <span class="c1">// finalise the context and print the hash value</span>
+    <span class="n">var</span> <span class="n">hash_value_of_concatenated_strings_1_2_3</span> <span class="o">=</span> <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="k">final</span><span class="p">();</span> 
+    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;Hash of my concatenated string 1,2,3 = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">hash_value_of_concatenated_strings_1_2_3</span><span class="p">));</span>
+
+    <span class="c1">// RESETTING context of the hasher since we want to start calculate hash from the scratch</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+    <span class="c1">// more strings</span>
+    <span class="n">var</span> <span class="n">my_string_value_4</span> <span class="o">=</span> <span class="s">&quot;12345fg&quot;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">my_string_value_5</span> <span class="o">=</span> <span class="s">&quot;@!#$@#%#&quot;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">my_string_value_6</span> <span class="o">=</span> <span class="s">&quot;{}:&gt;L$%^:c&quot;</span><span class="p">;</span>
+
+    <span class="c1">// add to context</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_4</span><span class="p">);</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_5</span><span class="p">);</span>
+    <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_string_value_6</span><span class="p">);</span>
+    <span class="c1">// finalise and print the value</span>
+    <span class="n">var</span> <span class="n">hash_value_of_concatenated_strings_4_5_6</span> <span class="o">=</span> <span class="n">sha256_hasher_context</span><span class="p">.</span><span class="k">final</span><span class="p">();</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;Hash of my concatenated string 4,5,6 = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">hash_value_of_concatenated_strings_4_5_6</span><span class="p">));</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -1270,7 +1321,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../etch-addresses/" title="Addresses" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../addresses/" title="Addresses" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>

@@ -289,11 +289,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1-2" type="checkbox" id="nav-1-2">
     
     <label class="md-nav__link" for="nav-1-2">
-      Fetch Ledger
+      Install the Fetch.AI Ledger
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-1-2">
-        Fetch Ledger
+        Install the Fetch.AI Ledger
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -345,8 +345,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../getting-started/python-api-install/" title="Python API" class="md-nav__link">
-      Python API
+    <a href="../../getting-started/python-api-install/" title="Python Ledger API" class="md-nav__link">
+      Python Ledger API
     </a>
   </li>
 
@@ -772,6 +772,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#fixed-points" title="Fixed Points" class="md-nav__link">
+    Fixed Points
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#boolean" title="Boolean" class="md-nav__link">
     Boolean
   </a>
@@ -802,6 +809,13 @@
         <li class="md-nav__item">
   <a href="#maps" title="Maps" class="md-nav__link">
     Maps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structureddata-types" title="StructuredData types" class="md-nav__link">
+    StructuredData types
   </a>
   
 </li>
@@ -1030,7 +1044,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../etch-addresses/" title="Addresses" class="md-nav__link">
+    <a href="../addresses/" title="Addresses" class="md-nav__link">
       Addresses
     </a>
   </li>
@@ -1251,8 +1265,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
-      Memory
+    <a href="../../smart-contracts/data-types/" title="Data types" class="md-nav__link">
+      Data types
     </a>
   </li>
 
@@ -1263,8 +1277,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/addresses/" title="Addresses" class="md-nav__link">
-      Addresses
+    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
+      Memory
     </a>
   </li>
 
@@ -1398,6 +1412,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#fixed-points" title="Fixed Points" class="md-nav__link">
+    Fixed Points
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#boolean" title="Boolean" class="md-nav__link">
     Boolean
   </a>
@@ -1428,6 +1449,13 @@
         <li class="md-nav__item">
   <a href="#maps" title="Maps" class="md-nav__link">
     Maps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structureddata-types" title="StructuredData types" class="md-nav__link">
+    StructuredData types
   </a>
   
 </li>
@@ -1516,10 +1544,6 @@
 
 <p><code>etch</code> is a statically-typed programming language. For good coding practice, you should explicitly declare all variable types.</p>
 <p>Declare a variable with the keyword <code>var</code>. Declare numeric values with literals where possible. You can also use an explicit type cast operation. See below for explicit type declaration rules.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <code>toString</code> function does not yet support all variable types.</p>
-</div>
 <h2 id="naming">Naming</h2>
 <p>Variable naming follows the same rules as C++.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -1536,7 +1560,7 @@
 </pre></div>
 
 <h2 id="integers">Integers</h2>
-<p>Integers can be signed or unsigned and are <em>currently</em> restricted to the width range 8-64 bits.</p>
+<p>Integers can be signed or unsigned and are <em>currently</em> restricted to the width range 8-64 bits (1 to 8 bytes).</p>
 <p>They are declared as signed <code>Int8</code>, <code>Int16</code>, <code>Int32</code>, <code>Int64</code>, and unsigned <code>UInt8</code>, <code>UInt16</code>, <code>UInt32</code>, <code>UInt64</code>, <code>UInt256</code>.</p>
 <p><code>Int32</code> is the compiler default so you don't need to explicitly declare this type.</p>
 <p>Below is a selection of example integer assignations including any errors on operations currently unsupported.</p>
@@ -1556,18 +1580,19 @@
 
     <span class="c1">// assigning various signed integer types explicitly and with label</span>
     <span class="n">var</span> <span class="n">int8a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i8</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(int8a)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int8a</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="nl">int8b</span> <span class="p">:</span> <span class="n">Int8</span> <span class="o">=</span> <span class="o">-</span><span class="mi">0</span><span class="n">i8</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(int8b)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int8b</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="n">int16a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i16</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(int16a)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int16a</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="nl">int16b</span> <span class="p">:</span> <span class="n">Int16</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">i16</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(int16b)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int16b</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
 
 <span class="n">endfunction</span>
 </pre></div>
 
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
     <span class="c1">// Int32 is default but can be explicit also</span>
     <span class="n">var</span> <span class="n">int32a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i32</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int32a</span><span class="p">));</span>
@@ -1585,19 +1610,20 @@
 
     <span class="c1">// assigning various unsigned integer types</span>
     <span class="n">var</span> <span class="n">uint8a</span> <span class="o">=</span> <span class="mi">45u8</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(uint8a)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint8a</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="nl">uint8b</span> <span class="p">:</span> <span class="n">UInt8</span> <span class="o">=</span> <span class="mi">1u8</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(uint8b)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint8b</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="n">uint16a</span> <span class="o">=</span> <span class="mi">0u16</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(uint16a)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint16a</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
     <span class="n">var</span> <span class="nl">uint16b</span> <span class="p">:</span> <span class="n">UInt16</span> <span class="o">=</span> <span class="mi">1u16</span><span class="p">;</span> 
-    <span class="c1">// printLn(toString(uint16b)); // error: unable to find matching function for &#39;toString&#39;</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint16b</span><span class="p">));</span> <span class="c1">// error: unable to find matching function for &#39;toString&#39;</span>
 
 <span class="n">endfunction</span>
 </pre></div>
 
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
+    <span class="c1">// assigning various unsigned integer types</span>
     <span class="n">var</span> <span class="n">uint32a</span> <span class="o">=</span> <span class="mi">0u32</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint32a</span><span class="p">));</span>
     <span class="n">var</span> <span class="nl">uint32b</span> <span class="p">:</span> <span class="n">UInt32</span> <span class="o">=</span> <span class="mi">1u32</span><span class="p">;</span> 
@@ -1619,11 +1645,7 @@
 <span class="n">endfunction</span>
 </pre></div></p>
 <h2 id="floats">Floats</h2>
-<p>Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Fixed point variables  <code>Fixed32</code> and <code>Fixed64</code> will be available in version release/0.5.x.</p>
-</div>
+<p>Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation (4 and 8 bytes).</p>
 <p>Unspecified floats default to <code>Float64</code>. </p>
 <p>A <code>Float</code> declared with <code>f</code> is <code>Float32</code>.</p>
 <p>Float types are declared as <code>Float32</code>, <code>Float64</code>.</p>
@@ -1641,9 +1663,31 @@
     <span class="n">var</span> <span class="n">float32bit</span> <span class="o">=</span> <span class="mf">32.0f</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">float32bit</span><span class="p">));</span>
 
-    <span class="c1">// fixed point types - wip</span>
-    <span class="c1">// var fixed32bit : Fixed32 = 32.1; // error: unknown type &#39;Fixed32&#39;</span>
-    <span class="c1">// var fixed64bit : Fixed64 = 64.1; // error: unknown type &#39;Fixed64&#39;</span>
+<span class="n">endfunction</span>
+</pre></div>
+
+<h2 id="fixed-points">Fixed Points</h2>
+<p>Fixed point variables are available as  <code>Fixed32</code> and <code>Fixed64</code> types.</p>
+<p>You must declare <code>FixedPoint</code> variables with the postfix literals <code>fp32</code> and <code>fp64</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">var</span> <span class="nl">fixed32bit</span> <span class="p">:</span> <span class="n">Fixed32</span> <span class="o">=</span> <span class="mf">32.1f</span><span class="n">p32</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="nl">fixed64bit</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="mf">64.1f</span><span class="n">p64</span><span class="p">;</span> 
+
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed32bit</span><span class="p">));</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed64bit</span><span class="p">));</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<p>For brevity, you do not need the full declaration.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">var</span> <span class="n">fixed32bit</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="n">p32</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">fixed64bit</span> <span class="o">=</span> <span class="mf">3.0f</span><span class="n">p64</span><span class="p">;</span>
+
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed32bit</span><span class="p">));</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed64bit</span><span class="p">));</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -1727,6 +1771,24 @@
 <p class="admonition-title">Note</p>
 <p>Coming soon: common <code>Map</code> operations.</p>
 </div>
+<h2 id="structureddata-types">StructuredData types</h2>
+<p>A <code>StructuredData</code> type is another map type containing key/value pairs. </p>
+<p>The main difference with <code>Map</code> is that a <code>StructuredData</code> type will always be able to generate <code>yaml</code>, <code>json</code>, or similar.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">var</span> <span class="n">data</span> <span class="o">=</span> <span class="n">StructuredData</span><span class="p">();</span>
+
+    <span class="n">data</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="n">i32</span><span class="p">);</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;key2&quot;</span><span class="p">,</span> <span class="mi">500u64</span><span class="p">);</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;key3&quot;</span><span class="p">,</span> <span class="s">&quot;hello world&quot;</span><span class="p">);</span>
+
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">getInt32</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">)));</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">getUInt64</span><span class="p">(</span><span class="s">&quot;key2&quot;</span><span class="p">)));</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">&quot;key3&quot;</span><span class="p">));</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
 <!--
 ## Matrices
 
@@ -1786,35 +1848,15 @@ Declare the `Matrix` type with `Matrix<ElementType>(Rows, Cols)`.
 <span class="n">endfunction</span>
 </pre></div>
 
-<p>Find out more about <code>etch</code> Addresses <a href="../../smart-contracts/addresses/">here</a>.</p>
+<p>Find out more about <code>etch</code> Addresses <a href="../addresses/">here</a>.</p>
 <h2 id="mathematical-ml-and-ai">Mathematical, ML, and AI</h2>
 <p><code>etch</code> provides powerful mathematical, machine learning, and AI specific data types and functions. </p>
-<p>In the current version, <code>release/v0.4.x</code>, the following maths functions are available:</p>
-<ul>
-<li>Log values.</li>
-<li>Absolute values.</li>
-<li>Exponents.</li>
-<li>Square roots.</li>
-<li>Random generator.</li>
-<li>Trigonometry functions such as <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>asin</code>, <code>sinh</code>, <code>asinh</code>, etc.</li>
-</ul>
 <p>For more details on the mathematical computation functions above, please check the section on <a href="../maths-libs/">maths libraries and functions</a>.</p>
-<p>The following types and functions commonly used for machine learning are also available:</p>
-<ul>
-<li>Graphs.</li>
-<li>Tensors.</li>
-<li>Cross entropy.</li>
-<li>Mean square error.</li>
-</ul>
 <p>For more details on the machine learning implementations, please check the section on <a href="../ML-AI/">machine learning and artificial intelligence</a>.</p>
 <h2 id="type-casting">Type casting</h2>
 <p>If you need a specific non-default numerical type, you can make an explicit cast of the default <code>Int32</code> and <code>Float64</code> types.</p>
 <p>Use <code>to&lt;Type&gt;Name</code> to type cast. </p>
 <p>There is no implicit type casting in <code>etch</code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><code>toString</code> is not currently universal.</p>
-</div>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="c1">// signed 32 bit integer type</span>
@@ -1859,117 +1901,82 @@ Declare the `Matrix` type with `Matrix<ElementType>(Rows, Cols)`.
 -->
 
 <h2 id="data-size">Data size</h2>
-<p>In the table below, we detail the exact memory size of each data type, and when etched onto the network.</p>
+<p>In the table below, we detail the memory size of each data type.</p>
 <table>
 <thead>
 <tr>
 <th>Type</th>
 <th>Memory size</th>
-<th>Size on ledger</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Int8</td>
-<td>8 byte</td>
-<td>tbc</td>
+<td>1 byte</td>
 </tr>
 <tr>
 <td>Int16</td>
-<td>16 byte</td>
-<td>tbc</td>
+<td>2 bytes</td>
 </tr>
 <tr>
 <td>Int32</td>
-<td>32 byte</td>
-<td>tbc</td>
+<td>4 bytes</td>
 </tr>
 <tr>
 <td>Int64</td>
-<td>64 byte</td>
-<td>tbc</td>
+<td>8 bytes</td>
 </tr>
 <tr>
 <td>UInt8</td>
-<td>8 byte</td>
-<td>tbc</td>
+<td>1 byte</td>
 </tr>
 <tr>
 <td>UInt16</td>
-<td>16 byte</td>
-<td>tbc</td>
+<td>2 bytes</td>
 </tr>
 <tr>
 <td>UInt32</td>
-<td>32 byte</td>
-<td>tbc</td>
+<td>4 bytes</td>
 </tr>
 <tr>
 <td>UInt64</td>
-<td>64 byte</td>
-<td>tbc</td>
+<td>8 bytes</td>
 </tr>
 <tr>
 <td>UInt256</td>
-<td>256 byte</td>
-<td>tbc</td>
+<td>32 bytes</td>
 </tr>
 <tr>
 <td>Float32</td>
-<td>32 byte</td>
-<td>tbc</td>
+<td>4 bytes</td>
 </tr>
 <tr>
 <td>Float64</td>
-<td>64 byte</td>
-<td>tbc</td>
+<td>8 bytes</td>
 </tr>
 <tr>
 <td>Bool</td>
-<td>tbc</td>
-<td>tbc</td>
+<td>1 byte</td>
 </tr>
 <tr>
 <td>String</td>
-<td>tbc</td>
-<td>tbc</td>
+<td>8 bytes + length character size (changing with UTF-8)</td>
 </tr>
 <tr>
 <td>Array</td>
-<td>tbc</td>
-<td>tbc</td>
+<td>8 bytes + length x element size</td>
 </tr>
 <tr>
 <td>Map</td>
-<td>tbc</td>
-<td>tbc</td>
-</tr>
-<tr>
-<td>State</td>
-<td>tbc</td>
-<td>tbc</td>
-</tr>
-<tr>
-<td>ShardedState</td>
-<td>tbc</td>
-<td>tbc</td>
+<td>8 bytes +  n x (key + value) storage</td>
 </tr>
 <tr>
 <td>Address</td>
-<td>tbc</td>
-<td>tbc</td>
-</tr>
-<tr>
-<td>null</td>
-<td>tbc</td>
-<td>tbc</td>
+<td>32 bytes</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Coming soon: relative cost.</p>
-</div>
+<p>Currently, there is a 2 unit charge per 1 byte of ledger storage.</p>
 <h2 id="scope">Scope</h2>
 <p><code>etch</code> has no global variables. </p>
 <h2 id="null">Null</h2>

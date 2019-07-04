@@ -289,11 +289,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1-2" type="checkbox" id="nav-1-2">
     
     <label class="md-nav__link" for="nav-1-2">
-      Fetch Ledger
+      Install the Fetch.AI Ledger
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-1-2">
-        Fetch Ledger
+        Install the Fetch.AI Ledger
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -345,8 +345,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../getting-started/python-api-install/" title="Python API" class="md-nav__link">
-      Python API
+    <a href="../../getting-started/python-api-install/" title="Python Ledger API" class="md-nav__link">
+      Python Ledger API
     </a>
   </li>
 
@@ -932,7 +932,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../etch-addresses/" title="Addresses" class="md-nav__link">
+    <a href="../addresses/" title="Addresses" class="md-nav__link">
       Addresses
     </a>
   </li>
@@ -1153,8 +1153,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
-      Memory
+    <a href="../../smart-contracts/data-types/" title="Data types" class="md-nav__link">
+      Data types
     </a>
   </li>
 
@@ -1165,8 +1165,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../smart-contracts/addresses/" title="Addresses" class="md-nav__link">
-      Addresses
+    <a href="../../smart-contracts/memory/" title="Memory" class="md-nav__link">
+      Memory
     </a>
   </li>
 
@@ -1330,9 +1330,8 @@
     <span class="n">printLn</span><span class="p">(</span><span class="n">myString</span><span class="p">);</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">myInferredString</span><span class="p">);</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">myInferredString</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">myString</span><span class="p">);</span>
-    <span class="c1">// printLn(toString(x)); // error: unable to find matching function for &#39;toString&#39;</span>
-
-    <span class="c1">// var y = myString[0]; // error: unable to find matching index operator for type &#39;String&#39;</span>
+    <span class="c1">// printLn(toString(x)); // error: you cannot print null</span>
+    <span class="c1">// var y = myString[0]; // error: currently we do not support index operators for strings</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -1499,12 +1498,12 @@
 
 <h3 id="substr">Substr</h3>
 
-<p>The <code>substr()</code> function extracts a substring from a string, based on specified starting and ending indexes (but excluding the final character):</p>
+<p>The <code>substr()</code> function extracts a substring from a string, based on specified starting and ending indices (but excluding the final character):</p>
 <p><code>string.substr(start, end)</code></p>
 <ul>
 <li>The <code>start</code> character in the string occurs at index 0.</li>
 <li>The <code>end</code> character is excluded from the substring.</li>
-<li>Returns an empty string if <code>start</code> and <code>end</code> indexes are equal.</li>
+<li>Returns an empty string if <code>start</code> and <code>end</code> indices are equal.</li>
 <li>Returns the whole string if <code>start</code> equals 0 and <code>end</code> is equal to the length of the string.</li>
 <li>Fails if <code>start</code> is greater than <code>end</code>.</li>
 <li>Fails if <code>start</code> is negative.</li>
@@ -1532,16 +1531,16 @@
 <span class="n">endfunction</span>
 </pre></div>
 
-<h3 id="substr">Split</h3>
+<h3 id="split">Split</h3>
 
-<p>The <code>split()</code> function takes an input string and a character(s) sequence to split on and returns an array of strings that does not include the split character(s). </p>
+<p>The <code>split()</code> function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. </p>
 <ul>
-<li>Returns a one element array if there is no tokenizer within it or if the input string is empty.</li>
-<li>Returns an empty string if more than one tokenizer is encountered consecutively.</li>
-<li>Returns an empty string as the first element in the output array if the first element of the input is a tokenizer.</li>
-<li>Returns an empty string as the last element in the output array if the last element of the input is a tokenizer.</li>
+<li>Returns a one element array if there is no separator within it or if the input string is empty.</li>
+<li>Returns an empty string if more than one separator is encountered consecutively.</li>
+<li>Returns an empty string as the first element in the output array if the first element of the input is a separator.</li>
+<li>Returns an empty string as the last element in the output array if the last element of the input is a separator.</li>
 </ul>
-<p>The following code takes a string and splits it on the tokenizer <code>--</code> returning an array of strings which it then outputs.</p>
+<p>The following code takes a string and splits it on the separator <code>--</code> returning an array of strings which it then outputs.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">text</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">xxx</span> <span class="o">--</span><span class="n">yyy</span> <span class="o">--</span><span class="n">zzz</span><span class="err">&#39;</span><span class="p">;</span>
