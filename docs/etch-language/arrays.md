@@ -12,9 +12,6 @@ Declare, access by index, and iterate over an array like this:
 ``` c++
 function main()
 
-    // var mySizelessArray = Array<String>(); // error: unable to find matching constructor for type/function 'Array<String>'
-    // Failed to compile.
-
     var myArray = Array<Int32>(5);
     myArray[0] = 40;
     myArray[1] = 41;
@@ -67,6 +64,25 @@ function main()
 endfunction
 ```
 
+## Nested arrays
+
+`etch` supports arrays of arrays of arrays, etc.
+
+``` c++
+function main()
+
+    var ref_array = Array<Array<Array<String>>>(2);
+    ref_array[0] = Array<Array<String>>(2);
+    ref_array[1] = Array<Array<String>>(2);
+    ref_array[0][0] = Array<String>(1);
+    ref_array[0][1] = Array<String>(1);
+    ref_array[1][0] = Array<String>(2);
+    ref_array[1][1] = Array<String>(2);    
+
+endfunction
+```
+
+
 ## Utility functions
 
 You can use the following utility functions to manipulate arrays:
@@ -76,6 +92,7 @@ You can use the following utility functions to manipulate arrays:
 * [extend()](arrays.md#extend)
 * [popBack() and popFront()](arrays.md#pop)
 * [reverse()](arrays.md#reverse)
+* [erase()](arrays.md#erase)
 
 
 <h3 id="count">Count</h3>
@@ -118,7 +135,7 @@ function main()
     myArray[0] = 1u32;
     myArray[1] = 2u32;
     myArray.append(42u32);
-    // type safety
+    // type safety check
     // myArray.append("hello"); // error: unable to find matching function for 'append'
     printLn(myArray);
 
@@ -238,7 +255,7 @@ endfunction
 
 Use `popBack(n)` to remove the last `n` items from a one dimensional array, or the last `n` arrays from a two dimensional array, and return them as an array(s). Use `popFront(n)` to remove and return the first `n` items or arrays. 
 
-* `n` must be a positive, whole number.
+* `n` must be a non-negative integer.
 * Returns an array.
 * Fails if `n` is negative or `n` is greater than the number of items or arrays.
 * Returns an empty array if `n` equals 0, leaving the original array unchanged.
@@ -299,8 +316,11 @@ function main()
     
 endfunction
 ```
+
+
 <h3 id="reverse">Reverse</h3>
-The reverse() function reverses the order of items in a one dimensional array, or the order of arrays in a two dimensional array.
+
+The `reverse()` function reverses the order of items in a one dimensional array, or the order of arrays in a two dimensional array.
 
 ``` c++
 function main()
@@ -337,6 +357,28 @@ function main()
     for (k in 0:4)
     printLn(my2dArray[k]);
     endfor
+
+endfunction
+```
+
+
+<h3 id="erase">Erase</h3>
+
+Remove an element from an array with the `erase()` function.
+
+``` c++
+function main()
+
+    var myArray = Array<Int32>(5);
+    myArray[0] = 40;
+    myArray[1] = 41;
+    myArray[2] = 42;
+    myArray[3] = 43;
+    myArray[4] = 44;
+
+    printLn(myArray);
+    myArray.erase(2);
+    printLn(myArray);
 
 endfunction
 ```

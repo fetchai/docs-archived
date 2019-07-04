@@ -34,12 +34,12 @@ endfunction
 
 ## SHA256
 
-`etch` currently supports the SHA256 encryption algorithm .
+`etch` currently supports the SHA256 encryption algorithm. Find out more <a href="../crypto" target=_blank>here</a>.
 
 
 ## Verification
 
-The `Address` type has a function `signed_tx()` which allows you to verify the signature. It returns a boolean. This is only valid in an `@action` function, else it will return false.
+The `Address` type has a function `signedTx()` which allows you to verify the signature. It returns a boolean. This is only valid in an `@action` function, else it will return false.
 
 ``` java
 function main()
@@ -47,10 +47,12 @@ function main()
   var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
   var verified : Bool;
   verified = account.signedTx(); 
-  printLn(toString(verified)); // False in v0.4.x ledger code
+  printLn(toString(verified)); 
 
 endfunction
 ```
+
+The above code always prints `false` when it is not contained within an `@action` function.
 
 The `Address` type will eventually support *all* asymmetric cryptographic types and, more importantly, will be quantum computing ready.
 

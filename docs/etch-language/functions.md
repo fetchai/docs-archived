@@ -11,17 +11,18 @@ In the example below, we declare a function `myFunction()` and call it from `mai
 ``` c++
 function main()
 
-	myFunction();
+  myFunction();
 
 endfunction
 
 // declare the function called from main()
 function myFunction()
 
-	printLn("hello");
+  printLn("hello");
 
 endfunction
 ```
+
 
 
 
@@ -39,7 +40,7 @@ function fibonacci(n: Int32) : Int32
     var temp = 0;
 
     for(i in 0:n)
-    	temp = a;
+      temp = a;
         a = b;
         b = temp + b;
         printLn(toString(a));
@@ -52,27 +53,30 @@ endfunction
 // call fibonacci from main()
 function main()
 
-	fibonacci(10);
+  fibonacci(10);
 
 endfunction
 
 ```
+
+
+
 
 ## Recursion
 
 Below is an example of the fibonacci function implemented with recursion.
 
 !!! warning
-	Take care with recursion in smart contract code.
+  Take care with recursion in smart contract code.
 
 
 ``` c++
 function fibonacci(n: Int32) : Int32
-  	
-  	if(n <= 1)
-    	return n;
-  	else
-  	  return (fibonacci(n-1) + fibonacci(n-2));
+    
+    if(n <= 1)
+      return n;
+    else
+      return (fibonacci(n-1) + fibonacci(n-2));
     endif
 
 endfunction
@@ -80,11 +84,11 @@ endfunction
 
 function main()
 
-	 var nterms = 10;
+   var nterms = 10;
 
-	 for (i in 0:nterms)
-		  printLn(toString(fibonacci(i)));
-	 endfor
+   for (i in 0:nterms)
+      printLn(toString(fibonacci(i)));
+   endfor
 
 endfunction
 ```
@@ -100,18 +104,18 @@ Attempting to reassign the value of a primitive variable passed to another funct
 ``` c++
 function main() 
 
-	var original_value = 10;
-	printLn(original_value);
+  var original_value = 10;
+  printLn(original_value);
 
-	change_value(original_value);
-	printLn(original_value);
+  change_value(original_value);
+  printLn(original_value);
 
 endfunction
 
 
 function change_value(value :Int32)
-  	
-  	// value = 20; // error: assignment operand is not writeable. Failed to compile.
+    
+    // value = 20; // error: assignment operand is not writeable. Failed to compile.
 
 endfunction
 
@@ -168,21 +172,21 @@ Reassigning a primitive type to a new variable does not affect the original.
 ``` c++
 function main() 
 
-	var x = 10;
-	printLn(x);
+  var x = 10;
+  printLn(x);
 
-	change_value(x);
-	printLn(x);
+  change_value(x);
+  printLn(x);
 
 endfunction
 
 
 function change_value(value :Int32)
-  	
-  	var y = 20;
-  	y = value;
-  	printLn(y);
-  	y = 20;
+    
+    var y = 20;
+    y = value;
+    printLn(y);
+    y = 20;
 
 endfunction
 
@@ -192,22 +196,22 @@ However, reassigning an object and changing any of its internal values does affe
 ``` c++
 function main() 
 
-	var myArray = Array<String>(2);
-	myArray[0] = "hello";
-	printLn(myArray[0]);
+  var myArray = Array<String>(2);
+  myArray[0] = "hello";
+  printLn(myArray[0]);
 
-	change_value(myArray);
-	printLn(myArray[0]);
+  change_value(myArray);
+  printLn(myArray[0]);
 
 endfunction
 
 
 function change_value(myArray :Array<String>)
-  	
-  	var newArray = Array<String>(2);
+    
+    var newArray = Array<String>(2);
 
-  	newArray = myArray;
-  	newArray[0] = "goodbye";
+    newArray = myArray;
+    newArray[0] = "goodbye";
 
 endfunction
 ```
@@ -227,7 +231,7 @@ endfunction
 Often, if the variable is a string, you don't have to cast it before printing, otherwise you should cast it with `toString()`.
 
 !!! note
-	`etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
+  `etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
 
 
 <H3>Sysargs</H3>
@@ -239,7 +243,7 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 
 
 !!! tip
-	`etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
+  `etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
 
 
 
@@ -273,8 +277,8 @@ function main()
     var f = toUInt64(x);
     var g = toFloat32(x);
     var h = toFloat64(x);
-    // var i = toFixed32(x); // error: unknown symbol 'toFixed32'
-    // var j = toFixed64(x); // error: unknown symbol 'toFixed64'
+    var i = toFixed32(x); 
+    var j = toFixed64(x); 
 
 endfunction
 ```

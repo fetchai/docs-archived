@@ -55,7 +55,7 @@ Clone the repository:
 ``` bash
 cd [working_directory]
 git clone https://github.com/fetchai/ledger.git
-git checkout release/v0.4.x
+git checkout release/v0.5.x
 ```
 
 Update and initialise submodules from the repository root directory:
@@ -146,7 +146,7 @@ manifest.......:
  - Lane/0: tcp://127.0.0.1:8110 (8110)
 ```
 
-Once you see the message:
+When you see the following message...
 
 ``` bash
 [ 2019-06-15 15:24:39.383, # 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101
@@ -158,7 +158,7 @@ Once you see the message:
 [ 2019-06-15 15:24:39.525, # 7 INFO  :                    BlockCoordinator ] Chain Sync complete on 0x780bbb1c050cd3d5c20fce89fa6f4e61c884315efeb44c54ceb956a50563683a (block: 0 prev: 0xd3efbefbefbefbefbefbefbefbe19e9deb22b3efbefbefbefbefbefbefbefbed)
 [ 2019-06-15 15:24:40.487, # 1 INFO  :                       constellation ] Startup complete
 ```
-you are ready to start exploring the ledger functionality.
+...you are ready to start exploring the ledger functionality.
 
 
 

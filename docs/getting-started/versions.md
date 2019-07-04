@@ -1,4 +1,4 @@
-While we are developing separate applications for the Fetch.AI Ledger, Python API, and Open Economic Framework, make sure all the versions match up.
+While we continue to work on developing separate applications for the Fetch.AI Ledger, Python Ledger API, and the Fetch.AI Open Economic Framework, it's important to make sure all running versions match up.
 
 For example:
 
@@ -8,7 +8,7 @@ fetchai/ledger-api-py release/v0.5.x
 fetchai/oef-search-pluto master
 ```
 
-Against these, documentation should be in line with the same versions.
+Against these, follow the documentation in line with the same versions.
 
 The documentation you are reading now is from version:
 

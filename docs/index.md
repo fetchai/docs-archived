@@ -9,7 +9,7 @@
 
 2. <a href="oef">Open Economic Framework</a> <br/>
 
-	Learn how to create decentralized autonomous agents and interface them to the digital world. Learn how to negotiate with other autonomous agents and get things done.
+	Learn how to create decentralised autonomous agents and interface them to the digital world. Learn how to negotiate with other autonomous agents and get things done.
 
 3. <a href="etch-language">`etch` Language Guide</a> <br/>
 	

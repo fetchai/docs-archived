@@ -19,9 +19,8 @@ function main()
     printLn(myString);
     printLn(myInferredString);
     printLn(myInferredString + " " + myString);
-    // printLn(toString(x)); // error: unable to find matching function for 'toString'
-
-    // var y = myString[0]; // error: unable to find matching index operator for type 'String'
+    // printLn(toString(x)); // error: you cannot print null
+    // var y = myString[0]; // error: currently we do not support index operators for strings
 
 endfunction
 ```
@@ -213,13 +212,13 @@ endfunction
 
 <h3 id="substr">Substr</h3>
 
-The `substr()` function extracts a substring from a string, based on specified starting and ending indexes (but excluding the final character):
+The `substr()` function extracts a substring from a string, based on specified starting and ending indices (but excluding the final character):
 
 `string.substr(start, end)`
 
 * The `start` character in the string occurs at index 0.
 * The `end` character is excluded from the substring.
-* Returns an empty string if `start` and `end` indexes are equal.
+* Returns an empty string if `start` and `end` indices are equal.
 * Returns the whole string if `start` equals 0 and `end` is equal to the length of the string.
 * Fails if `start` is greater than `end`.
 * Fails if `start` is negative.
@@ -250,16 +249,16 @@ endfunction
 ```
 
 
-<h3 id="substr">Split</h3>
+<h3 id="split">Split</h3>
 
-The `split()` function takes an input string and a character(s) sequence to split on and returns an array of strings that does not include the split character(s). 
+The `split()` function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. 
 
-* Returns a one element array if there is no tokenizer within it or if the input string is empty.
-* Returns an empty string if more than one tokenizer is encountered consecutively.
-* Returns an empty string as the first element in the output array if the first element of the input is a tokenizer.
-* Returns an empty string as the last element in the output array if the last element of the input is a tokenizer.
+* Returns a one element array if there is no separator within it or if the input string is empty.
+* Returns an empty string if more than one separator is encountered consecutively.
+* Returns an empty string as the first element in the output array if the first element of the input is a separator.
+* Returns an empty string as the last element in the output array if the last element of the input is a separator.
 
-The following code takes a string and splits it on the tokenizer ` --` returning an array of strings which it then outputs.
+The following code takes a string and splits it on the separator ` --` returning an array of strings which it then outputs.
 
 ``` c++
 function main()
