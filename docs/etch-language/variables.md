@@ -445,27 +445,24 @@ endfunction
 
 In the table below, we detail the exact memory size of each data type, and when etched onto the network.
 
-Type | Memory size | Size on ledger
------------- | ------------- | ---------
-Int8 | 8 byte | tbc
-Int16 | 16 byte | tbc
-Int32 | 32 byte | tbc 
-Int64 | 64 byte | tbc  
-UInt8 | 8 byte | tbc
-UInt16 | 16 byte | tbc
-UInt32 | 32 byte | tbc  
-UInt64 | 64 byte | tbc
-UInt256 | 256 byte | tbc
-Float32 | 32 byte | tbc
-Float64 | 64 byte | tbc
-Bool | tbc | tbc
-String | tbc | tbc
-Array | tbc | tbc
-Map | tbc | tbc
-State | tbc | tbc
-ShardedState | tbc | tbc
-Address | tbc | tbc
-null | tbc | tbc
+Type | Memory size 
+------------ | ------------- 
+Int8 | 1 byte 
+Int16 | 2 bytes 
+Int32 | 4 bytes  
+Int64 | 8 bytes   
+UInt8 | 1 byte 
+UInt16 | 2 bytes 
+UInt32 | 4 bytes   
+UInt64 | 8 bytes 
+UInt256 | 32 bytes 
+Float32 | 4 bytes 
+Float64 | 8 bytes 
+Bool | 1 byte 
+String | 8 bytes + length character size (changing with UTF-8) 
+Array | 8 bytes + length x element size 
+Map | 8 bytes +  n x (key + value) storage 
+Address | 32 bytes 
 
 
 !!! note 
