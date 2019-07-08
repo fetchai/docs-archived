@@ -52,7 +52,7 @@ from fetchai.ledger.crypto import Entity, Address
 CONTRACT_TEXT = """
 @init
 function setup(owner : Address)
-  var owner_balance = State<UInt64>(owner, 0u64);
+  var owner_balance = State<UInt64>(owner);
   owner_balance.set(1000000u64);
 endfunction
 
@@ -60,23 +60,23 @@ endfunction
 function transfer(from: Address, to: Address, amount: UInt64)
 
   // define the accounts
-  var from_account = State<UInt64>(from, 0u64);
-  var to_account = State<UInt64>(to, 0u64); // if new sets to 0u
+  var from_account = State<UInt64>(from);
+  var to_account = State<UInt64>(to); // if new sets to 0u
 
   // Check if the sender has enough balance to proceed
-  if (from_account.get() >= amount)
-  
+  if (from_account.get(0u64) >= amount)
+
     // update the account balances
-    from_account.set(from_account.get() - amount);
-    to_account.set(to_account.get() + amount);
+    from_account.set(from_account.get(0u64) - amount);
+    to_account.set(to_account.get(0u64) + amount);
   endif
 
 endfunction
 
 @query
 function balance(address: Address) : UInt64
-    var account = State<UInt64>(address, 0u64);
-    return account.get();
+    var account = State<UInt64>(address);
+    return account.get(0u64);
 endfunction
 
 """
