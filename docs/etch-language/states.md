@@ -55,16 +55,17 @@ endfunction
 
 ## Default values
 
-If a value has not been set on the `State` object and it does not already exist on the ledger, a run-time error is thrown. 
+If a value has not been set on the `State` object and it does not already exist on the ledger, a run-time error is thrown on `get()`. 
 
-To avoid this, use `get()` with a default value. For example, the following code returns zero if the state doesn't exist and the value that was originally set on it if it does exist.
+To avoid this, use **with care** `get(<default>)` with a default value. For example, the following code prints zero if the state doesn't exist and the value that was originally set on it if it does exist.
 
 ``` c++
 function main()
 
   var contract_amount_state = State<Int32>("contract_amount");  
   var contract_amount = contract_amount_state.get(0); 
-  
+  printLn(toString(contract_amount));
+
 endfunction
 ```
 
