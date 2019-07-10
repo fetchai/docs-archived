@@ -342,7 +342,7 @@ endfunction
 
 A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.AI ledger shards. 
 
-Unique identifiers for ledger data are created at `State` construction time.
+Unique identifiers for the ledger data are created at `State` construction time. These are unique to the smart contract alone.
 
 Declare and initialise a `State` type with `State<ValueType>` where values set with `set()` are mapped to the unique ledger identifier`account`:
 

@@ -155,9 +155,8 @@ When you see the following message...
 [ 2019-06-15 15:24:39.525, # 7 INFO  :                    BlockCoordinator ] Chain Sync complete on 0x780bbb1c050cd3d5c20fce89fa6f4e61c884315efeb44c54ceb956a50563683a (block: 0 prev: 0xd3efbefbefbefbefbefbefbefbe19e9deb22b3efbefbefbefbefbefbefbefbed)
 [ 2019-06-15 15:24:40.487, # 1 INFO  :                       constellation ] Startup complete
 ```
-...you are ready to start exploring the ledger functionality.
+...your node is running and you will be able to test smart contracts and autonomous agents.
 
-
-
+Navigate through to the <a href="../../oef" target=_blank>OEF</a>, <a href="../../etch-language" target=_blank>`etch` language</a>, or <a href="../../smart-contracts/smart-contract-intro" target=_blank>smart contracts</a> links above and you will find instructions and tutorials.
 
 <br/>

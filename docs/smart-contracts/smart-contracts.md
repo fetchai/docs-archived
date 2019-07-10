@@ -1,21 +1,25 @@
-<h1>Smart contracts</h1>
+<h1>Etch smart contracts</h1>
 
-Smart contract code runs on the `etch` VM. 
+!!! quote
 
-All ledger nodes maintain `etch` VM and smart contract code.
+    A smart contract is a computer protocol intended to digitally facilitate, verify, or enforce the negotiation or performance of a contract. Smart contracts allow the performance of credible transactions without third parties. These transactions are trackable and irreversible. Source: <a href="https://en.wikipedia.org/wiki/Smart_contract" target=_blank>Wikipedia</a>.
 
-The identity  of a smart contract is calculated by performing a `SHA256` hash of the contract code as an initial step. Next, a further `SHA256` hash is calculated from the previous result concatenated with a public key `Address`.
+Smart contract code runs on the `etch` virtual machine. 
 
-On the ledger, the `etch` VM stores the contract name, the contract source code, and the data resources that are mapped by a `data.json` file.
+All ledger nodes maintain the `etch` VM and smart contract code.
 
-Taking this contract identity data, the `etch` VM performs a modulo 16 calculation from which it decides how to store the data on the ledger, i.e. onto which shard.
+The identity  of a smart contract is calculated by performing a `SHA256` hash on the contract code string as an initial step. Next, a further `SHA256` hash is calculated from the previous result concatenated with a public key `Address` which represents the contract owner.
+
+On the ledger, the `etch` VM stores the contract identity, the contract source code, and the data resources that are mapped by a `data.json` file.
+
+With this information, the `etch` VM performs a modulo 16 calculation to decide where to store the data on the ledger, i.e. onto which shard.
 
 !!! note
 	Coming soon: details on how developers may dictate the sharding storage design for a smart contract.
 
 
 
-## Basic Smart contract
+## Smart contract structure
 
 Smart contract functions are annotated depending on the activity they perform.
 
@@ -25,7 +29,9 @@ The `@init` function defines a contract constructor that sets the state of the c
 
 The name of the `@init` function can be anything you like.
 
-For example, the following function initialises a contract by creating a `State` type that represents the owner's account which sets an initial supply of FET tokens. 
+For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. 
+
+This happens once and once only at contract deployment.
 
 
 ``` c++
@@ -51,7 +57,7 @@ endfunction
 
 The `@action` annotation signifies a function which performs a transaction. 
 
-You cannot create a contract in `etch` without an `@action` function and it is these functions that trigger the charging rules for data persistence fees.
+You cannot create a smart contract in `etch` without an `@action` function and it is these functions that trigger the charging rules for data persistence fees.
 
 The following function performs a transaction between two parties.
 
@@ -83,12 +89,12 @@ function main()
 endfunction
 ```
 
-In the worst case, the above function needs two shards for data.
+In the worst case, the above function needs two shards for data storage.
 
 
 <h3>@query</h3>
 
-Query functions are read-only functions that allow you to view data on the ledger. 
+Query functions are read-only functions that allow you to view data residing on the ledger. 
 
 The following function queries the balance of an `Address`.
 
@@ -105,15 +111,15 @@ endfunction
 function main()
 	
 	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	var x = balance(owner);
-	printLn(x);
+	var owner_balance = balance(owner);
+	printLn(owner_balance);
 
 endfunction
 ```
 
 ## Data confirmation
 
-If you run an `etch` contract in the simulator containing one or more `State` types and flag the compiler with `-data` and a filename, it will create a `json` file containing data details.
+If you run an `etch` contract in the simulator containing one or more `State` types and flag the compiler with `-data` and a filename, it will create a `json` file containing the details of the data that will be stored on the ledger.
 
 `./vm-lang *filename* -data data.json`
 
@@ -125,7 +131,13 @@ If we run one of the above code examples in this way, `data.json` may contain th
 
 ## Utility functions
 
-```getBlockNumber()``` : returns the number of the current block in `UInt64`.
+`getBlockNumber()` : returns the number of the current block in `UInt64`. 
+
+You need a node running to test this. As well as that, you can only get a result when the function is embedded within smart contract code in Python.
+
+Details for running a node are <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
+
+More details on the Python libraries for smart contracts are in the next sections.
 
 
 <br/>

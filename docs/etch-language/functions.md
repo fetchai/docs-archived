@@ -293,6 +293,8 @@ endfunction
 
 * `@query` is a function that allows you to query data residing on the ledger.
 
+There are more annotations for synergetic contracts.
+
 
 ## Getters and setters
 
