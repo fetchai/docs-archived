@@ -26,20 +26,20 @@ In a future release, log values will be available for all types as well as in ba
 
 ## Absolute value
 
-`Abs()` returns the absolute value of an `Int32` or a `Float64`.
+`abs()` returns the absolute value of an `Int32` or a `Float64`.
 
 ``` c++
 function do_abs(value: Int32)
 
   printLn("Abs of " + toString(value) + ": ");
-  printLn(toString(Abs(value)));
+  printLn(toString(abs(value)));
 
 endfunction
 
 function do_abs(value: Float64)
 
   printLn("Abs of " + toString(value) + ": ");
-  printLn(toString(Abs(value)));
+  printLn(toString(abs(value)));
 
 endfunction
 

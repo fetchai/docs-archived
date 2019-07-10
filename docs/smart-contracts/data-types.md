@@ -5,27 +5,27 @@ We detail these in the <a href="../../etch-language/states" target=_blank>`etch`
 
 ## State
 
-A `State` provides persistent storage for smart contracts. 
+A `State` provides persistent storage for smart contracts. The data referenced by a `State` type resides on the ledger. 
 
-It’s like a global variable whose value is always available when any function of your contract runs.
+`State` values are available for use in smart contract functions.
 
 
 ## ShardedState
 
-A `ShardedState` is like a State type in that data contained within a ShardedState is etched upon the ledger and is available to smart contract functions.
+A `ShardedState` is like a `State` type in that data contained within a `ShardedState` also resides on the ledger and is available for use in smart contract functions.
 
-`ShardedState` is a map type so can wrap significantly more information under one reference. 
+However, `ShardedState` is a map of key/value pairs so can wrap significantly more data under one reference. 
 
 
 ## Address
 
-The `Address` data structure formats multiple cryptographic public key types and included a number of useful functions such as `verify()` and `existed()`.
+The `Address` data structure formats multiple cryptographic public key types and includes a number of useful functions such as `verify()` and `existed()`.
 
 
 
 ## Cryptographic functions
 
-Currently, we support the `SHA256()` function.
+Currently, we support the <a href="../../etch-language/crypto" target=_blank>`SHA256()`</a>function.
 
 
 <br/>
