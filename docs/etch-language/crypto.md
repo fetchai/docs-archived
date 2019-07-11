@@ -2,18 +2,6 @@
 
 The `SHA256()` object gives you a number of ways to generate random 32 byte hashes which are returned as a 64 digit hexadecimal number.
 
-``` c++
-function main()
-    
-    // create a SHA256 object
-    var sha_obj = SHA256();
-    // finalise and print it
-    var print_sha = s.final();
-    printLn(toString(print_sha));
-
-endfunction
-```
-
 Use `update()` on the `SHA256()` object to include `String` or `Buffer` types into the context before finalising the hash. 
 
 The `final()` function generates the hash and returns the value. 

@@ -10,19 +10,19 @@ Full initial installation and build instructions are <a href="../.././getting-st
 
 `cd` into `build` folder.
 
-Run `make vm-lang`.
+Run `make etch`.
 
 ### Setup
 
-`cd` into `apps/vm-lang`.
+`cd` into `apps/etch`.
 
-Run `./vm-lang` with filename, flags, and arguments: 
+Run `./etch` with filename, flags, and arguments: 
 
-`./vm-lang [options] <filename> -- [script args]`.
+`./etch [options] <filename> -- [script args]`.
 
 For example: 
 
-`./vm-lang hello-world.etch -data test.json`. 
+`./etch hello-world.etch -data test.json`. 
 
 This runs the `hello-world.etch` file and produces a `json` file containing info on the data required by the contract.
 
@@ -46,25 +46,27 @@ You can find the details <a href="https://github.com/uvue-git/fetch-code-highlig
 
 Let’s run our first `etch` program.
 
-Create a new file in the `vm-lang` directory and save it as `hello-world.etch`.
+Create a new file in the `etch` directory and save it as `hello-world.etch`.
 
 Add the following code:
 
 ``` c++
 function main()
+
 	printLn("Hello world!");
+	
 endfunction
 ```
 
 Save the file.
 
-Run `./vm-lang hello-world.etch`.
+Run `./etch hello-world.etch`.
 
 You should see the following output:
 
 ``` c++
-$ ./vm-lang hello-world.etch
- F E ╱     vm-lang v0.1.0-23-gd7622f98
+$ ./etch hello-world.etch
+ F E ╱     etch v0.1.0-23-gd7622f98
    T C     Copyright 2018-2019 (c) Fetch AI Ltd.
      H     
 

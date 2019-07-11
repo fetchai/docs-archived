@@ -149,7 +149,7 @@ Both line and block comments are possible:
 
 
 
-We tell you all about these functions in the [section on smart contracts](.././smart-contracts/smart-contract-intro.md).
+We tell you all about these functions and more in the <a href="../../smart-contracts/smart-contract-intro" target=_blank>section on smart contracts</a>.
 
 
 <br/>

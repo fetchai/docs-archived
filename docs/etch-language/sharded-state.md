@@ -4,6 +4,8 @@ A `ShardedState` is like a `State` type in that data contained within a `Sharded
 
 The key difference is that a `ShardedState` is a map, containing key/value pairs. 
 
+A `key` must be a `String` or `Address` type.
+
 Behind the scenes, `ShardedState` creates anonymous `State` types for key/value pairs that etch onto the ledger.
 
 Declare a `ShardedState` in the same way you declare a `State`: 
@@ -33,10 +35,12 @@ function main()
 endfunction
 
 function set_values_on_state()
-      var state = ShardedState<Int32>("account1");
-      state.set("sales", 2000000);
-      state.set("gross_profit", 1800000);
-      state.set("net_profit", 1300000);
+      
+    var state = ShardedState<Int32>("account1");
+    state.set("sales", 2000000);
+    state.set("gross_profit", 1800000);
+    state.set("net_profit", 1300000);
+
 endfunction
 ```
 
@@ -49,7 +53,7 @@ function main()
     myShardedState.set("sales", 0i32);
     myShardedState.set("gross_profit", 0i32);
     myShardedState.set("net_profit", 0i32);
-    
+
     set_values_on_state();
     printLn(query_sales());
     printLn(query_gross_profit());
@@ -58,25 +62,33 @@ function main()
 endfunction
 
 function set_values_on_state()
-      var state = ShardedState<Int32>("account1");
-      state.set("sales", 2000000);
-      state.set("gross_profit", 1800000);
-      state.set("net_profit", 1300000);
+
+    var state = ShardedState<Int32>("account1");
+    state.set("sales", 2000000);
+    state.set("gross_profit", 1800000);
+    state.set("net_profit", 1300000);
+
 endfunction
- 
+
 function query_sales() : Int32
+
     var state = ShardedState<Int32>("account1");
     return state.get("sales", 0i32);
+
 endfunction
 
 function query_gross_profit() : Int32
+
     var state = ShardedState<Int32>("account1");
     return state.get("gross_profit", 0i32);
+
 endfunction
 
 function query_net_profit() : Int32
+
     var state = ShardedState<Int32>("account1");
     return state.get("net_profit", 0i32);
+    
 endfunction
 ```
 
@@ -110,12 +122,6 @@ function main()
 
 endfunction
 ```
-
-Because `ShardedState` uses anonymous `State` types to write data as soon as it is created, we can access values with keys using any `var` identifier.
-
-This makes the `ShardedState` type much more powerful than a `State` type.
-
-
 
 
 

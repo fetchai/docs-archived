@@ -4,9 +4,9 @@
 
 Coding a function in `etch` is straightforward. 
 
-All `etch` programs run from a `main()` function.
+All `etch` programs run in the simulator are triggered by a `main()` function. This is for development purposes only. Smart contracts do not require a `main()` function.
 
-In the example below, we declare a function `myFunction()` and call it from `main()`.
+In the example below, a function `myFunction()` is called from `main()`.
 
 ``` c++
 function main()
@@ -30,7 +30,7 @@ endfunction
 
 The iterative `fibonacci` function below takes a parameter `n: Int32` which is a 32 bit integer type named `n`. 
 
-The function will return an `Int32` and declares this with `: Int32`.
+The function returns an `Int32` and declares this after the function name and parameter declaration as `: Int32`.
 
 ``` c++
 function fibonacci(n: Int32) : Int32
@@ -67,7 +67,7 @@ endfunction
 Below is an example of the fibonacci function implemented with recursion.
 
 !!! warning
-  Take care with recursion in smart contract code.
+    Take care with recursion in smart contract code.
 
 
 ``` c++
@@ -112,7 +112,6 @@ function main()
 
 endfunction
 
-
 function change_value(value :Int32)
     
     // value = 20; // error: assignment operand is not writeable. Failed to compile.
@@ -130,7 +129,6 @@ function main()
     change_value(myArray);
 
 endfunction
-
 
 function change_value(value :Array<Int32>)
 
@@ -159,7 +157,6 @@ function main()
 
 endfunction
 
-
 function change_value(myArray :Array<Int32>)
 
     myArray[2] = 100;
@@ -179,7 +176,6 @@ function main()
   printLn(x);
 
 endfunction
-
 
 function change_value(value :Int32)
     
@@ -205,13 +201,9 @@ function main()
 
 endfunction
 
-
 function change_value(myArray :Array<String>)
     
-    var newArray = Array<String>(2);
-
-    newArray = myArray;
-    newArray[0] = "goodbye";
+    myArray[0] = "goodbye";
 
 endfunction
 ```
@@ -228,22 +220,20 @@ endfunction
 
 `print()` is available without a line break.
 
-Often, if the variable is a string, you don't have to cast it before printing, otherwise you should cast it with `toString()`.
-
 !!! note
   `etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
 
 
 <H3>Sysargs</H3>
 
-The following `System` functions `Argc()` and `Argv()` return the number of arguments to `vm-lang` and their value. These functions are only useful on the `etch` simulator outside of smart contract development.
+The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value. These functions are only useful on the `etch` simulator outside of smart contract development.
 
 * `System.Argc()`
 * `System.Argv()`
 
 
 !!! tip
-  `etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
+    `etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
 
 
 
@@ -298,7 +288,7 @@ There are more annotations for synergetic contracts.
 
 ## Getters and setters
 
-Getters and setters are available for `State` types.
+Getters and setters are available for `State` and `ShardedState` types.
 
 [comment]: <> (Any other types have get and set?)
 

@@ -58,13 +58,13 @@ function main()
 
     // assigning various signed integer types explicitly and with label
     var int8a = 0i8; 
-    printLn(toString(int8a)); // error: unable to find matching function for 'toString'
+    printLn(toString(int8a)); 
     var int8b : Int8 = -0i8; 
-    printLn(toString(int8b)); // error: unable to find matching function for 'toString'
+    printLn(toString(int8b)); 
     var int16a = 0i16; 
-    printLn(toString(int16a)); // error: unable to find matching function for 'toString'
+    printLn(toString(int16a)); 
     var int16b : Int16 = -1i16; 
-    printLn(toString(int16b)); // error: unable to find matching function for 'toString'
+    printLn(toString(int16b)); 
 
 endfunction
 ```
@@ -90,13 +90,13 @@ function main()
 
     // assigning various unsigned integer types
     var uint8a = 45u8; 
-    printLn(toString(uint8a)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint8a)); 
     var uint8b : UInt8 = 1u8; 
-    printLn(toString(uint8b)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint8b)); 
     var uint16a = 0u16; 
-    printLn(toString(uint16a)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint16a)); 
     var uint16b : UInt16 = 1u16; 
-    printLn(toString(uint16b)); // error: unable to find matching function for 'toString'
+    printLn(toString(uint16b)); 
 
 endfunction
 ``` 
@@ -121,8 +121,8 @@ In the current version, `UInt256` is built from a `UInt64` literal, like this:
 ``` c++
 function main()
 
-   var uint256 = UInt256(100u64); 
-   printLn(toString(uint256));
+    var uint256 = UInt256(100u64); 
+    printLn(toString(uint256));
 
 endfunction
 ```
@@ -298,7 +298,7 @@ endfunction
 
 A `StructuredData` type is another map type containing key/value pairs. 
 
-The main difference with `Map` is that a `StructuredData` type will always be able to generate `yaml`, `json`, or similar.
+The main difference to `Map` is that a `StructuredData` type can generate `yaml`, `json`, or similar.
 
 ``` c++
 function main()
@@ -369,9 +369,9 @@ Find out more about `etch` States [here](states.md).
 
 ## ShardedState
 
-A `ShardedState` is also used for reading and writing data to the Fetch.AI ledger. However, it is much more efficient and powerful. 
+A `ShardedState` is also used for reading and writing data to the Fetch.AI ledger.
 
-`ShardedState` uses `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with keys and values.
+`ShardedState` uses `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with keys and values where the keys must be either `String` or `Address` types.
 
 In the following code, we create a `ShardedState`, `set()` a key/value pair on it, and finally we print the value using `get()` on a key with a default value.
 
