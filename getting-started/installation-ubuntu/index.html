@@ -387,13 +387,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#run-a-local-node" title="Run a local node" class="md-nav__link">
-    Run a local node
-  </a>
-  
-</li>
-      
       
       
       
@@ -419,6 +412,18 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run-a-node/" title="Run a local node" class="md-nav__link">
+      Run a local node
+    </a>
   </li>
 
         
@@ -891,18 +896,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../etch-language/regex/" title="Regex" class="md-nav__link">
-      Regex
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../etch-language/error-checking/" title="Error checking" class="md-nav__link">
       Error checking
     </a>
@@ -996,11 +989,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
     
     <label class="md-nav__link" for="nav-3-4">
-      Machine Learning
+      Maths and ML
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-4">
-        Machine Learning
+        Maths and ML
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1316,6 +1309,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../tutorials/block-number/" title="Get block number" class="md-nav__link">
+      Get block number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../tutorials/erc20/" title="Create FET-20 contract" class="md-nav__link">
       Create FET-20 contract
     </a>
@@ -1387,13 +1392,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#run-a-local-node" title="Run a local node" class="md-nav__link">
-    Run a local node
-  </a>
-  
-</li>
-      
       
       
       
@@ -1444,7 +1442,7 @@
 <p>Clone the repository:</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="o">[</span>working_directory<span class="o">]</span>
 git clone https://github.com/fetchai/ledger.git
-git checkout release/v0.5.x
+git checkout release/v0.6.x
 </pre></div>
 
 <p>Update and initialise submodules from the repository root directory:</p>
@@ -1473,58 +1471,9 @@ make -j constellation
 <p>If you want, you can build all the libraries:
 <div class="highlight"><pre><span></span>make -j <span class="m">4</span>
 </pre></div></p>
-<p>For the <code>etch</code> simulator, build the <code>vm-lang</code> library:
-<div class="highlight"><pre><span></span>make vm-lang
+<p>For the <code>etch</code> simulator, build the <code>etch</code> library:
+<div class="highlight"><pre><span></span>make etch
 </pre></div></p>
-<h2 id="run-a-local-node">Run a local node</h2>
-<p>Go to the constellation app folder:
-<div class="highlight"><pre><span></span><span class="nb">cd</span> apps/constellation
-</pre></div></p>
-<p>Start a standalone test node:
-<div class="highlight"><pre><span></span>./constellation -port <span class="m">8100</span> -block-interval <span class="m">3000</span> -standalone
-</pre></div>
-You should see output like this:
-<div class="highlight"><pre><span></span>F E ╱     Constellation v0.4.1-rc1
-   T C     Copyright <span class="m">2018</span>-2019 <span class="o">(</span>c<span class="o">)</span> Fetch AI Ltd.
-     H
-
-<span class="o">[</span> <span class="m">2019</span>-06-03 <span class="m">16</span>:55:20.215, <span class="c1"># 1 INFO  :                                main ] Configuration:</span>
-
-port......................: <span class="m">8100</span>
-network mode..............: Standalone
-num executors.............: <span class="m">1</span>
-num lanes.................: <span class="m">1</span>
-num slices................: <span class="m">500</span>
-bootstrap.................: <span class="m">0</span>
-discoverable..............: <span class="m">0</span>
-host name.................:
-external address..........: <span class="m">127</span>.0.0.1
-db-prefix.................: node_storage
-interface.................: <span class="m">127</span>.0.0.1
-mining....................: Yes
-tx processor threads......: <span class="m">12</span>
-shard verification threads: <span class="m">12</span>
-block interval............: 3000ms
-max peers.................: <span class="m">3</span>
-peers update cycle........: 0ms
-peers.....................:
-manifest.......:
- - HTTP/0: tcp://127.0.0.1:8100 <span class="o">(</span><span class="m">8100</span><span class="o">)</span>
- - CORE/0: tcp://127.0.0.1:8101 <span class="o">(</span><span class="m">8101</span><span class="o">)</span>
- - Lane/0: tcp://127.0.0.1:8110 <span class="o">(</span><span class="m">8110</span><span class="o">)</span>
-</pre></div></p>
-<p>When you see the following message...</p>
-<p><div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] Num Initial Peers: 0</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] Starting P2PService...</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.484, <span class="c1"># 5 INFO  :                          HTTPServer ] Starting HTTPServer on http://127.0.0.1:8100</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.524, <span class="c1"># 6 WARN  :       NewVersionedRandomAccessStack ] Attempted to find if hash exists, but history is empty!</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.524, <span class="c1"># 6 WARN  :       NewVersionedRandomAccessStack ] Attempted to find if hash exists, but history is empty!</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.525, <span class="c1"># 7 INFO  :                    BlockCoordinator ] Chain Sync complete on 0x780bbb1c050cd3d5c20fce89fa6f4e61c884315efeb44c54ceb956a50563683a (block: 0 prev: 0xd3efbefbefbefbefbefbefbefbe19e9deb22b3efbefbefbefbefbefbefbefbed)</span>
-<span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:40.487, <span class="c1"># 1 INFO  :                       constellation ] Startup complete</span>
-</pre></div>
-...your node is running and you will be able to test smart contracts and autonomous agents.</p>
-<p>Navigate through to the <a href="../../oef" target=_blank>OEF</a>, <a href="../../etch-language" target=_blank><code>etch</code> language</a>, or <a href="../../smart-contracts/smart-contract-intro" target=_blank>smart contracts</a> links above and you will find instructions and tutorials.</p>
 <p><br/></p>
                 
                   

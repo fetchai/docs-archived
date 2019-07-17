@@ -358,6 +358,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../getting-started/run-a-node/" title="Run a local node" class="md-nav__link">
+      Run a local node
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../getting-started/python-api-install/" title="Python Ledger API" class="md-nav__link">
       Python Ledger API
     </a>
@@ -823,18 +835,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../regex/" title="Regex" class="md-nav__link">
-      Regex
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../error-checking/" title="Error checking" class="md-nav__link">
       Error checking
     </a>
@@ -964,11 +964,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
     
     <label class="md-nav__link" for="nav-3-4">
-      Machine Learning
+      Maths and ML
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-4">
-        Machine Learning
+        Maths and ML
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1284,6 +1284,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../tutorials/block-number/" title="Get block number" class="md-nav__link">
+      Get block number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../tutorials/erc20/" title="Create FET-20 contract" class="md-nav__link">
       Create FET-20 contract
     </a>
@@ -1353,6 +1365,7 @@
 
 <p>A <code>ShardedState</code> is like a <code>State</code> type in that data contained within a <code>ShardedState</code> will be etched upon the ledger.</p>
 <p>The key difference is that a <code>ShardedState</code> is a map, containing key/value pairs. </p>
+<p>A <code>key</code> must be a <code>String</code> or <code>Address</code> type.</p>
 <p>Behind the scenes, <code>ShardedState</code> creates anonymous <code>State</code> types for key/value pairs that etch onto the ledger.</p>
 <p>Declare a <code>ShardedState</code> in the same way you declare a <code>State</code>: </p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -1376,10 +1389,12 @@
 <span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="nf">set_values_on_state</span><span class="p">()</span>
-      <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;sales&quot;</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;gross_profit&quot;</span><span class="p">,</span> <span class="mi">1800000</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;net_profit&quot;</span><span class="p">,</span> <span class="mi">1300000</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;sales&quot;</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;gross_profit&quot;</span><span class="p">,</span> <span class="mi">1800000</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;net_profit&quot;</span><span class="p">,</span> <span class="mi">1300000</span><span class="p">);</span>
+
 <span class="n">endfunction</span>
 </pre></div>
 
@@ -1399,25 +1414,33 @@
 <span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="nf">set_values_on_state</span><span class="p">()</span>
-      <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;sales&quot;</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;gross_profit&quot;</span><span class="p">,</span> <span class="mi">1800000</span><span class="p">);</span>
-      <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;net_profit&quot;</span><span class="p">,</span> <span class="mi">1300000</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;sales&quot;</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;gross_profit&quot;</span><span class="p">,</span> <span class="mi">1800000</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;net_profit&quot;</span><span class="p">,</span> <span class="mi">1300000</span><span class="p">);</span>
+
 <span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="nf">query_sales</span><span class="p">()</span> <span class="o">:</span> <span class="n">Int32</span>
+
     <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;sales&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="n">i32</span><span class="p">);</span>
+
 <span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="nf">query_gross_profit</span><span class="p">()</span> <span class="o">:</span> <span class="n">Int32</span>
+
     <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;gross_profit&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="n">i32</span><span class="p">);</span>
+
 <span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="nf">query_net_profit</span><span class="p">()</span> <span class="o">:</span> <span class="n">Int32</span>
+
     <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;net_profit&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="n">i32</span><span class="p">);</span>
+
 <span class="n">endfunction</span>
 </pre></div>
 
@@ -1447,8 +1470,6 @@
 <span class="n">endfunction</span>
 </pre></div>
 
-<p>Because <code>ShardedState</code> uses anonymous <code>State</code> types to write data as soon as it is created, we can access values with keys using any <code>var</code> identifier.</p>
-<p>This makes the <code>ShardedState</code> type much more powerful than a <code>State</code> type.</p>
 <p><br/></p>
                 
                   

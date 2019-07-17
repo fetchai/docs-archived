@@ -358,6 +358,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../getting-started/run-a-node/" title="Run a local node" class="md-nav__link">
+      Run a local node
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../getting-started/python-api-install/" title="Python Ledger API" class="md-nav__link">
       Python Ledger API
     </a>
@@ -823,18 +835,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../regex/" title="Regex" class="md-nav__link">
-      Regex
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../error-checking/" title="Error checking" class="md-nav__link">
       Error checking
     </a>
@@ -1013,11 +1013,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
     
     <label class="md-nav__link" for="nav-3-4">
-      Machine Learning
+      Maths and ML
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-4">
-        Machine Learning
+        Maths and ML
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1333,6 +1333,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../tutorials/block-number/" title="Get block number" class="md-nav__link">
+      Get block number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../tutorials/erc20/" title="Create FET-20 contract" class="md-nav__link">
       Create FET-20 contract
     </a>
@@ -1454,7 +1466,10 @@
 <p>A smart contract might use a <code>State</code> to store the total supply or use multiple <code>State</code> variables to keep a track of who has what, for example. It can also let a contract track whether some events have occurred before it releases tokens.</p>
 <p>Declare a <code>State</code> like this:</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myState1</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;simple_state_declaration&quot;</span><span class="p">);</span>
-<span class="n">var</span> <span class="n">myState2</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="p">(</span><span class="s">&quot;nested_array_state_declaration&quot;</span><span class="p">);</span>
+</pre></div>
+
+<p>Or even this:</p>
+<div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myState2</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="p">(</span><span class="s">&quot;nested_array_state_declaration&quot;</span><span class="p">);</span>
 </pre></div>
 
 <p>A <code>State</code> is not like a normal variable, you have to create a <em>reference</em> to it. For example:</p>
@@ -1467,7 +1482,7 @@
 <span class="n">endfunction</span>
 </pre></div>
 
-<p>The above code creates a variable <code>contract_amount_state</code> which is a reference to a <code>State&lt;Int32&gt;</code> called <code>contract_amount</code>. It then sets a value on the <code>State</code>. </p>
+<p>The above code creates a variable name <code>contract_amount_state</code> and assigns it to a <code>State&lt;Int32&gt;</code> with a reference <code>contract_amount</code>. It then sets a value on the <code>State</code>. </p>
 <p><code>State</code> references can be <code>Address</code> types.</p>
 <p><div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
@@ -1485,19 +1500,19 @@
     <span class="n">var</span> <span class="n">supply</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span><span class="mi">1000u64</span><span class="p">);</span>
     <span class="n">contract_amount_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">supply</span><span class="p">);</span>
     <span class="n">var</span> <span class="n">contract_amount</span> <span class="o">=</span> <span class="n">contract_amount_state</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
-    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;My state value = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;My state value = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">contract_amount_state</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
 
 <span class="n">endfunction</span>
 </pre></div>
 
 <h2 id="default-values">Default values</h2>
-<p>If a value has not been set on the <code>State</code> object and it does not already exist on the ledger, a run-time error is thrown on <code>get()</code>. </p>
-<p>To avoid this, use <strong>with care</strong> <code>get(&lt;default&gt;)</code> with a default value. For example, the following code prints zero if the state doesn't exist and the value that was originally set on it if it does exist.</p>
+<p>If a value has not yet been set on the <code>State</code> object and the <code>State</code> does not already exist on the ledger, a run-time error is thrown on calling <code>get()</code>. </p>
+<p>To avoid this, use <strong>with care</strong> <code>get(&lt;default value&gt;)</code> with a default value. For example, the following code prints zero if the state doesn't exist and the value that was originally set on it if it does exist.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
-  <span class="n">var</span> <span class="n">contract_amount_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_amount&quot;</span><span class="p">);</span>  
-  <span class="n">var</span> <span class="n">contract_amount</span> <span class="o">=</span> <span class="n">contract_amount_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> 
-  <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">contract_amount</span><span class="p">));</span>
+    <span class="n">var</span> <span class="n">contract_amount_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_amount&quot;</span><span class="p">);</span>  
+    <span class="n">var</span> <span class="n">contract_amount</span> <span class="o">=</span> <span class="n">contract_amount_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> 
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">contract_amount</span><span class="p">));</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -1506,9 +1521,9 @@
 <p>You can test if a state already exists with <code>existed()</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
-  <span class="n">var</span> <span class="n">contract_amount_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_amount&quot;</span><span class="p">);</span>   
+    <span class="n">var</span> <span class="n">contract_amount_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_amount&quot;</span><span class="p">);</span>   
 
-  <span class="k">if</span> <span class="p">(</span><span class="n">contract_amount_state</span><span class="p">.</span><span class="n">existed</span><span class="p">())</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">contract_amount_state</span><span class="p">.</span><span class="n">existed</span><span class="p">())</span>
       <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;Yes, it existed&quot;</span><span class="p">);</span>
     <span class="n">endif</span>
 
@@ -1520,85 +1535,26 @@
 <p>In the example below, <code>ownerState</code> and <code>contractState</code> point to the same <code>State</code> object on the ledger.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
-  <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9&quot;</span><span class="p">);</span>
-  <span class="n">var</span> <span class="n">ownerState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
-  <span class="n">ownerState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">333</span><span class="p">);</span>
-  <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;My state value = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">ownerState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-  <span class="n">var</span> <span class="n">contractState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
-  <span class="c1">// printLn(&quot;My state value = &quot; + toString(contractState.get())); // runtime error: line 7: The state does not represent any value. </span>
-  <span class="c1">//The value has not been assigned and/or it does not exist in data storage.</span>
+    <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9&quot;</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">ownerState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+    <span class="n">ownerState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">333</span><span class="p">);</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;My state value = &quot;</span> <span class="o">+</span> <span class="n">toString</span><span class="p">(</span><span class="n">ownerState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+    <span class="n">var</span> <span class="n">contractState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+    <span class="c1">// printLn(&quot;My state value = &quot; + toString(contractState.get())); </span>
+    <span class="c1">// runtime error: line 7: The state does not represent any value. </span>
+    <span class="c1">// The value has not been assigned and/or it does not exist in data storage.</span>
 
 <span class="n">endfunction</span>
 </pre></div>
 
-<p>Assuming the referenced <code>State</code> object does not exist on the ledger, attempting to print the value of the second declaration of <code>State</code> generates an error - even though a value was set on it previously. This is because the data set in <code>ownerState</code> has not yet been written to the intermediate cache or ledger storage, so when <code>contractState</code> tries to access it, it finds no value and this generates a runtime error.</p>
+<p>Assuming the referenced <code>State</code> object does not exist on the ledger, attempting to print the value of the second declaration of <code>State</code> generates an error - even though a value was set on it previously. </p>
+<p>This is because the data set in <code>ownerState</code> has not yet been written to the intermediate cache or ledger storage, so when <code>contractState</code> tries to access it, it finds no value and this generates a runtime error.</p>
 <h2 id="writing-state-data-to-the-ledger">Writing <code>State</code> data to the ledger</h2>
-<p>The following is true for <code>State</code> variables with a <code>var</code> identifier.</p>
-<p>Currently, <code>State</code> data is written to smart contract intermediate cache only after control has passed out of scope and the <code>destructor()</code> function has been called behind the scenes.</p>
-<p>While identifiable <code>State</code> variables remain in function scope, data is written to an intermediate object cache mechanism at construction time. Within the same scope, such data is inaccessible to new <code>State</code> identifiers which do not explicitly call <code>set()</code>.</p>
-<p>Once control reaches the end of the function, data is written to an intermediate ledger cache mechanism and is available throughout the contract.</p>
-<p>Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.</p>
-<p><center></p>
-<p><img alt="How smart contracts manage State and ShardedState memory allocation" src="../img/memory-caching.png" /></p>
-<p></center></p>
-<h2 id="anonymous-state-types">Anonymous <code>State</code> types</h2>
-<p>Declaring an anonymous <code>State</code> type without a <code>var</code> name performs an immediate data write.</p>
-<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
-
-  <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;owner1_name&quot;</span><span class="p">);</span>
-
-  <span class="n">var</span> <span class="n">account1</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
-  <span class="n">printLn</span><span class="p">(</span><span class="n">account1</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="n">endfunction</span>
-</pre></div>
-
-<p>This is useful for <code>ShardedState</code> types which build up with immediate write anonymous <code>State</code> types behind the scenes.</p>
-<h2 id="passing-states-around">Passing States around</h2>
-<p>The following code shows the behaviour of <code>State</code> types as they are passed around functions.</p>
-<p><code>State</code> values are available to <code>get()</code> if the scope they were created in originally has closed.</p>
-<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
-
-  <span class="n">var</span> <span class="n">myState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_owner_balance&quot;</span><span class="p">);</span>
-  <span class="n">myState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">33</span><span class="p">);</span>
-  <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-  <span class="c1">// PRINTS 33</span>
-
-  <span class="n">change_state</span><span class="p">(</span><span class="n">myState</span><span class="p">);</span>
-  <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-  <span class="c1">// PRINTS 44</span>
-
-  <span class="n">var</span> <span class="n">result</span> <span class="o">=</span> <span class="n">query</span><span class="p">();</span>
-  <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
-  <span class="c1">// PRINTS 55</span>
-
-<span class="n">endfunction</span>
-
-
-<span class="n">function</span> <span class="nf">change_state</span><span class="p">(</span><span class="nl">state</span> <span class="p">:</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">)</span>
-
-  <span class="c1">// you can pass around a State parameter and get access to the original state</span>
-  <span class="n">var</span> <span class="n">newState</span> <span class="o">=</span> <span class="n">state</span><span class="p">;</span>
-  <span class="n">newState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">44</span><span class="p">);</span>
-
-  <span class="c1">// a new state with pointer = &quot;balance&quot;</span>
-  <span class="n">var</span> <span class="n">anotherState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;balance&quot;</span><span class="p">);</span>
-  <span class="n">anotherState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">55</span><span class="p">);</span>
-  <span class="c1">// all states from this function are written now</span>
-<span class="n">endfunction</span>
-
-
-<span class="n">function</span> <span class="nf">query</span><span class="p">()</span> <span class="o">:</span> <span class="n">Int32</span>
-
-  <span class="c1">// accessing the State at pointer = &quot;balance&quot;, a value out of scope </span>
-  <span class="n">var</span> <span class="n">myState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;balance&quot;</span><span class="p">);</span>
-  <span class="c1">// returns the 55 set in change_state()</span>
-  <span class="k">return</span> <span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-<span class="n">endfunction</span>
-</pre></div>
-
-<p>Similarly, you cannot access a value set on a <code>State</code> if the function scope in which it was created is still open.</p>
+<p>The following is true for <code>State</code> variables declared with a <code>var</code> identifier.</p>
+<p>Currently, <code>State</code> data is written to smart contract intermediate cache only after control has passed out of function scope.</p>
+<p>While identifiable <code>State</code> variables remain inside function scope, data is written to an intermediate object cache mechanism at construction time. </p>
+<p>Within the same scope, such data is inaccessible to new <code>State</code> identifiers (which have not explicitly called <code>set()</code> on the <code>State</code>).</p>
+<p>You cannot access a value set on a <code>State</code> if the function scope in which it was created is still open.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">);</span>
@@ -1621,6 +1577,67 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+<p>Once control reaches the end of the function, the data is written to an intermediate ledger cache mechanism and is available throughout the contract.</p>
+<p>Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.</p>
+<p><center></p>
+<p><img alt="How smart contracts manage State and ShardedState memory allocation" src="../img/memory-caching.png" /></p>
+<p></center></p>
+<h2 id="anonymous-state-types">Anonymous <code>State</code> types</h2>
+<p>Declaring an anonymous <code>State</code> type without a <code>var</code> name performs an immediate data write.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">).</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;owner1_name&quot;</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">account1</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;account1&quot;</span><span class="p">);</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">account1</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<p>This is useful for <code>ShardedState</code> types which build up with immediate write anonymous <code>State</code> types behind the scenes.</p>
+<h2 id="passing-states-around">Passing States around</h2>
+<p>The following code shows the behaviour of <code>State</code> types as they are passed around functions.</p>
+<p><code>State</code> values are available to <code>get()</code> if the function scope they were created in originally has closed.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+
+    <span class="n">var</span> <span class="n">myState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_owner_balance&quot;</span><span class="p">);</span>
+    <span class="n">myState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">33</span><span class="p">);</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+    <span class="c1">// PRINTS 33</span>
+
+    <span class="n">change_state</span><span class="p">(</span><span class="n">myState</span><span class="p">);</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+    <span class="c1">// PRINTS 44</span>
+
+    <span class="n">var</span> <span class="n">result</span> <span class="o">=</span> <span class="n">query</span><span class="p">();</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
+    <span class="c1">// PRINTS 55</span>
+
+<span class="n">endfunction</span>
+
+<span class="n">function</span> <span class="nf">change_state</span><span class="p">(</span><span class="nl">state</span> <span class="p">:</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">)</span>
+
+    <span class="c1">// you can pass around a State parameter and get access to the original state</span>
+    <span class="n">var</span> <span class="n">newState</span> <span class="o">=</span> <span class="n">state</span><span class="p">;</span>
+    <span class="n">newState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">44</span><span class="p">);</span>
+
+    <span class="c1">// a new state with pointer = &quot;balance&quot;</span>
+    <span class="n">var</span> <span class="n">anotherState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;balance&quot;</span><span class="p">);</span>
+    <span class="n">anotherState</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">55</span><span class="p">);</span>
+    <span class="c1">// all states from this function are written now</span>
+
+<span class="n">endfunction</span>
+
+<span class="n">function</span> <span class="nf">query</span><span class="p">()</span> <span class="o">:</span> <span class="n">Int32</span>
+
+    <span class="c1">// accessing the State at pointer = &quot;balance&quot;, a value out of scope </span>
+    <span class="n">var</span> <span class="n">myState</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;balance&quot;</span><span class="p">);</span>
+    <span class="c1">// returns the 55 set in change_state()</span>
+    <span class="k">return</span> <span class="n">myState</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
 <h2 id="verify-an-address">Verify an Address</h2>
 <p>Often, a contract needs to confirm whether an <code>@action</code> or <code>@query</code> comes from a specific address. This can be done with the <code>signedTx()</code> function of the <code>Address</code> type. </p>
 <p>In the example below, an <code>@action</code> establishes if the the signer of the calling transaction is a specific authorised address.</p>
@@ -1639,15 +1656,15 @@
         <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Incorrect address used to trigger&quot;</span><span class="p">);</span>
     <span class="n">endif</span>
         <span class="c1">// ... we&#39;re good to go, the signer of the TX is the stored authorised address...</span>
-<span class="n">endfunction</span>
 
+<span class="n">endfunction</span>
 
 <span class="n">function</span> <span class="n">main</span><span class="p">()</span>
 
-  <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9&quot;</span><span class="p">);</span>
-  <span class="n">var</span> <span class="n">authorised</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Address</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;owner&quot;</span><span class="p">);</span>
-  <span class="n">authorised</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
-  <span class="n">doSomething</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9&quot;</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">authorised</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Address</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;owner&quot;</span><span class="p">);</span>
+    <span class="n">authorised</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+    <span class="n">doSomething</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
 
 <span class="n">endfunction</span>
 </pre></div>

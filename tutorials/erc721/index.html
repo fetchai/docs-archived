@@ -83,7 +83,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#making-an-erc721-contract" tabindex="1" class="md-skip">
+      <a href="#create-an-erc721-contract" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -349,6 +349,18 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/run-a-node/" title="Run a local node" class="md-nav__link">
+      Run a local node
+    </a>
   </li>
 
         
@@ -821,18 +833,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../etch-language/regex/" title="Regex" class="md-nav__link">
-      Regex
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../etch-language/error-checking/" title="Error checking" class="md-nav__link">
       Error checking
     </a>
@@ -926,11 +926,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
     
     <label class="md-nav__link" for="nav-3-4">
-      Machine Learning
+      Maths and ML
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-3-4">
-        Machine Learning
+        Maths and ML
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1248,6 +1248,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../block-number/" title="Get block number" class="md-nav__link">
+      Get block number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../erc20/" title="Create FET-20 contract" class="md-nav__link">
       Create FET-20 contract
     </a>
@@ -1381,124 +1393,143 @@
               
                 
                 
-                <h1 id="making-an-erc721-contract">Making an ERC721 contract</h1>
+                <h1 id="create-an-erc721-contract">Create an ERC721 contract</h1>
 <p>In this tutorial we are going to implement a subset of the functionality of 
-an ERC721 contract in Etch. We will be using <code>UInt256</code> for identifiers and
-<code>SHA256</code> to generate the identifiers of the initial tokens. </p>
+an ERC721 contract in <code>etch</code>. </p>
+<p>We will be using <code>UInt256</code> for identifiers and the <code>SHA256()</code> function to generate the identifiers of the initial tokens. </p>
 <p>We will need two
-records: an <code>Address</code> record stating which tokens an address holds and a token 
-record keeping track of the owner of the token. </p>
-<p>For the first of these tasks, we will
-use the <code>State</code> object in Etch, and for the second we will use <code>ShardedState</code>.</p>
+records: an <code>Address</code> stating which tokens an address holds and a token record keeping track of the owner of the token. </p>
+<p>For the first of these tasks, we will use the <code>State</code> object in <code>etch</code>, and for the second we will use <code>ShardedState</code>.</p>
 <h2 id="initialisation-function">Initialisation function</h2>
 <p>Assuming that we have defined an <code>owner</code> and a <code>total_supply</code>, the initialise function 
 will do three things: </p>
 <ol>
-<li>It generates a list of token ids. </li>
-<li>It creates a record of each token owner.</li>
-<li>It creates a record of the tokens that an owner has. </li>
+<li>Generate a list of token ids. </li>
+<li>Create a record of each token owner.</li>
+<li>Create a record of the tokens that an owner has. </li>
 </ol>
-<p>The dual relationship is there to make lookups efficient, but comes at the price of twice the book keeping.</p>
-<p>As the first step we create the list of token ids:
-<div class="highlight"><pre><span></span>  // Genereating tokens
-  var token_id = UInt256(&quot;hello world&quot;);
-  for(i in 0:tokens.count()-1)
-    var hasher = SHA256();
-    hasher.update(token_id);
-    token_id = hasher.final();
-    tokens[i] = token_id;
-  endfor
-</pre></div></p>
-<p>Next we assign an owner:
-<div class="highlight"><pre><span></span>  // Assigning owner
-  var owner_state = ShardedState&lt; Address &gt;(&quot;tokens.owner&quot;);
-  for(i in 0:tokens.count()-1)
-    var tid = tokens[i];
-    owner_state.set(toString(tid), owner);
-  endfor
-</pre></div>
-and finally, we store the list of tokens on the creators address:
-<div class="highlight"><pre><span></span>  var objects_state = State&lt; Array&lt; UInt256 &gt; &gt;(owner);
+<p>The dual relationship makes lookups efficient, but comes at the price of twice the book keeping.</p>
+<p>First, create the list of token ids:</p>
+<div class="highlight"><pre><span></span>    <span class="c1">// Genereating tokens</span>
+    <span class="n">var</span> <span class="n">token_id</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">);</span>
 
-  // Storing the tokens on the owners address
-  objects_state.set(tokens);
-</pre></div></p>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
+
+        <span class="n">var</span> <span class="n">hasher</span> <span class="o">=</span> <span class="n">SHA256</span><span class="p">();</span>
+        <span class="n">hasher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">token_id</span><span class="p">);</span>
+        <span class="n">token_id</span> <span class="o">=</span> <span class="n">hasher</span><span class="p">.</span><span class="k">final</span><span class="p">();</span>
+        <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_id</span><span class="p">;</span>
+
+    <span class="n">endfor</span>
+</pre></div>
+
+<p>Next, assign an owner:</p>
+<div class="highlight"><pre><span></span>    <span class="c1">// Assigning owner</span>
+    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
+
+        <span class="n">var</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">owner_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">tid</span><span class="p">),</span> <span class="n">owner</span><span class="p">);</span>
+
+    <span class="n">endfor</span>
+</pre></div>
+
+<p>Finally, store the list of tokens on the creator's address:</p>
+<div class="highlight"><pre><span></span>    <span class="n">var</span> <span class="n">objects_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+
+    <span class="c1">// Storing the tokens on the owners address</span>
+    <span class="n">objects_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+</pre></div>
+
 <h2 id="queries">Queries</h2>
-<p>In this section we will focus on the two functions which are needed to implement a wallet overview and token details view, namely <code>balanceOf</code> and <code>ownerOf</code>. Both of these functions are short and easy to implement. We first make it possible to query the balance:
-<div class="highlight"><pre><span></span>@query
-function balanceOf(owner: Address) : UInt256
-  var objects_state = State&lt; Array&lt; UInt256 &gt; &gt;(owner);
-  var tokens = objects_state.get( Array&lt; UInt256 &gt;(0) );
-  var ret = UInt256( toUInt64(tokens.count()) );
+<p>In this section we will focus on the functions which implement a wallet overview and token details view, namely <code>balanceOf(owner: Address) : UInt256</code> and <code>ownerOf(token_id: UInt256) : Address</code>. </p>
+<p>Both of these functions are short and easy to implement. </p>
+<p>First, we make it possible to query the balance:</p>
+<div class="highlight"><pre><span></span><span class="err">@</span><span class="n">query</span>
+<span class="n">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="nl">owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">:</span> <span class="n">UInt256</span>
 
-  return ret;
-endfunction
+    <span class="n">var</span> <span class="n">objects_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">objects_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
+    <span class="n">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span> <span class="n">toUInt64</span><span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span> <span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="n">endfunction</span>
 </pre></div>
-Next, we make it possible to query the token owner. This is also a straight forward function to implement:
-<div class="highlight"><pre><span></span>@query
-function ownerOf(token_id: UInt256) : Address
-  var owner_state = ShardedState&lt; Address &gt;(&quot;tokens.owner&quot;);
-  return owner_state.get(toString(token_id)); 
-endfunction
+
+<p>Next, we make it possible to query the token owner:</p>
+<div class="highlight"><pre><span></span><span class="err">@</span><span class="n">query</span>
+<span class="n">function</span> <span class="n">ownerOf</span><span class="p">(</span><span class="nl">token_id</span><span class="p">:</span> <span class="n">UInt256</span><span class="p">)</span> <span class="o">:</span> <span class="n">Address</span>
+
+    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">owner_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">));</span> 
+
+<span class="n">endfunction</span>
 </pre></div>
-With these two query functions, it is possible to implement a ERC-721 wallet on top of the smart ledger. It is possible to make several optimisations for these functions. For instance, by storing number of tokens separately, there would be no need to deserialize the full array.</p>
+
+<p>With these two query functions, it is possible to implement an ERC-721 wallet on top of the smart ledger. </p>
+<p>We can also make several optimisations for these functions. For instance, by storing the number of tokens separately, we would not have to deserialize the full array.</p>
 <h2 id="actions">Actions</h2>
-<p>The standard ERC-721 contract has a number of different functions to transfer funds from one party to another. We will only implement one of these as they are all essentially variations of the same mechanism with more or less error checking built into them. </p>
-<p>We implement a single transfer function here:
-<div class="highlight"><pre><span></span>function transferFrom(from: Address, to: Address, token_id: UInt256)
-  if(!from.signedTx()) 
-    panic(&quot;Invalid signature from owner.&quot;);
-  endif
+<p>The standard ERC-721 contract has a number of different functions for transfering funds from one party to another. We will implement just one of these; they are all essentially variations of the same mechanism with more or less error checking built into them. </p>
+<p>Implement a single transfer function:</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">transferFrom</span><span class="p">(</span><span class="nl">from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">token_id</span><span class="p">:</span> <span class="n">UInt256</span><span class="p">)</span>
 
-  var owner_state = ShardedState&lt; Address &gt;(&quot;tokens.owner&quot;);
-  var owner = owner_state.get(toString(token_id));
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">from</span><span class="p">.</span><span class="n">signedTx</span><span class="p">())</span> 
+      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Invalid signature from owner.&quot;</span><span class="p">);</span>
+    <span class="n">endif</span>
 
-  if(owner != from)
-    panic(&quot;Owner does not actually own the token&quot;);
-  endif
+    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">owner_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">));</span>
 
-  var from_state   = State&lt; Array&lt; UInt256 &gt; &gt;(from);
-  var from_objects = from_state.get( Array&lt; UInt256 &gt;(0) );
-  var found = false;
-  var position : Int32;
+    <span class="k">if</span><span class="p">(</span><span class="n">owner</span> <span class="o">!=</span> <span class="n">from</span><span class="p">)</span>
+      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Owner does not actually own the token&quot;</span><span class="p">);</span>
+    <span class="n">endif</span>
+
+    <span class="n">var</span> <span class="n">from_state</span>   <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">from_objects</span> <span class="o">=</span> <span class="n">from_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
+    <span class="n">var</span> <span class="n">found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">var</span> <span class="nl">position</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">;</span>
 
 
-  for(i in 0:from_objects.count()-1)
-    var tid = from_objects[i];
-    if(tid == token_id)
-      if(found)
-        panic(&quot;Contract broken - token is only supposed be represented once.&quot;);
-      endif
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">from_objects</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">var</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">from_objects</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">tid</span> <span class="o">==</span> <span class="n">token_id</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+          <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Contract broken - token is only supposed be represented once.&quot;</span><span class="p">);</span>
+        <span class="n">endif</span>
 
-      found = true;
-      position = i;
-      break;
-    endif
-  endfor
+        <span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="n">endif</span>
+    <span class="n">endfor</span>
 
-  if(!found)
-    panic(&quot;Contract is fundamentally broken - owner has not been updated correctly&quot;);
-  endif
+    <span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="n">found</span><span class="p">)</span>
+      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Contract is fundamentally broken - owner has not been updated correctly&quot;</span><span class="p">);</span>
+    <span class="n">endif</span>
 
-  from_objects[position] = from_objects[from_objects.count() - 1];
-  from_objects.popBack();
+    <span class="n">from_objects</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_objects</span><span class="p">[</span><span class="n">from_objects</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="n">from_objects</span><span class="p">.</span><span class="n">popBack</span><span class="p">();</span>
 
-  var to_state   = State&lt; Array&lt; UInt256 &gt; &gt;(to);
-  var to_objects = to_state.get( Array&lt; UInt256 &gt;(0) );
-  to_objects.append(token_id);
+    <span class="n">var</span> <span class="n">to_state</span>   <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">to_objects</span> <span class="o">=</span> <span class="n">to_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
+    <span class="n">to_objects</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_id</span><span class="p">);</span>
 
-  // updating sender
-  from_state.set(from_objects);
+    <span class="c1">// updating sender</span>
+    <span class="n">from_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">from_objects</span><span class="p">);</span>
 
-  // Updating receiver
-  to_state.set(to_objects);
+    <span class="c1">// Updating receiver</span>
+    <span class="n">to_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">to_objects</span><span class="p">);</span>
 
-  // Updating owner
-  owner = to;
-  owner_state.set(toString(token_id), owner);
-endfunction
+    <span class="c1">// Updating owner</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span>
+    <span class="n">owner_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">),</span> <span class="n">owner</span><span class="p">);</span>
+
+<span class="n">endfunction</span>
 </pre></div>
-The above implementation only requires sender to sign the transaction, but could easily be extended to also requiring the receiver to sign. </p>
+
+<p>The above implementation requires the sender to sign the transaction, but can be extended to also requiring the receiver to sign as well. </p>
 <p>The full contract can be found <a href="https://github.com/fetchai/etch-examples/blob/master/03_erc721/contract.etch" target=_blank>here</a>.</p>
 <p><br/></p>
                 
