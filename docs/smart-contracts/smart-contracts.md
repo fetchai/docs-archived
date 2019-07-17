@@ -121,7 +121,7 @@ endfunction
 
 If you run an `etch` contract in the simulator containing one or more `State` types and flag the compiler with `-data` and a filename, it will create a `json` file containing the details of the data that will be stored on the ledger.
 
-`./vm-lang *filename* -data data.json`
+`./etch *filename* -data data.json`
 
 If we run one of the above code examples in this way, `data.json` may contain the following:
 
@@ -133,11 +133,11 @@ If we run one of the above code examples in this way, `data.json` may contain th
 
 `getBlockNumber()` : returns the number of the current block in `UInt64`. 
 
+See an example of running `getBlockNumber()` on a running node <a href="../../tutorials/block-number" target=_blank>here</a>.
+
 You need a node running to test this. As well as that, you can only get a result when the function is embedded within smart contract code in Python.
 
-Details for running a node are <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
-
-More details on the Python libraries for smart contracts are in the next sections.
+Details for running a node are <a href="../../getting-started/run-a-node/" target=_blank>here</a>.
 
 
 <br/>

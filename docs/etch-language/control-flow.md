@@ -1,6 +1,6 @@
 <h1>Control flow</h1>
 
-!!! warning
+!!! Tip
 	Make sure to declare the end of the function and construct.
 
 ## if-else
@@ -66,34 +66,20 @@ endfunction
 
 ## for
 
-!!! warning
-	`for` loop range is inclusive.
 
 ``` c++
 function main()
 
     // ascending
-    printLn("Ascending and inclusive for loop");
+    printLn("Ascending for loop");
     for(i in 0:5)
         printLn(toString(i));
     endfor
 
-    // descending
-    printLn("Descending and inclusive for loop");
-    for(j in 5:0:-1)
-        printLn(toString(j));
-    endfor
-
     // stepwise ascent
-    printLn("Ascending and inclusive stepwise");
+    printLn("Ascending stepwise");
     for(k in 0:10:2)
         printLn(toString(k));
-    endfor
-
-    // stepwise descent
-    printLn("Descending and inclusive stepwise");
-    for(l in 10:0:-2)
-        printLn(toString(l));
     endfor
 
 endfunction

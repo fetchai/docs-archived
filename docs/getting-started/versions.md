@@ -3,17 +3,17 @@ While we continue to work on developing separate applications for the Fetch.AI L
 For example:
 
 ``` c++
-fetchai/ledger release/v0.5.x
-fetchai/ledger-api-py release/v0.5.x
+fetchai/ledger release/v0.6.x
+fetchai/ledger-api-py release/v0.6.x
 fetchai/oef-search-pluto master
 ```
 
 Against these, follow the documentation in line with the same versions.
 
-The documentation you are reading now is from version:
+The documentation you are reading now is version:
 
 ``` c++
-	fetchai/docs release/v0.5.x
+fetchai/docs release/v0.6.x
 ```
 
 <br/>

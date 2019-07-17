@@ -1,7 +1,7 @@
 <h1>Maths libraries and functions</h1>
 
 
-In the current version, `release/v0.5.x`, the following maths functions are available:
+In the current version, `release/v0.6.x`, the following maths functions are available:
 
 ## Logarithm
 
@@ -10,12 +10,12 @@ Natural log values are currently available for `UInt256` types only.
 ``` c++
 function main()
 
-     var int32 = 32;
-     // var logI = int32.logValue(); // error: primitive type 'Int32' does not support member-access operator
+    var int32 = 32;
+    // var logI = int32.logValue(); // error: primitive type 'Int32' does not support member-access operator
 
-     var uint256 = UInt256(256u64);
-     var logY = uint256.logValue();
-     printLn(logY); // prints -inf
+    var uint256 = UInt256(256u64);
+    var logY = uint256.logValue();
+    printLn(logY); // prints -inf
 
 endfunction
 ```
@@ -31,39 +31,38 @@ In a future release, log values will be available for all types as well as in ba
 ``` c++
 function do_abs(value: Int32)
 
-  printLn("Abs of " + toString(value) + ": ");
-  printLn(toString(abs(value)));
+    printLn("Abs of " + toString(value) + ": ");
+    printLn(toString(abs(value)));
 
 endfunction
 
 function do_abs(value: Float64)
 
-  printLn("Abs of " + toString(value) + ": ");
-  printLn(toString(abs(value)));
+    printLn("Abs of " + toString(value) + ": ");
+    printLn(toString(abs(value)));
 
 endfunction
 
 
 function main()
 
-  // positive int 32
-  var x_int = 1;
-  do_abs(x_int);
+    // positive int 32
+    var x_int = 1;
+    do_abs(x_int);
 
-  // negative int 32
-  x_int = -1;
-  do_abs(x_int);
+    // negative int 32
+    x_int = -1;
+    do_abs(x_int);
 
-  // positive float 64
-  var x_float = 0.1123;
-  do_abs(x_float);
+    // positive float 64
+    var x_float = 0.1123;
+    do_abs(x_float);
 
-  // negative float 64
-  x_float = -7.151;
-  do_abs(x_float);
+    // negative float 64
+    x_float = -7.151;
+    do_abs(x_float);
 
 endfunction
-
 ```
 
 
@@ -116,7 +115,7 @@ endfunction
 
 The exponential function returns the value of `e` to the number given, <code>exp(x) = e<sup>x</sup></code> where `e` is Euler's base of natural logarithms.
 
-Currently, the square root function is limited to fixed and floating point variables.
+Currently, the exponent function is limited to fixed and floating point variables.
 
 ``` c++
 function main()
@@ -192,41 +191,41 @@ endfunction
 ``` c++
 function main()
 
-  var x = 1.0;
-  printLn("sin of 1");
-  printLn(toString(sin(x)));
+    var x = 1.0;
+    printLn("sin of 1");
+    printLn(toString(sin(x)));
 
-  x = 0.5;
-  printLn("sin of 0.5");
-  printLn(toString(sin(x)));
+    x = 0.5;
+    printLn("sin of 0.5");
+    printLn(toString(sin(x)));
 
-  x = 0.0;
-  printLn("sin of 0");
-  printLn(toString(sin(x)));
+    x = 0.0;
+    printLn("sin of 0");
+    printLn(toString(sin(x)));
 
-  x = 1.0;
-  printLn("cos of 1");
-  printLn(toString(cos(x)));
+    x = 1.0;
+    printLn("cos of 1");
+    printLn(toString(cos(x)));
 
-  x = 0.5;
-  printLn("cos of 0.5");
-  printLn(toString(cos(x)));
+    x = 0.5;
+    printLn("cos of 0.5");
+    printLn(toString(cos(x)));
 
-  x = 0.0;
-  printLn("cos of 0");
-  printLn(toString(cos(x)));
+    x = 0.0;
+    printLn("cos of 0");
+    printLn(toString(cos(x)));
 
-  x = 1.0;
-  printLn("tan of 1");
-  printLn(toString(tan(x)));
+    x = 1.0;
+    printLn("tan of 1");
+    printLn(toString(tan(x)));
 
-  x = 0.5;
-  printLn("tan of 0.5");
-  printLn(toString(tan(x)));
+    x = 0.5;
+    printLn("tan of 0.5");
+    printLn(toString(tan(x)));
 
-  x = 0.0;
-  printLn("tan of 0");
-  printLn(toString(tan(x)));
+    x = 0.0;
+    printLn("tan of 0");
+    printLn(toString(tan(x)));
 
 endfunction
 ```
@@ -236,41 +235,41 @@ Also `ArcSin`, `ArcCos`, and `ArcTan`.
 ``` c++
 function main()
 
-  var x = 1.0;
-  printLn("asin of 1");
-  printLn(toString(asin(x)));
+    var x = 1.0;
+    printLn("asin of 1");
+    printLn(toString(asin(x)));
 
-  x = 0.5;
-  printLn("asin of 0.5");
-  printLn(toString(asin(x)));
+    x = 0.5;
+    printLn("asin of 0.5");
+    printLn(toString(asin(x)));
 
-  x = 0.0;
-  printLn("asin of 0");
-  printLn(toString(asin(x)));
+    x = 0.0;
+    printLn("asin of 0");
+    printLn(toString(asin(x)));
 
-  x = 1.0;
-  printLn("acos of 1");
-  printLn(toString(acos(x)));
+    x = 1.0;
+    printLn("acos of 1");
+    printLn(toString(acos(x)));
 
-  x = 0.5;
-  printLn("acos of 0.5");
-  printLn(toString(acos(x)));
+    x = 0.5;
+    printLn("acos of 0.5");
+    printLn(toString(acos(x)));
 
-  x = 0.0;
-  printLn("acos of 0");
-  printLn(toString(acos(x)));
+    x = 0.0;
+    printLn("acos of 0");
+    printLn(toString(acos(x)));
 
-  x = 1.0;
-  printLn("atan of 1");
-  printLn(toString(atan(x)));
+    x = 1.0;
+    printLn("atan of 1");
+    printLn(toString(atan(x)));
 
-  x = 0.5;
-  printLn("atan of 0.5");
-  printLn(toString(atan(x)));
+    x = 0.5;
+    printLn("atan of 0.5");
+    printLn(toString(atan(x)));
 
-  x = 0.0;
-  printLn("atan of 0");
-  printLn(toString(atan(x)));
+    x = 0.0;
+    printLn("atan of 0");
+    printLn(toString(atan(x)));
 
 endfunction
 ```
@@ -280,41 +279,41 @@ And hyperbolic functions `Sin`, `Cos`, and `Tan`.
 ``` c++
 function main()
 
-  var x = 1.0;
-  printLn("sinh of 1");
-  printLn(toString(sinh(x)));
+    var x = 1.0;
+    printLn("sinh of 1");
+    printLn(toString(sinh(x)));
 
-  x = 0.5;
-  printLn("sinh of 0.5");
-  printLn(toString(sinh(x)));
+    x = 0.5;
+    printLn("sinh of 0.5");
+    printLn(toString(sinh(x)));
 
-  x = 0.0;
-  printLn("sinh of 0");
-  printLn(toString(sinh(x)));
+    x = 0.0;
+    printLn("sinh of 0");
+    printLn(toString(sinh(x)));
 
-  x = 1.0;
-  printLn("cosh of 1");
-  printLn(toString(cosh(x)));
+    x = 1.0;
+    printLn("cosh of 1");
+    printLn(toString(cosh(x)));
 
-  x = 0.5;
-  printLn("cosh of 0.5");
-  printLn(toString(cosh(x)));
+    x = 0.5;
+    printLn("cosh of 0.5");
+    printLn(toString(cosh(x)));
 
-  x = 0.0;
-  printLn("cosh of 0");
-  printLn(toString(cosh(x)));
+    x = 0.0;
+    printLn("cosh of 0");
+    printLn(toString(cosh(x)));
 
-  x = 1.0;
-  printLn("tanh of 1");
-  printLn(toString(tanh(x)));
+    x = 1.0;
+    printLn("tanh of 1");
+    printLn(toString(tanh(x)));
 
-  x = 0.5;
-  printLn("tanh of 0.5");
-  printLn(toString(tanh(x)));
+    x = 0.5;
+    printLn("tanh of 0.5");
+    printLn(toString(tanh(x)));
 
-  x = 0.0;
-  printLn("tanh of 0");
-  printLn(toString(tanh(x)));
+    x = 0.0;
+    printLn("tanh of 0");
+    printLn(toString(tanh(x)));
 
 endfunction
 ```
@@ -324,41 +323,41 @@ And hyperbolic `ArcSin`, `ArcCos`, and `ArcTan`.
 ``` c++
 function main()
 
-  var x = 1.0;
-  printLn("asinh of 1");
-  printLn(toString(asinh(x)));
+    var x = 1.0;
+    printLn("asinh of 1");
+    printLn(toString(asinh(x)));
 
-  x = 0.5;
-  printLn("asinh of 0.5");
-  printLn(toString(asinh(x)));
+    x = 0.5;
+    printLn("asinh of 0.5");
+    printLn(toString(asinh(x)));
 
-  x = 0.0;
-  printLn("asinh of 0");
-  printLn(toString(asinh(x)));
+    x = 0.0;
+    printLn("asinh of 0");
+    printLn(toString(asinh(x)));
 
-  x = 1.0;
-  printLn("acosh of 1");
-  printLn(toString(acosh(x)));
+    x = 1.0;
+    printLn("acosh of 1");
+    printLn(toString(acosh(x)));
 
-  x = 0.5;
-  printLn("acosh of 0.5");
-  printLn(toString(acosh(x)));
+    x = 0.5;
+    printLn("acosh of 0.5");
+    printLn(toString(acosh(x)));
 
-  x = 0.0;
-  printLn("acosh of 0");
-  printLn(toString(acosh(x)));
+    x = 0.0;
+    printLn("acosh of 0");
+    printLn(toString(acosh(x)));
 
-  x = 1.0;
-  printLn("atanh of 1");
-  printLn(toString(atanh(x)));
+    x = 1.0;
+    printLn("atanh of 1");
+    printLn(toString(atanh(x)));
 
-  x = 0.5;
-  printLn("atanh of 0.5");
-  printLn(toString(atanh(x)));
+    x = 0.5;
+    printLn("atanh of 0.5");
+    printLn(toString(atanh(x)));
 
-  x = 0.0;
-  printLn("atanh of 0");
-  printLn(toString(atanh(x)));
+    x = 0.0;
+    printLn("atanh of 0");
+    printLn(toString(atanh(x)));
 
 endfunction
 ```

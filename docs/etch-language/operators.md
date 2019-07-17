@@ -154,9 +154,9 @@ function main()
 	var y = 7;
 	var z = x / y;
 	printLn(toString(z));
+    
 	z /= 2;
 	printLn(toString(z));
-
 
 	var a = 32.3f;
 	var b = 31.2f;

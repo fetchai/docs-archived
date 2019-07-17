@@ -5,7 +5,7 @@ Use `printLn(toString(...))` to query variables on the command line and in the `
 !!! note
     In a live environment, the `etch` compiler will strip out `printLn()` statements.
 
-<H3>Compiling</H3>
+## Compiling
 
 [!comment]: <> (Todo: fill out with examples as we go along.)
 
@@ -30,39 +30,41 @@ Our compiler is very strict. It will complain about:
 * `while`, `for`, `if`, `var`, `return`, `break`, `continue`, variables, and expressions declared at topmost scope.
 
 
-<H3>System arguments</H3> 
+## System arguments
 
 `System.Argc()` and `System.Argv()` give us access to compiler argument count and values. In the following code, first we print the number of compiler arguments, then we list them.
 
 ``` c++
 function main()
+
   var message : String;
-  
+
   printLn("System args: " + toString(System.Argc()));
 
   // print the argument values
-  for(i in 0:System.Argc() - 1)
+  for(i in 0:System.Argc())
     message = toString(i) + " = " + System.Argv(i);
     printLn(message); 
   endfor
+  
 endfunction
 ```
 
-Running the code from the command line with zero flags `--` sends arguments to the `vm-lang` executable.  
+Running the code from the command line with zero flags `--` sends arguments to the `etch` executable.  
 
 For example, run the code snippet above with zero flags `--` and an example argument `hello` like this:
 
-`./vm-lang sysargs-examples.etch -- hello`
+`./etch sysargs-examples.etch -- hello`
 
 You should see the following output:
 
 ``` c++
- F E ╱     vm-lang v0.1.0-30-g557389e0
+ F E ╱     etch v0.1.0-30-g557389e0
    T C     Copyright 2018-2019 (c) Fetch AI Ltd.
      H     
 
 System args: 2
-0 = ./vm-lang
+0 = ./etch
 1 = hello
 ```
 

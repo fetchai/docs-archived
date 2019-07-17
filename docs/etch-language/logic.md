@@ -111,26 +111,6 @@ endfunction
 	Coming soon: support for `xor`.
 
 
-## Short circuiting
 
-Currently, we don't short circuit. This may cause unexpected results.
-
-``` c++
-function foo() : Bool
-  	printLn('1');
-  	return true;
-endfunction
-
-function bar() : Bool
-  	printLn('2');
-  	return false;
-endfunction
-
-function main()
- 	if (foo() || bar())
-       printLn('3');
-    endif
-endfunction
-```
 
 <br/>

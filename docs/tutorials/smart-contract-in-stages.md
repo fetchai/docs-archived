@@ -1,6 +1,12 @@
 <h1>Smart contract in stages</h1>
 
-Let's look at the three Python scripts in the `contract_in_stages` directory.
+Let's look at the three Python scripts in the `contract_in_stages` directory in the Python API.
+
+To run the code in this demo, you will need a running node. Details are <a href="../../getting-started/run-a-node/" target=_blank>here</a>.
+
+Details of the Python API are <a href="../../getting-started/python-api-install/" target=_blank>here</a>.
+
+## Stage 1
 
 The first script `01_create_private_key.py` creates an `Entity` object and inserts the private key from the `private.key` file in the same directory.
 
@@ -30,6 +36,8 @@ def main():
     print('Creating initial balance...complete')
 
 ```
+
+## Stage 2
 
 In the `02_create_contract.py` file, we embed the `etch` smart contract code into the script as a string.
 
@@ -102,6 +110,8 @@ def main():
     with open('sample.contract', 'w') as contract_file:
         contract.dump(contract_file)
 ```
+
+## Stage 3
 
 In `03_transfer.py` we load up the demo private key and the smart contract file. 
 

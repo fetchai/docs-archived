@@ -1,9 +1,6 @@
 <h1>Arrays</h1>
 
 
-!!! warning
-    Array ranges are wholly inclusive in `etch`.
-
 
 ## One dimensional arrays
 
@@ -22,17 +19,12 @@ function main()
     // print the array
     printLn(myArray);
 
-    // print one element of the array
+    // print a single element of the array
     printLn(toString(myArray[3]));
 
-    // print ascending
-    for (i in 0:4)
+    // print elements ascending
+    for (i in 0:myArray.count())
         printLn(toString(myArray[i]));
-    endfor
-
-    // print descending
-    for (j in 4:0:-1)
-        printLn(toString(myArray[j]));
     endfor
 
 endfunction
@@ -40,7 +32,7 @@ endfunction
 
 ## Two dimensional arrays
 
-Declare a 4x4 2d array like this:
+Declare a 4x4 two dimensional array like this:
 
 ``` c++
 function main()
@@ -53,14 +45,14 @@ function main()
 
     // initialise row and column values
     var count = 1;
-    for(row in 0:3)
-        for(column in 0:3)
+    for(row in 0:grid.count())
+        for(column in 0:grid[row].count())
             grid[row][column] = count;
             count += 1;
         endfor
         printLn(grid[row]);
     endfor
-    
+
 endfunction
 ```
 
@@ -85,12 +77,13 @@ endfunction
 
 ## Utility functions
 
-You can use the following utility functions to manipulate arrays:
+Use the following utility functions to manipulate arrays:
 
 * [count()](arrays.md#count)
 * [append()](arrays.md#append)
 * [extend()](arrays.md#extend)
 * [popBack() and popFront()](arrays.md#pop)
+* [popBack(n) and popFront(n)](arrays.md#popn)
 * [reverse()](arrays.md#reverse)
 * [erase()](arrays.md#erase)
 
@@ -148,9 +141,9 @@ function main()
 
     var my2dArray = Array<Array<Int32>>(3);
     var count = 1;
-    for (i in 0:2)
+    for (i in 0:my2dArray.count())
         my2dArray[i] = Array<Int32>(3);
-        for (j in 0:2)
+        for (j in 0:my2dArray.count())
             my2dArray[i][j] = count;
             count += 1;
         endfor
@@ -161,8 +154,8 @@ function main()
 
     my2dArray.append(Array<Int32>(8));
     my2dArray[1].append(42);
- 
-    for (k in 0:3)
+
+    for (k in 0:my2dArray.count())
         printLn(my2dArray[k]);
     endfor
 
@@ -171,7 +164,7 @@ endfunction
 
 <h3 id="extend">Extend</h3>
 
-Use `extend()` to append the contents of one array to another in order. 
+Use `extend()` to append the contents of one array to another in order of insertion. 
 
 * Array types must be the same.
 
@@ -201,7 +194,7 @@ endfunction
 
 The `popBack()` function removes and returns the last item from a one dimensional array, or the last array from a two dimensional array. 
 
-The `popFront()` function removes and returns the first item or array.
+The `popFront()` function removes and returns the first item or array, or the first array from a two dimensional array.
 
 * Fails if the array is empty.
   
@@ -230,9 +223,9 @@ function main()
     //create a 3 by 3 array
     var my2dArray = Array<Array<Int32>>(3);
     var count = 1;
-    for (i in 0:2)
+    for (i in 0:my2dArray.count())
         my2dArray[i] = Array<Int32>(3);
-        for (j in 0:2)
+        for (j in 0:my2dArray[i].count())
             my2dArray[i][j] = count;
             count += 1;
         endfor
@@ -244,16 +237,20 @@ function main()
     printLn(backArray);
     var frontArray = my2dArray.popFront();
     printLn(frontArray);
-    
+
     printLn("Left with");
-    for (row in 0:my2dArray.count()-1)
+    for (row in 0:my2dArray.count())
         printLn(my2dArray[row]);
     endfor
 
 endfunction
 ```
 
-Use `popBack(n)` to remove the last `n` items from a one dimensional array, or the last `n` arrays from a two dimensional array, and return them as an array(s). Use `popFront(n)` to remove and return the first `n` items or arrays. 
+<h3 id="popn">Pop back and pop front with n</h3>
+
+Use `popBack(n)` to remove the last `n` items from a one dimensional array, or the last `n` arrays from a two dimensional array, and return them as an array(s). 
+
+Use `popFront(n)` to remove and return the first `n` items or arrays. 
 
 * `n` must be a non-negative integer.
 * Returns an array.
@@ -286,12 +283,12 @@ endfunction
 
 ``` c++
 function main()
-    
+
     var my2dArray = Array<Array<Int32>>(5);
     var count = 11;
-    for (i in 0:4)
+    for (i in 0:my2dArray.count())
         my2dArray[i] = Array<Int32>(5);
-        for (j in 0:4)
+        for (j in 0:my2dArray[i].count())
             my2dArray[i][j] = count;
             count += 1;
         endfor
@@ -313,7 +310,7 @@ function main()
     for (m in 0:0)
         printLn(my2dArray[m]);
     endfor
-    
+
 endfunction
 ```
 
@@ -342,17 +339,17 @@ function main()
 
     var my2dArray = Array<Array<Int32>>(5);
     var count = 101;
-    for (i in 0:4)
+    for (i in 0:my2dArray.count())
         my2dArray[i] = Array<Int32>(5);
-        for (j in 0:4)
+        for (j in 0:my2dArray[i].count())
             my2dArray[i][j] = count;
             count += 1;
         endfor
         printLn(my2dArray[i]);
     endfor
-    
+
     my2dArray.reverse();
-    
+
     printLn("Reversed: ");
     for (k in 0:4)
     printLn(my2dArray[k]);
