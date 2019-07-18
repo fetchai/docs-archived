@@ -85,7 +85,7 @@ The ledger shards could look something like this after the `vote()` function run
 
 This is highly uneconomical. Every aggregate value for a single `State` takes up its own spot on a ledger shard. Furthermore, multiple `States` take up multiple shards. 
 
-Data is chargeable per lane in order to disincentivize code like the above which can slow the network. 
+Data is chargeable per lane in order to disincentivise code like the above which can slow the network. 
 
 There are better approaches to the voting problem. For example, by encapsulating the data with a `ShardedState` and performing calculations in functions outside the ledger.
 

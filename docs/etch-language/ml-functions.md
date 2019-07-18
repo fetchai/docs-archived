@@ -1,4 +1,3 @@
-<h1>Machine learning and AI</h1>
 
 !!! note
 

@@ -14,7 +14,7 @@ function main()
 
   
   print("Unsorted:");
-  for (i in 0:myArray.count()-1)
+  for (i in 0:myArray.count())
     print(toString(myArray[i]) + " ");
   endfor
   printLn("");
@@ -22,7 +22,7 @@ function main()
   bubble_sort(myArray);
 
   print("Sorted:");
-  for (i in 0:myArray.count()-1)
+  for (i in 0:myArray.count())
     print(toString(myArray[i]) + " ");
   endfor
   printLn("");
@@ -38,7 +38,7 @@ function bubble_sort(an_array :Array<Int32>)
 
       more_swaps = false;
 
-      for (i in 0:an_array.count()-2) 
+      for (i in 0:an_array.count()-1) 
           
           if (an_array[i] > an_array[i + 1])
 
@@ -72,7 +72,7 @@ function main()
 
   
   print("Unsorted:");
-  for (i in 0:4)
+  for (i in 0:myArray.count())
     print(toString(myArray[i]) + " ");
   endfor
   printLn("");
@@ -80,7 +80,7 @@ function main()
   insertion_sort(myArray);
 
   print("Sorted:");
-  for (i in 0:4)
+  for (i in 0:myArray.count())
     print(toString(myArray[i]) + " ");
   endfor
   printLn("");
@@ -91,7 +91,7 @@ endfunction
 function insertion_sort(an_array :Array<Int32>)
 
 
-    for(index in 1:an_array.count()-1) 
+    for(index in 1:an_array.count()) 
 
       var currentvalue = an_array[index];
       var position = index;
@@ -119,8 +119,8 @@ function main()
 
     var a_list = Array<UInt32>(15);
 
-    for (i in 0:a_list.count()-1)
-        a_list[i] = Rand(0u32, 1000u32);
+    for (i in 0:a_list.count())
+        a_list[i] = rand(0u32, 1000u32);
     endfor
 
     printLn(a_list);
@@ -141,14 +141,14 @@ function merge(a_list : Array<UInt32>)
         var left_half = Array<UInt32>(mid);
         var right_half = Array<UInt32>(a_list.count()-mid);
 
-        for (x in 0:mid-1)
+        for (x in 0:mid)
             left_half[x] = a_list[x];
         endfor
 
-        for (y in mid:a_list.count()-1)
+        for (y in mid:a_list.count())
             right_half[y-mid] = a_list[y];
         endfor
-        
+
         // print("Left half "); printLn(left_half);
         // print("Right half "); printLn(right_half);
 
@@ -171,19 +171,19 @@ function merge(a_list : Array<UInt32>)
             k=k+1;
         endwhile
 
-        
+
         while (i < left_half.count())
             a_list[k] = left_half[i];
             i += 1;
             k += 1;
         endwhile
-        
+
         while (j < right_half.count())
             a_list[k] = right_half[j];
             j += 1;
             k += 1;
         endwhile
-        
+
 
     endif 
 

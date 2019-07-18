@@ -1,26 +1,4 @@
-<h1>Maths libraries and functions</h1>
-
-
 In the current version, `release/v0.6.x`, the following maths functions are available:
-
-## Logarithm
-
-Natural log values are currently available for `UInt256` types only.
-
-``` c++
-function main()
-
-    var int32 = 32;
-    // var logI = int32.logValue(); // error: primitive type 'Int32' does not support member-access operator
-
-    var uint256 = UInt256(256u64);
-    var logY = uint256.logValue();
-    printLn(logY); // prints -inf
-
-endfunction
-```
-
-In a future release, log values will be available for all types as well as in base 2 and 10.
 
 
 
@@ -29,87 +7,27 @@ In a future release, log values will be available for all types as well as in ba
 `abs()` returns the absolute value of an `Int32` or a `Float64`.
 
 ``` c++
-function do_abs(value: Int32)
-
-    printLn("Abs of " + toString(value) + ": ");
-    printLn(toString(abs(value)));
-
-endfunction
-
-function do_abs(value: Float64)
-
-    printLn("Abs of " + toString(value) + ": ");
-    printLn(toString(abs(value)));
-
-endfunction
-
-
 function main()
 
     // positive int 32
     var x_int = 1;
-    do_abs(x_int);
+    printLn(toString(abs(x_int)));
 
     // negative int 32
     x_int = -1;
-    do_abs(x_int);
+    printLn(toString(abs(x_int)));
 
     // positive float 64
     var x_float = 0.1123;
-    do_abs(x_float);
+    printLn(toString(abs(x_float)));
 
     // negative float 64
     x_float = -7.151;
-    do_abs(x_float);
+    printLn(toString(abs(x_float)));
 
 endfunction
 ```
 
-
-## Random (non deterministic)
-
-You can currently generate non-deterministic, random, signed and unsigned integers and floats.
-
-The beginning value of the range *must* be less than the end value.
-
-``` c++
-function main()
-
-    //var randUInt8 = Rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
-    //printLn(toString(randUInt8));
-
-    // unpermitted range
-    // var rand_test = Rand(100u16, 0u16); // runtime error: Invalid argument: Rand(a, b) must satisfy a < b
-
-    var randUInt16 = Rand(0u16, 1000u16);
-    printLn(toString(randUInt16));
-
-    var randUInt32 = Rand(0u32, 1000u32);
-    printLn(toString(randUInt32));
-
-    var randUInt64 = Rand(0u64, 1000u64);
-    printLn(toString(randUInt64));
-
-    // var randInt8 = Rand(0u8, 1000u8);
-    // printLn(toString(randInt8));
-
-    var randInt16 = Rand(0i16, 1000i16);
-    printLn(toString(randInt16));
-
-    var randInt32 = Rand(0i32, 1000i32);
-    printLn(toString(randInt32));
-
-    var randInt64 = Rand(0i64, 1000i64);
-    printLn(toString(randInt64));
-
-    var randFloat32 = Rand(0.0f, 1000.0f);
-    printLn(toString(randFloat32));
-
-    var randFloat64 = Rand(0.0, 1000.0);
-    printLn(toString(randFloat64));
-
-endfunction
-```
 
 ## Exponent
 
@@ -132,6 +50,25 @@ function main()
 
 endfunction
 ```
+
+
+## Logarithm
+
+Natural log values are currently available for `UInt256` types only with the `logValue()` member function.
+
+``` c++
+function main()
+
+    var uint256 = UInt256(256u64);
+    var logY = uint256.logValue();
+    printLn(logY); 
+
+endfunction
+```
+
+In a future release, log values will be available for all types as well as in base 2 and 10.
+
+
 
 ## Power
 
@@ -160,6 +97,57 @@ function main()
 
 endfunction
 ```
+
+
+
+
+
+
+## Random (non deterministic)
+
+You can currently generate non-deterministic, random, signed and unsigned integers and floats.
+
+The beginning value of the range *must* be less than the end value.
+
+``` c++
+function main()
+
+    //var randUInt8 = rand(0u8, 1000u8); // error: unable to find matching function for 'Rand'
+    //printLn(toString(randUInt8));
+
+    // unpermitted range
+    // var rand_test = rand(100u16, 0u16); // runtime error: Invalid argument: rand(a, b) must satisfy a < b
+
+    var randUInt16 = rand(0u16, 1000u16);
+    printLn(toString(randUInt16));
+
+    var randUInt32 = rand(0u32, 1000u32);
+    printLn(toString(randUInt32));
+
+    var randUInt64 = rand(0u64, 1000u64);
+    printLn(toString(randUInt64));
+
+    // var randInt8 = rand(0u8, 1000u8);
+    // printLn(toString(randInt8));
+
+    var randInt16 = rand(0i16, 1000i16);
+    printLn(toString(randInt16));
+
+    var randInt32 = rand(0i32, 1000i32);
+    printLn(toString(randInt32));
+
+    var randInt64 = rand(0i64, 1000i64);
+    printLn(toString(randInt64));
+
+    var randFloat32 = rand(0.0f, 1000.0f);
+    printLn(toString(randFloat32));
+
+    var randFloat64 = rand(0.0, 1000.0);
+    printLn(toString(randFloat64));
+
+endfunction
+```
+
 
 
 ## Square root
@@ -274,7 +262,7 @@ function main()
 endfunction
 ```
 
-And hyperbolic functions `Sin`, `Cos`, and `Tan`.
+And hyperbolic functions of `Sin`, `Cos`, and `Tan`.
 
 ``` c++
 function main()
