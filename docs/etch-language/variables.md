@@ -127,6 +127,22 @@ function main()
 endfunction
 ```
 
+`UInt256` variables are printed in hexadecimal for brevity.
+
+<!--
+Due to the underlying C++ implementation, you can also build `UInt256` with a string:
+
+``` c++
+function main()
+
+    var uint256 = UInt256("hello world");
+    printLn(toString(uint256));
+
+endfunction
+```
+
+However, be careful, as any string larger than 32 bytes will be truncated. This presents the possibility that two unique strings could be regarded as equal. This gotcha will be fixed in the next release.
+-->
 
 ## Floats
 
@@ -414,7 +430,7 @@ Find out more about `etch` Addresses [here](./addresses.md).
 
 For more details on the mathematical computation functions above, please check the section on [maths libraries and functions](./maths-libs.md).
 
-For more details on the machine learning implementations, please check the section on [machine learning and artificial intelligence](./ML-AI.md).
+For more details on the machine learning implementations, please check the section on [machine learning and artificial intelligence](./ml-functions.md).
 
 
 

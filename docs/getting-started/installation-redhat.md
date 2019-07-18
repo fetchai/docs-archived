@@ -5,7 +5,7 @@ Currently, the Fetch.AI ledger and the open economic framework (OEF) are built a
 
 ## Supported platforms
 
-- Redhat is not currently supported.
+- Red Hat is not currently supported.
 
 
 ## Initial setup

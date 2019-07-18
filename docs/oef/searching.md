@@ -181,7 +181,7 @@ from oef.query import Constraint, Not, Range
 
 <H5>And</H5>
 
-`And` allows you to specify a conjunction of constraints over an attribute. There must be **at least** 2 subexpressions.
+`And` allows you to specify a conjunction of constraints over an attribute. There must be **at least** 2 sub-expressions.
 
 ``` python
 from oef.query import Constraint, And, NotEq, Range
@@ -192,7 +192,7 @@ from oef.query import Constraint, And, NotEq, Range
 
 <H5>Or</H5>
 
-`Or` allows you to specify a disjunction of constraints. The number of subexpressions must be **at least** 2.
+`Or` allows you to specify a disjunction of constraints. The number of sub-expressions must be **at least** 2.
 
 ``` python
 from oef.query import Constraint, Or, Lt, Gt

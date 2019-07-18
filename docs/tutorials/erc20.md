@@ -56,7 +56,7 @@ The ERC20 contract has three query functions:
 * `balanceOf(owner: Address) : UInt256`.
 * `allowance(owner: Address, spender: Address) : UInt256`.
 
-We will define `totalSupply` and `balanceOf` in this section and dicuss `allowance` later on.
+We will define `totalSupply` and `balanceOf` in this section and discuss `allowance` later on.
 
 Both `totalSupply` and `balanceOf` are straightforward to implement. `totalSupply` queries the `State` variable `total_supply` and returns it as a result:
 
@@ -93,7 +93,7 @@ In the first query, we request the `total_supply` by calling `get` on the state 
 
 In the second query, we manually check whether the variable existed at the beginning of the contract call and if not, we return `0`. 
 
-Both are valid ways to manage a state existance.
+Both are valid ways to manage a state existence.
 
 
 
@@ -149,7 +149,7 @@ The above demonstrates one of the simplest possible token contracts keeping a ba
 
 So far, the functions we've seen constitute a basic token contract that allows creation of tokens and transfer between participants. A more interesting functionality is the `allowance` mechanism in the ERC20 contract that gives one address the possibility of spending some amount based on the allowance details. 
 
-To create this functionality we could use the normal `State` object by simply definining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropiate shard within the system. 
+To create this functionality we could use the normal `State` object by simply defining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropriate shard within the system. 
 
 Implementing the `approve` mechanism using the `ShardedState` is relatively easy as it provides dictionary-like functionality:
 
@@ -166,7 +166,7 @@ endfunction
 
 The above builds object addresses by concatenating the `spender` address with the `owner` address. However, unlike a normal dictionary, `ShardedState` does not keep a record of which entries exist or not. Such functionality could be added by simply adding another state variable keeping track of owners. We will see an example on a similar type of functionality in the next part of this guide.
 
-Finally, implementing a query mechanism is equally straight foward:
+Finally, implementing a query mechanism is equally straight forward:
 
 ``` c++
 @query

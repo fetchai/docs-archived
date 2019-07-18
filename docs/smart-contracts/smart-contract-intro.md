@@ -50,7 +50,7 @@ It may be better to implement any essential non-deterministic behaviour outside 
 
 ## Fees
 
-Fetch.AI charges developers for computation and storage of data on the ledger in a manner which incentivizes good coding practices.
+Fetch.AI charges developers for computation and storage of data on the ledger in a manner which incentivises good coding practices.
 
 You can limit the fees paid for smart contract execution by distributing data storage over a single shard and a minimum number of shard lanes.
 

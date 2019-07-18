@@ -4,7 +4,7 @@ The following functions help with diagnosing bugs and ensuring the correct state
 
 Force runtime errors with `panic()`. 
 
-Use `panic` for unrecoverable states. It terminates the progam immediately and provides optional feedback. 
+Use `panic` for unrecoverable states. It terminates the program immediately and provides optional feedback. 
 
 For example:
 

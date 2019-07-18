@@ -117,6 +117,17 @@ function main()
 endfunction
 ```
 
+
+## Smart contract addresses
+
+`etch` smart contracts have a unique identification protocol for addressing on the Fetch Ledger.
+
+`etch` smart contract identifiers are a SHA256 hash of the contract source code which is then Base64 encoded and finally concatenated with the Base64 encoded owner's public key.
+
+Using this identifier, smart contract functions are accessible with a subsequent `.` plus function name.
+
+
+
 ## Data confirmation
 
 If you run an `etch` contract in the simulator containing one or more `State` types and flag the compiler with `-data` and a filename, it will create a `json` file containing the details of the data that will be stored on the ledger.
