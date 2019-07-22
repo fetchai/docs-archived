@@ -39,7 +39,7 @@ function main()
 
     // build a 4x4 grid
     var grid = Array< Array<Int32> >(4);
-    for (row in 0:3)
+    for (row in 0:grid.count())
       grid[row] = Array<Int32>(4);
     endfor
 
@@ -75,20 +75,10 @@ endfunction
 ```
 
 
-## Utility functions
-
-Use the following utility functions to manipulate arrays:
-
-* [count()](arrays.md#count)
-* [append()](arrays.md#append)
-* [extend()](arrays.md#extend)
-* [popBack() and popFront()](arrays.md#pop)
-* [popBack(n) and popFront(n)](arrays.md#popn)
-* [reverse()](arrays.md#reverse)
-* [erase()](arrays.md#erase)
+## Array functions
 
 
-<h3 id="count">Count</h3>
+### Count
 
 The `count()` function returns the number of items in a one dimensional array, or the number of arrays in a two dimensional array.
 
@@ -117,7 +107,7 @@ endfunction
 
 
 
-<h3 id="append">Append</h3>
+### Append
 
 The `append()` function adds a new type safe item to the end of a one dimensional array.
 
@@ -162,7 +152,8 @@ function main()
 endfunction
 ```
 
-<h3 id="extend">Extend</h3>
+
+### Extend
 
 Use `extend()` to append the contents of one array to another in order of insertion. 
 
@@ -190,7 +181,7 @@ endfunction
 
 
 
-<h3 id="pop">Pop back and pop front</h3>
+### Pop back and pop front
 
 The `popBack()` function removes and returns the last item from a one dimensional array, or the last array from a two dimensional array. 
 
@@ -246,7 +237,8 @@ function main()
 endfunction
 ```
 
-<h3 id="popn">Pop back and pop front with n</h3>
+
+### Pop back and front with n
 
 Use `popBack(n)` to remove the last `n` items from a one dimensional array, or the last `n` arrays from a two dimensional array, and return them as an array(s). 
 
@@ -259,7 +251,7 @@ Use `popFront(n)` to remove and return the first `n` items or arrays.
 
 ``` c++
 function main()
-    
+
     var myArray = Array<Int32>(5);
     myArray[0] = 10;
     myArray[1] = 20;
@@ -271,9 +263,9 @@ function main()
 
     var backItems = myArray.popBack(2);
     var frontItems = myArray.popFront(1);
-    printLn("Items removed from end: ");
+    printLn("n=2 items removed from end: ");
     printLn(backItems);
-    printLn("Items removed from start: ");
+    printLn("n=1 items removed from start: ");
     printLn(frontItems);
     printLn("Remaining array: ");
     printLn(myArray);
@@ -297,11 +289,11 @@ function main()
 
     var backArray = my2dArray.popBack(2);
     var frontArray = my2dArray.popFront(2);
-    printLn("Removed back arrays: ");
+    printLn("n=2 removed back arrays: ");
     for (k in 0:1)
         printLn(backArray[k]);
     endfor
-    printLn("Removed front arrays: ");
+    printLn("n=2 removed front arrays: ");
     for (l in 0:1)
         printLn(frontArray[l]);
     endfor
@@ -315,7 +307,7 @@ endfunction
 ```
 
 
-<h3 id="reverse">Reverse</h3>
+### Reverse
 
 The `reverse()` function reverses the order of items in a one dimensional array, or the order of arrays in a two dimensional array.
 
@@ -359,7 +351,7 @@ endfunction
 ```
 
 
-<h3 id="erase">Erase</h3>
+### Erase
 
 Remove an element from an array with the `erase()` function.
 

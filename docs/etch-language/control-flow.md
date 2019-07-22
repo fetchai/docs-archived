@@ -12,13 +12,13 @@ function main()
 	var y = 2;
 
 	if (x == y)
-		printLn("they are equal");
+		printLn("They are equal.");
 	elseif (x > y)
-		printLn("x is more than y");
+		printLn("x is more than y.");
 	else if (x > y)
-		printLn("x is more than y");
+		printLn("x is more than y.");
 	else
-		printLn("y is more than x");
+		printLn("y is more than x.");
 		endif
 	endif
 
@@ -37,9 +37,9 @@ function main()
     y.set(8);
 
     if (x.get() > y.get())
-        printLn("object x is greater than object y");
+        printLn("Object x is greater than object y.");
     else 
-        printLn("object x is less than or equal to object y");
+        printLn("Object x is less than or equal to object y.");
     endif
 
 endfunction
@@ -71,13 +71,13 @@ endfunction
 function main()
 
     // ascending
-    printLn("Ascending for loop");
+    printLn("Ascending for loop.");
     for(i in 0:5)
         printLn(toString(i));
     endfor
 
     // stepwise ascent
-    printLn("Ascending stepwise");
+    printLn("Ascending stepwise.");
     for(k in 0:10:2)
         printLn(toString(k));
     endfor

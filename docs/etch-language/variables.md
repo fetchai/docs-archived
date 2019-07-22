@@ -1,6 +1,6 @@
 <h1>Variables</h1>
 
-`etch` is a statically-typed programming language. For good coding practice, you should explicitly declare all variable types.
+`etch` is a statically-typed programming language. 
 
 Declare a variable with the keyword `var`. Declare numeric values with literals where possible. You can also use an explicit type cast operation. See below for explicit type declaration rules.
 
@@ -32,13 +32,17 @@ endfunction
 
 ## Integers
 
-Integers can be signed or unsigned and are *currently* restricted to the width range 8-64 bits (1 to 8 bytes).
+Integers can be signed or unsigned and are *currently* restricted to the width range 8-256 bits (1 to 32 bytes).
 
 They are declared as signed `Int8`, `Int16`, `Int32`, `Int64`, and unsigned `UInt8`, `UInt16`, `UInt32`, `UInt64`, `UInt256`.
 
+Further, and in the same order, they can be declared with postfix literals `i8`, `i16`, `i32`, `i64`, `u8`, `u16`, `u32`, and `u64`. 
+
+The `UInt256` label will be supplied in a future version.
+
 `Int32` is the compiler default so you don't need to explicitly declare this type.
 
-Below is a selection of example integer assignations including any errors on operations currently unsupported.
+Below is a selection of example integer assignations.
 
 ``` c++
 function main()
@@ -148,11 +152,12 @@ However, be careful, as any string larger than 32 bytes will be truncated. This 
 
 Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation (4 and 8 bytes).
 
+Float types are declared as `Float32`, `Float64`.
+
 Unspecified floats default to `Float64`. 
 
-A `Float` declared with `f` is `Float32`.
+A `Float` declared with `f` is a `Float32`.
 
-Float types are declared as `Float32`, `Float64`.
 
 ``` c++
 function main()
@@ -244,7 +249,7 @@ function main()
 endfunction
 ```
 
-Find out more about `etch` Strings [here](strings.md).
+Find out more about `etch` Strings <a href="./../strings" target=_blank>here</a>.
 
 
 ## Arrays
@@ -257,33 +262,37 @@ You must explicitly declare array element types and array size.
 ``` c++
 function main()
 
-	var myArray = Array<Int32>(5);
-	myArray[0] = 40;
-	myArray[1] = 41;
-	myArray[2] = 42;
-	myArray[3] = 43;
-	myArray[4] = 44;
+    var myArray = Array<Int32>(5);
+    myArray[0] = 40;
+    myArray[1] = 41;
+    myArray[2] = 42;
+    myArray[3] = 43;
+    myArray[4] = 44;
 
-	printLn(toString(myArray[3]));
+    printLn(toString(myArray[3]));
 
-	for (i in 0:4)
-		printLn(toString(myArray[i]));
-	endfor
+    for (i in 0:5)
+        printLn(toString(myArray[i]));
+    endfor
 
     printLn(myArray);
 
 endfunction
 ```
 
-Find out more about `etch` Arrays [here](arrays.md).
+Find out more about `etch` Arrays <a href="./../arrays" target=_blank>here</a>.
 
 
 ## Buffer
 
-Create a `Buffer` byte array type like this:
+Create a `Buffer` byte array type like this, where the `Buffer` size is defined by a `UInt32` type.
 
 ``` c++
-var myBuffer = Buffer(8);
+function main()
+
+    var myBuffer = Buffer(8);
+
+endfunction
 ```
 
 
@@ -310,11 +319,17 @@ endfunction
     Coming soon: common `Map` operations.
     
 
-## StructuredData types
+## StructuredData
 
 A `StructuredData` type is another map type containing key/value pairs. 
 
-The main difference to `Map` is that a `StructuredData` type can generate `yaml`, `json`, or similar.
+Declare a `StructuredData` type with `StructuredData()`.
+
+The `StructuredData` type has no appreciable size limit. Keys must be strings. Duplicate keys are allowed and override the most recent entry.
+
+Values can be any primitive, string, or array of primitives.
+
+An important difference to the `Map` type is that a `StructuredData` type can generate `yaml`, `json`, or similar.
 
 ``` c++
 function main()
@@ -354,19 +369,25 @@ endfunction
 
 
 
-## States 
+## State
 
-A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.AI ledger shards. 
+A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.AI Ledger shards. 
 
 Unique identifiers for the ledger data are created at `State` construction time. These are unique to the smart contract alone.
 
-Declare and initialise a `State` type with `State<ValueType>` where values set with `set()` are mapped to the unique ledger identifier`account`:
+Declare and initialise a `State` type with `State<ValueType>("ledger_identifier")`.
 
 ``` bash
-var myState = State<Int32>("account");
+function main()
+
+    var myState = State<Int32>("account");
+
+endfunction
 ```
 
 Getters and setters are available for `State` types.
+
+In the example, values set with the `set()` function map to the unique ledger identifier`account`.
 
 ``` c++
 function main()
@@ -378,18 +399,26 @@ function main()
 endfunction
 ```
 
-Find out more about `etch` States [here](states.md).
+Find out more about `etch` States <a href="./../states" target=_blank>here</a>.
 
 
 
 
 ## ShardedState
 
-A `ShardedState` is also used for reading and writing data to the Fetch.AI ledger.
+Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.AI ledger.
 
-`ShardedState` uses `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with keys and values where the keys must be either `String` or `Address` types.
+`ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/vlue pairs.
 
-In the following code, we create a `ShardedState`, `set()` a key/value pair on it, and finally we print the value using `get()` on a key with a default value.
+Keys must be either `String` or `Address` types.
+
+Value types must be declared at construction time.
+
+Declare and initialise a `ShardedState` with `ShardedState<ValueType>("ledger_identifier")`.
+
+Call `set()` on it to create a key/value pair. 
+
+Print a value using `get()` with a key and a default value.
 
 ``` c++
 function main()
@@ -402,11 +431,11 @@ endfunction
 
 ```
 
-Find out more about `etch` ShardedStates [here](sharded-state.md).
+Find out more about `etch` ShardedStates <a href="./../sharded-state" target=_blank>here</a>.
 
 
 
-## Addresses
+## Address
 
 The cryptographic `Address` type is currently represented by a 64 byte binary canonical <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank">ECDSA public key</a> which is then base 58 encoded. 
 
@@ -420,7 +449,7 @@ function main()
 endfunction
 ```
 
-Find out more about `etch` Addresses [here](./addresses.md).
+Find out more about the `etch` `Address` type <a href="./../addresses" target=_blank>here</a>.
 
 
 
@@ -428,19 +457,21 @@ Find out more about `etch` Addresses [here](./addresses.md).
 
 `etch` provides powerful mathematical, machine learning, and AI specific data types and functions. 
 
-For more details on the mathematical computation functions above, please check the section on [maths libraries and functions](./maths-libs.md).
+For more details on the mathematical computation functions above, please check the section on maths functions <a href="./../maths-functions" target=_blank>here</a>.
 
-For more details on the machine learning implementations, please check the section on [machine learning and artificial intelligence](./ml-functions.md).
+For more details on the machine learning implementations, please check the section on machine learning functions <a href="./../ml-functions" target=_blank>here</a>.
 
 
 
 ## Type casting
 
+There is no implicit type casting in `etch`.
+
 If you need a specific non-default numerical type, you can make an explicit cast of the default `Int32` and `Float64` types.
 
-Use `to<Type>Name` to type cast. 
+Use `to<Type>Name(variable_to_cast)`. 
 
-There is no implicit type casting in `etch`.
+
  
 ``` c++
 function main()
@@ -461,16 +492,30 @@ function main()
     var uint32Variable = toUInt32(int32bit);
     // cast to UInt64
     var uint64Variable = toUInt64(int32bit);
+    // cast to UInt256
+    // var uint256Variable = toUInt256(int32bit); // coming soon
 
 
     // float casting
     var float64bit = 42.0;
-    // cast to Int8
+    // cast Float64 to Int32
     var intFVariable = toInt32(float64bit);
-    // cast to Float32
+    // cast Float64 to Float32
     var float32Variable = toFloat32(float64bit);
-    // cast to Float64
+    // cast Int32 to Float64
     var float64variable = toFloat64(int32bit);
+
+
+    // fixed point casting
+    var fixed32 : Fixed32 = 32.1fp32; 
+    var fixed64 : Fixed64 = 64.1fp64;
+    // cast Fixed32 to Int32
+    var int32var = toInt32(fixed32);
+    // cast Fixed64 to Fixed32
+    var fixed32Variable = toFixed32(fixed64);
+    // cast Int32 to Fixed64
+    var fixed64variable = toFixed64(int32bit);
+
 
     // cast to string
     var stringVariable = toString(int32bit);
@@ -508,6 +553,9 @@ Bool | 1 byte
 String | 8 bytes + length character size (changing with UTF-8) 
 Array | 8 bytes + length x element size 
 Map | 8 bytes +  n x (key + value) storage 
+StructuredData | tbc
+State | tbc
+ShardedState | tbc
 Address | 32 bytes 
 
 
@@ -516,7 +564,9 @@ Currently, there is a 2 unit charge per 1 byte of ledger storage.
 
 ## Scope
 
-`etch` has no global variables. 
+`etch` has no global variables.
+
+However, values store on the Fetch.AI Ledger can be considered global. 
 
 
 

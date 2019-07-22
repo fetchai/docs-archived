@@ -19,8 +19,7 @@ function main()
     printLn(myString);
     printLn(myInferredString);
     printLn(myInferredString + " " + myString);
-    // printLn(toString(x)); // error: you cannot print null
-    // var y = myString[0]; // error: currently we do not support index operators for strings
+    // printLn(myString + x); // runtime error: line xx: null reference
 
 endfunction
 ```
@@ -151,18 +150,12 @@ endfunction
 
 
 
-## Utility functions
+## String functions
 
 You can use the following utility functions for string manipulation:
 
-* [find()](strings.md#find)
-* [length()](strings.md#length)
-* [reverse()](strings.md#reverse)
-* [substr()](strings.md#substr)
-* [trim()](strings.md#trim)
-* [split()](strings.md#split)
 
-<h3 id="find">Find</h3>
+### Find
 
 The `find()` function searches a string for the first occurrence of a specified substring. 
 
@@ -181,7 +174,8 @@ function main()
 endfunction
 ```
 
-<h3 id="length">Length</h3>
+
+### Length
 
 The `length()` function returns the number of characters in a string.
 
@@ -196,7 +190,8 @@ function main()
 endfunction
 ```
 
-<h3 id="reverse">Reverse</h3>
+
+### Reverse
 
 The `reverse()` function reverses the order of characters in a string.
 
@@ -210,7 +205,8 @@ function main()
 endfunction
 ```
 
-<h3 id="substr">Substr</h3>
+
+### Substring
 
 The `substr()` function extracts a substring from a string, based on specified starting and ending indices (but excluding the final character):
 
@@ -232,7 +228,7 @@ function main()
 endfunction
 ```
 
-<h3 id="trim">Trim</h3>
+### Trim
 
 The `trim()` function removes any whitespace from the start and end of a string.
 
@@ -249,7 +245,7 @@ endfunction
 ```
 
 
-<h3 id="split">Split</h3>
+### Split
 
 The `split()` function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. 
 
@@ -273,6 +269,6 @@ function main()
 endfunction
 ```
 
-[!comment]: <> (More examples when there is more time.)
+
 
 <br/>

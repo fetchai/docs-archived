@@ -25,14 +25,14 @@ Our compiler is very strict. It will complain about:
 * Local function definitions.
 * Returning `null` or no value from functions.
 * Attempts to construct primitives and unmatched constructors.
-* Mismatches between type and instance functions - *awaiting clarification*.
-* Member access support issues with dot operator - *awaiting clarification*.
+* Mismatches between type and instance functions.
+* Member access support issues with dot operator.
 * `while`, `for`, `if`, `var`, `return`, `break`, `continue`, variables, and expressions declared at topmost scope.
 
 
 ## System arguments
 
-`System.Argc()` and `System.Argv()` give us access to compiler argument count and values. In the following code, first we print the number of compiler arguments, then we list them.
+`System.Argc()` and `System.Argv()` give access to compiler argument count and values. The following code prints the number of compiler arguments, then lists their values.
 
 ``` c++
 function main()
@@ -68,10 +68,8 @@ System args: 2
 1 = hello
 ```
 
-`etch` features like this are useful for experimentation and debugging in a dev environment. For example, you can use these system arguments to load machine learning training data. 
+`etch` features like this are useful for experimentation and debugging in a development environment. For example, the system arguments can load machine learning training data into a script. 
 
-System arguments should not be included in smart contract code. 
-
-For smart contracts, there are more flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts <a href="../.././smart-contracts/smart-contract-intro/" target=_blank> here</a>.
+For smart contracts, there are flags, such as `-data`, which do specific things. We explain coding, compiling, contract flags, and all about `etch` smart contracts <a href="../.././smart-contracts/smart-contract-intro/" target=_blank> here</a>.
 
 <br/>

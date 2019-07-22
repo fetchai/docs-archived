@@ -6,8 +6,6 @@ Force runtime errors with `panic()`.
 
 Use `panic` for unrecoverable states. It terminates the program immediately and provides optional feedback. 
 
-For example:
-
 ``` c++
 function main()
 
@@ -26,9 +24,8 @@ endfunction
 
 ## Assert
 
-Use `assert` to ensure state.
+Use `assert` to ensure state with optional feedback.
 
-For example:
 
 ``` c++
 function main()
@@ -40,7 +37,7 @@ function main()
     z =- 2;
 
     assert(z == 1);
-    assert(z == 1, "khjkh")
+    assert(z == 1, "Feedback here.");
 
     printLn(toString(z));
 

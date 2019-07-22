@@ -1,17 +1,17 @@
 <h1>Syntax</h1>
 
-The `etch` language was initially integrated with the Fetch.AI C++ ledger project. It is designed to run on a number of platforms. 
+The `etch` language integrates with the Fetch.AI Ledger project. It is designed to run on a number of platforms. 
 
 `etch` is inspired by Rust, C++, and Python, but it also has some idiosyncrasies. 
 
-The `etch` language is extremely restrictive to avoid costly errors on the ledger. See [Smart Contract](.././smart-contracts/smart-contract-intro.md) section for more information. 
+The `etch` language is extremely restrictive to avoid costly errors on the ledger. See  <a href="../../smart-contracts/smart-contract-intro" target=_blank>Smart Contract section</a> for more information. 
 
 `etch` is a statically typed language and static typing is enforced by the compiler. 
 
 !!! note
 	Blocks of code require no delimiters. White space is ignored. Indentation is recommended.
 
-You can extend and customise `etch` in C++. We show you how to do that [here](extending-etch.md).
+You can extend and customise `etch` in C++. We show you how to do that <a href="../extending-etch" target=_blank>here</a>.
 
 Let's take a closer look at `etch`.
 
@@ -115,9 +115,9 @@ Here is a current list of `etch` keywords:
     </tr>
     <tr>
         <td align="center">return</td>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
+        <td align="center">@init</td>
+        <td align="center">@action</td>
+        <td align="center">@query</td>
     </tr>
 </table>
 

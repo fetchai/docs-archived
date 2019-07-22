@@ -9,7 +9,7 @@ function main()
 	var y = 12;
 
 	if (x == y)
-	 	printLn("equal");
+	 	printLn("Equal.");
 	endif
 
 endfunction
@@ -24,7 +24,7 @@ function main()
 	var y = 11;
 
 	if (x != y)
-	 	printLn("not equal");
+	 	printLn("Not equal.");
 	endif
 
 endfunction
@@ -39,11 +39,11 @@ function main()
 	var y = 11;
 
 	if (y < x)
-	 	printLn("less than");
+	 	printLn("Less than.");
 	endif
 
 	if (y <= x)
-		printLn("less than or equal to");
+		printLn("Less than or equal to.");
 	endif
 
 endfunction
@@ -58,11 +58,11 @@ function main()
 	var y = 11;
 
 	if (x > y)
-	 	printLn("more than");
+	 	printLn("More than.");
 	endif
 
 	if (x >= y)
-		printLn("more than or equal to");
+		printLn("More than or equal to.");
 	endif
 
 endfunction
@@ -77,9 +77,9 @@ function main()
 	var t : Bool = true;
 
 	if (f && t)
-	 	printLn("true");
+	 	printLn("True.");
 	else
-		printLn("false");
+		printLn("False.");
 	endif
 
 endfunction
@@ -96,9 +96,9 @@ function main()
 	var t : Bool = true;
 
 	if (f || t)
-	 	printLn("true");
+	 	printLn("True.");
 	else
-		printLn("false");
+		printLn("False.");
 	endif
 
 endfunction
