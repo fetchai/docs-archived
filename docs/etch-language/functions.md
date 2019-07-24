@@ -30,7 +30,7 @@ endfunction
 
 The iterative `fibonacci` function below takes a parameter `n: Int32` which is a 32 bit integer type named `n`. 
 
-The function returns an `Int32` and declares this after the function name and parameter declaration as `: Int32`.
+The function returns an `Int32` and declares this after the function name and parameter list as `: Int32`.
 
 ``` c++
 function fibonacci(n: Int32) : Int32
@@ -72,9 +72,9 @@ Below is an example of the fibonacci function implemented with recursion.
 
 ``` c++
 function fibonacci(n: Int32) : Int32
-    
-    if(n <= 1)
-      return n;
+
+    if(n == 1 || n == 0)
+      return 1;
     else
       return (fibonacci(n-1) + fibonacci(n-2));
     endif
@@ -138,7 +138,7 @@ endfunction
 
 ```
 
-However, this is not the case with accessing the internal state of object types such as `Array`.
+However, this is not the case with athe internal state of object types such as `Array`.
 
 
 ``` c++
@@ -214,17 +214,17 @@ endfunction
 
 
 
-<H3>Print</H3> 
+### Print 
 
 `printLn()` is available for printing variables to the console with a line break.
 
 `print()` is available without a line break.
 
 !!! note
-  `etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
+    `etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
 
 
-<H3>Sysargs</H3>
+### Sysargs
 
 The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value. These functions are only useful on the `etch` simulator outside of smart contract development.
 
@@ -232,12 +232,8 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 * `System.Argv()`
 
 
-!!! tip
-    `etch` also provides utility functions specifically for manipulating [strings](strings.md#utility-functions) and [arrays](arrays.md#utility-functions).
 
-
-
-## Type casting functions
+### Type casting
 
 * `toInt8()`
 * `toInt16()`
@@ -249,6 +245,8 @@ The following `System` functions `Argc()` and `Argv()` return the number of argu
 <!-- `toUInt256()` -->
 * `toFloat32()`
 * `toFloat64()`
+* `toFixed32()`
+* `toFixed64()`
 * `toString()`
 
 For example:
@@ -257,18 +255,31 @@ For example:
 function main()
 
     var x = 10;
+    printLn(x);
     var y = toInt8(x);
+    printLn(y);
     var z = toInt16(x);
+    printLn(z);
     var a = toInt32(x);
+    printLn(a);
     var b = toInt64(x);
+    printLn(b);
     var c = toUInt8(x);
+    printLn(c);
     var d = toUInt16(x);
+    printLn(d);
     var e = toUInt32(x);
+    printLn(e);
     var f = toUInt64(x);
+    printLn(f);
     var g = toFloat32(x);
+    printLn(g);
     var h = toFloat64(x);
+    printLn(h);
     var i = toFixed32(x); 
+    printLn(i);
     var j = toFixed64(x); 
+    printLn(j);
 
 endfunction
 ```
