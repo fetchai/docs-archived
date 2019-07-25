@@ -21,7 +21,7 @@ If you are only going to run a standalone single node, you only need the `script
 
 -->
 
-First, get <a href="https://www.docker.com/get-started">Docker</a>.
+First, get <a href="https://www.docker.com/get-started" target=_blank>Docker</a>.
 
 Next, pull and launch our published image.
 

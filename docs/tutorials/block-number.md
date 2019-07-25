@@ -1,5 +1,9 @@
 Run the following Python script and embedded smart contract to test the `getBlockNumber()` function.
 
+You need to run this against a running node on localhost port `8100`. 
+
+Details for running a node are <a href="../../getting-started/run-a-node/" target=_blank>here</a>.
+
 
 ``` c++
 from fetchai.ledger.api import LedgerApi

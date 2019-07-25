@@ -1,5 +1,8 @@
 <h1>Executing synergetic contract code</h1>
 
+!!! Warning
+    Synergetic contracts are currently an experimental feature.
+
 To test synergetic contracts, run a ledger node in synergetic mode using specific flags.
 
 ``` bash
@@ -48,7 +51,7 @@ endfunction
 
 def main():
     # create the API
-    api = LedgerApi('127.0.0.1', 8000)
+    api = LedgerApi('127.0.0.1', 8100)
 
     # create an entity and provide it some wealth
     print('Setup...')

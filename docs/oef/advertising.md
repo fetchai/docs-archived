@@ -1,3 +1,11 @@
+<script type="text/javascript">
+// Popup window code
+function newPopup(url) {
+  popupWindow = window.open(
+    url,'popUpWindow','height=600px,width=900px,left=500,top=60,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no,status=no')
+}
+</script>
+
 Agents advertise their services with schemas. 
 
 Schemas describe services in a language agnostic manner, after which they are serialised by the SDK. 
@@ -7,7 +15,7 @@ Schemas describe services in a language agnostic manner, after which they are se
 
 A `schema` describes an agent, service, or resource with a set of `attributes`.
 
-To specify data models and descriptions in Python use the <a href="http://oef-sdk-docs.fetch.ai/oef.html#oef-schema" target=_blank>`oef.schema` module</a>.
+To specify data models and descriptions in Python use the <a href="JavaScript:newPopup('/oef/assets/python-api/html/oef.html#oef-schema.html');">`oef.schema` module</a>.
 
 
 ### Attributes

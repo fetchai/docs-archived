@@ -1,0 +1,650 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ai.fetch.oef - oef-sdk-kotlin</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">oef-sdk-kotlin</a>&nbsp;/&nbsp;<a href="./index.html">ai.fetch.oef</a><br/>
+<br/>
+<h2>Package ai.fetch.oef</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-accept/index.html">Accept</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Accept</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent-message.html"><span class="identifier">AgentMessage</span></a></code>
+<p>This message is used to send an <code>Accept</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent/index.html">Agent</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Agent</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-o-e-f-proxy-interface/index.html"><span class="identifier">OEFProxyInterface</span></a><span class="symbol">, </span><a href="-o-e-f-delay-interface/index.html"><span class="identifier">OEFDelayInterface</span></a><span class="symbol">, </span><a href="-agent-communication-handler-interface.html"><span class="identifier">AgentCommunicationHandlerInterface</span></a><span class="symbol">, </span><a href="-o-e-f-connection-interface/index.html"><span class="identifier">OEFConnectionInterface</span></a></code>
+<p>The base class for OEF Agents.
+Extend this class to implement the callback methods defined in <a href="-agent-message-handler-interface/index.html">AgentMessageHandlerInterface</a> and <a href="-o-e-f-connection-interface/index.html">OEFConnectionInterface</a>.
+In this way you can program the behaviour of the agent when it's running.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-communication-handler-interface.html">AgentCommunicationHandlerInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">AgentCommunicationHandlerInterface</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-o-e-f-communication-error-handler-interface/index.html"><span class="identifier">OEFCommunicationErrorHandlerInterface</span></a><span class="symbol">, </span><a href="-o-e-f-search-handler-interface/index.html"><span class="identifier">OEFSearchHandlerInterface</span></a><span class="symbol">, </span><a href="-agent-message-handler-interface/index.html"><span class="identifier">AgentMessageHandlerInterface</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-message.html">AgentMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">AgentMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This type of message is used for interacting with other agents, via an OEF Node.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-message-emmiter-interface/index.html">AgentMessageEmmiterInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">AgentMessageEmmiterInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-message-handler-interface/index.html">AgentMessageHandlerInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">AgentMessageHandlerInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-and/index.html">And</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">And</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-expr/index.html"><span class="identifier">ConstraintExpr</span></a></code>
+<p>A constraint type that allows you to specify a conjunction of constraints.
+That is, the <a href="-and/index.html">And</a> constraint is satisfied whenever
+all the constraints that constitute the and are satisfied.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-attribute-schema/index.html">AttributeSchema</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AttributeSchema</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ProtobufSerializable</span><span class="symbol">&lt;</span><a href="../fetch.oef.pb/-query-outer-class/-query/-attribute/index.html"><span class="identifier">QueryOuterClass.Query.Attribute</span></a><span class="symbol">&gt;</span></code>
+<p>Description of a single element of datum of either a description or a service.
+This defines the schema that a single entry in a schema must take.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-base-message/index.html">BaseMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">BaseMessage</span></code>
+<p>To communicate with the OEF we need to send protocol buffer containing an Envelope message. This interface is the base for a classes
+representing OEF data.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-c-f-p/index.html">CFP</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CFP</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent-message.html"><span class="identifier">AgentMessage</span></a></code>
+<p>This message is used to send a <code>Call For Proposals</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-c-f-p-query/index.html">CFPQuery</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">CFPQuery</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-constraint/index.html">Constraint</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Constraint</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-expr/index.html"><span class="identifier">ConstraintExpr</span></a></code>
+<p>A class that represent a constraint over an attribute.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-constraint-expr/index.html">ConstraintExpr</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">ConstraintExpr</span></code>
+<p>This class is used to represent a constraint expression.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-constraint-type/index.html">ConstraintType</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">ConstraintType</span></code>
+<p>This class is used to represent a constraint type.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-context/index.html">Context</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Context</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-data-model/index.html">DataModel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DataModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ProtobufSerializable</span><span class="symbol">&lt;</span><a href="../fetch.oef.pb/-query-outer-class/-query/-data-model/index.html"><span class="identifier">QueryOuterClass.Query.DataModel</span></a><span class="symbol">&gt;</span></code>
+<p>This class represents a data model (a.k.a. schema) of the OEFCore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-decline/index.html">Decline</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Decline</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent-message.html"><span class="identifier">AgentMessage</span></a></code>
+<p>This message is used to send an <code>Decline</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-description/index.html">Description</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Description</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ProtobufSerializable</span><span class="symbol">&lt;</span><a href="../fetch.oef.pb/-query-outer-class/-query/-instance/index.html"><span class="identifier">QueryOuterClass.Query.Instance</span></a><span class="symbol">&gt;</span></code>
+<p>Description of either a service or an agent so it can be understood by the OEF and other agents.
+Contains values of the description, and an optional schema for checking format of values.
+Whenever the description is changed (including when it is create), the attribute values will
+checked to make sure they do not violate the attribute schema.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-distance/index.html">Distance</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Distance</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-type/index.html"><span class="identifier">ConstraintType</span></a></code>
+<p>Class that implements the 'distance' constraint type. That is, the locations we are looking for must be within
+a given distance from a given location. The distance is interpreted as a radius from a center.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-key-value/index.html">KeyValue</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KeyValue</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-location/index.html">Location</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Location</span></code>
+<p>Data structure to represent locations (i.e. a pair of latitude and longitude).</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-message/index.html">Message</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Message</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent-message.html"><span class="identifier">AgentMessage</span></a></code>
+<p>This message is used to send a generic message to other agents.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-not/index.html">Not</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Not</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-expr/index.html"><span class="identifier">ConstraintExpr</span></a></code>
+<p>A constraint type that allows you to specify a negation of a constraint.
+That is, the Not constraint is satisfied whenever the constraint that constitutes the Not expression is not satisfied.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-agent/index.html">OEFAgent</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">OEFAgent</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent/index.html"><span class="identifier">Agent</span></a></code>
+<p>Agent that interacts with an OEFNode on the network.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-agent-register-interface/index.html">OEFAgentRegisterInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFAgentRegisterInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-communication-error-handler-interface/index.html">OEFCommunicationErrorHandlerInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFCommunicationErrorHandlerInterface</span></code>
+<p>OEF Core interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-connection-interface/index.html">OEFConnectionInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFConnectionInterface</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/io/Closeable.html"><span class="identifier">Closeable</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-delay-interface/index.html">OEFDelayInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFDelayInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-error/index.html">OEFError</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">OEFError</span></code>
+<p>This class repesents the different error types we can get from the OEF.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-network-proxy/index.html">OEFNetworkProxy</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">OEFNetworkProxy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-o-e-f-proxy/index.html"><span class="identifier">OEFProxy</span></a><span class="symbol">, </span><span class="identifier">CoroutineScope</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-proxy/index.html">OEFProxy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">OEFProxy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-o-e-f-proxy-interface/index.html"><span class="identifier">OEFProxyInterface</span></a><span class="symbol">, </span><a href="-o-e-f-delay-interface/index.html"><span class="identifier">OEFDelayInterface</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-proxy-interface/index.html">OEFProxyInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFProxyInterface</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-o-e-f-agent-register-interface/index.html"><span class="identifier">OEFAgentRegisterInterface</span></a><span class="symbol">, </span><a href="-o-e-f-service-register-interface/index.html"><span class="identifier">OEFServiceRegisterInterface</span></a><span class="symbol">, </span><a href="-o-e-f-search-interface/index.html"><span class="identifier">OEFSearchInterface</span></a><span class="symbol">, </span><a href="-agent-message-emmiter-interface/index.html"><span class="identifier">AgentMessageEmmiterInterface</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-search-handler-interface/index.html">OEFSearchHandlerInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFSearchHandlerInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-search-interface/index.html">OEFSearchInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFSearchInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-service-register-interface/index.html">OEFServiceRegisterInterface</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OEFServiceRegisterInterface</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-u-r-i/index.html">OEFURI</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">OEFURI</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-or/index.html">Or</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Or</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-expr/index.html"><span class="identifier">ConstraintExpr</span></a></code>
+<p>A constraint type that allows you to specify a disjunction of constraints.
+That is, the Or constraint is satisfied whenever at least one of the constraints
+that constitute the or is satisfied.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proposals/index.html">Proposals</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Proposals</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-propose/index.html">Propose</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Propose</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-agent-message.html"><span class="identifier">AgentMessage</span></a></code>
+<p>This message is used to send a <code>Propose</code>.
+It contains:
+    - a dialogue id, that.
+    - a destination, that is .
+    - a .
+    - the message id, that is an unique identifier for a message, given dialogue.
+    - target, that is, the identifier of the message to whom this message is targeting.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-query/index.html">Query</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Query</span></code>
+<p>Representation of a search that is to be performed. Currently a search is represented as a
+set of key value pairs that must be contained in the description of the service/ agent.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-range/index.html">Range</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Range</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-type/index.html"><span class="identifier">ConstraintType</span></a></code>
+<p>A constraint type that allows you to restrict the values of the attribute in a given range.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-register-description/index.html">RegisterDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RegisterDescription</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for registering a new agent  in the Agent Directory of an OEF Node.
+The agent is described by a Description message object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-register-service/index.html">RegisterService</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RegisterService</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for registering a new agent in the Service Directory of an OEF Node.
+The service agent is described by a Description message object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-relation/index.html">Relation</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Relation</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-type/index.html"><span class="identifier">ConstraintType</span></a></code>
+<p>A constraint type that allows you to impose specific values for the attributes.
+The specific operator of the relation is defined in the subclasses that extend this class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-search-agents/index.html">SearchAgents</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SearchAgents</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for searching agents in the Agent Directory of an OEF Node.
+It contains:</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-search-result-item/index.html">SearchResultItem</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SearchResultItem</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-search-services/index.html">SearchServices</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SearchServices</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for searching agents which provides the queried service. This search will only search on
+the local node the agent connected to, and not the whole OEF network.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-search-services-wide/index.html">SearchServicesWide</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SearchServicesWide</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for searching agents in OEF Network.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-set/index.html">Set</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Set</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-constraint-type/index.html"><span class="identifier">ConstraintType</span></a></code>
+<p>A constraint type that allows you to restrict the values of the attribute in a specific set.
+The specific operator of the relation is defined in the subclasses that extend this class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-unregister-description/index.html">UnregisterDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UnregisterDescription</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for unregistering an agent in the Agent Directory of an OEF Node.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-unregister-service/index.html">UnregisterService</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UnregisterService</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-message/index.html"><span class="identifier">BaseMessage</span></a></code>
+<p>This message is used for unregistering a service provided by the agent from the OEF.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-value/index.html">Value</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Value</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-attribute-inconsistency-exception/index.html">AttributeInconsistencyException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AttributeInconsistencyException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html"><span class="identifier">Exception</span></a></code>
+<p>Exception raised when the attribute value list and given data model is inconsistent in <a href="-description/index.html">Description</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-type-error/index.html">TypeError</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TypeError</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-unknown-type-exception/index.html">UnknownTypeException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UnknownTypeException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html"><span class="identifier">Exception</span></a></code>
+<p>Exception type thworn when we encounter an unexpected type!</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-agent-message-builder.html">AgentMessageBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AgentMessageBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-agent/-message/-builder/index.html"><span class="identifier">AgentOuterClass.Agent.Message.Builder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-message-pb.html">AgentMessagePb</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AgentMessagePb</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-agent/-message/index.html"><span class="identifier">AgentOuterClass.Agent.Message</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-agent-search.html">AgentSearch</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AgentSearch</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-agent-search/index.html"><span class="identifier">AgentOuterClass.AgentSearch</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-attribute-type.html">AttributeType</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AttributeType</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-query-outer-class/-query/-attribute/-type/index.html"><span class="identifier">QueryOuterClass.Query.Attribute.Type</span></a></code>
+<p>Type aliases</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-envelope.html">Envelope</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Envelope</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-envelope/index.html"><span class="identifier">AgentOuterClass.Envelope</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-fipa-accept.html">FipaAccept</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">FipaAccept</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-fipa-outer-class/-fipa/-accept/index.html"><span class="identifier">FipaOuterClass.Fipa.Accept</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-fipa-decline.html">FipaDecline</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">FipaDecline</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-fipa-outer-class/-fipa/-decline/index.html"><span class="identifier">FipaOuterClass.Fipa.Decline</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-fipa-message-builder.html">FipaMessageBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">FipaMessageBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-fipa-outer-class/-fipa/-message/-builder/index.html"><span class="identifier">FipaOuterClass.Fipa.Message.Builder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-fipa-message-pb.html">FipaMessagePb</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">FipaMessagePb</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-fipa-outer-class/-fipa/-message/index.html"><span class="identifier">FipaOuterClass.Fipa.Message</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-nothing.html">Nothing</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Nothing</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-envelope/-nothing/index.html"><span class="identifier">AgentOuterClass.Envelope.Nothing</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-e-f-error-operation.html">OEFErrorOperation</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">OEFErrorOperation</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../fetch.oef.pb/-agent-outer-class/-server/-agent-message/-o-e-f-error/-operation/index.html"><span class="identifier">AgentOuterClass.Server.AgentMessage.OEFError.Operation</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="cfp-query-from.html">cfpQueryFrom</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cfpQueryFrom</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-c-f-p-query/-t-none.html"><span class="identifier">CFPQuery.TNone</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">cfpQueryFrom</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$cfpQueryFrom(ai.fetch.oef.Query)/query">query</span><span class="symbol">:</span>&nbsp;<a href="-query/index.html"><span class="identifier">Query</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-c-f-p-query/-t-query/index.html"><span class="identifier">CFPQuery.TQuery</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">cfpQueryFrom</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$cfpQueryFrom(java.nio.ByteBuffer)/bytes">bytes</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/nio/ByteBuffer.html"><span class="identifier">ByteBuffer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-c-f-p-query/-t-bytes/index.html"><span class="identifier">CFPQuery.TBytes</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="create-range.html">createRange</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">createRange</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$createRange(ai.fetch.oef.createRange.T, ai.fetch.oef.createRange.T)/first">first</span><span class="symbol">:</span>&nbsp;<a href="create-range.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="ai.fetch.oef$createRange(ai.fetch.oef.createRange.T, ai.fetch.oef.createRange.T)/second">second</span><span class="symbol">:</span>&nbsp;<a href="create-range.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-range/index.html"><span class="identifier">Range</span></a></code>
+<p>Generic function for creating a range objects from the arguments.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="description-of.html">descriptionOf</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">descriptionOf</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="ai.fetch.oef$descriptionOf(kotlin.Array((ai.fetch.oef.KeyValue)))/keyValues">keyValues</span><span class="symbol">:</span>&nbsp;<a href="-key-value/index.html"><span class="identifier">KeyValue</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-description/index.html"><span class="identifier">Description</span></a></code>
+<p>Creates <a href="-description/index.html">Description</a> object form the given <a href="-key-value/index.html">KeyValue</a> argument list.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="description-pair.html">descriptionPair</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">descriptionPair</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$descriptionPair(kotlin.String, ai.fetch.oef.descriptionPair.T)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="ai.fetch.oef$descriptionPair(kotlin.String, ai.fetch.oef.descriptionPair.T)/value">value</span><span class="symbol">:</span>&nbsp;<a href="description-pair.html#T"><span class="identifier">T</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-key-value/index.html"><span class="identifier">KeyValue</span></a></code>
+<p>Creates a <a href="-key-value/index.html">KeyValue</a> object which can be used in <a href="-description/index.html">Description</a> object creation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="logger.html">logger</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="logger.html#R"><span class="identifier">R</span></a><span class="symbol">.</span><span class="identifier">logger</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html"><span class="identifier">Lazy</span></a><span class="symbol">&lt;</span><span class="identifier">Logger</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="proposals-from.html">proposalsFrom</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">proposalsFrom</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="ai.fetch.oef$proposalsFrom(kotlin.Array((ai.fetch.oef.Description)))/proposals">proposals</span><span class="symbol">:</span>&nbsp;<a href="-description/index.html"><span class="identifier">Description</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-proposals/-t-descriptions/index.html"><span class="identifier">Proposals.TDescriptions</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">proposalsFrom</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$proposalsFrom(java.nio.ByteBuffer)/bytes">bytes</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/nio/ByteBuffer.html"><span class="identifier">ByteBuffer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-proposals/-t-bytes/index.html"><span class="identifier">Proposals.TBytes</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="un-wrap-companion-class.html">unWrapCompanionClass</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">unWrapCompanionClass</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef$unWrapCompanionClass(java.lang.Class((ai.fetch.oef.unWrapCompanionClass.T)))/ofClass">ofClass</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><a href="un-wrap-companion-class.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

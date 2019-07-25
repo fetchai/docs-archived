@@ -1,4 +1,11 @@
-Download and install the Python library which interacts with a running ledger node.
+Build the Python libraries like this:
+
+``` bash
+pip3 install -U fetchai-ledger-api
+```
+
+
+Or, download and install the Python library which interacts with a running ledger node.
 
 ``` bash
 git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.6.x
@@ -14,7 +21,7 @@ cd ledger-api-py/
 python3 setup.py install
 ```
 
-Find out how to build a smart contract using the Python API [here](../tutorials/submitting_contract.md).
+Find out how to build a smart contract using the Python API <a href="../../../tutorials/submitting_contract" target=_blank>here</a>.
 
 <!--### Connecting to testnet
 

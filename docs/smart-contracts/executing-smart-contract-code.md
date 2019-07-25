@@ -5,7 +5,7 @@
 
 To run smart contract code on your local machine, first download, build, and run a ledger node. You can find out how to do that <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
 
-If you have previously been running ledger constellation nodes, you should remove the databases as they will be incompatible with a fresh node:
+If you have previously been running ledger constellation nodes, you should remove the databases as they will be incompatible with a fresh node.
 
 ``` bash
 rm *.db 
@@ -91,6 +91,8 @@ Balance 2: 250
 
 Smart contract code is embedded into a Python script as a string.
 
+The smart contract below resembles the `contracts.py` script in the examples folder, except the `State` definitions are in line with `etch` updates.
+
 ``` python
 from fetchai.ledger.api import LedgerApi
 from fetchai.ledger.contract import SmartContract
@@ -133,7 +135,7 @@ endfunction
 
 From here, you can create a Python `SmartContract` type and feed it the contract string. Then deploy the contract with the Python `LedgerApi`.
 
-The code below takes the `CONTRACT_TEXT` string and deploys it to the ledger along with details of the contract owner and the fee.
+The code below takes the `CONTRACT_TEXT` string above and deploys it to the ledger along with details of the contract owner and the fee.
 
 ``` python
 # create the smart contract
@@ -149,8 +151,8 @@ api.sync(api.contracts.create(owner, contract, 2000))
 You can run the examples on our test network, replacing the hostname and port.
 
 ``` bash
-HOST: bootstrap.fetch.ai
-PORT: 80
+HOST = 'bootstrap.fetch.ai'
+PORT = 80
 ```
 
 <center>![Testnet](img/testnet-dev.png)</center>

@@ -29,7 +29,7 @@ endfunction
 
 The above integer value may etch onto a shard like this:
 
-<center>![Memory mapping on the Fetch.AI ledger shards](img/shards.png)</center>
+<center>![Memory mapping on the Fetch.AI Ledger shards](img/shards.png)</center>
 
 This is an economical way to manage memory on the ledger shards. However, there are scenarios in which `State` data etches onto the ledger in an inefficient way. 
 
@@ -81,7 +81,7 @@ Each time a `State` increments, the new data value takes up a new memory space o
 
 The ledger shards could look something like this after the `vote()` function runs over a short period of time.
 
-<center>![Bad memory mapping on the Fetch.AI ledger shards](img/bad-sharding.png)</center>
+<center>![Bad memory mapping on the Fetch.AI Ledger shards](img/bad-sharding.png)</center>
 
 This is highly uneconomical. Every aggregate value for a single `State` takes up its own spot on a ledger shard. Furthermore, multiple `States` take up multiple shards. 
 
