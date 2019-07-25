@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Query Language &mdash; oef 0.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Communication Protocols" href="communication-protocols.html" />
+    <link rel="prev" title="Defining Data Models" href="defining-data-model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> oef
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oef-node.html">Set up an OEF Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">First OEF Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defining-data-model.html">Defining Data Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Query Language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constraints">Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#relation">Relation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#range">Range</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distance">Distance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constraint-expressions">Constraint Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#not">Not</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#and">And</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#or">Or</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#queries">Queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-check-method">The <code class="docutils literal notranslate"><span class="pre">check</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validity">Validity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="communication-protocols.html">Communication Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-topics.html">Using <cite>async</cite> APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oef.html">oef package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">oef</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>The Query Language</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user/query-language.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-query-language">
+<span id="query-language"></span><h1>The Query Language<a class="headerlink" href="#the-query-language" title="Permalink to this headline">¶</a></h1>
+<p>We recommend reading <a class="reference internal" href="defining-data-model.html#defining-data-model"><span class="std std-ref">Defining Data Models</span></a> before reading this section.</p>
+<p>Along with the Data Model language, the SDK offers the possibility to specify <cite>queries</cite> defined over data models.</p>
+<p>The <a class="reference internal" href="../oef.html#module-oef.query" title="oef.query"><code class="xref py py-mod docutils literal notranslate"><span class="pre">query</span></code></a> module implements the API that allows you to:</p>
+<ul class="simple">
+<li><p>Query the OEF Node about specific kind of services</p></li>
+<li><p>Query other agents to ask them the desired resources.</p></li>
+</ul>
+<p>In one sentence, a <cite>query</cite> is a set of <cite>constraints</cite>, defined over a <cite>data model</cite>.
+The outcome is a set of <cite>description</cite> (that is, instances of <a class="reference internal" href="../oef.html#oef.schema.Description" title="oef.schema.Description"><code class="xref py py-class docutils literal notranslate"><span class="pre">Description</span></code></a>)
+<cite>matching</cite> with the query. That is, all the description whose attributes satisfy the constraints in the query.</p>
+<p>In the next sections, we describe how to build queries with the SDK.</p>
+<div class="section" id="constraints">
+<h2>Constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h2>
+<p>A <cite>constraint</cite> is associated with an <cite>attribute name</cite> and imposes restrictions on the domain of that attribute.
+That is, it imposes some limitations on the values the attribute can assume.</p>
+<p>We have different types of constraints:</p>
+<ul class="simple">
+<li><p><cite>relation</cite> constraints:</p>
+<ul>
+<li><p>the author of the book must be <cite>Stephen King</cite></p></li>
+<li><p>the publication year must be greater than 1990</p></li>
+</ul>
+</li>
+<li><p><cite>set</cite> constraints:</p>
+<ul>
+<li><p>the genre must fall into the following set of genres: <cite>Horror</cite>, <cite>Science fiction</cite>, <cite>Non-fiction</cite>.</p></li>
+</ul>
+</li>
+<li><p><cite>range</cite> constraints:</p>
+<ul>
+<li><p>the average rating must be between 3.5 and 4.5</p></li>
+</ul>
+</li>
+<li><p><cite>distance</cite> constraints:</p>
+<ul>
+<li><p>the nearest bookshop must be within a distance from a given location.</p></li>
+</ul>
+</li>
+</ul>
+<p>The class that implements the constraint concept is <a class="reference internal" href="../oef.html#oef.query.Constraint" title="oef.query.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a>
+In the following, we show how to define them in the Python SDK.</p>
+<div class="section" id="relation">
+<h3>Relation<a class="headerlink" href="#relation" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Relation" title="oef.query.Relation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Relation</span></code></a> is a constraint type that allows you to impose specific values for the attributes.</p>
+<p>The types of relation constraints are:</p>
+<ul class="simple">
+<li><p>Equal: <a class="reference internal" href="../oef.html#oef.query.Eq" title="oef.query.Eq"><code class="xref py py-class docutils literal notranslate"><span class="pre">Eq</span></code></a></p></li>
+<li><p>Not Equal: <a class="reference internal" href="../oef.html#oef.query.NotEq" title="oef.query.NotEq"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotEq</span></code></a></p></li>
+<li><p>Less than: <a class="reference internal" href="../oef.html#oef.query.Lt" title="oef.query.Lt"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lt</span></code></a></p></li>
+<li><p>Less than or Equal: <a class="reference internal" href="../oef.html#oef.query.LtEq" title="oef.query.LtEq"><code class="xref py py-class docutils literal notranslate"><span class="pre">LtEq</span></code></a></p></li>
+<li><p>Greater than: <a class="reference internal" href="../oef.html#oef.query.Gt" title="oef.query.Gt"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gt</span></code></a></p></li>
+<li><p>Greater than or Equal: <a class="reference internal" href="../oef.html#oef.query.GtEq" title="oef.query.GtEq"><code class="xref py py-class docutils literal notranslate"><span class="pre">GtEq</span></code></a></p></li>
+</ul>
+<p><strong>Examples</strong>: using the attributes we used before: <a class="reference internal" href="defining-data-model.html#defining-data-model"><span class="std std-ref">Defining Data Models</span></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">NotEq</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">LtEq</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">GtEq</span>
+
+<span class="c1"># all the books whose author is Stephen King</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="s2">&quot;Stephen King&quot;</span><span class="p">))</span>
+
+<span class="c1"># all the books that are not of the genre Horror</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span> <span class="n">NotEq</span><span class="p">(</span><span class="s2">&quot;Horror&quot;</span><span class="p">))</span>
+
+<span class="c1"># all the books published before 1990</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1990</span><span class="p">))</span>
+
+<span class="c1"># the same of before, but including 1990</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">LtEq</span><span class="p">(</span><span class="mi">1990</span><span class="p">))</span>
+
+<span class="c1"># all the books with rating greater than 4.0</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;average_rating&quot;</span><span class="p">,</span> <span class="n">Gt</span><span class="p">(</span><span class="mf">4.0</span><span class="p">))</span>
+
+<span class="c1"># all the books published after 2000, included</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">GtEq</span><span class="p">(</span><span class="mi">2000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set">
+<h3>Set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Set" title="oef.query.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a> is a constraint type that allows you to restrict the values of the attribute
+in a specific set.</p>
+<p>There are two kind of <code class="docutils literal notranslate"><span class="pre">Set</span></code> constraints:</p>
+<ul class="simple">
+<li><p>In (a set of values): <a class="reference internal" href="../oef.html#oef.query.In" title="oef.query.In"><code class="xref py py-class docutils literal notranslate"><span class="pre">In</span></code></a></p></li>
+<li><p>Not in (a set of values): <a class="reference internal" href="../oef.html#oef.query.NotIn" title="oef.query.NotIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotIn</span></code></a></p></li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">In</span><span class="p">,</span> <span class="n">NotIn</span>
+
+<span class="c1"># all the books whose genre is one of `Horror`, `Science fiction`, `Non-fiction`</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span> <span class="n">In</span><span class="p">([</span><span class="s2">&quot;horror&quot;</span><span class="p">,</span> <span class="s2">&quot;science fiction&quot;</span><span class="p">,</span> <span class="s2">&quot;non-fiction&quot;</span><span class="p">]))</span>
+
+<span class="c1"># all the books that have not been published neither in 1990, nor in 1995, nor in 2000</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">NotIn</span><span class="p">([</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">1995</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="range">
+<h3>Range<a class="headerlink" href="#range" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Range" title="oef.query.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a> is a constraint type that allows you to restrict the values of the attribute in a given
+range.</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Range</span>
+
+<span class="c1"># all the books whose title is between &#39;A&#39; and &#39;B&#39; (alphanumeric order)</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>   <span class="n">Range</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">)))</span>
+
+<span class="c1"># all the books that have been published between 1960 and 1970</span>
+<span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span>   <span class="n">Range</span><span class="p">((</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="distance">
+<h3>Distance<a class="headerlink" href="#distance" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Distance" title="oef.query.Distance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distance</span></code></a> is a constraint type that allows you to put a limit on a <a class="reference internal" href="../oef.html#oef.schema.Location" title="oef.schema.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>
+attribute type. More specifically, you can set a maximum distance from a given location (the <cite>center</cite>),
+such that will be considered only the instances whose location attribute value is within a distance from the center.</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Distance</span>
+<span class="kn">from</span> <span class="nn">oef.schema</span> <span class="kn">import</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Description</span>
+
+<span class="c1"># define a location of interest, e.g. the Tour Eiffel</span>
+<span class="n">tour_eiffel</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="mf">48.8581064</span><span class="p">,</span> <span class="mf">2.29447</span><span class="p">)</span>
+
+<span class="c1"># find all the locations close to the Tour Eiffel within 1 km</span>
+<span class="n">close_to_tour_eiffel</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="n">Distance</span><span class="p">(</span><span class="n">tour_eiffel</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+
+<span class="c1"># Le Jules Verne, a famous restaurant close to the Tour Eiffel, satisfies the constraint.</span>
+<span class="n">le_jules_verne_restaurant</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="mf">48.8579675</span><span class="p">,</span> <span class="mf">2.2951849</span><span class="p">)</span>
+<span class="n">close_to_tour_eiffel</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">le_jules_verne_restaurant</span><span class="p">}))</span>  <span class="c1"># gives `True`</span>
+
+<span class="c1"># The Colosseum does not satisfy the constraint (farther than 1 km from the Tour Eiffel).</span>
+<span class="n">colosseum</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="mf">41.8902102</span><span class="p">,</span> <span class="mf">12.4922309</span><span class="p">)</span>
+<span class="n">close_to_tour_eiffel</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">colosseum</span><span class="p">}))</span>  <span class="c1"># gives `False`</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="constraint-expressions">
+<h2>Constraint Expressions<a class="headerlink" href="#constraint-expressions" title="Permalink to this headline">¶</a></h2>
+<p>The constraints above mentioned can be combined with the common logical operators (i.e. and, or and not), yielding
+more complex expression.</p>
+<p>In particular we can specify any conjunction/disjunction/negations of the previous constraints or composite constraint
+expressions, e.g.:</p>
+<ul class="simple">
+<li><p>books that belong to <cite>Horror</cite> <strong>and</strong> has been published after 2000, but <strong>not</strong> published by <cite>Stephen King</cite>.</p></li>
+<li><p>books whose author is <strong>either</strong> <cite>J. K. Rowling</cite> <strong>or</strong> <cite>J. R. R. Tolkien</cite></p></li>
+</ul>
+<p>The classes that implement these operators are <a class="reference internal" href="../oef.html#oef.query.Not" title="oef.query.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.And" title="oef.query.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>
+and <a class="reference internal" href="../oef.html#oef.query.Or" title="oef.query.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a>.</p>
+<div class="section" id="not">
+<h3>Not<a class="headerlink" href="#not" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Not" title="oef.query.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a> is a constraint expression that allows you to specify a negation of a constraint expression.
+The <a class="reference internal" href="../oef.html#oef.query.Not" title="oef.query.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a> constraint is satisfied whenever its subexpression is <cite>not</cite> satisfied.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Not</span><span class="p">,</span> <span class="n">Range</span>
+
+<span class="c1"># all the books whose year of publication is not between 1990 and 2000</span>
+<span class="n">Not</span><span class="p">(</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Range</span><span class="p">((</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and">
+<h3>And<a class="headerlink" href="#and" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.And" title="oef.query.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a> is a constraint type that allows you to specify a conjunction of constraints
+over an attribute. That is, the <a class="reference internal" href="../oef.html#oef.query.And" title="oef.query.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a> constraint is satisfied whenever all the subexpressions
+that constitute the <cite>and</cite> are satisfied.</p>
+<p>Notice: the number of subexpressions must be <strong>at least</strong> 2.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">NotEq</span><span class="p">,</span> <span class="n">Range</span>
+
+<span class="c1"># all the books whose title is between &#39;I&#39; and &#39;J&#39; (alphanumeric order) but not equal to &#39;It&#39;</span>
+<span class="n">And</span><span class="p">([</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">Range</span><span class="p">((</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">))),</span> <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">NotEq</span><span class="p">(</span><span class="s2">&quot;It&quot;</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="or">
+<h3>Or<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Or" title="oef.query.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a> is a constraint type that allows you to specify a disjunction of constraints. That is, the
+<code class="docutils literal notranslate"><span class="pre">Or</span></code> constraint is satisfied whenever at least one of the constraints that constitute the <code class="docutils literal notranslate"><span class="pre">or</span></code> is satisfied.</p>
+<p>Notice: the number of subexpressions must be <strong>at least</strong> 2.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">Gt</span>
+
+<span class="c1"># all the books that have been published either before the year 1960 or after the year 1970</span>
+<span class="n">Or</span><span class="p">([</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1960</span><span class="p">)),</span> <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1970</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A <cite>query</cite> is simply a <cite>list of constraint expressions</cite>, interpreted as a conjunction
+(that is, a matching description with the query must satisfy <cite>every</cite> constraint expression.)</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Query</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Eq</span>
+
+<span class="c1"># return all the books written by Stephen King published after 1990, and available as an e-book:</span>
+<span class="n">Query</span><span class="p">([</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="s2">&quot;Stephen King&quot;</span><span class="p">)),</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1990</span><span class="p">)),</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;ebook_available&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+<span class="p">],</span> <span class="n">book_model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">book_model</span></code> is the <code class="docutils literal notranslate"><span class="pre">DataModel</span></code> object defined in <a class="reference internal" href="defining-data-model.html#defining-data-model"><span class="std std-ref">Defining Data Models</span></a>. However, the data model is
+an optional parameter, but to avoid ambiguity is recommended to include it.</p>
+<div class="section" id="the-check-method">
+<h3>The <code class="docutils literal notranslate"><span class="pre">check</span></code> method<a class="headerlink" href="#the-check-method" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../oef.html#oef.query.Query" title="oef.query.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> class supports a way to check whether a <a class="reference internal" href="../oef.html#oef.schema.Description" title="oef.schema.Description"><code class="xref py py-class docutils literal notranslate"><span class="pre">Description</span></code></a> matches with the
+query. This method is called <a class="reference internal" href="../oef.html#oef.query.Query.check" title="oef.query.Query.check"><code class="xref py py-func docutils literal notranslate"><span class="pre">check()</span></code></a>.</p>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.query</span> <span class="kn">import</span> <span class="n">Query</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Eq</span>
+<span class="kn">from</span> <span class="nn">oef.schema</span> <span class="kn">import</span> <span class="n">Description</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">Query</span><span class="p">([</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="s2">&quot;Stephen King&quot;</span><span class="p">)),</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1990</span><span class="p">)),</span>
+    <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;ebook_available&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+    <span class="p">])</span>
+
+<span class="c1"># With a query, you can check that a `~oef.schema.Description` object satisfies the constraints.</span>
+
+<span class="n">q</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Stephen King&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1991</span><span class="p">,</span> <span class="s2">&quot;ebook_available&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}))</span>  <span class="c1"># True</span>
+<span class="n">q</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;George Orwell&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1948</span><span class="p">,</span> <span class="s2">&quot;ebook_available&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}))</span> <span class="c1"># False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validity">
+<h3>Validity<a class="headerlink" href="#validity" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="../oef.html#oef.query.Query" title="oef.query.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object must satisfy some conditions in order to be instantiated.</p>
+<ul>
+<li><p>The list of constraints expressions can’t be empty; must have at least one constraint expression.</p></li>
+<li><p>If the data model is specified:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For every constraint expression that constitute the query, check if they are <cite>valid wrt the data model</cite>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>A <a class="reference internal" href="../oef.html#oef.query.ConstraintExpr" title="oef.query.ConstraintExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstraintExpr</span></code></a> <cite>c</cite> (that is, one of <a class="reference internal" href="../oef.html#oef.query.And" title="oef.query.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.Or" title="oef.query.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a>,
+<a class="reference internal" href="../oef.html#oef.query.Not" title="oef.query.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.Constraint" title="oef.query.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a>) is <cite>valid wrt a</cite> <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> if:</p>
+<ul>
+<li><p>If <cite>c</cite> is an instance of <a class="reference internal" href="../oef.html#oef.query.And" title="oef.query.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.Or" title="oef.query.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a> or <a class="reference internal" href="../oef.html#oef.query.Not" title="oef.query.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a>, then
+every subexpression of <cite>c</cite> must be valid (wrt to the data model);</p></li>
+<li><p>If <cite>c</cite> is an instance of <a class="reference internal" href="../oef.html#oef.query.Constraint" title="oef.query.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a>, then:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if the constraint type is one of <a class="reference internal" href="../oef.html#oef.query.Lt" title="oef.query.Lt"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lt</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.LtEq" title="oef.query.LtEq"><code class="xref py py-class docutils literal notranslate"><span class="pre">LtEq</span></code></a>, <a class="reference internal" href="../oef.html#oef.query.Gt" title="oef.query.Gt"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gt</span></code></a>,
+<a class="reference internal" href="../oef.html#oef.query.Gt" title="oef.query.Gt"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gt</span></code></a>, the value in the constructor must be one of <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p>if the constraint type is a <a class="reference internal" href="../oef.html#oef.query.Range" title="oef.query.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a>, then the types in the range must be one of <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>,
+<code class="docutils literal notranslate"><span class="pre">float</span></code> or <a class="reference internal" href="../oef.html#oef.schema.Location" title="oef.schema.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>.</p></li>
+<li><p>if the constraint type is a <a class="reference internal" href="../oef.html#oef.query.Distance" title="oef.query.Distance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Distance</span></code></a>, then the only valid type is <a class="reference internal" href="../oef.html#oef.schema.Location" title="oef.schema.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>.</p></li>
+<li><p>if the constraint type is a <a class="reference internal" href="../oef.html#oef.query.Set" title="oef.query.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>, then the types supported are
+<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <a class="reference internal" href="../oef.html#oef.schema.Location" title="oef.schema.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>. Notice though that a set of <code class="docutils literal notranslate"><span class="pre">bool</span></code> is trivial,
+so you may find yourself more comfortable by using other alternatives.</p></li>
+<li><p>for the other constraint types, i.e. <a class="reference internal" href="../oef.html#oef.query.Eq" title="oef.query.Eq"><code class="xref py py-class docutils literal notranslate"><span class="pre">Eq</span></code></a> and <a class="reference internal" href="../oef.html#oef.query.NotEq" title="oef.query.NotEq"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotEq</span></code></a>, the value can be one of the
+allowed types for <a class="reference internal" href="../oef.html#oef.schema.AttributeSchema" title="oef.schema.AttributeSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeSchema</span></code></a>, that is <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>,
+<a class="reference internal" href="../oef.html#oef.schema.Location" title="oef.schema.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Moreover, when <cite>c</cite> is a <a class="reference internal" href="../oef.html#oef.query.Constraint" title="oef.query.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a>, the attribute must have a consistent type wrt the data model.
+E.g. consider a <a class="reference internal" href="../oef.html#oef.query.Constraint" title="oef.query.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a> like:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Consider a <a class="reference internal" href="../oef.html#oef.schema.DataModel" title="oef.schema.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code></a> where there is an <a class="reference internal" href="../oef.html#oef.schema.AttributeSchema" title="oef.schema.AttributeSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeSchema</span></code></a>
+<code class="docutils literal notranslate"><span class="pre">&quot;foo&quot;</span></code> of type <code class="docutils literal notranslate"><span class="pre">str</span></code>. Then the constraint is not compatible with the mentioned data model, because
+the constraint expect an equality comparison with a boolean <code class="docutils literal notranslate"><span class="pre">True</span></code>, instead of a <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="communication-protocols.html" class="btn btn-neutral float-right" title="Communication Protocols" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defining-data-model.html" class="btn btn-neutral float-left" title="Defining Data Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Fetch.AI Limited
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
