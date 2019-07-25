@@ -5,11 +5,11 @@
 
 1. <a href="getting-started/versions">Getting Started</a> <br/>
 
-	Build and install the Fetch.AI ledger constellation, `etch` vm, and all the libraries you need. Get hold of the Fetch.AI Python Ledger API for smart contract creation. Spin up the Fetch.AI Open Economic Framework.
+	Build and install the Fetch.AI Ledger constellation, `etch` vm, and all the libraries you need. Get hold of the Fetch.AI Python Ledger API for smart contract creation. Spin up the Fetch.AI Open Economic Framework.
 
 2. <a href="ledger/architecture">The Fetch.AI Ledger</a> <br/>
 
-	Understand the inner workings of the Fetch.AI ledger.
+	Understand the inner workings of the Fetch.AI Ledger.
 
 3. <a href="oef">Open Economic Framework</a> <br/>
 
@@ -17,11 +17,11 @@
 
 4. <a href="etch-language">`etch` Language Guide</a> <br/>
 	
-	Learn how to code in `etch`, the Turing complete scripting language for smart contracts running on the Fetch.AI ledger. 
+	Learn how to code in `etch`, the Turing complete scripting language for smart contracts running on the Fetch.AI Ledger. 
 
 5. <a href="smart-contracts/smart-contract-intro">Smart Contracts</a> <br/>
 
-	Smart contracts written in `etch` run with the Python Ledger API. This section has everything you need to know about running smart contracts on the Fetch.AI ledger.
+	Smart contracts written in `etch` run with the Python Ledger API. This section has everything you need to know about running smart contracts on the Fetch.AI Ledger.
 
 6. <a href="tutorials/submitting_contract/">Tutorials</a> <br/>
 

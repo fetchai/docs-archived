@@ -4,9 +4,11 @@ A `ShardedState` is like a `State` type in that data contained within a `Sharded
 
 The key difference is that a `ShardedState` is a map, containing key/value pairs. 
 
-A `key` must be a `String` or `Address` type.
+A key must be a `String` or `Address` type.
 
 Behind the scenes, `ShardedState` creates anonymous `State` types for key/value pairs that etch onto the ledger.
+
+## Declaration
 
 Declare a `ShardedState` in the same way you declare a `State`: 
 
@@ -19,6 +21,9 @@ endfunction
 ```
 
 The `account1` identifier is the pointer to the place in memory that holds the data. 
+
+
+## Add key/value pairs
 
 Add key/value pairs to the `ShardedState` like this:
 
@@ -44,7 +49,12 @@ function set_values_on_state()
 endfunction
 ```
 
+## Querying with default values
+
 Let's add some query functions to get the `ShardedState` values. Notice that when you query the data, you provide default values and receive the actual value.
+
+!!! Note
+    The annotation `@query` is used in smart contract code and unnecessary for testing with the `etch` VM.
 
 ``` c++
 function main()
@@ -70,6 +80,7 @@ function set_values_on_state()
 
 endfunction
 
+@query
 function query_sales() : Int32
 
     var state = ShardedState<Int32>("account1");
@@ -77,6 +88,7 @@ function query_sales() : Int32
 
 endfunction
 
+@query
 function query_gross_profit() : Int32
 
     var state = ShardedState<Int32>("account1");
@@ -84,6 +96,7 @@ function query_gross_profit() : Int32
 
 endfunction
 
+@query
 function query_net_profit() : Int32
 
     var state = ShardedState<Int32>("account1");
@@ -92,7 +105,9 @@ function query_net_profit() : Int32
 endfunction
 ```
 
-You can of course create `ShardedState` types using `Address` types.
+## `ShardedState` types with `Address` references
+
+You can create `ShardedState` types using `Address` types as the reference.
 
 ``` c++
 function main()

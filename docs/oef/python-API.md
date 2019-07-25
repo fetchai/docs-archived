@@ -9,4 +9,7 @@ function newPopup(url) {
 		url,'popUpWindow','height=600px,width=900px,left=500,top=60,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no,status=no')
 }
 </script>
-<p><a href="JavaScript:newPopup('http://oef-sdk-docs.fetch.ai/oef.html');">Click here for the API.</a></p>
+<!--<p><a href="JavaScript:newPopup('http://oef-sdk-docs.fetch.ai/oef.html');">Click here for the API.</a></p>-->
+
+
+<p><a href="JavaScript:newPopup('/oef/assets/python-api/html/oef.html');">Click here for the API.</a></p>

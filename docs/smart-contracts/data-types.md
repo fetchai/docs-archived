@@ -10,11 +10,13 @@ A `State` provides persistent storage for smart contracts. The data referenced b
 `State` values are available for use in smart contract functions.
 
 
-## ShardedState
+## Sharded State
 
 A `ShardedState` is like a `State` type in that data contained within a `ShardedState` also resides on the ledger and is available for use in smart contract functions.
 
 However, `ShardedState` is a map of key/value pairs so can wrap significantly more data under one reference. 
+
+Moreover, `ShardedState` manages the sharded structure of ledger memory more efficiently than a `State` type.
 
 
 ## Address

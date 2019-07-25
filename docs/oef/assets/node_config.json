@@ -6,13 +6,15 @@
   "director_port": 40000,
   "html_dir": "api/src/resources/website",
   "prometheus_api_path": "/metrics",
-  "prometheus_log_file": "/fetch-logs/core-vars.txt",
-  "search_prometheus_log_file": "/fetch-logs/search-vars.txt",
+  "prometheus_log_file": "./fetch-logs/core-vars.txt",
+  "search_prometheus_log_file": "./fetch-logs/search-vars.txt",
   "http_port": 7500,
-  "log_dir": "",
-    "ssl_certificate": "/app/server.pem",
+  "log_dir": "./fetch-logs/",
+  "search_log": "./fetch-logs/search.log",
+  "core_log": "./fetch-logs/core.log",
+  "ssl_certificate": "",
   "core": {
-    "core_binary": "fetch_teams/OEFCore",
+    "core_binary": "/oef-mt-core/bazel-bin/mt-core/main/src/cpp/app",
      "config": {
       "core_key": "CoreKey",
       "core_uri": "tcp://127.0.0.1:10000",
@@ -22,7 +24,7 @@
       "karma_policy": {
       },
       "prometheus_log_interval": 3,
-      "prometheus_log_file": "/fetch-logs/core-vars.txt"
+      "prometheus_log_file": "./fetch-logs/core-vars.txt"
     }
   },
   "search_peers": ["KEY:HOST:PORT"],
@@ -42,7 +44,7 @@
     "fields": ["bootstrap:private-key"]
   },
   "search_config": {
-    "search_prometheus_log_file": "/fetch-logs/search-vars.txt",
+    "search_prometheus_log_file": "./fetch-logs/search-vars.txt",
     "daps": {
       "network_search": {
         "class": "DapERNetwork",

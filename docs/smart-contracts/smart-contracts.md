@@ -1,12 +1,8 @@
 <h1>Etch smart contracts</h1>
 
-!!! quote
-
-    A smart contract is a computer protocol intended to digitally facilitate, verify, or enforce the negotiation or performance of a contract. Smart contracts allow the performance of credible transactions without third parties. These transactions are trackable and irreversible. Source: <a href="https://en.wikipedia.org/wiki/Smart_contract" target=_blank>Wikipedia</a>.
-
 Smart contract code runs on the `etch` virtual machine. 
 
-All ledger nodes maintain the `etch` VM and smart contract code.
+All ledger nodes contain the `etch` VM and smart contract code.
 
 The identity  of a smart contract is calculated by performing a `SHA256` hash on the contract code string as an initial step. Next, a further `SHA256` hash is calculated from the previous result concatenated with a public key `Address` which represents the contract owner.
 
@@ -27,7 +23,7 @@ Smart contract functions are annotated depending on the activity they perform.
 
 The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment.
 
-The name of the `@init` function can be anything you like.
+The name of the `@init` function can be anything at all.
 
 For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. 
 
@@ -51,6 +47,9 @@ function main()
 
 endfunction
 ```
+
+!!! Remember
+    We use `main()` in the examples to allow for testing smart contract code outside of a ledger environment.
 
 
 <H3>@action</H3>
@@ -120,7 +119,7 @@ endfunction
 
 ## Smart contract addresses
 
-`etch` smart contracts have a unique identification protocol for addressing on the Fetch Ledger.
+`etch` smart contracts have a unique identification protocol for addressing on the Fetch.AI Ledger.
 
 `etch` smart contract identifiers are a SHA256 hash of the contract source code which is then Base64 encoded and finally concatenated with the Base64 encoded owner's public key.
 
@@ -144,11 +143,9 @@ If we run one of the above code examples in this way, `data.json` may contain th
 
 `getBlockNumber()` : returns the number of the current block in `UInt64`. 
 
-See an example of running `getBlockNumber()` on a running node <a href="../../tutorials/block-number" target=_blank>here</a>.
+You need a node running to test this. As well as that, you can only get a result when the function is embedded within smart contract code in Python. See a coded example of `getBlockNumber()` with a running node <a href="../../tutorials/block-number" target=_blank>here</a>.
 
-You need a node running to test this. As well as that, you can only get a result when the function is embedded within smart contract code in Python.
 
-Details for running a node are <a href="../../getting-started/run-a-node/" target=_blank>here</a>.
 
 
 <br/>

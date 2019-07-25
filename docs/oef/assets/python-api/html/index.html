@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OEF Python SDK &mdash; oef 0.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="user/introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> oef
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="user/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/oef-node.html">Set up an OEF Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/tutorial.html">First OEF Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/defining-data-model.html">Defining Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/query-language.html">The Query Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/communication-protocols.html">Communication Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/advanced-topics.html">Using <cite>async</cite> APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oef.html">oef package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">oef</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>OEF Python SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="oef-python-sdk">
+<h1>OEF Python SDK<a class="headerlink" href="#oef-python-sdk" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<a class="reference external image-reference" href="https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue.svg"><img alt="https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue.svg" src="https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue.svg" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg"><img alt="https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg" src="https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg" /></a>
+<p><strong>WARNING</strong>: the package is in active development, so the API might change frequently.</p>
+<p>This is the Python SDK for OEF agent development, allowing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>registration of agents and services in the OEF</p></li>
+<li><p>searching for agents and services in the OEF</p></li>
+<li><p>constructing a direct communication channel with another agent</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="user-guide">
+<h1>User guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/introduction.html#what-is-fetch">What is Fetch?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/introduction.html#what-is-oef-open-economic-framework">What is OEF? (Open Economic Framework)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/introduction.html#what-is-oef-python-sdk">What is OEF Python SDK?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart.html#run-an-oef-node">Run an OEF Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart.html#connect-agents">Connect Agents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/install.html#protobuf-compiler">Protobuf Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install.html#install-oef">Install <code class="docutils literal notranslate"><span class="pre">oef</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install.html#use-the-oef-node">Use the OEF Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/oef-node.html">Set up an OEF Node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/oef-node.html#using-the-docker-image">Using the Docker image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/oef-node.html#build-from-source">Build from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/tutorial.html">First OEF Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/tutorial.html#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/tutorial.html#first-example-echo-agent">First example: Echo agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/tutorial.html#second-example-weather-station">Second example: Weather Station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/defining-data-model.html">Defining Data Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/defining-data-model.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/defining-data-model.html#data-models">Data models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/defining-data-model.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/query-language.html">The Query Language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/query-language.html#constraints">Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/query-language.html#constraint-expressions">Constraint Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/query-language.html#queries">Queries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/communication-protocols.html">Communication Protocols</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/communication-protocols.html#interaction-with-the-oef-node">Interaction with the OEF Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/communication-protocols.html#interaction-with-other-oef-agents">Interaction with other OEF Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/communication-protocols.html#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/advanced-topics.html">Using <cite>async</cite> APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oef.html">oef package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.agents">oef.agents module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.core">oef.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.dialogue">oef.dialogue module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.helpers">oef.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.logger">oef.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.messages">oef.messages module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.proxy">oef.proxy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.query">oef.query module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef.schema">oef.schema module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oef.html#module-oef">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="contributing">
+<span id="id1"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given.</p>
+<p>If you need support, want to report/fix a bug, ask for/implement features, you can check the
+<a class="reference external" href="https://github.com/fetchai/oef-sdk-python/issues">Issues page</a>,
+or <a class="reference external" href="https://github.com/fetchai/oef-sdk-python/pulls">submit a Pull request</a>.</p>
+<p>For other kinds of feedback, you can contact one of the
+<a class="reference external" href="https://github.com/fetchai/oef-sdk-python/blob/master/AUTHORS.rst">authors/maintainers</a> by email.</p>
+</div>
+<div class="section" id="authors">
+<h1>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h1>
+<p>This is the official list of Fetch.AI authors for copyright purposes.</p>
+<ul class="simple">
+<li><p>Marco Favorito &lt;<a class="reference external" href="mailto:marco&#46;favorito&#37;&#52;&#48;fetch&#46;ai">marco<span>&#46;</span>favorito<span>&#64;</span>fetch<span>&#46;</span>ai</a>&gt; <a class="reference external" href="https://github.com/MarcoFavorito">&#64;MarcoFavorito</a> (maintainer)</p></li>
+<li><p>Jerome Maloberti &lt;<a class="reference external" href="mailto:jerome&#46;maloberti&#37;&#52;&#48;fetch&#46;ai">jerome<span>&#46;</span>maloberti<span>&#64;</span>fetch<span>&#46;</span>ai</a>&gt; <a class="reference external" href="https://github.com/jeromemaloberti">&#64;jeromemaloberti</a></p></li>
+<li><p>Lokman Rahmani &lt;<a class="reference external" href="mailto:lokman&#46;rahmani&#37;&#52;&#48;fetch&#46;ai">lokman<span>&#46;</span>rahmani<span>&#64;</span>fetch<span>&#46;</span>ai</a>&gt; <a class="reference external" href="https://github.com/lrahmani">&#64;lrahmani</a></p></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<p>Would you like know more about Fetch? Here’s a list of useful links:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://fetch.ai/">Website</a></p></li>
+<li><p><a class="reference external" href="https://fetch.ai/blog">Blog</a></p></li>
+<li><p>Developer Portal - Coming soon - <a class="reference external" href="https://fetch.ai/#community">Signup Open</a></p></li>
+<li><p><a class="reference external" href="https://t.me/fetchai">Community Telegram Group</a></p></li>
+<li><p><a class="reference external" href="https://fetch.ai/publications.html">Whitepapers</a></p></li>
+</ul>
+</div>
+<div class="section" id="release-history">
+<h1>Release History<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>0.1.0 (2018-12-17)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Initial release of the Python SDK for OEF Agent development.</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>0.2.0 (2018-02-07)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added support for the <code class="docutils literal notranslate"><span class="pre">Location</span></code> data type.</p></li>
+<li><p>Improved API for the query language.</p></li>
+<li><p>Added support for negotiation with multiple buyers/sellers, not only one-to-one.</p></li>
+<li><p>Misc bug fix.</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>0.3.0 (2018-04-19)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user/introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Fetch.AI Limited
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

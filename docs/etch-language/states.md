@@ -84,7 +84,10 @@ function main()
     var contract_amount_state = State<Int32>("contract_amount");   
 
     if (contract_amount_state.existed())
-      printLn("Yes, it existed");
+        printLn("Yes, it exists.");
+    
+    else printLn("This state does not exist.");
+
     endif
 
 endfunction
@@ -114,7 +117,7 @@ endfunction
 
 Assuming the referenced `State` object does not exist on the ledger, attempting to print the value of the second declaration of `State` generates an error - even though a value was set on it previously. 
 
-This is because the data set in `ownerState` has not yet been written to the intermediate cache or ledger storage, so when `contractState` tries to access it, it finds no value and this generates a runtime error.
+This is because the data set in `ownerState` has not yet been written to the intermediate cache or ledger storage, so when `contractState` tries to access it, it finds no value and the `etch` VM generates a runtime error.
 
 
 
@@ -241,6 +244,15 @@ Often, a contract needs to confirm whether an `@action` or `@query` comes from a
 In the example below, an `@action` establishes if the the signer of the calling transaction is a specific authorised address.
 
 ``` c++
+function main()
+
+    var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    var authorised = State<Address>("owner");
+    authorised.set(owner);
+    doSomething(owner);
+
+endfunction
+
 @action 
 function doSomething(signer : Address)
 
@@ -256,15 +268,6 @@ function doSomething(signer : Address)
         panic("Incorrect address used to trigger");
     endif
         // ... we're good to go, the signer of the TX is the stored authorised address...
-
-endfunction
-
-function main()
-
-    var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-    var authorised = State<Address>("owner");
-    authorised.set(owner);
-    doSomething(owner);
 
 endfunction
 ```

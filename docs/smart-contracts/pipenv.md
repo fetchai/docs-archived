@@ -1,6 +1,6 @@
 ## pipenv
 
-The wrapper libraries supporting `etch` smart contracts are in Python. We therefore advise developing and testing your smart contracts from within a Python environment.
+The wrapper libraries supporting creation and deployment of `etch` smart contracts are in Python. We therefore advise developing and testing your smart contracts from within a Python environment.
 
 Do this with `pipenv`. 
 

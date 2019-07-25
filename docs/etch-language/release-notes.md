@@ -6,6 +6,7 @@ Significant changes in this version of the `etch` virtual machine include the fo
 * For loops are non-inclusive.
 * Array ranges are non-inclusive.
 * Short circuiting implemented for `&&` and `||` expressions.
+* `StructuredData` type can be used as a serialised object.
 
 
 

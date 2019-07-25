@@ -1,0 +1,141 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Description - oef-sdk-kotlin</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">oef-sdk-kotlin</a>&nbsp;/&nbsp;<a href="../index.html">ai.fetch.oef</a>&nbsp;/&nbsp;<a href="./index.html">Description</a><br/>
+<br/>
+<h1>Description</h1>
+<code><span class="keyword">class </span><span class="identifier">Description</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ProtobufSerializable</span><span class="symbol">&lt;</span><a href="../../fetch.oef.pb/-query-outer-class/-query/-instance/index.html"><span class="identifier">QueryOuterClass.Query.Instance</span></a><span class="symbol">&gt;</span></code>
+<p>Description of either a service or an agent so it can be understood by the OEF and other agents.
+Contains values of the description, and an optional schema for checking format of values.
+Whenever the description is changed (including when it is create), the attribute values will
+checked to make sure they do not violate the attribute schema.</p>
+<p>Example:</p>
+<pre><code>    val It = descriptionOf(
+                 descriptionPair("title", "It"),
+                 descriptionPair("author", "Stephen King"),
+                 descriptionPair("genre",  "horror"),
+                 descriptionPair("year", 1986),
+                 descriptionPair("average_rating", 4.5),
+                 descriptionPair("ISBN", "0-670-81302-8"),
+                 descriptionPair("ebook_available", true)
+             )
+</code></pre>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Description</span><span class="symbol">(</span><span class="symbol">)</span></code><code><span class="identifier">Description</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef.Description$<init>(kotlin.collections.List((ai.fetch.oef.KeyValue)), ai.fetch.oef.DataModel, kotlin.String)/attributeValues">attributeValues</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-key-value/index.html"><span class="identifier">KeyValue</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="ai.fetch.oef.Description$<init>(kotlin.collections.List((ai.fetch.oef.KeyValue)), ai.fetch.oef.DataModel, kotlin.String)/dataModel">dataModel</span><span class="symbol">:</span>&nbsp;<a href="../-data-model/index.html"><span class="identifier">DataModel</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="ai.fetch.oef.Description$<init>(kotlin.collections.List((ai.fetch.oef.KeyValue)), ai.fetch.oef.DataModel, kotlin.String)/dataModelName">dataModelName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;dataModel?.name ?: ""<span class="symbol">)</span></code>
+<p>Description of either a service or an agent so it can be understood by the OEF and other agents.
+Contains values of the description, and an optional schema for checking format of values.
+Whenever the description is changed (including when it is create), the attribute values will
+checked to make sure they do not violate the attribute schema.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="attribute-values.html">attributeValues</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">attributeValues</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-key-value/index.html"><span class="identifier">KeyValue</span></a><span class="symbol">&gt;</span></code>
+<p>the values of each attribute in the description. This is a dictionary from attribute
+name to attribute value, each attribute value must have a type in <a href="../-attribute-schema/-type/index.html">AttributeSchema.Type</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="data-model.html">dataModel</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">dataModel</span><span class="symbol">: </span><a href="../-data-model/index.html"><span class="identifier">DataModel</span></a><span class="symbol">?</span></code>
+<p>optional schema of this description. If none is provided then the attribute values will not be
+checked against a schema. Schemas are extremely useful for preventing problems hard to debug, and are highly recommended.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="data-model-name.html">dataModelName</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">dataModelName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>the name of the default data model. If a data model is provided, this parameter is ignored.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="equals.html">equals</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef.Description$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Checks the equality of two Description objects.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="from-proto.html">fromProto</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromProto</span><span class="symbol">(</span><span class="identifier" id="ai.fetch.oef.Description$fromProto(fetch.oef.pb.QueryOuterClass.Query.Instance)/obj">obj</span><span class="symbol">:</span>&nbsp;<a href="../../fetch.oef.pb/-query-outer-class/-query/-instance/index.html"><span class="identifier">QueryOuterClass.Query.Instance</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Constructs Description object from protocol buffer message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hash-code.html">hashCode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Calculates the hash code for the object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-agent-description.html">toAgentDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toAgentDescription</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fetch.oef.pb/-agent-outer-class/-agent-description/index.html"><span class="identifier">AgentOuterClass.AgentDescription</span></a><span class="symbol">!</span></code>
+<p>Transforms the object to AgentDescription protocol buffer message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-proto.html">toProto</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toProto</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fetch.oef.pb/-query-outer-class/-query/-instance/index.html"><span class="identifier">QueryOuterClass.Query.Instance</span></a></code>
+<p>Transforms Description object to protocol buffer message.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../logger.html">logger</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../logger.html#R"><span class="identifier">R</span></a><span class="symbol">.</span><span class="identifier">logger</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html"><span class="identifier">Lazy</span></a><span class="symbol">&lt;</span><span class="identifier">Logger</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

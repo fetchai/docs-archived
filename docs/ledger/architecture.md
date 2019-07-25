@@ -3,9 +3,9 @@
 
 ## Sharding
 
-The Fetch.AI ledger is unlike more traditional blockchain designs. Instead of a single chain of truth, the Fetch.AI ledger is sharded into parallel lanes. 
+The Fetch.AI Ledger is unlike more traditional blockchain designs. Instead of a single chain of truth, the Fetch.AI Ledger is sharded into parallel lanes. 
 
-<center>![Memory mapping on the Fetch.AI ledger shards](../smart-contracts/img/shards-basic.png)</center>
+<center>![Memory mapping on the Fetch.AI Ledger shards](../smart-contracts/img/shards-basic.png)</center>
 
 This blockchain sharding design speeds up the network as contracts can execute concurrently and so provide a solution to the blockchain scalability problem. Furthermore, by sharding the *world state* in this way, transactions guarantee they only use certain resources, i.e. memory locations.
 
@@ -20,7 +20,7 @@ The following diagram gives a high level overview of the components making up a 
 
 ## High level architecture diagram 
 
-![Fetch.AI ledger architecture high level view](img/architecture.png)
+![Fetch.AI Ledger architecture high level view](img/architecture.png)
 
 
 !!!	note

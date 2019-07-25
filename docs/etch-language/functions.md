@@ -138,7 +138,7 @@ endfunction
 
 ```
 
-However, this is not the case with athe internal state of object types such as `Array`.
+However, this is not the case with the internal state of object types such as `Array`.
 
 
 ``` c++

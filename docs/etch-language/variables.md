@@ -121,7 +121,10 @@ function main()
 endfunction
 ```
 
-In the current version, `UInt256` is built from a `UInt64` literal, like this:
+## 32 byte unsigned integer
+
+Build a `UInt256` from a `UInt64` literal, like this:
+
 ``` c++
 function main()
 
@@ -295,10 +298,18 @@ function main()
 endfunction
 ```
 
+Currently, a `Buffer` is the *medium* for transport/exchange of data between other types, such as `SHA256` and `UInt256`. 
+
+A parallel representation is the `Array<UInt8>` type.
+
+
+
 
 ## Maps
 
 Declare the dictionary `Map` type with `Map<KeyType, ValueType>()`.
+
+The function `count()` returns an `Int32` value representing the number of entries in the `Map`.
 
 ``` c++
 function main()
@@ -311,6 +322,8 @@ function main()
     printLn(toString(myMap["balance1"]));
     printLn(toString(myMap["balance2"]));
     printLn(toString(myMap["balance3"]));
+
+    printLn(toString(myMap.count()));
 
 endfunction
 ```
@@ -406,7 +419,7 @@ Find out more about `etch` States <a href="./../states" target=_blank>here</a>.
 
 ## ShardedState
 
-Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.AI ledger.
+Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.AI Ledger.
 
 `ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/vlue pairs.
 

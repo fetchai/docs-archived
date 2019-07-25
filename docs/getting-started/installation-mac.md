@@ -1,6 +1,6 @@
 # Building the Fetch.AI components
 
-Currently, the Fetch.AI ledger and the open economic framework (OEF) are built and deployed individually. This will change with the main net deployment towards the end of the year.
+Currently, the Fetch.AI Ledger and the open economic framework (OEF) are built and deployed individually. This will change with the main net deployment towards the end of the year.
 
 
 ## Supported platforms
