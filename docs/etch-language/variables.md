@@ -490,7 +490,7 @@ Find out more about the `etch` `Address` type <a href="./../addresses" target=_b
 
 For more details on the mathematical computation functions above, please check the section on maths functions <a href="./../maths-functions" target=_blank>here</a>.
 
-For more details on the machine learning implementations, please check the section on machine learning functions <a href="./../ml-functions" target=_blank>here</a>.
+For more details on the machine learning implementations, please check the section on machine learning functions <a href="./../graph" target=_blank>here</a>.
 
 
 
