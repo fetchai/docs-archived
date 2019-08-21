@@ -207,6 +207,31 @@ function main()
 endfunction
 ```
 
+### Split
+
+The `split()` function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. 
+
+* Returns a one element array if there is no separator within it or if the input string is empty.
+* Returns an empty string if more than one separator is encountered consecutively.
+* Returns an empty string as the first element in the output array if the first element of the input is a separator.
+* Returns an empty string as the last element in the output array if the last element of the input is a separator.
+
+The following code takes a string and splits it on the separator ` --` returning an array of strings which it then outputs.
+
+``` c++
+function main()
+
+	var text = 'xxx --yyy --zzz';
+	printLn(text);
+    var output = text.split(' --');
+    printLn(output[0]);
+    printLn(output[1]);
+    printLn(output[2]);
+
+endfunction
+```
+
+
 
 
 ### Substring
@@ -231,6 +256,7 @@ function main()
 endfunction
 ```
 
+
 ### Trim
 
 The `trim()` function removes any whitespace from the start and end of a string.
@@ -248,29 +274,6 @@ endfunction
 ```
 
 
-### Split
-
-The `split()` function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. 
-
-* Returns a one element array if there is no separator within it or if the input string is empty.
-* Returns an empty string if more than one separator is encountered consecutively.
-* Returns an empty string as the first element in the output array if the first element of the input is a separator.
-* Returns an empty string as the last element in the output array if the last element of the input is a separator.
-
-The following code takes a string and splits it on the separator ` --` returning an array of strings which it then outputs.
-
-``` c++
-function main()
-
-	var text = 'xxx --yyy --zzz';
-	printLn(text);
-    var output = text.split(' --');
-    printLn(output[0]);
-    printLn(output[1]);
-    printLn(output[2]);
-
-endfunction
-```
 
 
 
