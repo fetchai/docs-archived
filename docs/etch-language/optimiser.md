@@ -17,7 +17,7 @@ var loss = optimiser.run(batch_size);
 
 ## Adagrad
 
-`"adagrad"` implements the <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#AdaGrad" target=_blank>Adagrad optimiser</a>.
+`"adagrad"` implements the <a href="http://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf" target=_blank>Adagrad optimiser</a>.
 
 ``` c++
 function main()
@@ -69,7 +69,7 @@ endfunction
 
 ## Momentum
 
-`"momentum"` implements the <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Momentum" target=_blank>Momentum optimiser</a>.
+`"momentum"` implements the <a href="https://www.nature.com/articles/323533a0" target=_blank>Momentum optimiser</a>.
 
 ``` c++
 	// ...
@@ -81,7 +81,7 @@ endfunction
 
 ## RMSprop
 
-`"rmsprop"` implements the <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp" target=_blank>RMSprop optimiser</a>.
+`"rmsprop"` implements the <a href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf" target=_blank>RMSprop optimiser</a>.
 
 ``` c++
 	// ...
