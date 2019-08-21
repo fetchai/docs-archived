@@ -25,7 +25,7 @@ function linear_search(an_array :Array<Int32>, search_for :Int32) : Bool
   
     var found : Bool = false;
 
-    for (i in 0:an_array.count()-1) 
+    for (i in 0:an_array.count()) 
       if (an_array[i] == search_for)
         found = true;
       endif

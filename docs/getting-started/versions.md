@@ -3,8 +3,8 @@ While we continue to work on developing separate applications for the Fetch.AI L
 For example:
 
 ``` c++
-fetchai/ledger release/v0.6.x
-fetchai/ledger-api-py release/v0.6.x
+fetchai/ledger release/v0.7.x
+fetchai/ledger-api-py release/v0.7.x
 fetchai/oef-search-pluto master
 ```
 
@@ -13,7 +13,7 @@ Against these, follow the documentation in line with the same versions.
 The documentation you are reading now is version:
 
 ``` c++
-fetchai/docs release/v0.6.x
+fetchai/docs release/v0.7.x
 ```
 
 <br/>

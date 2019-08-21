@@ -42,14 +42,19 @@ The `UInt256` label will be supplied in a future version.
 
 `Int32` is the compiler default so you don't need to explicitly declare this type.
 
+
+!!! Warn
+    Negative unsigned integers are dealt with in the manner C++ deals with them. They return a positive wrapped result dependent on size.
+
+
 Below is a selection of example integer assignations.
 
 ``` c++
 function main()
 
-	// default signed 32 bit integer type
+	// declaring the default signed positive 32 bit integer type
     var int32bit_default = 42;
-    // declaring the variable type
+    // declaring negative value
     var int32bit : Int32 = -43;
     printLn(toString(int32bit_default));
     printLn(toString(int32bit));
@@ -151,7 +156,8 @@ endfunction
 However, be careful, as any string larger than 32 bytes will be truncated. This presents the possibility that two unique strings could be regarded as equal. This gotcha will be fixed in the next release.
 -->
 
-## Floats
+
+## Floating point decimals
 
 Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation (4 and 8 bytes).
 
@@ -181,11 +187,11 @@ endfunction
 ```
 
 
-## Fixed Points
+## Fixed point decimals
 
 Fixed point variables are available as  `Fixed32` and `Fixed64` types.
 
-You must declare `FixedPoint` variables with the postfix literals `fp32` and `fp64`.
+You must declare Fixed Point variables with the postfix literals `fp32` and `fp64`.
 
 
 
@@ -215,6 +221,12 @@ function main()
 
 endfunction
 ```
+
+Make sure you are aware of the precision limits for fixed point decimals in `etch`.
+
+For up to date values for tolerance, maximum exponent, and number of decimals, please check the <a href="https://github.com/fetchai/ledger/blob/master/libs/vectorise/include/vectorise/fixed_point/fixed_point.hpp#L69" target=_blank>comments</a>.
+
+
 
 ## Boolean
 
@@ -309,6 +321,8 @@ A parallel representation is the `Array<UInt8>` type.
 
 Declare the dictionary `Map` type with `Map<KeyType, ValueType>()`.
 
+A duplicate key overrides the previous duplicate entry.
+
 The function `count()` returns an `Int32` value representing the number of entries in the `Map`.
 
 ``` c++
@@ -334,11 +348,15 @@ endfunction
 
 ## StructuredData
 
-A `StructuredData` type is another map type containing key/value pairs. 
+A `StructuredData` type is another Map type containing key/value pairs. 
 
-Declare a `StructuredData` type with `StructuredData()`.
+Declare a `StructuredData` type with `var variable_name = StructuredData();`.
 
-The `StructuredData` type has no appreciable size limit. Keys must be strings. Duplicate keys are allowed and override the most recent entry.
+Add key/value pairs with the `variable_name.set(key, value);` function.
+
+The `StructuredData` type has no appreciable size limit. 
+
+Keys must be strings. A duplicate key overrides the previous duplicate entry.
 
 Values can be any primitive, string, or array of primitives.
 
@@ -421,7 +439,7 @@ Find out more about `etch` States <a href="./../states" target=_blank>here</a>.
 
 Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.AI Ledger.
 
-`ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/vlue pairs.
+`ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/value pairs.
 
 Keys must be either `String` or `Address` types.
 
@@ -621,6 +639,8 @@ UInt64 | 0
 UInt256 | tbc
 Float32 | 0.000000
 Float64 | 0.000000
+Fixed32 | 0.00000000
+Fixed64 | 0.00000000
 Bool | false
 String | no default
 

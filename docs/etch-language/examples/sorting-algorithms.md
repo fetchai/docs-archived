@@ -117,7 +117,8 @@ endfunction
 ``` c++
 function main()
 
-    var a_list = Array<UInt32>(15);
+  // needs to be an even number length
+    var a_list = Array<UInt32>(16);
 
     for (i in 0:a_list.count())
         a_list[i] = rand(0u32, 1000u32);
@@ -132,32 +133,37 @@ endfunction
 
 function merge(a_list : Array<UInt32>)
 
-    //print("Splitting "); printLn(a_list);
+    // print("Splitting "); printLn(a_list);
+    // TODO: checking for odd length array
 
     if (a_list.count() > 1)
-        var initial_count = a_list.count();
+
         var mid = a_list.count() / 2;
 
         var left_half = Array<UInt32>(mid);
-        var right_half = Array<UInt32>(a_list.count()-mid);
+        var right_half = Array<UInt32>(mid);
 
         for (x in 0:mid)
             left_half[x] = a_list[x];
         endfor
 
+        var count = 0;
         for (y in mid:a_list.count())
-            right_half[y-mid] = a_list[y];
+            right_half[count] = a_list[y];
+            count += 1;
         endfor
-
+        
         // print("Left half "); printLn(left_half);
         // print("Right half "); printLn(right_half);
 
         merge(left_half);
         merge(right_half);
 
+
         var i = 0;
         var j = 0;
         var k = 0;
+
 
         while (i < left_half.count() && j < right_half.count())
             if (left_half[i] < right_half[j])
@@ -171,19 +177,19 @@ function merge(a_list : Array<UInt32>)
             k=k+1;
         endwhile
 
-
+        
         while (i < left_half.count())
             a_list[k] = left_half[i];
             i += 1;
             k += 1;
         endwhile
-
+        
+        
         while (j < right_half.count())
             a_list[k] = right_half[j];
             j += 1;
             k += 1;
-        endwhile
-
+        endwhile      
 
     endif 
 

@@ -4,7 +4,7 @@ The following functions help with diagnosing bugs and ensuring the correct state
 
 Force runtime errors with `panic()`. 
 
-Use `panic` for unrecoverable states. It terminates the program immediately and provides optional feedback. 
+Use `panic` for unrecoverable states. When encountering the state, `panic()` terminates the program immediately providing feedback. 
 
 ``` c++
 function main()
@@ -36,7 +36,7 @@ function main()
     printLn(toString(z));
     z =- 2;
 
-    assert(z == 1);
+    // assert(z == 1);
     assert(z == 1, "Feedback here.");
 
     printLn(toString(z));

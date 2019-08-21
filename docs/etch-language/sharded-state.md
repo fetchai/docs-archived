@@ -15,7 +15,7 @@ Declare a `ShardedState` in the same way you declare a `State`:
 ``` c++
 function main()
 
-    var state = ShardedState<Int32>("account1");
+    var shardedState = ShardedState<Int32>("account1");
 
 endfunction
 ```
@@ -25,7 +25,7 @@ The `account1` identifier is the pointer to the place in memory that holds the d
 
 ## Add key/value pairs
 
-Add key/value pairs to the `ShardedState` like this:
+Add key/value pairs to `ShardedState` like this:
 
 ``` c++
 function main()

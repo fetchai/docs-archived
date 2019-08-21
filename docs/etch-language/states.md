@@ -32,7 +32,7 @@ endfunction
 
 The above code creates a variable name `contract_amount_state` and assigns it to a `State<Int32>` with a reference `contract_amount`. It then sets a value on the `State`. 
 
-`State` references can be `Address` types.
+`State` references can be `Address` or `String` types.
 
 ``` c++
 function main()
@@ -44,7 +44,7 @@ function main()
 
 endfunction
 ```
-`State` references can also be strings and you can get and set values on a `State` object.
+You can get and set values on a `State` object.
 
 ``` c++
 function main()
@@ -93,7 +93,7 @@ function main()
 endfunction
 ```
 
-This test is useful for scenarios in which you use states to see who has what, as you might do in a token contract where you need to keep track of who has the tokens.
+This test is useful for scenarios in which you use states to see who has what, as you might do in a token contract where you need to keep track of token ownership.
 
 
 ## State references and scope
@@ -124,13 +124,13 @@ This is because the data set in `ownerState` has not yet been written to the int
 
 ## Writing `State` data to the ledger
 
-The following is true for `State` variables declared with a `var` identifier.
+The following is true for `State` types declared with a `var` identifier.
 
 Currently, `State` data is written to smart contract intermediate cache only after control has passed out of function scope.
 
 While identifiable `State` variables remain inside function scope, data is written to an intermediate object cache mechanism at construction time. 
 
-Within the same scope, such data is inaccessible to new `State` identifiers (which have not explicitly called `set()` on the `State`).
+Within the same scope, such data is inaccessible to new `State` identifiers which have not explicitly called `set()` on the `State`.
 
 You cannot access a value set on a `State` if the function scope in which it was created is still open.
 
@@ -170,7 +170,7 @@ Once control has reached the end of the contract, and no errors have arisen, the
 
 ## Anonymous `State` types
 
-Declaring an anonymous `State` type without a `var` name performs an immediate data write.
+Declaring an anonymous `State` type without a `var` identifier performs an immediate data write.
 
 ``` c++
 function main()
@@ -183,7 +183,7 @@ function main()
 endfunction
 ```
 
-This is useful for `ShardedState` types which build up with immediate write anonymous `State` types behind the scenes.
+This is useful for `ShardedState` types which initialise using these immediate write anonymous `State` types behind the scenes.
 
 
 

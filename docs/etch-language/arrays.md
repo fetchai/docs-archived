@@ -58,7 +58,7 @@ endfunction
 
 ## Nested arrays
 
-`etch` supports arrays of arrays of arrays, etc.
+`etch` supports multidimensional arrays.
 
 ``` c++
 function main()
@@ -288,18 +288,19 @@ function main()
     endfor
 
     var backArray = my2dArray.popBack(2);
-    var frontArray = my2dArray.popFront(2);
     printLn("n=2 removed back arrays: ");
-    for (k in 0:1)
+    for (k in 0:2)
         printLn(backArray[k]);
     endfor
+
+    var frontArray = my2dArray.popFront(2);
     printLn("n=2 removed front arrays: ");
-    for (l in 0:1)
+    for (l in 0:2)
         printLn(frontArray[l]);
     endfor
 
     printLn("Remaining array(s): ");
-    for (m in 0:0)
+    for (m in 0:1)
         printLn(my2dArray[m]);
     endfor
 
@@ -343,8 +344,8 @@ function main()
     my2dArray.reverse();
 
     printLn("Reversed: ");
-    for (k in 0:4)
-    printLn(my2dArray[k]);
+    for (k in 0:my2dArray.count())
+        printLn(my2dArray[k]);
     endfor
 
 endfunction

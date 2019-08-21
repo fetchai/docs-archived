@@ -1,6 +1,6 @@
 <h1>Strings</h1>
 
-`etch` supports ASCII for string representation.
+`etch` supports ASCII and UTF8 for string representation.
 
 
 
@@ -14,11 +14,13 @@ function main()
 
     var myString : String = "hello";
     var myInferredString = "hello again";
+    var myUtf8String = '人山人海';
     var x: String = null;
 
     printLn(myString);
     printLn(myInferredString);
     printLn(myInferredString + " " + myString);
+    printLn(myUtf8String);
     // printLn(myString + x); // runtime error: line xx: null reference
 
 endfunction
@@ -204,6 +206,7 @@ function main()
 
 endfunction
 ```
+
 
 
 ### Substring
