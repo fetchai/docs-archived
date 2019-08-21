@@ -628,12 +628,12 @@ Certain types not explicitly initialised receive a default value.
 
 Type | Default value 
 ------------ | ------------- 
-Int8 | tbc 
-Int16 | tbc  
+Int8 | 0 
+Int16 | 0 
 Int32 | 0  
 Int64 | 0  
-UInt8 | tbc 
-UInt16 | tbc 
+UInt8 | 0 
+UInt16 | 0 
 UInt32 | 0  
 UInt64 | 0 
 UInt256 | tbc
