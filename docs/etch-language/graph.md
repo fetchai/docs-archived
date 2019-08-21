@@ -283,11 +283,9 @@ function main()
     var tensor_shape = Array<UInt64>(1);
     tensor_shape[0] = 3u64;
     var input_tensor = Tensor(tensor_shape);
-    // setInput() here
     input_tensor.fillRandom();
 
     var label_tensor = Tensor(tensor_shape);
-    // setInput() here
     label_tensor.fillRandom();
 
     graph.addPlaceholder("input");
