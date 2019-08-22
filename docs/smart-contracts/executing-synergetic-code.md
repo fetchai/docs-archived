@@ -24,7 +24,7 @@ CONTRACT_TEXT = """
 @problem
 function createProblem(data : Array<StructuredData>) : Int32
   var value = 0;
-  for (i in 0:data.count() - 1)
+  for (i in 0:data.count())
     value += data[i].getInt32("value");
   endfor
   return value;

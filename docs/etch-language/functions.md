@@ -226,7 +226,9 @@ endfunction
 
 ### Sysargs
 
-The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value. These functions are only useful on the `etch` simulator outside of smart contract development.
+The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value. 
+
+These functions are used to pass data to the `etch` simulator.
 
 * `System.Argc()`
 * `System.Argv()`
@@ -299,7 +301,7 @@ There are more annotations for synergetic contracts.
 
 ## Getters and setters
 
-Getters and setters are available for `State` and `ShardedState` types.
+Getters and setters are available for `StructuredData`, `State`, and `ShardedState` types.
 
 [comment]: <> (Any other types have get and set?)
 

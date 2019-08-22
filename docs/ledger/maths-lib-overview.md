@@ -41,7 +41,7 @@ A `Tensor` is a wrapper for a `data_` object which is, by default, a `SharedArra
 
 Tensors have related helper classes such as `TensorIterator`, `TensorBroadcast`, and `TensorSlice` that permit efficient and convenient manipulation such as accessing, transposing, and slicing.
 
-In the next section we will look at the available mathematical functions in `etch`.
+Check out the available mathematical functions in `etch` <a href="../../etch-language/maths-functions/" target=_blank>here</a>.
 
 
 

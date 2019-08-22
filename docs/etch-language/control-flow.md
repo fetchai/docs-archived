@@ -25,7 +25,7 @@ function main()
 endfunction
 ```
 
-You can also test more complex data types for equality.
+You can also test the values contained within complex data types for equality.
 
 ``` c++
 function main()

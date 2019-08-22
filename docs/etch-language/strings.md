@@ -1,6 +1,6 @@
 <h1>Strings</h1>
 
-`etch` supports ASCII for string representation.
+`etch` supports ASCII and UTF8 for string representation.
 
 
 
@@ -14,11 +14,13 @@ function main()
 
     var myString : String = "hello";
     var myInferredString = "hello again";
+    var myUtf8String = '人山人海';
     var x: String = null;
 
     printLn(myString);
     printLn(myInferredString);
     printLn(myInferredString + " " + myString);
+    printLn(myUtf8String);
     // printLn(myString + x); // runtime error: line xx: null reference
 
 endfunction
@@ -205,46 +207,6 @@ function main()
 endfunction
 ```
 
-
-### Substring
-
-The `substr()` function extracts a substring from a string, based on specified starting and ending indices (but excluding the final character):
-
-`string.substr(start, end)`
-
-* The `start` character in the string occurs at index 0.
-* The `end` character is excluded from the substring.
-* Returns an empty string if `start` and `end` indices are equal.
-* Returns the whole string if `start` equals 0 and `end` is equal to the length of the string.
-* Fails if `start` is greater than `end`.
-* Fails if `start` is negative.
-* Fails if `end` is greater than the length of the string.
-
-``` c++
-function main()
-
-	printLn("Hello World".substr(6, 11));
-
-endfunction
-```
-
-### Trim
-
-The `trim()` function removes any whitespace from the start and end of a string.
-
-* Returns an empty string if the original string contains only whitespace.
-
-``` c++
-function main()
-
-	var myString : String = "   Hello World  ";
-	myString.trim();
-	printLn(myString);
-
-endfunction
-```
-
-
 ### Split
 
 The `split()` function takes an input string and a character(s) sequence separator to split on and returns an array of strings that does not include the separator. 
@@ -268,6 +230,50 @@ function main()
 
 endfunction
 ```
+
+
+
+
+### Substring
+
+The `substr()` function extracts a substring from a string, based on specified starting and ending indices (but excluding the final character):
+
+`string.substr(start, end)`
+
+* The `start` character in the string occurs at index 0.
+* The `end` character is excluded from the substring.
+* Returns an empty string if `start` and `end` indices are equal.
+* Returns the whole string if `start` equals 0 and `end` is equal to the length of the string.
+* Fails if `start` is greater than `end`.
+* Fails if `start` is negative.
+* Fails if `end` is greater than the length of the string.
+
+``` c++
+function main()
+
+	printLn("Hello World".substr(6, 11));
+
+endfunction
+```
+
+
+### Trim
+
+The `trim()` function removes any whitespace from the start and end of a string.
+
+* Returns an empty string if the original string contains only whitespace.
+
+``` c++
+function main()
+
+	var myString : String = "   Hello World  ";
+	myString.trim();
+	printLn(myString);
+
+endfunction
+```
+
+
 
 
 

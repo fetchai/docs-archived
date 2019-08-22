@@ -28,7 +28,9 @@ endfunction
 
 ```
 
-Here's another example which builds a SHA256 hash by concatenating strings into the context object.
+Here's another example which builds a SHA256 hash by concatenating strings and applying them to the `SHA256()` object.
+
+The example then resets the object and repeats the process with three more strings.
 
 ``` c++
 function main()
@@ -38,18 +40,18 @@ function main()
     var my_string_value_3 = "vvvowywnklhjxlmxxxxxxxxxxxxxxxxxxxxxxxxtreretrgy653wre6548";
 
     // create a SHA256() context object
-    var sha256_hasher_context = SHA256();
+    var sha256_hash = SHA256();
     // give it your strings
-    sha256_hasher_context.update(my_string_value_1);
-    sha256_hasher_context.update(my_string_value_2);
-    sha256_hasher_context.update(my_string_value_3);
+    sha256_hash.update(my_string_value_1);
+    sha256_hash.update(my_string_value_2);
+    sha256_hash.update(my_string_value_3);
 
     // finalise the context and print the hash value
-    var hash_value_of_concatenated_strings_1_2_3 = sha256_hasher_context.final(); 
+    var hash_value_of_concatenated_strings_1_2_3 = sha256_hash.final(); 
     printLn("Hash of my concatenated string 1,2,3 = " + toString(hash_value_of_concatenated_strings_1_2_3));
 
     // RESETTING context of the hasher since we want to start calculate hash from the scratch
-    sha256_hasher_context.reset();
+    sha256_hash.reset();
     
     // more strings
     var my_string_value_4 = "12345fg";
@@ -57,11 +59,11 @@ function main()
     var my_string_value_6 = "{}:>L$%^:c";
 
     // add to context
-    sha256_hasher_context.update(my_string_value_4);
-    sha256_hasher_context.update(my_string_value_5);
-    sha256_hasher_context.update(my_string_value_6);
+    sha256_hash.update(my_string_value_4);
+    sha256_hash.update(my_string_value_5);
+    sha256_hash.update(my_string_value_6);
     // finalise and print the value
-    var hash_value_of_concatenated_strings_4_5_6 = sha256_hasher_context.final();
+    var hash_value_of_concatenated_strings_4_5_6 = sha256_hash.final();
     printLn("Hash of my concatenated string 4,5,6 = " + toString(hash_value_of_concatenated_strings_4_5_6));
 
 endfunction

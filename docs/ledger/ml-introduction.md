@@ -31,7 +31,7 @@ A `Graph` must be a directed acyclic graph (DAG). Therefore, when adding nodes, 
 
 Nodes are positions in the graph which know from which other nodes to draw inputs. They are able to perform forward and backward computation according to a particular operation, or `Op`. 
 
-Each node is associated with a particular `Op` and this defines the specifics of what happens whenever the forward or backward methods are called. Often the forward method calls upon an existing maths function from the math library; for example the addition `Op` called on the math library implementation of `Add`. The backward method computes the gradient associated with the forward operation given a particular error signal.
+Each node is associated with a particular `Op` and this defines the specifics of what happens whenever the forward or backward methods are called. Often the forward method calls upon an existing maths function from the maths library; for example the addition `Op` called on the maths library implementation of `Add`. The backward method computes the gradient associated with the forward operation given a particular error signal.
 
 
 ## Ops

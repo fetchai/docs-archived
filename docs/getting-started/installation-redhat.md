@@ -1,6 +1,6 @@
 # Building the Fetch.AI components
 
-Currently, the Fetch.AI Ledger and the open economic framework (OEF) are built and deployed invidually. This will change with the main net deployment towards the end of the year.
+Currently, the Fetch.AI Ledger and the open economic framework (OEF) are built and deployed individually. This will change with the main net deployment towards the end of the year.
 
 
 ## Supported platforms
@@ -52,7 +52,7 @@ Clone the repository:
 ``` bash
 cd [working_directory]
 git clone https://github.com/fetchai/ledger.git
-git checkout release/v0.6.x
+git checkout release/v0.7.x
 ```
 
 Update and initialise submodules from the repository root directory:

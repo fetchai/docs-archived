@@ -57,4 +57,17 @@ The above code always prints `false` when it is not contained within an `@action
 The `Address` type will eventually support *all* asymmetric cryptographic types and, more importantly, will be quantum computing ready.
 
 
+## Print Address
+
+Use `toString()` to print `Address` types.
+
+``` c++
+function main()
+
+  var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+  printLn(toString(account));
+
+endfunction
+```
+
 <br/>

@@ -373,7 +373,7 @@ It is important to manage resources whose lifecycle needs strict control, such a
 
 This is especially critical in environments where exceptions can occur.
 
-Use a scope based smart pointer concept to manage resource lifecycle. The `Smart Pointer` concept exploits the C++ native constructor-destructor (unbreakable) bond for the class/struct instance created on the stack using <a href="http://en.cppreference.com/w/cpp/language/direct_initialisation" target=_blank>direct initialisation</a> where its lifecycle is strictly controlled by the encapsulating scope inside of the created instance.
+Use a scope based smart pointer concept to manage resource lifecycle. The `Smart Pointer` concept exploits the C++ native constructor-destructor (unbreakable) bond for the class/struct instance created on the stack using <a href="https://en.cppreference.com/w/cpp/language/direct_initialization" target=_blank>direct initialisation</a> where its lifecycle is strictly controlled by the encapsulating scope inside of the created instance.
 
 The most important aspect of this strong bond is that the destructor is *automatically* called when the code flow is exiting the encapsulating scope. This includes exits caused by an exception being thrown. 
 
@@ -531,7 +531,7 @@ Below are some types which guarantee to manage **array** object types (continuou
 * `std::vector<...>` guarantees to manage a continuous block of memory (array) by definition.
 * `std::string<...>` guarantees to manage a continuous block of memory (array) by definition.
 * `SharedArray<...>` and `Array<...>` classes (from `fetch::memory` namespace) that guarantee to manage a continuous block of memory (array) by definition.
-* Classes from `fetch::byte_array` namespac, such as `BasicByteArray` 
+* Classes from `fetch::byte_array` namespace, such as `BasicByteArray` 
 
 
 
