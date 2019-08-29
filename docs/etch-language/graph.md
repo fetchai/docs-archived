@@ -18,7 +18,7 @@ The preferred method for training a `Graph` is to use a `DataLoader` and `Optimi
 
 ## Placeholders
 
-Placeholders nodes store data on the `Graph`. Nodes store data such as input data, training data, or the output data node resulting from a layer of operations.
+Placeholder nodes store data on the `Graph`. Use them to set the input for computing a forward pass of a neural network.
 
 Create a placeholder node with `addPlaceholder()`.
 
@@ -34,103 +34,6 @@ endfunction
 
 
 
-## Training a `Graph`
-
-The following functions run in order. 
-
-Steps 1-3 may run multiple times as the graph is trained. Step 4 is the final step which runs only once.
-
-1. Input the data into a `Graph`.
-2. Evaluate a forward pass on the graph.
-3. Back propagate through the graph.
-4. Apply gradients to the weights calculated at the back propagation.
-
-In `etch`, these functions are taken care of by the more efficient `DataLoader` and `Optimiser` objects which we will see in a later section.
-
-### 1. Set input
-
-Add `Tensor` input or training data to a `Graph` with the `setInput()` function which takes a previously set placeholder string.
-
-``` c++
-function main()
-
-    var graph = Graph();
-
-    var tensor_shape = Array<UInt64>(1);
-    tensor_shape[0] = 3u64;
-    var tensor = Tensor(tensor_shape);
-
-    graph.addPlaceholder("my_tensor");
-    graph.setInput("my_tensor", tensor);
-
-endfunction
-```
-
-### 2. Evaluate
-
-The `evaluate()` method performs the forward pass on the data from the placeholder parameter and returns a `Tensor` as output.
-
-`evaluate()` allows you to run all the layers or operations, or a section of them, depending on which placeholder the function receives as a parameter.
-
-``` c++
-function main()
-
-    var graph = Graph();
-
-    var tensor_shape = Array<UInt64>(1);
-    tensor_shape[0] = 3u64;
-    var tensor = Tensor(tensor_shape);
-
-    graph.addPlaceholder("my_tensor");
-    graph.setInput("my_tensor", tensor);
-
-    // set layers and operations here
-
-    var tensor_evaluated = Tensor(tensor_shape);
-    tensor_evaluated = graph.evaluate("my_tensor");
-
-endfunction
-```
-
-### 3. Back propagate
-
-Perform back propagation with the `backPropagate()` function on the relevant node accessed by placeholder parameter string. The function back propagates from the specified placeholder to any inputs leading to it.
-
-Having already made a forward pass through the `Graph()`, `backPropagate()` computes the gradient descent with respect to weights in every node.
-
-``` c++
-function main()
-
-    var graph = Graph();
-    graph.addPlaceholder("my_tensor");
-    graph.addPlaceholder("result");
-    // set input data here
-    // set operations, layers, and activations here
-    // perform forward pass with evaluate()
-    // graph.evaluate("my_tensor");
-    // back propagate
-    graph.backPropagate("result");
-
-endfunction
-```
-
-### 4. Step
-
-Run the `step()` function on a `Graph`  to generate the results. The function applies the SGD function to weights calculated by the previous training cycles.
-
-The `Fixed64` parameter value the function takes is the learning rate.
-
-``` c++
-function main()
-
-    var graph = Graph();
-    graph.step(1.0fp64);
-
-endfunction
-```
-
-!!! Note
-    `step()` will be deprecated in favour of `applyGradients()`.
 
 
 ## Operations
@@ -378,18 +281,38 @@ endfunction
 ```
 -->
 
+## Serialisation
+
+A `Graph` is serialisable and deserialisable.
+
+The following code stores a `Graph` in a `State` object. It then creates a new `Graph` object and retrieves the `Graph` from the `State`.
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var graph_state = State<Graph>("graph");
+    graph_state.set(graph);
+
+    var retrieved_graph = Graph();
+    retrieved_graph = graph_state.get();
+
+endfunction
+```
+
 
 ## Build a `Graph` example
 
-The example below declares a `Graph` object adding two placeholders to map the nodes containing the input and label data. This example sets up a graph to train a neural net for training an MNist classifier.
+The example below builds a `Graph` object by first adding two placeholder nodes which will contain the input and label data. 
 
-Next, a fully connected layer is set up, `FC_1`, containing 128 neurons and taking input data of size `28x28`. This output then feeds into a ReLU activation, `Relu_1`.
+Next, a fully connected layer is set up, `FC_1`, containing 128 neurons and taking input data of size `28x28`. The output will feed into a ReLU activation, `Relu_1`.
 
 These two steps are repeated with new fully connected layer `FC_2` taking `Relu_1` as input and consequently lowering the input dimension and output neurons. The output of this, `FC_2`, is fed into another ReLU activation, `Relu_2`.
 
-Finally, after running a final fully connected layer, we calculate a soft max activation before applying the cross entropy loss function against the `Label` data to evaluate the accuracy of the model.
+Finally, after running a final fully connected layer, we will calculate a soft max activation before applying the cross entropy loss function against the `Label` data to evaluate the accuracy of the model.
 
-The code does not show loading the data or how to train the `Graph`.
+The code does not show steps for loading the data or training the `Graph`.
 
 
 ``` c++
@@ -422,6 +345,150 @@ endfunction
 ```
 
 
+## Training a `Graph` example
+
+Manually train a neural network on a graph by repeatedly processing the following 4 steps:
+
+1. Set input data to `Graph` placeholders.
+2. Evaluate a forward pass on the `Graph`.
+3. Back propagate through the `Graph` (to compute gradients).
+4. Apply gradients to the weights calculated at the back propagation.
+
+Steps 1-3 may be processed multiple times prior to processing step 4 (the gradients will accumulate).
+
+In `etch`, these functions are taken care of by the more efficient `DataLoader` and `Optimiser` objects which we will see in a later section.
+
+
+
+
+### 1. Set input
+
+Add `Tensor` input or training data to a `Graph` with the `setInput()` function which takes a previously set placeholder string.
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var input_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+
+    graph.addPlaceholder("input");
+    graph.addPlaceholder("label");
+    graph.addFullyConnected("fc1", "input", 1, 3);
+    graph.addMeanSquareErrorLoss("error", "fc1", "label");
+
+    graph.setInput("input", input_tensor);
+    graph.setInput("label", label_tensor);   
+
+endfunction
+```
+
+### 2. Evaluate
+
+The `evaluate()` method performs a forward pass on the `Graph`, computing the output of all operations/layers as required and leading to the specified output node.
+
+The return parameter is the `Tensor` computed at the output of the specified node.
+
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var input_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+
+    graph.addPlaceholder("input");
+    graph.addPlaceholder("label");
+    graph.addFullyConnected("fc1", "input", 1, 3);
+    graph.addMeanSquareErrorLoss("error", "fc1", "label");
+
+    graph.setInput("input", input_tensor);
+    graph.setInput("label", label_tensor);
+    
+    // perform a forward pass
+    var loss = graph.evaluate("error");   
+
+endfunction
+```
+
+### 3. Back propagate
+
+Perform back propagation with the `backPropagate()` function. The function back propagates from the specified node through all ops leading to it.
+
+Having already made a prediction via the forward pass through the `Graph`, `backPropagate()` computes the error gradient with respect to the weights in every node.
+
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var input_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+
+    graph.addPlaceholder("input");
+    graph.addPlaceholder("label");
+    graph.addFullyConnected("fc1", "input", 1, 3);
+    graph.addMeanSquareErrorLoss("error", "fc1", "label");
+
+    graph.setInput("input", input_tensor);
+    graph.setInput("label", label_tensor);
+    
+    // perform a forward pass
+    var loss = graph.evaluate("error"); 
+
+    // run back propagation
+    graph.backPropagate("error");  
+
+endfunction
+```
+
+### 4. Step
+
+Run the `step()` function on a `Graph`  to generate the results. The function applies the SGD function to weights calculated by the previous training cycles.
+
+The `Fixed64` parameter value the function takes is the learning rate.
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var input_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+
+    graph.addPlaceholder("input");
+    graph.addPlaceholder("label");
+    graph.addFullyConnected("fc1", "input", 1, 3);
+    graph.addMeanSquareErrorLoss("error", "fc1", "label");
+
+    graph.setInput("input", input_tensor);
+    graph.setInput("label", label_tensor);
+    
+    // perform a forward pass
+    var loss = graph.evaluate("error"); 
+
+    // run back propagation
+    graph.backPropagate("error");  
+
+    // call step
+    graph.step(0.1fp64); 
+
+endfunction
+```
+
+!!! Note
+    `step()` will be deprecated in favour of `applyGradients()`.
 
 
 

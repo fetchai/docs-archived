@@ -100,24 +100,35 @@ Here is a current list of `etch` keywords:
         <td align="center">if</td>
         <td align="center">endif</td>
         <td align="center">else</td>
+        <td align="center">for</td>
     </tr>
     <tr>
-        <td align="center">for</td>
         <td align="center">endfor</td>
         <td align="center">while</td>
         <td align="center">endwhile</td>
-    </tr>
-    <tr>
         <td align="center">function</td>
         <td align="center">endfunction</td>
-        <td align="center">break</td>
-        <td align="center">continue</td>
     </tr>
     <tr>
+        <td align="center">break</td>
+        <td align="center">continue</td>
         <td align="center">return</td>
+        <td align="center">persistent</td>
+        <td align="center">sharded</td>
+    </tr>
+    <tr>
+        <td align="center">use</td>
+        <td align="center">as</td>
+        <td align="center">any</td>
         <td align="center">@init</td>
         <td align="center">@action</td>
-        <td align="center">@query</td>
+    </tr>
+    <tr>    
+        <td align="center">@problem</td>
+        <td align="center">@objective</td>
+        <td align="center">@work</td>
+        <td align="center">@clear</td>
+        <td align="center"> </td>
     </tr>
 </table>
 
@@ -147,9 +158,7 @@ Both line and block comments are possible:
 
 * `@query` is a function that allows you to query data residing on the ledger.
 
-
-
-We tell you all about these functions and more in the <a href="../../smart-contracts/smart-contract-intro" target=_blank>section on smart contracts</a>.
+There are further annotations for synergetic contracts. Find out about these functions and more in the <a href="../../smart-contracts/smart-contract-intro" target=_blank>section on smart contracts</a>.
 
 
 <br/>

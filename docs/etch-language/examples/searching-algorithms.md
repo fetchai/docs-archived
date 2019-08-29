@@ -65,7 +65,7 @@ function binary_search(an_array :Array<Int32>, search_for :Int32) : Bool
     var end = an_array.count(); 
     var found : Bool = false;
 
-    while(start <= end && found == false) 
+    while(start < end && found == false) 
 
         var midpoint = (start + end) / 2;
 

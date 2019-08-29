@@ -31,6 +31,66 @@ function main()
 endfunction
 ```
 
+## toString
+
+Print a `Tensor` object with no more than two dimensions with the `toString()` function.
+
+``` c++
+function main()
+
+    var tensor_shape = Array<UInt64>(2);
+    tensor_shape[0] = 3u64;
+    tensor_shape[1] = 3u64;
+
+    var tensor = Tensor(tensor_shape);
+    tensor.fillRandom();
+    printLn(tensor.toString());
+
+endfunction
+```
+
+
+## Size
+
+Get the size of a `Tensor` object with the `size()` function. It returns the total number of elements in the `Tensor`.
+
+``` c++
+function main()
+
+    var tensor_shape = Array<UInt64>(2);
+    tensor_shape[0] = 12u64;
+    tensor_shape[1] = 12u64;
+
+    var tensor = Tensor(tensor_shape);
+    printLn(tensor.size());
+
+endfunction
+```
+
+
+
+## fromString
+
+Use the `fromString()` function to insert a comma separated string of values into each element of the `Tensor`. 
+
+``` c++
+function main() 
+
+    var tensor_shape = Array<UInt64>(2);
+    tensor_shape[0] = 4u64;
+    tensor_shape[1] = 1u64;
+    
+    var tensor = Tensor(tensor_shape);
+    tensor.fillRandom();
+    printLn(tensor.toString());
+    
+    var string_vals = "1.0, 1.0, 1.0, 1.0";
+    tensor.fromString(string_vals);
+    printLn(tensor.toString());
+
+endfunction
+```
+
 
 ## Fill
 
@@ -259,7 +319,7 @@ endfunction
 The function `reshape()` allows you to reshape an already existing `Tensor` into a new dimensional shape. 
 
 !!! Note
-    The function is destructive and the previous `Tensor` data is not preserved.
+    The `reshape()` function is destructive and the previous `Tensor` data is not preserved.
 
 ``` c++
 function main()
@@ -304,40 +364,8 @@ endfunction
 ```
 
 
-## Size
-
-Get the size of a `Tensor` object with the `size()` function. It returns the total number of elements in the `Tensor`.
-
-``` c++
-function main()
-
-    var tensor_shape = Array<UInt64>(2);
-    tensor_shape[0] = 12u64;
-    tensor_shape[1] = 12u64;
-
-    var tensor = Tensor(tensor_shape);
-    printLn(tensor.size());
-
-endfunction
-```
 
 
-## toString
 
-Print a `Tensor` object with the `toString()` function.
-
-``` c++
-function main()
-
-    var tensor_shape = Array<UInt64>(2);
-    tensor_shape[0] = 3u64;
-    tensor_shape[1] = 3u64;
-
-    var tensor = Tensor(tensor_shape);
-    tensor.fillRandom();
-    printLn(tensor.toString());
-
-endfunction
-```
 
 <br/>

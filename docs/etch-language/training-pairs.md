@@ -1,13 +1,13 @@
 `TrainingPair` is a custom `etch` class used to load data into a `DataLoader`. 
 
-Training pairs are made up of pairs of training data and the corresponding training label coming from two `Tensor` types.
+A `TrainingPair` contains pairs of training data and the corresponding training label coming from two `Tensor` types.
 
-Declare and initialise a Training Pair.
+Declare and initialise a `TrainingPair`.
 
 ``` c++
 function main()
 	
-	var trainingPair = TrainingPair(tensor1, tensor2)`.
+	var trainingPair = TrainingPair(tensor1, tensor2).
 
 endfunction
 ```

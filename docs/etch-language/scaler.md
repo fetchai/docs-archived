@@ -17,14 +17,8 @@ The `min_max` flag identifies the scaler which normalises data sets in the range
 Set the `Scaler` type with the `setScale()` function.
 
 ``` c++
-function main()
-
-	// build tensors
-
-	var scaler = Scaler();
-	scaler.setScale(data_tensor, "min_max");
-
-endfunction   
+var scaler = Scaler();
+scaler.setScale(data_tensor, "min_max"); 
 ```
 
 Once the `Scaler` type is set, run the `normalise()` function to scale the data. `deNormalise()` reverses the process. Both functions return a `Tensor`.

@@ -54,16 +54,5 @@ It may be prudent to implement any essential non-deterministic behaviour outside
 
 
 
-## Fees
-
-Fetch.AI charges developers for computation and storage of data on the Fetch.AI Ledger in a manner which incentivises good coding practices.
-
-You can limit the fees paid for smart contract execution by distributing data storage over a single shard and a minimum number of shard lanes.
-
-Fees rise in a linear manner per number of shards up to the maximum number of shards, after which point the fees increase exponentially.
-
-!!! note 
-	Coming soon: details of developer fee structures for smart contract data.
-
 
 <br/>
