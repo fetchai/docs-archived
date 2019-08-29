@@ -96,7 +96,7 @@ function insertion_sort(an_array :Array<Int32>)
       var currentvalue = an_array[index];
       var position = index;
 
-      while ((position > 1) && (an_array[position - 1] > currentvalue))
+      while ((position >= 1) && (an_array[position - 1] > currentvalue))
          
           an_array[position] = an_array[position - 1];
           position = position - 1;
@@ -118,7 +118,7 @@ endfunction
 function main()
 
   // needs to be an even number length
-    var a_list = Array<UInt32>(16);
+    var a_list = Array<UInt32>(15);
 
     for (i in 0:a_list.count())
         a_list[i] = rand(0u32, 1000u32);
@@ -134,7 +134,6 @@ endfunction
 function merge(a_list : Array<UInt32>)
 
     // print("Splitting "); printLn(a_list);
-    // TODO: checking for odd length array
 
     if (a_list.count() > 1)
 
@@ -142,6 +141,10 @@ function merge(a_list : Array<UInt32>)
 
         var left_half = Array<UInt32>(mid);
         var right_half = Array<UInt32>(mid);
+
+        if (a_list.count() % 2 != 0)
+          right_half = Array<UInt32>(mid+1);
+        endif
 
         for (x in 0:mid)
             left_half[x] = a_list[x];
@@ -152,7 +155,7 @@ function merge(a_list : Array<UInt32>)
             right_half[count] = a_list[y];
             count += 1;
         endfor
-        
+
         // print("Left half "); printLn(left_half);
         // print("Right half "); printLn(right_half);
 
@@ -177,14 +180,14 @@ function merge(a_list : Array<UInt32>)
             k=k+1;
         endwhile
 
-        
+
         while (i < left_half.count())
             a_list[k] = left_half[i];
             i += 1;
             k += 1;
         endwhile
-        
-        
+
+
         while (j < right_half.count())
             a_list[k] = right_half[j];
             j += 1;
@@ -201,8 +204,76 @@ endfunction
 
 ## Quick sort
 
-!!! note 
-	Coming soon.
+``` c++
+function main()
+
+    var a_list = Array<Int32>(15);
+
+    for (i in 0:a_list.count())
+      a_list[i] = rand(0, 1000);
+    endfor
+
+    var n = a_list.count(); 
+
+    printLn(a_list); 
+    quick_sort(a_list, 0, n-1);
+    printLn(a_list);
+
+endfunction
+
+
+function quick_sort(a_list : Array<Int32>, low : Int32, high : Int32) 
+
+    var pi = 0;
+
+    if (low < high)
+
+        // get the partition index
+        pi = partition(a_list, low, high);
+
+        quick_sort(a_list, low, pi-1);
+        quick_sort(a_list, pi+1, high);
+
+    endif
+
+endfunction
+
+
+function partition (a_list : Array<Int32>, low : Int32, high : Int32) : Int32
+
+    var pivot = rand(low, high);
+    
+    // swap random pivot with high
+    var temp = a_list[high];
+    a_list[high] = a_list[pivot];
+    a_list[pivot] = temp;
+    
+    // track next pivot index
+    var new_pivot_index = low - 1;
+
+    for (index in low:high)
+
+        if (a_list[index] < a_list[high])
+
+            new_pivot_index = new_pivot_index + 1;
+            temp = a_list[new_pivot_index];
+            a_list[new_pivot_index] = a_list[index];
+            a_list[index] = temp;
+
+        endif
+
+    endfor
+
+    // swap pivot to new spot
+    temp = a_list[new_pivot_index + 1];
+    a_list[new_pivot_index + 1] = a_list[high];
+    a_list[high] = temp;
+    
+    return new_pivot_index + 1;
+
+   
+endfunction
+```
 
 
 <br/>

@@ -122,21 +122,7 @@ function main()
 endfunction
 ```
 
-## Writing `ShardedState` data to the ledger
 
-Any number of `var` identifiers can point to the same `ShardedState` object.
-
-``` c++
-function main()
-
-    var x = ShardedState<Int32>("account1");
-    var y = ShardedState<Int32>("account1");
-    x.set("balance", 100);
-    y.set("balance", -10);
-    printLn("My state value = " + toString(x.get("balance")));
-
-endfunction
-```
 
 
 

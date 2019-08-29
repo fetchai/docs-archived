@@ -2,7 +2,11 @@
 
 `etch` is a statically-typed programming language. 
 
-Declare a variable with the keyword `var`. Declare numeric values with literals where possible. You can also use an explicit type cast operation. See below for explicit type declaration rules.
+The behaviour of value and reference types (primitives and non-primitives in Java) is the same as in other high level languages such as C++, Java, .Net, and Python.
+
+Declare a variable with the keyword `var`. 
+
+Declare numeric values with literals where possible. 
 
 
 [!comment]: <> (## Assignments TODO:)
@@ -224,7 +228,7 @@ endfunction
 
 Make sure you are aware of the precision limits for fixed point decimals in `etch`.
 
-For up to date values for tolerance, maximum exponent, and number of decimals, please check the <a href="https://github.com/fetchai/ledger/blob/master/libs/vectorise/include/vectorise/fixed_point/fixed_point.hpp#L69" target=_blank>comments</a>.
+For up to date information tolerance, maximum exponent, and number of decimal places for fixed point types, please check the <a href="https://github.com/fetchai/ledger/blob/master/libs/vectorise/include/vectorise/fixed_point/fixed_point.hpp#L69" target=_blank>comments</a>.
 
 
 
@@ -310,7 +314,7 @@ function main()
 endfunction
 ```
 
-Currently, a `Buffer` is the *medium* for transport/exchange of data between other types, such as `SHA256` and `UInt256`. 
+A `Buffer` is the medium for data transport/exchange between other types, such as `SHA256` and `UInt256`. 
 
 A parallel representation is the `Array<UInt8>` type.
 
@@ -348,17 +352,21 @@ endfunction
 
 ## StructuredData
 
-A `StructuredData` type is another Map type containing key/value pairs. 
+`StructuredData` is another Map type containing key/value pairs. 
 
 Declare a `StructuredData` type with `var variable_name = StructuredData();`.
 
 Add key/value pairs with the `variable_name.set(key, value);` function.
 
-The `StructuredData` type has no appreciable size limit. 
+* There is no appreciable size limit. 
 
-Keys must be strings. A duplicate key overrides the previous duplicate entry.
+* Keys must be strings. 
 
-Values can be any primitive, string, or array of primitives.
+* No duplicate keys allowed. 
+
+* A duplicate key overrides the previous duplicate entry.
+
+* Values can be any primitive, string, or array of primitives.
 
 An important difference to the `Map` type is that a `StructuredData` type can generate `yaml`, `json`, or similar.
 
@@ -441,11 +449,19 @@ Like `State`, a `ShardedState` is also used for reading and writing data to the 
 
 `ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/value pairs.
 
-Keys must be either `String` or `Address` types.
+* Keys must be either `String` or `Address` types.
 
-Value types must be declared at construction time.
+* Value types are declared at construction time.
 
-Declare and initialise a `ShardedState` with `ShardedState<ValueType>("ledger_identifier")`.
+* No duplicate keys allowed. 
+
+* A duplicate key overrides the previous duplicate entry.
+
+Declare and initialise a `ShardedState`. 
+
+``` c++
+var my_sharded_state = ShardedState<ValueType>("ledger_identifier")
+```
 
 Call `set()` on it to create a key/value pair. 
 
@@ -462,7 +478,7 @@ endfunction
 
 ```
 
-Find out more about `etch` ShardedStates <a href="./../sharded-state" target=_blank>here</a>.
+Find out more about `etch` `ShardedState` types <a href="./../sharded-state" target=_blank>here</a>.
 
 
 
@@ -567,43 +583,50 @@ endfunction
 
 In the table below, we detail the memory size of each data type.
 
+!!! Warning
+    Currently, the `const` value cannot be given precisely and varies depending on whether we are talking about *in-memory* or *in-permanent* size.
+
+For more information on the integer size ranges, please see the <a href="https://github.com/msgpack/msgpack/blob/master/spec.md#int-format-family" target=_blank>MessagePack specification</a>.
+
+
 Type | Memory size 
 ------------ | ------------- 
-Int8 | 1 byte 
-Int16 | 2 bytes 
-Int32 | 4 bytes  
-Int64 | 8 bytes   
-UInt8 | 1 byte 
-UInt16 | 2 bytes 
-UInt32 | 4 bytes   
-UInt64 | 8 bytes 
-UInt256 | 32 bytes 
-Float32 | 4 bytes 
-Float64 | 8 bytes 
-Bool | 1 byte 
-String | 8 bytes + length character size (changing with UTF-8) 
-Array | 8 bytes + length x element size 
-Map | 8 bytes +  n x (key + value) storage 
-StructuredData | tbc
-State | tbc
-ShardedState | tbc
-Address | 32 bytes 
+`Int8` | `1-2 byte` 
+`Int16` | `1-3 bytes` 
+`Int32` | `1-5 bytes`  
+`Int64` | `1-9 bytes`   
+`UInt8` | `1-2 byte` 
+`UInt16` | `1-3 bytes` 
+`UInt32` | `1-5 bytes`   
+`UInt64` | `1-9 bytes` 
+`UInt256` | `32 bytes` 
+`Float32` | `4 bytes` 
+`Float64` | `8 bytes` 
+`Fixed32` | `4 bytes` 
+`Fixed64` | `8 bytes` 
+`Bool` | `1 byte` 
+`String` | `len(string) + const` 
+`Array` | `len(Array<Type>) * sizeof(Type) + const` 
+`Map` | `len(Map<K, V>) * (sizeof(KeyType) + sizeof(ValueType)) + const` 
+`StructuredData` | `len(StructuredData<K, V>) * (sizeof(KeyType) + sizeof(ValueType)) + const` 
+`State` | `sizeof(Type) + const`
+`ShardedState` | `len(ShardedState<K, V>) * (sizeof(KeyType) + sizeof(ValueType)) + const`
+`Address` | `32 bytes` 
 
 
-Currently, there is a 2 unit charge per 1 byte of ledger storage.
 
 
 ## Scope
 
-`etch` has no global variables.
+`etch` scripts have no traditional global variables. They do, however, have persistent global types that represent any `State` or `ShardedState` type residing on the Fetch.AI Ledger.
 
-However, values store on the Fetch.AI Ledger can be considered global. 
+Find out more about persistent global types <a href="/etch-language/persistent-globals/" target=_blank>here.</a>
 
 
 
 ## Null
 
-Non-primitives can be set to null. 
+Reference types can be set to null. 
 
 ``` c++
 function main()
@@ -637,9 +660,9 @@ UInt16 | 0
 UInt32 | 0  
 UInt64 | 0 
 UInt256 | tbc
-Float32 | 0.000000
-Float64 | 0.000000
-Fixed32 | 0.00000000
+Float32 | 0
+Float64 | 0
+Fixed32 | 0.0000
 Fixed64 | 0.00000000
 Bool | false
 String | no default

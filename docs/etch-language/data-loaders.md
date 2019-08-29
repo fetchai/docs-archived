@@ -1,8 +1,6 @@
-A `DataLoader` loads two `Tensor` data nodes to form a set of `TrainingPair` data point objects for machine learning operations.
+A `DataLoader` is an object used by an `Optimiser` for loading data into a `Graph`. Usually this data is a pair of `Tensor` types (data and label).
 
-A `DataLoader` is used in conjunction with an `Optimiser`.
-
-Declare and initialise a `DataLoader` giving a string parameter which define the type of input data. The common generic `DataLoader` takes `Tensor` objects. 
+Declare and initialise a `DataLoader` giving a string parameter which defines the type of input data. The common generic `DataLoader` takes `Tensor` objects. 
 
 ``` c++
 function main()
@@ -79,6 +77,26 @@ function main()
       dataloader.getNext();
       // do stuff here
     endwhile
+
+endfunction
+```
+
+## Serialisation
+
+A `DataLoader` is serialisable and deserialisable.
+
+The following code stores a `DataLoader` in a `State` object. It then creates a new `DataLoader` object and retrieves the `DataLoader` from the `State`.
+
+``` c++
+function main()
+
+    var dataloader = DataLoader("tensor");
+
+    var dataloader_state = State<DataLoader>("dataloader");
+    dataloader_state.set(dataloader);
+
+    var retrieved_dataloader = DataLoader("tensor");
+    retrieved_dataloader = dataloader_state.get();
 
 endfunction
 ```

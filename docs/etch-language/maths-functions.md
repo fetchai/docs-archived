@@ -223,7 +223,7 @@ endfunction
 !!! Warn
     The `pow()` implementation depends on `exp()` so the range is limited. The implementation is as follows:
 
-    `x^y = Exp(y * Log(x));`
+    `x^y = exp(y * log(x));`
 
 
 ### Special cases

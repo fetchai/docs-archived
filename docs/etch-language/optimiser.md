@@ -36,8 +36,8 @@ function main()
     data_tensor.fillRandom();
     label_tensor.fillRandom();
 
-    var dataloader = DataLoader();
-    dataloader.addData("tensor", data_tensor, label_tensor);
+    var dataloader = DataLoader("tensor");
+    dataloader.addData(data_tensor, label_tensor);
 
     var graph = Graph();
     graph.addPlaceholder("Input");
@@ -105,7 +105,7 @@ endfunction
 ```
 
 
-## Full optimsation example
+## Full optimisation example
 
 Run the collection of `Optimiser` consecutively and check that error reduction is consistent.
 
@@ -126,8 +126,8 @@ function main()
     data_tensor.fillRandom();
     label_tensor.fillRandom();
 
-    var dataloader = DataLoader();
-    dataloader.addData("tensor", data_tensor, label_tensor);
+    var dataloader = DataLoader("tensor");
+    dataloader.addData(data_tensor, label_tensor);
 
     var graph = Graph();
     graph.addPlaceholder("Input");
@@ -163,5 +163,69 @@ function main()
 
 endfunction
 ```
+
+
+
+## Reset Graph or DataLoader
+
+Reset the `Graph` or `DataLoader` into the `Optimiser` with the `setGraph()` and `setDataLoader()` functions.
+
+
+``` c++ 
+function main()
+
+    var data_shape = Array<UInt64>(2);
+    data_shape[0] = 20u64;
+    data_shape[1] = 4000u64;
+
+    var label_shape = Array<UInt64>(2);
+    label_shape[0] = 1u64;
+    label_shape[1] = 4000u64;
+
+    var data_tensor = Tensor(data_shape);
+    var label_tensor = Tensor(label_shape);
+
+    data_tensor.fillRandom();
+    label_tensor.fillRandom();
+
+    var dataloader = DataLoader("tensor");
+    dataloader.addData(data_tensor, label_tensor);
+
+    var graph = Graph();
+    graph.addPlaceholder("Input");
+    graph.addPlaceholder("Label");
+    graph.addFullyConnected("Output", "Input", 20, 1);
+    graph.addMeanSquareErrorLoss("Error", "Output", "Label");
+
+    var batch_size = 8u64;
+
+    // test that every optimiser can be constructed and that running reduces loss
+
+    var optimiser = Optimiser("adagrad", graph, dataloader, "Input", "Label", "Error");
+    var loss1 = optimiser.run(batch_size);
+
+    // build new Graph and DataLoader
+    var graph2 = Graph();
+    graph2.addPlaceholder("Input");
+    graph2.addPlaceholder("Label");
+    graph2.addFullyConnected("Output", "Input", 20, 1);
+    graph2.addMeanSquareErrorLoss("Error", "Output", "Label");
+    var dataloader2 = DataLoader("tensor");
+
+    data_tensor.fillRandom();
+    label_tensor.fillRandom();
+    dataloader2.addData(data_tensor, label_tensor);
+
+    // set new Graph and DataLoader into the Optimiser
+    optimiser.setGraph(graph2);
+    optimiser.setDataloader(dataloader2);
+    var loss2 = optimiser.run(batch_size);
+    
+    // assert(loss2 < loss1);
+
+endfunction
+```
+
+
 
 </br>
