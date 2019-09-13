@@ -12,7 +12,7 @@ To compile and build the documentation site locally, run the follwoing steps:
     >```
     >pipenv run mkdocs build --strict
     >```
-    , what his will generate the html documentaion in `site` folder.
+    , what will generate the html documentaion in `site` folder.
 
 
 3. Use the documentation:
