@@ -1,13 +1,25 @@
 ## Instructions for building the documentation locally
 
-To compile and build the documentation site locally, download and install mkdocs. Instructions are <a href="https://www.mkdocs.org/#installation" target=_blank>here</a>.
+To compile and build the documentation site locally, run the follwoing steps:
 
-You will need the material theme. You can install that with `pip install mkdocs-material`. For more information on the material theme, check out <a href="https://squidfunk.github.io/mkdocs-material/" target=_blank>their website</a>.
+1. Installing dependencies using pip & pipenv:
+    >```
+    >pip3 install pipenv
+    >pipenv install
+    >```
 
-You will also need the PymDown extensions. Install with `pip install pymdown-extensions`. For more information on the PymDown extensions, go <a href="https://squidfunk.github.io/mkdocs-material/extensions/pymdown/" target=_blank>here</a>.
+2. Build the html documentation:
+    >```
+    >pipenv run mkdocs build --strict
+    >```
+    , what his will generate the html documentaion in `site` folder.
 
-Then, clone the version of the docs you are interested in, `cd` to the `docs` root, and run `mkdocs build`, then `mkdocs serve`. 
 
-If you run in `--strict` mode, you will receive warnings about any broken links.
+3. Use the documentation:
+    Either Start the Web server with documentation locally:
+    >```
+    >pipenv run mkdocs serve
+    >```
+    , or directly open the `site/index.html` file in the browser.
 
 Have fun.
