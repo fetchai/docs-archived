@@ -146,6 +146,25 @@ api.sync(api.contracts.create(owner, contract, 2000))
 ```
 
 
+## Public keys
+
+Generate a public key for your smart contract, or `Agent`, with the `Entity` class in the Python API `crypto` package which generates a full private/public key object having a number of useful functions available on it.
+
+Instantiate an `Entity` object and wrap it in an `Address` type to generate the public key. 
+
+``` python
+from fetchai.ledger.crypto import Entity, Address
+
+entity = Entity()
+entity_address = Address(entity)
+
+print(entity_address)
+```
+There are many more functions available for `Entity` and `Address` which will be documented in due course.
+
+
+
+
 ## Test network
 
 You can run the examples on our test network, replacing the hostname and port.

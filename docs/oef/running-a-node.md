@@ -34,7 +34,7 @@ Now download the <a href="/oef/assets/node_config.json" download="">`node_config
 And run the Docker image with the configuration.
 
 ``` bash
-docker run -it -v `pwd`:/config -p 20000:20000 -p 10000:10000 -p 40000:40000 -p 7500 fetchai/oef-search:latest node no_sh --config_file /config/node_config.json
+docker run -it -v `pwd`:/config -p 20000:20000 -p 10000:10000 -p 40000:40000 -p 7500 fetchai/oef-search:latest /config/node_config.json
 ```
 
 A successful run will start producing stats dumps after a few seconds. 

@@ -1,6 +1,10 @@
 A valid public key in the OEF contains only Base58 characters, which consist of alphanumeric characters, excluding the following characters: `0` (zero), `O` (capital o), `I` (capital i)
 and `l` (lower case L).
 
+You can generate test addresses with the  the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>`ledger-api-py`(Python SDK)</a>. Check the documentation <a href="../../smart-contracts/executing-smart-contract-code/#public-keys" target=_blank>here</a>.
+
+Or...
+
 Generate a public key for your Agent with the <a href="/oef/assets/crypto.py" download="">`crypto.py`</a> script which uses the Python `cryptography` library.
 
 Simply instantiate a `Crypto` object and call the `public_key()` function. 

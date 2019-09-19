@@ -7,7 +7,7 @@ Declare and initialise a `TrainingPair`.
 ``` c++
 function main()
 	
-	var trainingPair = TrainingPair(tensor1, tensor2).
+	var trainingPair = TrainingPair(tensor1, tensor2);
 
 endfunction
 ```

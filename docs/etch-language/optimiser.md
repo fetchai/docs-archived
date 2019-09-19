@@ -69,7 +69,7 @@ endfunction
 
 ## Momentum
 
-`"momentum"` implements the <a href="https://www.nature.com/articles/323533a0" target=_blank>Momentum optimiser</a>.
+`"momentum"` implements the <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Momentum" target=_blank>Momentum optimiser</a>.
 
 ``` c++
 	// ...

@@ -336,6 +336,34 @@ endfunction
 ```
 
 
+## Squeeze
+
+The function `squeeze()` returns a copy of the `Tensor` removing any dimension with size 1.
+
+Currently, `squeeze()` throws an error if there are no dimensions in the `Tensor` of size 1.
+
+``` c++
+function main() 
+
+    var tensor_shape = Array<UInt64>(3);
+    tensor_shape[0] = 3u64;
+    tensor_shape[1] = 1u64;
+    tensor_shape[2] = 3u64;
+
+    var tensor = Tensor(tensor_shape);
+    tensor.fill(7.0fp64);
+
+    // reassign tensor
+    tensor = tensor.squeeze();
+    printLn("Squeezed!");
+
+    printLn(tensor.toString());
+
+endfunction
+```
+
+
+
 ## Serialisation
 
 A `Tensor` is serialisable and deserialisable.

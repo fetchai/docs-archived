@@ -12,4 +12,6 @@ function newPopup(url) {
 <!--<p><a href="JavaScript:newPopup('http://oef-sdk-docs.fetch.ai/oef.html');">Click here for the API.</a></p>-->
 
 
-<p><a href="JavaScript:newPopup('/oef/assets/python-api/html/oef.html');">Click here for the API.</a></p>
+<p><a href="JavaScript:newPopup('/oef/assets/python-api/html/oef.html');">Click here for the version 0.6x API.</a></p>
+
+Version 0.7x coming soon.
