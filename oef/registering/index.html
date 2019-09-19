@@ -83,7 +83,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#role-names" tabindex="1" class="md-skip">
+      <a href="#asynciocore-thread-management" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -781,6 +781,48 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#asynciocore-thread-management" title="AsyncioCore thread management" class="md-nav__link">
+    AsyncioCore thread management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-creation" title="Agent creation" class="md-nav__link">
+    Agent creation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-state" title="Agent state" class="md-nav__link">
+    Agent state
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-agent-reacting-to-arriving-messages" title="Single Agent reacting to arriving messages" class="md-nav__link">
+    Single Agent reacting to arriving messages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-agent-doing-intermittent-work" title="Single Agent doing intermittent work" class="md-nav__link">
+    Single Agent doing intermittent work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-agent-scenarios" title="Multiple Agent scenarios" class="md-nav__link">
+    Multiple Agent scenarios
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#role-names" title="Role names" class="md-nav__link">
@@ -1554,6 +1596,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Python Ledger API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Python Ledger API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../../smart-contracts/pipenv/" title="Python environment" class="md-nav__link">
       Python environment
@@ -1594,6 +1655,11 @@
     <a href="../../smart-contracts/executing-synergetic-code/" title="Executing synergetic contracts" class="md-nav__link">
       Executing synergetic contracts
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1705,6 +1771,48 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#asynciocore-thread-management" title="AsyncioCore thread management" class="md-nav__link">
+    AsyncioCore thread management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-creation" title="Agent creation" class="md-nav__link">
+    Agent creation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-state" title="Agent state" class="md-nav__link">
+    Agent state
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-agent-reacting-to-arriving-messages" title="Single Agent reacting to arriving messages" class="md-nav__link">
+    Single Agent reacting to arriving messages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-agent-doing-intermittent-work" title="Single Agent doing intermittent work" class="md-nav__link">
+    Single Agent doing intermittent work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-agent-scenarios" title="Multiple Agent scenarios" class="md-nav__link">
+    Multiple Agent scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#role-names" title="Role names" class="md-nav__link">
     Role names
   </a>
@@ -1734,9 +1842,138 @@
 <p><center>
 <img alt="View of an Agent sending requests to register to and deregister from the OEF." src="../img/register-deregister.png" title="Agents registering to and deregistering from the OEF." />
 </center></p>
-<p>Before an Agent can advertise or search for services, it must register to the OEF.</p>
-<p>Agents are created with a name and public key and they connect to the OEF with an OEF host and port number. </p>
+<p>Before an Agent can advertise or search for services, it must register onto the OEF.</p>
+<h2 id="asynciocore-thread-management"><code>AsyncioCore</code> thread management</h2>
+<p>The <code>AsyncioCore</code> class is a thread manager for <code>Agent</code> objects.</p>
+<p>Instantiate an <code>AsyncioCore</code> class and call the <code>run_threaded()</code> function to start the networking.</p>
+<p>Call <code>stop()</code> when you're done.</p>
+<div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">AsyncioCore</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+<span class="n">core</span><span class="p">.</span><span class="n">run_threaded</span><span class="p">()</span>
+
+<span class="c1">// do stuff</span>
+
+<span class="n">core</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="agent-creation"><code>Agent</code> creation</h2>
+<p>Create an <code>Agent</code> with a name and public key. </p>
+<p>The <code>Agent</code> connects to the OEF with the given OEF host and port number. </p>
+<p>Finally, include the <code>AsyncioCore</code> class in the <code>Agent</code> constructor. </p>
+<p>The following example builds a weather station agent that is managed by the <code>AsyncioCore</code> class.</p>
+<div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="p">(</span><span class="s">&quot;weatherStationSecure&quot;</span><span class="p">,</span> <span class="n">prv_key_file</span><span class="o">=</span><span class="s">&quot;examples/resources/agent_1.pem&quot;</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="mi">10005</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+<span class="n">agent</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+
 <p>On attempting to connect to the OEF, the public key is verified.</p>
+<p>Include a single <code>AsyncioCore</code> class in many <code>Agent</code> objects.</p>
+<h2 id="agent-state"><code>Agent</code> state</h2>
+<p>Query the <code>state</code> parameter of an <code>Agent</code> with <code>get_state()</code>. </p>
+<p>The <code>Agent</code> returns one of the following self-explanatory strings:</p>
+<ul>
+<li><code>offline</code>.</li>
+<li><code>connecting</code>.</li>
+<li><code>connected</code>.</li>
+<li><code>failed</code>.</li>
+<li><code>timedout</code>.</li>
+<li><code>terminated</code>.</li>
+</ul>
+<h2 id="single-agent-reacting-to-arriving-messages">Single <code>Agent</code> reacting to arriving messages</h2>
+<p>Call <code>run()</code> on a single <code>Agent</code> after connecting if the <code>Agent</code> is only going to react to arriving messages. This puts the <code>Agent</code> into a loop. </p>
+<p>The loop sleeps then checks for the <code>Agent</code> state. </p>
+<p>When the <code>Agent</code> is in a disconnected state, the loop calls <code>stop()</code> on the <code>Agent</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">AsyncioCore</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">run_threaded</span><span class="p">()</span>
+
+    <span class="c1"># create and connect the agent</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">WeatherClient</span><span class="p">(</span><span class="s2">&quot;weatherCLient&quot;</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># add queries to the agent</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;EXCEPTION:&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="single-agent-doing-intermittent-work">Single <code>Agent</code> doing intermittent work</h2>
+<p>If you have an <code>Agent</code> which not only reacts to messages but also has to do some intermittent activity, do not call <code>run()</code>.</p>
+<p>Instead, after connecting, build a loop that checks the <code>Agent</code> state for some form of disconnection, at which point the loop calls <code>stop()</code>.</p>
+<p>While the <code>Agent</code> state is not disconnected, perform the required tasks.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">doSearch</span><span class="p">():</span>
+    <span class="c1"># doing search here</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">AsyncioCore</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">run_threaded</span><span class="p">()</span>
+
+    <span class="c1"># create and connect the agent</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">WeatherClient</span><span class="p">(</span><span class="s2">&quot;weatherCLient&quot;</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># do stuff with the agent</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">agent</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;connected&quot;</span><span class="p">,</span> <span class="s2">&quot;connecting&quot;</span><span class="p">]:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">doSearch</span><span class="p">()</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;EXCEPTION:&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="multiple-agent-scenarios">Multiple <code>Agent</code> scenarios</h2>
+<p>Do not call <code>run()</code> in scenarios in which you have more than one <code>Agent</code> in play. </p>
+<p>For example, when connecting to multiple OEF cores, set up each <code>Agent</code> and call <code>connect()</code>. Then perform the specific tasks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Logger can also be a print function.</p>
+</div>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">doSpecificTasks</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
+    <span class="c1"># do stuff here</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">AsyncioCore</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="k">print</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">run_threaded</span><span class="p">()</span>
+
+    <span class="c1"># create and connect the agent</span>
+    <span class="n">agent1</span> <span class="o">=</span> <span class="n">WeatherClient</span><span class="p">(</span><span class="s2">&quot;weatherClient1&quot;</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">agent1</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+    <span class="n">agent2</span> <span class="o">=</span> <span class="n">WeatherClient</span><span class="p">(</span><span class="s2">&quot;weatherClient2&quot;</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="mi">10001</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">agent2</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># add queries to the agent</span>
+
+    <span class="k">try</span>
+        <span class="k">while</span> <span class="n">agent1</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;connected&quot;</span><span class="p">,</span> <span class="s2">&quot;connecting&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">agent2</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;connected&quot;</span><span class="p">,</span> <span class="s2">&quot;connecting&quot;</span><span class="p">]:</span>
+            <span class="n">doSpecificTasks</span><span class="p">(</span><span class="n">agent1</span><span class="p">)</span>
+            <span class="n">doSpecificTasks</span><span class="p">(</span><span class="n">agent2</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;EXCEPTION:&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">agent1</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">agent1</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+        <span class="n">agent2</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">agent2</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
 <h2 id="role-names">Role names</h2>
 <p>An Agent can perform several roles at once. </p>
 <p>In order to distinguish between roles, an Agent supplies a different name for each role.</p>

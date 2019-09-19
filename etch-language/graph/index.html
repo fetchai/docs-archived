@@ -1362,6 +1362,26 @@
     Serialisation
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#serialise-to-string" title="Serialise to string" class="md-nav__link">
+    Serialise to string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deserialise-from-string" title="Deserialise from string" class="md-nav__link">
+    Deserialise from string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1697,6 +1717,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Python Ledger API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Python Ledger API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../../smart-contracts/pipenv/" title="Python environment" class="md-nav__link">
       Python environment
@@ -1737,6 +1776,11 @@
     <a href="../../smart-contracts/executing-synergetic-code/" title="Executing synergetic contracts" class="md-nav__link">
       Executing synergetic contracts
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1946,6 +1990,26 @@
   <a href="#serialisation" title="Serialisation" class="md-nav__link">
     Serialisation
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#serialise-to-string" title="Serialise to string" class="md-nav__link">
+    Serialise to string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deserialise-from-string" title="Deserialise from string" class="md-nav__link">
+    Deserialise from string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2242,8 +2306,8 @@ Load it into a `Graph`.
 -->
 
 <h2 id="serialisation">Serialisation</h2>
-<p>A <code>Graph</code> is serialisable and deserialisable.</p>
-<p>The following code stores a <code>Graph</code> in a <code>State</code> object. It then creates a new <code>Graph</code> object and retrieves the <code>Graph</code> from the <code>State</code>.</p>
+<p>For storing on the Fetch.AI Ledger, a <code>Graph</code> is serialisable and deserialisable.</p>
+<p>The following code stores a <code>Graph</code> in a <code>State</code> object. It then creates a new <code>Graph</code> object and retrieves the previously stored <code>Graph</code> data from the <code>State</code>.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">();</span>
@@ -2253,6 +2317,86 @@ Load it into a `Graph`.
 
     <span class="n">var</span> <span class="n">retrieved_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">();</span>
     <span class="n">retrieved_graph</span> <span class="o">=</span> <span class="n">graph_state</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<h3 id="serialise-to-string">Serialise to string</h3>
+<p>It is possible to store <code>Graph</code> data in a string. This facilitates smart contract function calls.</p>
+<p>Create a string representation of a <code>Graph</code> with the <code>serialiseToString()</code> function. </p>
+<p>Then, serialise the <code>Graph</code> by setting the string into a <code>State</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span> 
+
+    <span class="n">var</span> <span class="n">tensor_shape</span> <span class="o">=</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">UInt64</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2u64</span><span class="p">;</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10u64</span><span class="p">;</span>
+
+    <span class="n">var</span> <span class="n">data_tensor</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">(</span><span class="n">tensor_shape</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">label_tensor</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">(</span><span class="n">tensor_shape</span><span class="p">);</span>
+
+    <span class="n">data_tensor</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">7.0f</span><span class="n">p64</span><span class="p">);</span>
+    <span class="n">label_tensor</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">7.0f</span><span class="n">p64</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">();</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addPlaceholder</span><span class="p">(</span><span class="s">&quot;Input&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addPlaceholder</span><span class="p">(</span><span class="s">&quot;Label&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addRelu</span><span class="p">(</span><span class="s">&quot;Output&quot;</span><span class="p">,</span> <span class="s">&quot;Input&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addMeanSquareErrorLoss</span><span class="p">(</span><span class="s">&quot;Error&quot;</span><span class="p">,</span> <span class="s">&quot;Output&quot;</span><span class="p">,</span> <span class="s">&quot;Label&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="s">&quot;Input&quot;</span><span class="p">,</span> <span class="n">data_tensor</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="s">&quot;Label&quot;</span><span class="p">,</span> <span class="n">label_tensor</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">graph_string</span> <span class="o">=</span> <span class="n">graph</span><span class="p">.</span><span class="n">serializeToString</span><span class="p">();</span>
+
+    <span class="c1">// demo the graph string</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">graph_string</span><span class="p">);</span>
+
+    <span class="c1">// serialse the Graph with its hex string representation</span>
+    <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;graph_state&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">graph_string</span><span class="p">);</span>
+
+    <span class="n">graph</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s">&quot;Error&quot;</span><span class="p">);</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<h3 id="deserialise-from-string">Deserialise from string</h3>
+<p>Retrieve a <code>Graph</code> from the ledger via its string representation with the <code>deserialiseFromString()</code> function. </p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span> 
+
+    <span class="n">var</span> <span class="n">tensor_shape</span> <span class="o">=</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">UInt64</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2u64</span><span class="p">;</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10u64</span><span class="p">;</span>
+
+    <span class="n">var</span> <span class="n">data_tensor</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">(</span><span class="n">tensor_shape</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">label_tensor</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">(</span><span class="n">tensor_shape</span><span class="p">);</span>
+
+    <span class="n">data_tensor</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">7.0f</span><span class="n">p64</span><span class="p">);</span>
+    <span class="n">label_tensor</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">7.0f</span><span class="n">p64</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">();</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addPlaceholder</span><span class="p">(</span><span class="s">&quot;Input&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addPlaceholder</span><span class="p">(</span><span class="s">&quot;Label&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addRelu</span><span class="p">(</span><span class="s">&quot;Output&quot;</span><span class="p">,</span> <span class="s">&quot;Input&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addMeanSquareErrorLoss</span><span class="p">(</span><span class="s">&quot;Error&quot;</span><span class="p">,</span> <span class="s">&quot;Output&quot;</span><span class="p">,</span> <span class="s">&quot;Label&quot;</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="s">&quot;Input&quot;</span><span class="p">,</span> <span class="n">data_tensor</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">setInput</span><span class="p">(</span><span class="s">&quot;Label&quot;</span><span class="p">,</span> <span class="n">label_tensor</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">graph_string</span> <span class="o">=</span> <span class="n">graph</span><span class="p">.</span><span class="n">serializeToString</span><span class="p">();</span>
+
+    <span class="c1">// serialse the Graph with its hex string representation</span>
+    <span class="n">var</span> <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;graph_state&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">graph_string</span><span class="p">);</span>
+
+    <span class="n">graph</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s">&quot;Error&quot;</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">retrieved_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;graph_state&quot;</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">retrieved_graph_string</span> <span class="o">=</span> <span class="n">retrieved_state</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+
+    <span class="c1">// demo the Graph string</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="n">retrieved_graph_string</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">retrieved_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">();</span>
+    <span class="n">retrieved_graph</span> <span class="o">=</span> <span class="n">retrieved_graph</span><span class="p">.</span><span class="n">deserializeFromString</span><span class="p">(</span><span class="n">retrieved_graph_string</span><span class="p">);</span>
 
 <span class="n">endfunction</span>
 </pre></div>

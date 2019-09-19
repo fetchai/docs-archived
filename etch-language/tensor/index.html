@@ -1358,6 +1358,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#squeeze" title="Squeeze" class="md-nav__link">
+    Squeeze
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#serialisation" title="Serialisation" class="md-nav__link">
     Serialisation
   </a>
@@ -1685,6 +1692,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Python Ledger API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Python Ledger API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../../smart-contracts/pipenv/" title="Python environment" class="md-nav__link">
       Python environment
@@ -1725,6 +1751,11 @@
     <a href="../../smart-contracts/executing-synergetic-code/" title="Executing synergetic contracts" class="md-nav__link">
       Executing synergetic contracts
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1962,6 +1993,13 @@
         <li class="md-nav__item">
   <a href="#reshape" title="Reshape" class="md-nav__link">
     Reshape
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#squeeze" title="Squeeze" class="md-nav__link">
+    Squeeze
   </a>
   
 </li>
@@ -2258,6 +2296,28 @@
 
     <span class="n">var</span> <span class="n">new_shape</span> <span class="o">=</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">UInt64</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
     <span class="n">tensor</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">new_shape</span><span class="p">);</span>
+
+<span class="n">endfunction</span>
+</pre></div>
+
+<h2 id="squeeze">Squeeze</h2>
+<p>The function <code>squeeze()</code> returns a copy of the <code>Tensor</code> removing any dimension with size 1.</p>
+<p>Currently, <code>squeeze()</code> throws an error if there are no dimensions in the <code>Tensor</code> of size 1.</p>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span> 
+
+    <span class="n">var</span> <span class="n">tensor_shape</span> <span class="o">=</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">UInt64</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3u64</span><span class="p">;</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1u64</span><span class="p">;</span>
+    <span class="n">tensor_shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3u64</span><span class="p">;</span>
+
+    <span class="n">var</span> <span class="n">tensor</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">(</span><span class="n">tensor_shape</span><span class="p">);</span>
+    <span class="n">tensor</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mf">7.0f</span><span class="n">p64</span><span class="p">);</span>
+
+    <span class="c1">// reassign tensor</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">.</span><span class="n">squeeze</span><span class="p">();</span>
+    <span class="n">printLn</span><span class="p">(</span><span class="s">&quot;Squeezed!&quot;</span><span class="p">);</span>
+
+    <span class="n">printLn</span><span class="p">(</span><span class="n">tensor</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
 
 <span class="n">endfunction</span>
 </pre></div>

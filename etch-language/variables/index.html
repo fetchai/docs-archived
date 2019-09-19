@@ -1687,6 +1687,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Python Ledger API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Python Ledger API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../../smart-contracts/pipenv/" title="Python environment" class="md-nav__link">
       Python environment
@@ -1727,6 +1746,11 @@
     <a href="../../smart-contracts/executing-synergetic-code/" title="Executing synergetic contracts" class="md-nav__link">
       Executing synergetic contracts
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -2004,13 +2028,13 @@
 <p>Variable naming follows the same rules as C++.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
-    <span class="n">var</span> <span class="n">ABC</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">var</span> <span class="n">abc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">var</span> <span class="n">_abc</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-    <span class="c1">// var *abc = 4; // error at &#39;*&#39;, expected variable name</span>
-    <span class="c1">// var 123 = 5; // error at &#39;123&#39;, expected variable name</span>
-    <span class="n">var</span> <span class="n">a123</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-    <span class="n">var</span> <span class="n">a_123</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">ABC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">abc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">_abc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="c1">// var *abc = 3; // error at &#39;*&#39;, expected variable name</span>
+    <span class="c1">// var 123 = 4; // error at &#39;123&#39;, expected variable name</span>
+    <span class="n">var</span> <span class="n">a123</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">a_123</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -2023,7 +2047,7 @@
 <p><code>Int32</code> is the compiler default so you don't need to explicitly declare this type.</p>
 <div class="admonition warn">
 <p class="admonition-title">Warn</p>
-<p>Negative unsigned integers are dealt with in the manner C++ deals with them. They return a positive wrapped result dependent on size.</p>
+<p>Negative unsigned integers are dealt with in the same way C++ deals with them. They return a positive wrapped result dependent on size.</p>
 </div>
 <p>Below is a selection of example integer assignations.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -2031,7 +2055,7 @@
     <span class="c1">// declaring the default signed positive 32 bit integer type</span>
     <span class="n">var</span> <span class="n">int32bit_default</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
     <span class="c1">// declaring negative value</span>
-    <span class="n">var</span> <span class="nl">int32bit</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="o">-</span><span class="mi">43</span><span class="p">;</span>
+    <span class="n">var</span> <span class="nl">int32bit</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="o">-</span><span class="mi">42</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int32bit_default</span><span class="p">));</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int32bit</span><span class="p">));</span>
 
@@ -2043,11 +2067,11 @@
     <span class="c1">// assigning various signed integer types explicitly and with label</span>
     <span class="n">var</span> <span class="n">int8a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i8</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int8a</span><span class="p">));</span> 
-    <span class="n">var</span> <span class="nl">int8b</span> <span class="p">:</span> <span class="n">Int8</span> <span class="o">=</span> <span class="o">-</span><span class="mi">0</span><span class="n">i8</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="nl">int8b</span> <span class="p">:</span> <span class="n">Int8</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">i8</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int8b</span><span class="p">));</span> 
-    <span class="n">var</span> <span class="n">int16a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i16</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="n">int16a</span> <span class="o">=</span> <span class="mi">2</span><span class="n">i16</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int16a</span><span class="p">));</span> 
-    <span class="n">var</span> <span class="nl">int16b</span> <span class="p">:</span> <span class="n">Int16</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">i16</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="nl">int16b</span> <span class="p">:</span> <span class="n">Int16</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="n">i16</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int16b</span><span class="p">));</span> 
 
 <span class="n">endfunction</span>
@@ -2060,9 +2084,9 @@
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int32a</span><span class="p">));</span>
     <span class="n">var</span> <span class="nl">int32b</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">i32</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int32b</span><span class="p">));</span>
-    <span class="n">var</span> <span class="n">int64a</span> <span class="o">=</span> <span class="mi">0</span><span class="n">i64</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">int64a</span> <span class="o">=</span> <span class="mi">2</span><span class="n">i64</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int64a</span><span class="p">));</span>
-    <span class="n">var</span> <span class="nl">int64b</span> <span class="p">:</span> <span class="n">Int64</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">i64</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="nl">int64b</span> <span class="p">:</span> <span class="n">Int64</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="n">i64</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">int64b</span><span class="p">));</span>
 
 <span class="n">endfunction</span>
@@ -2071,13 +2095,13 @@
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="c1">// assigning various unsigned integer types</span>
-    <span class="n">var</span> <span class="n">uint8a</span> <span class="o">=</span> <span class="mi">45u8</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="n">uint8a</span> <span class="o">=</span> <span class="mi">0u8</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint8a</span><span class="p">));</span> 
     <span class="n">var</span> <span class="nl">uint8b</span> <span class="p">:</span> <span class="n">UInt8</span> <span class="o">=</span> <span class="mi">1u8</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint8b</span><span class="p">));</span> 
-    <span class="n">var</span> <span class="n">uint16a</span> <span class="o">=</span> <span class="mi">0u16</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="n">uint16a</span> <span class="o">=</span> <span class="mi">2u16</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint16a</span><span class="p">));</span> 
-    <span class="n">var</span> <span class="nl">uint16b</span> <span class="p">:</span> <span class="n">UInt16</span> <span class="o">=</span> <span class="mi">1u16</span><span class="p">;</span> 
+    <span class="n">var</span> <span class="nl">uint16b</span> <span class="p">:</span> <span class="n">UInt16</span> <span class="o">=</span> <span class="mi">3u16</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint16b</span><span class="p">));</span> 
 
 <span class="n">endfunction</span>
@@ -2090,9 +2114,9 @@
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint32a</span><span class="p">));</span>
     <span class="n">var</span> <span class="nl">uint32b</span> <span class="p">:</span> <span class="n">UInt32</span> <span class="o">=</span> <span class="mi">1u32</span><span class="p">;</span> 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint32b</span><span class="p">));</span>
-    <span class="n">var</span> <span class="n">uint64a</span> <span class="o">=</span> <span class="mi">0u64</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">uint64a</span> <span class="o">=</span> <span class="mi">2u64</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint64a</span><span class="p">));</span>
-    <span class="n">var</span> <span class="nl">uint64b</span> <span class="p">:</span> <span class="n">UInt64</span> <span class="o">=</span> <span class="mi">1u64</span><span class="p">;</span>
+    <span class="n">var</span> <span class="nl">uint64b</span> <span class="p">:</span> <span class="n">UInt64</span> <span class="o">=</span> <span class="mi">3u64</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">uint64b</span><span class="p">));</span> 
 
 <span class="n">endfunction</span>
@@ -2133,14 +2157,15 @@ However, be careful, as any string larger than 32 bytes will be truncated. This 
     <span class="c1">// default 64 bit float declaration</span>
     <span class="n">var</span> <span class="n">float64bit_default</span> <span class="o">=</span> <span class="mf">64.0</span><span class="p">;</span>
     <span class="c1">// 64 bit type declaration</span>
-    <span class="n">var</span> <span class="nl">float64bit</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="mf">64.0</span><span class="p">;</span>
+    <span class="n">var</span> <span class="nl">float64bit</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="o">-</span><span class="mf">64.0</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">float64bit_default</span><span class="p">));</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">float64bit</span><span class="p">));</span>
 
-    <span class="c1">// var float32bit : Float32 = 32.0; // error: incompatible types</span>
     <span class="c1">// declare 32 bit float with `f`</span>
     <span class="n">var</span> <span class="n">float32bit</span> <span class="o">=</span> <span class="mf">32.0f</span><span class="p">;</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">float32bit</span><span class="p">));</span>
+    <span class="n">var</span> <span class="nl">float32bit_minus</span> <span class="p">:</span> <span class="n">Float32</span> <span class="o">=</span> <span class="o">-</span><span class="mf">32.0f</span><span class="p">;</span> 
+    <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">float32bit_minus</span><span class="p">));</span>
 
 <span class="n">endfunction</span>
 </pre></div>
@@ -2162,8 +2187,8 @@ However, be careful, as any string larger than 32 bytes will be truncated. This 
 <p>For brevity, you do not need the full declaration.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
-    <span class="n">var</span> <span class="n">fixed32bit</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="n">p32</span><span class="p">;</span>
-    <span class="n">var</span> <span class="n">fixed64bit</span> <span class="o">=</span> <span class="mf">3.0f</span><span class="n">p64</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">fixed32bit</span> <span class="o">=</span> <span class="o">-</span><span class="mf">32.0f</span><span class="n">p32</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">fixed64bit</span> <span class="o">=</span> <span class="o">-</span><span class="mf">64.0f</span><span class="n">p64</span><span class="p">;</span>
 
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed32bit</span><span class="p">));</span>
     <span class="n">printLn</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">fixed64bit</span><span class="p">));</span>
