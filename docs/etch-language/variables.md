@@ -19,13 +19,13 @@ Variable naming follows the same rules as C++.
 ``` c++
 function main()
 
-    var ABC = 1;
-    var abc = 2;
-    var _abc = 3;
-    // var *abc = 4; // error at '*', expected variable name
-    // var 123 = 5; // error at '123', expected variable name
-    var a123 = 6;
-    var a_123 = 7;
+    var ABC = 0;
+    var abc = 1;
+    var _abc = 2;
+    // var *abc = 3; // error at '*', expected variable name
+    // var 123 = 4; // error at '123', expected variable name
+    var a123 = 5;
+    var a_123 = 6;
 
 endfunction
 ```
@@ -48,7 +48,7 @@ The `UInt256` label will be supplied in a future version.
 
 
 !!! Warn
-    Negative unsigned integers are dealt with in the manner C++ deals with them. They return a positive wrapped result dependent on size.
+    Negative unsigned integers are dealt with in the same way C++ deals with them. They return a positive wrapped result dependent on size.
 
 
 Below is a selection of example integer assignations.
@@ -59,7 +59,7 @@ function main()
 	// declaring the default signed positive 32 bit integer type
     var int32bit_default = 42;
     // declaring negative value
-    var int32bit : Int32 = -43;
+    var int32bit : Int32 = -42;
     printLn(toString(int32bit_default));
     printLn(toString(int32bit));
 
@@ -72,11 +72,11 @@ function main()
     // assigning various signed integer types explicitly and with label
     var int8a = 0i8; 
     printLn(toString(int8a)); 
-    var int8b : Int8 = -0i8; 
+    var int8b : Int8 = -1i8; 
     printLn(toString(int8b)); 
-    var int16a = 0i16; 
+    var int16a = 2i16; 
     printLn(toString(int16a)); 
-    var int16b : Int16 = -1i16; 
+    var int16b : Int16 = -3i16; 
     printLn(toString(int16b)); 
 
 endfunction
@@ -90,9 +90,9 @@ function main()
     printLn(toString(int32a));
     var int32b : Int32 = -1i32;
     printLn(toString(int32b));
-    var int64a = 0i64;
+    var int64a = 2i64;
     printLn(toString(int64a));
-    var int64b : Int64 = -1i64; 
+    var int64b : Int64 = -3i64; 
     printLn(toString(int64b));
 
 endfunction
@@ -102,13 +102,13 @@ endfunction
 function main()
 
     // assigning various unsigned integer types
-    var uint8a = 45u8; 
+    var uint8a = 0u8; 
     printLn(toString(uint8a)); 
     var uint8b : UInt8 = 1u8; 
     printLn(toString(uint8b)); 
-    var uint16a = 0u16; 
+    var uint16a = 2u16; 
     printLn(toString(uint16a)); 
-    var uint16b : UInt16 = 1u16; 
+    var uint16b : UInt16 = 3u16; 
     printLn(toString(uint16b)); 
 
 endfunction
@@ -122,9 +122,9 @@ function main()
     printLn(toString(uint32a));
     var uint32b : UInt32 = 1u32; 
     printLn(toString(uint32b));
-    var uint64a = 0u64;
+    var uint64a = 2u64;
     printLn(toString(uint64a));
-    var uint64b : UInt64 = 1u64;
+    var uint64b : UInt64 = 3u64;
     printLn(toString(uint64b)); 
 
 endfunction
@@ -175,17 +175,18 @@ A `Float` declared with `f` is a `Float32`.
 ``` c++
 function main()
 
-	// default 64 bit float declaration
-	var float64bit_default = 64.0;
-	// 64 bit type declaration
-	var float64bit : Float64 = 64.0;
-	printLn(toString(float64bit_default));
-	printLn(toString(float64bit));
+    // default 64 bit float declaration
+    var float64bit_default = 64.0;
+    // 64 bit type declaration
+    var float64bit : Float64 = -64.0;
+    printLn(toString(float64bit_default));
+    printLn(toString(float64bit));
 
-	// var float32bit : Float32 = 32.0; // error: incompatible types
-	// declare 32 bit float with `f`
-	var float32bit = 32.0f;
-	printLn(toString(float32bit));
+    // declare 32 bit float with `f`
+    var float32bit = 32.0f;
+    printLn(toString(float32bit));
+    var float32bit_minus : Float32 = -32.0f; 
+    printLn(toString(float32bit_minus));
 
 endfunction
 ```
@@ -209,7 +210,6 @@ function main()
     printLn(toString(fixed64bit));
 
 endfunction
-
 ```
 
 For brevity, you do not need the full declaration.
@@ -217,8 +217,8 @@ For brevity, you do not need the full declaration.
 ``` c++
 function main()
 
-    var fixed32bit = 2.0fp32;
-    var fixed64bit = 3.0fp64;
+    var fixed32bit = -32.0fp32;
+    var fixed64bit = -64.0fp64;
 
     printLn(toString(fixed32bit));
     printLn(toString(fixed64bit));

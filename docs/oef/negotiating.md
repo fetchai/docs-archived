@@ -71,6 +71,9 @@ In the current version of the OEF SDK, callbacks tell Agents which step of the F
 ![View of the FIPA negotiation sequence between agents.](./img/fipa-sequence.png "The search process from agent to agent via the OEF.")
 </center>
 
+!!!	Note
+	All FIPA messages are implemented as byte streams or dictionary types.
+
 For example, Agent Alice sends a `sendCFP` (call for proposal) message containing the public key and query to Agent Bob via the OEF which forwards an `onCFP`.
 
 Agent Bob receives the `onCFP` event and replies with a `sendPropose` containing a list of proposals. 

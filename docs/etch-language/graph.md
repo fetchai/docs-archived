@@ -283,9 +283,9 @@ endfunction
 
 ## Serialisation
 
-A `Graph` is serialisable and deserialisable.
+For storing on the Fetch.AI Ledger, a `Graph` is serialisable and deserialisable.
 
-The following code stores a `Graph` in a `State` object. It then creates a new `Graph` object and retrieves the `Graph` from the `State`.
+The following code stores a `Graph` in a `State` object. It then creates a new `Graph` object and retrieves the previously stored `Graph` data from the `State`.
 
 ``` c++
 function main()
@@ -300,6 +300,98 @@ function main()
 
 endfunction
 ```
+
+
+### Serialise to string
+
+It is possible to store `Graph` data in a string. This facilitates smart contract function calls.
+
+Create a string representation of a `Graph` with the `serialiseToString()` function. 
+
+Then, serialise the `Graph` by setting the string into a `State`.
+
+``` c++
+function main() 
+
+    var tensor_shape = Array<UInt64>(2);
+    tensor_shape[0] = 2u64;
+    tensor_shape[1] = 10u64;
+    
+    var data_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+    
+    data_tensor.fill(7.0fp64);
+    label_tensor.fill(7.0fp64);
+    
+    var graph = Graph();
+    graph.addPlaceholder("Input");
+    graph.addPlaceholder("Label");
+    graph.addRelu("Output", "Input");
+    graph.addMeanSquareErrorLoss("Error", "Output", "Label");
+    graph.setInput("Input", data_tensor);
+    graph.setInput("Label", label_tensor);
+    
+    var graph_string = graph.serializeToString();
+
+    // demo the graph string
+    printLn(graph_string);
+    
+    // serialse the Graph with its hex string representation
+    var state = State<String>("graph_state");
+    state.set(graph_string);
+    
+    graph.evaluate("Error");
+
+endfunction
+```
+
+
+
+### Deserialise from string
+
+Retrieve a `Graph` from the ledger via its string representation with the `deserialiseFromString()` function. 
+
+``` c++
+function main() 
+
+    var tensor_shape = Array<UInt64>(2);
+    tensor_shape[0] = 2u64;
+    tensor_shape[1] = 10u64;
+    
+    var data_tensor = Tensor(tensor_shape);
+    var label_tensor = Tensor(tensor_shape);
+    
+    data_tensor.fill(7.0fp64);
+    label_tensor.fill(7.0fp64);
+    
+    var graph = Graph();
+    graph.addPlaceholder("Input");
+    graph.addPlaceholder("Label");
+    graph.addRelu("Output", "Input");
+    graph.addMeanSquareErrorLoss("Error", "Output", "Label");
+    graph.setInput("Input", data_tensor);
+    graph.setInput("Label", label_tensor);
+    
+    var graph_string = graph.serializeToString();
+    
+    // serialse the Graph with its hex string representation
+    var state = State<String>("graph_state");
+    state.set(graph_string);
+    
+    graph.evaluate("Error");
+
+    var retrieved_state = State<String>("graph_state");
+    var retrieved_graph_string = retrieved_state.get();
+    
+    // demo the Graph string
+    printLn(retrieved_graph_string);
+    
+    var retrieved_graph = Graph();
+    retrieved_graph = retrieved_graph.deserializeFromString(retrieved_graph_string);
+
+endfunction
+```
+
 
 
 ## Build a `Graph` example

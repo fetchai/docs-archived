@@ -20,7 +20,7 @@ The checksum comes from the hash of the first 4 bytes of the `Address`.
 
 The result is `Base58` encoded. 
 
-You can generate test addresses with the  the `ledger-api-py`(Python SDK).
+You can generate test addresses with the  the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>`ledger-api-py`(Python SDK)</a>.
 
 And in `etch`, you can instantiate an `Address` like this:
 

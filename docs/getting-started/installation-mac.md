@@ -52,7 +52,7 @@ Clone the repository:
 ``` bash
 cd [working_directory]
 git clone https://github.com/fetchai/ledger.git
-git checkout release/v0.7.x
+git checkout release/v0.8.x
 ```
 
 Update and initialise submodules from the repository root directory:

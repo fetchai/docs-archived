@@ -1,4 +1,4 @@
-For enhanced developer experience, we have introduced more succinct and ledger efficient persistent variable types for storing data on the Fetch.AI Ledger. These types are equivalent to `State` and `ShardedState` objects.
+Persistent globals are succinct and ledger efficient persistent variable types that store data on the Fetch.AI Ledger. They are equivalent to `State` and `ShardedState` objects and are the primary mechanism for shard management.
 
 Five new keywords identify these types: `persistent`, `sharded`, `use`, `as`, and `any`.
 

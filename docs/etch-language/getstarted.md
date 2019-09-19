@@ -42,7 +42,11 @@ Code editor highlighter plugins are currently available for the following IDEs:
 You can find the details <a href="https://github.com/uvue-git/fetch-code-highlighter" target=_blank>here</a>.
 -->
 
+
 ## Hello world!
+
+
+### Compile and run a single `etch` file
 
 Let’s run our first `etch` program.
 
@@ -72,4 +76,16 @@ $ ./etch hello-world.etch
 
 Hello world!
 ```
+
+
+### Compile and run two or more `etch` files
+
+It is possible to compile and run two or more `etch` files in one go. 
+
+The files are not order dependent and the single `main()` function can be in any of the files.
+
+For example, run `./etch file-1.etch file-2.etch file-n.etch`.
+
+
+
 <br/>

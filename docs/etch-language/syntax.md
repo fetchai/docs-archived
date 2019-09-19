@@ -73,6 +73,7 @@ Failed to compile.
 
 [!comment]: (All variables in `etch` receive a default value at compile time.)
 
+
 ## Main
 
 Initially, all our code snippets execute inside the `main` function:
