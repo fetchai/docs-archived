@@ -15,11 +15,7 @@
 
 	Learn how to create decentralised autonomous agents and interface them to the digital world. Learn how to negotiate with other autonomous agents and get things done.
 
-4. <a href="aea">Autonomous Agent Framework</a> <br/>
-	
-	The modular, extensible, programming framework that allows quick and easy autonomous agent assembly.
-
-5. <a href="etch-language">`etch` Language Guide</a> <br/>
+4. <a href="etch-language">`etch` Language Guide</a> <br/>
 	
 	Learn how to code in `etch`, the Turing complete scripting language for smart contracts running on the Fetch.AI Ledger. 
 
@@ -31,6 +27,11 @@
 
 	Here you will find a growing list of tutorials on building smart contracts. Feel free to submit your own tutorial or demo.
 
+<!--
+4. <a href="aea">Autonomous Agent Framework</a> <br/>
+	
+	The modular, extensible, programming framework that allows quick and easy autonomous agent assembly.
 
+-->
 
 <br/>
