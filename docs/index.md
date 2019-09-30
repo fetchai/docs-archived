@@ -27,6 +27,11 @@
 
 	Here you will find a growing list of tutorials on building smart contracts. Feel free to submit your own tutorial or demo.
 
+<!--
+4. <a href="aea">Autonomous Agent Framework</a> <br/>
+	
+	The modular, extensible, programming framework that allows quick and easy autonomous agent assembly.
 
+-->
 
 <br/>

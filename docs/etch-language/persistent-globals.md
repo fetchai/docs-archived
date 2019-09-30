@@ -242,14 +242,12 @@ function main()
     a.set(100);
     b.set(-10);
     printLn("My state value = " + toString(a.get()));
-    // My state value = 100
 
     var x = ShardedState<Int32>("account2");
     var y = ShardedState<Int32>("account2");
     x.set("balance", 100);
     y.set("balance", -10);
     printLn("My sharded state value = " + toString(x.get("balance")));
-    // My state value = -10
 
 endfunction
 ```
