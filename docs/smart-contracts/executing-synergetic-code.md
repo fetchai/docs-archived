@@ -36,13 +36,13 @@ function evaluateWork(problem : Int32, solution : Int32 ) : Int64
 endfunction
 
 @work
-function doWork(problem : Int32, nonce : BigUInt) :  Int32
+function doWork(problem : Int32, nonce : UInt256) :  Int32
   return nonce.toInt32();
 endfunction
 
 @clear
 function applyWork(problem : Int32, solution : Int32)
-  var result = State<Int32>("solution", 0);
+  var result = State<Int32>("solution");
   result.set(solution);
 endfunction
 
