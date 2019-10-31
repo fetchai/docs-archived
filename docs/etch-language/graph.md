@@ -36,9 +36,7 @@ endfunction
 
 
 
-## Operations
-
-
+## Layers
 
 ### Fully connected
 
@@ -65,7 +63,6 @@ function main()
 
 endfunction
 ```
-
 
 ### 1D convolution
 
@@ -94,9 +91,12 @@ function main()
 endfunction
 ```
 
-## Activations
+## Operations
 
-### ReLU
+
+### Activations
+
+#### ReLU
 
 The `addRelu()` function of a `Graph` adds a node which contains the rectified linear unit (ReLU) activation function. Its behaviour can be characterised as returning `x` if `x > 0`, or `0` otherwise.
 
@@ -120,7 +120,7 @@ function main()
 endfunction
 ```
 
-### Softmax
+#### Softmax
 
 The `addSoftmax()` function of a `Graph` adds a node to the `Graph` that applies the `softmax` activation function to the input `Tensor`.
 
@@ -145,7 +145,7 @@ endfunction
 ```
 
 
-### Dropout
+#### Dropout
 
 The `addDropout()` function of a `Graph` adds a node that applies the `dropout` activation function to the input `Tensor`.
 
@@ -170,9 +170,59 @@ endfunction
 ```
 
 
-## Loss functions
+#### Transpose
 
-### Cross entropy loss
+The `addTranspose()` function of a `Graph` adds a node to the Graph that applies the transpose activation function to the input `Tensor`.
+
+It takes two parameters specifying the name of the node and the name of an existing node that feeds input data.
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var tensor = Tensor(tensor_shape);
+    tensor.fillRandom();
+
+    graph.addPlaceholder("my_tensor");
+    graph.setInput("my_tensor", tensor);
+
+    graph.addTranspose("transpose", "my_tensor");
+
+endfunction
+```
+
+
+#### Exp
+
+The `addExp()` function of a `Graph` adds a node to the Graph that applies the exp activation function to the input `Tensor`.
+
+It takes two parameters specifying the name of the node and the name of an existing node that feeds input data.
+
+``` c++
+function main()
+
+    var graph = Graph();
+
+    var tensor_shape = Array<UInt64>(1);
+    tensor_shape[0] = 3u64;
+    var tensor = Tensor(tensor_shape);
+    tensor.fillRandom();
+
+    graph.addPlaceholder("my_tensor");
+    graph.setInput("my_tensor", tensor);
+
+    graph.addExp("exp", "my_tensor");
+
+endfunction
+```
+
+
+### Loss functions
+
+#### Cross entropy loss
 
 The `addCrossEntropyLoss()` function of a `Graph` is a loss function measuring the performance of a classification model. 
 
@@ -203,7 +253,7 @@ endfunction
 
 
 
-### Mean square error loss
+#### Mean square error loss
 
 The `addMeanSquareErrorLoss()` function of a `Graph` is a loss function measuring the average of the square of errors.
 
@@ -283,7 +333,7 @@ endfunction
 
 ## Serialisation
 
-For storing on the Fetch.AI Ledger, a `Graph` is serialisable and deserialisable.
+For storing on the Fetch.ai Ledger, a `Graph` is serialisable and deserialisable.
 
 The following code stores a `Graph` in a `State` object. It then creates a new `Graph` object and retrieves the previously stored `Graph` data from the `State`.
 

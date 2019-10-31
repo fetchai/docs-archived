@@ -298,12 +298,13 @@ endfunction
 
 There are more annotations for synergetic contracts.
 
+See more information on Annotations <a href="../sc-annotations/" target=_blank>here</a>.
+
 
 ## Getters and setters
 
 Getters and setters are available for `StructuredData`, `State`, and `ShardedState` types.
 
-[comment]: <> (Any other types have get and set?)
 
 * `set()`
 * `get()`

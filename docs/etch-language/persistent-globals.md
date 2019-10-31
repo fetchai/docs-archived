@@ -1,8 +1,11 @@
-Persistent globals are succinct and ledger efficient persistent variable types that store data on the Fetch.AI Ledger. They are equivalent to `State` and `ShardedState` objects and are the primary mechanism for shard management.
+Persistent globals are succinct and ledger efficient persistent variable types that store data on the Fetch.ai Ledger. They are equivalent to `State` and `ShardedState` objects and are the primary mechanism for shard management.
 
 Five new keywords identify these types: `persistent`, `sharded`, `use`, `as`, and `any`.
 
-As `etch` evolves along with the Fetch.AI Ledger, persistent globals will help ensure maximum ledger storage efficiency and we recommend their use over `State` and `ShardedState`.
+As `etch` evolves along with the Fetch.ai Ledger, persistent globals will help ensure maximum ledger storage efficiency.
+
+!!! Recommendation
+    Use the persistent global syntax instead of `State` and `ShardedState` syntax.
 
 
 
@@ -222,10 +225,6 @@ endfunction
 ```
 
 
-<!--
-## Function call limitations
-means you can't pass these variables around
--->
 
 
 ## Benefits
@@ -251,6 +250,29 @@ function main()
 
 endfunction
 ```
+
+
+## Limitations
+
+You cannot pass persistent globals around.
+
+``` c++
+persistent total : UInt32;
+
+function main()
+
+    use total as first_total;
+    first_total.set(0u32);
+
+    second(first_total);
+
+endfunction
+
+function second(passed_global : UInt32)
+    // should error
+endfunction
+```
+
 
 
 <br/>

@@ -1,1 +1,0 @@
-Current version of the Autonomous Economic Agent framework is `0.1`.

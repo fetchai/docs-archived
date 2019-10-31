@@ -1,6 +1,6 @@
 <h1>Syntax</h1>
 
-The `etch` language integrates with the Fetch.AI Ledger project. It is designed to run on a number of platforms. 
+The `etch` language integrates with the Fetch.ai Ledger project. It is designed to run on a number of platforms. 
 
 `etch` is inspired by Rust, C++, and Python, but it also has some idiosyncrasies. 
 

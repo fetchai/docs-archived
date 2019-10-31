@@ -21,7 +21,7 @@ The ERC20 contract implements following functions:
 We now go ahead and implement most of these functions. 
 
 !!! Note
-    As Fetch.AI smart contracts do not have implicit addresses, as in Ethereum, the function signatures are slightly different, as  will see below, but the overall functionality remains the same.
+    As Fetch.ai smart contracts do not have implicit addresses, as in Ethereum, the function signatures are slightly different, as  will see below, but the overall functionality remains the same.
 
 
 ## Initialisation function

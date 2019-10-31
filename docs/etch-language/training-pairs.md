@@ -1,3 +1,6 @@
+<!-- commenting out TrainingPair for now -->
+<!-- currently, 29/10/19, the implementation below is out of date -->
+
 `TrainingPair` is a custom `etch` class used to load data into a `DataLoader`. 
 
 A `TrainingPair` contains pairs of training data and the corresponding training label coming from two `Tensor` types.
