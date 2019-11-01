@@ -202,7 +202,7 @@ We place this code in `my_agent/skills/my_search/tasks.py`.
 
 Based on our skill components above, we create the following config file:
 
-``` yaml
+```yaml
 name: my_search
 authors: Fetch.ai Limited
 version: 0.1.0
