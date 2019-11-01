@@ -1,9 +1,9 @@
-The AEA gym skill demonstrates how a custom Reinforcement Learning agent may be embedded into an Autonomous Economic Agent.
+The AEA gym skill demonstrates how a custom Reinforcement Learning agent, that uses openai's <a href="https://gym.openai.com" target=_blank>gym</a> library, may be embedded into an Autonomous Economic Agent.
 
 
 ## Demo instructions
 
-Follow the Preliminaries and Installation instructions <a href="../quickstart" target=_blank>here</a>.
+Follow the Preliminaries and Installation instructions <a href="../quickstart">here</a>.
 
 Install the gym library.
 
@@ -64,7 +64,7 @@ aea run --connection gym
 You will see the gym training logs.
 
 
-<center>![AEA Visdom UI](assets/gym-training.png)</center>
+<center>![AEA gym training logs](assets/gym-training.png)</center>
 
 
 ### Delete the agent
