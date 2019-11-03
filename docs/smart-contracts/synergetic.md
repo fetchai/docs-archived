@@ -18,17 +18,5 @@ Registered miners begin to solve the problem **at the same time** and the miner 
 !!! Note
 	The winning miner is not necessarily the miner who verifies the block.
 
-## Annotations
-
-`etch` synergetic contract code includes specific annotated functions.
-
-* `@problem` specifies a problem.
-
-* `@objective` measures the solution to a given problem.
-
-* `@work` creates a solution from a random number/nonce.
-
-* `@clear` finishes the competition, zeros everything, and saves the solution.
-
 
 <br/>

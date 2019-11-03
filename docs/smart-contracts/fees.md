@@ -1,6 +1,6 @@
-Fetch.AI charges developers for computation and storage of data on the Fetch.AI Ledger in a manner which incentivises good coding practices.
+Fetch.ai charges developers for computation and storage of data on the Fetch.ai Ledger in a manner which incentivises good coding practices.
 
-With the best use of Fetch.AI Ledger types such as `State` and `ShardedState`, you can limit the fees by distributing data storage over a minimum number of shards.
+With the best use of Fetch.ai Ledger types such as `State` and `ShardedState`, you can limit the fees by distributing data storage over a minimum number of shards.
 
 Fees rise in a linear manner per number of shards up to the maximum number of shards.
 
@@ -32,7 +32,7 @@ To calculate the transaction fee, multiply the total units by the charge rate gi
 TOTAL_FEE = TOTAL_UNITS * CHARGE_RATE
 ```
 
-The Fetch.AI Ledger uses the charge rate to prioritise the order of the incoming transactions in the same way as the Ethereum and Bitcoin networks do with gas and transaction fees respectively.
+The Fetch.ai Ledger uses the charge rate to prioritise the order of the incoming transactions in the same way as the Ethereum and Bitcoin networks do with gas and transaction fees respectively.
 
 
 

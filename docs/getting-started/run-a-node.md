@@ -1,4 +1,4 @@
-<h1>Run a local node</h1>
+## Local node
 
 From the `build` folder, navigate to the constellation app folder:
 ``` bash
@@ -55,7 +55,16 @@ When you see the following message...
 ```
 ...your node is running and you will be able to test smart contracts and autonomous agents.
 
-Navigate through to the <a href="../../oef" target=_blank>OEF</a>, <a href="../../etch-language" target=_blank>`etch` language</a>, or <a href="../../smart-contracts/smart-contract-intro" target=_blank>smart contracts</a> links above and you will find instructions and tutorials.
+
+## Connect to a node on testnet
+From the same `build/apps/constellation` folder, run the following.
+``` c++
+./constellation -bootstrap -network alpha
+```
+
+## More info
+
+Navigate through to <a href="../../oef" target=_blank>OEF</a>, <a href="../../etch-language/getstarted" target=_blank>`etch` language</a>, <a href="../../smart-contracts/executing-smart-contract-code/" target=_blank>smart contracts</a>, and <a href="../../tutorials/submitting_contract" target=_blank>tutorials</a> links where you will find instructions and tutorials.
 
 
 <br/>

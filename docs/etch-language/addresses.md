@@ -1,4 +1,4 @@
-<h1>Address</h1> 
+## `Address` type format
 
 The `Address` data structure formats multiple cryptographic public key types.
 
@@ -11,9 +11,7 @@ The checksum comes from the hash of the first 4 bytes of the `Address`.
 
 <center>
 
-
 ![Creating an Address type from a public key](img/address-creation.png)
-
 
 </center>
 
@@ -22,7 +20,7 @@ The result is `Base58` encoded.
 
 You can generate test addresses with the  the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>`ledger-api-py`(Python SDK)</a>.
 
-And in `etch`, you can instantiate an `Address` like this:
+## Create an `Address`
 
 ``` java
 function main()
@@ -31,6 +29,38 @@ function main()
 
 endfunction
 ```
+
+### Type size in detail
+
+There are two `Address` formats:
+
+* **`INTERNAL`**: This is a straightforward canonical representation of a `sha256` public key and the length is always 32 bytes. This is the `Address` format used inside the Fetch.ai ledger C++ code.
+
+* **`EXTERNAL`**: This is the public format used to interact with the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger HTTP API</a> and also in smart contract `etch` code. The final size of the external `Address` result is between 50-51 bytes as the Base58 encoding process increases the size by a multiple of 1.42.
+
+In Python-type pseudocode below, we show you the steps for producing both types of `Address`. 
+
+``` python
+public_key = XYZ
+
+# simple internal representation
+canonical_address = sha256(public_key)
+
+# external representation
+RAW_public_api_address = concatenate(canonical_address, sha256(canonical_address)[0 : 4bytes])
+
+# check length
+assert(36bytes == len(RAW_public_api_address))
+
+# Base58 encoding
+public_api_address = Base58(RAW_public_api_address)
+```
+
+
+
+
+
+
 
 ## SHA256
 
@@ -57,7 +87,7 @@ The above code always prints `false` when it is not contained within an `@action
 The `Address` type will eventually support *all* asymmetric cryptographic types and, more importantly, will be quantum computing ready.
 
 
-## Print Address
+## Print `Address`
 
 Use `toString()` to print `Address` types.
 
@@ -69,5 +99,9 @@ function main()
 
 endfunction
 ```
+
+
+
+
 
 <br/>

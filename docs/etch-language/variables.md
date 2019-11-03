@@ -410,7 +410,7 @@ endfunction
 
 ## State
 
-A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.AI Ledger shards. 
+A `State` is a data structure used by `etch` smart contracts for storing and querying data on the Fetch.ai Ledger shards. 
 
 Unique identifiers for the ledger data are created at `State` construction time. These are unique to the smart contract alone.
 
@@ -445,7 +445,7 @@ Find out more about `etch` States <a href="./../states" target=_blank>here</a>.
 
 ## ShardedState
 
-Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.AI Ledger.
+Like `State`, a `ShardedState` is also used for reading and writing data to the Fetch.ai Ledger.
 
 `ShardedState` manipulates `State` types behind the scenes but, for `etch` programmer purposes, a `ShardedState` operates like a Map with key/value pairs.
 
@@ -618,7 +618,7 @@ Type | Memory size
 
 ## Scope
 
-`etch` scripts have no traditional global variables. They do, however, have persistent global types that represent any `State` or `ShardedState` type residing on the Fetch.AI Ledger.
+`etch` scripts have no traditional global variables. They do, however, have persistent global types that represent any `State` or `ShardedState` type residing on the Fetch.ai Ledger.
 
 Find out more about persistent global types <a href="/etch-language/persistent-globals/" target=_blank>here.</a>
 

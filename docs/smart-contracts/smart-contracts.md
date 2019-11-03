@@ -15,111 +15,9 @@ With this information, the `etch` VM performs a modulo 16 calculation to decide 
 
 
 
-## Smart contract structure
-
-Smart contract functions are annotated depending on the activity they perform.
-
-<H3>@init</H3>	
-
-The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment.
-
-The name of the `@init` function can be anything at all.
-
-For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. 
-
-This happens once and once only at contract deployment.
-
-
-``` c++
-@init
-function initialise(owner: Address)
-
-    var INITIAL_SUPPLY = 100000000000u64;
-    var account = State<UInt64>("owner");
-    account.set(INITIAL_SUPPLY);
-
-endfunction
-
-function main()
-
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	initialise(owner);
-
-endfunction
-```
-
-!!! Remember
-    We use `main()` in the examples to allow for testing smart contract code outside of a ledger environment.
-
-
-<H3>@action</H3>
-
-The `@action` annotation signifies a function which performs a transaction. 
-
-You cannot create a smart contract in `etch` without an `@action` function and it is these functions that trigger the charging rules for data persistence fees.
-
-The following function performs a transaction between two parties.
-
-``` c++
-@action
-function transfer(from: Address, to: Address, amount: UInt64)
-    
-    var from_balance = State<UInt64>(from); 
-    from_balance.set(1000u64);
-    var to_balance = State<UInt64>(to);
-    to_balance.set(0u64);
-
-    // check if all the conditions are valid
-    if (from_balance.get() <= amount)
-    	panic("Argh!");
-    endif
-
-    from_balance.set(from_balance.get() - amount);
-    to_balance.set(to_balance.get() + amount);
-    
-endfunction
-
-function main()
-
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	var user = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	transfer(owner, user, 100u64);
-
-endfunction
-```
-
-In the worst case, the above function needs two shards for data storage.
-
-
-<h3>@query</h3>
-
-Query functions are read-only functions that allow you to view data residing on the ledger. 
-
-The following function queries the balance of an `Address`.
-
-``` c++
-@query
-function balance(address : Address) : UInt64
-
-    var account = State<UInt64>(address);
-    account.set(100u64);
-    return account.get();
-
-endfunction
-
-function main()
-	
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	var owner_balance = balance(owner);
-	printLn(owner_balance);
-
-endfunction
-```
-
-
 ## Smart contract addresses
 
-`etch` smart contracts have a unique identification protocol for addressing on the Fetch.AI Ledger.
+`etch` smart contracts have a unique identification protocol for addressing on the Fetch.ai Ledger.
 
 `etch` smart contract identifiers are a SHA256 hash of the contract source code which is then Base64 encoded and finally concatenated with the Base64 encoded owner's public key.
 
@@ -139,12 +37,13 @@ If we run one of the above code examples in this way, `data.json` may contain th
 {"2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9": "8403000000000000"}
 ```
 
+<!-- removed in respect of Context object tx access methods
 ## Utility functions
 
 `getBlockNumber()` : returns the number of the current block in `UInt64`. 
 
 You need a node running to test this. As well as that, you can only get a result when the function is embedded within smart contract code in Python. See a coded example of `getBlockNumber()` with a running node <a href="../../tutorials/block-number" target=_blank>here</a>.
-
+-->
 
 
 

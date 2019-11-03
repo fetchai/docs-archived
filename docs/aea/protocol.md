@@ -88,7 +88,7 @@ A `models.py` module is provided by the `oef` protocol which includes classes an
 
 The `fipa` protocol definition includes a `FIPAMessage` class which gets a `protocol_id` of `fipa`.
 
-It defines FIPA negotiating terms by way of a `Peformative(Enum)`.
+It defines FIPA negotiating terms by way of a `Performative(Enum)`.
 
 ``` python
 class Performative(Enum):
@@ -156,6 +156,7 @@ The `default` protocol has a `DefaultMessage` class which gets a `protocol_id` o
 It has two message types: `BYTES` and `ERROR`, and provides error messages for the error skill which uses it.
 
 The serialisation methods `encode` and `decode` implement transformations from `Message` type to bytes and back.
+
 
 
 

@@ -6,4 +6,5 @@ A step up, if you run the weather skills demo with a ledger (Fetch.ai or Ethereu
 
 One could expand trustlessness even further by incorporating a third party as an arbitrator or some escrow contract. However, in the weather skills demo there are limits to trustlessness as the station ultimately offers unverifiable data.
 
+
 Finally, in the case of (non-fungible) token transactions where there is an atomic swap, full trustlessness is apparent. This is demonstrated in the TAC.

@@ -123,6 +123,7 @@ TO,SENDER,PROTOCOL_ID,ENCODED_MESSAGE
         
 For example:
 
+
 ``` bash
 recipient_agent,sender_agent,default,{"type": "bytes", "content": "aGVsbG8="}
 ```

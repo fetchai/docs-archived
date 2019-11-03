@@ -1,6 +1,6 @@
-## Fetch.AI wallet
+## Fetch.ai wallet
 
-The Fetch.AI wallet is available to download on <a href="https://play.google.com/store/apps/details?id=ai.fetch.wallet&hl=en_GB" target=_blank>GooglePlay</a>.
+The Fetch.ai wallet is available to download on <a href="https://play.google.com/store/apps/details?id=ai.fetch.wallet&hl=en_GB" target=_blank>GooglePlay</a>.
 
 You can store your test FET here for playing around with on the test network.
 
