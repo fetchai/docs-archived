@@ -1,4 +1,7 @@
-<h1>Sharded States</h1>
+!!! Warning
+    Use persistent global syntax to build `State` variables.
+
+## Introduction to `ShardedState` variables
 
 A `ShardedState` is like a `State` type in that data contained within a `ShardedState` will be etched upon the ledger.
 

@@ -1,4 +1,5 @@
-<h1>States</h1>
+!!! Warning
+    Use persistent global syntax to build `State` variables.
 
 ## Introduction to `State` variables
 

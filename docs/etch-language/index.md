@@ -11,9 +11,9 @@ For news, tutorials, and the latest, visit <a href="https://community.fetch.ai/"
 
 <h2>What's <code>etch</code>?</h2>
 
-`etch` is a high-level, statically-typed programming language designed for creating smart contracts on the Fetch.AI Ledger. Unlike similar languages, `etch` allows developers to code advanced compute-intensive logic for high performance scenarios such as machine learning and AI.
+`etch` is a high-level, statically-typed programming language designed for creating smart contracts on the Fetch.ai Ledger. Unlike similar languages, `etch` allows developers to code advanced compute-intensive logic for high performance scenarios such as machine learning and AI.
 
-The Fetch.AI Ledger (known as Constellation) runs compiled `etch` bytecode that is extremely robust to ensure maximum hardware-optimised performance.
+The Fetch.ai Ledger (known as Constellation) runs compiled `etch` bytecode that is extremely robust to ensure maximum hardware-optimised performance.
 
 The `etch` language imposes rigorous compilation restrictions in order to avoid unwelcome and costly runtime errors. 
 

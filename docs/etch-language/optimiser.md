@@ -1,10 +1,10 @@
 Use an `Optimiser` to run the machine learning training on a `Graph` and a `DataLoader`.
 
-Declare and initialise an `Optimser`, giving it the name of the optimisation algorithm you wish to run, the `Graph` and the `DataLoader` objects, and the placeholder nodes for the input data, training data, and error data.
+Declare and initialise an `Optimiser`, giving it the name of the optimisation algorithm you wish to run, the `Graph` and the `DataLoader` objects, and the place-holder nodes for the input data, training data, and error data.
 
 
 ``` c++
-var optimiser = Optimiser("sgd", graph, dataloader, "Input", "Label", "Error");
+var optimiser = Optimiser("sgd", graph, dataloader, {"Input1", "Input2", ...},"Label", "Error");
 ```
 
 To run the `Optimiser`, call `run()` with a batch size. Batch size sets the number of samples to train on in an epoch.
@@ -48,7 +48,7 @@ function main()
     var batch_size = 8u64;
 
     // train the data via an Adagrad Optimiser
-    var optimiser = Optimiser("adagrad", graph, dataloader, "Input", "Label", "Error");
+    var optimiser = Optimiser("adagrad", graph, dataloader, {"Input"}, "Label", "Error");
     var loss = optimiser.run(batch_size);
 
 endfunction
@@ -62,7 +62,7 @@ endfunction
 ``` c++
 	// ...
 	// train the data via an Adam Optimiser
-    var optimiser = Optimiser("adam", graph, dataloader, "Input", "Label", "Error");
+    var optimiser = Optimiser("adam", graph, dataloader, {"Input"}, "Label", "Error");
     var loss = optimiser.run(batch_size);
     // ...
 ```
@@ -74,7 +74,7 @@ endfunction
 ``` c++
 	// ...
 	// train the data via a Momentum Optimiser
-    var optimiser = Optimiser("momentum", graph,dataloader,  "Input", "Label", "Error");
+    var optimiser = Optimiser("momentum", graph,dataloader,  {"Input"}, "Label", "Error");
     var loss = optimiser.run(batch_size);
     // ...
 ```
@@ -86,7 +86,7 @@ endfunction
 ``` c++
 	// ...
 	// train the data via an RMSprop Optimiser
-    var optimiser = Optimiser("rmsprop", graph, dataloader, "Input", "Label", "Error");
+    var optimiser = Optimiser("rmsprop", graph, dataloader, {"Input"}, "Label", "Error");
     var loss = optimiser.run(batch_size);
     // ...
 ```
@@ -99,7 +99,7 @@ endfunction
 ``` c++
 	// ...
 	// train the data via an SGD Optimiser
-    var optimiser = Optimiser("sgd", graph, dataloader, "Input", "Label", "Error");
+    var optimiser = Optimiser("sgd", graph, dataloader, {"Input"}, "Label", "Error");
     var loss = optimiser.run(batch_size);
     // ...
 ```
@@ -139,22 +139,22 @@ function main()
 
     // test that every optimiser can be constructed and that running reduces loss
 
-    var optimiser1 = Optimiser("adagrad", graph, dataloader, "Input", "Label", "Error");
+    var optimiser1 = Optimiser("adagrad", graph, dataloader, {"Input"}, "Label", "Error");
     var loss = optimiser1.run(batch_size);
 
-    var optimiser2 = Optimiser("adam", graph, dataloader, "Input", "Label", "Error");
+    var optimiser2 = Optimiser("adam", graph, dataloader, {"Input"}, "Label", "Error");
     var loss2 = optimiser2.run(batch_size);
     assert(loss2 < loss);
 
-    var optimiser3 = Optimiser("momentum", graph, dataloader, "Input", "Label", "Error");
+    var optimiser3 = Optimiser("momentum", graph, dataloader, {"Input"}, "Label", "Error");
     loss = optimiser3.run(batch_size);
     assert(loss < loss2);
 
-    var optimiser4 = Optimiser("rmsprop", graph, dataloader, "Input", "Label", "Error");
+    var optimiser4 = Optimiser("rmsprop", graph, dataloader, {"Input"},"Label", "Error");
     loss2 = optimiser4.run(batch_size);
     assert(loss2 < loss);
 
-    var optimiser5 = Optimiser("sgd", graph, dataloader, "Input", "Label", "Error");
+    var optimiser5 = Optimiser("sgd", graph, dataloader, {"Input"}, "Label", "Error");
     loss = optimiser5.run(batch_size);
     assert(loss < loss2);
 
@@ -201,7 +201,7 @@ function main()
 
     // test that every optimiser can be constructed and that running reduces loss
 
-    var optimiser = Optimiser("adagrad", graph, dataloader, "Input", "Label", "Error");
+    var optimiser = Optimiser("adagrad", graph, dataloader, {"Input"}, "Label", "Error");
     var loss1 = optimiser.run(batch_size);
 
     // build new Graph and DataLoader

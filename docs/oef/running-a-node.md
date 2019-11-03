@@ -51,7 +51,7 @@ You are now running a full OEF node. It contains a core node on `port 10000` con
 
 The `launch_config.json` file in the `scripts` directory configures port forwarding on the host machine. By default, the `scripts` directory is mounted onto the container.
 
-The `image` entry in the same file defaults to the Fetch.AI public image on 
+The `image` entry in the same file defaults to the Fetch.ai public image on 
 
 The `config_file` entry points to `/config/node_config.json` which has a whole bunch of options for each node's setup.
 

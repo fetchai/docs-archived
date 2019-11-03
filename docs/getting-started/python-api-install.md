@@ -8,7 +8,7 @@ pip3 install -U fetchai-ledger-api
 Or, download and install the Python library which interacts with a running ledger node.
 
 ``` bash
-git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.8.x
+git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.9.x
 ```
 
 !!!	Tip
