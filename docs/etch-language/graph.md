@@ -386,7 +386,7 @@ function main()
     // demo the graph string
     printLn(graph_string);
     
-    // serialse the Graph with its hex string representation
+    // serialise the Graph with its hex string representation
     var state = State<String>("graph_state");
     state.set(graph_string);
     
@@ -424,7 +424,7 @@ function main()
     
     var graph_string = graph.serializeToString();
     
-    // serialse the Graph with its hex string representation
+    // serialise the Graph with its hex string representation
     var state = State<String>("graph_state");
     state.set(graph_string);
     
