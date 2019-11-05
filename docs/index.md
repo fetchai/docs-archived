@@ -27,9 +27,8 @@
 
 	Smart contracts written in `etch` run with the Python Ledger API. This section has everything you need to know about running smart contracts on the Fetch.ai Ledger.
 
-7. <a href="tutorials/submitting_contract/">Tutorials</a> <br/>
 
-	Here you will find a growing list of tutorials on building smart contracts. Feel free to submit your own tutorial or demo.
+Updated for ledger release v0.9x. See <a href="https://github.com/fetchai/ledger/releases/tag/v0.9.1" target=_blank>here</a> for a summary of changes.
 
 
 <br/>
