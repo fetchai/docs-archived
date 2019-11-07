@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{%- block site_meta %}
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+{%- block htmltitle %}
+<title>{% if page and page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+{%- endblock %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% if config.site_description %}<meta name="description" content="{{ config.site_description }}">{% endif %}
+<meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-gitbook-{{ config.theme.version }}">
+{% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
+<link rel="shortcut icon" href="{{ base_url }}/images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+{%- endblock %}
+
+{%- block styles %}
+<link href="{{ base_url }}/css/style.min.css" rel="stylesheet">
+{%- for path in extra_css %}
+<link href="{{ path }}" rel="stylesheet">
+{%- endfor %}
+{%- endblock %}
+
+{%- block extrahead %} {% endblock %}
+</head>
+
+<body>
+	<div class="menuheader">
+		<div class="headerlogo"><img src="/images/logo.png" alt="Fetch Logo"></div><ul class="menu"><li><a href="/status">Bounty </a></li><li><a href="/status">Explorer </a></li><li><a href="/status">Docs </a></li><li><a href="/status">Links </a></li><li><a href="/status">Tutorials </a></li><li><a href="/status">References </a></li></ul>
+	</div>
+<div class="book">
+	
+<div class="book-summary">
+
+{%- block search_button %}
+{%- if 'search' in config['plugins'] %}
+<div id="book-search-input" role="search">
+<input type="text" placeholder="Type to search" />
+</div> <!-- end of book-search-input -->
+{%- endif %}
+{%- endblock %}
+
+{%- block site_nav %}
+
+{% include "nav.html" %}
+
+{%- endblock %}
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+{%- if 'search' in config['plugins'] %}
+<div id="book-search-results">
+<div class="search-noresults">
+{%- endif %}
+
+<section class="normal markdown-section">
+
+{%- block content %}
+
+{% include "content.html" %}
+
+{%- endblock %}
+
+</section>
+
+{%- if 'search' in config['plugins'] %}
+</div> <!-- end of search-noresults -->
+<div class="search-results">
+<div class="has-results">
+
+<h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+<ul class="search-results-list"></ul>
+
+</div> <!-- end of has-results -->
+<div class="no-results">
+
+<h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+
+</div> <!-- end of no-results -->
+</div> <!-- end of search-results -->
+</div> <!-- end of book-search-results -->
+{%- endif %}
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+
+{%- block scripts %}
+<script src="{{ base_url }}/js/main.js"></script>
+{%- for path in extra_javascript %}
+<script src="{{ path }}"></script>
+{%- endfor %}
+{%- endblock %}
+
+{%- block libs %}
+<script src="{{ base_url }}/js/gitbook.min.js"></script>
+<script src="{{ base_url }}/js/theme.min.js"></script>
+{%- endblock %}
+</body>
+</html>

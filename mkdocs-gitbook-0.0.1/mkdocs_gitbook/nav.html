@@ -1,0 +1,48 @@
+<nav role="navigation">
+<ul class="summary">
+
+{%- if nav | length >=1 %}
+
+{% if not page.is_homepage %}
+<li class="header">{{ page.title }}</li>
+{% for toc_item in page.toc %}
+    <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+    {% for toc_item in toc_item.children %}
+        <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+    {% endfor %}
+{% endfor %}
+
+{% else %}
+
+{%- for nav_item in nav %}
+{%- if nav_item.children %}
+<li class="header">{{ nav_item.title }}</li>
+{%- for nav_item in nav_item.children %}
+{% include "nav-sub.html" %}
+{%- endfor %}
+
+
+{% else %}
+<li class="chapter{% if nav_item.active %} active{% endif %}" data-path="{{ nav_item.url }}">
+<a href="{{ nav_item.url | url }}">{{ nav_item.title }}</a>
+{%- endif %}
+{%- endfor %}
+<li class="divider"></li>
+{%- endif %}
+
+{% if config.copyright %}
+<li>{{ config.copyright }}</li>
+{% endif %}
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+
+{% endif %}
+</ul>
+
+</nav>
