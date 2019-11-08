@@ -12,11 +12,17 @@
 <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-gitbook-{{ config.theme.version }}">
 {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
 <link rel="shortcut icon" href="{{ base_url }}/images/favicon.ico" type="image/x-icon">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta name="HandheldFriendly" content="true"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta rel="next" href="" />
+
+
+
 {%- endblock %}
 
 {%- block styles %}
@@ -53,8 +59,8 @@
 
 </div> <!-- end of book-summary -->
 
-<div class="book-body">
-<div class="body-inner">
+<div class="book-body" >
+<div class="body-inner" id="book-body">
 <div class="book-header" role="navigation">
 
 <!-- Title -->
@@ -65,7 +71,9 @@
 </div> <!-- end of book-header -->
 
 <div class="page-wrapper" tabindex="-1" role="main">
-<div class="page-inner">
+<div class="page-inner" id="book-body-inner">
+
+
 
 {%- if 'search' in config['plugins'] %}
 <div id="book-search-results">
@@ -82,29 +90,34 @@
 
 </section>
 
-{%- if 'search' in config['plugins'] %}
-</div> <!-- end of search-noresults -->
+<!-- {%- if 'search' in config['plugins'] %}
+</div> 
 <div class="search-results">
 <div class="has-results">
 
 <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
 <ul class="search-results-list"></ul>
 
-</div> <!-- end of has-results -->
+</div> 
 <div class="no-results">
 
 <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
 
-</div> <!-- end of no-results -->
-</div> <!-- end of search-results -->
-</div> <!-- end of book-search-results -->
-{%- endif %}
+</div> 
+</div>
+</div> 
+{%- endif %} -->
 
 </div> <!-- end of page-inner -->
+
+<div class="bottomnav">
+	<a href="{{ page.next_page.url | url }}"><div class="rightButton">Next: </br>{{ page.next_page.title | title}}</div></a>
+	<a href="{{ page.previous_page.url | url }}"><div class="leftButton">Prev:</br>{{ page.previous_page.title | title}}</div></a>
+	
+	</div>
 </div> <!-- end of page-wrapper -->
 
 </div> <!-- end of body-inner -->
-
 </div> <!-- end of book-body -->
 
 {%- block scripts %}
@@ -117,6 +130,29 @@
 {%- block libs %}
 <script src="{{ base_url }}/js/gitbook.min.js"></script>
 <script src="{{ base_url }}/js/theme.min.js"></script>
+<script>
+document.getElementById("book-body").onscroll = function() {detectScroll()};
+
+function detectScroll() {
+  console.log("You scrolled in div.");
+
+  var d = document.getElementById("book-body-inner");
+  var e = document.getElementById("book-body");
+  var offset = e.scrollTop + window.innerHeight;
+  // var height = d.offsetHeight;
+  var h = d.getBoundingClientRect();
+  var height = h.height;
+  // console.log(d);
+  // console.log('offset = ' + offset);
+  // console.log('height = ' + height);
+
+  if (offset >= height) {
+    // console.log('At the bottom');
+  }
+}
+</script>
+
 {%- endblock %}
 </body>
+
 </html>

@@ -1,5 +1,9 @@
+#Architecture
+
 !!!	note
 	We assume the reader is comfortable with high level concepts that underpin blockchain technology, such as public key cryptography, consensus, blockchain, and smart contracts.
+
+
 
 ## Sharding
 
