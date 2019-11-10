@@ -1,6 +1,13 @@
-# Welcome to the <a href="https://fetch.ai/" target=_blank>Fetch.ai</a> documentation.
+<h1> Fetch.ai documentation</h1>
 
 
+Quickstart | tutorials
+
+What is Fetch.ai 
+
+What can you do with Fetch.ai
+
+A note on WIP
 
 
 1. <a href="getting-started/versions">Getting Started</a> <br/>

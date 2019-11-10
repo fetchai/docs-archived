@@ -29,5 +29,10 @@ For more detailed instructions, including helpful tips if you're running into er
 
 If you want to develop Smart Contracts and deploy them, or create apps to connect directly to the ledger, the Python Ledger API is your best friend. 
 
+You can see the source here, or just install with pip:
+
+Keep close attention to build versions, if your ledger is at latest, grab latest, else, stick with a lateste labeled version.
+
+
 
 <br/>
