@@ -1,11 +1,4 @@
-# Building the Fetch.ai components
-
-Currently, the Fetch.ai Ledger and the open economic framework (OEF) are built and deployed individually. This will change with the main net deployment towards the end of the year.
-
-
-## Supported platforms
-
-- Red Hat is not currently supported.
+# Installing and building the ledger on Linux Redhat
 
 
 ## Initial setup

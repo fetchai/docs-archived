@@ -3,22 +3,28 @@
 
 {%- if nav | length >=1 %}
 
-<!-- 	{% if not page.is_homepage %}
- 		<li class="header">{{ page.title }}</li>
+ 	{% if not page.is_homepage %}
+ 		<!--<li class="header">{{ page.title }}</li>
 		{% for toc_item in page.toc %}
 		    <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
 		    {% for toc_item in toc_item.children %}
 		        <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
 		    {% endfor %}
 		{% endfor %} 
+ 		-->
 
-
-	{%- for nav_item in nav %}
+		{%- for nav_item in nav %}
 
 			<li class="header">{{ nav_item.title }}</li>
-				{% if page.parent == nav_item.title %}
+				{% if page.parent == nav_item %}
 					{%- for nav_item in nav_item.children %}
-						{% include "nav-sub.html" %}
+						 {% include "nav-sub.html" %}
+						{%- endfor %}
+				{%- endif %}
+
+				{% if page.parent.parent == nav_item %}
+					{%- for nav_item in nav_item.children %}
+						 {% include "nav-sub.html" %}
 						{%- endfor %}
 				{%- endif %}
 
@@ -31,7 +37,10 @@
 
 
 
-	{% else %} -->
+	{% endif %}
+
+	{% if page.is_homepage %}
+
 
 		{%- for nav_item in nav %}
 			{%- if nav_item.children %}
@@ -53,7 +62,7 @@
 			<li>{{ config.copyright }}</li>
 	{% endif %}
 
-<!-- {% endif %} -->
+{%- endif %}
 </ul>
 
 </nav>
