@@ -1,14 +1,10 @@
+
 {%- if not nav_item.children %}
-<li>
-<a href="{{ nav_item.url|url }}" class="lightfont">{{ nav_item.title }}</a>
-</li>
-{%- else %}
-<li>
-<a href="#" class="lightfont">{{ nav_item.title }}</a>
-<ul>
-{%- for nav_item in nav_item.children %}
-{% include "nav-sub-sub.html" %}
-{%- endfor %}
-</ul>
-</li>
+	<a href={{nav_item.url | url }}><ul class="header" id="header">{{ nav_item.title }}</ul></a>
+{% else %}
+	<ul class="header" id="header_{{nav_item.title}}"><a href="#" class="sub-head">{{ nav_item.title }}</a>
+		{%- for nav_item in nav_item.children %}
+		{% include "nav-sub-sub.html" %}
+		{%- endfor %}
+	</ul>
 {%- endif %}

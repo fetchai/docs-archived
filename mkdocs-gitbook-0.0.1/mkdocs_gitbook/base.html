@@ -13,15 +13,18 @@
 {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
 <link rel="shortcut icon" href="{{ base_url }}/images/favicon.ico" type="image/x-icon">
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <meta name="HandheldFriendly" content="true"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta rel="next" href="" />
-
-
+<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>var base_url = '{{ base_url }}';</script>
 
 {%- endblock %}
 
@@ -36,9 +39,11 @@
 </head>
 
 <body>
-	<div class="menuheader">
-		<div class="headerlogo"><img src="/images/logo.png" alt="Fetch Logo"></div><ul class="menu"><li><a href="/status">Bounty </a></li><li><a href="/status">Explorer </a></li><li><a href="/status">Docs </a></li><li><a href="/status">Links </a></li><li><a href="/status">Tutorials </a></li><li><a href="/status">References </a></li></ul>
-	</div>
+  <div class="header-wrap">
+  	<div class="menuheader">
+  		<div class="headerlogo"><img src="/images/logo.png" alt="Fetch Logo"></div><ul class="menu"><li><a href="/status">Bounty </a></li><li><a href="/status">Explorer </a></li><li><a href="/status">Docs </a></li><li><a href="/status">Links </a></li><li><a href="/status">Tutorials </a></li><li><a href="/status">References </a></li></ul>
+  	</div>
+</div>
 <div class="book">
 
   {%- block search_button %}
@@ -46,6 +51,9 @@
 <div id="book-search-input" role="search">
 <input type="text" placeholder="Type to search" />
 </div> <!-- end of book-search-input -->
+
+
+
 {%- endif %}
 {%- endblock %}
 	
@@ -53,10 +61,20 @@
 
 
 
+
 {%- block site_nav %}
 
 {% include "nav.html" %}
 
+<div class="version">
+Previous versions:</br>
+<select>
+  <option value="volvo">v0.8.x</option>
+  <option value="saab">v0.6.x</option>
+  <option value="opel">v0.5.x</option>
+  <option value="audi">v0.4.x</option>
+</select>
+</div>
 {%- endblock %}
 
 </div> <!-- end of book-summary -->
@@ -76,6 +94,19 @@
 
 
 {%- if 'search' in config['plugins'] %}
+
+
+
+<h1 id="search">Search Results</h1>
+
+<form action="search.html">
+  <input name="q" id="mkdocs-search-query" type="text" >
+</form>
+
+<div id="mkdocs-search-results">
+  Sorry, page not found.
+</div>
+
 <div id="book-search-results">
 <div class="search-noresults">
 {%- endif %}
@@ -90,7 +121,7 @@
 
 </section>
 
-<!-- {%- if 'search' in config['plugins'] %}
+{%- if 'search' in config['plugins'] %}
 </div> 
 <div class="search-results">
 <div class="has-results">
@@ -106,7 +137,7 @@
 </div> 
 </div>
 </div> 
-{%- endif %} -->
+{%- endif %} 
 
 </div> <!-- end of page-inner -->
 
@@ -130,27 +161,7 @@
 {%- block libs %}
 <script src="{{ base_url }}/js/gitbook.min.js"></script>
 <script src="{{ base_url }}/js/theme.min.js"></script>
-<script>
-document.getElementById("book-body").onscroll = function() {detectScroll()};
 
-function detectScroll() {
-  console.log("You scrolled in div.");
-
-  var d = document.getElementById("book-body-inner");
-  var e = document.getElementById("book-body");
-  var offset = e.scrollTop + window.innerHeight;
-  // var height = d.offsetHeight;
-  var h = d.getBoundingClientRect();
-  var height = h.height;
-  // console.log(d);
-  // console.log('offset = ' + offset);
-  // console.log('height = ' + height);
-
-  if (offset >= height) {
-    // console.log('At the bottom');
-  }
-}
-</script>
 
 {%- endblock %}
 </body>

@@ -1,14 +1,14 @@
+<!-- page.toc https://mkdocs.readthedocs.io/en/stable/about/release-notes/#page-context -->
+
 {%- if not nav_item.children %}
 <li>
 <a href="{{ nav_item.url|url }}" class="lighterfont">{{ nav_item.title }}</a>
 </li>
 {%- else %}
-<li >
-<a href="#">{{ nav_item.title }}</a>
-<ul>
-{%- for nav_item in nav_item.children %}
-{% include "nav-sub-sub.html" %}
-{%- endfor %}
-</ul>
-</li>
+
+<ul class="header" id="header_{{nav_item.title}}"><a href="#" class="sub-sub-sub">{{ nav_item.title }}</a>
+		{%- for nav_item in nav_item.children %}
+		{% include "nav-sub-sub.html" %}
+		{%- endfor %}
+	</ul>
 {%- endif %}

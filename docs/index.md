@@ -1,6 +1,15 @@
 <h1> Fetch.ai documentation</h1>
 
 
+<div class="parent grid-box">
+<div class="div1 grid-box"> </div>
+<div class="div2 grid-box"> </div>
+<div class="div3 grid-box"> QuickStart</div>
+<div class="div4 grid-box">Tutorials </div>
+<div class="div6 grid-box"> b</div>
+<div class="div7 grid-box"> c</div>
+</div>
+
 Quickstart | tutorials
 
 What is Fetch.ai 
