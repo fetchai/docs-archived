@@ -39,6 +39,16 @@
 </head>
 
 <body>
+
+{%- if 'search' in config['plugins'] %}
+
+<div id="mkdocs-search-results" class="search-popup">
+  Sorry, page not found.
+</div>
+
+<div class="search-noresults">
+{%- endif %}
+
   <div class="header-wrap">
   	<div class="menuheader">
   		<div class="headerlogo"><img src="/images/logo.png" alt="Fetch Logo"></div><ul class="menu"><li><a href="/status">Bounty </a></li><li><a href="/status">Explorer </a></li><li><a href="/status">Docs </a></li><li><a href="/status">Links </a></li><li><a href="/status">Tutorials </a></li><li><a href="/status">References </a></li></ul>
@@ -46,14 +56,14 @@
 </div>
 <div class="book">
 
-  {%- block search_button %}
+{%- block search_button %}
 {%- if 'search' in config['plugins'] %}
 <div id="book-search-input" role="search">
-<input type="text" placeholder="Type to search" />
+<!-- <input type="text" placeholder="Type to search" /> -->
+<form action="search.html">
+  <input name="q" id="mkdocs-search-query" type="text" placeholder="Type to search">
+</form>
 </div> <!-- end of book-search-input -->
-
-
-
 {%- endif %}
 {%- endblock %}
 	
@@ -93,23 +103,7 @@ Previous versions:</br>
 
 
 
-{%- if 'search' in config['plugins'] %}
 
-
-
-<h1 id="search">Search Results</h1>
-
-<form action="search.html">
-  <input name="q" id="mkdocs-search-query" type="text" >
-</form>
-
-<div id="mkdocs-search-results">
-  Sorry, page not found.
-</div>
-
-<div id="book-search-results">
-<div class="search-noresults">
-{%- endif %}
 
 <section class="normal markdown-section">
 
@@ -120,24 +114,6 @@ Previous versions:</br>
 {%- endblock %}
 
 </section>
-
-{%- if 'search' in config['plugins'] %}
-</div> 
-<div class="search-results">
-<div class="has-results">
-
-<h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-<ul class="search-results-list"></ul>
-
-</div> 
-<div class="no-results">
-
-<h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-
-</div> 
-</div>
-</div> 
-{%- endif %} 
 
 </div> <!-- end of page-inner -->
 
