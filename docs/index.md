@@ -1,48 +1,36 @@
 <h1> Fetch.ai documentation</h1>
 
 
-<div class="parent grid-box">
-<div class="div1 grid-box"> </div>
-<div class="div2 grid-box"> </div>
-<div class="div3 grid-box"> QuickStart</div>
-<div class="div4 grid-box">Tutorials </div>
-<div class="div6 grid-box"> b</div>
-<div class="div7 grid-box"> c</div>
+<div class="grid-container">
+        <div class="grid-item item1">
+            <h4>Welcome to Fetch.ai developer resources, let's get started.</h4>
+        </div>
+
+        <a href="getting-started/quickstart/"><div class="grid-item item2">
+              <img src=""/>
+              <h3>Quickstart</h3>
+          <p> If you want to get moving quickly, this is the place.  </p>
+        </div></a>
+        <a href="./tutorials/"><div class="grid-item item3">
+        <h3>Tutorials</h3>
+          
+          <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
+        </div></a>
+         <div class="grid-item item_whole_row">
+              <h1>What is Fetch.ai</h1>
+               <p> XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX</p>
+        </div>
+         <div class="grid-item item_whole_row">
+             <h1>What can you do with Fetch.ai</h1>
+              <p> XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX</p>
+        </div>
+
+        <div class="grid-item item_whole_row">
+             <h1>Versions, and notes</h1>
+              <p> XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX XOXOX</p>
+        </div>
+    </div>
 </div>
-
-Quickstart | tutorials
-
-What is Fetch.ai 
-
-What can you do with Fetch.ai
-
-A note on WIP
-
-
-1. <a href="getting-started/versions">Getting Started</a> <br/>
-
-	Build and install the Fetch.ai Ledger constellation, `etch` vm, and all the libraries you need. Get hold of the Fetch.ai Python Ledger API for smart contract creation. Spin up the Fetch.ai Open Economic Framework.
-
-2. <a href="ledger/architecture">The Fetch.ai Ledger</a> <br/>
-
-	Understand the inner workings of the Fetch.ai Ledger.
-
-3. <a href="oef">Open Economic Framework</a> <br/>
-
-	Learn how to create decentralised autonomous agents and interface them to the digital world. Learn how to negotiate with other autonomous agents and get things done.
-
-4. <a href="aea">Autonomous Agent Framework</a> <br/>
-	
-	The modular, extensible, programming framework that allows quick and easy autonomous agent assembly.
-
-5. <a href="etch-language">`etch` Language Guide</a> <br/>
-	
-	Learn how to code in `etch`, the Turing complete scripting language for smart contracts running on the Fetch.ai Ledger. 
-
-6. <a href="smart-contracts/smart-contract-intro">Smart Contracts</a> <br/>
-
-	Smart contracts written in `etch` run with the Python Ledger API. This section has everything you need to know about running smart contracts on the Fetch.ai Ledger.
-
 
 !!! Tip
 	**November 6th, 2019**
