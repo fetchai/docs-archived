@@ -52,18 +52,26 @@ code {
 #mkdocs-search-results {
     height: 80vh;
     margin: 10vh 10vw 0;
-    overflow-y: scroll;
+    overflow-y: auto; //scroll;
     position: relative;
     padding: 0; //65px 0 0;
     background-color: white;
+    min-width: 80vw; // This kind of thing can use variables in SASS! Ensures consistency.
 }
 #mkdocs-search-results:before {
     content: '';
     background: white;
 }
+#mkdocs-search-results > p,
 #mkdocs-search-results article {
     background-color: white;
     padding: 4px 2vw;
+}
+#mkdocs-search-results > p {
+    margin: 4vh 0;
+    font-size: 2rem;
+    color: #337ab7;
+    font-weight: 500;
 }
 #mkdocs-search-query,
 #mkdocs-search-query:hover {
@@ -76,7 +84,7 @@ code {
     position: fixed;
     z-index: 2;
     top: 10vh;
-    left: 10vw;
+    left: 12vw;
     margin: 15px 0 0 316px;
     border: 1px solid gray;
     width: 200px;
@@ -91,8 +99,8 @@ code {
 */
 
 p {
-    font-size: 17px !important;
-    font-weight: 300 !important;
+    font-size: 17px; // !important;
+    font-weight: 300; // !important;
 }
 
 /* Katharine's css additions */
@@ -161,6 +169,7 @@ p {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-weight: 300;
 }
 
 .lightfont {
@@ -179,6 +188,7 @@ p {
     overflow: hidden;
     /* background: red; */
     margin-bottom: 20px;
+    padding: 0 65px;
 }
 
 .button.left,
@@ -289,7 +299,7 @@ ul > .multi-opened::after {
     content: ' -';
 }
 
-.head {
+/* .head {
     font-size: 20px;
     text-decoration: none;
     color: #222;
@@ -299,13 +309,13 @@ ul > .multi-opened::after {
     font-size: 18px;
     text-decoration: none;
     color: #222;
-}
+} */
 
 .header {
     font-size: 18px;
     text-decoration: none;
     color: #222;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 select {
@@ -420,16 +430,19 @@ select {
 nav#nav .head {
     cursor: pointer;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
+    font-weight: 300;
 }
 nav#nav .head:hover {
     text-decoration: underline;
 }
 nav#nav li a {
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
-    font-size: 16px;
+    font-weight: 300;
+    font-size: 18px;
     color: #222;
+}
+nav#nav li li li a {
+    font-size: 16px;
 }
 nav#nav .head {
     font-size: 20px;
@@ -446,3 +459,161 @@ nav#nav > ul ul.show {
     transition: max-height 1s;
     max-height: 2000px;
 }
+/* nav#nav.not-loaded {
+    display: none;
+}
+nav#nav.not-loaded > ul ul {
+    transition: none;
+}
+nav#nav.not-loaded > ul ul.show {
+    transition: none;
+}
+.book-body {
+} */
+.book-summary {
+    height: auto;
+    margin-top: 0;
+    float: left;
+    position: relative;
+}
+.book-summary.not-loaded {
+    display: none;
+}
+.book-summary.not-loaded nav#nav > ul ul {
+    transition: none;
+}
+.book-summary.not-loaded nav#nav > ul ul.show {
+    transition: none;
+}
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+#content-wrap {
+    padding-bottom: 148px; /* Must be same as footer height. Use SASS and variables */
+}
+footer {
+    width: 100%;
+    height: 148px;
+    background: red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+/* Footer specific stuff Begin */
+
+footer {
+    padding: 50px 0 0;
+    display: block;
+    background-color: #33383e;
+    text-align: center;
+}
+
+/* footer:before {
+    content: '';
+    display: table;
+} */
+
+footer .inner {
+    overflow: auto;
+}
+
+footer .col-1,
+footer .col-2 {
+    display: inline-block;
+    width: 50%;
+}
+
+footer .col-1 {
+    float: left;
+    padding: 0 50px 0 0;
+}
+
+footer .col-2 {
+    float: left;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+footer #menu-footer-main-navigation {
+    list-style: none;
+    padding: 18px 0 0;
+    margin: 0;
+    -webkit-columns: 3;
+    columns: 3;
+}
+
+footer .contacts {
+    padding-left: 25px;
+}
+
+footer .contacts ul {
+    list-style: none;
+    padding: 0;
+    margin-left: ;
+}
+
+footer #menu-footer-main-navigation li {
+    border-bottom: 1px solid #5887da;
+    margin: 0 0 10px 35px;
+}
+
+footer li,
+footer p {
+    color: #fff;
+}
+
+footer .contacts a {
+    color: #5887da;
+}
+
+footer #menu-footer-main-navigation li a {
+    color: #fff;
+    margin: 0 0 5px;
+    display: block;
+}
+
+footer #menu-footer-lower-navigation {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 35px;
+}
+
+footer #menu-footer-lower-navigation li {
+    display: inline-block;
+    float: left;
+}
+
+footer #menu-footer-lower-navigation li a,
+footer .lower-footer * {
+    color: #fff;
+}
+
+footer #menu-footer-lower-navigation li a:after {
+    content: '|';
+    display: inline-block;
+    margin: 0 10px;
+    color: #5887da;
+}
+
+footer .lower-footer {
+    border-top: 1px solid #474c51;
+    padding: 35px 0;
+    float: left;
+    width: 100%;
+}
+
+footer .lower-footer i {
+    font-size: 16px;
+    margin: 0 15px 0 0;
+}
+
+footer .lower-footer .col-2 {
+    padding: 0 0 0 35px;
+}
+
+footer .inner {
+    overflow: auto;
+}
+
+/* Footer specific stuff End */

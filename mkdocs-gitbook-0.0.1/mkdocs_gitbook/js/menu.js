@@ -5,18 +5,22 @@ $('#summary .head').on('click', function() {
 });
 
 $('#mkdocs-search-wrapper button').on('click', function() {
-    console.log('Close button clicked');
     $('#mkdocs-search-wrapper').hide();
+    let $searchInput = $('#mkdocs-search-query');
+    $searchInput.val('');
+    $searchInput.removeClass('pop-over');
 });
 
 $('#mkdocs-search-query').on('keyup', function(ev) {
-    console.log('changey changey');
+    let $sq = $('#mkdocs-search-query');
     let t = setTimeout(function() {
         let $searchResultsArticles = $('#mkdocs-search-results article');
-        console.log(2, $searchResultsArticles.length);
         let $makedocsSearchWrapper = $('#mkdocs-search-wrapper');
         let $searchInput = $('#mkdocs-search-query');
         if ($searchResultsArticles.length) {
+            $makedocsSearchWrapper.css('display', 'flex');
+            $searchInput.addClass('pop-over');
+        } else if ($searchResultsArticles.length == 0 && $sq.val().length) {
             $makedocsSearchWrapper.css('display', 'flex');
             $searchInput.addClass('pop-over');
         } else {
@@ -24,9 +28,27 @@ $('#mkdocs-search-query').on('keyup', function(ev) {
             $searchInput.removeClass('pop-over');
         }
     }, 200); // Very hacky - I know!
-    let $searchResultsArticles = $('#mkdocs-search-results article');
-    console.log(1, $searchResultsArticles.length);
     return true;
 });
 
-console.log('Load');
+$(document).ready(function() {
+    let t = setTimeout(function() {
+        $('.book-summary').removeClass('not-loaded');
+    }, 20); // Very hacky - I know!
+    $('.year').innerHtml = new Date().getFullYear(); // Would rather do this in jinja if possible!
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const matchString = document.URL.replace(window.origin + '/', '').replace(
+        new RegExp('/', 'g'),
+        '-'
+    );
+    $('nav#nav a').each(function(index) {
+        let id = $(this).attr('id');
+        if ($(this).attr('id') == matchString) {
+            $(this)
+                .parents('ul')
+                .addClass('show');
+        }
+    });
+});
