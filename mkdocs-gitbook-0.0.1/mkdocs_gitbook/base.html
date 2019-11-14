@@ -42,11 +42,12 @@
 
 {%- if 'search' in config['plugins'] %}
 
-<div id="mkdocs-search-results" class="search-popup">
-  Sorry, page not found.
+<div id="mkdocs-search-wrapper">
+  <button id="closeSearchResults">&times;</button>
+  <div id="mkdocs-search-results" class="search-popup">
+    Sorry, page not found.
+  </div>
 </div>
-
-<div class="search-noresults">
 
 {%- endif %}
 
@@ -69,7 +70,7 @@
 {%- if 'search' in config['plugins'] %}
 <div id="book-search-input" role="search">
 <!-- <input type="text" placeholder="Type to search" /> -->
-<form action="search.html">
+<form action="search.html" id="searchForm">
   <input name="q" id="mkdocs-search-query" type="text" placeholder="Type to search">
 </form>
 </div> <!-- end of book-search-input -->
@@ -127,8 +128,8 @@ Previous versions:
 </div> <!-- end of page-inner -->
 
 <div class="bottomnav">
-	<a href="{{ page.next_page.url | url }}"><div class="rightButton">Next: </br>{{ page.next_page.title | title}}</div></a>
-	<a href="{{ page.previous_page.url | url }}"><div class="leftButton">Prev:</br>{{ page.previous_page.title | title}}</div></a>
+	<a href="{{ page.previous_page.url | url }}" class="button left"><strong>Prev:</strong></br>{{ page.previous_page.title | title}}</a>
+	<a href="{{ page.next_page.url | url }}" class="button right"><strong>Next:</strong></br>{{ page.next_page.title | title}}</a>
 	
 	</div>
 </div> <!-- end of page-wrapper -->
@@ -144,10 +145,6 @@ Previous versions:
 {%- endblock %}
 
 {%- block libs %}
-<script src="{{ base_url }}/js/gitbook.min.js"></script>
-<script src="{{ base_url }}/js/theme.min.js"></script>
-
-
 {%- endblock %}
 </body>
 
