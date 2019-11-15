@@ -12,6 +12,15 @@ setup(
     author_email='ramage.lucas@protonmail.com',
     packages=find_packages(),
     include_package_data=True,
+    sass_manifests={
+        'package': {
+            'sass_path': '../../docs/sass',
+            'css_path': '../../docs/css',
+            'strip_extension': True,
+        },
+    },
+    setup_requires=['libsass >= 0.6.0'],
+    install_requires=['libsass >= 0.6.0'],
     entry_points={
         'mkdocs.themes': [
             'gitbook = mkdocs_gitbook',

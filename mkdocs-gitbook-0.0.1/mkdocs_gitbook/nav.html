@@ -1,35 +1,8 @@
 <nav role="navigation" id="nav">
-<ul class="summary" id="summary">
-
-{%- if nav | length >=1 %}
-	{%- for nav_item in nav %}
-		{%- if nav_item.children %}
-		{% if nav_item.url != null %}
-		<a href={{nav_item.url | url }}><ul class="header" id="header">{{ nav_item.title }}</ul></a>
-		{% else %}
-		<ul class="header" id="header_{{nav_item.title}}"><a href="#" class="head">{{ nav_item.title }}</a>
-		{% endif %}
-			{%- for nav_item in nav_item.children %}
-				{% include "nav-sub.html" %}
-				{%- endfor %}
-		</ul>
-		{% else %}
-		<li class="chapter{% if nav_item.active %} active{% endif %}" data-path="{{ nav_item.url }}">
-		<a href="{{ nav_item.url | url }}">{{ nav_item.title }}</a>
-		{%- endif %}
-		{%- endfor %}
-		<li class="divider"></li>
-		{%- endif %}
-
-		{% if config.copyright %}
-		<li>{{ config.copyright }}</li>
-
-
-{%- endif %}
-
-
-
-
-</ul>
-
+    <ul class="summary" id="summary">
+        {%- if nav | length >=1 %} {%- for nav_item in nav %} {% include
+        "nav-sub.html" %} {%- endfor %} {%- endif %} {% if config.copyright %}
+        <li>{{ config.copyright }}</li>
+        {%- endif %}
+    </ul>
 </nav>
