@@ -1,0 +1,539 @@
+/* Do not edit my-styles.css 
+edit my-styles.scss in thesasss directory and run
+py setup.py build_sass */
+
+@import './colours.scss';
+@import 'media-queries.scss';
+
+// /* colours */
+// $primary-colour: #1e2844;
+// $secondary-blue: #5887da;
+// $secondary-green: #2bb5a2;
+// $secondary-pink: #f176a9;
+// $secondary-mauve: #a45a95;
+// $secondary-purple: $secondary-mauve;
+// $secondary-orange: #f6923b;
+// $secondary-yellow: #fdda64;
+
+// $neutral-dark-grey: #0d0d0d;
+// $neutral-dark-cyan: #33383e;
+// $neutral-cyan: #467083;
+// $neutral-light-cyan: #a2b7c1;
+// $neutral-mid-grey: #d1dbe0;
+// $neutral-light-grey: #ecf1f3;
+
+// $overlay: rgba(0, 0, 0, 0.5);
+
+pre {
+    background-color: #f8f8f7;
+}
+
+code {
+    background-color: #0083fb;
+}
+
+/* Search styling begin */
+
+$search-width: 80vw;
+
+#mkdocs-search-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $overlay;
+    padding: 2vh 0;
+    z-index: 2;
+    display: none; //flex;
+    align-items: center;
+    padding: 0;
+    &:before {
+        content: 'Search results:';
+        position: absolute;
+        top: 10vh;
+        left: 10vw;
+        z-index: 2;
+        padding: 4px 2vw;
+        margin: 0px 28px 0 0;
+        font-size: 4rem;
+        color: $secondary-blue; //#337ab7;
+        width: 100vw;
+        background: white;
+        border-bottom: 1px solid $neutral-light-grey;
+        width: $search-width;
+    }
+    button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 10vh;
+        right: 10vw;
+        color: black;
+        z-index: 2;
+        margin: 10px 10px 0 0;
+        font-size: 4rem;
+        line-height: 0;
+        font-weight: bold;
+    }
+}
+#mkdocs-search-results {
+    height: 80vh;
+    margin: 10vh 10vw 0;
+    overflow-y: auto; //scroll;
+    position: relative;
+    padding: 0; //65px 0 0;
+    background-color: white;
+    min-width: $search-width;
+    &:before {
+        content: '';
+        background: white;
+    }
+    > p,
+    article {
+        background-color: white;
+        padding: 4px 2vw;
+    }
+    > p {
+        margin: 4vh 0;
+        font-size: 2rem;
+        color: $secondary-blue; //#337ab7;
+        font-weight: 500;
+    }
+}
+#mkdocs-search-query,
+#mkdocs-search-query:hover {
+    padding-left: 20px;
+    position: relative;
+}
+#mkdocs-search-query {
+    &.pop-over,
+    &.pop-over:focus,
+    &.pop-over:hover {
+        position: fixed;
+        z-index: 2;
+        top: 10vh;
+        left: 12vw;
+        margin: 15px 0 0 316px;
+        border: 1px solid $neutral-dark-grey;
+        width: 200px;
+        background-color: #dfdfdf;
+    }
+}
+p {
+    font-size: 17px; // !important;
+    font-weight: 300; // !important;
+}
+
+/* Katharine's css additions */
+/* RB These don't appear to be used?
+.md-header,
+.md-tabs,
+.md-footer-meta,
+.md-footer-nav,
+.md-footer-nav__inner {
+    background-color: #172b6e;
+}
+
+.md-nav__title {
+    color: #172b6e;
+}*/
+
+.menuheader {
+    height: 120px;
+    background-color: $primary-colour;
+    width: 100%;
+    top: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.headerlogo img {
+    width: 180px;
+    display: inline-block;
+    float: left;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.menu {
+    float: right;
+    display: inline-block;
+    color: $neutral-light-grey; //#f7f7f7;
+    margin-top: 12px;
+    list-style-type: none;
+    // margin: 0;
+    // padding: 0;
+    // overflow: hidden;
+    // background-color: #333;
+    a {
+        color: $neutral-light-grey; //#f7f7f7;
+        text-decoration: none;
+    }
+
+    li {
+        float: left;
+        list-style-type: none;
+        a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: 300;
+        }
+    }
+}
+
+/* RB Doesn't appear to be used
+.lightfont {
+    color: #666666;
+}
+
+.lighterfont {
+    color: #888888;
+}*/
+
+.bottomnav {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    margin-bottom: 60px;
+    padding: 0 65px;
+}
+
+.button.left,
+.button.right {
+    color: white;
+    background-color: darkblue;
+    min-width: 100px;
+    max-width: 30%;
+    border-radius: 4px;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    &:hover {
+        background-color: blue;
+    }
+}
+
+.header-wrap {
+    background-color: $primary-colour;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    font-size: calc(10px + 1vmin);
+    color: #fff;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+    outline: 0 !important;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.grid-box {
+    border: 1px solid black;
+}
+.div1 {
+    grid-area: 1 / 1 / 2 / 2;
+    column-span: 2;
+}
+.div2 {
+    grid-area: 1 / 1 / 2 / 3;
+}
+.div3 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+.div4 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.div5 {
+    grid-area: 3 / 1 / 4 / 2;
+}
+.div6 {
+    grid-area: 3 / 1 / 4 / 3;
+}
+.div7 {
+    grid-area: 4 / 1 / 5 / 3;
+}
+
+.summary {
+    & > ul {
+        /*display: none;*/
+        list-style-type: none;
+        padding: 0;
+        list-style-type: none;
+    }
+    & > li {
+        list-style: none;
+        font-weight: bold;
+    }
+}
+
+ul > .multi::after {
+    content: ' +';
+}
+
+ul > .multi-opened::after {
+    content: ' -';
+}
+
+/* .head {
+    font-size: 20px;
+    text-decoration: none;
+    color: #222;
+}
+
+.sub-head {
+    font-size: 18px;
+    text-decoration: none;
+    color: #222;
+} */
+
+.header {
+    font-size: 18px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 300;
+}
+
+select {
+    text-transform: none;
+    width: 200px;
+}
+
+.markdown-section {
+    h1 {
+        font-size: 2em;
+        font-weight: 400;
+    }
+    h2 {
+        font-size: 1.75em;
+        font-weight: 400;
+    }
+}
+
+.version {
+    padding-bottom: 10px;
+}
+
+/* GRID to be tidied*/
+
+.grid-container {
+    display: grid;
+    grid-gap: 1px;
+    width: inherit;
+    margin: 0 auto;
+    height: 100%;
+    p {
+        font-size: 17px;
+        font-weight: 300;
+    }
+
+    h1 {
+        font-weight: 200;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    h3 {
+        font-weight: 200;
+    }
+}
+
+.grid-item {
+    padding: 20px;
+    padding-bottom: 40px;
+    margin: 4px;
+    color: #222;
+}
+
+.item1 {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+
+    border: solid 1px lightgrey;
+    h4 {
+        padding-top: 10vh;
+        font-size: 24px;
+        font-weight: 100;
+    }
+}
+
+.item2 {
+    grid-column: 1;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+    height: 220px;
+}
+
+.item3 {
+    grid-column: 2;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+    height: 220px;
+}
+
+.no-padding {
+    padding: unset;
+}
+
+.item_whole_row {
+    grid-column: 1 / span 2;
+}
+
+.dropdown-content a {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: 18px;
+    padding: 4px;
+    color: #555;
+    text-decoration: none;
+    &:hover {
+        background-color: #ddd;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        height: 18px;
+        padding: 4px;
+        text-decoration: none;
+    }
+}
+
+nav#nav {
+    .head {
+        cursor: pointer;
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 300;
+        :hover {
+            text-decoration: underline;
+        }
+    }
+    li {
+        a {
+            font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial,
+                sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            color: #222;
+        }
+        li li a {
+            font-size: 16px;
+        }
+    }
+    .head {
+        font-size: 20px;
+        .head {
+            font-size: 18px;
+        }
+    }
+    & > ul ul {
+        max-height: 0;
+        transition: max-height 1s;
+        overflow: hidden;
+        &.show {
+            transition: max-height 1s;
+            max-height: 2000px;
+        }
+    }
+}
+.book-summary {
+    height: auto;
+    margin-top: 0;
+    float: left;
+    position: relative;
+    &.not-loaded {
+        display: none;
+        nav#nav > ul ul {
+            transition: none;
+            &.show {
+                transition: none;
+            }
+        }
+    }
+}
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+$footer-height: 148px;
+#content-wrap {
+    padding-bottom: $footer-height;
+}
+
+footer {
+    width: 100%;
+    height: $footer-height;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 50px 0 0;
+    display: block;
+    background-color: $neutral-dark-grey; //#33383e;
+    text-align: center;
+    .inner {
+        overflow: auto;
+    }
+    .col-1,
+    .col-2 {
+        display: inline-block;
+        width: 50%;
+    }
+    .col-1 {
+        float: left;
+        padding: 0 50px 0 0;
+    }
+
+    .col-2 {
+        float: left;
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .contacts {
+        padding-left: 25px;
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    }
+}
+
+footer {
+    .lower-footer {
+        * {
+            color: white;
+        }
+        border-top: 1px solid #474c51;
+        padding: 35px 0;
+        float: left;
+        width: 100%;
+        i {
+            font-size: 16px;
+            margin: 0 15px 0 0;
+        }
+        .col-2 {
+            padding: 0 0 0 35px;
+        }
+    }
+}
+
+// footer .inner {
+//     overflow: auto;
+// }
+
+/* Footer specific stuff End */
