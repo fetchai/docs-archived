@@ -1,9 +1,9 @@
-<h1>Quick, start!</h1>
+#Quick, start!
 Fetch.ai is a platform for decentralised autonomous agents to work, it's a platform that enables machine learning from the consensus design through to applications in Etch. 
 
 This quickstart quide is to get you moving as quickly as possible. Let's get started, anything we miss will be highlighted for you to deep dive on later.
 
-Running a node locally:
+###Running a node locally:
 
 This is a great way to test Etch code locally and view what a node is doing; you can connect to the testnet or just run as a single node. 
 
@@ -22,6 +22,7 @@ git pull
 git submodule update --init --recursive
 ```
 
+###Building and running the ledger:
 Now let's build the project: 
 
 ```bash
@@ -37,10 +38,9 @@ The node is running, it's not connected to the network and a block interval of 2
 
 For more detailed instructions, including helpful tips if you're running into errors head here. 
 
-<h3>Install the Python Ledger API</h3>
+##Install the Python Ledger API
 
-
-If you want to deploy Smart Contracts and deploy them, or create apps to connect directly to the ledger, the Python Ledger API is your best friend. 
+If you want to develop Smart Contracts and deploy them, or create apps to connect directly to the ledger, the Python Ledger API is currently one of two ways to do so. 
 
 You can see the source here, or just install with pip:
 ```bash
@@ -72,4 +72,6 @@ You can get public, and private key of the agent by:
 str(Address(agent1))
 agent1.private_key
 ```
-<br/>
+
+##Deploying a contract
+
