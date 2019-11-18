@@ -3,12 +3,65 @@ edit my-styles.scss in thesasss directory and run
 py setup.py build_sass */
 
 @import './colours.scss';
+@import './fonts.scss';
 @import 'media-queries.scss';
 
-pre {
-    background-color: #f8f8f7;
-}
+$note-tip-title-height: 36px;
 
+.markdown-section {
+    .admonition {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+            0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        position: relative;
+        margin: 1.5625em 3px 1.5625em 0;
+        padding: 0 0.6rem;
+        border-left-width: 0.2rem;
+        border-left-style: solid;
+        border-radius: 0.1rem;
+        font-size: 0.64rem;
+        overflow: auto;
+        &.tip,
+        &.note {
+            .admonition-title {
+                margin: 0 -0.6rem;
+                padding: 0.4rem 0.6rem 0.4rem 2rem;
+                font-weight: 700;
+                &:before {
+                    position: absolute;
+                    left: 0.6rem;
+                    font-size: 1rem;
+                    font-family: 'Material Icons';
+                    line-height: 20px;
+                }
+            }
+            p {
+                margin: 1em 0;
+            }
+        }
+        &.tip {
+            border-left-color: $tip-colour;
+            .admonition-title {
+                border-bottom-color: rgba(0, 191, 165, 0.1);
+                background-color: rgba(0, 191, 165, 0.1);
+                &:before {
+                    color: $tip-colour;
+                    content: '\E80E';
+                }
+            }
+        }
+        &.note {
+            border-left-color: $note-colour;
+            .admonition-title {
+                border-bottom: 0.05rem solid rgba(68, 138, 255, 0.1);
+                background-color: rgba(68, 138, 255, 0.1);
+                &:before {
+                    color: $note-colour;
+                    content: '\E3C9';
+                }
+            }
+        }
+    }
+}
 code {
     background-color: #0083fb;
 }
@@ -102,10 +155,6 @@ $search-width: 80vw;
         width: 200px;
         background-color: #dfdfdf;
     }
-}
-p {
-    font-size: 17px; // !important;
-    font-weight: 300; // !important;
 }
 
 /* Katharine's css additions */
@@ -231,7 +280,7 @@ p {
     grid-row-gap: 0px;
 }
 
-.p17{
+.p17 {
     font-size: 17px;
     font-weight: 300;
 }
