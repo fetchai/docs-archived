@@ -5,7 +5,6 @@
 
   <a href="getting-started/quickstart/">
     <div class="grid-item item2">
-      <img src=""/><!-- needs fixing -->
       <h3>Quickstart</h3>
       <p> If you want to get moving quickly, this is the place.  </p>
     </div>
@@ -37,10 +36,17 @@
 
 <!--/div--><!-- One closing div too many-->
 <!-- stuff outside of tags (added a pre for now -->
-<pre>
-!!! Tip
-	**November 6th, 2019**
-	Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target=_blank>summary details here</a>.
-</pre>
+
+<div class="admonition tip">
+  <p class="admonition-title">Tip</p>
+  <p><strong>November 6th, 2019</strong>
+  Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target="_blank">summary details here</a>.</p>
+</div>
+
+<div class="admonition note">
+  <p class="admonition-title">Title</p>
+  <p><strong>November 6th, 2019</strong>
+  Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target="_blank">summary details here</a>.</p>
+</div>
 
 <br/>
