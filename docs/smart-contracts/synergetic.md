@@ -2,7 +2,7 @@
 
 Synergetic contracts are a new type of smart contract which allow miners to use their computational power to solve useful problems and earn a reward.
 
-Anyone can register a problem on the ledger by creating a synergetic contract and inviting miners to solve it. 
+Anyone can register a problem on the ledger by creating a synergetic contract and inviting miners to solve it.
 
 All attempts at solving the problem form a Directed Acyclic Graph (DAG).
 
@@ -10,13 +10,13 @@ The type of problems that synergetic contracts can solve are complex optimisatio
 
 <center>![Synergetic contract flow](img/synergetic_contracts.png)</center>
 
-
 A miner registers as a participant of the synergetic contract and starts calculating towards the problem solution from a random seed generated from a public key. It is a trial and error approach like proof of work.
 
-Registered miners begin to solve the problem **at the same time** and the miner who solves the problem first wins the bounty associated with the problem. 
+Registered miners begin to solve the problem **at the same time** and the miner who solves the problem first wins the bounty associated with the problem.
 
-!!! Note
-	The winning miner is not necessarily the miner who verifies the block.
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The winning miner is not necessarily the miner who verifies the block.</p>
+</div>
 
 <br/>

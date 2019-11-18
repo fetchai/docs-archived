@@ -1,4 +1,6 @@
 <h1>Extending <code>etch</code></h1>
 
-!!! note 
-	Coming soon: details on extending `etch` in C++.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>Coming soon: details on extending `etch` in C++.</p>
+</div>

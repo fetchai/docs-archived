@@ -10,13 +10,17 @@
 
 This means that, putting `Context` code in `@query` functions or other functions not equipped to access a `Context`, should raise an error.
 
-!!! Note
-It is not possible to provide standalone `etch` code snippet examples as `Context` requires a running ledger node.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>It is not possible to provide standalone `etch` code snippet examples as `Context` requires a running ledger node.</p>
+</div>
 
 ## Coding with `Context`
 
-!!! Note
-The only way to get a `Context` is by calling `getContext()`.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The only way to get a `Context` is by calling `getContext()`.</p>
+</div>
 
 The `Context` object has two member functions.
 

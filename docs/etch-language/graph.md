@@ -1,6 +1,6 @@
 Declare and initialise a `Graph`.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -8,13 +8,11 @@ function main()
 endfunction
 ```
 
-A `Graph` is a directed acyclic computational graph used to process data through a sequence of operations. 
+A `Graph` is a directed acyclic computational graph used to process data through a sequence of operations.
 
 The current primary use case for these is the instantiation of neural networks. Each node in the `Graph` maintains responsibility for either a single operation or a layer of operations.
 
-The preferred method for training a `Graph` is to use a `DataLoader` and `Optimiser`. We describe these two objects in a later section. 
-
-
+The preferred method for training a `Graph` is to use a `DataLoader` and `Optimiser`. We describe these two objects in a later section.
 
 ## Placeholders
 
@@ -22,7 +20,7 @@ Placeholder nodes store data on the `Graph`. Use them to set the input for compu
 
 Create a placeholder node with `addPlaceholder()`.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -30,11 +28,6 @@ function main()
 
 endfunction
 ```
-
-
-
-
-
 
 ## Layers
 
@@ -44,8 +37,7 @@ Add a fully connected layer to a `Graph` with the function `addFullyConnected()`
 
 It takes four input parameters specifying the name of the fully connected node, the name of a previously defined node, input size, and output size.
 
-
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -70,7 +62,7 @@ The `addConv1D()` training node operation of a `Graph` convolves the input layer
 
 It takes six parameters specifying the name of the node, the name of a previously defined node (to feed input), the number of filters, number of input channels, kernel size, and stride size respectively.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -93,7 +85,6 @@ endfunction
 
 ## Operations
 
-
 ### Activations
 
 #### ReLU
@@ -102,7 +93,7 @@ The `addRelu()` function of a `Graph` adds a node which contains the rectified l
 
 It takes two parameters specifying the node name and the name of a node which feeds input to the ReLU.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -126,7 +117,7 @@ The `addSoftmax()` function of a `Graph` adds a node to the `Graph` that applies
 
 It takes two parameters specifying the name of the node and the name of an existing node that feeds input data.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -144,14 +135,13 @@ function main()
 endfunction
 ```
 
-
 #### Dropout
 
 The `addDropout()` function of a `Graph` adds a node that applies the `dropout` activation function to the input `Tensor`.
 
 It takes three parameters specifying the name of the node, the name of an existing node that feeds input data, and a `Fixed64` type with a value between 0 and 1 specifying the dropout randomisation value.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -169,14 +159,13 @@ function main()
 endfunction
 ```
 
-
 #### Transpose
 
 The `addTranspose()` function of a `Graph` adds a node to the Graph that applies the transpose activation function to the input `Tensor`.
 
 It takes two parameters specifying the name of the node and the name of an existing node that feeds input data.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -194,14 +183,13 @@ function main()
 endfunction
 ```
 
-
 #### Exp
 
 The `addExp()` function of a `Graph` adds a node to the Graph that applies the exp activation function to the input `Tensor`.
 
 It takes two parameters specifying the name of the node and the name of an existing node that feeds input data.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -219,16 +207,15 @@ function main()
 endfunction
 ```
 
-
 ### Loss functions
 
 #### Cross entropy loss
 
-The `addCrossEntropyLoss()` function of a `Graph` is a loss function measuring the performance of a classification model. 
+The `addCrossEntropyLoss()` function of a `Graph` is a loss function measuring the performance of a classification model.
 
 It takes three parameters specifying the name of the node, the name of the input data node, and the name of the label data node.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -251,15 +238,13 @@ function main()
 endfunction
 ```
 
-
-
 #### Mean square error loss
 
 The `addMeanSquareErrorLoss()` function of a `Graph` is a loss function measuring the average of the square of errors.
 
 It takes three parameters specifying the name of the node, the name of the input data node, and the name of the label data node.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -283,7 +268,7 @@ endfunction
 ```
 
 <!--
-## State dicts 
+## State dicts
 
 A `StateDict` extracts the weights from a `Graph` and passes them to another. It only saves the weights in a layer and discards all meta data.
 
@@ -337,7 +322,7 @@ For storing on the Fetch.ai Ledger, a `Graph` is serialisable and deserialisable
 
 The following code stores a `Graph` in a `State` object. It then creates a new `Graph` object and retrieves the previously stored `Graph` data from the `State`.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -351,28 +336,27 @@ function main()
 endfunction
 ```
 
-
 ### Serialise to string
 
 It is possible to store `Graph` data in a string. This facilitates smart contract function calls.
 
-Create a string representation of a `Graph` with the `serialiseToString()` function. 
+Create a string representation of a `Graph` with the `serialiseToString()` function.
 
 Then, serialise the `Graph` by setting the string into a `State`.
 
-``` c++
-function main() 
+```c++
+function main()
 
     var tensor_shape = Array<UInt64>(2);
     tensor_shape[0] = 2u64;
     tensor_shape[1] = 10u64;
-    
+
     var data_tensor = Tensor(tensor_shape);
     var label_tensor = Tensor(tensor_shape);
-    
+
     data_tensor.fill(7.0fp64);
     label_tensor.fill(7.0fp64);
-    
+
     var graph = Graph();
     graph.addPlaceholder("Input");
     graph.addPlaceholder("Label");
@@ -380,40 +364,38 @@ function main()
     graph.addMeanSquareErrorLoss("Error", "Output", "Label");
     graph.setInput("Input", data_tensor);
     graph.setInput("Label", label_tensor);
-    
+
     var graph_string = graph.serializeToString();
 
     // demo the graph string
     printLn(graph_string);
-    
+
     // serialise the Graph with its hex string representation
     var state = State<String>("graph_state");
     state.set(graph_string);
-    
+
     graph.evaluate("Error");
 
 endfunction
 ```
 
-
-
 ### Deserialise from string
 
-Retrieve a `Graph` from the ledger via its string representation with the `deserialiseFromString()` function. 
+Retrieve a `Graph` from the ledger via its string representation with the `deserialiseFromString()` function.
 
-``` c++
-function main() 
+```c++
+function main()
 
     var tensor_shape = Array<UInt64>(2);
     tensor_shape[0] = 2u64;
     tensor_shape[1] = 10u64;
-    
+
     var data_tensor = Tensor(tensor_shape);
     var label_tensor = Tensor(tensor_shape);
-    
+
     data_tensor.fill(7.0fp64);
     label_tensor.fill(7.0fp64);
-    
+
     var graph = Graph();
     graph.addPlaceholder("Input");
     graph.addPlaceholder("Label");
@@ -421,32 +403,30 @@ function main()
     graph.addMeanSquareErrorLoss("Error", "Output", "Label");
     graph.setInput("Input", data_tensor);
     graph.setInput("Label", label_tensor);
-    
+
     var graph_string = graph.serializeToString();
-    
+
     // serialise the Graph with its hex string representation
     var state = State<String>("graph_state");
     state.set(graph_string);
-    
+
     graph.evaluate("Error");
 
     var retrieved_state = State<String>("graph_state");
     var retrieved_graph_string = retrieved_state.get();
-    
+
     // demo the Graph string
     printLn(retrieved_graph_string);
-    
+
     var retrieved_graph = Graph();
     retrieved_graph = retrieved_graph.deserializeFromString(retrieved_graph_string);
 
 endfunction
 ```
 
-
-
 ## Build a `Graph` example
 
-The example below builds a `Graph` object by first adding two placeholder nodes which will contain the input and label data. 
+The example below builds a `Graph` object by first adding two placeholder nodes which will contain the input and label data.
 
 Next, a fully connected layer is set up, `FC_1`, containing 128 neurons and taking input data of size `28x28`. The output will feed into a ReLU activation, `Relu_1`.
 
@@ -456,8 +436,7 @@ Finally, after running a final fully connected layer, we will calculate a soft m
 
 The code does not show steps for loading the data or training the `Graph`.
 
-
-``` c++
+```c++
 function main()
 
     // define the neural network
@@ -486,7 +465,6 @@ function main()
 endfunction
 ```
 
-
 ## Training a `Graph` example
 
 Manually train a neural network on a graph by repeatedly processing the following 4 steps:
@@ -500,14 +478,11 @@ Steps 1-3 may be processed multiple times prior to processing step 4 (the gradie
 
 In `etch`, these functions are taken care of by the more efficient `DataLoader` and `Optimiser` objects which we will see in a later section.
 
-
-
-
 ### 1. Set input
 
 Add `Tensor` input or training data to a `Graph` with the `setInput()` function which takes a previously set placeholder string.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -523,7 +498,7 @@ function main()
     graph.addMeanSquareErrorLoss("error", "fc1", "label");
 
     graph.setInput("input", input_tensor);
-    graph.setInput("label", label_tensor);   
+    graph.setInput("label", label_tensor);
 
 endfunction
 ```
@@ -534,8 +509,7 @@ The `evaluate()` method performs a forward pass on the `Graph`, computing the ou
 
 The return parameter is the `Tensor` computed at the output of the specified node.
 
-
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -552,9 +526,9 @@ function main()
 
     graph.setInput("input", input_tensor);
     graph.setInput("label", label_tensor);
-    
+
     // perform a forward pass
-    var loss = graph.evaluate("error");   
+    var loss = graph.evaluate("error");
 
 endfunction
 ```
@@ -565,8 +539,7 @@ Perform back propagation with the `backPropagate()` function. The function back 
 
 Having already made a prediction via the forward pass through the `Graph`, `backPropagate()` computes the error gradient with respect to the weights in every node.
 
-
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -583,23 +556,23 @@ function main()
 
     graph.setInput("input", input_tensor);
     graph.setInput("label", label_tensor);
-    
+
     // perform a forward pass
-    var loss = graph.evaluate("error"); 
+    var loss = graph.evaluate("error");
 
     // run back propagation
-    graph.backPropagate("error");  
+    graph.backPropagate("error");
 
 endfunction
 ```
 
 ### 4. Step
 
-Run the `step()` function on a `Graph`  to generate the results. The function applies the SGD function to weights calculated by the previous training cycles.
+Run the `step()` function on a `Graph` to generate the results. The function applies the SGD function to weights calculated by the previous training cycles.
 
 The `Fixed64` parameter value the function takes is the learning rate.
 
-``` c++
+```c++
 function main()
 
     var graph = Graph();
@@ -616,25 +589,22 @@ function main()
 
     graph.setInput("input", input_tensor);
     graph.setInput("label", label_tensor);
-    
+
     // perform a forward pass
-    var loss = graph.evaluate("error"); 
+    var loss = graph.evaluate("error");
 
     // run back propagation
-    graph.backPropagate("error");  
+    graph.backPropagate("error");
 
     // call step
-    graph.step(0.1fp64); 
+    graph.step(0.1fp64);
 
 endfunction
 ```
 
-!!! Note
-    `step()` will be deprecated in favour of `applyGradients()`.
-
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>`step()` will be deprecated in favour of `applyGradients()`.</p>
+</div>
 
 <br/>
-
-
-

@@ -5,21 +5,17 @@ Five new keywords identify these types: `persistent`, `sharded`, `use`, `as`, an
 As `etch` evolves along with the Fetch.ai Ledger, persistent globals will help ensure maximum ledger storage efficiency.
 
 !!! Recommendation
-    Use the persistent global syntax instead of `State` and `ShardedState` syntax.
-
-
+Use the persistent global syntax instead of `State` and `ShardedState` syntax.
 
 ## Syntax
 
 Declare all persistent variables the smart contract may use at the top of the file before any function declarations.
 
-
-
 ### `persistent`
 
-Use the `persistent` keyword to reference global persistent `State` types available to the contract. 
+Use the `persistent` keyword to reference global persistent `State` types available to the contract.
 
-``` c++
+```c++
 persistent total : UInt32;
 // more persistent globals
 
@@ -31,12 +27,11 @@ endfunction
 
 The above syntax references a `State` variable that previously could only be constructed as follows.
 
-
-``` c++
+```c++
 function main()
-	
+
 	var total_state = State<UInt32>("str_ref");
-    
+
     var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
     var account_state = State<UInt256>(account);
 
@@ -45,17 +40,16 @@ endfunction
 
 Using the persistent global syntax, there is no way to reference the `String` or `Address` constructor parameter references as before.
 
-!!!	Note
-	It is still possible to construct `State` types without persistent global declarations.
-
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>It is still possible to construct `State` types without persistent global declarations.</p>
+</div>
 
 ### `sharded`
 
 Use the `persistent sharded` keyword pair to declare global persistent `ShardedState` types available to the contract.
 
-
-``` c++
+```c++
 persistent sharded balances : UInt64;
 // more persistent globals
 
@@ -67,10 +61,9 @@ endfunction
 
 The above syntax references a `ShardedState` variable that previously could only be constructed as follows.
 
-
-``` c++
+```c++
 function main()
-	
+
 	var balances_sharded_state = ShardedState<UInt64>("balances");
 
 endfunction
@@ -78,19 +71,20 @@ endfunction
 
 This means you cannot build a `ShardedState` referenced by a single `String` or `Address` as before. However, this limitation should promote a more economical use of the ledger.
 
-!!! Note
-    It is still possible to construct `ShardedState` types without persistent global declarations.
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>It is still possible to construct `ShardedState` types without persistent global declarations.</p>
+</div>
 
 ### `use`
 
-Import the global persistent variables into smart contract functions with the `use` keyword. 
+Import the global persistent variables into smart contract functions with the `use` keyword.
 
 #### `State`
 
 For `State` types, call `get()` and `set()` on the variable name as before.
 
-``` c++
+```c++
 persistent total : UInt32;
 
 function main()
@@ -109,7 +103,7 @@ endfunction
 
 For `ShardedState` types, call `get()` and `set()` as before.
 
-``` c++
+```c++
 persistent sharded balances : UInt64;
 
 function main()
@@ -128,11 +122,11 @@ function main()
 endfunction
 ```
 
-However, note that setting keys on the `ShardedState` type happens at import time and there is no limit to the number of keys. 
+However, note that setting keys on the `ShardedState` type happens at import time and there is no limit to the number of keys.
 
 Set and use keys on a persistent global `ShardedState` in a flexible manner as demonstrated by the following example.
 
-``` c++
+```c++
 persistent sharded balances : UInt64;
 
 
@@ -168,16 +162,13 @@ endfunction
 ```
 
 !!! Warning
-    If you don't use a declared persistent global variable you have imported, `etch` generates a compilation error. This ensures maximum ledger efficiency (i.e. not paying for unused objects).
-
-
-
+If you don't use a declared persistent global variable you have imported, `etch` generates a compilation error. This ensures maximum ledger efficiency (i.e. not paying for unused objects).
 
 ### `as`
 
 Alias the persistent global variable name to avoid confusion in large smart contract scripts.
 
-``` c++
+```c++
 persistent total : UInt32;
 
 
@@ -197,20 +188,18 @@ function second()
     use total as second_total;
 
     second_total.set(20u32);
-    
+
 endfunction
 ```
-
-
 
 ### `any`
 
 !!! Warning
-    Use `any` with great care. `any` does not require use of the variable within the function and it therefore has no safety mechanism for avoiding additional charges.
+Use `any` with great care. `any` does not require use of the variable within the function and it therefore has no safety mechanism for avoiding additional charges.
 
 Import all the declared persistent global variables with the wildcard keyword `any`.
 
-``` c++
+```c++
 persistent total : UInt64;
 persistent sharded balances : UInt64;
 
@@ -224,16 +213,13 @@ function main()
 endfunction
 ```
 
-
-
-
 ## Benefits
 
 Using persistent global syntax means that only one variable identifier can point to a single `State` or `ShardedState` object.
 
 The following unusual situation is not possible with persistent globals.
 
-``` c++
+```c++
 function main()
 
     var a = State<Int32>("account1");
@@ -251,12 +237,11 @@ function main()
 endfunction
 ```
 
-
 ## Limitations
 
 You cannot pass persistent globals around.
 
-``` c++
+```c++
 persistent total : UInt32;
 
 function main()
@@ -272,7 +257,5 @@ function second(passed_global : UInt32)
     // should error
 endfunction
 ```
-
-
 
 <br/>

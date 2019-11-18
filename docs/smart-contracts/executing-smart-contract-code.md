@@ -178,7 +178,9 @@ We show you how to get some test FET and set up the Fetch Wallet in the next sec
 
 ## Public network
 
-!!! note
-In development.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>In development.</p>
+</div>
 
 <br/>
