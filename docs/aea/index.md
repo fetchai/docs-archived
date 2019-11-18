@@ -1,19 +1,8 @@
-## Software to work for you
+## Agent Framework
 
-Do you want to create software to work for you and enrich your life? 
-
-Autonomous Economic Agents (AEAs) work continuously for your benefit without you having to do anything more than write them and start them up.
+The AEA framework provides the tools for creating autonomous economic agents. Autonomous Economic Agents (AEAs) work continuously for your benefit without you having to do anything more than write them and start them up.AEAs act independently of constant input and autonomously develop new capabilities. Their goal is to create economic gain for you, their owner. AEAs have a wide range of application areas. Check out the <a href="/aea/gym-plugin/" target=_blank>demo section</a> for examples.
 
 AEAs act independently of constant input and autonomously develop new capabilities. Their goal is to create economic gain for you, their owner.
-
-AEAs have a wide range of application areas. Check out the <a href="/aea/gym-plugin/" target=_blank>demo section</a> for examples.
-
-Bridging Web 2.0 to Web 3.0, AEAs are the future, now.
-
-
-## More specifically
-
-The AEA framework provides the tools for creating autonomous economic agents. 
 
 It is a Python-based development suite which equips you with an efficient and easy to understand set of tools for building autonomous economic agents. 
 
