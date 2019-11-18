@@ -1,22 +1,23 @@
 Build the Python libraries like this:
 
-``` bash
+```bash
 pip3 install -U fetchai-ledger-api
 ```
 
-
 Or, download and install the Python library which interacts with a running ledger node.
 
-``` bash
+```bash
 git clone git@github.com:fetchai/ledger-api-py.git -b release/v0.9.x
 ```
 
-!!!	Tip
-	Make sure you are on the latest release branch in order to have the latest features. 
+<div class="admonition tip">
+  <p class="admonition-title">Tip</p>
+  <p>Make sure you are on the latest release branch in order to have the latest features.</p>
+</div>
 
 Install the library with the following command:
 
-``` python
+```python
 cd ledger-api-py/
 python3 setup.py install
 ```
@@ -40,11 +41,9 @@ rm -f *.db
 Start the network connecting to the alpha test network.
 
 ``` bash
-./constellation -bootstrap -network 
+./constellation -bootstrap -network
 ./constellation -bootstrap -network delta
 ```
 -->
-
-
 
 <br/>

@@ -9,6 +9,7 @@
       <ul>
         <li>Getting started with the Agent Framework</li>
       <ul>
+
   </div>
 
   <div class="grid-item item_whole_row hasborder">
@@ -24,10 +25,10 @@
 
 <!--/div--><!-- One closing div too many-->
 <!-- stuff outside of tags (added a pre for now -->
-<pre>
-!!! Tip
-	**November 6th, 2019**
-	Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target=_blank>summary details here</a>.
-</pre>
+
+<div class="admonition tip">
+  <p class="admonition-title">Tip</p>
+  <p>Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target=_blank>summary details here</a>.</p>
+</div>
 
 <br/>
