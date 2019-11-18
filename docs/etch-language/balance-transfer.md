@@ -1,11 +1,10 @@
 Like `Context`, `Block`, and `Transaction`, the balance and transfer functions must run against a Fetch.ai Ledger node.
 
-
 ## `balance()`
 
 The balance function returns the balance of funds owned by the contract address as a `UInt64` type.
 
-``` c++
+```c++
 @action
 function check_balance()
 
@@ -18,14 +17,13 @@ endfunction
 
 You can call `balance()` from a smart contract currently invoking against a node in the following annotated smart contract functions:
 
-* `@init`
-* `@action`
-* `@query`
+-   `@init`
+-   `@action`
+-   `@query`
 
 You can call `balance()` from a synergetic contract currently invoking against a node in the following annotated synergetic contract functions:
 
-* `@clear`
-
+-   `@clear`
 
 ## `transfer(target : Address, amount : UInt64)`
 
@@ -33,10 +31,10 @@ The transfer function allows the smart contract to transfer an amount of FET to 
 
 It takes two parameters:
 
-* An `Address` type representing the receiving entity.
-* A `UInt64` value representing the amount of FET the entity will receive.
+-   An `Address` type representing the receiving entity.
+-   A `UInt64` value representing the amount of FET the entity will receive.
 
-``` c++
+```c++
 @action
 function transfer_funds(target : Address, amount : UInt64)
 
@@ -47,19 +45,16 @@ endfunction
 
 You can call `transfer()` from a smart contract currently invoking against a node in the following annotated functions:
 
-* `@init`
-* `@action`
+-   `@init`
+-   `@action`
 
 You can call `transfer()` from a synergetic contract currently invoking against a node in the following annotated functions:
 
-* `@clear`
-
+-   `@clear`
 
 ## Example
 
-Let's execute an example against a local ledger node. Instructions for starting up a ledger node are <a href="/../getting-started/run-a-node/" target=_blank>here</a>. 
-
-
+Let's execute an example against a local ledger node. Instructions for starting up a ledger node are <a href="/../getting-started/run-a-node/" target=_blank>here</a>.
 
 ### `etch` smart contract code
 
@@ -67,7 +62,7 @@ The `etch` code here and `Python` wrapper code below it comes from <a href="http
 
 The first contract code is here.
 
-``` c++
+```c++
 persistent balance_state : UInt64;
 
 @action
@@ -92,24 +87,23 @@ endfunction
 
 And the second smart contract code is here.
 
-``` c++
+```c++
 @action
 function transfer_funds1(target : Address, amount : UInt64)
   transfer(target, amount);
 endfunction
 ```
 
-
-!!!	Tip
-	Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/smart-contracts/pipenv/" target=_blank>here</a> for updates.
-
+<div class="admonition tip">
+  <p class="admonition-title">Tip</p>
+  <p>Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/smart-contracts/pipenv/" target=_blank>here</a> for updates.</p>
+</div>
 
 This beautiful example show how smart contracts may interact with each other.
 
-
 ### Python Ledger API wrapper code
 
-``` python
+```python
 from fetchai.ledger.api import LedgerApi
 from fetchai.ledger.contract import Contract
 from fetchai.ledger.crypto import Entity, Address
@@ -194,7 +188,7 @@ def run(options):
     # Have entity1 send contract1 some money
     transfer_and_verify_balances(api, entity1, contract1.address, 2345)
 
-    # Have contract1 send contract2 some of its money 
+    # Have contract1 send contract2 some of its money
     call_transfer_action_and_verify_balances(
         api,
         contract1,
@@ -203,7 +197,7 @@ def run(options):
         contract2.address,
         1345)
 
-    # Have contract2 send some money back to its owner 
+    # Have contract2 send some money back to its owner
     call_transfer_action_and_verify_balances(
         api,
         contract2,
@@ -219,7 +213,7 @@ if __name__ == "__main__":
 
 You should see similar to the following results.
 
-``` bash
+```bash
 WARNING:root:Defaulting to wildcard shard mask as none supplied
 WARNING:root:Defaulting to wildcard shard mask as none supplied
 Transfer from 2VkKoC7DvBz6wXKZyoypkg2xsRBkE3FdNGXHqShqcEevYray4J to 24sx12GNYMRSFHLyUkiPLmfjeydeV5225RYZfpu2Qvk2LMpWWu
@@ -228,6 +222,5 @@ Transfer from 2mfWzyUTgoju5nWYMENf7M1yLE3b2Ma31kmAhKPvAW7ytBydev to 2VkKoC7DvBz6
 
 Process finished with exit code 0
 ```
-
 
 <br />
