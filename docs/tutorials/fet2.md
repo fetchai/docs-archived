@@ -1,7 +1,7 @@
-# Create an ERC721 contract
+# Create an FET-2 contract
 
 In this tutorial we are going to implement a subset of the functionality of 
-an ERC721 contract in `etch`. 
+an FET-2 contract in `etch`. 
 
 We will be using `UInt256` for identifiers and the `SHA256()` function to generate the identifiers of the initial tokens. 
 
@@ -94,14 +94,14 @@ function ownerOf(token_id: UInt256) : Address
 endfunction
 ```
 
-With these two query functions, it is possible to implement an ERC721 wallet on top of the smart ledger. 
+With these two query functions, it is possible to implement an FET-2 wallet on top of the smart ledger. 
 
 We can also make several optimisations for these functions. For instance, by storing the number of tokens separately, we would not have to deserialise the full array.
 
 
 ## Actions
 
-The standard ERC721 contract has a number of different functions for transferring funds from one party to another. We will implement just one of these; they are all essentially variations of the same mechanism with more or less error checking built into them. 
+The standard FET-2 contract has a number of different functions for transferring funds from one party to another. We will implement just one of these; they are all essentially variations of the same mechanism with more or less error checking built into them. 
 
 Implement a single transfer function:
 

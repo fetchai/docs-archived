@@ -1,4 +1,5 @@
-# Create an ERC20 contract
+
+# Create an FET-1 contract
 
 The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the the Python API.
 
@@ -9,7 +10,7 @@ Details of the Python API are <a href="../../getting-started/python-api-install/
 
 ## Requirements
 
-The ERC20 contract implements following functions:
+The FET-1 contract implements following functions:
 
 - `totalSupply() : UInt256` gets the total token supply.
 - `balanceOf(owner: Address): UInt256` gets the balance of an account having address `owner`.
@@ -50,7 +51,7 @@ Furthermore, for this specific contract we have made the total supply programmab
 
 ## Queries
 
-The ERC20 contract has three query functions: 
+The FET-1 contract has three query functions: 
 
 * `totalSupply(): UInt256`.
 * `balanceOf(owner: Address) : UInt256`.
@@ -99,7 +100,7 @@ Both are valid ways to manage a state existence.
 
 ## Actions
 
-The ERC20 contract defines three functions annotated with `@action`:
+The FET-1 contract defines three functions annotated with `@action`:
 
 * `transfer(from: Address, to: Address, value: UInt256) : Bool`. 
 * `transferFrom(from: Address, to: Address, value: UInt256): Bool`.
@@ -147,7 +148,7 @@ The above demonstrates one of the simplest possible token contracts keeping a ba
 
 ## Implementing allowance
 
-So far, the functions we've seen constitute a basic token contract that allows creation of tokens and transfer between participants. A more interesting functionality is the `allowance` mechanism in the ERC20 contract that gives one address the possibility of spending some amount based on the allowance details. 
+So far, the functions we've seen constitute a basic token contract that allows creation of tokens and transfer between participants. A more interesting functionality is the `allowance` mechanism in the FET-1 contract that gives one address the possibility of spending some amount based on the allowance details. 
 
 To create this functionality we could use the normal `State` object by simply defining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropriate shard within the system. 
 
