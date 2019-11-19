@@ -3,15 +3,6 @@
       <h4>Tutorials</h4>
   </div>
 
-    <div class="grid-item item_whole_row hasborder">
-      <h4>Agent Tutorials</h4>
-
-      <ul>
-        <li>Getting started with the Agent Framework</li>
-      <ul>
-
-  </div>
-
   <div class="grid-item item_whole_row hasborder">
       <h4>Smart Contracts and Etch</h4>
       <ul>
