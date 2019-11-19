@@ -1,7 +1,8 @@
 #Architecture
 
 <div class="admonition note">
-  <p class="admonition-title">We assume the reader is comfortable with high level concepts that underpin blockchain technology, such as public key cryptography, consensus, blockchain, and smart contracts.</p>
+  <p class="admonition-title">Note</p>
+  <p>We assume the reader is comfortable with high level concepts that underpin blockchain technology, such as public key cryptography, consensus, blockchain, and smart contracts.</p>
 </div>
 
 ## Sharding
