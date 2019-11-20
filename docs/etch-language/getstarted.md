@@ -1,20 +1,18 @@
-<h1>Getting started</h1>
+#Getting started
 
-### Prerequisites
+## Prerequisites
 
-Get the Fetch.ai Ledger code from Git. 
-
-Full initial installation and build instructions are <a href="../.././getting-started/installation-mac/" target=_blank>here</a>.
+To build with Etch, you will need a running node. 
 
 ### Installation
 
-`cd` into `build` folder.
+At the root of your ledger installation directory `cd` into `build` folder.
 
 Run `make etch`.
 
 ### Setup
 
-`cd` into `apps/etch`.
+At the root of your ledger installation directory `cd` into `apps/etch`.
 
 Run `./etch` with filename, flags, and arguments: 
 
@@ -24,11 +22,7 @@ For example:
 
 `./etch hello-world.etch -data test.json`. 
 
-This runs the `hello-world.etch` file and produces a `json` file containing info on the data required by the contract.
-
-## Etch playground
-
-You can run all the examples in these docs in the <a href="http://etch-tour.economicagents.com/" target=_blank>`etch` playground here</a> as well as on the command line.
+This runs a `hello-world.etch` file and produces a `json` file containing info on the data required by the contract.
 
 
 <!--## Editor plugins
@@ -43,39 +37,40 @@ You can find the details <a href="https://github.com/uvue-git/fetch-code-highlig
 -->
 
 
-## Hello world!
+## Hello world with Etch
 
+Let's use the `etch` simulator for the development process. Unlike Smart Contracts, Etch code needs a main() function as it's entry point. 
 
-### Compile and run a single `etch` file
-
-Let’s run our first `etch` program.
-
-Create a new file in the `etch` directory and save it as `hello-world.etch`.
-
-Add the following code:
-
-``` c++
+``` python
+@testCase
 function main()
+  
+    printLn("Hello, world");
 
-	printLn("Hello world!");
-	
 endfunction
 ```
 
-Save the file.
+You can test this contract with the `etch` executable. Save this code snippet to `hello_world.etch` Run the following from your 
+build directory:
 
-Run `./etch hello-world.etch`.
-
-You should see the following output:
-
-``` c++
-$ ./etch hello-world.etch
- F E ╱     etch v0.1.0-23-gd7622f98
-   T C     Copyright 2018-2019 (c) Fetch AI Ltd.
-     H     
-
-Hello world!
+``` bash
+./apps/etch/etch hello_world.etch
 ```
+
+This produces an output similar to:
+```
+ F E ╱     etch v0.4.1-rc3
+   T C     Copyright 2018-2019 (c) Fetch AI Ltd.
+     H
+
+Hello, world!
+```
+
+`main` is the default runner function in `etch`. When submitting the smart contract to the ledger, we do not need the `main` function as it is inaccessible to the ledger code.
+
+
+
+<br/>
 
 
 ### Compile and run two or more `etch` files
@@ -89,3 +84,10 @@ For example, run `./etch file-1.etch file-2.etch file-n.etch`.
 
 
 <br/>
+
+
+
+## Etch playground
+
+You can run all the examples in these docs in the <a href="http://etch-tour.economicagents.com/" target=_blank>`etch` playground here</a> as well as on the command line.
+
