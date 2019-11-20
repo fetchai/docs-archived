@@ -13,7 +13,7 @@ If you run in `--strict` mode, you will receive warnings about any broken links.
 Have fun.
 
 
-##Building CSS
+## Building CSS
 
 `python3 setup.py install`
 
