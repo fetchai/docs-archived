@@ -15,5 +15,6 @@ Have fun.
 
 ##Building CSS
 
-python3 setup.py install
-python3 setup.py build_sass
+`python3 setup.py install`
+
+`python3 setup.py build_sass`
