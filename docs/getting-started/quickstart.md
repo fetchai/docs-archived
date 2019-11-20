@@ -1,13 +1,16 @@
-#Quickstart!
-Fetch.ai is a platform for decentralised autonomous agents to work, it's a platform that enables machine learning from the consensus design through to applications in Etch. 
+# Quickstart!
 
-This quickstart quide is to get you moving as quickly as possible. Let's get started, anything we miss will be highlighted for you to deep dive on later.
+Fetch.ai is a decentralised platform where autonomous agents can collaborate, enabling machine learning from the consensus design through to applications in Etch.
 
-###Running a node locally:
+This quickstart quide aims to get you moving as quickly as possible, and it will point you at sections where you can learn more. Let's get started!
 
-This is a great way to test Etch code locally and view what a node is doing; you can connect to the testnet or just run as a single node. 
 
-Let's do that. You're going to need to clone the fetch.ai ledger repo:
+## Running a node locally
+
+This is a great way to test locally smart contracts developed in our native language (called [Etch](../etch-language/index.md), and to debug what a node is doing. You can connect to the testnet or just run as a single node. 
+
+You'll first need to clone the [Fetch.ai ledger repo](https://github.com/fetchai/ledger):
+
 ``` bash
 cd [working_directory]
 git clone https://github.com/fetchai/ledger.git
@@ -22,24 +25,27 @@ git pull
 git submodule update --init --recursive
 ```
 
-###Building and running the ledger:
 Now let's build the project: 
 
 ```bash
 ./scripts/quickstart.sh
 ```
 
-we can now run the leder locally: 
+And we can now run the ledger locally:
+
 ```bash
 ./build/apps/constellation/constellation -standalone -block-interval 20000
 ```
 
-The node is running, it's not connected to the network and a block interval of 2 seconds. 
+This runs a node with a block interval of 2 seconds. Since it is a standalone node, it is not connected to any network. 
 
-For more detailed instructions, including helpful tips if you're running into errors head here. 
+For more detailed instructions on how to run a node, please check the following:
+
+* [Running a standalone node or connected to a network](run-a-node.md)
+* [`constellation` flags](../ledger/running-a-constellation.md)
 
 
-##Install the Python Ledger API
+## Installing the Python Ledger API
 
 If you want to develop Smart Contracts and deploy them, or create apps to connect directly to the ledger, the Python Ledger API is currently one of two ways to do so. 
 
@@ -74,7 +80,7 @@ str(Address(agent1))
 agent1.private_key
 ```
 
-##Deploying a contract
+## Deploying a contract
 
 Let's create another Python Script for this.
 
@@ -113,14 +119,14 @@ This is intentionally very simple; to see a full example go <a href="https://git
 We also have <a href="https://build.fetch.ai/">Etch playground</a>, while not the best way to develop contracts it's a great way to <a href="https://build.fetch.ai/">learn Etch.</a>
 
 
-##Machine learning on Fetch.ai
+## Machine learning on Fetch.ai
 
 ...
 
 
-##Agents
+## Agents
 
 
 
-##Next steps
+## Next steps
 
