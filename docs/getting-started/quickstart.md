@@ -120,7 +120,7 @@ We also have <a href="https://build.fetch.ai/">Etch playground</a>, while not th
 
 ##Agents
 
-
+...
 
 ##Next steps
 
