@@ -1,6 +1,8 @@
-`etch` machine learning code is powerful, efficient, and succinct. Let's look at an example.
+Writing machine learning applications in the `etch` language should be familiar for developers already experience in writing with other machine learning frameworks. Let's look at an example of training a fully connected neural net to solve the regression problem of predicting house prices for the boston housing dataset.
 
-## Boston Housing Dataset example
+### Boston Housing Example
+
+Below is code for an etch script that trains a fully connected model on csv's read in from the command line. Naturally a different approach has to be taken in a smart contract, but for now we'll work locally just to see how machine learning works in etch.
 
 ``` c++
 function main()
@@ -37,6 +39,10 @@ function main()
 
 endfunction
 ```
+
+At the core of this example is setting up a sequential model that lets you specify what each layer of the graph should be. In this case we specify a three-layer dense network. Then we compile the model, specifying the loss function to be mean squared error, and the optimiser to be adam.
+
+With the model set up we fit the data to the labels, and specify the batch size for training.
 
 The demo does four things.
 
