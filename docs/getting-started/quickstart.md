@@ -1,13 +1,13 @@
 # Quickstart!
 
-Fetch.ai is a decentralised platform where autonomous agents can collaborate, enabling machine learning from the consensus design through to applications in Etch.
+Fetch.ai is a decentralised platform where autonomous agents can collaborate, using machine learning supported at all levels, from the consensus design to the smart contracts language [Etch](../etch-language/index.md).
 
 This quickstart quide aims to get you moving as quickly as possible, and it will point you at sections where you can learn more. Let's get started!
 
 
 ## Running a node locally
 
-This is a great way to test locally smart contracts developed in our native language (called [Etch](../etch-language/index.md), and to debug what a node is doing. You can connect to the testnet or just run as a single node. 
+This is a great way to test locally smart contracts developed in the Fetch.ai native language (called [Etch](../etch-language/index.md), and to debug a node's behaviour. You can connect to the testnet or just run as a single node. 
 
 You'll first need to clone the [Fetch.ai ledger repo](https://github.com/fetchai/ledger):
 
