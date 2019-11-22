@@ -57,7 +57,9 @@ The main differences from the previous etch example are:
 
 ### Persistent storage
 
-A full explanation of persistent storage is given <a href="/etch-language/persistent-globals" target=_blank>here</a>. In brief, however, the ledger maintains a state database for smart contracts to store objects. In this example we indicate our intention to access the model in the state database with `use model_state`, we store our model in the state database using `set()`, and we recover it for use with `get()`. It's important to consider carefully what make sense to store in the state database, and what should be managed locally.
+The ledger maintains a state database for smart contracts to store objects. In this example we indicate our intention to access the model in the state database with `use model_state`, we store our model in the state database using `set()`, and we recover it for use with `get()`. It's important to consider carefully what make sense to store in the state database, and what should be managed locally.
+
+A full explanation of persistent storage is given <a href="/etch-language/persistent-globals" target=_blank>here</a>.
 
 ### Separately callable functions
 
