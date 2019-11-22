@@ -63,7 +63,7 @@ A full explanation of persistent storage is given <a href="/etch-language/persis
 
 ### Separately callable functions
 
-In this example the train, evaluate, and predict functions are all separately callable. This allows users to contribute to training the model, or utilise the model for prediction independently.
+In this example the `train`, `evaluate`, and `predict` functions are all separately callable. This allows users to contribute to training the model, or utilise the model for prediction independently.
 
 ### Function decorators
 
