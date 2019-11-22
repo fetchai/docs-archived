@@ -1,6 +1,6 @@
 # Machine Learning
 
-the Fetch.AI distributed ledger was built with machine learning in mind, and is fully compatible with 
+The Fetch.ai distributed ledger is fully compatible with 
 Fetch's machine learning library. That means neural networks can be trained and run on or off chain 
 depending on what is needed for your application.
 
