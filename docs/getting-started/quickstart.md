@@ -108,6 +108,19 @@ contract.query(api, 'sayHello')
 
 ```
 
-This is intentionally very simple; to see a full example go <a href="https://github.com/fetchai/ledger-api-py/blob/master/examples/contracts.py">here</a>. If you'd like to see much more, such as <a href="http://etch-docs.fetch.ai/smart-contracts/executing-synergetic-code/">experimental features</a> or <a href="http://etch-docs.fetch.ai/tutorials/fet1/">non-fungible generation contract example</a> click those links, or check out our <a href="/tutorial/">tutorials</a>.
+This is intentionally very simple; to see a full example go <a href="https://github.com/fetchai/ledger-api-py/blob/master/examples/contracts.py">here</a>. If you'd like to see much more, such as <a href="http://etch-docs.fetch.ai/smart-contracts/executing-synergetic-code/">experimental features</a> or <a href="http://etch-docs.fetch.ai/tutorials/fet2/">non-fungible generation contract example</a> click those links, or check out our <a href="/tutorial/">tutorials</a>.
 
 We also have <a href="https://build.fetch.ai/">Etch playground</a>, while not the best way to develop contracts it's a great way to <a href="https://build.fetch.ai/">learn Etch.</a>
+
+
+##Machine learning on Fetch.ai
+
+...
+
+
+##Agents
+
+...
+
+##Next steps
+
