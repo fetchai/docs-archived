@@ -55,7 +55,7 @@ Let's take a closer look.
 
 If you haven't yet run an `etch` script, make sure you can do so from the console. 
 
-Instructions are <a href="../getstarted/" target=_blank>here</a>.
+Instructions are <a href="../etch-language/getstarted/" target=_blank>here</a>.
 
 
 
