@@ -4,7 +4,7 @@ The Fetch.ai distributed ledger is fully compatible with
 Fetch's machine learning library. That means neural networks can be trained and run on or off chain 
 depending on what is needed for your application.
 
-If you're new to the Etch language, the language of fetch smart contracts, 
+If you're new to the Etch language, used to write smart contracts native to the Fetch.ai platform,
 <a href="/machine-learning/basic-etch-example" target=_blank>this etch example</a> demonstrates how to train and run a neural network.
 This can be useful for trying out ideas, or simply using the fetch machine learning library for standalone applications.
 
