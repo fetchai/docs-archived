@@ -113,9 +113,9 @@ This is intentionally very simple; to see a full example go <a href="https://git
 We also have <a href="https://build.fetch.ai/">Etch playground</a>, while not the best way to develop contracts it's a great way to <a href="https://build.fetch.ai/">learn Etch.</a>
 
 
-## Training a neural network
+## Using the machine learning library
 
-Let's look at an example of how to use the Fetch.ai machine learning library for standalone applications. This example will predict house prices for the Boston Housing Dataset, which can be downloaded from [here](http://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html).
+Let's look at an example of how to use the Fetch.ai machine learning library to train a neural network in a standalone applicatoin. This example will predict house prices for the Boston Housing Dataset, which can be downloaded from [here](http://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html).
 
 The implementation is based on the [Etch language](/etch-language), which is also used to write smart contracts on the Fetch.ai ledger; you saw a very brief example in the previous section. Instructions to set up an Etch development environment can be found [here](/etch-language/getstarted/).
 
