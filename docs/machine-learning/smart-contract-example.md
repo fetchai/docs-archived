@@ -1,8 +1,6 @@
 # AI in Smart Contracts
 
-<a href="/machine-learning/basic-etch-example" target=_blank>The previous example</a> demonstrated how to train and execute neural networks in the `etch` language locally. This example focuses on reworking that example as a smart contract that can be executed entirely on-chain.
-
-## Simple Smart Contract
+[The quickstart example](/getting-started/quickstart#training-a-neural-network) demonstrates how to train and execute neural networks in the Etch language locally. This example focuses on reworking that example as a smart contract that can be executed entirely on-chain.
 
 ``` c++
 // initial set up creates the model and persistent data
