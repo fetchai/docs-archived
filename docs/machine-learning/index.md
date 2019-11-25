@@ -9,7 +9,7 @@ If you're new to the Etch language, used to write smart contracts native to the 
 This can be useful for trying out ideas, or simply using the fetch machine learning library for standalone applications.
 
 To extending this further we need to understand how to train or run a neural net on-chain. 
-<a href="/machine-learning/ml-smart-contract" target=_blank>This smart contract example </a> demonstrates how to rework this neural network to train and run on chain.
+<a href="/machine-learning/smart-contract-example" target=_blank>This smart contract example </a> demonstrates how to rework this neural network to train and run on chain.
 
-Finally, <a href="/machine-learning/ml-synergetic-contract" target=_blank>this synergetic contract example</a> covers synergetic contracts; this is useful for coordinating between on-chain and off-chain work.
+Finally, <a href="/machine-learning/synergetic-contract-example" target=_blank>this synergetic contract example</a> covers synergetic contracts; this is useful for coordinating between on-chain and off-chain work.
 This is great for executing expensive computations off-chain but coordinating/managing the work on-chain. 

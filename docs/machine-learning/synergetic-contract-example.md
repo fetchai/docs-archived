@@ -6,6 +6,11 @@ In this example we'll take this even further with a synergetic contract; this al
 
 ## Simple Synergetic Contract
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>This developer documentation is a work in progress. If you spot any errors please open an issue [here](https://github.com/fetchai/agents-aea).</p>
+</div>
+
 ``` c++
 // set up a problem around training a machine learning model
 @problem
