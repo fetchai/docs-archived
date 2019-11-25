@@ -13,9 +13,6 @@ The FET-1 contract implements following functions:
 -   `totalSupply() : UInt256` gets the total token supply.
 -   `balanceOf(owner: Address): UInt256` gets the balance of an account having address `owner`.
 -   `transfer(to: Address, value: UInt256) : Bool` sends `value` amount of tokens to address `to`.
--   `transferFrom(from: Address, to: Address, value: UInt256): Bool` sends `value` amount of tokens from address `from` to address `to`.
--   `approve(spender: Address, value: UInt256) : Bool` allows `spender` to withdraw from your account, multiple times, up to the `value` amount. If this function is called again it overwrites the current allowance with `value`.
--   `allowance(owner: Address, spender: Address)` returns the amount which `spender` is still allowed to withdraw from `owner`.
 
 We now go ahead and implement most of these functions.
 
@@ -30,13 +27,13 @@ We first define the contract constructor function which is annotated with the `@
 
 ```c++
 @init
-function createSupply(owner: Address, supply: UInt256)
+function init(owner: Address)
 
-    var supply_state = State< UInt256 >("total_supply");
-    supply_state.set(supply);
+    use supply_state;
+    use balance_state[owner];
 
-    var balance_state = State< UInt256 >(owner);
-    balance_state.set( supply );
+    supply_state.set(92817u64);
+    balance_state.set(owner, 92817u64);
 
 endfunction
 ```
@@ -53,35 +50,31 @@ The FET-1 contract has three query functions:
 
 -   `totalSupply(): UInt256`.
 -   `balanceOf(owner: Address) : UInt256`.
--   `allowance(owner: Address, spender: Address) : UInt256`.
+-   `transfer(from: Address, to: Address, value: UInt256) : Bool`.
 
-We will define `totalSupply` and `balanceOf` in this section and discuss `allowance` later on.
+We will define `totalSupply` and `balanceOf` in this section and discuss `transfer` later on.
 
 Both `totalSupply` and `balanceOf` are straightforward to implement. `totalSupply` queries the `State` variable `total_supply` and returns it as a result:
 
 ```c++
 @query
-function totalSupply(): UInt256
+function totalSupply(): UInt64
 
-    var supply_state = State< UInt256 >("total_supply");
-    return supply_state.get(0u64);
+    use supply_state;
+    return supply_state.get();
 
 endfunction
+
 ```
 
-`balanceOf`, on the other hand, does a dynamic look up based on the address of `owner`:
+`balanceOf`, on the other hand uses the `sharded state` of `balance_state` and does a dynamic look up based on the address of `address`:
 
 ```c++
 @query
-function balanceOf(owner: Address) : UInt256
-
-    var balance_state = State< UInt256 >(owner);
-
-    if(!balance_state.existed())
-      return UInt256(0u64);
-    endif
-
-    return balance_state.get(UInt256(0u64));
+function balanceOf(address: Address) : UInt64
+    
+    use balance_state[address];
+    return balance_state.get(address, 0u64);
 
 endfunction
 ```
@@ -96,44 +89,34 @@ Both are valid ways to manage a state existence.
 
 ## Actions
 
-The FET-1 contract defines three functions annotated with `@action`:
+The FET-1 contract defines one function annotated with `@action`:
 
 -   `transfer(from: Address, to: Address, value: UInt256) : Bool`.
--   `transferFrom(from: Address, to: Address, value: UInt256): Bool`.
--   `approve(spender: Address, value: UInt256) : Bool`.
 
-We will discuss `approve` in the next section.
 
-In `etch`, `transfer` and `transferFrom` are one and the same function as `etch` does not have an implicitly provided sender. Rather `from` and `to` are explicit function arguments and whether these addresses signed the transaction is checked within the `@action` function.
+In `transfer`, `from` and `to` are explicit function arguments and whether these addresses signed the transaction is checked within the `@action` function.
 
 ```c++
 @action
-function transfer(from: Address, to: Address, value: UInt256) : Bool
+function transfer(from: Address, to: Address, value: UInt64) : Bool
 
     if(!from.signedTx())
       return false;
     endif
 
-    var from_state = State< UInt256 >(from);
-    var from_balance = from_state.get( UInt256(0u64) );
+    use balance_state[from, to];
+    var from_balance = balance_state.get(from, 0u64);
+    var to_balance = balance_state.get(to, 0u64);
+
     if(from_balance < value)
       return false;
     endif
 
-    var to_state = State< UInt256 >(to);
-    var to_balance = to_state.get( UInt256(0u64) );
+    var u_from = from_balance - value;
+    var u_to = to_balance + value;
 
-    // TODO: Polyfilling due to missing UInt256 functionality
-    var u_from = toUInt64(from_balance);
-    var u_to = toUInt64(to_balance);
-    var u_amount = toUInt64(value);
-    u_from -= u_amount;
-    u_to += u_amount;
-    from_balance = UInt256(u_from);
-    to_balance = UInt256(u_to);
-
-    from_state.set(from_balance);
-    to_state.set(to_balance);
+    balance_state.set(from, u_from);
+    balance_state.set(to, u_to);
     return true;
 
 endfunction
@@ -176,6 +159,6 @@ endfunction
 
 The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance.
 
-You can find the full contract <a href="https://github.com/fetchai/etch-examples/blob/master/02_erc20/contract.etch" target=_blank>here</a>.
+You can find the full contract within <a href="https://github.com/fetchai/etch-examples/blob/master/01/contract.etch" target=_blank>here</a>.
 
 <br/>
