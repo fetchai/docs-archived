@@ -10,12 +10,11 @@
     </div>
   </a>
   
-  <a href="./tutorials/">
-    <div class="grid-item item3">
+  <a href="./tutorials/" class="grid-item item3">
       <h3>Tutorials</h3>
             
       <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
-    </div>
+
   </a>
   <div class="grid-item item_whole_row no-padding">
     <h1>What is Fetch.ai</h1>
