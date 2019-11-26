@@ -159,6 +159,6 @@ endfunction
 
 The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance.
 
-You can find the full contract within <a href="https://github.com/fetchai/etch-examples/blob/master/01/contract.etch" target=_blank>here</a>.
+You can find the full contract within <a href="hthttps://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch" target=_blank>here</a>.
 
 <br/>
