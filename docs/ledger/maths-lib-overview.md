@@ -1,22 +1,20 @@
-`etch` mathematics and machine learning operations are supported by a header-only fully-templated C++ library. 
+`etch` mathematics and machine learning operations are supported by a header-only fully-templated C++ library.
 
-
-!!!	Note
-	Detailed developer documentation for the C++ implementation of the maths libraries will be available in the Fetch Ledger section in due course. 
-	Developers should be comfortable with SFINAE.
-
-
+<div class="admonition note">
+  <p class="admonition-title">Detailed developer documentation for the C++ implementation of the maths libraries will be available in the Fetch Ledger section in due course. 
+	Developers should be comfortable with SFINAE.</p>
+</div>
 
 ## Architecture
 
-A core component of the maths library is the `tensor.hpp` class which handles N-dimensional array mathematics. This is crucial for the machine learning library but can also be used for any generalised matrix algebra. 
+A core component of the maths library is the `tensor.hpp` class which handles N-dimensional array mathematics. This is crucial for the machine learning library but can also be used for any generalised matrix algebra.
 
 The remainder of the library contains templated free functions that can be called with the following types:
 
-* Built-in C++ types such as `double`, `int`, `float`, etc. 
-* C++ tensors of built-in types such as `Tensor<double>`.
-* `etch` types such as `Fixed32`. 
-* `etch` tensors types such as `Tensor<Fixed32>`.
+-   Built-in C++ types such as `double`, `int`, `float`, etc.
+-   C++ tensors of built-in types such as `Tensor<double>`.
+-   `etch` types such as `Fixed32`.
+-   `etch` tensors types such as `Tensor<Fixed32>`.
 
 The header file `fundamental_operators.hpp` contains common operations `Add`, `Subtract`, `Multiply`, and `Divide`.
 
@@ -27,15 +25,13 @@ The `standard_functions` directory contains header files for additional standard
 The following block diagram gives a rough indication of the library structure.
 
 !!! Advice
-	This is work in progress.
-
+This is work in progress.
 
 <center>![Maths library architecture](img/maths-lib-architecture.png)</center>
 
-
 ## Tensor
 
-A `Tensor` is a wrapper for a `data_` object which is, by default, a `SharedArray` managed by the `vectorise` library. This library manages the vectorisation/SIMD on the underlying data. 
+A `Tensor` is a wrapper for a `data_` object which is, by default, a `SharedArray` managed by the `vectorise` library. This library manages the vectorisation/SIMD on the underlying data.
 
 `Tensor` objects provide interfaces for manipulating arrays at a mathematical/algebraic level while allowing implementations to be efficient and vectorisable.
 
@@ -43,15 +39,12 @@ Tensors have related helper classes such as `TensorIterator`, `TensorBroadcast`,
 
 Check out the available mathematical functions in `etch` <a href="../../etch-language/maths-functions/" target=_blank>here</a>.
 
-
-
 ## Working with the maths library
 
 When working with the C++ maths library, take note of the following:
 
-* Functions should have two interfaces: one that takes a reference to the return object, and one that creates the return object internally.
+-   Functions should have two interfaces: one that takes a reference to the return object, and one that creates the return object internally.
 
-* Function design decisions should follow Numpy conventions where possible.
-
+-   Function design decisions should follow Numpy conventions where possible.
 
 <br/>

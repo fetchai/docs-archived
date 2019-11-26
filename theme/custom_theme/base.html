@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{%- block site_meta %}
+  <meta charset="utf-8">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  {%- block htmltitle %}
+    <title>{% if page and page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+  {%- endblock %}{# block htmltitle end #}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% if config.site_description %}<meta name="description" content="{{ config.site_description }}">{% endif %}
+  <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-{{ config.theme.version }}">
+  {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
+  <link rel="shortcut icon" href="{{ base_url }}/images/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <meta name="HandheldFriendly" content="true"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta rel="next" href="" />
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>var base_url = '{{ base_url }}';</script>
+
+{%- endblock %}{# site_meta #} 
+
+{%- block styles %}
+  <link href="{{ base_url }}/css/style.min.css" rel="stylesheet">
+  {%- for path in extra_css %}
+    <link href="{{ path }}" rel="stylesheet">
+  {%- endfor %}
+{%- endblock %}{# styles #}
+
+{%- block extrahead %} {% endblock %}{# xtrahead #}
+</head>
+
+<body>
+  <div id="page-container">
+    <div id="content-wrap">
+      {%- if 'search' in config['plugins'] %}
+
+        <div id="mkdocs-search-wrapper">
+          <button id="closeSearchResults">&times;</button>
+          <div id="mkdocs-search-results" class="search-popup">
+            Sorry, page not found.
+          </div><!-- #mkdocs-search-results end -->
+        </div><!-- #mkdocs-search-wrapper end -->
+
+      {%- endif %}{# if search #}
+
+      <div class="header-wrap">
+        <div class="menuheader">
+          <div class="headerlogo">
+            <a href="https://fetch.ai" target="_blank">
+              <img src="/images/logo.png" alt="Fetch Logo">
+            </a>
+          </div><!-- .headerlogo end -->
+
+          <ul class="menu">
+            <li><a href="https://developer.fetch.ai/bounties">Bounty </a></li>
+            <li><a href="https://blockexplorer-alpha.fetch-ai.com/">Explorer </a></li>
+            <li><a href="/status">Docs </a></li>
+            <li><a href="/status">Links </a></li>
+            <li><a href="/tutorials/">Tutorials </a></li>
+            <li><a href="/status">References </a></li>
+          </ul><!-- .menu end -->
+        </div><!-- .menuheader end -->
+      </div><!-- .header-wrap end -->
+
+      <div class="book">
+
+        {%- block search_button %}
+          {%- if 'search' in config['plugins'] %}
+            <div id="book-search-input" role="search">
+              <form action="search.html" id="searchForm">
+                <input name="q" id="mkdocs-search-query" type="text" placeholder="Type to search">
+              </form>
+            </div> <!-- #book-search-input end -->
+          {%- endif %}
+        {%- endblock %}{# search button #}
+	
+        <div class="book-summary not-loaded">
+
+          {%- block site_nav %}
+
+            {% include "nav.html" %}
+
+            <hr class="menu-divide"/>
+            <div class="version">
+              Current version:
+
+            <div class="dropdown-content">
+                <a href="/latest/index.html">latest</a>
+            </div>
+                        </div>
+            <div class="version">
+              Previous versions:
+
+            <div class="dropdown-content">
+                <a href="/v0.8.x/index.html">v0.8.x</a>
+                <a href="/v0.6.x/index.html">v0.6.x</a>
+                <a href="/v0.5.x/index.html">v0.5.x</a>
+            </div><!-- .dropdown-content end -->
+              </div>
+
+          {%- endblock %}{# site_nav #}
+
+        </div> <!-- .book-summary end -->
+
+        <div class="book-body" >
+          <div class="body-inner" id="book-body">
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+              <div class="page-inner" id="book-body-inner">
+
+                <section class="normal markdown-section p17">
+
+                  {%- block content %}
+
+                  {% include "content.html" %}
+
+                  {%- endblock %}{# content #}
+
+                </section>
+
+              </div> <!-- .page-inner end -->
+
+              <div class="bottomnav">
+                {% if page.previous_page.title %}
+                <a href="{{ page.previous_page.url | url }}" class="button left"><strong>Previous:</strong></br>{{ page.previous_page.title | title}}</a>
+                {%- else %}
+                <div></div>
+                {%- endif %}
+                {% if page.next_page.title %}
+                <a href="{{ page.next_page.url | url }}" class="button right"><strong>Next:</strong></br>{{ page.next_page.title | title}}</a>
+                {%- else %}
+                <div></div>
+                {%- endif %}
+              </div><!-- .bottomnav end -->
+
+            </div> <!-- .page-wrapper end -->
+
+          </div> <!-- .body-inner end -->
+        </div> <!-- .book-body end -->
+
+      </div><!-- .book end -->
+    </div><!-- #content-wrap -->
+
+    <footer>
+      <div class="lower-footer">
+        <div class="col-1">
+          <div class="social">
+            <a href="https://t.me/fetch_ai" target="_blank"><i class="fab fa-telegram-plane" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/fetch_ai?lang=en" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/company/fetch-ai/" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/c/FetchAI" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+            <a href="https://medium.com/fetch-ai" target="_blank"><i class="fab fa-medium-m" aria-hidden="true"></i></a>
+            <a href="https://github.com/fetchai" target="_blank"><i class="fab fa-github" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="col-2">Copyright © <a href="https://fetch.ai">Fetch.ai</a> <span class="year">2019</span></div>
+      </div>
+    </footer>
+  </div><!-- end #page-container -->
+
+  <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
+
+  {%- block scripts %}
+  <script src="{{ base_url }}/js/main.js"></script>
+    {%- for path in extra_javascript %}
+      <script src="{{ path }}"></script>
+    {%- endfor %}
+  {%- endblock %}{# scripts #}
+
+  {%- block libs %}
+
+  {%- endblock %}{# libs #}
+</body>
+
+</html>

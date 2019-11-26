@@ -11,3 +11,10 @@ Then, clone the version of the docs you are interested in, `cd` to the `docs` ro
 If you run in `--strict` mode, you will receive warnings about any broken links.
 
 Have fun.
+
+
+## Building CSS
+
+`python3 setup.py install`
+
+`python3 setup.py build_sass`
