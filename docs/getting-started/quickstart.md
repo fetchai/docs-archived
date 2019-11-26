@@ -145,12 +145,12 @@ endfunction
 
 We then create a `Model` type and set a flag on it that describes what kind of `Model` we want. A `sequential` model allows us to manually add layers specifying:
 
-* Type: `dense` in this example
+* Type: `dense` in this example refers to a fully-connected layer where every neuron in the layer is connected to every input and every output.
 * Input size: must match the data for the first layer
 * Neurons in layer / output size: must match the label size for the final layer
 * Activation type (optional): here we use a rectified linear unit for the first two layers, and no activation for the final layer
 
-Finally, we compile the model using the `mean squared error` loss function, and the `adam` optimiser.
+Finally, we compile the model using the `mse` (mean squared error) loss function, and the `adam` optimiser.
 
 ``` c++
 var model = Model("sequential");
@@ -197,4 +197,3 @@ The script can be run from the root of the ledger folder, passing the input file
 ...
 
 ##Next steps
-
