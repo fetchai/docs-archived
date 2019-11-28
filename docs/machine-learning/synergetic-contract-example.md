@@ -1,6 +1,6 @@
 # AI in Synergetic Contracts
 
-<a href="machine-learning/smart-contract-example" target=_blank>The previous example</a> demonstrated how to train and execute neural networks in a smart contract. That's useful if you want to set up fully on-chain machine learning, but it also allows you to perform the compute intensive parts of the work off-chain and then load the model directly into smart contract state and use it to make predictions on-chain (trading off a certain amount of model transparency for efficiency/cost).
+<a href="/machine-learning/smart-contract-example" target=_blank>The previous example</a> demonstrated how to train and execute neural networks in a smart contract. That's useful if you want to set up fully on-chain machine learning, but it also allows you to perform the compute intensive parts of the work off-chain and then load the model directly into smart contract state and use it to make predictions on-chain (trading off a certain amount of model transparency for efficiency/cost).
 
 In this example we'll take this even further with a synergetic contract; this allows off-chain components of work to be specified in the contract. This could be extremely valuable if, for example, you wanted to set up a competition or auction in a contract where miners could take part to do expensive work training a machine learning model in exchange for a chance at winning the rewrad. Then the resulting best model could be uploaded onto the ledger for all to use.
 

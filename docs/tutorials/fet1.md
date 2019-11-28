@@ -2,9 +2,9 @@
 
 The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the the Python API.
 
-Details for running a node are <a href="../../getting-started/run-a-node/" target=_blank>here</a>.
+Details for running a node are <a href="/getting-started/run-a-node/" target=_blank>here</a>.
 
-Details of the Python API are <a href="../../getting-started/python-api-install/" target=_blank>here</a>.
+Details of the Python API are <a href="/getting-started/python-api-install/" target=_blank>here</a>.
 
 ## Requirements
 
@@ -159,6 +159,6 @@ endfunction
 
 The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance.
 
-You can find the full contract within <a href="hthttps://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch" target=_blank>here</a>.
+You can find the full contract within <a href="https://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch" target=_blank>here</a>.
 
 <br/>
