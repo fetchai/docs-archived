@@ -95,4 +95,4 @@ Above is a trivial example of a synergetic contract for setting up a competition
 
 In a serious implementation we would likely have many hyperparameters to search over and sensible ranges and resolutions for each hyper-parameter. We might also add further sophistication such as building into the contract an algorithm for guiding a random walk through hyper-parameter space across miners. Hopefully, however, this example serves to illustrate what is possible on the fetch ledger with synergetic contracts.
 
-To learn more about synergetic contracts take a look at <a href="/smart-contracts/synergetic" target=_blank>this further documentation</a>.
+To learn more about synergetic contracts take a look at <a href="../smart-contracts/synergetic" target=_blank>this further documentation</a>.
