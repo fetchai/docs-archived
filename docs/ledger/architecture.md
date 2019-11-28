@@ -8,9 +8,20 @@ This section describes at a high level how the Fetch.ai ledger operates. We assu
 !!! note
     For an understanding of the whole Fetch architecture, please read [the Fetch.ai whitepaper](https://fetch.ai/wp-content/uploads/2019/10/technical-introduction.pdf).
 
-The following diagram gives a high level overview of the components a node consists of. The entry point is the _Constellation_ application; every time a node is deployed in the network, an instance of this application is created. Please read [this section](running-a-constellation.md) for more information about how to run a node.
+The following diagram gives a high level overview of the components a node consists of. The entry point is the __Constellation__ application; every time a node is deployed in the network, an instance of this application is created. Please read [this section](running-a-constellation.md) for more information about how to run a node.
 
 ![Fetch.ai Ledger architecture high level view](img/architecture.png)
+
+The __block coordinator__ inside each node is responsible for adding new blocks to its copy of the chain, while preserving its consistency. In order to do so, it advances along the chain to find the longest/heaviest branch, and drops the ones that are not. After reaching the heaviest block, the block coordinator asks the executor(s) and consensus for help to add a new block, which contains a set of transactions.
+
+__Consensus__ is responsible for building a block that will be considered correct, e.g with a timestamp greater than that of the heaviest block in the chain.
+
+The __executor__ takes said block, iterates through all the transactions packed within it, and for each of them:
+
+1. It determines if the transaction is valid, has paid the required fees, etc.
+2. Since conceptually a transaction is a state change in blockchain, it updates the state accordingly.
+
+Blocks are then exchanged between nodes via a __block synchronization protocol__. Consensus is also responsible for verifying that blocks received this way are correct.
 
 
 ## Sharding
