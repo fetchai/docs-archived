@@ -14,7 +14,7 @@ The following diagram gives a high level overview of the components a node consi
 
 The __block coordinator__ inside each node is responsible for adding new blocks to its copy of the chain, while preserving its consistency. In order to do so, it advances along the chain to find the longest/heaviest branch, and drops the ones that are not. After reaching the heaviest block, the block coordinator asks the executor(s) and consensus for help to add a new block, which contains a set of transactions.
 
-__Consensus__ is responsible for building a block that will be considered correct, e.g with a timestamp greater than that of the heaviest block in the chain.
+__Consensus__ is responsible for building a block that will be considered correct, e.g. with a timestamp greater than that of the heaviest block in the chain.
 
 The __executor__ takes said block, iterates through all the transactions packed within it, and for each of them:
 
@@ -26,15 +26,13 @@ Blocks are then exchanged between nodes via a __block synchronization protocol__
 
 ## Sharding
 
-The Fetch.ai Ledger is unlike more traditional blockchain designs. Instead of a single chain of truth, the Fetch.ai Ledger is sharded into parallel _lanes_.
+The Fetch.ai ledger is unlike more traditional blockchain designs: instead of a single chain of truth, the ledger is sharded into parallel _lanes_. So even though the executor apparently has access to a continuous area of memory, in reality it is split across multiple processes, each of them representing a fraction of the state and the transactions.
 
-<center>![Memory mapping on the Fetch.ai Ledger shards](/smart-contracts/img/shards-basic.png)</center>
+![Memory mapping on the Fetch.ai Ledger shards](../smart-contracts/img/shards-basic.png)
 
-This blockchain sharding design speeds up the network as contracts can execute concurrently and so provide a solution to the blockchain scalability problem. Furthermore, by sharding the _world state_ in this way, transactions guarantee they only use certain resources, i.e. memory locations.
+This blockchain sharding design speeds up the network as contracts can execute concurrently, providing a solution to the blockchain scalability problem. Furthermore, by sharding the _world state_ in this way, transactions guarantee they only use certain resources, i.e. memory locations. Sharding is best done across multiple machines, to scale access and avoid resource locking.
 
-This means that the _size_ of a block can vary by increasing or decreasing the number of shards. This allows the network to balance block sizes against economic incentives, for example.
-
-The consequence of this design means the _world state_ is best sharded across multiple machines to scale access and avoid resource locking.
+As a consequence of this design, the _size_ of a block can vary by increasing or decreasing the number of shards. This allows the network to balance block sizes against economic incentives, for example.
 
 
 ## Wallet API
