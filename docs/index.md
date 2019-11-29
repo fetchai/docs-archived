@@ -55,8 +55,8 @@
 <!-- stuff outside of tags (added a pre for now -->
 
 <div class="admonition note">
-  <p class="admonition-title">Title</p>
-  <p><strong>November 6th, 2019</strong>
+  <p class="admonition-title">Updates!</p>
+  <p><strong>November 29th, 2019</strong>
   Documentation updated for Fetch.ai ledger v0.10.x. See <a href="summary" target="_blank">summary details here</a>.</p>
 </div>
 

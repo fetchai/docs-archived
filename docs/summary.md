@@ -1,4 +1,4 @@
-**November 6th, 2019**
+**November 29th, 2019**
 
 Documentation has been updated for Fetch.ai ledger v0.10.x 
 
