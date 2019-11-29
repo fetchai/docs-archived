@@ -28,6 +28,7 @@
         <li>Support for fixed-point arithmetics to guarantee precision and determinism across all operations and transactions</li>
     </ul>
     <p><a href="https://fetch.ai/wp-content/uploads/2019/10/technical-introduction.pdf">Whitepaper > </a></p> 
+    <p><a href="https://medium.com/fetch-ai/a-gentle-introduction-to-the-fetch-ai-framework-990b487de4d">Gentle Introduction > </a></p>
   </div>
 
   <div class="grid-item item_whole_row no-padding">
