@@ -54,16 +54,10 @@
 <!--/div--><!-- One closing div too many-->
 <!-- stuff outside of tags (added a pre for now -->
 
-<div class="admonition tip">
-  <p class="admonition-title">Tip</p>
-  <p><strong>November 6th, 2019</strong>
-  Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target="_blank">summary details here</a>.</p>
-</div>
-
 <div class="admonition note">
   <p class="admonition-title">Title</p>
   <p><strong>November 6th, 2019</strong>
-  Documentation updated for Fetch.ai ledger v0.9.x Ara release. See <a href="summary" target="_blank">summary details here</a>.</p>
+  Documentation updated for Fetch.ai ledger v0.10.x. See <a href="summary" target="_blank">summary details here</a>.</p>
 </div>
 
 <br/>
