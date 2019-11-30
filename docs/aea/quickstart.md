@@ -59,8 +59,7 @@ pip install aea[cli]
 
 ### Known issues
 
-If the installation steps fail, it might be because some of
- the dependencies cannot be built on your system. 
+If the installation steps fail, it might be because some of the dependencies cannot be built on your system. 
 
 The following hints can help:
 
@@ -69,7 +68,7 @@ The following hints can help:
 sudo apt-get install python3.7-dev
 ``` 
 
-- Windows users: install [build tools for Visual Studio](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019). 
+- Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target=_blank>tools for Visual Studio</a>. 
 
 
 ## Echo skill demo
@@ -94,12 +93,10 @@ cd my_first_agent
 ### Add the echo skill 
 
 ``` bash
-
 aea add skill echo
 ```
 
 This copies the echo application code for the behaviours, handlers, and tasks into the skill, ready to run.
-
 
 ### Add a stub connection
 

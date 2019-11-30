@@ -12,7 +12,7 @@ endfunction
 
 There are currently three flavours of `DataLoader` in `etch`. 
 
-Fetch.AI developers have built specific `DataLoader` types for research and example purposes that take `MNIST` files, and `csv` files for a commodity application.
+Fetch.ai developers have built specific `DataLoader` types for research and example purposes that take `MNIST` files, and `csv` files for a commodity application.
 
 
 ## `Tensor` data loader

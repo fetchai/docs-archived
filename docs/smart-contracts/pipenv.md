@@ -4,7 +4,7 @@ The wrapper libraries supporting creation and deployment of `etch` smart contrac
 
 Do this with `pipenv`. 
 
-Find out about `pipenv` <a href="https://docs.pipenv.org/en/latest/" target=_blank>here</a>, including installation instructions.
+Find out about `pipenv` <a href="https://pipenv-fork.readthedocs.io/en/latest/" target=_blank>here</a>, including installation instructions.
 
 Once installed, develop and test from within an environment shell.
 

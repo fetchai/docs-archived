@@ -1,8 +1,8 @@
 <h1>Logical operators</h1>
 
-## Equal to 
+## Equal to
 
-``` c++
+```c++
 function main()
 
 	var x = 12;
@@ -15,9 +15,9 @@ function main()
 endfunction
 ```
 
-## Not equal to 
+## Not equal to
 
-``` c++
+```c++
 function main()
 
 	var x = 12;
@@ -32,7 +32,7 @@ endfunction
 
 ## Less than
 
-``` c++
+```c++
 function main()
 
 	var x = 12;
@@ -49,9 +49,9 @@ function main()
 endfunction
 ```
 
-## More than 
+## More than
 
-``` c++
+```c++
 function main()
 
 	var x = 12;
@@ -68,9 +68,9 @@ function main()
 endfunction
 ```
 
-## And 
+## And
 
-``` c++
+```c++
 function main()
 
 	var f : Bool = false;
@@ -83,13 +83,11 @@ function main()
 	endif
 
 endfunction
-``` 
-
-
+```
 
 ## Or
 
-``` c++
+```c++
 function main()
 
 	var f : Bool = false;
@@ -104,13 +102,11 @@ function main()
 endfunction
 ```
 
-
 ## Xor
 
-!!! note
-	Coming soon: support for `xor`.
-
-
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>Coming soon: support for `xor`.</p>
+</div>
 
 <br/>

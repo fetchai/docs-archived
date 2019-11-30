@@ -1,8 +1,11 @@
-<h1>Sharded States</h1>
+!!! Warning
+Use persistent global syntax to build `State` variables.
+
+## Introduction to `ShardedState` variables
 
 A `ShardedState` is like a `State` type in that data contained within a `ShardedState` will be etched upon the ledger.
 
-The key difference is that a `ShardedState` is a map, containing key/value pairs. 
+The key difference is that a `ShardedState` is a map, containing key/value pairs.
 
 A key must be a `String` or `Address` type.
 
@@ -10,9 +13,9 @@ Behind the scenes, `ShardedState` creates anonymous `State` types for key/value 
 
 ## Declaration
 
-Declare a `ShardedState` in the same way you declare a `State`: 
+Declare a `ShardedState` in the same way you declare a `State`:
 
-``` c++
+```c++
 function main()
 
     var shardedState = ShardedState<Int32>("account1");
@@ -20,27 +23,26 @@ function main()
 endfunction
 ```
 
-The `account1` identifier is the pointer to the place in memory that holds the data. 
-
+The `account1` identifier is the pointer to the place in memory that holds the data.
 
 ## Add key/value pairs
 
 Add key/value pairs to `ShardedState` like this:
 
-``` c++
+```c++
 function main()
 
     var myShardedState = ShardedState<Int32>("account1");
     myShardedState.set("sales", 0i32);
     myShardedState.set("gross_profit", 0i32);
     myShardedState.set("net_profit", 0i32);
-    
+
     set_values_on_state();
 
 endfunction
 
 function set_values_on_state()
-      
+
     var state = ShardedState<Int32>("account1");
     state.set("sales", 2000000);
     state.set("gross_profit", 1800000);
@@ -53,10 +55,12 @@ endfunction
 
 Let's add some query functions to get the `ShardedState` values. Notice that when you query the data, you provide default values and receive the actual value.
 
-!!! Note
-    The annotation `@query` is used in smart contract code and unnecessary for testing with the `etch` VM.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The annotation `@query` is used in smart contract code and unnecessary for testing with the `etch` VM.</p>
+</div>
 
-``` c++
+```c++
 function main()
 
     var myShardedState = ShardedState<Int32>("account1");
@@ -101,7 +105,7 @@ function query_net_profit() : Int32
 
     var state = ShardedState<Int32>("account1");
     return state.get("net_profit", 0i32);
-    
+
 endfunction
 ```
 
@@ -109,7 +113,7 @@ endfunction
 
 You can create `ShardedState` types using `Address` types as the reference.
 
-``` c++
+```c++
 function main()
 
     var account = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
@@ -122,11 +126,4 @@ function main()
 endfunction
 ```
 
-
-
-
-
-
 <br/>
-
-

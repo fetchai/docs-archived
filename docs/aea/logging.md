@@ -1,8 +1,8 @@
-The AEA framework supports flexible logging capabilities with the standard [Python logging library](https://docs.python.org/3/library/logging.html).
+The AEA framework supports flexible logging capabilities with the standard <a href="https://docs.python.org/3/library/logging.html" target=_blank>Python logging library</a>.
 
-In this tutorial, we will configure logging for an agent.
+In this tutorial, we configure logging for an agent.
 
-First of all, create your agent:
+First of all, create your agent.
 
 
 ``` bash
@@ -32,16 +32,14 @@ logging_config:
   version: 1
 ```
 
-By updating the `logging_config` section, you can configure 
-the loggers of your application.
+By updating the `logging_config` section, you can configure the loggers of your application.
 
-The format of this section is specified in the 
-[`logging.config`](https://docs.python.org/3/library/logging.config.html)
-module.
-At [this section](https://docs.python.org/3/library/logging.config.html#configuration-dictionary-schema) 
+The format of this section is specified in the <a href="https://docs.python.org/3/library/logging.config.html" target=_blank>`logging.config`</a> module.
+
+At <a href="https://docs.python.org/3/library/logging.config.html#configuration-dictionary-schema" target=_blank>this section</a> 
 you'll find the definition of the configuration dictionary schema.
 
-An example of `logging_config` value is reported below:
+Below is an example of the `logging_config` value.
 
 ```yaml
 logging_config:
@@ -73,6 +71,8 @@ This configuration will set up a logger with name `aea`,
 print both on console (see `console` handler) and on file
 (see `logfile` handler) with format specified by the 
 `standard` formatter.
+
+This configuration will set up a logger with name `aea`. It prints both on console and on file with a format specified by the `standard` formatter.
 
 
 <br />

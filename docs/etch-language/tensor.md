@@ -1,24 +1,25 @@
-A `Tensor` is a vector or matrix type having multiple dimensions. 
+A `Tensor` is a vector or matrix type having multiple dimensions.
 
 In `etch` it is the n-dimensional matrix type used by the mathematics and machine learning libraries.
 
-
 ## Declare and initialise
 
-Declare and initialise a `Tensor` by first defining the size of its dimensions. 
+Declare and initialise a `Tensor` by first defining the size of its dimensions.
 
-We do that with a one dimensional array of 64 bit unsigned integers: `Array<UInt64>`. 
+We do that with a one dimensional array of 64 bit unsigned integers: `Array<UInt64>`.
 
-!!! Note
-    There is conceptually no limit to how many dimensions a `Tensor` object can have, although there are practical limitations set by the `etch` implementation which the documentation highlights.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>There is conceptually no limit to how many dimensions a `Tensor` object can have, although there are practical limitations set by the `etch` implementation which the documentation highlights.</p>
+</div>
 
-The following code sets up a two dimensional `Tensor` object's shape by declaring an array with length equal to two. 
+The following code sets up a two dimensional `Tensor` object's shape by declaring an array with length equal to two.
 
 We give the first dimension three elements and the second dimension four.
 
 Finally, the code takes the array, builds the `Tensor`, and prints the default `Fixed64` values contained within.
 
-``` c++
+```c++
 function main()
 
 	var tensor_shape = Array<UInt64>(2);
@@ -35,7 +36,7 @@ endfunction
 
 Print a `Tensor` object with no more than two dimensions with the `toString()` function.
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -49,12 +50,11 @@ function main()
 endfunction
 ```
 
-
 ## Size
 
 Get the size of a `Tensor` object with the `size()` function. It returns the total number of elements in the `Tensor`.
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -67,23 +67,21 @@ function main()
 endfunction
 ```
 
-
-
 ## fromString
 
-Use the `fromString()` function to insert a comma separated string of values into each element of the `Tensor`. 
+Use the `fromString()` function to insert a comma separated string of values into each element of the `Tensor`.
 
-``` c++
-function main() 
+```c++
+function main()
 
     var tensor_shape = Array<UInt64>(2);
     tensor_shape[0] = 4u64;
     tensor_shape[1] = 1u64;
-    
+
     var tensor = Tensor(tensor_shape);
     tensor.fillRandom();
     printLn(tensor.toString());
-    
+
     var string_vals = "1.0, 1.0, 1.0, 1.0";
     tensor.fromString(string_vals);
     printLn(tensor.toString());
@@ -91,14 +89,13 @@ function main()
 endfunction
 ```
 
-
 ## Fill
 
-Use the `fill()` function to insert a specific `Fixed64` value into each element of the `Tensor`. 
+Use the `fill()` function to insert a specific `Fixed64` value into each element of the `Tensor`.
 
 The following two dimensional `Tensor` contains nine elements all set to `7.0`.
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -113,12 +110,11 @@ function main()
 endfunction
 ```
 
-
 ## Fill Random
 
 The function `fillRandom()` inserts random `Fixed64` values between 0 and 1 into the `Tensor`.
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -143,8 +139,7 @@ The following code creates a one dimensional `Tensor` object. The dimension has 
 
 The code sets specific values at each element with the function `setAt(index_u64, value_fp64)`.
 
-
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(1);
@@ -160,15 +155,13 @@ function main()
 endfunction
 ```
 
-
 ### 2D
 
 The following code creates a two dimensional `Tensor` object. Each dimension has three elements.
 
 The code sets specific values at each element with the function `setAt(index1_u64, index2_u64, value_fp64)`.
 
-
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -192,8 +185,7 @@ The following code creates a three dimensional `Tensor` object. Each dimension h
 
 The code sets specific values at each element with the function `setAt(index1_u64, index2_u64, index3_u64, value_fp64)`.
 
-
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(3);
@@ -216,8 +208,7 @@ The following code creates a four dimensional `Tensor` object. Each dimension ha
 
 The code sets specific values at each element with the function `setAt(index1_u64, index2_u64, index3_u64, index4_u64, value_fp64)`.
 
-
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(4);
@@ -236,14 +227,13 @@ function main()
 endfunction
 ```
 
-
 ## Getters
 
 The getter function `at()` is available for one, two, and three dimension `Tensor` objects. It returns the value of the element at the given dimension.
 
 ### 1D
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(1);
@@ -258,9 +248,10 @@ function main()
 
 endfunction
 ```
+
 ### 2D
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -277,7 +268,7 @@ endfunction
 
 ### 3D
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(3);
@@ -295,7 +286,7 @@ endfunction
 
 ### 4D
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(4);
@@ -312,16 +303,16 @@ function main()
 endfunction
 ```
 
-
-
 ## Reshape
 
-The function `reshape()` allows you to reshape an already existing `Tensor` into a new dimensional shape. 
+The function `reshape()` allows you to reshape an already existing `Tensor` into a new dimensional shape.
 
-!!! Note
-    The `reshape()` function is destructive and the previous `Tensor` data is not preserved.
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The `reshape()` function is destructive and the previous `Tensor` data is not preserved.</p>
+</div>
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -335,15 +326,14 @@ function main()
 endfunction
 ```
 
-
 ## Squeeze
 
 The function `squeeze()` returns a copy of the `Tensor` removing any dimension with size 1.
 
 Currently, `squeeze()` throws an error if there are no dimensions in the `Tensor` of size 1.
 
-``` c++
-function main() 
+```c++
+function main()
 
     var tensor_shape = Array<UInt64>(3);
     tensor_shape[0] = 3u64;
@@ -362,15 +352,13 @@ function main()
 endfunction
 ```
 
-
-
 ## Serialisation
 
 A `Tensor` is serialisable and deserialisable.
 
 The following code stores a `Tensor` in a `State` object. It then retrieves the `State` object, gets and prints the `Tensor`.
 
-``` c++
+```c++
 function main()
 
     var tensor_shape = Array<UInt64>(2);
@@ -379,10 +367,10 @@ function main()
 
     var tensor = Tensor(tensor_shape);
     tensor.fillRandom();
-    
-    var serialised_tensor = State<Tensor>("tensor"); 
-    serialised_tensor.set(tensor); 
-    
+
+    var serialised_tensor = State<Tensor>("tensor");
+    serialised_tensor.set(tensor);
+
     var retrieved_tensor = Tensor(tensor_shape);
     retrieved_tensor = serialised_tensor.get();
 
@@ -390,10 +378,5 @@ function main()
 
 endfunction
 ```
-
-
-
-
-
 
 <br/>

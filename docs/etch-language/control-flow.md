@@ -1,11 +1,13 @@
 <h1>Control flow</h1>
 
-!!! Tip
-	Make sure to declare the end of the function and construct.
+<div class="admonition tip">
+  <p class="admonition-title">Tip</p>
+  <p>Make sure to declare the end of the function and construct.</p>
+</div>
 
 ## if-else
 
-``` c++
+```c++
 function main()
 
 	var x = 2;
@@ -27,7 +29,7 @@ endfunction
 
 You can also test the values contained within complex data types for equality.
 
-``` c++
+```c++
 function main()
 
     var x = State<Int32>("account1");
@@ -38,7 +40,7 @@ function main()
 
     if (x.get() > y.get())
         printLn("Object x is greater than object y.");
-    else 
+    else
         printLn("Object x is less than or equal to object y.");
     endif
 
@@ -46,13 +48,11 @@ endfunction
 
 ```
 
-
-
 ## while
 
-``` c++
+```c++
 function main()
-	
+
 	var i = 0;
 
 	while(i < 10)
@@ -63,11 +63,9 @@ function main()
 endfunction
 ```
 
-
 ## for
 
-
-``` c++
+```c++
 function main()
 
     // ascending
@@ -85,17 +83,14 @@ function main()
 endfunction
 ```
 
-
-
 ## break
 
-
-``` c++
+```c++
 function main()
 
 	for(i in 0:10)
 	    printLn(toString(i));
-	    if (i == 5) 
+	    if (i == 5)
 	    	break;
 	    endif
 	endfor
@@ -103,14 +98,11 @@ function main()
 endfunction
 ```
 
-
-
-
 ## continue
 
-``` c++
+```c++
 function main()
-	
+
 	var i = 0;
 
 	while(i < 10)

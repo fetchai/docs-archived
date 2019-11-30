@@ -2,13 +2,13 @@
 
 ## Writing a function
 
-Coding a function in `etch` is straightforward. 
+Coding a function in `etch` is straightforward.
 
 All `etch` programs run in the simulator are triggered by a `main()` function. This is for development purposes only. Smart contracts do not require a `main()` function.
 
 In the example below, a function `myFunction()` is called from `main()`.
 
-``` c++
+```c++
 function main()
 
   myFunction();
@@ -23,16 +23,13 @@ function myFunction()
 endfunction
 ```
 
-
-
-
 ## Parameter and return types
 
-The iterative `fibonacci` function below takes a parameter `n: Int32` which is a 32 bit integer type named `n`. 
+The iterative `fibonacci` function below takes a parameter `n: Int32` which is a 32 bit integer type named `n`.
 
 The function returns an `Int32` and declares this after the function name and parameter list as `: Int32`.
 
-``` c++
+```c++
 function fibonacci(n: Int32) : Int32
 
     var a = 0;
@@ -59,18 +56,14 @@ endfunction
 
 ```
 
-
-
-
 ## Recursion
 
 Below is an example of the fibonacci function implemented with recursion.
 
 !!! warning
-    Take care with recursion in smart contract code.
+Take care with recursion in smart contract code.
 
-
-``` c++
+```c++
 function fibonacci(n: Int32) : Int32
 
     if(n == 1 || n == 0)
@@ -93,16 +86,14 @@ function main()
 endfunction
 ```
 
-
 ## Pass by reference
 
-All variables in `etch` are passed by reference. 
+All variables in `etch` are passed by reference.
 
 Attempting to reassign the value of a primitive variable passed to another function will cause a compilation error.
 
-
-``` c++
-function main() 
+```c++
+function main()
 
   var original_value = 10;
   printLn(original_value);
@@ -113,7 +104,7 @@ function main()
 endfunction
 
 function change_value(value :Int32)
-    
+
     // value = 20; // error: assignment operand is not writeable. Failed to compile.
 
 endfunction
@@ -122,8 +113,8 @@ endfunction
 
 The same is true of complex types.
 
-``` c++
-function main() 
+```c++
+function main()
 
     var myArray = Array<Int32>(5);
     change_value(myArray);
@@ -140,9 +131,8 @@ endfunction
 
 However, this is not the case with the internal state of object types such as `Array`.
 
-
-``` c++
-function main() 
+```c++
+function main()
 
     var myArray = Array<Int32>(5);
     myArray[0] = 40;
@@ -166,8 +156,8 @@ endfunction
 
 Reassigning a primitive type to a new variable does not affect the original.
 
-``` c++
-function main() 
+```c++
+function main()
 
   var x = 10;
   printLn(x);
@@ -178,7 +168,7 @@ function main()
 endfunction
 
 function change_value(value :Int32)
-    
+
     var y = 20;
     y = value;
     printLn(y);
@@ -187,10 +177,11 @@ function change_value(value :Int32)
 endfunction
 
 ```
+
 However, reassigning an object and changing any of its internal values does affect the original.
 
-``` c++
-function main() 
+```c++
+function main()
 
   var myArray = Array<String>(2);
   myArray[0] = "hello";
@@ -202,58 +193,53 @@ function main()
 endfunction
 
 function change_value(myArray :Array<String>)
-    
+
     myArray[0] = "goodbye";
 
 endfunction
 ```
 
-
-
 ## Utility functions
 
-
-
-### Print 
+### Print
 
 `printLn()` is available for printing variables to the console with a line break.
 
 `print()` is available without a line break.
 
-!!! note
-    `etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. 
-
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>`etch` strips out all `printLn()` statements in a release environment. This means that logs and other miscellaneous debug code never finds its way onto ledger shards. </p>
+</div>
 
 ### Sysargs
 
-The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value. 
+The following `System` functions `Argc()` and `Argv()` return the number of arguments to `etch` and their value.
 
 These functions are used to pass data to the `etch` simulator.
 
-* `System.Argc()`
-* `System.Argv()`
-
-
+-   `System.Argc()`
+-   `System.Argv()`
 
 ### Type casting
 
-* `toInt8()`
-* `toInt16()`
-* `toInt64()`
-* `toUInt8()`
-* `toUInt16()`
-* `toUInt32()`
-* `toUInt64()`
-<!-- `toUInt256()` -->
-* `toFloat32()`
-* `toFloat64()`
-* `toFixed32()`
-* `toFixed64()`
-* `toString()`
+-   `toInt8()`
+-   `toInt16()`
+-   `toInt64()`
+-   `toUInt8()`
+-   `toUInt16()`
+-   `toUInt32()`
+-   `toUInt64()`
+    <!-- `toUInt256()` -->
+-   `toFloat32()`
+-   `toFloat64()`
+-   `toFixed32()`
+-   `toFixed64()`
+-   `toString()`
 
 For example:
 
-``` c++
+```c++
 function main()
 
     var x = 10;
@@ -278,9 +264,9 @@ function main()
     printLn(g);
     var h = toFloat64(x);
     printLn(h);
-    var i = toFixed32(x); 
+    var i = toFixed32(x);
     printLn(i);
-    var j = toFixed64(x); 
+    var j = toFixed64(x);
     printLn(j);
 
 endfunction
@@ -290,23 +276,21 @@ endfunction
 
 `etch` smart contract code includes annotated functions:
 
-* `@init` is a constructor method that initialises the contract.
+-   `@init` is a constructor method that initialises the contract.
 
-* `@action` is a function which defines transactions on the ledger that change state.
+-   `@action` is a function which defines transactions on the ledger that change state.
 
-* `@query` is a function that allows you to query data residing on the ledger.
+-   `@query` is a function that allows you to query data residing on the ledger.
 
 There are more annotations for synergetic contracts.
 
+See more information on Annotations <a href="../sc-annotations/" target=_blank>here</a>.
 
 ## Getters and setters
 
 Getters and setters are available for `StructuredData`, `State`, and `ShardedState` types.
 
-[comment]: <> (Any other types have get and set?)
-
-* `set()`
-* `get()`
-
+-   `set()`
+-   `get()`
 
 <br/>
