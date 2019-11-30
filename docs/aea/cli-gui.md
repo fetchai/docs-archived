@@ -1,4 +1,4 @@
-You can invoke the AEA Command Line Interface (CLI) from a Graphical User Interface (GUI) accessed from a web browser. 
+You can invoke the AEA Command Line Interface (CLI) from a Graphical User Interface (GUI) accessed from a web browser.
 
 These instructions will take you through building an agent, starting an OEF Node, and running the agent - all from the GUI.
 
@@ -6,7 +6,7 @@ These instructions will take you through building an agent, starting an OEF Node
 
 Follow the Preliminaries and Installation instructions <a href="../quickstart" target=_blank>here</a>.
 
-Install the extra dependencies for the CLI GUI:
+Install the extra dependencies for the CLI GUI.
 
 ```python
 pip install aea[cli_gui]
@@ -14,13 +14,12 @@ pip install aea[cli_gui]
 
 
 ## Starting the GUI
-Go to the directory in which you will create new agents. If you followed the quick start guide, this will `my_aea`.
+Go to the directory in which you will create new agents. If you followed the quick start guide, this will be `my_aea`.
 
 Start the local web-server.
 ``` bash
 aea gui
 ```
-
 Open this page in a browser: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
 You should see the following page.
@@ -38,15 +37,15 @@ To create a new agent and run it, follow these steps.
 2. Click the [Create Agent] button - the newly created agent should appear in the [Local Agents] table.
 3. On the right hand side, search the `echo` skill and click on it - this will select it.
 4. Click on the [Add skill] button - which should now say "Add echo skill to my_new_agent agent".
-5. Start an OEF Node, by clicking on the [Start OEF Node] button. Wait for the text saying "A thing of beauty is a joy forever..." to appear. When you see that, the node has started successfully.
+5. Start an OEF Node by clicking on the [Start OEF Node] button. Wait for the text saying "A thing of beauty is a joy forever..." to appear. When you see that, the node has started successfully.
 
 <center>![start node](assets/cli_gui03_oef_node.png)</center>
 
-6. Start the agent running, by clicking on the [start agent] button. You should see the output from the echo agent appearing on the screen.
+6. Start the agent running by clicking on the [start agent] button. You should see the output from the echo agent appearing on the screen.
 
 <center>![start agent](assets/cli_gui04_new_agent.png)</center>
 
-This is how your whole page should look if you followed the instructions correctly
+This is how your whole page should look if you followed the instructions correctly.
 
 <center>![whole screen running](assets/cli_gui05_full_running_agent.png)</center>
 
