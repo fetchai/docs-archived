@@ -8,13 +8,15 @@ Ensure you have the framework installed and the CLI is working by following the 
 
 Install the extra dependencies for the CLI GUI:
 
- ```python
- pip install aea[cli_gui]
- ```
+```python
+pip install aea[cli_gui]
+```
 
 
 ## Starting the GUI
-Go to your working folder, where you want to create new agents. If you followed the quick start guide, this will be in the `my_aea` directory. Start the local web-server:
+Go to your working folder, where you want to create new agents. If you followed the quick start guide, this will be in the `my_aea` directory.
+
+Start the local web-server.
 ``` bash
 aea gui
 ```
