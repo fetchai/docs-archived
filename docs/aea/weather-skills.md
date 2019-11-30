@@ -29,6 +29,7 @@ svn export https://github.com/fetchai/agents-aea.git/trunk/packages
 svn export https://github.com/fetchai/agents-aea.git/trunk/scripts
 ```
 
+
 ## Launch an OEF node
 In a separate terminal, launch a local OEF node (for search and discovery).
 ``` bash
@@ -40,7 +41,6 @@ Keep it running for all the following demos.
 ## Demo 1: no ledger payment
 
 The AEAs negotiate and then transfer the data. No payment takes place. This demo serves as a demonstration of the negotiation steps.
-
 
 ### Create the weather station AEA
 In the root directory, create the weather station AEA.
@@ -114,7 +114,6 @@ cd my_weather_station
 aea add skill weather_station_ledger
 ```
 
-
 ### Create the weather client (ledger version)
 
 In another terminal, create the AEA that will query the weather station.
@@ -124,7 +123,6 @@ aea create my_weather_client
 cd my_weather_client 
 aea add skill weather_client_ledger
 ```
-
 
 Additionally, create the private key for the weather client AEA.
 ```bash
@@ -232,7 +230,6 @@ max_buyer_tx_fee: 20000
 currency_pbk: 'ETH'
 ledger_id: 'ethereum'
 ```
-
 Amend `ledgers` to the following.
 ``` bash
 ledgers: ['ethereum']

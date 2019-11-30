@@ -6,7 +6,8 @@ These instructions will take you through building an agent, starting an OEF Node
 
 Ensure you have the framework installed and the CLI is working by following the [quick-start guide](quickstart.md).
 
-Please install the extra dependencies for the CLI GUI:
+Install the extra dependencies for the CLI GUI:
+
  ```python
  pip install aea[cli_gui]
  ```
@@ -20,7 +21,7 @@ aea gui
 
 Open this page in a browser: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
-You should see the following page displayed:
+You should see the following page.
 
 <center>![new gui screen](assets/cli_gui01_clean.png)</center>
 
@@ -44,5 +45,7 @@ To create a new agent and run it, follow these steps:
     <center>![start agent](assets/cli_gui04_new_agent.png)</center>
 
 This is how your whole page should look if you followed the instructions correctly
+
+<center>![whole screen running](assets/cli_gui05_full_running_agent.png)</center>
 
 <br />

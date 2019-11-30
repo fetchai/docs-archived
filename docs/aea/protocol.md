@@ -49,7 +49,6 @@ The `oef` protocol definition includes an `OEFMessage` class which gets a `proto
 
 It defines OEF agent delegation by way of a `MessageType` Enum.
 
-
 ```python
 class Type(Enum):
 
@@ -108,7 +107,6 @@ class Performative(Enum):
 
 `FIPAMessages` are constructed with a `message_id`, a `dialogue_id`, a `target` and `peformative`.
 
-
 ```python
 super().__init__(id=message_id, dialogue_id=dialogue_id, target=target,
 	performative=FIPAMessage.Performative(performative), **kwargs)
@@ -151,7 +149,6 @@ message FIPAMessage{
 }
 ```
 
-
 ## `default` protocol
 
 The `default` protocol has a `DefaultMessage` class which gets a `protocol_id` of `default`.
@@ -159,13 +156,5 @@ The `default` protocol has a `DefaultMessage` class which gets a `protocol_id` o
 It has two message types: `BYTES` and `ERROR`, and provides error messages for the error skill which uses it.
 
 The serialisation methods `encode` and `decode` implement transformations from `Message` type to bytes and back.
-
-
-
-
-
-
-
-
 
 <br />

@@ -195,7 +195,6 @@ Note, how we have access to other objects in the skill via `self.context`.
 
 We place this code in `my_agent/skills/my_search/tasks.py`.
 
-
 ## Step 5: Create the config file
 
 Based on our skill components above, we create the following config file.
@@ -236,7 +235,6 @@ aea add protocol oef
 
 ## Step 7: Run the agent
 
-
 We first start an oef node (see the <a href="../connection/" target=_blank>connection section</a> for more details) in a separate terminal window.
 
 ```bash
@@ -250,7 +248,6 @@ aea run
 ```
 
 Stop the agent with `CTRL + C`.
-
 
 ## Now it's your turn
 

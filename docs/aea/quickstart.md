@@ -59,11 +59,11 @@ pip install aea[cli]
 
 ### Known issues
 
-If the installation steps fail, it might be because some of the dependencies cannot be built on your system. 
+If the installation steps fail, it might be a depenceny issue. 
 
 The following hints can help:
 
-- Ubuntu/Debian systems only: install Python 3.7 headers 
+- Ubuntu/Debian systems only: install Python 3.7 headers.
 ```bash
 sudo apt-get install python3.7-dev
 ``` 

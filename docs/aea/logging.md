@@ -10,7 +10,7 @@ aea create my_agent
 cd my_agent
 ```
 
-The `aea-config.yaml` file should look like:
+The `aea-config.yaml` file should look like this.
 ```yaml
 aea_version: 0.1.6
 agent_name: my_agent
@@ -67,10 +67,6 @@ logging_config:
       propagate: true
 ```
 
-This configuration will set up a logger with name `aea`,
-print both on console (see `console` handler) and on file
-(see `logfile` handler) with format specified by the 
-`standard` formatter.
 
 This configuration will set up a logger with name `aea`. It prints both on console and on file with a format specified by the `standard` formatter.
 
