@@ -25,7 +25,7 @@ Blocks are then exchanged between nodes via a __block synchronization protocol__
 
 In order to prevent attacks such as [double spending](https://en.wikipedia.org/wiki/Double-spending), transactions in a blockchain are executed in a strict, sequential order, thus ensuring that access to any given resource is strictly sequential. On a traditional decentralized ledger, this ordering of transactions must be identical across all the nodes that replicate the process.
 
-The Fetch.ai ledger relaxes the requirement on sequential execution by partitioning resources into mutually disjoint subsets called _resource groups_. Transactions that affect resources from different groups are then handled by separate _resource lanes_. The ledger defines a complete ordering of transactions belonging to a given lane, but not across lanes. A strict temporal ordering of transactions, including simultaneous execution of non-conflicting events, is achieved by entering transactions into a novel block structure.
+The Fetch.ai ledger relaxes the requirement on sequential execution by partitioning resources into mutually disjoint subsets called __resource groups__. Transactions that affect resources from different groups are then handled by separate __resource lanes__. The ledger defines a complete ordering of transactions belonging to a given lane, but not across lanes. A strict temporal ordering of transactions, including simultaneous execution of non-conflicting events, is achieved by entering transactions into a novel block structure.
 
 In order to understand better how resources lanes work, let's take a look at the following example:
 
