@@ -26,28 +26,26 @@ Blocks are then exchanged between nodes via a __block synchronization protocol__
 
 ## Sharding
 
-The Fetch.ai ledger is unlike more traditional blockchain designs: instead of a single chain of truth, the ledger is sharded into parallel _lanes_. So even though the executor apparently has access to a continuous area of memory, in reality it is split across multiple processes, each of them representing a fraction of the state and the transactions.
+In order to prevent attacks such as [double spending](https://en.wikipedia.org/wiki/Double-spending), transactions in a blockchain are executed in a strict, sequential order, thus ensuring that access to any given resource is strictly sequential. On a traditional decentralized ledger, this ordering of transactions must be identical across all the nodes that replicate the process.
 
-![Memory mapping on the Fetch.ai Ledger shards](../smart-contracts/img/shards-basic.png)
+The Fetch.ai ledger relaxes the requirement on sequential execution by partitioning resources into mutually disjoint _resource groups_. Transactions that affect resources from different groups are then handled by separate _resource lanes_; a complete ordering of transactions is defined within, but not across lanes.
 
-This blockchain sharding design speeds up the network as contracts can execute concurrently, providing a solution to the blockchain scalability problem. Furthermore, by sharding the _world state_ in this way, transactions guarantee they only use certain resources, i.e. memory locations. Sharding is best done across multiple machines, to scale access and avoid resource locking.
+The ledger enables a transaction between resources in different groups by entering it into all the appropriate resource lanes. This serves as a cross-lane synchronisation mechanism that is resolved by a novel block organisation algorithm. Transactions that do not belong to the same lane affect resources belonging to different groups, and thus can safely be executed in parallel. These features allow the ledger to scale its throughput to accommodate an arbitrary number of transactions.
 
-As a consequence of this design, the _size_ of a block can vary by increasing or decreasing the number of shards. This allows the network to balance block sizes against economic incentives, for example.
+This blockchain sharding design speeds up the network as contracts can execute concurrently, providing a solution to the blockchain scalability problem. Furthermore, by sharding the state in this way, transactions guarantee they only use certain resources, e.g. memory locations; even though the executor (see diagram above) apparently has access to a continuous area of memory via the sharding abstraction, in reality it is split across multiple processes, each of them representing a fraction of the state and the transactions. Sharding is best done across multiple machines, to scale access and avoid resource locking.
 
-
-## Wallet API
-
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>This section is coming soon.</p>
-</div>
+As a consequence of this design, the size of a block can vary by increasing or decreasing the number of shards. This allows the network to balance block sizes against economic incentives, for example.
 
 
-## P2P Service
+## HTTP pages and API
 
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>This section is coming soon.</p>
-</div>
+!!! note
+    Coming soon
+
+
+## Networking
+
+!!! note
+    Coming soon
 
 <br/>
