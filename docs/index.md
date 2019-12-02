@@ -1,6 +1,6 @@
 <div class="grid-container">
   <div class="grid-item item1">
-      <h4>Welcome to Fetch.ai developer resources, let's get started.</h4>
+      <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
   </div>
 
   <a href="getting-started/quickstart/">
