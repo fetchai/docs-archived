@@ -204,8 +204,9 @@ The script can be run from the root of the ledger folder, passing the input file
 
 ## Agents
 
-...
+Coming soon.
 
 
 ## Next steps
 
+Coming soon.
