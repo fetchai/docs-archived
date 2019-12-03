@@ -8,11 +8,9 @@ The type of problems that synergetic contracts can solve are complex optimisatio
 
 A miner registers as a participant of the synergetic contract and starts calculating towards the problem solution from a random seed generated from a public key. It is a trial and error approach like proof of work.
 
-Solutions submitted by miners are verified periodically via a function provided by the synergetic contract. The miner that wins the bounty associated with the problem is the one that provides the best solution, according to this function and before the period expires.
+Solutions submitted by miners are verified periodically via a function provided by the synergetic contract. The miner that wins the bounty associated with the problem is the one that provides the best solution, according to this function and before the period expires. In the case of a tie, the winner is randomly chosen among all those that provided the best solution.
 
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>The winning miner is not necessarily the miner who verifies the block.</p>
-</div>
+!!! note
+    The winning miner is not necessarily the miner who verifies the block.
 
 <br/>
