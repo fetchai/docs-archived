@@ -231,7 +231,7 @@ currency_pbk: 'ETH'
 ledger_id: 'ethereum'
 ```
 Amend `ledgers` to the following.
-``` basgh
+``` bash
 ledgers: ['ethereum']
 ```
 

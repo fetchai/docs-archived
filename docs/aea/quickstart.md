@@ -59,7 +59,7 @@ pip install aea[cli]
 
 ### Known issues
 
-If the installation steps fail, it might a dependency issue. 
+If the installation steps fail, it might be a depenceny issue. 
 
 The following hints can help:
 
