@@ -7,8 +7,8 @@ setup(
     include_package_data=True,
     sass_manifests={
         '': {
-            'sass_path': 'docs/sass',
-            'css_path': 'docs/css',
+            'sass_path': './docs/sass',
+            'css_path': './docs/css',
             'strip_extension': True,
         },
     },

@@ -1,0 +1,225 @@
+/*
+layout.scss
+*/
+@import './variables.scss';
+
+#root,
+#page-container,
+#content-wrap {
+	width: 100%;
+}
+
+#page-container {
+	position: relative;
+	min-height: 100vh;
+}
+#content-wrap {
+	padding-bottom: $footer-height;
+}
+
+$content-width: 96vw;
+.corset,
+#popup {
+	max-width: $content-width;
+	width: $content-width;
+	margin: auto;
+}
+
+section {
+	padding-bottom: $section-bottom-padding;
+	position: relative;
+}
+
+// NEED TO BE KEPT TOGETHER
+$header-height: 18vh;
+
+header {
+	height: $header-height;
+}
+
+/* Side menu */
+html {
+	.book {
+		&-summary {
+			position: fixed;
+			top: 0;
+			float: none;
+			margin-top: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			width: 100vw;
+			min-height: 100vh;
+			visibility: hidden;
+			opacity: 0;
+			transition: opacity 0.5s, visibility 0.5s;
+			overflow-y: visible;
+			cursor: pointer;
+			> div {
+				position: absolute;
+				top: $header-height;
+				left: 0; //-90vw;
+				max-width: 95vw;
+				max-height: 100vh - $header-height;
+				// border: 1px solid red;
+				box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+				background: white;
+				transform: rotateY(90deg);
+				transform-origin: left;
+				transition: transform 0.5s; //left 0.5s;
+				overflow-y: scroll;
+			}
+		}
+		&-body {
+			margin-left: auto;
+		}
+	}
+	&.show-side-menu {
+		body {
+			overflow: hidden; // to prevent scrolling when menu displayed
+			height: 100vh;
+		}
+		.book {
+			&-summary {
+				visibility: visible;
+				opacity: 1;
+				transition: opacity 0.5s, visibility 0s;
+				> div {
+					left: 0;
+					transform: rotateY(0deg);
+					transition: transform 0.5s; //left 0.5s;
+				}
+			}
+		}
+	}
+}
+
+#hamburger {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 1rem;
+	z-index: 99;
+	font-size: 1.2rem;
+	cursor: pointer;
+	&i {
+		cursor: pointer;
+	}
+}
+@include respond-above(s) {
+	$content-width: 80vw;
+	.corset,
+	#popup {
+		max-width: $content-width;
+		margin: auto;
+		position: relative;
+	}
+	$header-height: 18vh;
+	header {
+		height: $header-height;
+		font-size: 0.8rem;
+		div {
+			ul {
+				li {
+					a {
+						font-size: 1.2rem;
+					}
+				}
+			}
+		}
+	}
+}
+@include respond-above(m) {
+	$header-height: 16vh;
+	header {
+		height: $header-height;
+	}
+	html .book {
+		&-summary {
+			> div {
+				top: $header-height;
+			}
+		}
+	}
+
+	@media screen and (orientation: landscape) {
+		$header-height: 28vh;
+		header {
+			height: $header-height;
+		}
+		html .book {
+			&-summary {
+				> div {
+					top: $header-height;
+				}
+			}
+		}
+	}
+}
+@include respond-above(l) {
+	#hamburger {
+		display: none;
+	}
+	html .book {
+		&-summary {
+			position: relative;
+			top: 0;
+			left: 0;
+			float: left;
+			background: white;
+			width: 300px;
+			visibility: visible;
+			opacity: 1;
+			// transition: opacity 0.5s, visibility 0s;
+			& > div {
+				position: relative;
+				top: 0;
+				left: 0;
+				box-shadow: none;
+				transform: rotateY(0);
+			}
+		}
+		&-body {
+			margin-left: 300px;
+		}
+	}
+	$header-height: 16vh;
+	header {
+		height: $header-height;
+	}
+	@media screen and (orientation: landscape) {
+		$header-height: 28vh;
+		header {
+			height: $header-height;
+		}
+	}
+}
+@include respond-above(xl) {
+	$header-height: 16vh;
+	header {
+		height: $header-height;
+	}
+	@media screen and (orientation: landscape) {
+		$header-height: 22vh;
+		header {
+			height: $header-height;
+		}
+	}
+}
+@include respond-above(xxl) {
+	$content-width: 1200px;
+	.corset,
+	#popup {
+		max-width: $content-width;
+		width: $content-width;
+	}
+	$header-height: 10vh;
+	header {
+		height: $header-height;
+	}
+	@media screen and (orientation: landscape) {
+		$header-height: 10vh;
+		header {
+			height: $header-height;
+		}
+	}
+}
