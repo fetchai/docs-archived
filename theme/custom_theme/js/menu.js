@@ -4,28 +4,38 @@ $('#summary .head').on('click', function () {
         .toggleClass('show');
 });
 
-$('#mkdocs-search-wrapper button').on('click', function () {
+$('#mkdocs-search-wrapper, #mkdocs-search-wrapper button').on('click', function () {
     $('#mkdocs-search-wrapper').hide();
     let $searchInput = $('#mkdocs-search-query');
     $searchInput.val('');
-    $searchInput.removeClass('pop-over');
 });
+$('.search-results-container').on('click', function (e) {
+    e.stopPropagation();
+}).find('a').on('click', function (e) {
+    e.stopPropagation();
+})
+
 
 $('#mkdocs-search-query').on('keyup', function (ev) {
-    let $sq = $('#mkdocs-search-query');
     let t = setTimeout(function () {
+        let $sq = $('#mkdocs-search-query');
+        let v = $sq.val();
+        let $stc = $('#search-text-copy');
+        $stc.val(v);
+        $stc.on('keyup', function () {
+            $sq.val($stc.val());
+            doSearch();
+        })
         let $searchResultsArticles = $('#mkdocs-search-results article');
         let $makedocsSearchWrapper = $('#mkdocs-search-wrapper');
-        let $searchInput = $('#mkdocs-search-query');
         if ($searchResultsArticles.length) {
             $makedocsSearchWrapper.css('display', 'flex');
-            $searchInput.addClass('pop-over');
+            $stc.focus();
         } else if ($searchResultsArticles.length == 0 && $sq.val().length) {
             $makedocsSearchWrapper.css('display', 'flex');
-            $searchInput.addClass('pop-over');
+            $stc.focus();
         } else {
             $makedocsSearchWrapper.hide();
-            $searchInput.removeClass('pop-over');
         }
     }, 200); // Very hacky - I know!
     return true;
@@ -66,4 +76,5 @@ document.addEventListener('DOMContentLoaded', function () {
         $('html').toggleClass('show-side-menu');
         e.stopPropagation();
     })
+
 });
