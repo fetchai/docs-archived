@@ -3,7 +3,15 @@ layout.scss
 */
 @import './variables.scss';
 @import './colours.scss';
-
+html.debug {
+	.corset,
+	.inner,
+	.logo,
+	nav ul li,
+	nav ul li a {
+		box-shadow: 0 0 8px white inset;
+	}
+}
 #root,
 #page-container,
 #content-wrap {
@@ -29,13 +37,6 @@ $content-width: 96vw;
 section {
 	padding-bottom: $section-bottom-padding;
 	position: relative;
-}
-
-// NEED TO BE KEPT TOGETHER
-$header-height: 18vh;
-
-header {
-	height: $header-height;
 }
 
 /* Side menu */
@@ -105,7 +106,25 @@ html {
 		cursor: pointer;
 	}
 }
+
+// NEED TO BE KEPT TOGETHER
+$header-height: 18vh;
+
+header {
+	height: $header-height;
+}
+@media screen and (orientation: landscape) {
+	$header-height: 28vh;
+	header {
+		height: $header-height;
+	}
+	#hero {
+		min-height: 100vh - $header-height;
+		height: 100vh - $header-height;
+	}
+}
 @include respond-above(s) {
+	$header-height: 18vh;
 	$content-width: 80vw;
 	.corset,
 	#popup {
@@ -113,7 +132,6 @@ html {
 		margin: auto;
 		position: relative;
 	}
-	$header-height: 18vh;
 	header {
 		height: $header-height;
 		font-size: 0.8rem;
@@ -127,9 +145,25 @@ html {
 			}
 		}
 	}
+	@media screen and (orientation: landscape) {
+		$header-height: 28vh;
+		header {
+			height: $header-height;
+		}
+		#hero {
+			min-height: 100vh - $header-height;
+			height: 100vh - $header-height;
+		}
+	}
 }
 @include respond-above(m) {
 	$header-height: 16vh;
+	$content-width: 80vw;
+	.corset {
+		max-width: $content-width;
+		margin: auto;
+		position: relative;
+	}
 	header {
 		height: $header-height;
 	}
