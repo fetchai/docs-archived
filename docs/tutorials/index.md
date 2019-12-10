@@ -6,9 +6,8 @@
   <div class="grid-item item_whole_row hasborder">
       <h4>Smart Contracts and Etch</h4>
       <ul>
-        <li><a href="/submitting_contract">Hello world smart contract</a></li>
-        <li><a href="/fet1">Create FET-1 token generation contract (basic contract, non-fungible)</a></li>
-        <li><a href="/fet2">Create FET-2 token generation contract (simple contract, fungible)</a></li>
+        <li><a href="submitting_contract">Hello world smart contract</a></li>
+        <li><a href="fet1">Create FET-1 token generation contract (basic contract, non-fungible)</a></li>
       <ul>
   </div>
 
