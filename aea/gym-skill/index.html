@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
-  <meta name="author" content="katharine.murphy@fetch.ai">
+  <meta name="author" content="developer@fetch.ai">
   <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
     <ul id="header_getting_started"> 
 <li>
     <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
-        >QuickStart</a
+        >Quickstart</a
     >
 </li>
  
@@ -180,7 +180,7 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Welcome</a
+        >Introduction</a
     >
 </li>
  
@@ -235,8 +235,20 @@
 </li>
  
 <li>
+    <a href="../tac-skills/" id="aea-tac-skills-"
+        >TAC skills</a
+    >
+</li>
+ 
+<li>
     <a href="../tac/" id="aea-tac-"
         >TAC external app</a
+    >
+</li>
+ 
+<li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
     >
 </li>
 
@@ -388,14 +400,14 @@
     <span class="head">Etch Language</span>
     <ul id="header_etch_language"> 
 <li>
-    <span class="head">Welcome</span>
-    <ul id="header_welcome"> 
-<li>
     <a href="../../etch-language/" id="etch-language-"
-        >What's etch?</a
+        >Introduction</a
     >
 </li>
  
+<li>
+    <span class="head">Usage</span>
+    <ul id="header_usage"> 
 <li>
     <a href="../../etch-language/getstarted/" id="etch-language-getstarted-"
         >Getting started</a
@@ -592,16 +604,11 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Extending Etch</span>
-    <ul id="header_extending_etch"> 
-<li>
     <a href="../../etch-language/extending-etch/" id="etch-language-extending-etch-"
-        >Extending etch in C++</a
+        >Extending Etch in C++'</a
     >
 </li>
-
-    </ul>
-</li> 
+ 
 <li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
@@ -718,6 +725,12 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
+    <a href="../../tutorials/" id="tutorials-"
+        >Introduction</a
+    >
+</li>
+ 
+<li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
@@ -748,22 +761,15 @@
 
 <p>The AEA gym skill demonstrates how a custom Reinforcement Learning agent, that uses OpenAI's <a href="https://gym.openai.com" target=_blank>gym</a> library, may be embedded into an Autonomous Economic Agent.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
-<p>Follow the Preliminaries and Installation instructions <a href="../quickstart">here</a>.</p>
-<p>Install the gym library.</p>
-<div class="highlight"><pre><span></span>pip install gym
-</pre></div>
-
-<p>Then, download the examples and packages directory.
-<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/examples
-svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
-</pre></div></p>
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h3 id="create-the-agent">Create the agent</h3>
 <p>In the root directory, create the gym agent.
 <div class="highlight"><pre><span></span>aea create my_gym_agent
 </pre></div></p>
 <h3 id="add-the-gym-skill">Add the gym skill</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> my_gym_agent
-aea add skill gym 
+aea add skill gym
 </pre></div>
 
 <h3 id="copy-the-gym-environment-to-the-agent-directory">Copy the gym environment to the agent directory</h3>
@@ -780,16 +786,41 @@ cp -a ../examples/gym_ex/gyms/. gyms/
 env: gyms.env.BanditNArmedRandom
 </pre></div>
 
+<h3 id="install-the-skill-dependencies">Install the skill dependencies</h3>
+<p>To install the <code>gym</code> package, a dependency of the gym skill, from Pypi run
+<div class="highlight"><pre><span></span>aea install
+</pre></div></p>
 <h3 id="run-the-agent-with-the-gym-connection">Run the agent with the gym connection</h3>
-<div class="highlight"><pre><span></span>aea run --connection gym
+<div class="highlight"><pre><span></span>aea run --connections gym
 </pre></div>
 
 <p>You will see the gym training logs.</p>
 <p><center><img alt="AEA gym training logs" src="../assets/gym-training.png" /></center></p>
 <h3 id="delete-the-agent">Delete the agent</h3>
 <p>When you're done, you can go up a level and delete the agent.</p>
-<div class="highlight"><pre><span></span>aea delete my_gym_agent
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+aea delete my_gym_agent
 </pre></div>
+
+<h3 id="communication">Communication</h3>
+<p>This diagram shows the communication between the agent and the gym environment </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Environment
+
+        activate Agent
+        activate Environment
+        Agent->>Environment: reset
+        loop learn
+            Agent->>Environment: act
+            Environment->>Agent: percept
+        end
+        Agent->>Environment: close
+
+        deactivate Agent
+        deactivate Environment
+</div>
 
 <p><br/></p>
 
@@ -833,6 +864,7 @@ env: gyms.env.BanditNArmedRandom
   <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
   <script src="../../js/main.js"></script>
       <script src="../../js/menu.js"></script>
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
 </body>
 

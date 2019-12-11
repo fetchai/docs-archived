@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
-  <meta name="author" content="katharine.murphy@fetch.ai">
+  <meta name="author" content="developer@fetch.ai">
   <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
     <ul id="header_getting_started"> 
 <li>
     <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
-        >QuickStart</a
+        >Quickstart</a
     >
 </li>
  
@@ -180,7 +180,7 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Welcome</a
+        >Introduction</a
     >
 </li>
  
@@ -235,8 +235,20 @@
 </li>
  
 <li>
+    <a href="../tac-skills/" id="aea-tac-skills-"
+        >TAC skills</a
+    >
+</li>
+ 
+<li>
     <a href="../tac/" id="aea-tac-"
         >TAC external app</a
+    >
+</li>
+ 
+<li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
     >
 </li>
 
@@ -388,14 +400,14 @@
     <span class="head">Etch Language</span>
     <ul id="header_etch_language"> 
 <li>
-    <span class="head">Welcome</span>
-    <ul id="header_welcome"> 
-<li>
     <a href="../../etch-language/" id="etch-language-"
-        >What's etch?</a
+        >Introduction</a
     >
 </li>
  
+<li>
+    <span class="head">Usage</span>
+    <ul id="header_usage"> 
 <li>
     <a href="../../etch-language/getstarted/" id="etch-language-getstarted-"
         >Getting started</a
@@ -592,16 +604,11 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Extending Etch</span>
-    <ul id="header_extending_etch"> 
-<li>
     <a href="../../etch-language/extending-etch/" id="etch-language-extending-etch-"
-        >Extending etch in C++</a
+        >Extending Etch in C++'</a
     >
 </li>
-
-    </ul>
-</li> 
+ 
 <li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
@@ -718,6 +725,12 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
+    <a href="../../tutorials/" id="tutorials-"
+        >Introduction</a
+    >
+</li>
+ 
+<li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
@@ -751,21 +764,8 @@
 <li>The provider of weather data (the weather station).</li>
 <li>The seller of weather data (the weather client).</li>
 </ul>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Make sure you have the latest <code>aea</code> version.</p>
-<div class="highlight"><pre><span></span>aea --version
-</pre></div>
-
-<p>If not, update with the following.</p>
-<div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>all<span class="o">]</span> --force --no-cache-dir
-</pre></div>
-
-<h2 id="demo-preliminaries">Demo preliminaries</h2>
-<p>Follow the Preliminaries and Installation instructions <a href="../quickstart" target=_blank>here</a>.</p>
-<p>Download the packages and scripts directories.
-<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
-svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/scripts
-</pre></div></p>
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="launch-an-oef-node">Launch an OEF node</h2>
 <p>In a separate terminal, launch a local OEF node (for search and discovery).
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
@@ -802,6 +802,7 @@ aea add skill weather_client
 <h3 id="observe-the-logs-of-both-aeas">Observe the logs of both AEAs</h3>
 <p><center><img alt="Weather station logs" src="../assets/weather-station-logs.png" /></center></p>
 <p><center><img alt="Weather client logs" src="../assets/weather-client-logs.png" /></center></p>
+<p>To stop an agent use <code>CTRL + C</code>.</p>
 <h3 id="delete-the-aeas">Delete the AEAs</h3>
 <p>When you're done, go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
@@ -809,28 +810,58 @@ aea delete my_weather_station
 aea delete my_weather_client
 </pre></div>
 
+<h2 id="communication">Communication</h2>
+<p>This diagram shows the communication between the various entities as data is successfully sold by the car park agent to the client. </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Search
+        participant Client_AEA
+        participant Weather_AEA
+
+        activate Client_AEA
+        activate Search
+        activate Weather_AEA
+
+        Weather_AEA->>Search: register_service
+        Client_AEA->>Search: search
+        Search->>Client_AEA: list_of_agents
+        Client_AEA->>Weather_AEA: call_for_proposal
+        Weather_AEA->>Client_AEA: propose
+        Client_AEA->>Weather_AEA: accept
+        Weather_AEA->>Client_AEA: match_accept
+        Client_AEA->>Weather_AEA: Inform funds transfered 
+        Weather_AEA->>Client_AEA: send_data
+
+        deactivate Client_AEA
+        deactivate Search
+        deactivate Weather_AEA
+
+</div>
+
+<p>Note that the client informs the weather station that funds have been transfereed, but in this example no funds actually get transfered.</p>
 <h2 id="demo-2-fetchai-ledger-payment">Demo 2: Fetch.ai ledger payment</h2>
 <p>A demo to run the same scenario but with a true ledger transaction on Fetch.ai <code>testnet</code>. This demo assumes the weather client trusts the weather station to send the weather data upon successful payment.</p>
 <h3 id="create-the-weather-station-ledger-version">Create the weather station (ledger version)</h3>
 <p>Create the AEA that will provide weather measurements.</p>
-<div class="highlight"><pre><span></span>aea create my_weather_station 
+<div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea add skill weather_station_ledger
 </pre></div>
 
 <h3 id="create-the-weather-client-ledger-version">Create the weather client (ledger version)</h3>
 <p>In another terminal, create the AEA that will query the weather station.</p>
-<div class="highlight"><pre><span></span>aea create my_weather_client 
-<span class="nb">cd</span> my_weather_client 
+<div class="highlight"><pre><span></span>aea create my_weather_client
+<span class="nb">cd</span> my_weather_client
 aea add skill weather_client_ledger
 </pre></div>
 
 <p>Additionally, create the private key for the weather client AEA.
 <div class="highlight"><pre><span></span>aea generate-key fetchai
+aea add-key fetchai fet_private_key.txt
 </pre></div></p>
 <h3 id="update-the-aea-configs">Update the AEA configs</h3>
-<p>Both in <code>weather_station/aea-config.yaml</code> and
-<code>weather_client/aea-config.yaml</code>, replace <code>ledger_apis: []</code> with the following.</p>
+<p>Both in <code>my_weather_station/aea-config.yaml</code> and
+<code>my_weather_client/aea-config.yaml</code>, replace <code>ledger_apis: []</code> with the following.</p>
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">ledger_api</span><span class="p">:</span>
       <span class="nt">ledger</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
@@ -841,7 +872,7 @@ aea add skill weather_client_ledger
 <h3 id="fund-the-weather-client-aea">Fund the weather client AEA</h3>
 <p>Create some wealth for your weather client on the Fetch.ai <code>testnet</code>. (It takes a while).
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-python scripts/fetchai_wealth_generation.py --private-key weather_client/fet_private_key.txt --amount <span class="m">10000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
+python scripts/fetchai_wealth_generation.py --private-key my_weather_client/fet_private_key.txt --amount <span class="m">10000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
 <span class="nb">cd</span> my_weather_client
 </pre></div></p>
 <h3 id="run-the-aeas">Run the AEAs</h3>
@@ -860,24 +891,25 @@ aea delete my_weather_client
 <p>A demo to run the same scenario but with a true ledger transaction on the Ethereum Ropsten <code>testnet</code>. This demo assumes the weather client trusts the weather station to send the weather data upon successful payment.</p>
 <h3 id="create-the-weather-station-ledger-version_1">Create the weather station (ledger version)</h3>
 <p>Create the AEA that will provide weather measurements.</p>
-<div class="highlight"><pre><span></span>aea create my_weather_station 
+<div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea add skill weather_station_ledger
 </pre></div>
 
 <h3 id="create-the-weather-client-ledger-version_1">Create the weather client (ledger version)</h3>
 <p>In another terminal, create the AEA that will query the weather station.</p>
-<div class="highlight"><pre><span></span>aea create my_weather_client 
-<span class="nb">cd</span> my_weather_client 
+<div class="highlight"><pre><span></span>aea create my_weather_client
+<span class="nb">cd</span> my_weather_client
 aea add skill weather_client_ledger
 </pre></div>
 
 <p>Additionally, create the private key for the weather client AEA.
 <div class="highlight"><pre><span></span>aea generate-key ethereum
+aea add-key ethereum eth_private_key.txt
 </pre></div></p>
 <h3 id="update-the-aea-configs_1">Update the AEA configs</h3>
-<p>Both in <code>weather_station/aea-config.yaml</code> and
-<code>weather_client/aea-config.yaml</code>, replace <code>ledger_apis: []</code> with the following.</p>
+<p>Both in <code>my_weather_station/aea-config.yaml</code> and
+<code>my_weather_client/aea-config.yaml</code>, replace <code>ledger_apis: []</code> with the following.</p>
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">ledger_api</span><span class="p">:</span>
       <span class="nt">addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
@@ -899,11 +931,11 @@ currency_pbk: <span class="s1">&#39;ETH&#39;</span>
 ledger_id: <span class="s1">&#39;ethereum&#39;</span>
 </pre></div>
 Amend <code>ledgers</code> to the following.
-<div class="highlight"><pre><span></span>ledgers: <span class="o">[</span><span class="s1">&#39;ethereum&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span>ledgers: [&#39;ethereum&#39;]
 </pre></div></p>
 <h3 id="fund-the-weather-client-aea_1">Fund the weather client AEA</h3>
 <p>Create some wealth for your weather client on the Ethereum Ropsten test net.</p>
-<p>Go to the <a href="https://faucet.metamask.io/" target=_blank>MetaMask Faucet</a> and request some test ETH for the account your weather client AEA is using (you need to first load your AEAs private key into MetaMask). Your private key is at <code>weather_client/eth_private_key.txt</code>.</p>
+<p>Go to the <a href="https://faucet.metamask.io/" target=_blank>MetaMask Faucet</a> and request some test ETH for the account your weather client AEA is using (you need to first load your AEAs private key into MetaMask). Your private key is at <code>my_weather_client/eth_private_key.txt</code>.</p>
 <h3 id="run-the-aeas_1">Run the AEAs</h3>
 <p>Run both AEAs, from their respective terminals.
 <div class="highlight"><pre><span></span>aea run
@@ -916,7 +948,37 @@ aea delete my_weather_station
 aea delete my_weather_client
 </pre></div>
 
-<p><br/></p>
+<h3 id="communication_1">Communication</h3>
+<p>This diagram shows the communication between the various entities as data is successfully sold by the weather station agent to the client. </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Search
+        participant Client_AEA
+        participant Weather_AEA
+        participant Blockchain
+
+        activate Client_AEA
+        activate Search
+        activate Weather_AEA
+        activate Blockchain
+
+        Weather_AEA->>Search: register_service
+        Client_AEA->>Search: search
+        Search-->>Client_AEA: list_of_agents
+        Client_AEA->>Weather_AEA: call_for_proposal
+        Weather_AEA->>Client_AEA: propose
+        Client_AEA->>Weather_AEA: accept
+        Weather_AEA->>Client_AEA: match_accept
+        Client_AEA->>Blockchain: transfer_funds
+        Client_AEA->>Weather_AEA: send_transaction_hash
+        Weather_AEA->>Client_AEA: send_data
+
+        deactivate Client_AEA
+        deactivate Search
+        deactivate Weather_AEA
+        deactivate Blockchain
+
+</div>
 
 
                 </section>
@@ -927,7 +989,7 @@ aea delete my_weather_client
                 
                 <a href="../gym-skill/" class="button left"><strong>Previous:</strong></br>Gym Skill</a>
                 
-                <a href="../tac/" class="button right"><strong>Next:</strong></br>Tac External App</a>
+                <a href="../tac-skills/" class="button right"><strong>Next:</strong></br>Tac Skills</a>
               </div><!-- .bottomnav end -->
 
             </div> <!-- .page-wrapper end -->
@@ -958,6 +1020,7 @@ aea delete my_weather_client
   <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
   <script src="../../js/main.js"></script>
       <script src="../../js/menu.js"></script>
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
 </body>
 

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
-  <meta name="author" content="katharine.murphy@fetch.ai">
+  <meta name="author" content="developer@fetch.ai">
   <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
     <ul id="header_getting_started"> 
 <li>
     <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
-        >QuickStart</a
+        >Quickstart</a
     >
 </li>
  
@@ -180,7 +180,7 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Welcome</a
+        >Introduction</a
     >
 </li>
  
@@ -235,8 +235,20 @@
 </li>
  
 <li>
+    <a href="../tac-skills/" id="aea-tac-skills-"
+        >TAC skills</a
+    >
+</li>
+ 
+<li>
     <a href="../tac/" id="aea-tac-"
         >TAC external app</a
+    >
+</li>
+ 
+<li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
     >
 </li>
 
@@ -388,14 +400,14 @@
     <span class="head">Etch Language</span>
     <ul id="header_etch_language"> 
 <li>
-    <span class="head">Welcome</span>
-    <ul id="header_welcome"> 
-<li>
     <a href="../../etch-language/" id="etch-language-"
-        >What's etch?</a
+        >Introduction</a
     >
 </li>
  
+<li>
+    <span class="head">Usage</span>
+    <ul id="header_usage"> 
 <li>
     <a href="../../etch-language/getstarted/" id="etch-language-getstarted-"
         >Getting started</a
@@ -592,16 +604,11 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Extending Etch</span>
-    <ul id="header_extending_etch"> 
-<li>
     <a href="../../etch-language/extending-etch/" id="etch-language-extending-etch-"
-        >Extending etch in C++</a
+        >Extending Etch in C++'</a
     >
 </li>
-
-    </ul>
-</li> 
+ 
 <li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
@@ -718,6 +725,12 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
+    <a href="../../tutorials/" id="tutorials-"
+        >Introduction</a
+    >
+</li>
+ 
+<li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
@@ -752,8 +765,9 @@
   <p>Before developing your first skill, please read the <a href="../skill/">skill guide</a>.</p>
 </div>
 
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="step-1-setup">Step 1: Setup</h2>
-<p>Make sure you have followed the <a href="../quickstart/" target=_blank>preliminaries and installation</a> instructions from the quick start.</p>
 <p>We will first create an agent and add a scaffold skill, which we call <code>my_search</code>.</p>
 <div class="highlight"><pre><span></span>aea create my_agent <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my_agent
 aea scaffold skill my_search
@@ -782,15 +796,15 @@ aea scaffold skill my_search
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the setup.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: setting up MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the act.</span>
 
@@ -800,23 +814,23 @@ aea scaffold skill my_search
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">search_constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
                               <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;UK&quot;</span><span class="p">))]</span>
-        <span class="n">search_query_w_empty_model</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">search_constraints</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="n">search_query_w_empty_model</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">search_constraints</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="n">search_request</span> <span class="o">=</span> <span class="n">OEFMessage</span><span class="p">(</span><span class="n">oef_type</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SEARCH_SERVICES</span><span class="p">,</span>
                                     <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
                                     <span class="n">query</span><span class="o">=</span><span class="n">search_query_w_empty_model</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: sending search request to OEF, search_count={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending search request to OEF, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">DEFAULT_OEF</span><span class="p">,</span>
                                         <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span>
                                         <span class="n">protocol_id</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span>
                                         <span class="n">message</span><span class="o">=</span><span class="n">OEFSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">search_request</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the task teardown.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: tearing down MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 </pre></div>
 
 <p>Searches are proactive and, as such, well placed in a <code>Behaviour</code>.</p>
@@ -843,11 +857,11 @@ aea scaffold skill my_search
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Set up the handler.&quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: setting up MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">OEFMessage</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">OEFMessage</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle the message.</span>
 
@@ -860,15 +874,15 @@ aea scaffold skill my_search
         <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">is</span> <span class="n">OEFMessage</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SEARCH_RESULT</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">nb_agents_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;agents&quot;</span><span class="p">))</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: found number of agents={}, received search count={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Teardown the handler.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: tearing down MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 </pre></div>
 
 <p>We create a handler which is registered for the <code>oef</code> protocol. Whenever it receives a search result, we log the number of agents returned in the search - the agents matching the search query - and update the counter of received searches.</p>
@@ -886,15 +900,15 @@ aea scaffold skill my_search
 <span class="k">class</span> <span class="nc">MySearchTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This class scaffolds a task.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the setup.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: setting up MySearchTask&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchTask&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the task execution.</span>
 
@@ -903,18 +917,18 @@ aea scaffold skill my_search
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">my_search_behaviour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">my_search_handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: number of search requests sent={} vs. number of search responses received={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
                                 <span class="n">my_search_behaviour</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
                                 <span class="n">my_search_handler</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the task teardown.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[{}]: tearing down MySearchTask&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchTask&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
 </pre></div>
 
 <p>Note, how we have access to other objects in the skill via <code>self.context</code>.</p>
@@ -928,17 +942,17 @@ aea scaffold skill my_search
 <span class="nt">url</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
 <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;A</span><span class="nv"> </span><span class="s">simple</span><span class="nv"> </span><span class="s">search</span><span class="nv"> </span><span class="s">skill</span><span class="nv"> </span><span class="s">utilising</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">OEF.&#39;</span>
 <span class="nt">behaviours</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">behaviour</span><span class="p">:</span>
-          <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchBehaviour</span>
-          <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">behaviour</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchBehaviour</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">handlers</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
-          <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchHandler</span>
-          <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchHandler</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">tasks</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span>
-          <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchTask</span>
-          <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchTask</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">shared_classes</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;oef&#39;</span><span class="p p-Indicator">]</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
@@ -1004,6 +1018,7 @@ aea scaffold skill my_search
   <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
   <script src="../../js/main.js"></script>
       <script src="../../js/menu.js"></script>
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
 </body>
 

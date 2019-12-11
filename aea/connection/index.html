@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
-  <meta name="author" content="katharine.murphy@fetch.ai">
+  <meta name="author" content="developer@fetch.ai">
   <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
     <ul id="header_getting_started"> 
 <li>
     <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
-        >QuickStart</a
+        >Quickstart</a
     >
 </li>
  
@@ -180,7 +180,7 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Welcome</a
+        >Introduction</a
     >
 </li>
  
@@ -235,8 +235,20 @@
 </li>
  
 <li>
+    <a href="../tac-skills/" id="aea-tac-skills-"
+        >TAC skills</a
+    >
+</li>
+ 
+<li>
     <a href="../tac/" id="aea-tac-"
         >TAC external app</a
+    >
+</li>
+ 
+<li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
     >
 </li>
 
@@ -388,14 +400,14 @@
     <span class="head">Etch Language</span>
     <ul id="header_etch_language"> 
 <li>
-    <span class="head">Welcome</span>
-    <ul id="header_welcome"> 
-<li>
     <a href="../../etch-language/" id="etch-language-"
-        >What's etch?</a
+        >Introduction</a
     >
 </li>
  
+<li>
+    <span class="head">Usage</span>
+    <ul id="header_usage"> 
 <li>
     <a href="../../etch-language/getstarted/" id="etch-language-getstarted-"
         >Getting started</a
@@ -592,16 +604,11 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Extending Etch</span>
-    <ul id="header_extending_etch"> 
-<li>
     <a href="../../etch-language/extending-etch/" id="etch-language-extending-etch-"
-        >Extending etch in C++</a
+        >Extending Etch in C++'</a
     >
 </li>
-
-    </ul>
-</li> 
+ 
 <li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
@@ -718,6 +725,12 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
+    <a href="../../tutorials/" id="tutorials-"
+        >Introduction</a
+    >
+</li>
+ 
+<li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
@@ -746,12 +759,10 @@
 
                   
 
-<p>A <code>Connection</code> is attached to a <code>MailBox</code> within the AEA framework.</p>
-<p>The <code>connection.py</code> module in the <code>connections</code> directory contains two classes. A <code>Connection</code> object has a reference to a <code>Channel</code>. </p>
-<ul>
-<li><code>Channel</code>: a wrapper for an SDK or API.</li>
-<li><code>Connection</code>: a proxy to the functionality of an SDK or API.</li>
-</ul>
+<p>A <code>Connection</code> is attached to an <code>AEA</code> within the AEA framework.</p>
+<p>The <code>connection.py</code> module in the <code>connections</code> directory contains a <code>Connection</code> class, 
+which is a wrapper for an SDK or API</p>
+<p>An <code>AEA</code> can interact with multiple connections at the same time.</p>
 <h2 id="configuration">Configuration</h2>
 <p>The <code>connection.yaml</code> file in the agent directory contains protocol details and connection url and port details. For example, the oef <code>connection.yaml</code> contains the connection class name, supported protocols, and any connection configuration details.</p>
 <div class="highlight"><pre><span></span><span class="err">name:</span> <span class="err">oef</span>
@@ -766,36 +777,8 @@
   <span class="err">port:</span> <span class="mi">10000</span>
 </pre></div>
 
-<p>The developer is left to implement the methods of both <code>Connection</code> and <code>Channel</code> classes dependent on the protocol type. </p>
+<p>The developer is left to implement the methods of the <code>Connection</code> dependent on the protocol type. </p>
 <!--We'll demonstrate implementations from the `oef` connection as an example.-->
-
-<h2 id="channel"><code>Channel</code></h2>
-<h3 id="sendself-envelope-envelope"><code>send(self, envelope: Envelope)</code></h3>
-<!--
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_default_message</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="s2">&quot;fipa&quot;</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_fipa_message</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="s2">&quot;oef&quot;</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_oef_message</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="s2">&quot;tac&quot;</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_default_message</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;This envelope cannot be sent: protocol_id={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">))</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot send message.&quot;</span><span class="p">)</span>
-</pre></div>
--->
-
-<h3 id="connectself-gt-optionalqueue"><code>connect(self) -&gt; Optional[Queue]</code></h3>
-<!--
-<code>Channel.connect() not implemented in oef</code>
--->
-
-<h3 id="disconnectself"><code>disconnect(self)</code></h3>
-<!--
-<code>Channel.disconnect() not implemented in oef</code>
--->
 
 <h2 id="connection"><code>Connection</code></h2>
 <h3 id="is_establishedself"><code>is_established(self)</code></h3>
@@ -808,37 +791,37 @@
 
 <h3 id="connectself"><code>connect(self)</code></h3>
 <!--
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_core</span><span class="o">.</span><span class="n">run_threaded</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">connect</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="n">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Cannot connect to OEFChannel.&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Cannot connect to OEFChannel.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fetch</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="k">except</span> <span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_core</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
             <span class="k">raise</span> <span class="n">e</span>
 </pre></div>
 -->
 
-<h3 id="disconnectself_1"><code>disconnect(self)</code></h3>
+<h3 id="disconnectself"><code>disconnect(self)</code></h3>
 <!--
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-<span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">,</span> <span class="s2">&quot;Call connect before disconnect.&quot;</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Call connect before disconnect.&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_thread</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_core</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 -->
 
-<h3 id="sendself-envelope-envelope_1"><code>send(self, envelope: Envelope)</code></h3>
+<h3 id="sendself-envelope-envelope"><code>send(self, envelope: Envelope)</code></h3>
 <!--
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span><span class="p">:</span>
@@ -911,6 +894,7 @@
   <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
   <script src="../../js/main.js"></script>
       <script src="../../js/menu.js"></script>
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
 </body>
 

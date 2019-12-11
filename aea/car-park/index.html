@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Car park - Fetch.ai Developer Documentation</title>
+    <title>Car park agent - Fetch.ai Developer Documentation</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
-  <meta name="author" content="katharine.murphy@fetch.ai">
+  <meta name="author" content="developer@fetch.ai">
   <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
     <ul id="header_getting_started"> 
 <li>
     <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
-        >QuickStart</a
+        >Quickstart</a
     >
 </li>
  
@@ -180,7 +180,7 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Welcome</a
+        >Introduction</a
     >
 </li>
  
@@ -235,8 +235,20 @@
 </li>
  
 <li>
+    <a href="../tac-skills/" id="aea-tac-skills-"
+        >TAC skills</a
+    >
+</li>
+ 
+<li>
     <a href="../tac/" id="aea-tac-"
         >TAC external app</a
+    >
+</li>
+ 
+<li>
+    <a href="./" id="aea-car-park-"
+        >Car park agent</a
     >
 </li>
 
@@ -388,14 +400,14 @@
     <span class="head">Etch Language</span>
     <ul id="header_etch_language"> 
 <li>
-    <span class="head">Welcome</span>
-    <ul id="header_welcome"> 
-<li>
     <a href="../../etch-language/" id="etch-language-"
-        >What's etch?</a
+        >Introduction</a
     >
 </li>
  
+<li>
+    <span class="head">Usage</span>
+    <ul id="header_usage"> 
 <li>
     <a href="../../etch-language/getstarted/" id="etch-language-getstarted-"
         >Getting started</a
@@ -592,16 +604,11 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Extending Etch</span>
-    <ul id="header_extending_etch"> 
-<li>
     <a href="../../etch-language/extending-etch/" id="etch-language-extending-etch-"
-        >Extending etch in C++</a
+        >Extending Etch in C++'</a
     >
 </li>
-
-    </ul>
-</li> 
+ 
 <li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
@@ -718,6 +725,12 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
+    <a href="../../tutorials/" id="tutorials-"
+        >Introduction</a
+    >
+</li>
+ 
+<li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
@@ -746,168 +759,80 @@
 
                   
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-</div>
-<p>Work in progress.</p>
 <h1 id="car-park-agent-application">Car Park Agent Application</h1>
-<p>The Fetch.ai car park agent application is made up of three components:</p>
-<ul>
-<li>A Raspberry Pi hardware device with camera module viewing a car park.</li>
-<li>A car park agent GUI running on the Raspberry Pi that collects data on free spaces and serves it up for purchase on the Fetch.ai network.</li>
-<li>A remote client agent GUI that connects to the Raspberry Pi and buys data.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Hardware</th>
-<th align="center">Car Park Agent GUI</th>
-<th align="center">Client Agent GUI</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="../assets/device_small.jpg" height="150"></td>
-<td align="center"><img src="../assets/pi_live.jpg" height="150"></td>
-<td align="center"><img src="../assets/client_04.jpg" height="150"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="raspberry-pi-hardware-set-up">Raspberry Pi hardware set up</h2>
-<p>The hardware set up is the most time consuming part of these instructions.</p>
-<p>We assume the developer has some familiarity with Raspberry Pi and refer them to the manufacturer's instructions. However, we do list any problems we encountered and their solutions below.</p>
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>We have used the Raspberry Pi 4. You are welcome to use earlier versions but the set up may change slightly.</p>
+<p>The Fetch.ai car park agent demo is documented in its own repo <a href="https://github.com/fetchai/carpark_agent">here</a>.</p>
+<h2 id="to-test-the-aea-functionality-without-the-detection">To test the AEA functionality (without the detection)</h2>
+<p>First, create the carpark detection agent:
+<div class="highlight"><pre><span></span>aea create car_detector
+cd car_detector
+aea add skill carpark_detection
+aea install
+</pre></div></p>
+<p>Then, create the carpark client agent:
+<div class="highlight"><pre><span></span>aea create car_data_buyer
+cd car_data_buyer
+aea add skill carpark_client
+aea install
+aea generate-key fetchai
+aea add-key fetchai fet_private_key.txt
+</pre></div></p>
+<p>Add the ledger info to both aea configs:
+<div class="highlight"><pre><span></span>ledger_apis:
+  - ledger_api:
+      ledger: fetchai
+      addr: alpha.fetch-ai.com
+      port: 80
+</pre></div></p>
+<p>Fund the carpark client agent:
+<div class="highlight"><pre><span></span>cd ..
+python scripts/fetchai_wealth_generation.py --private-key car_data_buyer/fet_private_key.txt --amount 10000000000 --addr alpha.fetch-ai.com --port 80
+</pre></div></p>
+<p>Then, in the carpark detection skill settings (<code>car_detector/skills/carpark_detection/skill.yaml</code>) of the detection agent comment out database related settings:
+<div class="highlight"><pre><span></span># db_is_rel_to_cwd: true
+# db_rel_dir: ../temp_files
+</pre></div></p>
+<p>Then, launch an OEF node instance:
+<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+</pre></div></p>
+<p>Finally, run both agents with <code>aea run</code>.</p>
+<p>You can see that the agents find each other, negotiate and eventually trade.</p>
+<p>When you're finished, delete your agents:
+<div class="highlight"><pre><span></span>cd ..
+aea delete car_detector
+aea delete car_data_buyer
+</pre></div></p>
+<h2 id="communication">Communication</h2>
+<p>This diagram shows the communication between the various entities as data is successfully sold by the car park agent to the client. </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Search
+        participant Client_AEA
+        participant Car_Park_AEA
+        participant Blockchain
+
+        activate Client_AEA
+        activate Search
+        activate Car_Park_AEA
+        activate Blockchain
+
+        Car_Park_AEA->>Search: register_service
+        Client_AEA->>Search: search
+        Search-->>Client_AEA: list_of_agents
+        Client_AEA->>Car_Park_AEA: call_for_proposal
+        Car_Park_AEA->>Client_AEA: propose
+        Client_AEA->>Car_Park_AEA: accept
+        Car_Park_AEA->>Client_AEA: match_accept
+        Client_AEA->>Blockchain: transfer_funds
+        Client_AEA->>Car_Park_AEA: send_transaction_hash
+        Car_Park_AEA->>Client_AEA: send_data
+
+        deactivate Client_AEA
+        deactivate Search
+        deactivate Car_Park_AEA
+        deactivate Blockchain
 </div>
 
-<p>Follow the manufacturer's instructions to set up the Raspberry Pi 4 hardware device: <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2" target=_blank>https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2</a>.</p>
-<h3 id="install-and-update-the-os">Install and update the OS</h3>
-<p>Install the Raspbian OS and update it.</p>
-<div class="highlight"><pre><span></span>sudo apt update -y
-sudo apt-get update
-sudo apt-get dist-upgrade
-sudo reboot
-</pre></div>
-
-<h3 id="enable-camera-ssh-and-vnc">Enable camera, ssh, and VNC</h3>
-<p>Click on the Raspberry symbol in the top left of the screen.</p>
-<p>Select Preferences then Raspberry Pi Configuration.</p>
-<p><center>
-<img src="../assets/config_nav.png" />
-</center>
-<br/></p>
-<p>Enable the Camera, SSH, and VNC options.</p>
-<p><center>
-<img src="../assets/config_dlg.png" />
-</center></p>
-<h3 id="set-up-camera-module">Set up camera module</h3>
-<p>Follow the manufacturer's instructions to set up the Raspberry Pi Camera module: <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera" target=_blank>https://projects.raspberrypi.org/en/projects/getting-started-with-picamera</a>.</p>
-<p>Configure and test the camera software: <a href="https://www.raspberrypi.org/documentation/configuration/camera.md" target=_blank>https://www.raspberrypi.org/documentation/configuration/camera.md</a>.</p>
-<p>Set up your Pi to physically view the car park. We'll leave that to you.</p>
-<h3 id="potential-issues">Potential issues</h3>
-<ol>
-<li>Make sure you use the first port, <code>HDMI 0</code> on the Pi for the initial set up monitor.</li>
-<li>If you install the Pi with a used SD card, you will need to reformat the card with NOOBS: <a href="https://www.raspberrypi.org/downloads/noobs/" target=_blank>https://www.raspberrypi.org/downloads/noobs/</a>.</li>
-<li>Fix the screen resolution issues by editing the configuration.</li>
-</ol>
-<div class="highlight"><pre><span></span>sudo raspi-config
-</pre></div>
-
-<p>Select the <code>1920X1080</code> resolution option - number 31.</p>
-<p>Then update the configuration file as follows. Open it.</p>
-<div class="highlight"><pre><span></span>sudo nano /boot/config.txt
-</pre></div>
-
-<p>And make sure the following three lines are commented out.</p>
-<div class="highlight"><pre><span></span><span class="c1"># Enable DRM VC4 V3D driver on top of the dispmanx display stack</span>
-<span class="c1"># dtoverlay=vc4-fkms-v3d</span>
-<span class="c1"># max_framebuffers=2</span>
-</pre></div>
-
-<h2 id="agent-server-application-installation">Agent server application installation</h2>
-<p>Now we are ready to install the car park agent GUI server application on the Raspberry Pi.</p>
-<h3 id="get-the-code">Get the code</h3>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Desktop
-git clone https://github.com/fetchai/carpark_agent.git
-<span class="nb">cd</span> carpark_agent
-</pre></div>
-
-<h3 id="download-datafile">Download datafile</h3>
-<p>This is required for the machine learning algorithms.</p>
-<div class="highlight"><pre><span></span>./car_detection/weights/download_weights.sh
-</pre></div>
-
-<p>Install the required libraries.</p>
-<div class="highlight"><pre><span></span>sudo apt-get install gcc htop vim mc python3-dev ffmpeg virtualenv libatlas-base-dev libsm6 libxext6 clang libblas3 liblapack3 liblapack-dev libblas-dev cython gfortran build-essential libgdal-dev libopenblas-dev liblapack3 liblapacke liblapacke-dev liblcms2-utils liblcms2-2 libwebpdemux2 python3-scipy python3-numpy python3-matplotlib libjasper-dev libqtgui4 libqt4-test protobuf-compiler python3-opencv gpsd gpsd-clients
-</pre></div>
-
-<h3 id="activate-a-virtual-environment">Activate a virtual environment.</h3>
-<div class="highlight"><pre><span></span>pip3 install virtualenv
-./run_scripts/create_venv.sh
-<span class="nb">source</span> venv/bin/activate
-</pre></div>
-
-<h3 id="install-the-software">Install the software</h3>
-<div class="highlight"><pre><span></span>python setup.py develop
-</pre></div>
-
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>We recommend that using `develop` as this creates a link to the code and so any changes you make will take immediate effect when you run the code.</p>
-</div>
-
-<h3 id="run-it">Run it</h3>
-<div class="highlight"><pre><span></span>./run_scripts/run_carpark_agent.sh
-</pre></div>
-
-<p>You should now see the agent running.</p>
-<h3 id="ensure-agent-start-on-boot-rpi4-only">Ensure agent start on boot (RPi4 only)</h3>
-<p>Ensure the startup script runs whenever we the Raspberry Pi turns on.</p>
-<div class="highlight"><pre><span></span>crontab -e
-</pre></div>
-
-<p>Pick an editor which will open a text file. Scroll to the bottom and add the following line.</p>
-<div class="highlight"><pre><span></span>@reboot /home/pi/Desktop/carpark_agent/run_scripts/run_carpark_agent.sh
-</pre></div>
-
-<p>Save and reboot. The agent should now start automatically on reboot.</p>
-<h3 id="get-the-pis-ip-address">Get the Pi's ip address</h3>
-<p>We will need the ip address of the Raspberry Pi to connect remotely.</p>
-<div class="highlight"><pre><span></span>ifconfig
-</pre></div>
-
-<p>Returns something like:</p>
-<div class="highlight"><pre><span></span>...
-wlan0: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
-    inet <span class="m">192</span>.168.11.9  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">192</span>.168.11.255
-...
-</pre></div>
-
-<p>The <code>inet</code> value is the Raspberry Pi's ip address.</p>
-<!--
-### Get the code
-
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Desktop
-git clone https://github.com/fetchai/carpark_agent.git
-<span class="nb">cd</span> carpark_agent
-</pre></div>
--->
-
-<h3 id="connect-to-the-app-remotely">Connect to the app remotely</h3>
-<p>Download and install the VNC viewer onto your remote laptop: <a href="https://www.realvnc.com/en/connect/download/viewer/" target=_blank>https://www.realvnc.com/en/connect/download/viewer/</a>.</p>
-<p>Add the Pi's ip address. You will be prompted for the Raspberry Pi password. The Raspberry Pi's desktop should appear.</p>
-<h3 id="get-your-remote-desktop-ip">Get your remote desktop ip</h3>
-<p>Follow the <a href="https://www.tp-link.com/uk/support/faq/838/?utm_medium=select-local" target=_blank>instructions</a> to get your remote ip address.</p>
-<h3 id="connect-to-the-raspberry-pi">Connect to the Raspberry Pi</h3>
-<p>Start up the agent, if it is not running - but it should be.</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> Desktop/carpark_agent
-./run_scripts/run_carpark_agent.sh
-</pre></div>
-
-<h1 id="stopped-here-monday-28th-october">STOPPED HERE - Monday 28th October</h1>
-<h1 id="the-pi-server-app-instructions-come-next">The Pi server app instructions come next</h1>
-<p>From "When it starts up and you see the output from the camera, you can move your camera around so it is looking at the area...</p>
+<p><br /></p>
 
 
                 </section>
@@ -916,9 +841,9 @@ git clone https://github.com/fetchai/carpark_agent.git
 
               <div class="bottomnav">
                 
-                <div></div>
+                <a href="../tac/" class="button left"><strong>Previous:</strong></br>Tac External App</a>
                 
-                <div></div>
+                <a href="../design-principles/" class="button right"><strong>Next:</strong></br>Design Principles</a>
               </div><!-- .bottomnav end -->
 
             </div> <!-- .page-wrapper end -->
@@ -949,6 +874,7 @@ git clone https://github.com/fetchai/carpark_agent.git
   <link rel="stylesheet" id="font-awesome-css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" type="text/css" media="all">
   <script src="../../js/main.js"></script>
       <script src="../../js/menu.js"></script>
+      <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
       <script src="../../search/main.js"></script>
 </body>
 
