@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Running a node - Fetch.ai Developer Documentation</title>
+    <title>Deploying an Etch contract with Python - Fetch.ai Developer Documentation</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Everything you need to know about Fetch.ai.">
   <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
@@ -725,19 +725,19 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
-    <a href="../../tutorials/" id="tutorials-"
+    <a href="../" id="tutorials-"
         >Introduction</a
     >
 </li>
  
 <li>
-    <a href="../../tutorials/fet1/" id="tutorials-fet1-"
+    <a href="../fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
 </li>
  
 <li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
+    <a href="./" id="tutorials-python-deployment-"
         >Deploying an Etch contract with Python</a
     >
 </li>
@@ -765,119 +765,83 @@
 
                   
 
-<!--
-## Pull
-
-Clone the repo:
-
-<div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fetchai</span><span class="o">/</span><span class="n">oef</span><span class="o">-</span><span class="n">search</span><span class="o">-</span><span class="n">pluto</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">oef</span><span class="o">-</span><span class="n">search</span><span class="o">-</span><span class="n">pluto</span>
+<h1 id="deploying-an-etch-contract-with-the-python-ledger-api">Deploying an Etch Contract with the Python Ledger API</h1>
+<p>The following tutorial assumes that you already have a <code>constellation</code> instance running on port <code>8000</code> and that you have installed the the Python API.</p>
+<p>Details for running a node are <a href="/getting-started/run-a-node/" target=_blank>here</a>.</p>
+<p>Details of the Python API are <a href="/getting-started/python-api-install/" target=_blank>here</a>.</p>
+<h2 id="requirements">Requirements</h2>
+<p>We're going to keep this simple, and refer to FIP-1, our basic token generation contract. </p>
+<p>The FIP-1 contract implements the following functions:</p>
+<ul>
+<li><code>totalSupply() : UInt256</code> gets the total token supply.</li>
+<li><code>balanceOf(owner: Address): UInt256</code> gets the balance of an account having address <code>owner</code>.</li>
+<li><code>transfer(to: Address, value: UInt256) : Bool</code> sends <code>value</code> amount of tokens to address <code>to</code>.</li>
+</ul>
+<h2 id="deploying-the-contract">Deploying the contract:</h2>
+<p>We're going to create a new script, let's call it deploy.py</p>
+<h3 id="import">Import</h3>
+<p>Let's get the initial things out of the way, let's import:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fetchai.ledger.api</span> <span class="kn">import</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">TokenApi</span>
+<span class="kn">from</span> <span class="nn">fetchai.ledger.contract</span> <span class="kn">import</span> <span class="n">Contract</span>
+<span class="kn">from</span> <span class="nn">fetchai.ledger.crypto</span> <span class="kn">import</span> <span class="n">Entity</span><span class="p">,</span> <span class="n">Address</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 </pre></div>
 
-!!! Warning
-    At 13/6/2019, the correct code was still in private repo and cloning the above link did not function correctly.
-
-
-Checkout the master branch:
-
-<div class="highlight"><pre><span></span>git checkout master
+<h3 id="connect-to-network">Connect to network</h3>
+<p>Then, connect to a local running node:</p>
+<div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">api</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">LedgerApi</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
 </pre></div>
 
-If you are only going to run a standalone single node, you only need the `scripts` directory from the repo.
+<h3 id="setup-accounts">Setup accounts</h3>
+<p>Now, we'll read in our etch contract, and create a couple of entities to test with:</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s1">&#39;contract.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ct</span><span class="p">:</span>
+    <span class="n">contract_text</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
--->
+<span class="nb">print</span> <span class="p">(</span><span class="n">contract_text</span><span class="p">)</span>
 
-<p>First, get <a href="https://www.docker.com/get-started" target=_blank>Docker</a>.</p>
-<p>Next, pull and launch our published image.</p>
-<div class="highlight"><pre><span></span>docker pull fetchai/oef-search:latest
+<span class="c1"># create our first private key pair</span>
+<span class="n">entity1</span> <span class="o">=</span> <span class="n">Entity</span><span class="p">()</span>
+<span class="n">address1</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="n">entity1</span><span class="p">)</span>
+
+<span class="c1"># create a second private key pair</span>
+<span class="n">entity2</span> <span class="o">=</span> <span class="n">Entity</span><span class="p">()</span>
+<span class="n">address2</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="n">entity2</span><span class="p">)</span>
 </pre></div>
 
-<p>Now download the <a href="/oef/assets/node_config.json" download=""><code>node_config.json</code></a> file.</p>
-<p>And run the Docker image with the configuration.</p>
-<div class="highlight"><pre><span></span>docker run -it -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/config -p <span class="m">20000</span>:20000 -p <span class="m">10000</span>:10000 -p <span class="m">40000</span>:40000 -p <span class="m">7500</span> fetchai/oef-search:latest /config/node_config.json
+<h3 id="create-balance">Create balance</h3>
+<p>To test, we need a balance: 
+<div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">wealth</span><span class="p">(</span><span class="n">entity1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+</pre></div>
+(Note this will functionality will be removed and a faucet will take it's place).</p>
+<h3 id="create-the-smart-contract-object">Create the smart contract object</h3>
+<p>We create the contract object, and deploy it:
+<div class="highlight"><pre><span></span><span class="n">contract</span> <span class="o">=</span> <span class="n">Contract</span><span class="p">(</span><span class="n">contract_text</span><span class="p">,</span> <span class="n">entity1</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">contract</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">entity1</span><span class="p">,</span> <span class="mi">4000</span><span class="p">))</span>
+</pre></div></p>
+<h3 id="query-the-contract">Query the contract</h3>
+<p>The named argument has to be the exact name of the variable we're accessing in balanceOf
+for example, if the state had a named var of "userX" the below code would be:
+<code>print (contract.query(api, 'balanceOf', userX=address1))</code>
+this is an important note for other functions you might create.</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">contract</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;totalSupply&#39;</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">contract</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;balanceOf&#39;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">address1</span><span class="p">))</span>
 </pre></div>
 
-<p>A successful run will start producing stats dumps after a few seconds. </p>
-<p>You'll need to have several ports available on your machine: <code>10000</code>, <code>20000</code>, <code>30000</code>, and <code>7500</code>.</p>
-<!--
-<div class="highlight"><pre><span></span>sudo python3 scripts/launch.py -c ./scripts/launch_config.json
+<h3 id="make-a-transaction">Make a transaction</h3>
+<p>Using the two entities we created earlier, and their addressed we transact 200 from entity1 to entity2, then check the balance:</p>
+<div class="highlight"><pre><span></span><span class="c1"># transfer from one to the other using our newly deployed contract</span>
+<span class="n">tok_transfer_amount</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">fet_tx_fee</span> <span class="o">=</span> <span class="mi">160</span>
+<span class="n">api</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">contract</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;transfer&#39;</span><span class="p">,</span> <span class="n">fet_tx_fee</span><span class="p">,</span> <span class="p">[</span><span class="n">entity1</span><span class="p">],</span> <span class="n">address1</span><span class="p">,</span> <span class="n">address2</span><span class="p">,</span> <span class="n">tok_transfer_amount</span><span class="p">))</span>
+
+
+<span class="c1">#Query new balance: </span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">contract</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;balanceOf&#39;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">address1</span><span class="p">))</span>
 </pre></div>
 
-You are now running a full OEF node. It contains a core node on `port 10000` connected to a search node on `port 20000`.
-
-The `launch_config.json` file in the `scripts` directory configures port forwarding on the host machine. By default, the `scripts` directory is mounted onto the container.
-
-The `image` entry in the same file defaults to the Fetch.ai public image on 
-
-The `config_file` entry points to `/config/node_config.json` which has a whole bunch of options for each node's setup.
-
-Node content is in `/docker-images/config`. 
-
-
-
-
-
-<H3>Running the container in the background</H3>
-
-First, configure logging on the node.
-
-1. Create a folder `logs` in the current directory.
-2. Open `scripts/node_config.json` and update `log_dir` to `"log_dir": "/logs",`.
-3. Open `scripts/launch_config.json` and extend the `params` list with: `"-v", "$PWD/logs:/logs"`. `$PWD` grabs the full path to the project root.
-
-Now launch the node with the `background` flag.
-
-<div class="highlight"><pre><span></span>python3 scripts/launch.py -c ./scripts/launch_config.json --background
-</pre></div>
-
-You will see `search.log`, `core.log`, etc. in the `/logs` directory.
-
-To stop a running Docker image, run `docker ps` and copy the `CONTAINERID`. Then run `docker kill CONTAINERID`. To kill all running Docker images, run `docker kill $(docker ps -q)`.
-
-
-
-
-## Verify
-
-The verification demo allows an agent to connect to the network and issue a network-wide query for weather data in a particular location. The network nodes broadcast and propagate the location-based query. 
-
-Use `docker-images/demo_network.py` to start multiple nodes at once. There are a number of option flags: 
-
-* `--num_nodes` specifies the number of nodes. 
-* `--run_director` positions each node in a UK city and registers a weather agent on each node. Cities are ordered by population and start at London. 
-* `--link` connects nodes to each other by a list of tuples representing source:destination `SRC:DST`.
-* `--http_port_map` enables the HTTP search endpoint on individual nodes. It contains a list of `ID:PORT` entries, where the `ID` is `0`-`num_nodes` and `PORT` is a unique port number for each node.
-* Access the HTTP interface with `https://localhost:PORT`. 
-
-
-For example, start two connected nodes:
-
-<div class="highlight"><pre><span></span>python3 docker-images/demo_network.py --num_nodes <span class="m">2</span> --link <span class="m">0</span>:1 --http_port_map <span class="m">0</span>:7500 --log_dir <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/docker-images/logs/ --run_director
-</pre></div>
-
-The above command runs two full nodes, two search nodes, and two oef-core nodes. Core nodes are connected to their search nodes. 
-
-The `--link` argument connects the two nodes. Agents talk to each other via search ports. The SDK does not need to know about these ports.
-
-The ports for the running nodes are as follows:
-
-<center>
-
-| Node   |      Search Port      |  Core Port |
-|----------|:-------------:|------:|
-| 1 |  20000 | 10000 |
-| 2 |    20001   |   10001 |
-
-</center>
-
-
-Let's try another example. Start three connected nodes, where every node is connected to every other node, and two of the nodes have `http` interfaces:
-
-<div class="highlight"><pre><span></span>python3 docker-images/demo_network.py --num_nodes <span class="m">3</span> --link <span class="m">0</span>:1 <span class="m">0</span>:2 <span class="m">1</span>:0 <span class="m">1</span>:2 <span class="m">2</span>:0 <span class="m">2</span>:0 --http_port_map <span class="m">0</span>:7500 <span class="m">1</span>:7501 --log_dir <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/docker-images/logs/ --run_director
-</pre></div>
-
--->
-
-<p>Now we have a node up and running, let's get the SDK.</p>
+<p>You can find the source <a href="https://github.com/fetchai/etch-examples/blob/master/Fet-1/submit_contract.py" target=_blank>here</a>.</p>
 <p><br/></p>
 
 
@@ -887,7 +851,7 @@ Let's try another example. Start three connected nodes, where every node is conn
 
               <div class="bottomnav">
                 
-                <div></div>
+                <a href="../fet1/" class="button left"><strong>Previous:</strong></br>Create Fet-1 Contract</a>
                 
                 <div></div>
               </div><!-- .bottomnav end -->
