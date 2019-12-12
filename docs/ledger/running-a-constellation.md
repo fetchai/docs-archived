@@ -62,12 +62,6 @@ From the same `build/apps/constellation` folder, run the following.
 ./constellation -bootstrap -network alpha
 ```
 
-## More info
-
-Navigate through to <a href="../../oef" target=_blank>OEF</a>, <a href="../../etch-language/getstarted" target=_blank>`etch` language</a>, <a href="../../smart-contracts/executing-smart-contract-code/" target=_blank>smart contracts</a>, and <a href="../../tutorials/submitting_contract" target=_blank>tutorials</a> links where you will find instructions and tutorials.
-
-
-<br/>
 
 ## Compiler flags
 

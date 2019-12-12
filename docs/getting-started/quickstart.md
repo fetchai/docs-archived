@@ -67,7 +67,7 @@ from fetchai.ledger.contract import Contract
 
 api = None
 if api is None:
-    api = LedgerApi(host="127.0.0.1", port=8100)
+    api = LedgerApi(host="127.0.0.1", port=8000)
 
 agent1 = Entity()
 api.sync(api.tokens.wealth(agent1, 200000000))
@@ -100,7 +100,7 @@ endfunction
 
 api = None
 if api is None:
-    api = LedgerApi(host="127.0.0.1", port=8100)
+    api = LedgerApi(host="127.0.0.1", port=8000)
 
 agent1 = Entity()
 api.sync(api.tokens.wealth(agent1, 200000000))
@@ -204,8 +204,9 @@ The script can be run from the root of the ledger folder, passing the input file
 
 ## Agents
 
-...
+Coming soon.
 
 
 ## Next steps
 
+Coming soon.
