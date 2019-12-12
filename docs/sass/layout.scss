@@ -197,26 +197,41 @@ header {
 	#hamburger {
 		display: none;
 	}
-	html .book {
-		&-summary {
-			position: relative;
-			top: 0;
-			left: 0;
-			float: left;
-			background: white;
-			width: 300px;
-			visibility: visible;
-			opacity: 1;
-			& > div {
-				position: relative;
-				top: 0;
-				left: 0;
-				box-shadow: none;
-				transform: rotateY(0);
+	html {
+		.book {
+			display: grid;
+			grid-template-columns: 300px;
+			height: auto;
+			overflow: initial;
+			#book-search-input {
+				grid-row-start: 1;
+				grid-column-start: 1;
+				grid-column-end: 3;
 			}
-		}
-		&-body {
-			margin-left: 300px;
+			&-summary {
+				background: transparent;
+				grid-column-start: 1;
+				grid-row-start: 2;
+				position: relative;
+				background: white;
+				width: auto; //300px;
+				visibility: visible;
+				opacity: 1;
+
+				& > div {
+					position: relative;
+					top: 0;
+					max-height: none;
+					box-shadow: none;
+					transform: none;
+					overflow: visible;
+				}
+			}
+			&-body {
+				grid-column-start: 2;
+				grid-row-start: 2;
+				margin-left: 0;
+			}
 		}
 	}
 }
