@@ -1,14 +1,12 @@
-Smart contract functions are annotated depending on the activity they perform.
+# Smart contract annotations
 
-## @init	
+Smart contract functions are annotated depending on the activity they perform. These annotations are checked at compile time.
 
-The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment.
+## @init
 
-The name of the `@init` function can be anything at all.
+The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment. The name of the `@init` function can be anything at all.
 
-For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. 
-
-This happens once and once only at contract deployment.
+For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. This happens once and once only at contract deployment.
 
 
 ``` c++
@@ -29,6 +27,9 @@ function main()
 endfunction
 ```
 
+Only one `@init` function per contract is allowed. Attempting to define more than one will raise a compile-time error.
+
+
 !!! Remember
     We use `main()` in the examples to allow for testing smart contract code outside of a ledger environment.
 
@@ -37,7 +38,7 @@ endfunction
 
 The `@action` annotation signifies a function which performs a transaction. 
 
-A smart contract must have one or more functions annotated with `@action`.
+A smart contract must have one or more functions annotated with `@action`. In order for a function to be callable from other smart contracts, it must be annotated with `@action`. Otherwise it will be effectively considered private.
 
 You cannot run an `etch` smart contract on the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> without an `@action` function and it is these functions that trigger the charging rules for data persistence fees.
 
