@@ -2,11 +2,13 @@
 
 Smart contract functions are annotated depending on the activity they perform. These annotations are checked at compile time.
 
+A function definition or prototype can only be annotated once. Attempting to use more than annotation in a function will raise a compile-time error.
+
 ## @init
 
 The `@init` function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment. The name of the `@init` function can be anything at all.
 
-For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens. This happens once and once only at contract deployment.
+For example, the following function initialises a contract by creating a `State` type to represent the owner's account which then receives an initial supply of FET tokens.
 
 
 ``` c++
@@ -21,13 +23,13 @@ endfunction
 
 function main()
 
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	initialise(owner);
+    var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    initialise(owner);
 
 endfunction
 ```
 
-Only one `@init` function per contract is allowed. Attempting to define more than one will raise a compile-time error.
+Only one `@init` function per contract is allowed; attempting to define more than one will raise a compile-time error. It must take no arguments or only an `Address`, and its return type must be either `void` or `Int64`.
 
 
 !!! Remember
@@ -65,9 +67,9 @@ endfunction
 
 function main()
 
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	var user = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	transfer(owner, user, 100u64);
+    var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    var user = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    transfer(owner, user, 100u64);
 
 endfunction
 ```
@@ -93,9 +95,9 @@ endfunction
 
 function main()
 	
-	var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
-	var owner_balance = balance(owner);
-	printLn(owner_balance);
+    var owner = Address("2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9");
+    var owner_balance = balance(owner);
+    printLn(owner_balance);
 
 endfunction
 ```
