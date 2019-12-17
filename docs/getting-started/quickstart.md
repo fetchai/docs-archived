@@ -131,7 +131,7 @@ The implementation is based on the [Etch language](/etch-language), which is als
 
 ### Loading input data
 
-An Etch program needs a `main()` function as its entry point, and that is where all code in this example will reside.
+An Etch program running outside of a ledger environment needs a `main()` function as its entry point, and that is where all code in this example will reside.
 
 Since the input is provided via multiple CSV files, the `main()` function firstly has to check the correct number of files is provided, then load the input data from them:
 
