@@ -154,7 +154,13 @@ However, be careful, as any string larger than 32 bytes will be truncated. This 
 
 ## Fixed point decimals
 
-Low and high precision calculations can be performed by the use of Fixed point types. Fixed point variables are available as `Fixed32`, `Fixed64` and Fixed128 types. Fixed point types use the 
+Low and high precision calculations can be performed by the use of Fixed point types. Fixed point variables are available as `Fixed32`, `Fixed64` and Fixed128 types. Fixed point types use half of the high bits for the integer part and the low half bits for the fractional part. More specifically the split is done as following: 
+
+| Type     | Integer bits | Fractional bits |
+| -------- | ------------ | --------------- |
+| Fixed32  |      16      |       16        |
+| Fixed64  |      32      |       32        |
+| Fixed128 |      64      |       64        |
 
 You must declare Fixed Point variables with the postfix literals `fp32`, `fp64` and `fp128`.
 
