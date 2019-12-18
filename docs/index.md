@@ -1,21 +1,22 @@
-<div class="grid-container">
+<div id="qst" class="grid-container">
   <div class="grid-item item1">
       <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
   </div>
 
-  <a href="getting-started/quickstart/">
-    <div class="grid-item item2">
-      <h3>Quickstart</h3>
-      <p> If you want to get moving quickly, this is the place.  </p>
-    </div>
-  </a>
-  
-  <a href="./tutorials/" class="grid-item item3">
-      <h3>Tutorials</h3>
-            
-      <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
+    <a id="qs" href="getting-started/quickstart/">
+      <div class="grid-item item2">
+        <h3>Quickstart</h3>
+        <p> If you want to get moving quickly, this is the place.  </p>
+      </div>
+    </a>
+    
+    <a id="tut" href="./tutorials/" class="grid-item item3 tutorials">
+        <h3>Tutorials</h3>
+              
+        <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
 
-  </a>
+    </a>
+
   <div class="grid-item item_whole_row no-padding">
     <h1>What is Fetch.ai</h1>
     <p>There are billions of devices, processes and pipelines around the world that are desperate for automation and communication. Most blockchains aren't built to handle such a large number of transactions, and none enable their clients to learn from the data generated and exchanged.</p>
