@@ -72,21 +72,21 @@ And fixed point types.
 ```c++
 function main()
 
-    // 32 bit floating point
+    // 32 bit fixed point
     var fixed_32 = 1.0fp32;
     printLn(toString(abs(fixed_32)));
 
     var neg_fixed_32 = -1.0fp32;
     printLn(toString(abs(neg_fixed_32)));
 
-    // 64 bit floating point
+    // 64 bit fixed point
     var fixed_64 = 1.0fp64;
     printLn(toString(abs(fixed_64)));
 
     var neg_fixed_64 = -1.0fp64;
     printLn(toString(abs(neg_fixed_64)));
 
-    // 128 bit floating point
+    // 128 bit fixed point
     var fixed_128 = 1.0fp128;
     printLn(toString(abs(fixed_128)));
 
@@ -172,7 +172,7 @@ In a future release, log values will be available for all types as well as in ba
 
 The power function returns the value of the first parameter raised to the second.
 
-The power function is limited to fixed and floating point variables.
+The power function is limited to fixed point variables.
 
 ```c++
 function main()
@@ -268,7 +268,7 @@ endfunction
 
 The square root of a number is found with the `sqrt()` function.
 
-The square root function is limited to fixed and floating point variables.
+The square root function is limited to fixed point variables.
 
 ```c++
 function main()
