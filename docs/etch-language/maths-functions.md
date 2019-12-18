@@ -255,7 +255,7 @@ function main()
     var randInt64 = rand(0i64, 1000i64);
     printLn(toString(randInt64));
 
-    var randFixed32 = rand(0.0fp64, 1000.0fp64);
+    var randFixed32 = rand(0.0fp32, 1000.0fp32);
     printLn(toString(randFixed32));
 
     var randFixed64 = rand(0.0fp64, 1000.0fp64);
