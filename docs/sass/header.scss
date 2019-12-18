@@ -3,7 +3,7 @@ header.scss
 */
 @import './colours.scss'; // Keep in step with docs colours.scss (single repo would be good)
 @import './media-queries.scss'; // Keep in step with docs colours.scss (single repo would be good)
-
+@import './fonts.scss'; // Keep in step with docs colours.scss (single repo would be good)
 header {
 	background-color: $primary-colour;
 	border-bottom: white 1px solid;
@@ -13,7 +13,8 @@ header {
 	position: relative;
 	display: flex;
 	justify-content: space-around;
-
+	font-family: $common-font;
+	$logo-width: 180px;
 	div {
 		display: flex;
 		flex-wrap: wrap;
@@ -27,22 +28,10 @@ header {
 			line-height: initial;
 		}
 		.logo {
-			width: 220px;
+			width: $logo-width;
 			display: block;
 		}
 		ul {
-			a {
-				font-size: 1rem;
-				font-weight: 400;
-				&:link,
-				&:visited,
-				&:hover,
-				&:active,
-				&:focus {
-					color: #f7f7f7;
-					text-decoration: none;
-				}
-			}
 			text-align: center;
 			display: flex;
 			justify-content: space-around;
@@ -50,16 +39,47 @@ header {
 			margin: 0;
 			padding: 0;
 			li {
-				margin: 0 2vw;
+				margin: 0; // 2vw;
 				line-height: initial;
-				&:last-of-type {
-					margin: 0 0 0 2vw;
+				// &:last-of-type {
+				// 	margin: 0 0 0 2vw;
+				// }
+				a {
+					font-weight: 100; //400;
+					font-size: 1rem;
+					padding: 0 2vw;
+					&:link,
+					&:visited,
+					&:hover,
+					&:active,
+					&:focus {
+						color: #f7f7f7;
+						text-decoration: none;
+					}
 				}
 			}
 		}
 	}
 }
 
+@include respond-above(m) {
+	header {
+		div.corset {
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-around;
+		}
+	}
+	@media screen and (orientation: landscape) {
+		header {
+			div.corset {
+				flex-wrap: nowrap;
+				align-items: center;
+				justify-content: space-between;
+			}
+		}
+	}
+}
 @include respond-above(l) {
 	header {
 		div.corset {
@@ -70,11 +90,11 @@ header {
 				ul {
 					justify-content: space-between;
 					li {
-						margin: 0 0.8vw;
+						margin: 0; // 0.8vw;
 						text-align: center;
-						&:last-of-type {
-							margin-right: 0;
-						}
+						// &:last-of-type {
+						// 	margin-right: 0;
+						// }
 						a {
 							font-size: 1rem;
 							padding: 0 2vw;
@@ -92,7 +112,7 @@ header {
 				ul {
 					li {
 						a {
-							font-size: 1.3rem;
+							font-size: 1.2rem;
 							padding: 0 2vw;
 						}
 					}
@@ -108,7 +128,7 @@ header {
 				ul {
 					li {
 						a {
-							font-size: 1.4rem;
+							font-size: 1.2rem;
 							padding: 0 1.6vw;
 						}
 					}
