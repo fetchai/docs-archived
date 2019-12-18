@@ -40,11 +40,13 @@ Only one `@init` function per contract is allowed; attempting to define more tha
 
 The `@action` annotation signifies a function which performs a transaction. 
 
-A smart contract must have one or more functions annotated with `@action`. In order for a function to be callable from other smart contracts, it must be annotated with `@action`. Otherwise it will be effectively considered private.
+A smart contract must have one or more functions annotated with `@action`. In order for a function to be callable from other smart contracts, it must be annotated with `@action`, otherwise it will be effectively considered private.
 
 You cannot run an `etch` smart contract on the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> without an `@action` function and it is these functions that trigger the charging rules for data persistence fees.
 
-The following function performs a transaction between two parties.
+An `@action` return type must be either `void` or `Int64`.
+
+The following function performs a transaction between two parties. In the worst case, this function needs two shards for data storage.
 
 ``` c++
 @action
@@ -74,12 +76,10 @@ function main()
 endfunction
 ```
 
-In the worst case, the above function needs two shards for data storage.
-
 
 ## @query
 
-Query functions are read-only functions that allow you to view data residing on the ledger. 
+Query functions are read-only functions that allow you to view data residing on the ledger. Their return type can not be `void`.
 
 The following function queries the balance of an `Address`.
 
