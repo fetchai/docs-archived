@@ -41,7 +41,7 @@ The `UInt256` label will be supplied in a future version.
 `Int32` is the compiler default so you don't need to explicitly declare this type.
 
 !!! Warn
-Negative unsigned integers are dealt with in the same way C++ deals with them. They return a positive wrapped result dependent on size.
+    Negative unsigned integers are dealt with in the same way C++ deals with them. They return a positive wrapped result dependent on size.
 
 Below is a selection of example integer assignations.
 
