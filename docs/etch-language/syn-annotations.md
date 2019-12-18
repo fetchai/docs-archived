@@ -1,4 +1,4 @@
-`etch` synergetic contract code includes specific annotated functions.
+Etch synergetic contract code includes specific function annotations. These need to be all present or absent, and only one of each type is allowed.
 
 -   `@problem` specifies a problem.
 
@@ -8,9 +8,6 @@
 
 -   `@clear` finishes the competition, zeros everything, and saves the solution.
 
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>Detailed explanations of the above annotations, with coded examples, are coming soon.</p>
-</div>
- 
- <br />
+You can find an example of a synergetic contract and these annotations [here](smart-contracts/executing-synergetic-code/).
+
+<br />
