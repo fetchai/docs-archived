@@ -67,29 +67,6 @@ function main()
 endfunction
 ```
 
-Floating point types.
-
-```c++
-function main()
-
-    // 32 bit floating point
-    var float_32 = 1.0f;
-    printLn(toString(abs(float_32)));
-
-    var neg_float_32 = -1.0f;
-    printLn(toString(abs(neg_float_32)));
-
-    // 64 bit floating point
-    var float_64 = 1.0;
-    printLn(toString(abs(float_64)));
-
-    var neg_float_64 = -1.0;
-    printLn(toString(abs(neg_float_64)));
-
-endfunction
-
-```
-
 And fixed point types.
 
 ```c++
@@ -109,6 +86,12 @@ function main()
     var neg_fixed_64 = -1.0fp64;
     printLn(toString(abs(neg_fixed_64)));
 
+    // 128 bit floating point
+    var fixed_128 = 1.0fp128;
+    printLn(toString(abs(fixed_128)));
+
+    var neg_fixed_128 = -1.0fp128;
+    printLn(toString(abs(neg_fixed_128)));
 endfunction
 ```
 
@@ -277,11 +260,11 @@ function main()
     var randInt64 = rand(0i64, 1000i64);
     printLn(toString(randInt64));
 
-    var randFloat32 = rand(0.0f, 1000.0f);
-    printLn(toString(randFloat32));
+    var randFixed32 = rand(0.0fp64, 1000.0fp64);
+    printLn(toString(randFixed32));
 
-    var randFloat64 = rand(0.0, 1000.0);
-    printLn(toString(randFloat64));
+    var randFixed64 = rand(0.0fp64, 1000.0fp64);
+    printLn(toString(randFixed64));
 
 endfunction
 ```
@@ -297,13 +280,10 @@ function main()
 
     var a = 4.0fp32;
     var b = 49.0fp64;
+    var c = 49.0fp128;
     printLn(toString(sqrt(a)));
     printLn(toString(sqrt(b)));
-
-    var c = 4.0f;
-    var d = 49.0;
     printLn(toString(sqrt(c)));
-    printLn(toString(sqrt(d)));
 
 endfunction
 ```
