@@ -158,8 +158,8 @@ function main()
 	z /= 2;
 	printLn(toString(z));
 
-	var a = 32.3f;
-	var b = 31.2f;
+	var a = 32.3fp64;
+	var b = 31.2fp64;
 	var c = a / b;
 	printLn(toString(c));
 
