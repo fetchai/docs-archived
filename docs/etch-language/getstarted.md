@@ -89,5 +89,5 @@ For example, run `./etch file-1.etch file-2.etch file-n.etch`.
 
 ## Etch playground
 
-You can run all the examples in these docs in the <a href="http://etch-tour.economicagents.com/" target=_blank>`etch` playground here</a> as well as on the command line.
+You can run all the examples in these docs in the <a href="http://build.fetch.ai" target=_blank>`etch` playground here</a> as well as on the command line.
 
