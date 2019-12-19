@@ -48,7 +48,7 @@
 
           <ul class="menu">
             <li><a href="https://developer.fetch.ai/bounties">Bounty </a></li>
-            <li><a href="https://blockexplorer-alpha.fetch-ai.com/">Explorer </a></li>
+            <li><a href="https://explore.fetch.ai">Explorer </a></li>
             <li><a href="http://build.fetch.ai">Build</a></li>
             <li><a href="http://developer.fetch.ai/#links">Links </a></li>
             <li><a href="https://docs.fetch.ai/tutorials/">Tutorials </a></li>
@@ -604,12 +604,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../extending-etch/" id="etch-language-extending-etch-"
-        >Extending Etch in C++'</a
-    >
-</li>
- 
-<li>
     <span class="head">Examples</span>
     <ul id="header_examples"> 
 <li>
@@ -765,12 +759,12 @@
 
                   
 
-<p>Smart contract functions are annotated depending on the activity they perform.</p>
+<h1 id="smart-contract-annotations">Smart contract annotations</h1>
+<p>Smart contract functions are annotated depending on the activity they perform. These annotations are checked at compile time.</p>
+<p>A function definition or prototype can only be annotated once. Attempting to use more than annotation in a function will raise a compile-time error.</p>
 <h2 id="init">@init</h2>
-<p>The <code>@init</code> function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment.</p>
-<p>The name of the <code>@init</code> function can be anything at all.</p>
-<p>For example, the following function initialises a contract by creating a <code>State</code> type to represent the owner's account which then receives an initial supply of FET tokens. </p>
-<p>This happens once and once only at contract deployment.</p>
+<p>The <code>@init</code> function defines a contract constructor that sets the state of the contract prior to any operations performed on it. It is called once and once only on contract initialisation/deployment. The name of the <code>@init</code> function can be anything at all.</p>
+<p>For example, the following function initialises a contract by creating a <code>State</code> type to represent the owner's account which then receives an initial supply of FET tokens.</p>
 <div class="highlight"><pre><span></span><span class="err">@</span><span class="n">init</span>
 <span class="n">function</span> <span class="n">initialise</span><span class="p">(</span><span class="nl">owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span>
 
@@ -788,15 +782,17 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+<p>Only one <code>@init</code> function per contract is allowed; attempting to define more than one will raise a compile-time error. It must take no arguments or only an <code>Address</code>, and its return type must be either <code>void</code> or <code>Int64</code>.</p>
 <div class="admonition remember">
 <p class="admonition-title">Remember</p>
 <p>We use <code>main()</code> in the examples to allow for testing smart contract code outside of a ledger environment.</p>
 </div>
 <h2 id="action">@action</h2>
 <p>The <code>@action</code> annotation signifies a function which performs a transaction. </p>
-<p>A smart contract must have one or more functions annotated with <code>@action</code>.</p>
+<p>A smart contract must have one or more functions annotated with <code>@action</code>. In order for a function to be callable from other smart contracts, it must be annotated with <code>@action</code>, otherwise it will be effectively considered private.</p>
 <p>You cannot run an <code>etch</code> smart contract on the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> without an <code>@action</code> function and it is these functions that trigger the charging rules for data persistence fees.</p>
-<p>The following function performs a transaction between two parties.</p>
+<p>An <code>@action</code> return type must be either <code>void</code> or <code>Int64</code>.</p>
+<p>The following function performs a transaction between two parties. In the worst case, this function needs two shards for data storage.</p>
 <div class="highlight"><pre><span></span><span class="err">@</span><span class="n">action</span>
 <span class="n">function</span> <span class="n">transfer</span><span class="p">(</span><span class="nl">from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">amount</span><span class="p">:</span> <span class="n">UInt64</span><span class="p">)</span>
 
@@ -824,9 +820,8 @@
 <span class="n">endfunction</span>
 </pre></div>
 
-<p>In the worst case, the above function needs two shards for data storage.</p>
 <h2 id="query">@query</h2>
-<p>Query functions are read-only functions that allow you to view data residing on the ledger. </p>
+<p>Query functions are read-only functions that allow you to view data residing on the ledger. Their return type can not be <code>void</code>.</p>
 <p>The following function queries the balance of an <code>Address</code>.</p>
 <div class="highlight"><pre><span></span><span class="err">@</span><span class="n">query</span>
 <span class="n">function</span> <span class="n">balance</span><span class="p">(</span><span class="nl">address</span> <span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">:</span> <span class="n">UInt64</span>
