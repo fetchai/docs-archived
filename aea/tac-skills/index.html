@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="../weather-skills/" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="../car-park/" id="aea-car-park-"
-        >Car park agent</a
+    <a href="../weather-skills/" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -779,14 +791,16 @@
 </pre></div></p>
 <h3 id="add-the-tac-control-skill">Add the tac control skill</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_controller
+aea add connection oef
 aea add skill tac_control
+aea install
 </pre></div>
 
 <h3 id="update-the-game-parameters">Update the game parameters</h3>
 <p>You can change the game parameters in <code>tac_controller/skills/tac_control/skill.yaml</code> under <code>Parameters</code>.</p>
 <p>You must set the start time to a point in the future <code>start_time: Nov 10 2019  10:40AM</code>.</p>
 <h3 id="run-the-tac-controller-aea">Run the TAC controller AEA</h3>
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 
 <h3 id="create-the-tac-participants-aea">Create the TAC participants AEA</h3>
@@ -796,18 +810,22 @@ aea create tac_participant_two
 </pre></div></p>
 <h3 id="add-the-tac-participation-skill-to-participant-one">Add the tac participation skill to participant one</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
+aea add connection oef
 aea add skill tac_participation
 aea add skill tac_negotiation
+aea install
 </pre></div>
 
 <h3 id="add-the-tac-participation-skill-to-participant-two">Add the tac participation skill to participant two</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
+aea add connection oef
 aea add skill tac_participation
 aea add skill tac_negotiation
+aea install
 </pre></div>
 
 <h3 id="run-both-the-tac-participant-aeas">Run both the TAC participant AEAs</h3>
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 
 <div class="admonition note">
@@ -848,32 +866,108 @@ aea add skill tac_negotiation
 <p>This diagram shows the communication between the two agents and the controller. In this case, we have a Seller_Agent which is set up as a seller (and registers itself as such with the controller during the registration phase). We also have the Searching_Agent which is set up to search for sellers. </p>
 <div class="mermaid">
     sequenceDiagram
-        participant Searching_Agent
+        participant Buyer_Agent
         participant Seller_Agent
+        participant Search
         participant Controller
 
-        activate Searching_Agent
+        activate Buyer_Agent
         activate Seller_Agent
+        activate Search
         activate Controller
 
-        Searching_Agent->>Controller: search
-        Controller-->>Searching_Agent: list_of_agents
-        Searching_Agent->>Seller_Agent: call_for_proposal
-        Seller_Agent->>Searching_Agent: proposal
-        Searching_Agent->>Seller_Agent: accept
-        Searching_Agent->>Controller: request_transaction
-        Seller_Agent->>Searching_Agent: match_accept
-        Seller_Agent->>Controller: request_transaction
-        Controller->>Controller: transfer_funds
+        Seller_Agent->>Search: register_service
+        Buyer_Agent->>Search: search
+        Search-->>Buyer_Agent: list_of_agents
+        Buyer_Agent->>Seller_Agent: call_for_proposal
+        Seller_Agent->>Buyer_Agent: proposal
+        Buyer_Agent->>Seller_Agent: accept
+        Seller_Agent->>Buyer_Agent: match_accept
+        Seller_Agent->>Controller: transaction
+        Controller->>Controller: transaction_execution
+        Controller->>Seller_Agent: confirm_transaction
+        Controller->>Buyer_Agent: confirm_transaction
 
-        deactivate Searching_Agent
+        deactivate Buyer_Agent
         deactivate Seller_Agent
+        deactivate Search
         deactivate Controller
 
 </div>
 
-<p>In the above case, the proposal received contains a set of good which the seller wishes to sell and a cost of them. The Searching Agent needs to determine if this is a good deal for them and if so, it accepts.</p>
-<p>There is an equivilent diagram for agents set up to search for buyers and their interaction with agents which are registered as buyers. In that scenario, the proposal will instead, be a list of goods that the buyer wishes to buy and the price it is willing to pay for them.   </p>
+<p>In the above case, the proposal received contains a set of good which the seller wishes to sell and a cost of them. The buyer agent needs to determine if this is a good deal for them and if so, it accepts.</p>
+<p>There is an equivalent diagram for seller agents set up to search for buyers and their interaction with agents which are registered as buyers. In that scenario, the proposal will instead, be a list of goods that the buyer wishes to buy and the price it is willing to pay for them.   </p>
+<h2 id="negotiation-skill-deep-dive">Negotiation skill - deep dive</h2>
+<p>The AEA <code>tac_negotiation</code> skill demonstrates how negotiation strategies may be embedded into an Autonomous Economic Agent.</p>
+<p>The <code>tac_negotiation</code> skill <code>skill.yaml</code> configuration file looks like this.</p>
+<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="s">&#39;tac_negotiation&#39;</span>
+<span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Fetch.AI Limited</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
+<span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache 2.0</span>
+<span class="nt">description</span><span class="p">:</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">tac</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">skill</span><span class="nv"> </span><span class="s">implements</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">logic</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">AEA</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">fipa</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">TAC.&quot;</span>
+<span class="nt">url</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+<span class="nt">behaviours</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">behaviour</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GoodsRegisterAndSearchBehaviour</span>
+      <span class="nt">args</span><span class="p">:</span>
+        <span class="nt">services_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="nt">handlers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FIPANegotiationHandler</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionHandler</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OEFSearchHandler</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">tasks</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionCleanUpTask</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">shared_classes</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Search</span>
+      <span class="nt">args</span><span class="p">:</span>
+        <span class="nt">search_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Registration</span>
+      <span class="nt">args</span><span class="p">:</span>
+        <span class="nt">update_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+      <span class="nt">args</span><span class="p">:</span>
+        <span class="nt">register_as</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">both</span>
+        <span class="nt">search_for</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">both</span>
+  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
+      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Transactions</span>
+      <span class="nt">args</span><span class="p">:</span>
+        <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;oef&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fipa&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+
+<p>Above, you can see the registered <code>Behaviour</code> class name <code>GoodsRegisterAndSearchBehaviour</code> which implements register and search behaviour of an AEA for the <code>tac_negotiation</code> skill.</p>
+<p>The <code>FIPANegotiationHandler</code> deals with receiving <code>FIPAMessage</code> types containing FIPA negotiation terms, such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</p>
+<p>The <code>TransactionHandler</code> deals with <code>TransactionMessage</code>s received from the decision maker component. The decision maker component is responsible for cryptoeconomic security.</p>
+<p>The <code>OEFSearchHandler</code> deals with <code>OEFMessage</code> types returned from the OEF search nodes.</p>
+<p>The <code>TransactionCleanUpTask</code> is responsible for cleaning up transactions which are no longer likely to being settled with the controller agent.</p>
+<h2 id="shared-classes">Shared classes</h2>
+<p>The <code>shared_classes</code> element in the configuration <code>yaml</code> lists a number of important classes which are shared between the handlers, behaviours and tasks.</p>
+<h3 id="search">Search</h3>
+<p>This class abstracts the logic required by agents performing searches for other buying/selling agents according to strategy (see below).</p>
+<h3 id="registration">Registration</h3>
+<p>This class abstracts the logic required by agents performing service registrations on the OEF.</p>
+<h3 id="strategy">Strategy</h3>
+<p>This class defines the strategy behind an agent's activities.</p>
+<p>The class is instantiated with the agent's goals, for example whether the agent intends to buy/sell something, and is therefore looking for other sellers, buyers, or both.</p>
+<p>It also provides methods for defining what goods agents are looking for and what goods they may have to sell, for generating proposal queries, and checking whether a proposal is profitable or not.</p>
+<h3 id="dialogue">Dialogue</h3>
+<p><code>Dialogues</code> abstract the negotiations that take place between agents including all negotiation end states, such as accepted, declined, etc. and all the negotiation states in between.</p>
+<h3 id="transactions">Transactions</h3>
+<p>This class deals with representing potential transactions between agents.</p>
 
 
                 </section>
@@ -882,7 +976,7 @@ aea add skill tac_negotiation
 
               <div class="bottomnav">
                 
-                <a href="../weather-skills/" class="button left"><strong>Previous:</strong></br>Weather Skills</a>
+                <a href="../ml-skills/" class="button left"><strong>Previous:</strong></br>Ml Skills</a>
                 
                 <a href="../tac/" class="button right"><strong>Next:</strong></br>Tac External App</a>
               </div><!-- .bottomnav end -->

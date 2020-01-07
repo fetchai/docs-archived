@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="./" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="../weather-skills/" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="../car-park/" id="aea-car-park-"
-        >Car park agent</a
+    <a href="../weather-skills/" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -766,7 +778,7 @@
 </pre></div>
 
 <p>We highly recommend using a virtual environment to ensure consistency across dependencies.</p>
-<p>Check you have <a href="https://github.com/pypa/pipenv"><code>pipenv</code></a>.</p>
+<p>Check that you have <a href="https://github.com/pypa/pipenv"><code>pipenv</code></a>.</p>
 <div class="highlight"><pre><span></span>which pipenv
 </pre></div>
 
@@ -795,11 +807,11 @@ The following installs the basic application without the cli.
 </pre></div>
 -->
 
-<p>The following installs the entire AEA package which includes the cli too.</p>
+<p>The following installs the entire AEA package which also includes a command-line interface (CLI).</p>
 <div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>all<span class="o">]</span>
 </pre></div>
 
-<p>However, you can run this demo by installing the base AEA, including the CLI (Command Line Interface) extension, alone.</p>
+<p>However, you can run this demo by installing the base AEA, including the CLI extension, alone.</p>
 <div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>cli<span class="o">]</span>
 </pre></div>
 
@@ -827,14 +839,12 @@ The following installs the basic application without the cli.
 <div class="highlight"><pre><span></span>aea add skill <span class="nb">echo</span>
 </pre></div>
 
-<p>This copies the echo application code for the behaviours, handlers, and tasks into the skill, ready to run.</p>
+<p>This copies the echo application code containing the "behaviours", "handlers", and "tasks" into the skill, ready to run.</p>
 <h3 id="add-a-stub-connection">Add a stub connection</h3>
-<p>AEAs use messages for communication. We will add a stub connection to send messages to and receive messages from the AEA.</p>
-<div class="highlight"><pre><span></span>aea add connection stub
-</pre></div>
-
-<p>A stub connection provides an I/O reader/writer. </p>
-<p>It uses two files for communication: one for the incoming messages and the other for the outgoing messages. Each line contains an encoded envelope.</p>
+<p>AEAs use messages for communication. We use a stub connection to send messages to and receive messages from the AEA.</p>
+<p>The stub conection is already added to the agent by default.</p>
+<p>A stub connection provides an I/O reader and writer. </p>
+<p>It uses two files for communication: one for incoming messages and the other for outgoing messages. Each line contains an encoded envelope.</p>
 <p>The AEA waits for new messages posted to the file <code>my_first_agent/input_file</code>, and adds a response to the file <code>my_first_agent/output_file</code>.</p>
 <p>The format of each line is the following:</p>
 <div class="highlight"><pre><span></span>TO,SENDER,PROTOCOL_ID,ENCODED_MESSAGE
@@ -846,7 +856,7 @@ The following installs the basic application without the cli.
 
 <h3 id="run-the-agent">Run the agent</h3>
 <p>Run the agent with the <code>stub</code> connection.</p>
-<div class="highlight"><pre><span></span>aea run --connections stub
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 <p>You will see the echo task running in the terminal window.</p>
@@ -873,7 +883,7 @@ info: Echo Task: execute method called.
 <h3 id="stop-the-agent">Stop the agent</h3>
 <p>Stop the agent by pressing <code>CTRL C</code></p>
 <h3 id="delete-the-agent">Delete the agent</h3>
-<p>Delete the agent from the parent directory via <code>cd ..</code>.</p>
+<p>Delete the agent from the parent directory (<code>cd ..</code> to go to the parent directory).</p>
 <div class="highlight"><pre><span></span>aea delete my_first_agent
 </pre></div>
 
@@ -886,7 +896,7 @@ info: Echo Task: execute method called.
 
               <div class="bottomnav">
                 
-                <a href="../" class="button left"><strong>Previous:</strong></br>Introduction</a>
+                <a href="../agent-oriented-development/" class="button left"><strong>Previous:</strong></br>Agent-Oriented Development</a>
                 
                 <a href="../vision/" class="button right"><strong>Next:</strong></br>Vision</a>
               </div><!-- .bottomnav end -->

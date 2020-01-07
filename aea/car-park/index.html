@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="./" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="../weather-skills/" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="./" id="aea-car-park-"
-        >Car park agent</a
+    <a href="../weather-skills/" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -764,13 +776,15 @@
 <h2 id="to-test-the-aea-functionality-without-the-detection">To test the AEA functionality (without the detection)</h2>
 <p>First, create the carpark detection agent:
 <div class="highlight"><pre><span></span>aea create car_detector
-cd car_detector
+<span class="nb">cd</span> car_detector
+aea add connection oef
 aea add skill carpark_detection
 aea install
 </pre></div></p>
 <p>Then, create the carpark client agent:
 <div class="highlight"><pre><span></span>aea create car_data_buyer
-cd car_data_buyer
+<span class="nb">cd</span> car_data_buyer
+aea add connection oef
 aea add skill carpark_client
 aea install
 aea generate-key fetchai
@@ -781,11 +795,11 @@ aea add-key fetchai fet_private_key.txt
   - ledger_api:
       ledger: fetchai
       addr: alpha.fetch-ai.com
-      port: 80
+      port: <span class="m">80</span>
 </pre></div></p>
 <p>Fund the carpark client agent:
-<div class="highlight"><pre><span></span>cd ..
-python scripts/fetchai_wealth_generation.py --private-key car_data_buyer/fet_private_key.txt --amount 10000000000 --addr alpha.fetch-ai.com --port 80
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+python scripts/fetchai_wealth_generation.py --private-key car_data_buyer/fet_private_key.txt --amount <span class="m">10000000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
 </pre></div></p>
 <p>Then, in the carpark detection skill settings (<code>car_detector/skills/carpark_detection/skill.yaml</code>) of the detection agent comment out database related settings:
 <div class="highlight"><pre><span></span># db_is_rel_to_cwd: true
@@ -797,7 +811,7 @@ python scripts/fetchai_wealth_generation.py --private-key car_data_buyer/fet_pri
 <p>Finally, run both agents with <code>aea run</code>.</p>
 <p>You can see that the agents find each other, negotiate and eventually trade.</p>
 <p>When you're finished, delete your agents:
-<div class="highlight"><pre><span></span>cd ..
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
 aea delete car_detector
 aea delete car_data_buyer
 </pre></div></p>
@@ -841,9 +855,9 @@ aea delete car_data_buyer
 
               <div class="bottomnav">
                 
-                <a href="../tac/" class="button left"><strong>Previous:</strong></br>Tac External App</a>
+                <a href="../trust/" class="button left"><strong>Previous:</strong></br>Trust Issues</a>
                 
-                <a href="../design-principles/" class="button right"><strong>Next:</strong></br>Design Principles</a>
+                <a href="../gym-plugin/" class="button right"><strong>Next:</strong></br>Gym Demo</a>
               </div><!-- .bottomnav end -->
 
             </div> <!-- .page-wrapper end -->

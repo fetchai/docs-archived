@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="../weather-skills/" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="../car-park/" id="aea-car-park-"
-        >Car park agent</a
+    <a href="../weather-skills/" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -760,70 +772,190 @@
                   
 
 <h2 id="preliminaries">Preliminaries</h2>
-<p>These instructions detail the Python code you need for running an AEA outside the <code>cli</code> tool.</p>
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>You have already coded up your agent. See the <a href="../aea/skill-guide/" target=_blank>build your own skill guide</a> for a reminder.</p>
-</div>
+<p>These instructions detail the Python code you need for running an AEA outside the <code>cli</code> tool, using the code interface. </p>
+<p>This guide assumes you have already followed the Preliminaries and Installation section in the <a href="../quickstart/">quick start</a> guide and so have the framework installed and the packages and scripts directory downloaded into the directory you are working in.</p>
+<h2 id="create-private-key">Create private key</h2>
+<p>Before we make our agent we make a private key to be used in the wallet. Open a terminal and type:</p>
+<div class="highlight"><pre><span></span>python scripts/generate_private_key.py my_key.txt
+</pre></div>
 
 <h2 id="imports">Imports</h2>
+<p>Now we can start to write our python script. </p>
 <p>First, import the necessary common Python libraries and classes.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
 </pre></div>
 
 <p>Then, import the application specific libraries.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span> 
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
+<span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 <span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
-<span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
-<span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
 <span class="kn">from</span> <span class="nn">aea.registries.base</span> <span class="kn">import</span> <span class="n">Resources</span>
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolConfig</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
 </pre></div>
 
+<p>Set up a variable pointing to where the packages directory is located - this should be our current directory. 
+<div class="highlight"><pre><span></span><span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+</pre></div></p>
+<h2 id="clearing-the-input-and-output-files">Clearing the input and output files</h2>
+<p>We will use the stub connection to pass envelopes in and out of the agent. Ensure that any input and output text files are removed before we start.
+<div class="highlight"><pre><span></span><span class="c1"># Ensure the input and output files do not exist initially</span>
+<span class="n">input_filename</span> <span class="o">=</span> <span class="s2">&quot;input.txt&quot;</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="s2">&quot;output.txt&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">input_filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">input_filename</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">output_filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
+</pre></div></p>
 <h2 id="initialise-the-agent">Initialise the agent</h2>
-<p>Create a private key.
-<div class="highlight"><pre><span></span>python scripts/generate_private_key.py my_key.txt
-</pre></div></p>
-<p>Create a wallet object with a private key.
-<div class="highlight"><pre><span></span><span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;my_key.txt&#39;</span><span class="p">})</span>
-</pre></div></p>
-<p>Create a <code>Connection</code>.
-<div class="highlight"><pre><span></span><span class="n">stub_connection</span> <span class="o">=</span> <span class="n">StubConnection</span><span class="p">(</span><span class="n">input_file_path</span><span class="o">=</span><span class="s1">&#39;input.txt&#39;</span><span class="p">,</span> <span class="n">output_file_path</span><span class="o">=</span><span class="s1">&#39;output.txt&#39;</span><span class="p">)</span>
-</pre></div></p>
-<p>For ledger APIs, we simply feed the agent an empty dictionary (meaning we do not require any). 
-<div class="highlight"><pre><span></span><span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({})</span>
-</pre></div></p>
-<p>Create the resources pointing to the working directory.
-<div class="highlight"><pre><span></span><span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</pre></div></p>
-<p>Now we have everything we need for initialisation.
-<div class="highlight"><pre><span></span><span class="n">my_agent</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="s2">&quot;my_agent&quot;</span><span class="p">,</span> <span class="n">stub_connection</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
-</pre></div></p>
-<h2 id="add-skills-and-protocols">Add skills and protocols</h2>
-<p>We can add the echo skill as follows...</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Work in progress.</p>
-</div>
-<h2 id="run-the-agent">Run the agent</h2>
-<p>Create a thread and add the agent to it.</p>
-<div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_agent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
-</pre></div>
+<p>We use the private key file we created to initialise a wallet, we also create the stub connection, tell it what Ledger APIs we are going to use (none in this example) and create a resources object containing skills, protocols and connections (this is initially empty). </p>
+<p>Then we pass all of this into the AEA constructor to create our agent.
+<div class="highlight"><pre><span></span><span class="c1"># Set up the wallet, stub connection, ledger and (empty) resources</span>
+<span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;my_key.txt&#39;</span><span class="p">})</span>
+<span class="n">stub_connection</span> <span class="o">=</span> <span class="n">StubConnection</span><span class="p">(</span><span class="n">input_file_path</span><span class="o">=</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_file_path</span><span class="o">=</span><span class="n">output_filename</span><span class="p">)</span>
+<span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({})</span>
+<span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
-<p>Start the agent.</p>
-<div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</pre></div>
+<span class="c1"># Create our AEA</span>
+<span class="n">my_agent</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="s2">&quot;my_agent&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">],</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+</pre></div></p>
+<p>Create the default protocol and add it to the agent
+<div class="highlight"><pre><span></span><span class="c1"># Add the default protocol</span>
+<span class="n">default_protocol_configuration</span> <span class="o">=</span> <span class="n">ProtocolConfig</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;protocol.yaml&quot;</span><span class="p">))))</span>
+<span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">DefaultSerializer</span><span class="p">(),</span> <span class="n">default_protocol_configuration</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">protocol_registry</span><span class="o">.</span><span class="n">register</span><span class="p">((</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">default_protocol</span><span class="p">)</span>
+</pre></div></p>
+<p>Create the error skill (needed by all agents) and the echo skill which will bounce our messages back to us
+<div class="highlight"><pre><span></span><span class="c1"># Add the error skill and the echo skill</span>
+<span class="n">echo_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;echo&quot;</span><span class="p">),</span> <span class="n">my_agent</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">echo_skill</span><span class="p">)</span>
+<span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">my_agent</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">error_skill</span><span class="p">)</span>
+</pre></div></p>
+<h2 id="start-the-agent">Start the agent</h2>
+<p>We run the agent from a different thread so that we can still use the main thread to pass it messages.
+<div class="highlight"><pre><span></span><span class="c1"># Set the agent running in a different thread</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_agent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-<h2 id="terminate-the-agent">Terminate the agent</h2>
-<p>Finalise the agent thread.</p>
-<div class="highlight"><pre><span></span><span class="n">my_agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="c1"># Wait for everything to start up</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div></p>
+<h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
+<p>We use the input and output text files to send an envelope to our agent and receive a response (from the echo skill)
+<div class="highlight"><pre><span></span><span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
+<span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;my_agent,other_agent,default,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>
+
+<span class="c1"># Wait for the envelope to get processed</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Read the output envelope generated by the echo skill</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+</pre></div></p>
+<h2 id="shutdown">Shutdown</h2>
+<p>Finally stop our agent and wait for it to finish
+<div class="highlight"><pre><span></span><span class="c1"># Shut down the agent</span>
+<span class="n">my_agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div></p>
+<h2 id="running-the-agent">Running the agent</h2>
+<p>If you now run this python script file, you should see this output:</p>
+<pre><code>No protocol found.
+No skill found.
+input message: my_agent,other_agent,default,{"type": "bytes", "content": "aGVsbG8="}
+output message: other_agent,my_agent,default,{"type": "bytes", "content": "aGVsbG8="}
+</code></pre>
+<h2 id="entire-code-listing">Entire code listing</h2>
+<p>If you just want to copy and past the entire script in you can find it here:</p>
+<details><summary>Click here to see full listing</summary>
+<p>
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
+<span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
+<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
+<span class="kn">from</span> <span class="nn">aea.registries.base</span> <span class="kn">import</span> <span class="n">Resources</span>
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolConfig</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+
+<span class="c1"># Ensure the input and output files do not exist initially</span>
+<span class="n">input_filename</span> <span class="o">=</span> <span class="s2">&quot;input.txt&quot;</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="s2">&quot;output.txt&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">input_filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">input_filename</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">output_filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
+
+<span class="c1"># set up the Wallet, stub connection, ledger and (empty) resources</span>
+<span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;my_key.txt&#39;</span><span class="p">})</span>
+<span class="n">stub_connection</span> <span class="o">=</span> <span class="n">StubConnection</span><span class="p">(</span><span class="n">input_file_path</span><span class="o">=</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_file_path</span><span class="o">=</span><span class="n">output_filename</span><span class="p">)</span>
+<span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({})</span>
+<span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create our AEA</span>
+<span class="n">my_agent</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="s2">&quot;my_agent&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">],</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+
+<span class="c1"># Add the default protocol</span>
+<span class="n">default_protocol_configuration</span> <span class="o">=</span> <span class="n">ProtocolConfig</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;protocol.yaml&quot;</span><span class="p">))))</span>
+<span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">DefaultSerializer</span><span class="p">(),</span> <span class="n">default_protocol_configuration</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">protocol_registry</span><span class="o">.</span><span class="n">register</span><span class="p">((</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">default_protocol</span><span class="p">)</span>
+
+<span class="c1"># Add the error skill and the echo skill</span>
+<span class="n">echo_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s2">&quot;packages/&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;echo&quot;</span><span class="p">),</span> <span class="n">my_agent</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">echo_skill</span><span class="p">)</span>
+<span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">my_agent</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">error_skill</span><span class="p">)</span>
+
+<span class="c1"># Set the agent running in a different thread</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_agent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Wait for everything to start up</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
+<span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;my_agent,other_agent,default,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>
+
+<span class="c1"># Wait for the envelope to get processed</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Read the output envelope generated by the echo skill</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+
+<span class="c1"># Shut down the agent</span>
+<span class="n">my_agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 <span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
+</p>
+</details>
 
 <p><br /></p>
 

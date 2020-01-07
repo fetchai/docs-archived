@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="../weather-skills/" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="../car-park/" id="aea-car-park-"
-        >Car park agent</a
+    <a href="../weather-skills/" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -765,7 +777,7 @@
 <p>The skill has a <code>context</code> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code> objects. The skill context also has a link to the agent context. The agent context provides read access to agent specific information like the public key and address of the agent, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
 <p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the agent.</p>
 <p>For example, in the <code>ErrorHandler(Handler)</code> class, the code often grabs a reference to its context and by doing so can access initialised and running framework objects such as an <code>OutBox</code> for putting messages into.</p>
-<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">recipient</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_public_key</span><span class="p">,</span><span class="n">protocol_id</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">reply</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">recipient</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">protocol_id</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">reply</span><span class="p">))</span>
 </pre></div>
 
 <p>Importantly, however, a skill does not have access to the context of another skill or protected AEA components like the <code>DecisionMaker</code>.</p>

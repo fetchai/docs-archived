@@ -185,6 +185,12 @@
 </li>
  
 <li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
+<li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
     >
@@ -217,6 +223,12 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
+    <a href="../car-park/" id="aea-car-park-"
+        >Car park agent</a
+    >
+</li>
+ 
+<li>
     <a href="../gym-plugin/" id="aea-gym-plugin-"
         >Gym demo</a
     >
@@ -229,8 +241,8 @@
 </li>
  
 <li>
-    <a href="./" id="aea-weather-skills-"
-        >Weather skills</a
+    <a href="../ml-skills/" id="aea-ml-skills-"
+        >ML skills</a
     >
 </li>
  
@@ -247,8 +259,8 @@
 </li>
  
 <li>
-    <a href="../car-park/" id="aea-car-park-"
-        >Car park agent</a
+    <a href="./" id="aea-weather-skills-"
+        >Weather skills</a
     >
 </li>
 
@@ -777,26 +789,30 @@
 <p>In the root directory, create the weather station AEA.
 <div class="highlight"><pre><span></span>aea create my_weather_station
 </pre></div></p>
-<h3 id="add-the-weather-station-skill">Add the weather station skill</h3>
+<h3 id="add-the-oef-connection-and-the-weather-station-skill">Add the oef connection and the weather station skill</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> my_weather_station
+aea add connection oef
 aea add skill weather_station
+aea install
 </pre></div>
 
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 
 <h3 id="create-the-weather-client-aea">Create the weather client AEA</h3>
 <p>In a new terminal window, return to the root directory and create the weather client AEA.
 <div class="highlight"><pre><span></span>aea create my_weather_client
 </pre></div></p>
-<h3 id="add-the-weather-client-skill">Add the weather client skill</h3>
+<h3 id="add-the-oef-connection-and-the-weather-client-skill">Add the oef connection and the weather client skill</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> my_weather_client
+aea add connection oef
 aea add skill weather_client
+aea install
 </pre></div>
 
 <h3 id="run-the-weather-client-aea">Run the weather client AEA</h3>
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 
 <h3 id="observe-the-logs-of-both-aeas">Observe the logs of both AEAs</h3>
@@ -824,7 +840,7 @@ aea delete my_weather_client
 
         Weather_AEA->>Search: register_service
         Client_AEA->>Search: search
-        Search->>Client_AEA: list_of_agents
+        Search-->>Client_AEA: list_of_agents
         Client_AEA->>Weather_AEA: call_for_proposal
         Weather_AEA->>Client_AEA: propose
         Client_AEA->>Weather_AEA: accept
@@ -845,14 +861,18 @@ aea delete my_weather_client
 <p>Create the AEA that will provide weather measurements.</p>
 <div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
+aea add connection oef
 aea add skill weather_station_ledger
+aea install
 </pre></div>
 
 <h3 id="create-the-weather-client-ledger-version">Create the weather client (ledger version)</h3>
 <p>In another terminal, create the AEA that will query the weather station.</p>
 <div class="highlight"><pre><span></span>aea create my_weather_client
 <span class="nb">cd</span> my_weather_client
+aea add connection oef
 aea add skill weather_client_ledger
+aea install
 </pre></div>
 
 <p>Additionally, create the private key for the weather client AEA.
@@ -877,7 +897,7 @@ python scripts/fetchai_wealth_generation.py --private-key my_weather_client/fet_
 </pre></div></p>
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>Run both AEAs from their respective terminals.
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div></p>
 <p>You will see that the AEAs negotiate and then transact using the Fetch.ai <code>testnet</code>.</p>
 <h3 id="delete-the-aeas_1">Delete the AEAs</h3>
@@ -893,14 +913,18 @@ aea delete my_weather_client
 <p>Create the AEA that will provide weather measurements.</p>
 <div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
+aea add connection oef
 aea add skill weather_station_ledger
+aea install
 </pre></div>
 
 <h3 id="create-the-weather-client-ledger-version_1">Create the weather client (ledger version)</h3>
 <p>In another terminal, create the AEA that will query the weather station.</p>
 <div class="highlight"><pre><span></span>aea create my_weather_client
 <span class="nb">cd</span> my_weather_client
+aea add connection oef
 aea add skill weather_client_ledger
+aea install
 </pre></div>
 
 <p>Additionally, create the private key for the weather client AEA.
@@ -918,16 +942,16 @@ aea add-key ethereum eth_private_key.txt
 </pre></div>
 
 <h3 id="update-the-skill-configs">Update the skill configs</h3>
-<p>In the weather station skill config (<code>my_weather_station/skills/weather_station_ledger/skill.yaml</code>) under strategy, amend the <code>currency_pbk</code> and <code>ledger_id</code> as follows.
-<div class="highlight"><pre><span></span>currency_pbk: <span class="s1">&#39;ETH&#39;</span>
+<p>In the weather station skill config (<code>my_weather_station/skills/weather_station_ledger/skill.yaml</code>) under strategy, amend the <code>currency_id</code> and <code>ledger_id</code> as follows.
+<div class="highlight"><pre><span></span>currency_id: <span class="s1">&#39;ETH&#39;</span>
 ledger_id: <span class="s1">&#39;ethereum&#39;</span>
 </pre></div>
 Amend <code>ledgers</code> to the following.
 <div class="highlight"><pre><span></span>ledgers: <span class="o">[</span><span class="s1">&#39;ethereum&#39;</span><span class="o">]</span>
 </pre></div></p>
-<p>In the weather client skill config (<code>my_weather_client/skills/weather_client_ledger/skill.yaml</code>) under strategy change the <code>currency_pbk</code> and <code>ledger_id</code>.
+<p>In the weather client skill config (<code>my_weather_client/skills/weather_client_ledger/skill.yaml</code>) under strategy change the <code>currency_id</code> and <code>ledger_id</code>.
 <div class="highlight"><pre><span></span>max_buyer_tx_fee: <span class="m">20000</span>
-currency_pbk: <span class="s1">&#39;ETH&#39;</span>
+currency_id: <span class="s1">&#39;ETH&#39;</span>
 ledger_id: <span class="s1">&#39;ethereum&#39;</span>
 </pre></div>
 Amend <code>ledgers</code> to the following.
@@ -938,7 +962,7 @@ Amend <code>ledgers</code> to the following.
 <p>Go to the <a href="https://faucet.metamask.io/" target=_blank>MetaMask Faucet</a> and request some test ETH for the account your weather client AEA is using (you need to first load your AEAs private key into MetaMask). Your private key is at <code>my_weather_client/eth_private_key.txt</code>.</p>
 <h3 id="run-the-aeas_1">Run the AEAs</h3>
 <p>Run both AEAs, from their respective terminals.
-<div class="highlight"><pre><span></span>aea run
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 You will see that the AEAs negotiate and then transact using the Ethereum <code>testnet</code>.</p>
 <h3 id="delete-the-aeas_2">Delete the AEAs</h3>
@@ -987,9 +1011,9 @@ aea delete my_weather_client
 
               <div class="bottomnav">
                 
-                <a href="../gym-skill/" class="button left"><strong>Previous:</strong></br>Gym Skill</a>
+                <a href="../tac/" class="button left"><strong>Previous:</strong></br>Tac External App</a>
                 
-                <a href="../tac-skills/" class="button right"><strong>Next:</strong></br>Tac Skills</a>
+                <a href="../design-principles/" class="button right"><strong>Next:</strong></br>Design Principles</a>
               </div><!-- .bottomnav end -->
 
             </div> <!-- .page-wrapper end -->
