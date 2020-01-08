@@ -1,6 +1,6 @@
 <div id="qst" class="grid-container">
   <div class="grid-item item1">
-      <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
+    <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
   </div>
 
     <a id="qs" href="getting-started/quickstart/">
@@ -11,9 +11,9 @@
     </a>
     
     <a id="tut" href="./tutorials/" class="grid-item item3 tutorials">
-        <h3>Tutorials</h3>
-              
-        <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
+      <h3>Tutorials</h3>
+            
+      <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
 
     </a>
 
@@ -23,10 +23,10 @@
     <p>Fetch.ai is a platform built to bring value to data, by connecting devices and facilitating the creation of new markets based on what they learn from each other. It is the platform where truly autonomous decisions can be made.</p>
     <p>Some of the technical features that will enable this autonomous world are:</p>
     <ul>
-        <li>Blockchain sharding to increase concurrency and scalability</li>
-        <li>Smart contract language with ML and AI capabilities</li>
-        <li>Framework for rapid development of Autonomous Economic Agents (AEAs) that can be deployed in any device</li>
-        <li>Support for fixed-point arithmetics to guarantee precision and determinism across all operations and transactions</li>
+      <li>Blockchain sharding to increase concurrency and scalability</li>
+      <li>Smart contract language with ML and AI capabilities</li>
+      <li>Framework for rapid development of Autonomous Economic Agents (AEAs) that can be deployed in any device</li>
+      <li>Support for fixed-point arithmetics to guarantee precision and determinism across all operations and transactions</li>
     </ul>
     <p><a href="https://fetch.ai/wp-content/uploads/2019/10/technical-introduction.pdf">Whitepaper > </a></p> 
     <p><a href="https://medium.com/fetch-ai/a-gentle-introduction-to-the-fetch-ai-framework-990b487de4d">Gentle Introduction > </a></p>
