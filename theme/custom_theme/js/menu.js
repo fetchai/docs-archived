@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let id = $(this).attr('id');
         if ($(this).attr('id') == matchString) {
             $(this)
+                .addClass('highlight')
                 .parents('ul')
                 .addClass('show');
         }

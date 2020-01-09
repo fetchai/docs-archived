@@ -17,6 +17,33 @@ html.debug {
 #content-wrap {
 	width: 100%;
 }
+$hamburger-size: 32px;
+#hamburger{
+    width: $hamburger-size;
+    height: $hamburger-size;
+	display: block;
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	margin: -$hamburger-size/2 0 0 -$hamburger-size/2;
+	z-index: 99;
+    font-size: 1.2rem;
+    // Not sure why but button styling disappears in Chrome at the iphone 5 level? Artifically reintroduce, here:
+    background-color: #f0f0f0;
+    border-color: rgb(216,216,216) rgb(209,209,209) rgb(186,186,186);
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+	i {
+        cursor: pointer;
+        &.fa-times{
+            display: none;
+        }
+        &.fa-bars{
+            display: block;
+        }
+	}
+}
 #qst {
 	grid-row-gap: 8px;
 	grid-column-gap: 8px;
@@ -72,7 +99,7 @@ section {
 	padding-bottom: $section-bottom-padding;
 	position: relative;
 }
-$header-height: 16vh;
+$header-height: 100px;
 header {
 	height: $header-height;
 }
@@ -85,30 +112,19 @@ html {
     }
 	.book {
 		&-summary {
-			position: fixed;
-			top: 0;
+            position: relative;
 			float: none;
 			margin-top: 0;
 			background-color: $overlay;
 			width: 100vw;
-			min-height: 100vh;
-			visibility: hidden;
-			opacity: 0;
-			transition: opacity 0.5s, visibility 0.5s;
+			display: none;
 			overflow-y: visible;
 			cursor: pointer;
 			> div {
-				position: absolute;
-				top: $header-height;
 				left: 0;
-				max-width: 95vw;
-				max-height: 100vh - $header-height;
-				box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+                width: 100vw;
 				background: white;
-				transform: rotateY(90deg);
-				transform-origin: left;
-				transition: transform 0.5s;
-				overflow-y: scroll;
+                overflow: hidden;
 			}
 		}
 		&-body {
@@ -116,65 +132,35 @@ html {
 		}
 	}
 	&.show-side-menu {
-		body {
-			overflow: hidden; // to prevent scrolling when menu displayed
-			height: 100vh;
-		}
+        #book-search-input{
+            display: none;
+        }
 		.book {
 			&-summary {
-				visibility: visible;
-				opacity: 1;
-				transition: opacity 0.5s, visibility 0s;
-				> div {
-					left: 0;
-					transform: rotateY(0deg);
-					transition: transform 0.5s;
-				}
-			}
-		}
+                display: block;
+            }
+            &-body{
+                display: none;
+            }
+        }
+        #hamburger{
+            i{
+                &.fa-times{
+                    display: block;
+                }
+                &.fa-bars{
+                    display: none;
+                }
+            }
+        }
 	}
 }
 
-#hamburger {
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin: 1rem;
-	z-index: 99;
-    font-size: 1.2rem;
-    // Not sure why but button styling disappears in Chrome at the iphone 5 level? Artifically reintroduce, here:
-    background-color: #f0f0f0;
-    border-color: rgb(216,216,216) rgb(209,209,209) rgb(186,186,186);
-    border-width: 1px;
-    border-style: solid;
-    cursor: pointer;
-	&i {
-		cursor: pointer;
-	}
-}
 
-// NEED TO BE KEPT TOGETHER
-// $header-height: 18vh;
-
-// header {
-// 	height: $header-height;
-// }
 @media screen and (orientation: landscape) {
 	$header-height: 28vh;
 	header {
 		height: $header-height;
-	}
-	#hero {
-		min-height: 100vh - $header-height;
-		height: 100vh - $header-height;
-	}
-	html .book {
-		&-summary {
-			> div {
-				top: $header-height;
-			}
-		}
 	}
 	#qst {
 		#qs {
@@ -188,7 +174,6 @@ html {
 	}
 }
 @include respond-above(s) {
-	$header-height: 18vh;
 	$content-width: 80vw;
 	.corset,
 	#popup {
@@ -209,13 +194,6 @@ html {
 			}
 		}
 	}
-	html .book {
-		&-summary {
-			> div {
-				top: $header-height;
-			}
-		}
-	}
 	#qst {
 		#qs {
 			grid-column: 1;
@@ -231,21 +209,9 @@ html {
 		header {
 			height: $header-height;
 		}
-		#hero {
-			min-height: 100vh - $header-height;
-			height: 100vh - $header-height;
-		}
-		html .book {
-			&-summary {
-				> div {
-					top: $header-height;
-				}
-			}
-		}
 	}
 }
 @include respond-above(m) {
-	$header-height: 16vh;
 	$content-width: 80vw;
 	.corset {
 		max-width: $content-width;
@@ -255,25 +221,11 @@ html {
 	header {
 		height: $header-height;
 	}
-	html .book {
-		&-summary {
-			> div {
-				top: $header-height;
-			}
-		}
-	}
 
 	@media screen and (orientation: landscape) {
 		$header-height: 28vh;
 		header {
 			height: $header-height;
-		}
-		html .book {
-			&-summary {
-				> div {
-					top: $header-height;
-				}
-			}
 		}
 	}
 }
@@ -308,9 +260,8 @@ html {
 				grid-row-start: 2;
 				position: relative;
 				background: white;
-				width: auto; //300px;
-				visibility: visible;
-				opacity: 1;
+				width: auto;
+                display: block;
 
 				& > div {
 					position: relative;
@@ -318,13 +269,15 @@ html {
 					max-height: none;
 					box-shadow: none;
 					transform: none;
-					overflow: visible;
+                    overflow: visible;
+                    width: auto;
 				}
 			}
 			&-body {
 				grid-column-start: 2;
 				grid-row-start: 2;
-				margin-left: 0;
+                margin-left: 0;
+                display: block;
 			}
 		}
 	}
