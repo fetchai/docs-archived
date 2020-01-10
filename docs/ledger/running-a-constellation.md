@@ -5,40 +5,91 @@ From the `build` folder, navigate to the constellation app folder:
 cd apps/constellation
 ```
 
+
+Create a `genesis_file.json`:
+
+Create a file saved as `genesis_file.json` and is saved in the constellation root dir, paste in the below code:
+
+```{
+  "version": 4,
+  "accounts": [
+    {
+      "address": "Your base64 address",
+      "balance": 1152997575,
+      "stake": 0
+    }
+  ]
+}
+```
+
+
 Start a standalone test node:
 ``` bash
-./constellation -port 8100 -block-interval 3000 -standalone
+./constellation -block-interval 4000 -standalone -genesis-file-location genesis_file.json
+
 ```
 You should see output like this:
 ``` bash
-F E ╱     Constellation v0.4.1-rc1
-   T C     Copyright 2018-2019 (c) Fetch AI Ltd.
-     H
+■ ■ ■ .
+■ ■ . .
+■ . . .
+. . . .
+Constellation v1.1.0-alpha19-8-g4cd13f999
+Copyright 2018-2019 (c) Fetch AI Ltd.
 
-[ 2019-06-03 16:55:20.215, # 1 INFO  :                                main ] Configuration:
-
-port......................: 8100
-network mode..............: Standalone
-num executors.............: 1
-num lanes.................: 1
-num slices................: 500
-bootstrap.................: 0
-discoverable..............: 0
-host name.................:
-external address..........: 127.0.0.1
-db-prefix.................: node_storage
-interface.................: 127.0.0.1
-mining....................: Yes
-tx processor threads......: 12
-shard verification threads: 12
-block interval............: 3000ms
-max peers.................: 3
-peers update cycle........: 0ms
-peers.....................:
-manifest.......:
- - HTTP/0: tcp://127.0.0.1:8100 (8100)
- - CORE/0: tcp://127.0.0.1:8101 (8101)
- - Lane/0: tcp://127.0.0.1:8110 (8110)
+[I] 2020/01/10 10:01:19 | main                           : Configuration:
+lanes................: 1
+slices...............: 500
+block-interval.......: 4000
+standalone...........: Yes
+private-network......: No
+db-prefix............: node_storage
+port.................: 8000
+peers................:
+external.............: 127.0.0.1
+config...............:
+max-peers............: 3
+transient-peers......: 1
+peers-update-cycle-ms: 0
+disable-signing......: No
+kademlia-routing.....: Yes
+bootstrap............: No
+discoverable.........: No
+host-name............:
+network..............:
+token................:
+processor-threads....: 12
+verifier-threads.....: 12
+executors............: 1
+genesis-file-location: genesis_file.json
+experimental.........:
+pos..................: No
+max-cabinet-size.....: 10
+stake-delay-period...: 5
+aeon-period..........: 25
+graceful-failure.....: No
+fault-tolerant.......: No
+enable-agents........: No
+messenger-port.......: 9010
+-
+Network Mode.........: Standalone
+Num Lanes............: 1
+Num Slices...........: 500
+Num Executors........: 1
+DB Prefix............: 1
+Processor Threads....: 12
+Verification Threads.: 12
+Max Peers............: 3
+Transient Peers......: 1
+Block Internal.......: 4000ms
+Max Cabinet Size.....: 10
+Stake Delay Period...: 5
+Aeon Period..........: 25
+Kad Routing..........: 1
+Proof of Stake.......: 0
+Agents...............: 0
+Messenger Port.......: 9010
+Mailbox Port.........: 0
 ```
 
 When you see the following message...

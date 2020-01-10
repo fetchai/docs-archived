@@ -31,10 +31,35 @@ Now let's build the project:
 ./scripts/quickstart.sh
 ```
 
+cd into constellation:
+
+```bash
+cd build/apps/constellation/
+```
+
+
+Create a `genesis_file.json`:
+
+Create a file saved as `genesis_file.json` and is saved in the constellation root dir, paste in the below code:
+
+```{
+  "version": 4,
+  "accounts": [
+    {
+      "address": "Your base64 address",
+      "balance": 1152997575,
+      "stake": 0
+    }
+  ]
+}
+```
+
+Be sure to generate an address you can manage with the Ledger-api-py, or Pocketbook. 
+
 And we can now run the ledger locally:
 
 ```bash
-./build/apps/constellation/constellation -standalone -block-interval 20000
+./constellation -block-interval 4000 -standalone -genesis-file-location genesis_file.json
 ```
 
 This runs a node with a block interval of 2 seconds. Since it is a standalone node, it is not connected to any network. 
