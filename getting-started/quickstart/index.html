@@ -812,8 +812,26 @@ git submodule update --init --recursive
 <div class="highlight"><pre><span></span>./scripts/quickstart.sh
 </pre></div>
 
+<p>cd into constellation:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> build/apps/constellation/
+</pre></div>
+
+<p>Create a <code>genesis_file.json</code>:</p>
+<p>Create a file saved as <code>genesis_file.json</code> and is saved in the constellation root dir, paste in the below code:</p>
+<div class="highlight"><pre><span></span>  &quot;version&quot;: 4,
+  &quot;accounts&quot;: [
+    {
+      &quot;address&quot;: &quot;Your base64 address&quot;,
+      &quot;balance&quot;: 1152997575,
+      &quot;stake&quot;: 0
+    }
+  ]
+}
+</pre></div>
+
+<p>Be sure to generate an address you can manage with the Ledger-api-py, or Pocketbook. </p>
 <p>And we can now run the ledger locally:</p>
-<div class="highlight"><pre><span></span>./build/apps/constellation/constellation -standalone -block-interval <span class="m">20000</span>
+<div class="highlight"><pre><span></span>./constellation -block-interval <span class="m">4000</span> -standalone -genesis-file-location genesis_file.json
 </pre></div>
 
 <p>This runs a node with a block interval of 2 seconds. Since it is a standalone node, it is not connected to any network. </p>

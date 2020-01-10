@@ -795,38 +795,83 @@
 <p>From the <code>build</code> folder, navigate to the constellation app folder:
 <div class="highlight"><pre><span></span><span class="nb">cd</span> apps/constellation
 </pre></div></p>
+<p>Create a <code>genesis_file.json</code>:</p>
+<p>Create a file saved as <code>genesis_file.json</code> and is saved in the constellation root dir, paste in the below code:</p>
+<div class="highlight"><pre><span></span>  &quot;version&quot;: 4,
+  &quot;accounts&quot;: [
+    {
+      &quot;address&quot;: &quot;Your base64 address&quot;,
+      &quot;balance&quot;: 1152997575,
+      &quot;stake&quot;: 0
+    }
+  ]
+}
+</pre></div>
+
 <p>Start a standalone test node:
-<div class="highlight"><pre><span></span>./constellation -port <span class="m">8100</span> -block-interval <span class="m">3000</span> -standalone
+<div class="highlight"><pre><span></span>./constellation -block-interval <span class="m">4000</span> -standalone -genesis-file-location genesis_file.json
 </pre></div>
 You should see output like this:
-<div class="highlight"><pre><span></span>F E ╱     Constellation v0.4.1-rc1
-   T C     Copyright <span class="m">2018</span>-2019 <span class="o">(</span>c<span class="o">)</span> Fetch AI Ltd.
-     H
+<div class="highlight"><pre><span></span>■ ■ ■ .
+■ ■ . .
+■ . . .
+. . . .
+Constellation v1.1.0-alpha19-8-g4cd13f999
+Copyright <span class="m">2018</span>-2019 <span class="o">(</span>c<span class="o">)</span> Fetch AI Ltd.
 
-<span class="o">[</span> <span class="m">2019</span>-06-03 <span class="m">16</span>:55:20.215, <span class="c1"># 1 INFO  :                                main ] Configuration:</span>
-
-port......................: <span class="m">8100</span>
-network mode..............: Standalone
-num executors.............: <span class="m">1</span>
-num lanes.................: <span class="m">1</span>
-num slices................: <span class="m">500</span>
-bootstrap.................: <span class="m">0</span>
-discoverable..............: <span class="m">0</span>
-host name.................:
-external address..........: <span class="m">127</span>.0.0.1
-db-prefix.................: node_storage
-interface.................: <span class="m">127</span>.0.0.1
-mining....................: Yes
-tx processor threads......: <span class="m">12</span>
-shard verification threads: <span class="m">12</span>
-block interval............: 3000ms
-max peers.................: <span class="m">3</span>
-peers update cycle........: 0ms
-peers.....................:
-manifest.......:
- - HTTP/0: tcp://127.0.0.1:8100 <span class="o">(</span><span class="m">8100</span><span class="o">)</span>
- - CORE/0: tcp://127.0.0.1:8101 <span class="o">(</span><span class="m">8101</span><span class="o">)</span>
- - Lane/0: tcp://127.0.0.1:8110 <span class="o">(</span><span class="m">8110</span><span class="o">)</span>
+<span class="o">[</span>I<span class="o">]</span> <span class="m">2020</span>/01/10 <span class="m">10</span>:01:19 <span class="p">|</span> main                           : Configuration:
+lanes................: <span class="m">1</span>
+slices...............: <span class="m">500</span>
+block-interval.......: <span class="m">4000</span>
+standalone...........: Yes
+private-network......: No
+db-prefix............: node_storage
+port.................: <span class="m">8000</span>
+peers................:
+external.............: <span class="m">127</span>.0.0.1
+config...............:
+max-peers............: <span class="m">3</span>
+transient-peers......: <span class="m">1</span>
+peers-update-cycle-ms: <span class="m">0</span>
+disable-signing......: No
+kademlia-routing.....: Yes
+bootstrap............: No
+discoverable.........: No
+host-name............:
+network..............:
+token................:
+processor-threads....: <span class="m">12</span>
+verifier-threads.....: <span class="m">12</span>
+executors............: <span class="m">1</span>
+genesis-file-location: genesis_file.json
+experimental.........:
+pos..................: No
+max-cabinet-size.....: <span class="m">10</span>
+stake-delay-period...: <span class="m">5</span>
+aeon-period..........: <span class="m">25</span>
+graceful-failure.....: No
+fault-tolerant.......: No
+enable-agents........: No
+messenger-port.......: <span class="m">9010</span>
+-
+Network Mode.........: Standalone
+Num Lanes............: <span class="m">1</span>
+Num Slices...........: <span class="m">500</span>
+Num Executors........: <span class="m">1</span>
+DB Prefix............: <span class="m">1</span>
+Processor Threads....: <span class="m">12</span>
+Verification Threads.: <span class="m">12</span>
+Max Peers............: <span class="m">3</span>
+Transient Peers......: <span class="m">1</span>
+Block Internal.......: 4000ms
+Max Cabinet Size.....: <span class="m">10</span>
+Stake Delay Period...: <span class="m">5</span>
+Aeon Period..........: <span class="m">25</span>
+Kad Routing..........: <span class="m">1</span>
+Proof of Stake.......: <span class="m">0</span>
+Agents...............: <span class="m">0</span>
+Messenger Port.......: <span class="m">9010</span>
+Mailbox Port.........: <span class="m">0</span>
 </pre></div></p>
 <p>When you see the following message...</p>
 <p><div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101</span>
