@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Create an FET-2 contract - Fetch.ai Developer Documentation</title>
+    <title>Wallets - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -92,19 +92,19 @@
     <span class="head">Getting Started</span>
     <ul id="header_getting_started"> 
 <li>
-    <a href="../../getting-started/quickstart/" id="getting-started-quickstart-"
+    <a href="../quickstart/" id="getting-started-quickstart-"
         >Quickstart</a
     >
 </li>
  
 <li>
-    <a href="../../getting-started/versions/" id="getting-started-versions-"
+    <a href="../versions/" id="getting-started-versions-"
         >Versions</a
     >
 </li>
  
 <li>
-    <a href="../../getting-started/wallet/" id="getting-started-wallet-"
+    <a href="./" id="getting-started-wallet-"
         >Wallets</a
     >
 </li>
@@ -133,19 +133,19 @@
     <span class="head">Installation</span>
     <ul id="header_installation"> 
 <li>
-    <a href="../../getting-started/installation-mac/" id="getting-started-installation-mac-"
+    <a href="../installation-mac/" id="getting-started-installation-mac-"
         >MacOS</a
     >
 </li>
  
 <li>
-    <a href="../../getting-started/installation-ubuntu/" id="getting-started-installation-ubuntu-"
+    <a href="../installation-ubuntu/" id="getting-started-installation-ubuntu-"
         >Ubuntu</a
     >
 </li>
  
 <li>
-    <a href="../../getting-started/installation-redhat/" id="getting-started-installation-redhat-"
+    <a href="../installation-redhat/" id="getting-started-installation-redhat-"
         >Redhat</a
     >
 </li>
@@ -175,7 +175,7 @@
     <span class="head">Python API</span>
     <ul id="header_python_api"> 
 <li>
-    <a href="../../getting-started/python-api-install/" id="getting-started-python-api-install-"
+    <a href="../python-api-install/" id="getting-started-python-api-install-"
         >Installation</a
     >
 </li>
@@ -751,19 +751,19 @@
     <span class="head">Tutorials</span>
     <ul id="header_tutorials"> 
 <li>
-    <a href="../" id="tutorials-"
+    <a href="../../tutorials/" id="tutorials-"
         >Introduction</a
     >
 </li>
  
 <li>
-    <a href="../fet1/" id="tutorials-fet1-"
+    <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
     >
 </li>
  
 <li>
-    <a href="../python-deployment/" id="tutorials-python-deployment-"
+    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
         >Deploying an Etch contract with Python</a
     >
 </li>
@@ -791,145 +791,77 @@
 
                                     
 
-<h1 id="create-an-fet-2-contract">Create an FET-2 contract</h1>
-<p>In this tutorial we are going to implement a subset of the functionality of 
-an FET-2 contract in <code>etch</code>. </p>
-<p>We will be using <code>UInt256</code> for identifiers and the <code>SHA256()</code> function to generate the identifiers of the initial tokens. </p>
-<p>We will need two
-records: an <code>Address</code> stating which tokens an address holds and a token record keeping track of the owner of the token. </p>
-<p>For the first of these tasks, we will use the <code>State</code> object in <code>etch</code>, and for the second we will use <code>ShardedState</code>.</p>
-<h2 id="initialisation-function">Initialisation function</h2>
-<p>Assuming that we have defined an <code>owner</code> and a <code>total_supply</code>, the initialise function 
-will do three things: </p>
-<ol>
-<li>Generate a list of token ids. </li>
-<li>Create a record of each token owner.</li>
-<li>Create a record of the tokens that an owner has. </li>
-</ol>
-<p>The dual relationship makes lookups efficient, but comes at the price of twice the book keeping.</p>
-<p>First, create the list of token ids:</p>
-<div class="highlight"><pre><span></span>    <span class="c1">// Genereating tokens</span>
-    <span class="n">var</span> <span class="n">token_id</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">);</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
-
-        <span class="n">var</span> <span class="n">hasher</span> <span class="o">=</span> <span class="n">SHA256</span><span class="p">();</span>
-        <span class="n">hasher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">token_id</span><span class="p">);</span>
-        <span class="n">token_id</span> <span class="o">=</span> <span class="n">hasher</span><span class="p">.</span><span class="k">final</span><span class="p">();</span>
-        <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_id</span><span class="p">;</span>
-
-    <span class="n">endfor</span>
+<h1 id="creating-fetchai-native-wallets-using-pocketbook">Creating Fetch.ai Native Wallets using <code>pocketbook</code></h1>
+<p><code>pocketbook</code> is a Python command line utility that provides a simple wallet mechanism for Fetch.ai’s main network. It allows you to create accounts, manage them, view token balances and transfer native FET from one address to another. <code>pocketbook</code> works with all of Fetch.ai’s native networks, including any test networks as well as the main network itself. It is simple to use, simple to install and is the easiest way of creating wallets to hold native FET for utility purposes on the networks, such as for performing transactions, or deploying and using synergetic and/or ai-powered smart contracts.</p>
+<p><strong>Firstly, a warning:</strong></p>
+<blockquote>
+<p><strong>You use this application at your own risk</strong>. Whilst Fetch.ai have made every
+effort to ensure its reliability and security, it comes with no warranty. It is
+intended for the creation and management of Fetch.ai mainnet wallets and
+transactions between them. You are responsible for the security of your own
+private keys (see <code>~/.pocketbook</code> folder). Do not use this application for
+high-value operations: it is intended for utility operations on the main network.</p>
+</blockquote>
+<p>That out of the way, let us proceed. You can view the source code for <code>pocketbook</code> on Fetch.ai’s <a href="https://github.com/fetchai/tools-pocketbook">GitHub account</a>. You can download, view, modify and use the source code directly, or you can get it via PyPI:</p>
+<div class="highlight"><pre><span></span>pip3 install -U pocketbook
 </pre></div>
 
-<p>Next, assign an owner:</p>
-<div class="highlight"><pre><span></span>    <span class="c1">// Assigning owner</span>
-    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
-
-        <span class="n">var</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="n">owner_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">tid</span><span class="p">),</span> <span class="n">owner</span><span class="p">);</span>
-
-    <span class="n">endfor</span>
+<p>Note the <code>-U</code> option that will update your existing installation if it is already installed.</p>
+<p><code>pocketbook</code> defaults to access the main network. You can change the network using the <code>-n</code> parameter. E.g.:</p>
+<div class="highlight"><pre><span></span>pocketbook -n testnet …
+pocketbook -n mainnet …
 </pre></div>
 
-<p>Finally, store the list of tokens on the creator's address:</p>
-<div class="highlight"><pre><span></span>    <span class="n">var</span> <span class="n">objects_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
-
-    <span class="c1">// Storing the tokens on the owners address</span>
-    <span class="n">objects_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+<p>For details of how to use <code>pocketbook</code>, you can use its help option <code>-h</code>. You can get help on all the commands by appending <code>-h</code>. The remainder of this document covers the four key operations that you will need in the majority of cases:</p>
+<p>Creating a new address
+Adding an existing address
+Listing addresses and balances
+Transferring tokens from one address to another
+Backing up your private keys</p>
+<h3 id="creating-a-new-address">Creating a new address</h3>
+<p>To create a new address simply run the following command:</p>
+<div class="highlight"><pre><span></span>pocketbook create
 </pre></div>
 
-<h2 id="queries">Queries</h2>
-<p>In this section we will focus on the functions which implement a wallet overview and token details view, namely <code>balanceOf(owner: Address) : UInt256</code> and <code>ownerOf(token_id: UInt256) : Address</code>. </p>
-<p>Both of these functions are short and easy to implement. </p>
-<p>First, we make it possible to query the balance:</p>
-<div class="highlight"><pre><span></span><span class="err">@</span><span class="n">query</span>
-<span class="n">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="nl">owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">:</span> <span class="n">UInt256</span>
-
-    <span class="n">var</span> <span class="n">objects_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">owner</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">objects_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
-    <span class="n">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span> <span class="n">toUInt64</span><span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">count</span><span class="p">())</span> <span class="p">);</span>
-
-    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-
-<span class="n">endfunction</span>
+<p>You will be prompted to enter a name for this key pair, followed by a password for the key. Below is a sample output:</p>
+<div class="highlight"><pre><span></span>Enter name for key: foo
+Enter password for key...:
+Confirm password for key.:
 </pre></div>
 
-<p>Next, we make it possible to query the token owner:</p>
-<div class="highlight"><pre><span></span><span class="err">@</span><span class="n">query</span>
-<span class="n">function</span> <span class="n">ownerOf</span><span class="p">(</span><span class="nl">token_id</span><span class="p">:</span> <span class="n">UInt256</span><span class="p">)</span> <span class="o">:</span> <span class="n">Address</span>
-
-    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">owner_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">));</span> 
-
-<span class="n">endfunction</span>
+<h3 id="adding-an-existing-address">Adding an existing address</h3>
+<p>Other users may provide you with an address, and you can add it to <code>pocketbook</code>’s address book. Once you have added it, you can send tokens to it, or query the balance. You can add existing addresses like this:</p>
+<div class="highlight"><pre><span></span>pocketbook -n mainnet add &lt;name-for-the-address&gt; &lt;address&gt;
 </pre></div>
 
-<p>With these two query functions, it is possible to implement an FET-2 wallet on top of the smart ledger. </p>
-<p>We can also make several optimisations for these functions. For instance, by storing the number of tokens separately, we would not have to deserialise the full array.</p>
-<h2 id="actions">Actions</h2>
-<p>The standard FET-2 contract has a number of different functions for transferring funds from one party to another. We will implement just one of these; they are all essentially variations of the same mechanism with more or less error checking built into them. </p>
-<p>Implement a single transfer function:</p>
-<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">transferFrom</span><span class="p">(</span><span class="nl">from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="nl">token_id</span><span class="p">:</span> <span class="n">UInt256</span><span class="p">)</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">from</span><span class="p">.</span><span class="n">signedTx</span><span class="p">())</span> 
-      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Invalid signature from owner.&quot;</span><span class="p">);</span>
-    <span class="n">endif</span>
-
-    <span class="n">var</span> <span class="n">owner_state</span> <span class="o">=</span> <span class="n">ShardedState</span><span class="o">&lt;</span> <span class="n">Address</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tokens.owner&quot;</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">owner_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">));</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">owner</span> <span class="o">!=</span> <span class="n">from</span><span class="p">)</span>
-      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Owner does not actually own the token&quot;</span><span class="p">);</span>
-    <span class="n">endif</span>
-
-    <span class="n">var</span> <span class="n">from_state</span>   <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">from_objects</span> <span class="o">=</span> <span class="n">from_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
-    <span class="n">var</span> <span class="n">found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">var</span> <span class="nl">position</span> <span class="p">:</span> <span class="n">Int32</span><span class="p">;</span>
-
-
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">from_objects</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
-      <span class="n">var</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">from_objects</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">tid</span> <span class="o">==</span> <span class="n">token_id</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
-          <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Contract broken - token is only supposed be represented once.&quot;</span><span class="p">);</span>
-        <span class="n">endif</span>
-
-        <span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="n">position</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="k">break</span><span class="p">;</span>
-      <span class="n">endif</span>
-    <span class="n">endfor</span>
-
-    <span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="n">found</span><span class="p">)</span>
-      <span class="n">panic</span><span class="p">(</span><span class="s">&quot;Contract is fundamentally broken - owner has not been updated correctly&quot;</span><span class="p">);</span>
-    <span class="n">endif</span>
-
-    <span class="n">from_objects</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_objects</span><span class="p">[</span><span class="n">from_objects</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-    <span class="n">from_objects</span><span class="p">.</span><span class="n">popBack</span><span class="p">();</span>
-
-    <span class="n">var</span> <span class="n">to_state</span>   <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">to_objects</span> <span class="o">=</span> <span class="n">to_state</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">Array</span><span class="o">&lt;</span> <span class="n">UInt256</span> <span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
-    <span class="n">to_objects</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_id</span><span class="p">);</span>
-
-    <span class="c1">// updating sender</span>
-    <span class="n">from_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">from_objects</span><span class="p">);</span>
-
-    <span class="c1">// Updating receiver</span>
-    <span class="n">to_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">to_objects</span><span class="p">);</span>
-
-    <span class="c1">// Updating owner</span>
-    <span class="n">owner</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span>
-    <span class="n">owner_state</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">toString</span><span class="p">(</span><span class="n">token_id</span><span class="p">),</span> <span class="n">owner</span><span class="p">);</span>
-
-<span class="n">endfunction</span>
+<h3 id="listing-addresses-and-balances">Listing addresses and balances</h3>
+<p>You can query the balance of your accounts and address book entries with the following command:</p>
+<div class="highlight"><pre><span></span>pocketbook -n mainnet list [-v]
 </pre></div>
 
-<p>The above implementation requires the sender to sign the transaction, but can be extended to also requiring the receiver to sign as well. </p>
-<p>The full contract can be found <a href="https://github.com/fetchai/etch-examples/blob/master/03_erc721/contract.etch" target=_blank>here</a>.</p>
-<p><br/></p>
+<p>Adding the <code>-v</code> option will display the addresses alongside the names and balances.</p>
+<h3 id="making-a-transfer">Making a transfer</h3>
+<p>You can use <code>pocketbook</code>’s <code>transfer</code> command to send tokens from one address to another. The syntax is as follows:</p>
+<div class="highlight"><pre><span></span>pocketbook -n mainnet transfer &lt;destination-name&gt; &lt;amount&gt; &lt;signer (source)&gt;
+</pre></div>
+
+<p>If you wish to transfer 10 FET from account <code>main</code> to account <code>other</code>, you would use the transfer command like this:</p>
+<div class="highlight"><pre><span></span>pocketbook -n mainnet transfer other 10 main
+</pre></div>
+
+<p>You will then be prompted with a summary of the transfer so that you can verify the details before you agree to the transfer. You can type <code>CTRL-C</code> to abort at any time. This confirmation will look like this:</p>
+<div class="highlight"><pre><span></span>Network....: devnet
+From.......: main
+Signers....: [&#39;main&#39;]
+Destination: dest_address_will_be_here
+Amount.....: 10 FET
+
+Press enter to continue
+</pre></div>
+
+<p>If you are happy with the transfer, press enter, enter the password for the source account (in this case, <code>main</code>) and the transaction will be submitted. </p>
+<h3 id="backing-up-your-accounts-and-address-book">Backing up your accounts and address book</h3>
+<p><code>pocketbook</code> stores all information in the <code>~/.pocketbook</code> folder on your computer. You can back this folder up entirely to store your encrypted private keys. We <strong>strongly recommend</strong> that you do this regularly and keep the backups in an encrypted safe place in order to provide a mechanism for recovering your accounts.</p>
 
 
                                 </section>
@@ -938,9 +870,9 @@ will do three things: </p>
 
                             <div class="bottomnav">
                                 
-                                <div></div>
+                                <a href="../versions/" class="button left"><strong>Previous:</strong></br>Versions</a>
                                 
-                                <div></div>
+                                <a href="../../ledger/" class="button right"><strong>Next:</strong></br>Introduction</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->
