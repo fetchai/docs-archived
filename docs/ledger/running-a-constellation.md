@@ -10,7 +10,8 @@ Create a `genesis_file.json`:
 
 Create a file saved as `genesis_file.json` and is saved in the constellation root dir, paste in the below code:
 
-```{
+```
+{
   "version": 4,
   "accounts": [
     {
