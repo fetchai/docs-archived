@@ -111,7 +111,7 @@ When you see the following message...
 ## Connect to a node on testnet
 From the same `build/apps/constellation` folder, run the following.
 ``` c++
-./constellation -bootstrap -network alpha
+./constellation -bootstrap -network testnet
 ```
 
 
