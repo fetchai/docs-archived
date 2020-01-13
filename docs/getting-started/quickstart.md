@@ -14,7 +14,7 @@ You'll first need to clone the [Fetch.ai ledger repo](https://github.com/fetchai
 ``` bash
 cd [working_directory]
 git clone https://github.com/fetchai/ledger.git
-git checkout release/v0.1.x
+git checkout release/v1.0.x
 ```
 
 Update and initialise submodules from the repository root directory:
