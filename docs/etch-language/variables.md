@@ -152,49 +152,28 @@ endfunction
 However, be careful, as any string larger than 32 bytes will be truncated. This presents the possibility that two unique strings could be regarded as equal. This gotcha will be fixed in the next release.
 -->
 
-## Floating point decimals
-
-Signed and unsigned decimal numbers are available as floating point types in 32 and 64 bit representation (4 and 8 bytes).
-
-Float types are declared as `Float32`, `Float64`.
-
-Unspecified floats default to `Float64`.
-
-A `Float` declared with `f` is a `Float32`.
-
-```c++
-function main()
-
-    // default 64 bit float declaration
-    var float64bit_default = 64.0;
-    // 64 bit type declaration
-    var float64bit : Float64 = -64.0;
-    printLn(toString(float64bit_default));
-    printLn(toString(float64bit));
-
-    // declare 32 bit float with `f`
-    var float32bit = 32.0f;
-    printLn(toString(float32bit));
-    var float32bit_minus : Float32 = -32.0f;
-    printLn(toString(float32bit_minus));
-
-endfunction
-```
-
 ## Fixed point decimals
 
-Fixed point variables are available as `Fixed32` and `Fixed64` types.
+Low and high precision calculations can be performed by the use of Fixed point types. Fixed point variables are available as `Fixed32`, `Fixed64` and Fixed128 types. Fixed point types use half of the high bits for the integer part and the low half bits for the fractional part. More specifically the split is done as following: 
 
-You must declare Fixed Point variables with the postfix literals `fp32` and `fp64`.
+| Type     | Integer bits | Fractional bits |
+| -------- | ------------ | --------------- |
+| Fixed32  |      16      |       16        |
+| Fixed64  |      32      |       32        |
+| Fixed128 |      64      |       64        |
+
+You must declare Fixed Point variables with the postfix literals `fp32`, `fp64` and `fp128`.
 
 ```c++
 function main()
 
-    var fixed32bit : Fixed32 = 32.1fp32;
-    var fixed64bit : Fixed64 = 64.1fp64;
+    var fixed32bit  : Fixed32  = 32.1fp32;
+    var fixed64bit  : Fixed64  = 64.1fp64;
+    var fixed128bit : Fixed128 = 64.1fp128;
 
     printLn(toString(fixed32bit));
     printLn(toString(fixed64bit));
+    printLn(toString(fixed128bit));
 
 endfunction
 ```
@@ -204,16 +183,24 @@ For brevity, you do not need the full declaration.
 ```c++
 function main()
 
-    var fixed32bit = -32.0fp32;
-    var fixed64bit = -64.0fp64;
+    var fixed32bit  = -32.0fp32;
+    var fixed64bit  = -64.0fp64;
+    var fixed128bit = -128.0fp128;
 
     printLn(toString(fixed32bit));
     printLn(toString(fixed64bit));
+    printLn(toString(fixed128bit));
 
 endfunction
 ```
 
 Make sure you are aware of the precision limits for fixed point decimals in `etch`.
+
+| Type     |               Minimum value               |             Maximum value                |
+| -------- | ----------------------------------------- | ---------------------------------------- |
+| Fixed32  |               -32766.9999                 |               32766.9999                 |
+| Fixed64  |          -2147483646.999999999            |          2147483646.999999999            |
+| Fixed128 | -9223372036854775806.10000000000000000000 | 9223372036854775806.10000000000000000000 |
 
 For up to date information tolerance, maximum exponent, and number of decimal places for fixed point types, please check the <a href="https://github.com/fetchai/ledger/blob/master/libs/vectorise/include/vectorise/fixed_point/fixed_point.hpp#L69" target=_blank>comments</a>.
 
@@ -483,7 +470,7 @@ For more details on the machine learning implementations, please check the secti
 
 There is no implicit type casting in `etch`.
 
-If you need a specific non-default numerical type, you can make an explicit cast of the default `Int32` and `Float64` types.
+If you need a specific non-default numerical type, you can make an explicit cast of the default `Int32` and `Fixed64` types.
 
 Use `to<Type>Name(variable_to_cast)`.
 
@@ -508,16 +495,6 @@ function main()
     var uint64Variable = toUInt64(int32bit);
     // cast to UInt256
     // var uint256Variable = toUInt256(int32bit); // coming soon
-
-
-    // float casting
-    var float64bit = 42.0;
-    // cast Float64 to Int32
-    var intFVariable = toInt32(float64bit);
-    // cast Float64 to Float32
-    var float32Variable = toFloat32(float64bit);
-    // cast Int32 to Float64
-    var float64variable = toFloat64(int32bit);
 
 
     // fixed point casting
@@ -567,10 +544,9 @@ For more information on the integer size ranges, please see the <a href="https:/
 | `UInt32`         | `1-5 bytes`                                                                 |
 | `UInt64`         | `1-9 bytes`                                                                 |
 | `UInt256`        | `32 bytes`                                                                  |
-| `Float32`        | `4 bytes`                                                                   |
-| `Float64`        | `8 bytes`                                                                   |
 | `Fixed32`        | `4 bytes`                                                                   |
 | `Fixed64`        | `8 bytes`                                                                   |
+| `Fixed128`       | `16 bytes`                                                                   |
 | `Bool`           | `1 byte`                                                                    |
 | `String`         | `len(string) + const`                                                       |
 | `Array`          | `len(Array<Type>) * sizeof(Type) + const`                                   |
@@ -610,22 +586,21 @@ endfunction
 
 Certain types not explicitly initialised receive a default value.
 
-| Type    | Default value |
-| ------- | ------------- |
-| Int8    | 0             |
-| Int16   | 0             |
-| Int32   | 0             |
-| Int64   | 0             |
-| UInt8   | 0             |
-| UInt16  | 0             |
-| UInt32  | 0             |
-| UInt64  | 0             |
-| UInt256 | tbc           |
-| Float32 | 0             |
-| Float64 | 0             |
-| Fixed32 | 0.0000        |
-| Fixed64 | 0.00000000    |
-| Bool    | false         |
-| String  | no default    |
+| Type     | Default value |
+| -------- | ------------- |
+| Int8     | 0             |
+| Int16    | 0             |
+| Int32    | 0             |
+| Int64    | 0             |
+| UInt8    | 0             |
+| UInt16   | 0             |
+| UInt32   | 0             |
+| UInt64   | 0             |
+| UInt256  | tbc           |
+| Fixed32  | 0.0           |
+| Fixed64  | 0.0           |
+| Fixed128 | 0.0           |
+| Bool     | false         |
+| String   | no default    |
 
 <br/>

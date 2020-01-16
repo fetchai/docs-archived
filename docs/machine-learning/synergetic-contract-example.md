@@ -48,7 +48,7 @@ function doWork(in_model : String, nonce : UInt256) :  String
   model.fromString(in_model);
 
   // update the learning rate of the local model
-  var lr = nonce.toFloat64() % 1.0fp64;
+  var lr = nonce.toFixed64() % 1.0fp64;
   model.setLearningRate(lr);
 
   // train the model

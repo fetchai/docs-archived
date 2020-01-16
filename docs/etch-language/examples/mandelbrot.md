@@ -12,33 +12,33 @@ function main()
   var halfOffset : Int32 = yMax * xMax;
   var screen = Array<String>(xMax * (yMax * 2));
   var maxIterations : Int32 = 230;
-  var maxSprites : Float64 = 32.0;
+  var maxSprites : Fixed64 = 32.0fp64;
   //
   // Draw the mandelbrot set:  
   for (pixelY in 0:yMax - 1)  
     for (pixelX in 0:xMax - 1)
       //
       // Scale X to mandlebrot scale (x -2.5 to 1):
-      var xLocal : Float64 = toFloat64(pixelX);
-      xLocal = ((xLocal / toFloat64(xMax)) * 3.5) - 2.5;
+      var xLocal : Fixed64 = toFixed64(pixelX);
+      xLocal = ((xLocal / toFixed64(xMax)) * 3.5fp64) - 2.5fp64;
       //
       // Now Y to -1 to 1:
-      var yLocal : Float64 = toFloat64(pixelY);
-      yLocal = yLocal / toFloat64(yMax);
+      var yLocal : Fixed64 = toFixed64(pixelY);
+      yLocal = yLocal / toFixed64(yMax);
       //
       // Now let's do the algorithm bit:
-      var x : Float64 = 0.0;
-      var y : Float64 = 0.0;
+      var x : Fixed64 = 0.0fp64;
+      var y : Fixed64 = 0.0fp64;
       var iteration : Int32 = 0;
-      while (((x * x) + (y * y)) <= 4.0 && iteration < maxIterations)
+      while (((x * x) + (y * y)) <= 4.0fp64 && iteration < maxIterations)
         var xTemp = (x * x) - (y * y) + xLocal;
-        y = 2.0 * x * y + yLocal;
+        y = 2.0fp64 * x * y + yLocal;
         x = xTemp;
         iteration++;
         endwhile
       //
       // Render based on iteration achieved:
-      var colourSlide : Float64 = (toFloat64(iteration) / toFloat64(maxIterations));
+      var colourSlide : Fixed64 = (toFixed64(iteration) / toFixed64(maxIterations));
       var colourIndex : Int32 = toInt32(colourSlide * maxSprites);
       //
       // Pick a character according to colourIndex (iterations achieved):
