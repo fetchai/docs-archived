@@ -231,10 +231,9 @@ These functions are used to pass data to the `etch` simulator.
 -   `toUInt32()`
 -   `toUInt64()`
     <!-- `toUInt256()` -->
--   `toFloat32()`
--   `toFloat64()`
 -   `toFixed32()`
 -   `toFixed64()`
+-   `toFixed128()`
 -   `toString()`
 
 For example:
@@ -260,14 +259,12 @@ function main()
     printLn(e);
     var f = toUInt64(x);
     printLn(f);
-    var g = toFloat32(x);
+    var g = toFixed32(x);
     printLn(g);
-    var h = toFloat64(x);
+    var h = toFixed64(x);
     printLn(h);
-    var i = toFixed32(x);
+    var i = toFixed128(x);
     printLn(i);
-    var j = toFixed64(x);
-    printLn(j);
 
 endfunction
 ```

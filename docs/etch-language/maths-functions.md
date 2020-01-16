@@ -67,48 +67,31 @@ function main()
 endfunction
 ```
 
-Floating point types.
-
-```c++
-function main()
-
-    // 32 bit floating point
-    var float_32 = 1.0f;
-    printLn(toString(abs(float_32)));
-
-    var neg_float_32 = -1.0f;
-    printLn(toString(abs(neg_float_32)));
-
-    // 64 bit floating point
-    var float_64 = 1.0;
-    printLn(toString(abs(float_64)));
-
-    var neg_float_64 = -1.0;
-    printLn(toString(abs(neg_float_64)));
-
-endfunction
-
-```
-
 And fixed point types.
 
 ```c++
 function main()
 
-    // 32 bit floating point
+    // 32 bit fixed point
     var fixed_32 = 1.0fp32;
     printLn(toString(abs(fixed_32)));
 
     var neg_fixed_32 = -1.0fp32;
     printLn(toString(abs(neg_fixed_32)));
 
-    // 64 bit floating point
+    // 64 bit fixed point
     var fixed_64 = 1.0fp64;
     printLn(toString(abs(fixed_64)));
 
     var neg_fixed_64 = -1.0fp64;
     printLn(toString(abs(neg_fixed_64)));
 
+    // 128 bit fixed point
+    var fixed_128 = 1.0fp128;
+    printLn(toString(abs(fixed_128)));
+
+    var neg_fixed_128 = -1.0fp128;
+    printLn(toString(abs(neg_fixed_128)));
 endfunction
 ```
 
@@ -116,20 +99,17 @@ endfunction
 
 The exponential function returns the value of `e` to the number given, <code>exp(x) = e<sup>x</sup></code> where `e` is Euler's base of natural logarithms.
 
-The exponential function is limited to fixed and floating point variables.
+The exponential function is limited to fixed point variables.
 
 ```c++
 function main()
 
     var a = 2.0fp32;
     var b = 3.0fp64;
+    var c = 4.0fp128;
     printLn(toString(exp(a)));
     printLn(toString(exp(b)));
-
-    var c = 4.0f;
-    var d = 5.0;
     printLn(toString(exp(c)));
-    printLn(toString(exp(d)));
 
 endfunction
 ```
@@ -140,13 +120,15 @@ endfunction
 
 `Fixed64` accuracy is limited within the range `[-21.48756260, 21.48756260]`.
 
+`Fixed128` accuracy is limited within the range `[-43.6682723752765511, 43.6682723752765511]`.
+
 Running the exponential function on numbers outside of this range produces unexpected results.
 
 !!! Warning
 If the implementation of a function depends on `exp()` then accuracy is limited within a range dependent on the implementation.
 
 !!! Warning
-For `Fixed32` types, take extra care because, even though the type has a reduced range, it has an increased accuracy within that range.
+For Fixed point types, take extra care because, even though the type has a reduced range, it has an increased accuracy within that range.
 
 ### Special cases
 
@@ -190,7 +172,7 @@ In a future release, log values will be available for all types as well as in ba
 
 The power function returns the value of the first parameter raised to the second.
 
-The power function is limited to fixed and floating point variables.
+The power function is limited to fixed point variables.
 
 ```c++
 function main()
@@ -203,13 +185,9 @@ function main()
     var d = 5.0fp32;
     printLn(toString(pow(c, d)));
 
-    var e = 2.0f;
-    var f = 3.0f;
+    var e = 2.0fp128;
+    var f = 3.0fp128;
     printLn(toString(pow(e, f)));
-
-    var g = 4.0;
-    var h = 5.0;
-    printLn(toString(pow(g, h)));
 
 endfunction
 ```
@@ -277,11 +255,11 @@ function main()
     var randInt64 = rand(0i64, 1000i64);
     printLn(toString(randInt64));
 
-    var randFloat32 = rand(0.0f, 1000.0f);
-    printLn(toString(randFloat32));
+    var randFixed32 = rand(0.0fp32, 1000.0fp32);
+    printLn(toString(randFixed32));
 
-    var randFloat64 = rand(0.0, 1000.0);
-    printLn(toString(randFloat64));
+    var randFixed64 = rand(0.0fp64, 1000.0fp64);
+    printLn(toString(randFixed64));
 
 endfunction
 ```
@@ -290,20 +268,17 @@ endfunction
 
 The square root of a number is found with the `sqrt()` function.
 
-The square root function is limited to fixed and floating point variables.
+The square root function is limited to fixed point variables.
 
 ```c++
 function main()
 
     var a = 4.0fp32;
     var b = 49.0fp64;
+    var c = 49.0fp128;
     printLn(toString(sqrt(a)));
     printLn(toString(sqrt(b)));
-
-    var c = 4.0f;
-    var d = 49.0;
     printLn(toString(sqrt(c)));
-    printLn(toString(sqrt(d)));
 
 endfunction
 ```
@@ -330,39 +305,39 @@ endfunction
 ```c++
 function main()
 
-    var x = 1.0;
+    var x = 1.0fp64;
     printLn("sin of 1");
     printLn(toString(sin(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("sin of 0.5");
     printLn(toString(sin(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("sin of 0");
     printLn(toString(sin(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("cos of 1");
     printLn(toString(cos(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("cos of 0.5");
     printLn(toString(cos(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("cos of 0");
     printLn(toString(cos(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("tan of 1");
     printLn(toString(tan(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("tan of 0.5");
     printLn(toString(tan(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("tan of 0");
     printLn(toString(tan(x)));
 
@@ -416,39 +391,39 @@ endfunction
 ```c++
 function main()
 
-    var x = 1.0;
+    var x = 1.0fp64;
     printLn("asin of 1");
     printLn(toString(asin(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("asin of 0.5");
     printLn(toString(asin(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("asin of 0");
     printLn(toString(asin(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("acos of 1");
     printLn(toString(acos(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("acos of 0.5");
     printLn(toString(acos(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("acos of 0");
     printLn(toString(acos(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("atan of 1");
     printLn(toString(atan(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("atan of 0.5");
     printLn(toString(atan(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("atan of 0");
     printLn(toString(atan(x)));
 
@@ -501,39 +476,39 @@ endfunction
 ```c++
 function main()
 
-    var x = 1.0;
+    var x = 1.0fp64;
     printLn("sinh of 1");
     printLn(toString(sinh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("sinh of 0.5");
     printLn(toString(sinh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("sinh of 0");
     printLn(toString(sinh(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("cosh of 1");
     printLn(toString(cosh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("cosh of 0.5");
     printLn(toString(cosh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("cosh of 0");
     printLn(toString(cosh(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("tanh of 1");
     printLn(toString(tanh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("tanh of 0.5");
     printLn(toString(tanh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("tanh of 0");
     printLn(toString(tanh(x)));
 
@@ -596,39 +571,39 @@ The `tanh()` implementation depends on `exp()` so the range is limited. The impl
 ```c++
 function main()
 
-    var x = 1.0;
+    var x = 1.0fp64;
     printLn("asinh of 1");
     printLn(toString(asinh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("asinh of 0.5");
     printLn(toString(asinh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("asinh of 0");
     printLn(toString(asinh(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("acosh of 1");
     printLn(toString(acosh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("acosh of 0.5");
     printLn(toString(acosh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("acosh of 0");
     printLn(toString(acosh(x)));
 
-    x = 1.0;
+    x = 1.0fp64;
     printLn("atanh of 1");
     printLn(toString(atanh(x)));
 
-    x = 0.5;
+    x = 0.5fp64;
     printLn("atanh of 0.5");
     printLn(toString(atanh(x)));
 
-    x = 0.0;
+    x = 0.0fp64;
     printLn("atanh of 0");
     printLn(toString(atanh(x)));
 

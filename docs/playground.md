@@ -36,7 +36,7 @@ endfunction
     
 `for` and `while` support `continue` and `break` which skip an iteration or break out of the loop respectively.
 
-Note that we support `++` for increment. We also support operators for `+=`, `--`, `-=`, etc. Also observe that we declare the variable `i` as an `Int32` a 32 bit integer type. `etch` has many built-in types, and they include: `Float32`, `Float64`, `Int32`, `Int64`, `UInt32`, `UInt64`, `Bool`, `String`, `Array`, and more.
+Note that we support `++` for increment. We also support operators for `+=`, `--`, `-=`, etc. Also observe that we declare the variable `i` as an `Int32` a 32 bit integer type. `etch` has many built-in types, and they include: `Fixed32`, `Fixed64`, `Fixed128`, `Int32`, `Int64`, `UInt32`, `UInt64`, `Bool`, `String`, `Array`, and more.
 
 For flow control, use the `if/else/elseif/endif` structure:
 
