@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Fipa skill - Fetch.ai Developer Documentation</title>
+    <title>Generating protocols - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="./" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -793,103 +799,25 @@
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>Work in progress.</p>
+  <p>Coming soon!</p>
 </div>
 
-<p>The AEA FIPA skill demonstrates how FIPA negotiation strategies may be embedded into an Autonomous Economic Agent.</p>
-<h2 id="configuration">Configuration</h2>
-<p>The FIPA skill <code>skill.yaml</code> configuration file looks like this.</p>
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="s">&#39;fipa_negotiation&#39;</span>
-<span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Fetch.ai Limited</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
-<span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache 2.0</span>
-<span class="nt">url</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
-<span class="nt">behaviours</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">behaviour</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GoodsRegisterAndSearchBehaviour</span>
-      <span class="nt">args</span><span class="p">:</span>
-        <span class="nt">services_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-<span class="nt">handlers</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">handler</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FIPANegotiationHandler</span>
-      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-<span class="nt">tasks</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionCleanUpTask</span>
-      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-<span class="nt">shared_classes</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Search</span>
-      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
-      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="p p-Indicator">-</span> <span class="nt">shared_class</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Transactions</span>
-      <span class="nt">args</span><span class="p">:</span>
-        <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;oef&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fipa&#39;</span><span class="p p-Indicator">]</span>
-</pre></div>
-
-<p>Above, you can see the registered <code>Behaviour</code> class name <code>GoodsRegisterAndSearchBehaviour</code> which implements register and search behaviour of an AEA for the FIPA skill.</p>
-<p>The <code>FIPANegotiationHandler</code> deals with receiving <code>FIPAMessage</code> types containing FIPA negotiation terms, such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</p>
-<p>The <code>TransactionCleanUpTask</code> takes care of removing potential transaction of different degrees of commitment from the potential transactions list if they are unlikely to be settled.</p>
-<h2 id="shared-classes">Shared classes</h2>
-<p>The <code>shared_classes</code> element in the configuration <code>yaml</code> lists a number of important classes for agents communicating via the FIPA skill.</p>
-<h3 id="search">Search</h3>
-<p>This class abstracts the logic required by agents performing searches for other buying/selling agents according to strategy (see below).</p>
-<h3 id="strategy">Strategy</h3>
-<p>This class defines the strategy behind an agent's activities.</p>
-<p>The class is instantiated with the agent's goals, for example whether the agent intends to buy/sell something, and is therefore looking for other sellers, buyers, or both.</p>
-<p>It also provides methods for defining what goods agents are looking for and what goods they may have to sell, for generating proposal queries, and checking whether a proposal is profitable or not.</p>
-<h3 id="dialogue">Dialogue</h3>
-<p><code>Dialogues</code> abstract the negotiations that take place between agents including all negotiation end states, such as accepted, declined, etc. and all the negotiation states in between.</p>
-<h3 id="transactions">Transactions</h3>
-<p>This class deals with representing potential transactions between agents.</p>
+<p>This is currently an experimental feature. To try it follow this guide.</p>
+<h2 id="preparation-instructions">Preparation instructions</h2>
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-</div>
-<p>FIPA negotiation skill is not fully developed.</p>
-<p>Follow the Preliminaries and Installation instructions <a href="../quickstart" target=_blank>here</a>.</p>
-<p>Then, download the examples and packages directory.</p>
-<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
+<p>First, create a new agent project:</p>
+<div class="highlight"><pre><span></span>aea create my_agent
+<span class="nb">cd</span> my_agent
 </pre></div>
 
-<h3 id="create-the-agent">Create the agent</h3>
-<p>In the root directory, create the FIPA agent.</p>
-<div class="highlight"><pre><span></span>aea create my_fipa_agent
+<p>Second, run the generator on the sample specification.
+<div class="highlight"><pre><span></span>aea generate protocol ../examples/protocol_specification_ex/sample.yaml
 </pre></div>
-
-<h3 id="add-the-fipa-skill">Add the FIPA skill</h3>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> my_fipa_agent
-aea add skill fipa_negotiation
-</pre></div>
-
-<h3 id="add-the-local-connection">Add the local connection</h3>
-<div class="highlight"><pre><span></span>aea add connection <span class="nb">local</span>
-</pre></div>
-
-<h3 id="run-the-agent-with-the-default-connection">Run the agent with the default connection</h3>
-<div class="highlight"><pre><span></span>aea run --connections <span class="nb">local</span>
-</pre></div>
-
-<!--
-You will see the FIPA logs.
-
-<center>![FIPA logs](assets/gym-training.png)</center>
--->
-
-<h3 id="delete-the-agent">Delete the agent</h3>
-<p>When you're done, go up a level and delete the agent.</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-aea delete my_fipa_agent
-</pre></div>
-
-<p><br/></p>
+This will generate the protocol and place it in your agent project.</p>
+<p>Third, try generating other protocols by first defining a specification, then running the generator.</p>
+<p><br /></p>
 
 
                                 </section>
@@ -898,9 +826,9 @@ aea delete my_fipa_agent
 
                             <div class="bottomnav">
                                 
-                                <div></div>
+                                <a href="../scaffolding/" class="button left"><strong>Previous:</strong></br>Scaffolding Packages</a>
                                 
-                                <div></div>
+                                <a href="../logging/" class="button right"><strong>Next:</strong></br>Logging</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

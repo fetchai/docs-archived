@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -791,17 +797,18 @@
 
                                     
 
-<p>The AEA gym skill demonstrates how a custom Reinforcement Learning agent, that uses OpenAI's <a href="https://gym.openai.com" target=_blank>gym</a> library, may be embedded into an Autonomous Economic Agent.</p>
-<h2 id="demo-instructions">Demo instructions</h2>
+<p>The AEA gym skill demonstrates how a custom Reinforcement Learning agent, that uses OpenAI's <a href="https://gym.openai.com" target=_blank>gym</a> library, may be embedded into an AEA skill and connection.</p>
+<h2 id="preparation-instructions">Preparation instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
+<h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-agent">Create the agent</h3>
-<p>In the root directory, create the gym agent.
+<p>In the root directory, create the gym agent and enter the project.
 <div class="highlight"><pre><span></span>aea create my_gym_agent
+<span class="nb">cd</span> my_gym_agent
 </pre></div></p>
 <h3 id="add-the-gym-skill">Add the gym skill</h3>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> my_gym_agent
-aea add skill gym
+<div class="highlight"><pre><span></span>aea add skill fetchai/gym:0.1.0
 </pre></div>
 
 <h3 id="copy-the-gym-environment-to-the-agent-directory">Copy the gym environment to the agent directory</h3>
@@ -810,12 +817,11 @@ cp -a ../examples/gym_ex/gyms/. gyms/
 </pre></div>
 
 <h3 id="add-a-gym-connection">Add a gym connection</h3>
-<div class="highlight"><pre><span></span>aea add connection gym
+<div class="highlight"><pre><span></span>aea add connection fetchai/gym:0.1.0
 </pre></div>
 
 <h3 id="update-the-connection-config">Update the connection config</h3>
-<div class="highlight"><pre><span></span>nano connections/gym/connection.yaml
-env: gyms.env.BanditNArmedRandom
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </pre></div>
 
 <h3 id="install-the-skill-dependencies">Install the skill dependencies</h3>
@@ -834,7 +840,7 @@ env: gyms.env.BanditNArmedRandom
 aea delete my_gym_agent
 </pre></div>
 
-<h3 id="communication">Communication</h3>
+<h2 id="communication">Communication</h2>
 <p>This diagram shows the communication between the agent and the gym environment </p>
 <div class="mermaid">
     sequenceDiagram
@@ -863,7 +869,7 @@ aea delete my_gym_agent
 
                             <div class="bottomnav">
                                 
-                                <a href="../gym-plugin/" class="button left"><strong>Previous:</strong></br>Gym Demo</a>
+                                <a href="../gym-example/" class="button left"><strong>Previous:</strong></br>Gym Example</a>
                                 
                                 <a href="../ml-skills/" class="button right"><strong>Next:</strong></br>Ml Skills</a>
                             </div><!-- .bottomnav end -->

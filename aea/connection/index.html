@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -798,15 +804,22 @@ which is a wrapper for an SDK or API</p>
 <h2 id="configuration">Configuration</h2>
 <p>The <code>connection.yaml</code> file in the agent directory contains protocol details and connection url and port details. For example, the oef <code>connection.yaml</code> contains the connection class name, supported protocols, and any connection configuration details.</p>
 <div class="highlight"><pre><span></span><span class="err">name:</span> <span class="err">oef</span>
-<span class="err">authors:</span> <span class="err">Fetch.ai</span> <span class="err">Limited</span>
+<span class="err">author:</span> <span class="err">fetchai</span>
 <span class="err">version:</span> <span class="mf">0.1</span><span class="err">.</span><span class="mi">0</span>
 <span class="err">license:</span> <span class="err">Apache</span> <span class="mf">2.0</span>
-<span class="err">url:</span> <span class="s2">&quot;&quot;</span>
+<span class="err">fingerprint:</span> <span class="s2">&quot;&quot;</span>
+<span class="err">description:</span> <span class="s2">&quot;The oef connection provides a wrapper around the OEF sdk.&quot;</span>
 <span class="err">class_name:</span> <span class="err">OEFConnection</span>
-<span class="err">supported_protocols:</span> <span class="p">[</span><span class="s2">&quot;oef&quot;</span><span class="p">]</span>
+<span class="err">protocols:</span> <span class="p">[</span><span class="s2">&quot;fetchai/oef:0.1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai/fipa:0.1.0&quot;</span><span class="p">]</span>
+<span class="err">restricted_to_protocols:</span> <span class="p">[]</span>
+<span class="err">excluded_protocols:</span> <span class="p">[</span><span class="s2">&quot;fetchai/gym:0.1.0&quot;</span><span class="p">]</span>
 <span class="err">config:</span>
-  <span class="err">addr:</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span>
-  <span class="err">port:</span> <span class="mi">10000</span>
+  <span class="err">addr:</span> <span class="err">$</span><span class="p">{</span><span class="err">OEF_ADDR:127.0.0.1</span><span class="p">}</span>
+  <span class="err">port:</span> <span class="err">$</span><span class="p">{</span><span class="err">OEF_PORT:10000</span><span class="p">}</span>
+<span class="err">dependencies:</span>
+  <span class="err">colorlog:</span> <span class="p">{}</span>
+  <span class="err">oef:</span>
+    <span class="err">version:</span> <span class="err">==</span><span class="mf">0.8</span><span class="err">.</span><span class="mi">1</span>
 </pre></div>
 
 <p>The developer is left to implement the methods of the <code>Connection</code> dependent on the protocol type. </p>
@@ -871,19 +884,6 @@ which is a wrapper for an SDK or API</p>
 </pre></div>
 -->
 
-<h2 id="launching-oef-connections">Launching <code>oef</code> connections</h2>
-<h3 id="oef-local-node"><code>oef</code> - local node</h3>
-<p>Download the scripts directory:
-<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/scripts
-</pre></div></p>
-<p>Then, start an oef from a separate terminal:</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div>
-
-<p>This pulls and runs an <code>oef</code> docker image.</p>
-<p>Now you can run an AEA with an <code>oef</code> connection.</p>
-<h3 id="oef-remote-node"><code>oef</code> - remote node</h3>
-<p>Connect directly to a running <code>oef</code> via a given <code>URL:PORT</code>. Update the configuration of the <code>oef</code> connection in the <code>connection.yaml</code> file.</p>
 <p><br /></p>
 
 
@@ -895,7 +895,7 @@ which is a wrapper for an SDK or API</p>
                                 
                                 <a href="../protocol/" class="button left"><strong>Previous:</strong></br>Protocol</a>
                                 
-                                <a href="../scaffolding/" class="button right"><strong>Next:</strong></br>Scaffolding</a>
+                                <a href="../scaffolding/" class="button right"><strong>Next:</strong></br>Scaffolding Packages</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

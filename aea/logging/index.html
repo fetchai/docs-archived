@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -799,24 +805,27 @@
 </pre></div>
 
 <p>The <code>aea-config.yaml</code> file should look like this.</p>
-<div class="highlight"><pre><span></span><span class="nt">aea_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.6</span>
+<div class="highlight"><pre><span></span><span class="nt">aea_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.16</span>
 <span class="nt">agent_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my_agent</span>
-<span class="nt">authors</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
+<span class="nt">author</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
 <span class="nt">connections</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">oef</span>
-<span class="nt">default_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">oef</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/stub:0.1.0</span>
+<span class="nt">default_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/stub:0.1.0</span>
+<span class="nt">default_ledger</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<span class="nt">description</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
+<span class="nt">fingerprint</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
+<span class="nt">ledger_apis</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">license</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
-<span class="nt">private_key_pem_path</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
-<span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-<span class="nt">registry_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../packages</span>
-<span class="nt">skills</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">error</span>
-<span class="nt">url</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">logging_config</span><span class="p">:</span>
   <span class="nt">disable_existing_loggers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
   <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">private_key_paths</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+<span class="nt">protocols</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.1.0</span>
+<span class="nt">registry_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../packages</span>
+<span class="nt">skills</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/error:0.1.0</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 </pre></div>
 
 <p>By updating the <code>logging_config</code> section, you can configure the loggers of your application.</p>
@@ -826,7 +835,7 @@ you'll find the definition of the configuration dictionary schema.</p>
 <p>Below is an example of the <code>logging_config</code> value.</p>
 <div class="highlight"><pre><span></span><span class="nt">logging_config</span><span class="p">:</span>
   <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-  <span class="nt">disable_existing_loggers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">disable_existing_loggers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="nt">formatters</span><span class="p">:</span>
     <span class="nt">standard</span><span class="p">:</span>
       <span class="nt">format</span><span class="p">:</span> <span class="s">&#39;%(asctime)s</span><span class="nv"> </span><span class="s">[%(levelname)s]</span><span class="nv"> </span><span class="s">%(name)s:</span><span class="nv"> </span><span class="s">%(message)s&#39;</span>
@@ -846,7 +855,7 @@ you'll find the definition of the configuration dictionary schema.</p>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">logfile</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">console</span>
       <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
-      <span class="nt">propagate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">propagate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 
 <p>This configuration will set up a logger with name <code>aea</code>. It prints both on console and on file with a format specified by the <code>standard</code> formatter.</p>
@@ -859,7 +868,7 @@ you'll find the definition of the configuration dictionary schema.</p>
 
                             <div class="bottomnav">
                                 
-                                <a href="../scaffolding/" class="button left"><strong>Previous:</strong></br>Scaffolding</a>
+                                <a href="../generator/" class="button left"><strong>Previous:</strong></br>Generating Protocols</a>
                                 
                                 <a href="../cli-how-to/" class="button right"><strong>Next:</strong></br>Cli Tool</a>
                             </div><!-- .bottomnav end -->

@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -797,28 +803,44 @@
 <li>The tac controller which coordinates the game.</li>
 <li>The participant agents which compete in the game.</li>
 </ul>
+<h2 id="preparation-instructions">Preparation instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="launch-an-oef-node">Launch an OEF node</h2>
+<h3 id="launch-an-oef-node">Launch an OEF node</h3>
 <p>In a separate terminal, launch a local OEF node (for search and discovery).
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
 </pre></div></p>
 <p>Keep it running for all the following demos.</p>
-<h2 id="demo-1-no-ledger-transactions">Demo 1: no ledger transactions</h2>
+<h2 id="demo-instructions-1-no-ledger-transactions">Demo instructions 1: no ledger transactions</h2>
+<p>This demo uses another agent - a controller agent - to take the role of running the competition and validating the transactions negotiated by the agents. </p>
 <h3 id="create-the-tac-controller-aea">Create the TAC controller AEA</h3>
-<p>In the root directory, create the tac controller AEA.
+<p>In the root directory, create the tac controller AEA and enter the project.
 <div class="highlight"><pre><span></span>aea create tac_controller
+<span class="nb">cd</span> tac_controller
 </pre></div></p>
 <h3 id="add-the-tac-control-skill">Add the tac control skill</h3>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> tac_controller
-aea add connection oef
-aea add skill tac_control
+<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
+aea add skill fetchai/tac_control:0.1.0
 aea install
 </pre></div>
 
+<p>Add the following configs to the aea config:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">ethereum</span><span class="p">:</span>
+    <span class="nt">addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
+    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+</pre></div></p>
+<p>Set the default ledger to ethereum:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div></p>
 <h3 id="update-the-game-parameters">Update the game parameters</h3>
 <p>You can change the game parameters in <code>tac_controller/skills/tac_control/skill.yaml</code> under <code>Parameters</code>.</p>
-<p>You must set the start time to a point in the future <code>start_time: Nov 10 2019  10:40AM</code>.</p>
+<p>You must set the start time to a point in the future <code>start_time: 12 11 2019  15:01</code>.</p>
+<p>Alternatively, use the command line to get and set the start time:</p>
+<div class="highlight"><pre><span></span>aea config get skills.tac_control.shared_classes.parameters.args.start_time
+aea config <span class="nb">set</span> skills.tac_control.shared_classes.parameters.args.start_time <span class="s1">&#39;21 12 2019  07:14&#39;</span>
+</pre></div>
+
 <h3 id="run-the-tac-controller-aea">Run the TAC controller AEA</h3>
 <div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
@@ -830,28 +852,34 @@ aea create tac_participant_two
 </pre></div></p>
 <h3 id="add-the-tac-participation-skill-to-participant-one">Add the tac participation skill to participant one</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
-aea add connection oef
-aea add skill tac_participation
-aea add skill tac_negotiation
+aea add connection fetchai/oef:0.1.0
+aea add skill fetchai/tac_participation:0.1.0
+aea add skill fetchai/tac_negotiation:0.1.0
 aea install
 </pre></div>
 
+<p>Set the default ledger to ethereum:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div></p>
 <h3 id="add-the-tac-participation-skill-to-participant-two">Add the tac participation skill to participant two</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
-aea add connection oef
-aea add skill tac_participation
-aea add skill tac_negotiation
+aea add connection fetchai/oef:0.1.0
+aea add skill fetchai/tac_participation:0.1.0
+aea add skill fetchai/tac_negotiation:0.1.0
 aea install
 </pre></div>
 
+<p>Set the default ledger to ethereum:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div></p>
 <h3 id="run-both-the-tac-participant-aeas">Run both the TAC participant AEAs</h3>
 <div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Currently, the agents cannot settle their trades. Updates coming soon!</p>
-</div>
+<h2 id="communication">Communication</h2>
+<p>There are two types of interactions:
+- between the participants and the controller, the game communication
+- between the participants, the negotiation</p>
 <h3 id="registration-communication">Registration communication</h3>
 <p>This diagram shows the communication between the various entities during the registration phase. </p>
 <div class="mermaid">
@@ -920,12 +948,11 @@ aea install
 <h2 id="negotiation-skill-deep-dive">Negotiation skill - deep dive</h2>
 <p>The AEA <code>tac_negotiation</code> skill demonstrates how negotiation strategies may be embedded into an Autonomous Economic Agent.</p>
 <p>The <code>tac_negotiation</code> skill <code>skill.yaml</code> configuration file looks like this.</p>
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="s">&#39;tac_negotiation&#39;</span>
-<span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Fetch.AI Limited</span>
+<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tac_negotiation</span>
+<span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache 2.0</span>
 <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">tac</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">skill</span><span class="nv"> </span><span class="s">implements</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">logic</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">AEA</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">fipa</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">TAC.&quot;</span>
-<span class="nt">url</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">behaviour</span><span class="p">:</span>
       <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GoodsRegisterAndSearchBehaviour</span>
@@ -966,7 +993,7 @@ aea install
       <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Transactions</span>
       <span class="nt">args</span><span class="p">:</span>
         <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;oef&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fipa&#39;</span><span class="p p-Indicator">]</span>
+<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai/oef:0.1.0&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fetchai/fipa:0.1.0&#39;</span><span class="p p-Indicator">]</span>
 </pre></div>
 
 <p>Above, you can see the registered <code>Behaviour</code> class name <code>GoodsRegisterAndSearchBehaviour</code> which implements register and search behaviour of an AEA for the <code>tac_negotiation</code> skill.</p>
@@ -974,19 +1001,19 @@ aea install
 <p>The <code>TransactionHandler</code> deals with <code>TransactionMessage</code>s received from the decision maker component. The decision maker component is responsible for cryptoeconomic security.</p>
 <p>The <code>OEFSearchHandler</code> deals with <code>OEFMessage</code> types returned from the OEF search nodes.</p>
 <p>The <code>TransactionCleanUpTask</code> is responsible for cleaning up transactions which are no longer likely to being settled with the controller agent.</p>
-<h2 id="shared-classes">Shared classes</h2>
+<h3 id="shared-classes">Shared classes</h3>
 <p>The <code>shared_classes</code> element in the configuration <code>yaml</code> lists a number of important classes which are shared between the handlers, behaviours and tasks.</p>
-<h3 id="search">Search</h3>
+<h4 id="search">Search</h4>
 <p>This class abstracts the logic required by agents performing searches for other buying/selling agents according to strategy (see below).</p>
-<h3 id="registration">Registration</h3>
+<h4 id="registration">Registration</h4>
 <p>This class abstracts the logic required by agents performing service registrations on the OEF.</p>
-<h3 id="strategy">Strategy</h3>
+<h4 id="strategy">Strategy</h4>
 <p>This class defines the strategy behind an agent's activities.</p>
 <p>The class is instantiated with the agent's goals, for example whether the agent intends to buy/sell something, and is therefore looking for other sellers, buyers, or both.</p>
 <p>It also provides methods for defining what goods agents are looking for and what goods they may have to sell, for generating proposal queries, and checking whether a proposal is profitable or not.</p>
-<h3 id="dialogue">Dialogue</h3>
+<h4 id="dialogue">Dialogue</h4>
 <p><code>Dialogues</code> abstract the negotiations that take place between agents including all negotiation end states, such as accepted, declined, etc. and all the negotiation states in between.</p>
-<h3 id="transactions">Transactions</h3>
+<h4 id="transactions">Transactions</h4>
 <p>This class deals with representing potential transactions between agents.</p>
 
 

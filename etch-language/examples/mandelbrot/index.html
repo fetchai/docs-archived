@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../../../aea/car-park/" id="aea-car-park-"
+    <a href="../../../aea/car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../../../aea/gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../../../aea/gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../../../aea/scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -804,33 +810,33 @@
   <span class="n">var</span> <span class="nl">halfOffset</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="n">yMax</span> <span class="o">*</span> <span class="n">xMax</span><span class="p">;</span>
   <span class="n">var</span> <span class="n">screen</span> <span class="o">=</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="n">xMax</span> <span class="o">*</span> <span class="p">(</span><span class="n">yMax</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
   <span class="n">var</span> <span class="nl">maxIterations</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="mi">230</span><span class="p">;</span>
-  <span class="n">var</span> <span class="nl">maxSprites</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="mf">32.0</span><span class="p">;</span>
+  <span class="n">var</span> <span class="nl">maxSprites</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="mf">32.0f</span><span class="n">p64</span><span class="p">;</span>
   <span class="c1">//</span>
   <span class="c1">// Draw the mandelbrot set:  </span>
   <span class="k">for</span> <span class="p">(</span><span class="n">pixelY</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">yMax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  
     <span class="k">for</span> <span class="p">(</span><span class="n">pixelX</span> <span class="n">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">xMax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
       <span class="c1">//</span>
       <span class="c1">// Scale X to mandlebrot scale (x -2.5 to 1):</span>
-      <span class="n">var</span> <span class="nl">xLocal</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="n">toFloat64</span><span class="p">(</span><span class="n">pixelX</span><span class="p">);</span>
-      <span class="n">xLocal</span> <span class="o">=</span> <span class="p">((</span><span class="n">xLocal</span> <span class="o">/</span> <span class="n">toFloat64</span><span class="p">(</span><span class="n">xMax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">3.5</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">;</span>
+      <span class="n">var</span> <span class="nl">xLocal</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="n">toFixed64</span><span class="p">(</span><span class="n">pixelX</span><span class="p">);</span>
+      <span class="n">xLocal</span> <span class="o">=</span> <span class="p">((</span><span class="n">xLocal</span> <span class="o">/</span> <span class="n">toFixed64</span><span class="p">(</span><span class="n">xMax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">3.5f</span><span class="n">p64</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5f</span><span class="n">p64</span><span class="p">;</span>
       <span class="c1">//</span>
       <span class="c1">// Now Y to -1 to 1:</span>
-      <span class="n">var</span> <span class="nl">yLocal</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="n">toFloat64</span><span class="p">(</span><span class="n">pixelY</span><span class="p">);</span>
-      <span class="n">yLocal</span> <span class="o">=</span> <span class="n">yLocal</span> <span class="o">/</span> <span class="n">toFloat64</span><span class="p">(</span><span class="n">yMax</span><span class="p">);</span>
+      <span class="n">var</span> <span class="nl">yLocal</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="n">toFixed64</span><span class="p">(</span><span class="n">pixelY</span><span class="p">);</span>
+      <span class="n">yLocal</span> <span class="o">=</span> <span class="n">yLocal</span> <span class="o">/</span> <span class="n">toFixed64</span><span class="p">(</span><span class="n">yMax</span><span class="p">);</span>
       <span class="c1">//</span>
       <span class="c1">// Now let&#39;s do the algorithm bit:</span>
-      <span class="n">var</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-      <span class="n">var</span> <span class="nl">y</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+      <span class="n">var</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="n">p64</span><span class="p">;</span>
+      <span class="n">var</span> <span class="nl">y</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="n">p64</span><span class="p">;</span>
       <span class="n">var</span> <span class="nl">iteration</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="k">while</span> <span class="p">(((</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mf">4.0</span> <span class="o">&amp;&amp;</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">maxIterations</span><span class="p">)</span>
+      <span class="k">while</span> <span class="p">(((</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mf">4.0f</span><span class="n">p64</span> <span class="o">&amp;&amp;</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">maxIterations</span><span class="p">)</span>
         <span class="n">var</span> <span class="n">xTemp</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">xLocal</span><span class="p">;</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">yLocal</span><span class="p">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="n">p64</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">yLocal</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">xTemp</span><span class="p">;</span>
         <span class="n">iteration</span><span class="o">++</span><span class="p">;</span>
         <span class="n">endwhile</span>
       <span class="c1">//</span>
       <span class="c1">// Render based on iteration achieved:</span>
-      <span class="n">var</span> <span class="nl">colourSlide</span> <span class="p">:</span> <span class="n">Float64</span> <span class="o">=</span> <span class="p">(</span><span class="n">toFloat64</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="o">/</span> <span class="n">toFloat64</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">));</span>
+      <span class="n">var</span> <span class="nl">colourSlide</span> <span class="p">:</span> <span class="n">Fixed64</span> <span class="o">=</span> <span class="p">(</span><span class="n">toFixed64</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="o">/</span> <span class="n">toFixed64</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">));</span>
       <span class="n">var</span> <span class="nl">colourIndex</span> <span class="p">:</span> <span class="n">Int32</span> <span class="o">=</span> <span class="n">toInt32</span><span class="p">(</span><span class="n">colourSlide</span> <span class="o">*</span> <span class="n">maxSprites</span><span class="p">);</span>
       <span class="c1">//</span>
       <span class="c1">// Pick a character according to colourIndex (iterations achieved):</span>

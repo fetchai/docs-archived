@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="./" id="aea-car-park-"
+    <a href="./" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -791,45 +797,75 @@
 
                                     
 
-<h1 id="car-park-agent-application">Car Park Agent Application</h1>
-<p>The Fetch.ai car park agent demo is documented in its own repo <a href="https://github.com/fetchai/carpark_agent">here</a>.</p>
-<h2 id="to-test-the-aea-functionality-without-the-detection">To test the AEA functionality (without the detection)</h2>
+<p>The full Fetch.ai car park agent demo is documented in its own repo <a href="https://github.com/fetchai/carpark_agent">here</a>.</p>
+<p>This demo allows you to test the AEA functionality of the car park agent demo without the detection logic.</p>
+<p>It demonstrates how the agents trade car park information.</p>
+<h2 id="preparation-instructions">Preparation instructions</h2>
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
+<h3 id="launch-the-oef">Launch the OEF</h3>
+<p>In a separate terminal, launch a local OEF node (for search and discovery).
+<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+</pre></div></p>
+<p>Keep it running for all the following.</p>
+<h2 id="demo-instructions">Demo instructions</h2>
+<h3 id="create-carpark-detection-agent">Create carpark detection agent</h3>
 <p>First, create the carpark detection agent:
 <div class="highlight"><pre><span></span>aea create car_detector
 <span class="nb">cd</span> car_detector
-aea add connection oef
-aea add skill carpark_detection
+aea add connection fetchai/oef:0.1.0
+aea add skill fetchai/carpark_detection:0.1.0
 aea install
 </pre></div></p>
+<p>Second, add the ledger info to the aea config:
+<div class="highlight"><pre><span></span>ledger_apis:
+  fetchai:
+    address: alpha.fetch-ai.com
+    port: <span class="m">80</span>
+</pre></div></p>
+<p>Alternatively to the previous two steps, simply run:
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_detector:0.1.0
+<span class="nb">cd</span> car_detector
+aea install
+</pre></div></p>
+<h3 id="create-carpark-client-agent">Create carpark client agent</h3>
 <p>Then, create the carpark client agent:
 <div class="highlight"><pre><span></span>aea create car_data_buyer
 <span class="nb">cd</span> car_data_buyer
-aea add connection oef
-aea add skill carpark_client
+aea add connection fetchai/oef:0.1.0
+aea add skill fetchai/carpark_client:0.1.0
 aea install
-aea generate-key fetchai
+</pre></div></p>
+<p>Second, add the ledger info to the aea config:
+<div class="highlight"><pre><span></span>ledger_apis:
+  fetchai:
+    address: alpha.fetch-ai.com
+    port: <span class="m">80</span>
+</pre></div></p>
+<p>Alternatively to the previous two steps, simply run:
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_data_buyer:0.1.0
+<span class="nb">cd</span> car_data_buyer
+aea install
+</pre></div></p>
+<h3 id="generate-wealth-for-the-client-agent">Generate wealth for the client agent</h3>
+<p>Add a private key to the carpark client agent:
+<div class="highlight"><pre><span></span>aea generate-key fetchai
 aea add-key fetchai fet_private_key.txt
 </pre></div></p>
-<p>Add the ledger info to both aea configs:
-<div class="highlight"><pre><span></span>ledger_apis:
-  - ledger_api:
-      ledger: fetchai
-      addr: alpha.fetch-ai.com
-      port: <span class="m">80</span>
-</pre></div></p>
-<p>Fund the carpark client agent:
+<p>And, fund the carpark client agent:
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
 python scripts/fetchai_wealth_generation.py --private-key car_data_buyer/fet_private_key.txt --amount <span class="m">10000000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
 </pre></div></p>
-<p>Then, in the carpark detection skill settings (<code>car_detector/skills/carpark_detection/skill.yaml</code>) of the detection agent comment out database related settings:
-<div class="highlight"><pre><span></span># db_is_rel_to_cwd: true
-# db_rel_dir: ../temp_files
+<h3 id="update-skill-configurations">Update skill configurations</h3>
+<p>Then, in the detection agent we disable the detection logic:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.carpark_detection.shared_classes.strategy.args.db_is_rel_to_cwd False
 </pre></div></p>
-<p>Then, launch an OEF node instance:
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+<h3 id="run-both-agents">Run both agents</h3>
+<p>Finally, run both agents from their respective directories:
+<div class="highlight"><pre><span></span>aea run --connections oef
 </pre></div></p>
-<p>Finally, run both agents with <code>aea run</code>.</p>
 <p>You can see that the agents find each other, negotiate and eventually trade.</p>
+<h3 id="cleaning-up">Cleaning up</h3>
 <p>When you're finished, delete your agents:
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
 aea delete car_detector
@@ -877,7 +913,7 @@ aea delete car_data_buyer
                                 
                                 <a href="../trust/" class="button left"><strong>Previous:</strong></br>Trust Issues</a>
                                 
-                                <a href="../gym-plugin/" class="button right"><strong>Next:</strong></br>Gym Demo</a>
+                                <a href="../gym-example/" class="button right"><strong>Next:</strong></br>Gym Example</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

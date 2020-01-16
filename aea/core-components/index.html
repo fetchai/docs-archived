@@ -243,14 +243,14 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../car-park/" id="aea-car-park-"
+    <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
     >
 </li>
  
 <li>
-    <a href="../gym-plugin/" id="aea-gym-plugin-"
-        >Gym demo</a
+    <a href="../gym-example/" id="aea-gym-example-"
+        >Gym example</a
     >
 </li>
  
@@ -350,7 +350,13 @@
  
 <li>
     <a href="../scaffolding/" id="aea-scaffolding-"
-        >Scaffolding</a
+        >Scaffolding packages</a
+    >
+</li>
+ 
+<li>
+    <a href="../generator/" id="aea-generator-"
+        >Generating protocols</a
     >
 </li>
  
@@ -791,10 +797,19 @@
 
                                     
 
+<h2 id="multiplexer">Multiplexer</h2>
+<p>The <code>Multiplexer</code> is responsible for maintaining potentially multiple connections.</p>
+<h3 id="connection">Connection</h3>
+<p>Connections wrap an external SDK or API and manage messaging. As such, they allow the agent to connect to an external service with an exposed Python SDK/API.</p>
+<p>The module <code>connections/base.py</code> contains the abstract class which define a <code>Connection</code>. A <code>Connection</code> acts as a bridge to the SDK or API to be wrapped, and is responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service.</p>
+<p>The framework provides one default connections.</p>
+<ul>
+<li><code>stub</code>: implements an I/O reader and writer to send messages to the agent from a local file.</li>
+</ul>
 <h3 id="inbox-and-outbox">InBox and OutBox</h3>
-<p>The <code>InBox</code> and <code>OutBox</code> are, respectively, queues for incoming and outgoing <code>Envelopes</code>.</p>
+<p>The <code>InBox</code> and <code>OutBox</code> are, respectively, queues for incoming and outgoing <code>Envelopes</code>. They are needed to separate the thread which runs the <code>Multiplexer</code> from the thread which runs the main agent loop.</p>
 <h3 id="envelope">Envelope</h3>
-<p>An <code>Envelope</code> is the core object with which agents communicate. It travels from <code>OutBox</code> to another agent. <code>Envelope</code> objects sent from other agents arrive in the <code>InBox</code> via a connection. An <code>Envelope</code> is a vehicle for messages with four attribute parameters:</p>
+<p>An <code>Envelope</code> is the core object with which agents communicate. It travels from <code>OutBox</code> to another agent. <code>Envelope</code> objects sent from other agents arrive in the <code>InBox</code> via a connection. An <code>Envelope</code> is a vehicle for messages with five attribute parameters:</p>
 <ul>
 <li>
 <p><code>to</code>: defines the destination address.</p>
@@ -808,38 +823,37 @@
 <li>
 <p><code>message</code>: is a bytes field which holds the message in serialized form.</p>
 </li>
+<li>
+<p><code>Optional[context]</code>: an optional field to specify routing information in a URI.</p>
+</li>
 </ul>
 <h3 id="protocol">Protocol</h3>
 <p>Protocols define how messages are represented and encoded for transport. They also define the rules to which messages have to adhere in a message sequence. </p>
 <p>For instance, a protocol may contain messages of type <code>START</code> and <code>FINISH</code>. From there, the rules may prescribe that a message of type <code>FINISH</code> must be preceded by a message of type <code>START</code>.</p>
 <p>The <code>Message</code> class in the <code>protocols/base.py</code> module provides an abstract class with all the functionality a derived <code>Protocol</code> message class requires for a custom protocol, such as basic message generating and management functions and serialisation details.</p>
-<p>A number of protocols come packaged up with the AEA framework.</p>
+<p>The framework provides one default protocol:</p>
 <ul>
 <li><code>default</code>: this protocol provides a bare bones implementation for an AEA protocol which includes a <code>DefaultMessage</code> class and a <code>DefaultSerialization</code> class with functions for managing serialisation. Use this protocol as a starting point for building custom protocols.</li>
+</ul>
+<p>Additional protocols can be added as packages, including:</p>
+<ul>
 <li><code>oef</code>: this protocol provides the AEA protocol implementation for communication with the OEF including an <code>OEFMessage</code> class for hooking up to OEF services and search agents. Utility classes are available in the <code>models.py</code> module which provides OEF specific requirements, such as classes, needed to perform querying on the OEF, such as <code>Description</code>, <code>Query</code>, and <code>Constraint</code>, to name a few.</li>
 <li><code>fipa</code>: this protocol provides classes and functions necessary for communication between AEAs via the <a href="http://www.fipa.org/repository/aclspecs.html">FIPA</a> Agent Communication Language. For example, the <code>FIPAMessage</code> class provides negotiation terms such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</li>
 </ul>
-<h3 id="connection">Connection</h3>
-<p>Connections wrap an external SDK or API and manage messaging. As such, they allow the agent to connect to an external service with an exposed Python SDK/API.</p>
-<p>The module <code>connections/base.py</code> contains the abstract class which define a <code>Connection</code>. A <code>Connection</code> acts as a bridge to the SDK or API to be wrapped, and is responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service.</p>
-<p>The framework provides a number of default connections.</p>
-<ul>
-<li><code>local</code>: implements a local node.</li>
-<li><code>oef</code>: wraps the OEF SDK.</li>
-</ul>
 <h3 id="skill">Skill</h3>
-<p>Skills are a result of the framework's extensibility. They are atomic capabilities that agents can dynamically take on board, 
+<p>Skills are a result of the framework's extensibility. They are self-contained capabilities that agents can dynamically take on board, 
 in order to expand their effectiveness in different situations. 
 A skill can be given permission to read the internal state of the the agent, and suggest action(s) to the agent according to its specific logic. 
 As such, more than one skill could exist per protocol, competing with each other in suggesting to the agent the best course of actions to take. </p>
-<p>For instance, an agent who is playing chess, could subscribe to more than one skill, where each skill corresponds to a specific strategy for playing chess. 
-The skills could then read the internal state of the agent, including the agent's observation of the game's state, and suggest a next move to the agent.   </p>
+<p>For instance, an agent who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy. 
+The skills could then read the internal state of the agent, and independently suggest profitable transactions. </p>
 <p>A skill encapsulates implementations of the abstract base classes <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code>:</p>
 <ul>
 <li><code>Handler</code>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement agents' reactive behaviour. If the agent understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages.</li>
 <li><code>Behaviour</code>: none, one or more <code>Behaviours</code> encapsulate actions that cause interactions with other agents initiated by the agent. Behaviours implement agents' proactiveness.</li>
 <li><code>Task</code>: none, one or more <code>Tasks</code> encapsulate background work internal to the agent.</li>
 </ul>
+<p>Skills further allow for <code>SharedClasses</code>.</p>
 <h2 id="agent">Agent</h2>
 <h3 id="main-loop">Main loop</h3>
 <p>The <code>_run_main_loop()</code> function in the <code>Agent</code> class performs a series of activities while the <code>Agent</code> state is not stopped.</p>
@@ -851,6 +865,12 @@ The skills could then read the internal state of the agent, including the agent'
 <h2 id="decision-maker">Decision maker</h2>
 <p>The <code>DecisionMaker</code> component manages global agent state updates proposed by the skills and processes the resulting ledger transactions.</p>
 <p>It is responsible for the agent's crypto-economic security and goal management, and it contains the preference and ownership representation of the agent.</p>
+<h3 id="transactionmessage-and-stateupdatemessage">TransactionMessage and StateUpdateMessage</h3>
+<p>Skills communicate with the decision maker via <code>InternalMessages</code>. There exist two types of these: <code>TransactionMessage</code> and <code>StateUpdateMessage</code>.</p>
+<p>The <code>StateUpdateMessage</code> is used to initialize the decision maker with preferences and ownership states. It can also be used to update the ownership states in the decision maker if the settlement of transaction takes place off chain.</p>
+<p>The <code>TransactionMessage</code> is used by a skill to propose a transaction to the decision maker. The performative <code>TransactionMessage.Performative.PROPOSE_FOR_SETTLEMENT</code> is used by a skill to propose a transaction which the decision maker is supposed to settle on chain. The performative <code>TransactionMessage.Performative.PROPOSE_FOR_SIGNING</code> is used by the skill to propose a transaction which the decision maker is supposed to sign and which will be settled later.</p>
+<p>The decision maker processes messages and can accept or reject them.</p>
+<p>For examples how to use these concepts have a look at the <code>tac_</code> skills. These functionalities are experimental and subject to change.</p>
 <h2 id="filter">Filter</h2>
 <p><code>Filter</code> routes messages to the correct <code>Handler</code> via <code>Resource</code>. It also holds a reference to the currently active <code>Behaviour</code> and <code>Task</code> instances.</p>
 <p>By default for every skill, each <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> is registered in the <code>Filter</code>. However, note that skills can de-register and re-register themselves.</p>
