@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="./" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -799,8 +828,8 @@
 
 <h2 id="preliminaries">Preliminaries</h2>
 <p>Create and enter into a new working directory.</p>
-<div class="highlight"><pre><span></span>mkdir my_aea/
-<span class="nb">cd</span> my_aea/
+<div class="highlight"><pre><span></span>mkdir my_aea_projects/
+<span class="nb">cd</span> my_aea_projects/
 </pre></div>
 
 <p>We highly recommend using a virtual environment to ensure consistency across dependencies.</p>
@@ -830,10 +859,6 @@ You can install the <code>svn</code> command with (<code>brew install subversion
 <div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>all<span class="o">]</span>
 </pre></div>
 
-<p>However, you can run this demo by installing the base AEA, including the CLI extension, alone.</p>
-<div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>cli<span class="o">]</span>
-</pre></div>
-
 <h3 id="known-issues">Known issues</h3>
 <p>If the installation steps fail, it might be a dependency issue. </p>
 <p>The following hints can help:</p>
@@ -850,57 +875,63 @@ You can install the <code>svn</code> command with (<code>brew install subversion
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA.</p>
 <h2 id="option-1-step-by-step">Option 1 - Step-by-step</h2>
-<h3 id="create-a-new-agent">Create a new agent</h3>
-<p>First create a new agent project and enter it.
-<div class="highlight"><pre><span></span>aea create my_first_agent
-<span class="nb">cd</span> my_first_agent
+<h3 id="create-a-new-aea">Create a new AEA</h3>
+<p>First, create a new AEA project and enter it.
+<div class="highlight"><pre><span></span>aea create my_first_aea
+<span class="nb">cd</span> my_first_aea
 </pre></div></p>
 <h3 id="add-the-echo-skill">Add the echo skill</h3>
+<p>Second, add the echo skill to the project.
 <div class="highlight"><pre><span></span>aea add skill fetchai/echo:0.1.0
-</pre></div>
-
-<p>This copies the <code>echo</code> skill code containing the "behaviours", "handlers", and "tasks" into the skill, ready to run. The full identifier of the skill <code>fetchai/echo:0.1.0</code> consists of the name of the author of the skill, followed by the skill name and its version.</p>
+</pre></div></p>
+<p>This copies the <code>echo</code> skill code containing the "behaviours", "handlers", and "tasks" into the skill, ready to run. The identifier of the skill <code>fetchai/echo:0.1.0</code> consists of the name of the author of the skill, followed by the skill name and its version.</p>
 <h3 id="add-a-stub-connection">Add a stub connection</h3>
 <p>AEAs use messages for communication. We use a stub connection to send messages to and receive messages from the AEA.</p>
-<p>The stub conection is already added to the agent by default.</p>
-<p>A stub connection provides an I/O reader and writer. </p>
-<p>It uses two files for communication: one for incoming messages and the other for outgoing messages. Each line contains an encoded envelope.</p>
-<p>The AEA waits for new messages posted to the file <code>my_first_agent/input_file</code>, and adds a response to the file <code>my_first_agent/output_file</code>.</p>
+<p>The stub connection is already added to the AEA by default.</p>
+<p>A stub connection provides an I/O reader and writer. It uses two files for communication: one for incoming messages and the other for outgoing messages. Each line contains an encoded envelope.</p>
+<p>The AEA waits for new messages posted to the file <code>my_first_aea/input_file</code>, and adds a response to the file <code>my_first_aea/output_file</code>.</p>
 <p>The format of each line is the following:</p>
 <div class="highlight"><pre><span></span>TO,SENDER,PROTOCOL_ID,ENCODED_MESSAGE
 </pre></div>
 
 <p>For example:</p>
-<div class="highlight"><pre><span></span>recipient_agent,sender_agent,default,<span class="o">{</span><span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;bytes&quot;</span>, <span class="s2">&quot;content&quot;</span>: <span class="s2">&quot;aGVsbG8=&quot;</span><span class="o">}</span>
+<div class="highlight"><pre><span></span>recipient_aea,sender_aea,fetchai/default:0.1.0,<span class="o">{</span><span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;bytes&quot;</span>, <span class="s2">&quot;content&quot;</span>: <span class="s2">&quot;aGVsbG8=&quot;</span><span class="o">}</span>
 </pre></div>
 
-<h2 id="option-2-fetch-the-entire-agent">Option 2 - Fetch the entire agent</h2>
+<h2 id="option-2-fetch-the-entire-aea">Option 2 - Fetch the entire AEA</h2>
 <p>The preceding three steps can be executed at once with the command
-<div class="highlight"><pre><span></span>aea fetch fetchai/my_first_agent:0.1.0
-<span class="nb">cd</span> my_first_agent
+<div class="highlight"><pre><span></span>aea fetch fetchai/my_first_aea:0.1.0
+<span class="nb">cd</span> my_first_aea
 </pre></div></p>
-<h2 id="run-the-agent">Run the agent</h2>
-<p>Run the agent with the default <code>stub</code> connection.</p>
+<h2 id="run-the-aea">Run the AEA</h2>
+<p>Run the AEA with the default <code>stub</code> connection.</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 <p>or </p>
-<div class="highlight"><pre><span></span>aea run --connections stub
+<div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.1.0
 </pre></div>
 
 <p>You will see the echo task running in the terminal window.</p>
-<p><center><img alt="The echo call and response log" src="../assets/echo.png" /></center></p>
+<div class="highlight"><pre><span></span>info: Echo Behaviour: act method called.
+info: Echo Task: execute method called.
+info: Echo Behaviour: act method called.
+info: Echo Task: execute method called.
+info: Echo Behaviour: act method called.
+info: Echo Task: execute method called.
+</pre></div>
+
 <p>The framework first calls the <code>setup</code> method on the <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code> code in that order; after which it repeatedly calls the <code>Behaviour</code> and <code>Task</code> methods, <code>act</code> and <code>execute</code>. This is the main agent loop in action.</p>
 <p>Let's look at the <code>Handler</code> in more depth.</p>
 <h3 id="add-a-message-to-the-input-file">Add a message to the input file</h3>
 <p>From a different terminal and same directory, we send the AEA a message wrapped in an envelope via the input file.</p>
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;my_first_agent,sender_agent,default,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span> &gt;&gt; input_file
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span> &gt;&gt; input_file
 </pre></div>
 
 <p>You will see the <code>Echo Handler</code> dealing with the envelope and responding with the same message to the <code>output_file</code>, and also decoding the Base64 encrypted message in this case.</p>
 <div class="highlight"><pre><span></span>info: Echo Task: execute method called.
 info: Echo Behaviour: act method called.
-info: Echo Handler: <span class="nv">message</span><span class="o">=</span>Message<span class="o">(</span><span class="nv">type</span><span class="o">=</span>bytes <span class="nv">content</span><span class="o">=</span>b<span class="s1">&#39;hello&#39;</span><span class="o">)</span>, <span class="nv">sender</span><span class="o">=</span>sender_agent
+info: Echo Handler: <span class="nv">message</span><span class="o">=</span>Message<span class="o">(</span><span class="nv">type</span><span class="o">=</span>bytes <span class="nv">content</span><span class="o">=</span>b<span class="s1">&#39;hello&#39;</span><span class="o">)</span>, <span class="nv">sender</span><span class="o">=</span>sender_aea
 info: Echo Task: execute method called.
 info: Echo Behaviour: act method called.
 info: Echo Task: execute method called.
@@ -908,12 +939,11 @@ info: Echo Behaviour: act method called.
 info: Echo Task: execute method called.
 </pre></div>
 
-<p><center><img alt="Stub connection input and output" src="../assets/input-output.png" /></center></p>
-<h2 id="stop-the-agent">Stop the agent</h2>
-<p>Stop the agent by pressing <code>CTRL C</code></p>
-<h2 id="delete-the-agent">Delete the agent</h2>
-<p>Delete the agent from the parent directory (<code>cd ..</code> to go to the parent directory).</p>
-<div class="highlight"><pre><span></span>aea delete my_first_agent
+<h2 id="stop-the-aea">Stop the AEA</h2>
+<p>Stop the AEA by pressing <code>CTRL C</code></p>
+<h2 id="delete-the-aea">Delete the AEA</h2>
+<p>Delete the AEA from the parent directory (<code>cd ..</code> to go to the parent directory).</p>
+<div class="highlight"><pre><span></span>aea delete my_first_aea
 </pre></div>
 
 <p><br /></p>
@@ -925,9 +955,9 @@ info: Echo Task: execute method called.
 
                             <div class="bottomnav">
                                 
-                                <a href="../agent-oriented-development/" class="button left"><strong>Previous:</strong></br>Agent-Oriented Development</a>
+                                <a href="../" class="button left"><strong>Previous:</strong></br>Welcome</a>
                                 
-                                <a href="../vision/" class="button right"><strong>Next:</strong></br>Vision</a>
+                                <a href="../steps/" class="button right"><strong>Next:</strong></br>Build An Aea Step By Step</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

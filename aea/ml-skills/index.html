@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -798,7 +827,7 @@
                                     
 
 <p>The AEA ml skills demonstrate an interaction between two AEAs trading data.</p>
-<p>There are two types of agents:</p>
+<p>There are two types of AEAs:</p>
 <ul>
 <li>The ml data provider which sells training data.</li>
 <li>The ml model trainer which trains a model</li>
@@ -821,18 +850,18 @@
 <div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
 aea add skill fetchai/ml_data_provider:0.1.0
 </pre></div></p>
-<h3 id="alternatively-install-the-agent-directly">Alternatively, install the agent directly</h3>
+<h3 id="alternatively-install-the-aea-directly">Alternatively, install the AEA directly</h3>
 <p>In the root directory, fetch the data provider AEA and enter the project.
 <div class="highlight"><pre><span></span>aea fetch fetchai/ml_data_provider:0.1.0
 <span class="nb">cd</span> ml_data_provider
 </pre></div>
-The <code>aea fetch</code> command creates the entire agent, including its dependencies for you.</p>
+The <code>aea fetch</code> command creates the entire AEA, including its dependencies for you.</p>
 <h3 id="install-the-dependencies">Install the dependencies</h3>
 <p>The ml data provider uses <code>tensorflow</code> and <code>numpy</code>.
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
 <h3 id="run-the-data-provider-aea">Run the data provider AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 
 <h3 id="create-the-model-trainer-aea">Create the model trainer AEA</h3>
@@ -844,7 +873,7 @@ The <code>aea fetch</code> command creates the entire agent, including its depen
 <div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
 aea add skill fetchai/ml_train:0.1.0
 </pre></div></p>
-<h3 id="alternatively-install-the-agent-directly_1">Alternatively, install the agent directly</h3>
+<h3 id="alternatively-install-the-aea-directly_1">Alternatively, install the AEA directly</h3>
 <p>In the root directory, fetch the data provider AEA and enter the project.
 <div class="highlight"><pre><span></span>aea fetch fetchai/ml_model_trainer:0.1.0
 <span class="nb">cd</span> ml_model_trainer
@@ -854,7 +883,7 @@ aea add skill fetchai/ml_train:0.1.0
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
 <h3 id="run-the-model-trainer-aea">Run the model trainer AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 
 <p>After some time, you should see the AEAs transact and the model trainer train its model.</p>
@@ -865,23 +894,20 @@ aea add skill fetchai/ml_train:0.1.0
 <code>ml_data_provider/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following.</p>
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">alpha.fetch-ai.com</span>
-    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
 </pre></div>
 
 <h3 id="fund-the-ml-model-trainer-aea">Fund the ml model trainer AEA</h3>
 <p>Create some wealth for your ml model trainer on the Fetch.ai <code>testnet</code>. (It takes a while).
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-python scripts/fetchai_wealth_generation.py --private-key ml_model_trainer/fet_private_key.txt --amount <span class="m">10000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
-<span class="nb">cd</span> ml_model_trainer
+<div class="highlight"><pre><span></span>aea generate-wealth fetchai
 </pre></div></p>
 <h3 id="update-the-ml-model-trainer-aea-skills-config">Update the ml model trainer AEA skills config</h3>
 <p>We tell the ml model trainer skill to use the ledger, by using the following command:
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.ml_train.shared_classes.strategy.args.is_ledger_tx True
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.shared_classes.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <h3 id="run-both-aeas">Run both AEAs</h3>
 <p>From their respective directories, run both AEAs
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div></p>
 <h3 id="clean-up">Clean up</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
@@ -890,7 +916,7 @@ aea delete ml_model_trainer
 </pre></div>
 
 <h2 id="communication">Communication</h2>
-<p>This diagram shows the communication between the two agents.</p>
+<p>This diagram shows the communication between the two AEAs.</p>
 <div class="mermaid">
     sequenceDiagram
         participant ml_model_trainer

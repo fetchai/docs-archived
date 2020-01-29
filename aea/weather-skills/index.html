@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -824,7 +853,7 @@ aea install
 </pre></div>
 
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 
 <h3 id="create-the-weather-client-aea">Create the weather client AEA</h3>
@@ -839,13 +868,13 @@ aea install
 </pre></div>
 
 <h3 id="run-the-weather-client-aea">Run the weather client AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 
 <h3 id="observe-the-logs-of-both-aeas">Observe the logs of both AEAs</h3>
 <p><center><img alt="Weather station logs" src="../assets/weather-station-logs.png" /></center></p>
 <p><center><img alt="Weather client logs" src="../assets/weather-client-logs.png" /></center></p>
-<p>To stop an agent use <code>CTRL + C</code>.</p>
+<p>To stop an AEA use <code>CTRL + C</code>.</p>
 <h3 id="delete-the-aeas">Delete the AEAs</h3>
 <p>When you're done, go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
@@ -854,7 +883,7 @@ aea delete my_weather_client
 </pre></div>
 
 <h2 id="communication">Communication</h2>
-<p>This diagram shows the communication between the various entities as data is successfully sold by the car park agent to the client. </p>
+<p>This diagram shows the communication between the various entities as data is successfully sold by the car park AEA to the client. </p>
 <div class="mermaid">
     sequenceDiagram
         participant Search
@@ -911,26 +940,23 @@ aea add-key fetchai fet_private_key.txt
 <code>my_weather_client/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following.</p>
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">alpha.fetch-ai.com</span>
-    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
 </pre></div>
 
 <h3 id="fund-the-weather-client-aea">Fund the weather client AEA</h3>
 <p>Create some wealth for your weather client on the Fetch.ai <code>testnet</code>. (It takes a while).
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-python scripts/fetchai_wealth_generation.py --private-key my_weather_client/fet_private_key.txt --amount <span class="m">10000000</span> --addr alpha.fetch-ai.com --port <span class="m">80</span>
-<span class="nb">cd</span> my_weather_client
+<div class="highlight"><pre><span></span>aea generate-wealth fetchai
 </pre></div></p>
 <h3 id="update-the-skill-configs">Update the skill configs</h3>
 <p>Tell the weather client skill of the weather client that we want to settle the transaction on the ledger:
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.weather_client.shared_classes.strategy.args.is_ledger_tx True
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.shared_classes.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <p>Similarly, for the weather station skill of the weather station:
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.weather_station.shared_classes.strategy.args.is_ledger_tx True
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.shared_classes.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>Run both AEAs from their respective terminals.
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div></p>
 <p>You will see that the AEAs negotiate and then transact using the Fetch.ai <code>testnet</code>.</p>
 <h3 id="delete-the-aeas_1">Delete the AEAs</h3>
@@ -980,9 +1006,9 @@ ledger_id: <span class="s1">&#39;ethereum&#39;</span>
 is_ledger_tx: True
 </pre></div>
 An other way to update the skill config is via the <code>aea config get/set</code> command.
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.weather_station.shared_classes.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> skills.weather_station.shared_classes.strategy.args.ledger_id ethereum
-aea config <span class="nb">set</span> skills.weather_station.shared_classes.strategy.args.is_ledger_tx True
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.shared_classes.strategy.args.currency_id ETH
+aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.shared_classes.strategy.args.ledger_id ethereum
+aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.shared_classes.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <p>In the weather client skill config (<code>my_weather_client/skills/weather_client/skill.yaml</code>) under strategy change the <code>currency_id</code> and <code>ledger_id</code>.
 <div class="highlight"><pre><span></span>max_buyer_tx_fee: <span class="m">20000</span>
@@ -991,17 +1017,22 @@ ledger_id: <span class="s1">&#39;ethereum&#39;</span>
 is_ledger_tx: True
 </pre></div>
 An other way to update the skill config is via the <code>aea config get/set</code> command.
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> skills.weather_client.shared_classes.strategy.args.max_buyer_tx_fee <span class="m">10000</span>
-aea config <span class="nb">set</span> skills.weather_client.shared_classes.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> skills.weather_client.shared_classes.strategy.args.ledger_id ethereum
-aea config <span class="nb">set</span> skills.weather_client.shared_classes.strategy.args.is_ledger_tx True
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.shared_classes.strategy.args.max_buyer_tx_fee <span class="m">10000</span> --type int
+aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.shared_classes.strategy.args.currency_id ETH
+aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.shared_classes.strategy.args.ledger_id ethereum
+aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.shared_classes.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <h3 id="fund-the-weather-client-aea_1">Fund the weather client AEA</h3>
 <p>Create some wealth for your weather client on the Ethereum Ropsten test net.</p>
 <p>Go to the <a href="https://faucet.metamask.io/" target=_blank>MetaMask Faucet</a> and request some test ETH for the account your weather client AEA is using (you need to first load your AEAs private key into MetaMask). Your private key is at <code>my_weather_client/eth_private_key.txt</code>.</p>
 <h3 id="run-the-aeas_1">Run the AEAs</h3>
+<p>You can change the end point's address and port by modifying the connection's yaml file (my_weather_station/connection/oef/connection.yaml)</p>
+<p>Under config locate :</p>
+<p><div class="highlight"><pre><span></span>addr: <span class="si">${</span><span class="nv">OEF_ADDR</span><span class="p">: 127.0.0.1</span><span class="si">}</span>
+</pre></div>
+ and replace it with your ip (The ip of the machine that runs the oef image.)</p>
 <p>Run both AEAs, from their respective terminals.
-<div class="highlight"><pre><span></span>aea run --connections oef
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 You will see that the AEAs negotiate and then transact using the Ethereum <code>testnet</code>.</p>
 <h3 id="delete-the-aeas_2">Delete the AEAs</h3>
@@ -1012,7 +1043,7 @@ aea delete my_weather_client
 </pre></div>
 
 <h2 id="communication_1">Communication</h2>
-<p>This diagram shows the communication between the various entities as data is successfully sold by the weather station agent to the client. </p>
+<p>This diagram shows the communication between the various entities as data is successfully sold by the weather station AEA to the client. </p>
 <div class="mermaid">
     sequenceDiagram
         participant Search
@@ -1034,6 +1065,7 @@ aea delete my_weather_client
         Weather_AEA->>Client_AEA: match_accept
         Client_AEA->>Blockchain: transfer_funds
         Client_AEA->>Weather_AEA: send_transaction_hash
+        Weather_AEA->>Blockchain: check_transaction_status
         Weather_AEA->>Client_AEA: send_data
 
         deactivate Client_AEA

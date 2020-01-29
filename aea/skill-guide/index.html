@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Build your own skill - Fetch.ai Developer Documentation</title>
+    <title>Build a skill for an AEA - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="./" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="./" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -805,21 +834,22 @@
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="step-1-setup">Step 1: Setup</h2>
-<p>We will first create an agent and add a scaffold skill, which we call <code>my_search</code>.</p>
-<div class="highlight"><pre><span></span>aea create my_agent <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my_agent
+<p>We will first create an AEA and add a scaffold skill, which we call <code>my_search</code>.</p>
+<div class="highlight"><pre><span></span>aea create my_aea <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my_aea
 aea scaffold skill my_search
 </pre></div>
 
-<p>In the following steps, we replace each one of the scaffolded <code>Behaviour</code>, <code>Handler</code> and <code>Task</code> in <code>my_agent/skills/my_search</code> with our implementation. We will build a simple skill which lets the agent send a search query to the <a href="https://docs.fetch.ai/oef/">OEF</a> and process the resulting response.</p>
+<p>In the following steps, we replace each one of the scaffolded <code>Behaviour</code>, <code>Handler</code> and <code>Task</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="https://docs.fetch.ai/oef/">OEF</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
-<p>A <code>Behaviour</code> class contains the business logic specific to initial actions initiated by the agent rather than reactions to other events.</p>
+<p>A <code>Behaviour</code> class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
 <p>In this example, we implement a simple search behaviour. Each time, <code>act()</code> gets called by the main agent loop, we will send a search request to the OEF.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Query</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Query</span>
 <span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
-<span class="kn">from</span> <span class="nn">packages.protocols.oef.message</span> <span class="kn">import</span> <span class="n">OEFMessage</span>
-<span class="kn">from</span> <span class="nn">packages.protocols.oef.serialization</span> <span class="kn">import</span> <span class="n">DEFAULT_OEF</span><span class="p">,</span> <span class="n">OEFSerializer</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef.message</span> <span class="kn">import</span> <span class="n">OEFMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef.serialization</span> <span class="kn">import</span> <span class="n">DEFAULT_OEF</span><span class="p">,</span> <span class="n">OEFSerializer</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea.my_search_skill&quot;</span><span class="p">)</span>
 
@@ -838,7 +868,9 @@ aea scaffold skill my_search
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -847,17 +879,24 @@ aea scaffold skill my_search
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">search_constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                              <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;UK&quot;</span><span class="p">))]</span>
+        <span class="n">search_constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;UK&quot;</span><span class="p">))]</span>
         <span class="n">search_query_w_empty_model</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">search_constraints</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-        <span class="n">search_request</span> <span class="o">=</span> <span class="n">OEFMessage</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SEARCH_SERVICES</span><span class="p">,</span>
-                                    <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
-                                    <span class="n">query</span><span class="o">=</span><span class="n">search_query_w_empty_model</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending search request to OEF, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">DEFAULT_OEF</span><span class="p">,</span>
-                                        <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span>
-                                        <span class="n">protocol_id</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span>
-                                        <span class="n">message</span><span class="o">=</span><span class="n">OEFSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">search_request</span><span class="p">))</span>
+        <span class="n">search_request</span> <span class="o">=</span> <span class="n">OEFMessage</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SEARCH_SERVICES</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
+            <span class="n">query</span><span class="o">=</span><span class="n">search_query_w_empty_model</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending search request to OEF, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span>
+            <span class="n">to</span><span class="o">=</span><span class="n">DEFAULT_OEF</span><span class="p">,</span>
+            <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span>
+            <span class="n">protocol_id</span><span class="o">=</span><span class="n">OEFMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="n">OEFSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">search_request</span><span class="p">),</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -865,19 +904,21 @@ aea scaffold skill my_search
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 
 <p>Searches are proactive and, as such, well placed in a <code>Behaviour</code>. Specifically, we subclass the <code>TickerBehaviour</code> as it allows us to repeatedly search at a defined tick interval.</p>
-<p>We place this code in <code>my_agent/skills/my_search/behaviours.py</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/behaviours.py</code>.</p>
 <h2 id="step-3-develop-a-handler">Step 3: Develop a Handler</h2>
-<p>So far, we have tasked the agent with sending search requests to the OEF. However, we have no way of handling the responses sent to the agent by the OEF at the moment. The agent would simply respond to the OEF via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
+<p>So far, we have tasked the AEA with sending search requests to the OEF. However, we have no way of handling the responses sent to the AEA by the OEF at the moment. The AEA would simply respond to the OEF via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
 <p>Let us now implement a handler to deal with the incoming search responses.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
-<span class="kn">from</span> <span class="nn">packages.protocols.oef.message</span> <span class="kn">import</span> <span class="n">OEFMessage</span>
-<span class="kn">from</span> <span class="nn">packages.protocols.oef.serialization</span> <span class="kn">import</span> <span class="n">OEFSerializer</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef.message</span> <span class="kn">import</span> <span class="n">OEFMessage</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea.my_search_skill&quot;</span><span class="p">)</span>
 
@@ -908,7 +949,11 @@ aea scaffold skill my_search
         <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">is</span> <span class="n">OEFMessage</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SEARCH_RESULT</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">nb_agents_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;agents&quot;</span><span class="p">))</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -916,12 +961,14 @@ aea scaffold skill my_search
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 
 <p>We create a handler which is registered for the <code>oef</code> protocol. Whenever it receives a search result, we log the number of agents returned in the search - the agents matching the search query - and update the counter of received searches.</p>
 <p>Note, how the handler simply reacts to incoming events (i.e. messages). It could initiate further actions, however, they are still reactions to the upstream search event.</p>
-<p>We place this code in <code>my_agent/skills/my_search/handlers.py</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/handlers.py</code>.</p>
 <h2 id="step-4-develop-a-task">Step 4: Develop a Task</h2>
 <p>We have implemented a behaviour and a handler. We conclude by implementing a task. Here we can implement background logic. We will implement a trivial check on the difference between the amount of search requests sent and responses received.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -949,10 +996,13 @@ aea scaffold skill my_search
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># to slow down the agent</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">my_search_behaviour</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">my_search_handler</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># to slow down the AEA</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">my_search_behaviour</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">my_search_handler</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -965,7 +1015,7 @@ aea scaffold skill my_search
 </pre></div>
 
 <p>Note, how we have access to other objects in the skill via <code>self.context</code>.</p>
-<p>We place this code in <code>my_agent/skills/my_search/tasks.py</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/tasks.py</code>.</p>
 <h2 id="step-5-create-the-config-file">Step 5: Create the config file</h2>
 <p>Based on our skill components above, we create the following config file.</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my_search</span>
@@ -992,26 +1042,26 @@ aea scaffold skill my_search
 </pre></div>
 
 <p>Importantly, the keys <code>my_search_behaviour</code> and <code>my_search_handler</code> are used in the above task to access these skill components at runtime. We also set the <code>tick_interval</code> of the <code>TickerBehaviour</code> to <code>5</code> seconds.</p>
-<p>We place this code in <code>my_agent/skills/my_search/skill.yaml</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/skill.yaml</code>.</p>
 <h2 id="step-6-add-the-oef-protocol-and-connection">Step 6: Add the oef protocol and connection</h2>
-<p>Our agent does not have the oef protocol yet so let's add it.
+<p>Our AEA does not have the oef protocol yet so let's add it.
 <div class="highlight"><pre><span></span>aea add protocol fetchai/oef:0.1.0
 </pre></div></p>
-<p>This adds the protocol to our agent and makes it available on the path <code>packages.protocols...</code>.</p>
+<p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the oef connection:
 <div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
 </pre></div></p>
-<h2 id="step-7-run-the-agent">Step 7: Run the agent</h2>
+<h2 id="step-7-run-the-aea">Step 7: Run the AEA</h2>
 <p>We first start an oef node (see the <a href="../connection/" target=_blank>connection section</a> for more details) in a separate terminal window.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
 </pre></div>
 
-<p>We can then launch our agent.</p>
-<div class="highlight"><pre><span></span>aea run --connections oef
+<p>We can then launch our AEA.</p>
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
 </pre></div>
 
-<p>We can see that the agent sends search requests to the OEF and receives search responses from the OEF. Since our agent is only searching on the OEF - and not registered on the OEF - the search response returns an empty list of agents.</p>
-<p>We stop the agent with <code>CTRL + C</code>.</p>
+<p>We can see that the AEA sends search requests to the OEF and receives search responses from the OEF. Since our AEA is only searching on the OEF - and not registered on the OEF - the search response returns an empty list of agents.</p>
+<p>We stop the AEA with <code>CTRL + C</code>.</p>
 <h2 id="now-its-your-turn">Now it's your turn</h2>
 <p>We hope this step by step introduction has helped you develop your own skill. We are excited to see what you will build.</p>
 <p><br /></p>
@@ -1023,9 +1073,9 @@ aea scaffold skill my_search
 
                             <div class="bottomnav">
                                 
-                                <a href="../skill/" class="button left"><strong>Previous:</strong></br>Skill</a>
+                                <a href="../steps/" class="button left"><strong>Previous:</strong></br>Build An Aea Step By Step</a>
                                 
-                                <a href="../protocol/" class="button right"><strong>Next:</strong></br>Protocol</a>
+                                <a href="../build-aea-programmatically/" class="button right"><strong>Next:</strong></br>Build An Aea Programmatically</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -801,15 +830,15 @@
 <p>The <code>Multiplexer</code> is responsible for maintaining potentially multiple connections.</p>
 <h3 id="connection">Connection</h3>
 <p>Connections wrap an external SDK or API and manage messaging. As such, they allow the agent to connect to an external service with an exposed Python SDK/API.</p>
-<p>The module <code>connections/base.py</code> contains the abstract class which define a <code>Connection</code>. A <code>Connection</code> acts as a bridge to the SDK or API to be wrapped, and is responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service.</p>
-<p>The framework provides one default connections.</p>
+<p>The module <code>connections/base.py</code> contains the abstract class which defines a <code>Connection</code>. A <code>Connection</code> acts as a bridge to the SDK or API to be wrapped, and is, where necessary, responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service.</p>
+<p>The framework provides one default connection:</p>
 <ul>
 <li><code>stub</code>: implements an I/O reader and writer to send messages to the agent from a local file.</li>
 </ul>
 <h3 id="inbox-and-outbox">InBox and OutBox</h3>
 <p>The <code>InBox</code> and <code>OutBox</code> are, respectively, queues for incoming and outgoing <code>Envelopes</code>. They are needed to separate the thread which runs the <code>Multiplexer</code> from the thread which runs the main agent loop.</p>
 <h3 id="envelope">Envelope</h3>
-<p>An <code>Envelope</code> is the core object with which agents communicate. It travels from <code>OutBox</code> to another agent. <code>Envelope</code> objects sent from other agents arrive in the <code>InBox</code> via a connection. An <code>Envelope</code> is a vehicle for messages with five attribute parameters:</p>
+<p>An <code>Envelope</code> is the core object with which agents communicate. It travels from <code>OutBox</code> to another agent or gets translated in the <code>Connection</code> to an external service or protocol. <code>Envelope</code> objects sent from other agents arrive in the <code>InBox</code> via a <code>Connection</code>. An <code>Envelope</code> is a vehicle for messages with five attribute parameters:</p>
 <ul>
 <li>
 <p><code>to</code>: defines the destination address.</p>
@@ -838,42 +867,47 @@
 <p>Additional protocols can be added as packages, including:</p>
 <ul>
 <li><code>oef</code>: this protocol provides the AEA protocol implementation for communication with the OEF including an <code>OEFMessage</code> class for hooking up to OEF services and search agents. Utility classes are available in the <code>models.py</code> module which provides OEF specific requirements, such as classes, needed to perform querying on the OEF, such as <code>Description</code>, <code>Query</code>, and <code>Constraint</code>, to name a few.</li>
-<li><code>fipa</code>: this protocol provides classes and functions necessary for communication between AEAs via the <a href="http://www.fipa.org/repository/aclspecs.html">FIPA</a> Agent Communication Language. For example, the <code>FIPAMessage</code> class provides negotiation terms such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</li>
+<li><code>fipa</code>: this protocol provides classes and functions necessary for communication between AEAs via a variant of the <a href="http://www.fipa.org/repository/aclspecs.html">FIPA</a> Agent Communication Language. For example, the <code>FIPAMessage</code> class provides negotiation terms such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</li>
 </ul>
 <h3 id="skill">Skill</h3>
-<p>Skills are a result of the framework's extensibility. They are self-contained capabilities that agents can dynamically take on board, 
+<p>Skills are a result of the framework's extensibility. They are self-contained capabilities that AEAs can dynamically take on board, 
 in order to expand their effectiveness in different situations. 
-A skill can be given permission to read the internal state of the the agent, and suggest action(s) to the agent according to its specific logic. 
-As such, more than one skill could exist per protocol, competing with each other in suggesting to the agent the best course of actions to take. </p>
-<p>For instance, an agent who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy. 
-The skills could then read the internal state of the agent, and independently suggest profitable transactions. </p>
+A skill can be given permission to read the internal state of the the AEA, and suggest action(s) to the AEA according to its specific logic. 
+As such, more than one skill could exist per protocol, competing with each other in suggesting to the AEA the best course of actions to take. </p>
+<p>For instance, an AEA who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy. 
+The skills could then read the internal state of the AEA, and independently suggest profitable transactions. </p>
 <p>A skill encapsulates implementations of the abstract base classes <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code>:</p>
 <ul>
-<li><code>Handler</code>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement agents' reactive behaviour. If the agent understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages.</li>
-<li><code>Behaviour</code>: none, one or more <code>Behaviours</code> encapsulate actions that cause interactions with other agents initiated by the agent. Behaviours implement agents' proactiveness.</li>
-<li><code>Task</code>: none, one or more <code>Tasks</code> encapsulate background work internal to the agent.</li>
+<li><code>Handler</code>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement AEAs' reactive behaviour. If the AEA understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages.</li>
+<li><code>Behaviour</code>: none, one or more <code>Behaviours</code> encapsulate actions that cause interactions with other agents initiated by the AEA. Behaviours implement AEAs' pro-activeness.</li>
+<li><code>Task</code>: none, one or more <code>Tasks</code> encapsulate background work internal to the AEA.</li>
 </ul>
-<p>Skills further allow for <code>SharedClasses</code>.</p>
+<p>Skills further allow for <code>SharedClasses</code>. Classes sub-classed from the <code>SharedClass</code> can be accessed via the <code>SkillContext</code>.</p>
 <h2 id="agent">Agent</h2>
 <h3 id="main-loop">Main loop</h3>
 <p>The <code>_run_main_loop()</code> function in the <code>Agent</code> class performs a series of activities while the <code>Agent</code> state is not stopped.</p>
 <ul>
-<li><code>act()</code>: this function calls the <code>act()</code> function of all registered Behaviours.</li>
+<li><code>act()</code>: this function calls the <code>act()</code> function of all active registered Behaviours.</li>
 <li><code>react()</code>: this function grabs all Envelopes waiting in the <code>InBox</code> queue and calls the <code>handle()</code> function for the Handlers currently registered against the protocol of the <code>Envelope</code>.</li>
 <li><code>update()</code>: this function loops through all the Tasks and executes them.</li>
 </ul>
 <h2 id="decision-maker">Decision maker</h2>
 <p>The <code>DecisionMaker</code> component manages global agent state updates proposed by the skills and processes the resulting ledger transactions.</p>
-<p>It is responsible for the agent's crypto-economic security and goal management, and it contains the preference and ownership representation of the agent.</p>
+<p>It is responsible for the AEA's crypto-economic security and goal management, and it contains the preference and ownership representation of the AEA.</p>
 <h3 id="transactionmessage-and-stateupdatemessage">TransactionMessage and StateUpdateMessage</h3>
 <p>Skills communicate with the decision maker via <code>InternalMessages</code>. There exist two types of these: <code>TransactionMessage</code> and <code>StateUpdateMessage</code>.</p>
 <p>The <code>StateUpdateMessage</code> is used to initialize the decision maker with preferences and ownership states. It can also be used to update the ownership states in the decision maker if the settlement of transaction takes place off chain.</p>
 <p>The <code>TransactionMessage</code> is used by a skill to propose a transaction to the decision maker. The performative <code>TransactionMessage.Performative.PROPOSE_FOR_SETTLEMENT</code> is used by a skill to propose a transaction which the decision maker is supposed to settle on chain. The performative <code>TransactionMessage.Performative.PROPOSE_FOR_SIGNING</code> is used by the skill to propose a transaction which the decision maker is supposed to sign and which will be settled later.</p>
 <p>The decision maker processes messages and can accept or reject them.</p>
-<p>For examples how to use these concepts have a look at the <code>tac_</code> skills. These functionalities are experimental and subject to change.</p>
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>For examples how to use these concepts have a look at the `tac_` skills. These functionalities are experimental and subject to change.
+</p>
+</div>
+
 <h2 id="filter">Filter</h2>
 <p><code>Filter</code> routes messages to the correct <code>Handler</code> via <code>Resource</code>. It also holds a reference to the currently active <code>Behaviour</code> and <code>Task</code> instances.</p>
-<p>By default for every skill, each <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> is registered in the <code>Filter</code>. However, note that skills can de-register and re-register themselves.</p>
+<p>By default for every skill, each <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> is registered in the <code>Filter</code>. However, note that skills can de-active and re-activate themselves.</p>
 <p>The <code>Filter</code> also routes internal messages from the <code>DecisionMaker</code> to the respective <code>Handler</code> in the skills.</p>
 <h2 id="resource">Resource</h2>
 <p>The <code>Resource</code> component is made up of <code>Registries</code> for each type of resource (e.g. <code>Protocol</code>, <code>Handler</code>, <code>Behaviour</code>, <code>Task</code>). </p>

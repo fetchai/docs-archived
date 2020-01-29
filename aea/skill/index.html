@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="./" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -797,11 +826,11 @@
 
                                     
 
-<p>An agent developer writes skills that the framework can call.</p>
+<p>An AEA developer writes skills that the framework can call.</p>
 <p>When you add a skill with the CLI, a directory is created which includes modules for the <code>Behaviour,</code> <code>Task</code>, and <code>Handler</code> classes as well as a configuration file <code>skill.yaml</code>.</p>
 <h2 id="context">Context</h2>
-<p>The skill has a <code>context</code> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code> objects. The skill context also has a link to the agent context. The agent context provides read access to agent specific information like the public key and address of the agent, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
-<p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the agent.</p>
+<p>The skill has a <code>SkillContext</code> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code> objects. The skill context also has a link to the <code>AgentContext</code>. The <code>AgentContext</code> provides read access to AEA specific information like the public key and address of the AEA, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
+<p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the AEA.</p>
 <p>For example, in the <code>ErrorHandler(Handler)</code> class, the code often grabs a reference to its context and by doing so can access initialised and running framework objects such as an <code>OutBox</code> for putting messages into.</p>
 <div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">recipient</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">protocol_id</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">reply</span><span class="p">))</span>
 </pre></div>
@@ -821,7 +850,7 @@
 <p>For example.</p>
 </div>
 <h3 id="behaviourspy"><code>behaviours.py</code></h3>
-<p>Conceptually, a <code>Behaviour</code>  class contains the business logic specific to initial actions initiated by the agent rather than reactions to other events.</p>
+<p>Conceptually, a <code>Behaviour</code>  class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
 <p>There can be one or more <code>Behaviour</code> classes per skill. The developer must create a subclass from the abstract class <code>Behaviour</code> to create a new <code>Behaviour</code>.</p>
 <ul>
 <li><code>act(self)</code>: is how the framework calls the <code>Behaviour</code> code.</li>
@@ -831,7 +860,7 @@
 <p>For example.</p>
 </div>
 <h3 id="taskspy"><code>tasks.py</code></h3>
-<p>Conceptually, a <code>Task</code> is where the developer codes any internal tasks the agent requires.</p>
+<p>Conceptually, a <code>Task</code> is where the developer codes any internal tasks the AEA requires.</p>
 <p>There can be one or more <code>Task</code> classes per skill. The developer subclasses abstract class <code>Task</code> to create a new <code>Task</code>.</p>
 <ul>
 <li><code>execute(self)</code>: is how the framework calls a <code>Task</code>. </li>
@@ -896,9 +925,9 @@
 
                             <div class="bottomnav">
                                 
-                                <a href="../steps/" class="button left"><strong>Previous:</strong></br>Step By Step</a>
+                                <a href="../version/" class="button left"><strong>Previous:</strong></br>Version</a>
                                 
-                                <a href="../skill-guide/" class="button right"><strong>Next:</strong></br>Build Your Own Skill</a>
+                                <a href="../protocol/" class="button right"><strong>Next:</strong></br>Protocol</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

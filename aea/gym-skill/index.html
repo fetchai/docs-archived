@@ -200,16 +200,13 @@
     <ul id="header_agent_framework"> 
 <li>
     <a href="../" id="aea-"
-        >Introduction</a
+        >Welcome</a
     >
 </li>
  
 <li>
-    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
-        >Agent-oriented development</a
-    >
-</li>
- 
+    <span class="head">Getting started</span>
+    <ul id="header_getting_started"> 
 <li>
     <a href="../quickstart/" id="aea-quickstart-"
         >AEA quick start</a
@@ -217,8 +214,40 @@
 </li>
  
 <li>
+    <a href="../steps/" id="aea-steps-"
+        >Build an AEA step by step</a
+    >
+</li>
+ 
+<li>
+    <a href="../skill-guide/" id="aea-skill-guide-"
+        >Build a skill for an AEA</a
+    >
+</li>
+ 
+<li>
+    <a href="../build-aea-programmatically/" id="aea-build-aea-programmatically-"
+        >Build an AEA programmatically</a
+    >
+</li>
+ 
+<li>
+    <a href="../agent-vs-aea/" id="aea-agent-vs-aea-"
+        >AEAs vs Agents</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">The AEA universe</span>
     <ul id="header_the_aea_universe"> 
+<li>
+    <a href="../agent-oriented-development/" id="aea-agent-oriented-development-"
+        >Agent-oriented development</a
+    >
+</li>
+ 
 <li>
     <a href="../vision/" id="aea-vision-"
         >Vision</a
@@ -240,8 +269,8 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Demos</span>
-    <ul id="header_demos"> 
+    <span class="head">Demo guides</span>
+    <ul id="header_demo_guides"> 
 <li>
     <a href="../car-park-skills/" id="aea-car-park-skills-"
         >Car park agent</a
@@ -316,23 +345,17 @@
     </ul>
 </li> 
 <li>
-    <span class="head">Developer guide</span>
-    <ul id="header_developer_guide"> 
+    <span class="head">Developer guides</span>
+    <ul id="header_developer_guides"> 
 <li>
-    <a href="../steps/" id="aea-steps-"
-        >Step by step</a
+    <a href="../version/" id="aea-version-"
+        >Version</a
     >
 </li>
  
 <li>
     <a href="../skill/" id="aea-skill-"
         >Skill</a
-    >
-</li>
- 
-<li>
-    <a href="../skill-guide/" id="aea-skill-guide-"
-        >Build your own skill</a
     >
 </li>
  
@@ -386,12 +409,18 @@
         >GUI</a
     >
 </li>
+ 
+<li>
+    <a href="../wealth/" id="aea-wealth-"
+        >Generating wealth</a
+    >
+</li>
 
     </ul>
 </li> 
 <li>
-    <a href="../hacking-an-agent/" id="aea-hacking-an-agent-"
-        >Create an agent programmatically</a
+    <a href="../raspberry-set-up/" id="aea-raspberry-set-up-"
+        >Build an AEA on a Raspberry Pi</a
     >
 </li>
  
@@ -802,16 +831,16 @@
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
-<h3 id="create-the-agent">Create the agent</h3>
-<p>In the root directory, create the gym agent and enter the project.
-<div class="highlight"><pre><span></span>aea create my_gym_agent
-<span class="nb">cd</span> my_gym_agent
+<h3 id="create-the-aea">Create the AEA</h3>
+<p>In the root directory, create the gym AEA and enter the project.
+<div class="highlight"><pre><span></span>aea create my_gym_aea
+<span class="nb">cd</span> my_gym_aea
 </pre></div></p>
 <h3 id="add-the-gym-skill">Add the gym skill</h3>
 <div class="highlight"><pre><span></span>aea add skill fetchai/gym:0.1.0
 </pre></div>
 
-<h3 id="copy-the-gym-environment-to-the-agent-directory">Copy the gym environment to the agent directory</h3>
+<h3 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory</h3>
 <div class="highlight"><pre><span></span>mkdir gyms
 cp -a ../examples/gym_ex/gyms/. gyms/
 </pre></div>
@@ -821,42 +850,42 @@ cp -a ../examples/gym_ex/gyms/. gyms/
 </pre></div>
 
 <h3 id="update-the-connection-config">Update the connection config</h3>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </pre></div>
 
 <h3 id="install-the-skill-dependencies">Install the skill dependencies</h3>
 <p>To install the <code>gym</code> package, a dependency of the gym skill, from Pypi run
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
-<h3 id="run-the-agent-with-the-gym-connection">Run the agent with the gym connection</h3>
-<div class="highlight"><pre><span></span>aea run --connections gym
+<h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
+<div class="highlight"><pre><span></span>aea run --connections fetchai/gym:0.1.0
 </pre></div>
 
 <p>You will see the gym training logs.</p>
 <p><center><img alt="AEA gym training logs" src="../assets/gym-training.png" /></center></p>
-<h3 id="delete-the-agent">Delete the agent</h3>
-<p>When you're done, you can go up a level and delete the agent.</p>
+<h3 id="delete-the-aea">Delete the AEA</h3>
+<p>When you're done, you can go up a level and delete the AEA.</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-aea delete my_gym_agent
+aea delete my_gym_aea
 </pre></div>
 
 <h2 id="communication">Communication</h2>
-<p>This diagram shows the communication between the agent and the gym environment </p>
+<p>This diagram shows the communication between the AEA and the gym environment </p>
 <div class="mermaid">
     sequenceDiagram
-        participant Agent
+        participant AEA
         participant Environment
 
-        activate Agent
+        activate AEA
         activate Environment
-        Agent->>Environment: reset
+        AEA->>Environment: reset
         loop learn
-            Agent->>Environment: act
-            Environment->>Agent: percept
+            AEA->>Environment: act
+            Environment->>AEA: percept
         end
-        Agent->>Environment: close
+        AEA->>Environment: close
 
-        deactivate Agent
+        deactivate AEA
         deactivate Environment
 </div>
 
