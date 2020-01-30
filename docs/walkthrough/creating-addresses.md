@@ -8,7 +8,7 @@ pip3 install -U pocketbook
 ```
 The `-U` option is important as it ensures that if you already have it installed, it will upgrade where applicable.
 
-This will also install the Python Ledger API (https://github.com/fetchai/ledger-api-py), which gets you up and running with your own code. You can find on-line docs for using `pocketbook` on our https://docs.fetch.ai site at https://docs.fetch.ai/getting-started/wallet/
+This will also install the Python Ledger API [https://github.com/fetchai/ledger-api-py](https://github.com/fetchai/ledger-api-py), which gets you up and running with your own code. You can find on-line docs for using `pocketbook` on our [https://docs.fetch.ai](https://docs.fetch.ai) site at [https://docs.fetch.ai/getting-started/wallet/](https://docs.fetch.ai/getting-started/wallet/).
 
 ## How to create wallets
 
