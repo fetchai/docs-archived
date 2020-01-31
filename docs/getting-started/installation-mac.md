@@ -16,7 +16,7 @@ Get homebrew:
 Install dependencies:
 
 ``` bash
-brew install cmake openssl git python
+brew install cmake openssl git python protobuf
 ```
 
 
