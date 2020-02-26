@@ -1,28 +1,32 @@
-# *Part 1: Creating addresses and getting testnet tokens*
+# Part 1: Creating addresses and getting testnet tokens
 
-Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai. Over several parts, we'll go from creating addresses through transactions to deploying and interacting with smart contracts. Later we'll also look at node deployment, and the creation of autonomous economic agents. In this first part, though, we will focus on how you can get testnet addresses and stock them with tokens. With the exception of the free-tokens bit, everything here also applies to mainnet.
+Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai, where we will focus on how you can get testnet addresses and stock them with tokens. With the exception of the free-tokens bit, everything here also applies to mainnet.
 
-First things first, it's the perfect time to install `pocketbook`, our command-line based Python wallet and address book. It's easy to install in Linux and on the Mac. Open a Terminal window and type:
+First things first, it's the perfect time to install `pocketbook`, our command-line based Python wallet and address book.
+
+!!! warning ""
+    **You use this application at your own risk**. Whilst Fetch.ai have made every effort to ensure its reliability and security, it comes with no warranty. It is intended for the creation and management of Fetch.ai mainnet wallets and transactions between them. You are responsible for the security of your own private keys (see `~/.pocketbook` folder). Do not use this application for high-value operations: it is intended for utility operations on the main network.
+
+`pocketbook` can be easily installed in Linux and on the Mac. Open a terminal window and type:
 
 ```
 pip3 install -U pocketbook
 ```
 
-The `-U` option is important as it ensures that if you already have it installed, it will upgrade where applicable.
+The `-U` option ensures that if you already have it installed, it will upgrade where applicable.
 
 This will also install the Python Ledger API [https://github.com/fetchai/ledger-api-py](https://github.com/fetchai/ledger-api-py), which gets you up and running with your own code. You can find on-line docs for using `pocketbook` on our [https://docs.fetch.ai](https://docs.fetch.ai) site at [https://docs.fetch.ai/getting-started/wallet/](https://docs.fetch.ai/getting-started/wallet/).
 
 ## How to create wallets
 
 Let's get started with a simple program that generates an address and outputs the public address and private key. Quite obviously, any private key you generate should be kept secure, etc., but you will occasionally need this in order to deploy and interact with contracts. So here's a little Python code that does this:
-```
-# No warranty, your own risk, etc. Provided for reference and example!
 
+``` python
 from fetchai.ledger.api import LedgerApi, TokenApi
 from fetchai.ledger.contract import Contract
 from fetchai.ledger.crypto import Entity, Address
 
-print ("Fetch.ai Address Generator v1.0")
+print ("My Fetch.ai Address Generator v1.0")
 
 # this gets us an API connected to the testnet endpoint:
 try:
