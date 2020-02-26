@@ -4,22 +4,50 @@ Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai, wher
 
 First things first, it's the perfect time to install `pocketbook`, our command-line based Python wallet and address book.
 
-!!! warning ""
-    **You use this application at your own risk**. Whilst Fetch.ai have made every effort to ensure its reliability and security, it comes with no warranty. It is intended for the creation and management of Fetch.ai mainnet wallets and transactions between them. You are responsible for the security of your own private keys (see `~/.pocketbook` folder). Do not use this application for high-value operations: it is intended for utility operations on the main network.
+!!! warning "**You use this application at your own risk**"
+    Whilst Fetch.ai have made every effort to ensure its reliability and security, it comes with no warranty. It is intended for the creation and management of Fetch.ai mainnet wallets and transactions between them. You are responsible for the security of your own private keys (see `~/.pocketbook` folder). Do not use this application for high-value operations: it is intended for utility operations on the main network.
 
 `pocketbook` can be easily installed in Linux and on the Mac. Open a terminal window and type:
 
-```
+``` bash
 pip3 install -U pocketbook
 ```
 
 The `-U` option ensures that if you already have it installed, it will upgrade where applicable.
 
-This will also install the Python Ledger API [https://github.com/fetchai/ledger-api-py](https://github.com/fetchai/ledger-api-py), which gets you up and running with your own code. You can find on-line docs for using `pocketbook` on our [https://docs.fetch.ai](https://docs.fetch.ai) site at [https://docs.fetch.ai/getting-started/wallet/](https://docs.fetch.ai/getting-started/wallet/).
+`pocketbook` defaults to access the main network. You can change the network using the `-n` parameter. E.g.:
 
-## How to create wallets
+``` bash
+pocketbook -n testnet <command>
+pocketbook -n mainnet <command>
+```
 
-Let's get started with a simple program that generates an address and outputs the public address and private key. Quite obviously, any private key you generate should be kept secure, etc., but you will occasionally need this in order to deploy and interact with contracts. So here's a little Python code that does this:
+For details of how to use `pocketbook`, you can use its help option `-h`.
+
+
+## Creating a new address
+
+### Using Pocketbook
+
+Simply run the following command:
+
+``` bash
+pocketbook create
+```
+
+You will be prompted to enter a name for this key pair, followed by a password for the key. Below is a sample output:
+
+```
+Enter name for key: foo
+Enter password for key...:
+Confirm password for key.:
+```
+
+### Using the Python Ledger API
+
+Installing `pocketbook` also installs the Python Ledger API [https://github.com/fetchai/ledger-api-py](https://github.com/fetchai/ledger-api-py), which enables you to create and interact with addresses programmatically.
+
+Let's get started with a simple Python program that generates an address and outputs the private key (hex and in bytes) and the address; you can add the latter to `pocketbook` or use to receive tokens from others.
 
 ``` python
 from fetchai.ledger.api import LedgerApi, TokenApi
@@ -39,9 +67,6 @@ print ("Private key: ", entity.private_key_hex)
 print ("           : ", entity.private_key_bytes)
 print ("    Address: ", Address(entity))
 ```
-Neat, eh?
-
-When you run this, it will output the private key (hex and in bytes) and the address (which you can add to `pocketbook` or use to receive tokens from others).
 
 For example, if you save the above file into a program called `generate_address.py`, you can run it and will get a result like this:
 ```
@@ -51,7 +76,9 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
            :  b'4\x1f\x00\xf7\x89\x00c\xee\xfd5h\xf2\xf5\xc7\xc3\x10\x80/\xd3+:\x15\xa1\x11\xac\x0f\xbf\xb4\xa6\\\xe0{'
     Address:  2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 ```
-Needless to say, don't use that account for anything, it's shared with you all, private key and all. But you get the idea. Just to reiterate, *any account you wish to use yourself, do not, ever, for any reason, disclose the private key in public, on the internet, or anywhere people can see it* so don't post the output of the above program here!
+
+!!! warning "**Do not use this account**"
+    This account and its private key are shared with anyone who reads this tutorial. Just to reiterate, *any account you wish to use yourself, do not, ever, for any reason, disclose the private key in public, on the internet, or anywhere people can see it*. So don't post the output of the above program here!
 
 If we now wanted to add this address to `pocketbook`'s address book, we could do it with this, incidentally (but do see the docs linked above):
 ```
