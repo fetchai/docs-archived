@@ -43,9 +43,13 @@ Enter password for key...:
 Confirm password for key.:
 ```
 
+### Using the web test net wallet
+
+For testnet addresses only, you can also use our [web-based wallet](https://testnet-wallet.fetch.ai/). You will be prompted to enter the password for the address twice.
+
 ### Using the Python Ledger API
 
-Installing `pocketbook` also installs the Python Ledger API [https://github.com/fetchai/ledger-api-py](https://github.com/fetchai/ledger-api-py), which enables you to create and interact with addresses programmatically.
+Installing `pocketbook` also installs the Python Ledger API ([GitHub repository](https://github.com/fetchai/ledger-api-py)), which enables you to create and interact with addresses programmatically.
 
 Let's get started with a simple Python program that generates an address and outputs the private key (hex and in bytes) and the address; you can add the latter to `pocketbook` or use to receive tokens from others.
 
@@ -80,21 +84,22 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
 !!! warning "**Do not use this account**"
     This account and its private key are shared with anyone who reads this tutorial. Just to reiterate, *any account you wish to use yourself, do not, ever, for any reason, disclose the private key in public, on the internet, or anywhere people can see it*. So don't post the output of the above program here!
 
-If we now wanted to add this address to `pocketbook`'s address book, we could do it with this, incidentally (but do see the docs linked above):
+
+## Adding an address to Pocketbook
+
+We may now want to add the address we just created (or another provided by other users) to `pocketbook`. Once an address is added, you can send tokens to it or query the balance. You can add existing addresses like this:
+
+``` bash
+pocketbook -n <network> add <name-for-the-address> <address>
 ```
+
+For our particular example:
+
+``` bash
 pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 ```
-It would be *our* responsibility to store the private key to this securely.
 
-So that shows a bunch of things:
-
-1. Getting pocketbook installed, and the Python API along with it
-2. Writing a simple Python program to generate an address
-3. Adding that address into pocketbook's address book
-
-Addresses generated inside pocketbook will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself — instructions are here: https://docs.fetch.ai/getting-started/wallet/)
-
-For testnet addresses only, you can also use our web-based wallet, which is at https://testnet-wallet.fetch.ai/
+It would be *our* responsibility to store the private key to this securely. Addresses generated inside `pocketbook` will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself).
 
 ## How to get testnet tokens
 
