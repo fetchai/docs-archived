@@ -1,6 +1,6 @@
 # Creating addresses
 
-Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai, where we will focus on how you can get testnet addresses and stock them with tokens. With the exception of the free-tokens bit, everything here also applies to mainnet.
+In this tutorial we will focus on how you can get Fetch.ai mainnet/testnet addresses, and stock testnet ones with tokens.
 
 First things first, it's the perfect time to install Pocketbook, our command-line based Python wallet and address book.
 
@@ -47,7 +47,7 @@ It is the user's responsibility to store the private key to this securely. Addre
 
 Pocketbook stores all information in the `~/.pocketbook` folder on your computer. You can back this folder up entirely to store your encrypted private keys. We **strongly recommend** that you do this regularly and keep the backups in an encrypted safe place in order to provide a mechanism for recovering your accounts.
 
-### Using the web test net wallet
+### Using the web testnet wallet
 
 For testnet addresses only, you can also use our [web-based wallet](https://testnet-wallet.fetch.ai/). You will be prompted to enter the password for the address twice.
 
