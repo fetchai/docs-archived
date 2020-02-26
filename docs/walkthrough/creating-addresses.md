@@ -117,10 +117,9 @@ Adding the `-v` option will display the addresses alongside the names and balanc
 
 For our particular example:
 
-
 ```
 $ pocketbook -n testnet ls -v
-Name                         Type Balance          Stake Address
+Name                    Type Balance          Stake Address
 GeneratedTestnetAddress addr 0.0              0.0   2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 ```
 
