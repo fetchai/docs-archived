@@ -1,4 +1,4 @@
-# Part 1: Creating addresses and getting testnet tokens
+# Creating addresses and getting testnet tokens
 
 Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai, where we will focus on how you can get testnet addresses and stock them with tokens. With the exception of the free-tokens bit, everything here also applies to mainnet.
 

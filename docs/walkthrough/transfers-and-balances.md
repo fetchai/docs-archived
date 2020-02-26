@@ -1,4 +1,4 @@
-# *Part 2: Transfers and balances*
+# Transfers and balances
 
 This is a relatively short piece that gets you going using `pocketbook` and the Python API to perform a transfer and check balances. So let’s do the easy one first, `pocketbook`. We’ll be using the address we minted in part 1, `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5`. Obviously, you’re able to use that address too, as the private key is in part 1’s text, but it’s not recommended or we might all be fighting over the same test tokens!
 ```

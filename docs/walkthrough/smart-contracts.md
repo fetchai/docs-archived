@@ -1,4 +1,4 @@
-# *Part 3: Deploying and interacting with smart contracts on Fetch*
+# Deploying and interacting with smart contracts on Fetch.ai
 
 Let’s talk a little about smart contracts and how we deploy them using Fetch, and the Python API. At the end of this part, you’ll understand how to deploy a contract and how to interact with it. You’ll be able to see it on the block explorer and view its source. We’ll go through this before falling back to talking about encryption and private key management: this way, we’ll have covered all the main things that you’ll want to do:
 
