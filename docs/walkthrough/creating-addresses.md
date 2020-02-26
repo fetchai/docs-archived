@@ -101,3 +101,23 @@ pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ
 
 It would be *our* responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself).
 
+
+## Listing an address balance
+
+You can query the balance of your accounts and address book entries with a command like the following:
+
+``` bash
+pocketbook -n <network> list [-v]
+```
+
+Adding the `-v` option will display the addresses alongside the names and balances.
+
+For our particular example:
+
+
+```
+$ pocketbook -n testnet ls -v
+Name                         Type Balance          Stake Address
+GeneratedTestnetAddress addr 0.0              0.0   2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
+```
+
