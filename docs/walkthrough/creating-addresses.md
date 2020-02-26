@@ -2,12 +2,12 @@
 
 Welcome to part 1 of the step-by-step tutorial introducing you to Fetch.ai, where we will focus on how you can get testnet addresses and stock them with tokens. With the exception of the free-tokens bit, everything here also applies to mainnet.
 
-First things first, it's the perfect time to install `pocketbook`, our command-line based Python wallet and address book.
+First things first, it's the perfect time to install Pocketbook, our command-line based Python wallet and address book.
 
 !!! warning "**You use this application at your own risk**"
     Whilst Fetch.ai have made every effort to ensure its reliability and security, it comes with no warranty. It is intended for the creation and management of Fetch.ai mainnet wallets and transactions between them. You are responsible for the security of your own private keys (see `~/.pocketbook` folder). Do not use this application for high-value operations: it is intended for utility operations on the main network.
 
-`pocketbook` can be easily installed in Linux and on the Mac. Open a terminal window and type:
+Pocketbook can be easily installed in Linux and on the Mac. Open a terminal window and type:
 
 ``` bash
 pip3 install -U pocketbook
@@ -15,14 +15,14 @@ pip3 install -U pocketbook
 
 The `-U` option ensures that if you already have it installed, it will upgrade where applicable.
 
-`pocketbook` defaults to access the main network. You can change the network using the `-n` parameter. E.g.:
+Pocketbook defaults to access the main network. You can change the network using the `-n` parameter. E.g.:
 
 ``` bash
 pocketbook -n testnet <command>
 pocketbook -n mainnet <command>
 ```
 
-For details of how to use `pocketbook`, you can use its help option `-h`.
+For details of how to use Pocketbook, you can use its help option `-h`.
 
 
 ## Creating a new address
@@ -49,9 +49,9 @@ For testnet addresses only, you can also use our [web-based wallet](https://test
 
 ### Using the Python Ledger API
 
-Installing `pocketbook` also installs the Python Ledger API ([GitHub repository](https://github.com/fetchai/ledger-api-py)), which enables you to create and interact with addresses programmatically.
+Installing Pocketbook also installs the Python Ledger API ([GitHub repository](https://github.com/fetchai/ledger-api-py)), which enables you to create and interact with addresses programmatically.
 
-Let's get started with a simple Python program that generates an address and outputs the private key (hex and in bytes) and the address; you can add the latter to `pocketbook` or use to receive tokens from others.
+Let's get started with a simple Python program that generates an address and outputs the private key (hex and in bytes) and the address; you can add the latter to Pocketbook or use to receive tokens from others.
 
 ``` python
 from fetchai.ledger.api import LedgerApi, TokenApi
@@ -87,7 +87,7 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
 
 ## Adding an address to Pocketbook
 
-We may now want to add the address we just created (or another provided by other users) to `pocketbook`. Once an address is added, you can send tokens to it or query the balance. You can add existing addresses like this:
+We may now want to add the address we just created (or another provided by other users) to Pocketbook. Once an address is added, you can send tokens to it or query the balance. You can add existing addresses like this:
 
 ``` bash
 pocketbook -n <network> add <name-for-the-address> <address>
@@ -99,7 +99,7 @@ For our particular example:
 pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 ```
 
-It would be *our* responsibility to store the private key to this securely. Addresses generated inside `pocketbook` will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself).
+It would be *our* responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself).
 
 ## How to get testnet tokens
 
@@ -108,7 +108,7 @@ When you have an address, you'll need some tokens.
 There are three easy ways of getting tokens on testnet:
 
 1. *Use our new token tap!* Go here — https://explore-testnet.fetch.ai/tokentap — paste the Address in and press the DISPENSE button. Wait 30-60 seconds and voila, you'll have 10-500 test-FET just like that. Using our above example, you can send the above “free for all” account tokens by pasting `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5` into the address box.
-2. *Transfer tokens from another account you have!* It's easy, you can use `pocketbook` and it takes no time at all. Just use the `pocketbook -n testnet transfer destination_account_name AMOUNT source_account_name` syntax and you're done.
+2. *Transfer tokens from another account you have!* It's easy, you can use Pocketbook and it takes no time at all. Just use the `pocketbook -n testnet transfer destination_account_name AMOUNT source_account_name` syntax and you're done.
 3. *Ask in the [Fetch developer slack](https://join.slack.com/t/fetch-ai/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY)*. We have tons, and we're happy to send large amounts if you need them for specific contracts or tests. *Don't be shy*, we want you to get stuff done. It may take a day or two, but we'll do our best to make it quick.
 
 That's it for part 1, in which we've learned how to create addresses that work on testnet and mainnet, and how to get tokens for them.
