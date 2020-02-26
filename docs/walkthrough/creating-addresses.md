@@ -43,6 +43,10 @@ Enter password for key...:
 Confirm password for key.:
 ```
 
+It is the user's responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually, but you do need to back them up yourself. 
+
+Pocketbook stores all information in the `~/.pocketbook` folder on your computer. You can back this folder up entirely to store your encrypted private keys. We **strongly recommend** that you do this regularly and keep the backups in an encrypted safe place in order to provide a mechanism for recovering your accounts.
+
 ### Using the web test net wallet
 
 For testnet addresses only, you can also use our [web-based wallet](https://testnet-wallet.fetch.ai/). You will be prompted to enter the password for the address twice.
@@ -73,6 +77,7 @@ print ("    Address: ", Address(entity))
 ```
 
 For example, if you save the above file into a program called `generate_address.py`, you can run it and will get a result like this:
+
 ```
 $ python3 generate_address.py 
 Fetch.ai Address Generator v1.0
@@ -98,8 +103,6 @@ For our particular example:
 ``` bash
 pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 ```
-
-It would be *our* responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually (but you do need to back them up yourself).
 
 
 ## Listing an address balance
