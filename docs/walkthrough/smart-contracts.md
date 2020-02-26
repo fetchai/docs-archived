@@ -1,24 +1,21 @@
-# Deploying and interacting with smart contracts on Fetch.ai
+# Deploying and interacting with smart contracts
 
-Let’s talk a little about smart contracts and how we deploy them using Fetch, and the Python API. At the end of this part, you’ll understand how to deploy a contract and how to interact with it. You’ll be able to see it on the block explorer and view its source. We’ll go through this before falling back to talking about encryption and private key management: this way, we’ll have covered all the main things that you’ll want to do:
+In this tutorial, you'll understand how to deploy a contract and interact with it. You'll be able to see it on the block explorer and view its source. We'll go through this before falling back to talking about encryption and private key management.
 
-1. Generating addresses, in [part 1](../walkthrough/creating-addresses.md)
-2. Performing transactions, in [part 2](../walkthrough/transfers-and-balances.md)
-3. Deploying and interacting with contracts, in this part
+!!! note "What is a smart contract?"
+    A Smart Contract is an agreement with the terms defined as a computer program. The contract exists on a decentralised network, and its execution and transactions can be tracked by anyone and are irreversible. All parties involved can be defined and enforced by the contract and no central authority is required for it to operate.
 
-We’ll have explored the first two both programmatically in Python using our Ledger API, and using our command line tool `pocketbook`. 
+In practice, most people's interaction with a smart contract is through those that handle the issuance of tokens, such as the well known Ethereum [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md). Most token contracts are either:
 
-First things first. What _is_ a smart contract? You’ll find lots of different refinements out there on the definition, but effectively:
-
-> A Smart Contract is an agreement with the terms defined as a computer program. The contract exists on a decentralised network, and its execution and transactions can be tracked by anyone and are irreversible. All parties involved can be defined and enforced by the contract and no central authority is required for it to operate.
-
-In practice, most people’s interaction with a smart contract is through those that handle the issuance of *tokens*, such as the well known ethereum ERC20. Most token contracts are either _fungible_ or _non-fungible_. Non-fungible tokens (NFT) are like collectables: they cannot be split. An example would be a baseball collector’s card, you can’t cut it in half and have two that are worth 50% of the original. One of the most well-known of these is [Cryptokitties](https://www.cryptokitties.co/). Fungible can be split, and are used for most token issuance. The circulating supply, the issuance foundation and the list of where the tokens are are held and enforced by a smart contract. Most fungible tokens on ethereum are based on ERC20, and most NFTs ERC721. Non-native FET tokens are ERC20. 
+- Non-fungible tokens (NFT): These are like collectables, as they cannot be split; you can't cut a baseball collector's card and have two that are worth 50% of the original. One of the most well-known of these is [Cryptokitties](https://www.cryptokitties.co/). Most non-fungible tokens are [ERC721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
+- Fungible tokens (FT): Fungible can be split, and are used for most token issuance. The circulating supply, the issuance foundation and the list of where the tokens are are held and enforced by a smart contract. Most fungible tokens on Ethereum, including non-native FET tokens, are based on [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md).
 
 ## A simple token contract
 
-In today’s tutorial, we are going to deploy a simple fungible token contract and make some calls to it. We will then transfer some of our new tokens to some owners.
+In today's tutorial, we are going to deploy a simple fungible token contract and make some calls to it. We will then transfer some of our new tokens to some owners.
 
-First things first, let’s look at the Etch code for a simple fungible token:
+First things first, let's look at the Etch code for a simple fungible token:
+
 ```
 //------------------------------------------------------------------------------
 //
@@ -111,7 +108,7 @@ You can find the documentation on Etch at https://docs.fetch.ai/etch-language/
 
 ## Deploying and interacting with a contract
 
-Let’s now deploy our contract. Here’s some Python, which we’ll break down afterwards:
+Let's now deploy our contract. Here's some Python, which we'll break down afterwards:
 ```
 import sys
 from fetchai.ledger.api import LedgerApi, TokenApi
@@ -138,7 +135,7 @@ if 0 == len(contract_text):
 	sys.exit("Invalid contract")
 	
 # some simple stats, a bit messy, as the Python API does have this information
-# but it isn’t yet exposed (January 28th 2020). Future versions will expose actions
+# but it isn't yet exposed (January 28th 2020). Future versions will expose actions
 # and queries, so non-optimal parsers like the below will absolutely not be 
 # necessary!
 lines = 0
@@ -155,7 +152,7 @@ for line in contract_text.splitlines():
 # private key for deploying from 
 # *WARNING* putting an unencrypted private key in a script
 # is a terrible idea! Future tutorials will deal with this.
-entity = Entity(b’… your private key here …’)
+entity = Entity(b'… your private key here …')
 address = Address(entity)
 
 # perform the deployment now:
@@ -183,7 +180,7 @@ print (" Total supply:", contract.query(api, 'totalSupply'))
 print ("Owner balance:", contract.query(api, 'balanceOf', address=address))
 print ("Declared name:", contract.query(api, 'getName'))
 ```
-This assumes that you have saved the fungible token as `Fet1.etch`, and that you have added a private key where noted. If you then run the above, having taken these two steps, it will deploy the contract to testnet for you. You’ll see something like this:
+This assumes that you have saved the fungible token as `Fet1.etch`, and that you have added a private key where noted. If you then run the above, having taken these two steps, it will deploy the contract to testnet for you. You'll see something like this:
 ```
 $ python3 deploy.py
 Deploying contract: Fet1.etch 
@@ -206,7 +203,7 @@ Owner balance: 100000
 Declared name: Fet-1 Fungible token
 $
 ```
-So let’s look at some of the key things. You’ll recognise much of the code from the examples in [Part 1](LINK), but here’s the magic bit that actually deploys the contract to the Fetch ledger:
+So let's look at some of the key things. You'll recognise much of the code from the examples in [Part 1](LINK), but here's the magic bit that actually deploys the contract to the Fetch ledger:
 ```
 try:
 	contract = Contract(contract_text, entity)
@@ -214,9 +211,9 @@ try:
 except Exception as e:
 	sys.exit(e);
 ```
-The 600000 value is the gas fee for deployment. It’s in 10,000,000’s of a FET (canonical FET). The exception handler ensures that you see the error neatly if there are deployment issues.
+The 600000 value is the gas fee for deployment. It's in 10,000,000's of a FET (canonical FET). The exception handler ensures that you see the error neatly if there are deployment issues.
 
-After we’ve deployed, we’re able to get information about the contract out, such as its address. We use `contract.address` to recall the address on the ledger. This also ensures that we can easily interact with it in the future (although you can track this stuff down on the block explorer!)
+After we've deployed, we're able to get information about the contract out, such as its address. We use `contract.address` to recall the address on the ledger. This also ensures that we can easily interact with it in the future (although you can track this stuff down on the block explorer!)
 
 We then call all three of the `@query`s in the contract:
 ```
@@ -224,7 +221,7 @@ print (" Total supply:", contract.query(api, 'totalSupply'))
 print ("Owner balance:", contract.query(api, 'balanceOf', address=address))
 print ("Declared name:", contract.query(api, 'getName'))
 ```
-Note that we’re getting the balance of the contract’s owner, which will be _all the tokens_, at this stage. If all has worked, you’ll see the total supply and balance as the same values. We then call the `@action` to send some tokens to another address:
+Note that we're getting the balance of the contract's owner, which will be _all the tokens_, at this stage. If all has worked, you'll see the total supply and balance as the same values. We then call the `@action` to send some tokens to another address:
 ```
 # Now send someone some tokens:
 target_for_tokens = Address('2pMdjmCczv3n1cF7kWSLV4cBSgXt6VmiudzhxGFNnNPJwBUAv9')
@@ -240,7 +237,7 @@ print ('       TX hash:', tx_hash)
 print (' Owner balance:', contract.query(api, 'balanceOf', address=address))
 print ('Target balance:', contract.query(api, 'balanceOf', address=target_for_tokens))
 ```
-So let’s unpack what’s going on here. Firstly, we’re declaring an address that we’re going to be sending some tokens to. Then we use `contract.action` to create the transaction to perform the action. The return from this is the *transaction hash*. You can add a `0x` to the front of this and look it up in the appropriate block explorer to see details (https://explore.fetch.ai for mainnet and https://explore-testnet.fetch.ai for testnet). We then use `api.sync` with this transaction hash so that we can wait for it to complete, and therefore show any errors that might occur. Assuming all is good, then we’ll show the transaction’s hash and then the owner and target balance after the operation. In the above case, we see this:
+So let's unpack what's going on here. Firstly, we're declaring an address that we're going to be sending some tokens to. Then we use `contract.action` to create the transaction to perform the action. The return from this is the *transaction hash*. You can add a `0x` to the front of this and look it up in the appropriate block explorer to see details (https://explore.fetch.ai for mainnet and https://explore-testnet.fetch.ai for testnet). We then use `api.sync` with this transaction hash so that we can wait for it to complete, and therefore show any errors that might occur. Assuming all is good, then we'll show the transaction's hash and then the owner and target balance after the operation. In the above case, we see this:
 ```
 Attempting to transfer 100 tokens to  2pMdjmCczv3n1cF7kWSLV4cBSgXt6VmiudzhxGFNnNPJwBUAv9
 
@@ -255,12 +252,12 @@ Neat, eh?
 
 ## Interacting with an already deployed contract
 
-So, obviously, there is a catch with what we’ve done. Once the program completes, we no longer have a way of interacting with the contract that we’ve deployed, so we can’t send _more_ tokens to _someone else_ at a later date. Well, actually, we can! And we do it as a two-step process:
+So, obviously, there is a catch with what we've done. Once the program completes, we no longer have a way of interacting with the contract that we've deployed, so we can't send _more_ tokens to _someone else_ at a later date. Well, actually, we can! And we do it as a two-step process:
 
 1. We serialise out the contract that we create as a JSON file when we do the initial deployment
 2. We read a contract object from the serialised JSON file and then interact with that
 
-So let’s look at how we do this:
+So let's look at how we do this:
 ```
 try:
 	contract = Contract(contract_text, entity)
@@ -272,7 +269,7 @@ try:
 except Exception as e:
 	sys.exit(e);
 ```
-This replaces the code which does the contract create at the moment. You’ll see that now, we’ve added two extra lines that will save the contract as a JSON file. We can _reconstitute_ the contract from this file to allow us to interact with it further. Here is a new Python script which you can save as `interact_with_existing.py`:
+This replaces the code which does the contract create at the moment. You'll see that now, we've added two extra lines that will save the contract as a JSON file. We can _reconstitute_ the contract from this file to allow us to interact with it further. Here is a new Python script which you can save as `interact_with_existing.py`:
 ```
 import sys
 from fetchai.ledger.api import LedgerApi, TokenApi
@@ -335,9 +332,9 @@ Transfer of tokens complete:
 Target balance: 200
 $
 ```
-Now this is all a “bit manual” at this stage. We don’t have command line parameters for interacting sensibly, we have to edit files all the time, and we’re storing the private key in the file, but we do have *all the components* in this tutorial to 1) create a contract, 2) interact with it, 3) save it for later interactions and 4) load it for subsequent interactions. 
+Now this is all a “bit manual” at this stage. We don't have command line parameters for interacting sensibly, we have to edit files all the time, and we're storing the private key in the file, but we do have *all the components* in this tutorial to 1) create a contract, 2) interact with it, 3) save it for later interactions and 4) load it for subsequent interactions.
 
-It’s pretty straightforward to deploy a token contract using this tutorial, and we recommend that you do. If you mention your token details in the developer Slack, you may find an interest in collecting them for testing purposes! 
+It's pretty straightforward to deploy a token contract using this tutorial, and we recommend that you do. If you mention your token details in the developer Slack, you may find an interest in collecting them for testing purposes!
 
-As with previous examples, everything you see above will work on both main net and testnet — just change the `api = LedgerApi(network=’testnet’)` line accordingly.
+As with previous examples, everything you see above will work on both main net and testnet — just change the `api = LedgerApi(network='testnet')` line accordingly.
 
