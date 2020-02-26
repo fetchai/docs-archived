@@ -27,6 +27,8 @@ For details of how to use Pocketbook, you can use its help option `-h`.
 
 ## Creating a new address
 
+You can use any of the following methods to create an address.
+
 ### Using Pocketbook
 
 Simply run the following command:
