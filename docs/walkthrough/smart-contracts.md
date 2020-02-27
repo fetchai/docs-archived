@@ -84,29 +84,33 @@ Address: 2VRHNEDBNfgind7NLmgcGbSvCqc4LX8bMt9Tw9gfyMyk5HXjFS
  Output: Hello world
 ```
 
+!!! note
+    As with previous examples, everything you see above works on both mainnet and testnet — just change the `api = LedgerApi(network='testnet')` line accordingly.
+
 
 ## Interacting with an already deployed contract
 
-So, obviously, there is a catch with what we've done. Once the program completes, we no longer have a way of interacting with the contract that we've deployed, so we can't send _more_ tokens to _someone else_ at a later date. Well, actually, we can! And we do it as a two-step process:
+There is a catch with the way we have deployed the contract. Once the program completes, we no longer have a way of interacting with the contract! We need to make some changes to our code to:
 
-1. We serialise out the contract that we create as a JSON file when we do the initial deployment
-2. We read a contract object from the serialised JSON file and then interact with that
+1. Serialise the contract as a JSON file when we do the initial deployment
+2. Read a contract object from the serialised JSON file and then interact with that
 
 So let's look at how we do this:
 
 ``` python
 try:
 	contract = Contract(contract_text, entity)
-	api.sync(contract.create(api, entity, 600000), None, 0)
+	gas_fee = 600000
+	api.sync(contract.create(api, entity, gas_fee), None, 0)
 	
-	with open('contract_data.json', 'w') as contract_info:
+	with open('hello_contract.json', 'w') as contract_info:
 		contract.dump(contract_info)
 
 except Exception as e:
 	sys.exit(e);
 ```
 
-This replaces the code which does the contract create at the moment. You'll see that now, we've added two extra lines that will save the contract as a JSON file. We can _reconstitute_ the contract from this file to allow us to interact with it further. Here is a new Python script which you can save as `interact_with_existing.py`:
+You will see that we have added two extra lines that will save the contract as a JSON file. We can "reconstitute" the contract from this file to allow us to interact with it further. Here is a new Python script which you can save as `interact_with_existing.py`:
 
 ``` python
 import sys
@@ -114,68 +118,35 @@ from fetchai.ledger.api import LedgerApi, TokenApi
 from fetchai.ledger.contract import Contract
 from fetchai.ledger.crypto import Entity, Address
 
-# this gets us an API connected to the testnet endpoint:
+# Connect the API to the testnet
 try:
 	api = LedgerApi(network="testnet")
 except Exception as e:
 	sys.exit(e)
 
-# create a contract from our previously saved one:
+# Create a contract from our previously saved one
+contract_name = 'hello_contract.json'
 try:
-	with open('contract_data.json', 'r') as contract_info:
+	with open(contract_name, 'r') as contract_info:
 		contract = Contract.load(contract_info)
 except Exception as e:
 	sys.exit(e)
 
-# us as owner, with private key:	
-entity = Entity(b'4\x1f\x00\xf7\x89\x00c\xee\xfd5h\xf2\xf5\xc7\xc3\x10\x80/\xd3+:\x15\xa1\x11\xac\x0f\xbf\xb4\xa6\\\xe0{')
+# Private key of the address to deploy from
+# WARNING: Unencrypted private keys should not be present in production code
+entity = Entity(b'... your private key here ...')
 address = Address(entity)
 
-# let's show stats, and then send some more tokens:
-print ('\nCurrent token status:\n')
-print (" Total supply:", contract.query(api, 'totalSupply'))
-print ("Owner balance:", contract.query(api, 'balanceOf', address=address))
-print ("Declared name:", contract.query(api, 'getName'))
-
-# Now send someone some tokens:
-target_for_tokens = Address('2pMdjmCczv3n1cF7kWSLV4cBSgXt6VmiudzhxGFNnNPJwBUAv9')
-print ('\nAttempting to transfer 100 tokens to ', target_for_tokens)
-try:
-	tx_hash = contract.action(api, 'transfer', 60000, [entity], address, target_for_tokens, 100)
-	api.sync(tx_hash)
-except Exception as e:
-	sys.exit(e);
-
-print ('\nTransfer of tokens complete:\n')
-print ('          TX hash:', tx_hash)
-print (' Owner balance:', contract.query(api, 'balanceOf', address=address))
-print ('Target balance:', contract.query(api, 'balanceOf', address=target_for_tokens))
+# Confirm by querying the contract
+print ("Querying existing contract:", contract_name, '\n')
+print ("Output:", contract.query(api, 'sayHello'))
 ```
 
-And when run, we now load the previously deployed contract and transfer an additional 100 tokens to the same address as we did in the creation script:
+And when run, the output should look like the following:
 
 ``` bash
 $ python3 interact_with_existing.py
 
-Current token status:
-
- Total supply: 100000
-Owner balance: 99900
-Declared name: Fet-1 Fungible token
-
-Attempting to transfer 100 tokens to  2pMdjmCczv3n1cF7kWSLV4cBSgXt6VmiudzhxGFNnNPJwBUAv9
-
-Transfer of tokens complete:
-
-          TX hash: f5b2277cf779b6b5a91b48c790f889a0e2599d3b6559933f823f13d227e46fa2
- Owner balance: 99800
-Target balance: 200
-$
+Querying existing contract: hello_contract.json
+Output: Hello world
 ```
-
-Now this is all a "bit manual” at this stage. We don't have command line parameters for interacting sensibly, we have to edit files all the time, and we're storing the private key in the file, but we do have *all the components* in this tutorial to 1) create a contract, 2) interact with it, 3) save it for later interactions and 4) load it for subsequent interactions.
-
-It's pretty straightforward to deploy a token contract using this tutorial, and we recommend that you do. If you mention your token details in the developer Slack, you may find an interest in collecting them for testing purposes!
-
-As with previous examples, everything you see above will work on both main net and testnet — just change the `api = LedgerApi(network='testnet')` line accordingly.
-
