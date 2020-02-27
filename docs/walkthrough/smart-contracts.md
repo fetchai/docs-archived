@@ -150,3 +150,12 @@ $ python3 interact_with_existing.py
 Querying existing contract: hello_contract.json
 Output: Hello world
 ```
+
+## Learn more about smart contract development
+
+You can check the following for more interesting smart contract examples:
+
+* [Fungible token contract example](/tutorials/fet1.md)
+* [Synergetic contracts](/smart-contracts/executing-synergetic-code.md), one of our experimental features
+
+We also have an [Etch playground](https://build.fetch.ai) that you can use to learn the Etch language. Please note that we don't recommend it as the environment to develop contracts.
