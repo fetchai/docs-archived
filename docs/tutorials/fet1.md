@@ -1,39 +1,32 @@
-# Create a FIP-1 contract
+# Create a token smart contract
 
-The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the the Python API.
+Most people interact with smart contracts that handle the issuance of tokens, such as the well known Ethereum [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md). Most token contracts are either:
 
-Details for running a node are <a href="/getting-started/run-a-node/" target=_blank>here</a>.
+- Non-fungible tokens (NFT): These are like collectables, as they cannot be split; you can't cut a baseball collector's card and have two that are worth 50% of the original. One of the most well-known of these is [Cryptokitties](https://www.cryptokitties.co/). Most non-fungible tokens are [ERC721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
+- Fungible tokens (FT): Fungible can be split, and are used for most token issuance. The circulating supply, the issuance foundation and the list of where the tokens are are held and enforced by a smart contract. Most fungible tokens on Ethereum, including non-native FET tokens, are based on [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md).
 
-Details of the Python API are <a href="/getting-started/python-api-install/" target=_blank>here</a>.
+In this tutorial, we are going to deploy a simple fungible token contract and make some calls to it. We will then transfer some of our new tokens to some owners.
 
-## Requirements
+!!! note
+    As Fetch.ai smart contracts do not have implicit addresses (as in Ethereum), the function signatures are slightly different, but the overall functionality remains the same.
 
-The FIP-1 contract implements the following functions:
-
--   `totalSupply() : UInt256` gets the total token supply.
--   `balanceOf(owner: Address): UInt256` gets the balance of an account having address `owner`.
--   `transfer(to: Address, value: UInt256) : Bool` sends `value` amount of tokens to address `to`.
-
-We now go ahead and implement most of these functions.
-
-<div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>As Fetch.ai smart contracts do not have implicit addresses, as in Ethereum, the function signatures are slightly different, as  will see below, but the overall functionality remains the same.</p>
-</div>
 
 ## Initialisation function
 
 We first define the contract constructor function which is annotated with the `@init` keyword. The `@init` annotation tells the ledger that the function should be invoked upon initial deployment of the contract:
 
-```c++
+``` java
+persistent sharded balance_state : UInt64;
+persistent supply_state : UInt64;
+
 @init
 function init(owner: Address)
 
     use supply_state;
     use balance_state[owner];
 
-    supply_state.set(92817u64);
-    balance_state.set(owner, 92817u64);
+    supply_state.set(100000u64);
+    balance_state.set(owner, 100000u64);
 
 endfunction
 ```
@@ -44,19 +37,27 @@ The above `@init` function creates a state for the `owner` issuing `supply` toke
 
 Furthermore, for this specific contract we have made the total supply programmable so that the contract can be reused and to facilitate testing.
 
+
 ## Queries
 
-The FIP-1 contract has three query functions:
+Functions labeled with `@query` do not alter state, and they return a value to the caller. There can be many of these in a single contract. In this contract, they are used to return the contract name, total supply, and get the balance of an address.
 
--   `totalSupply(): UInt256`.
--   `balanceOf(owner: Address) : UInt256`.
--   `transfer(from: Address, to: Address, value: UInt256) : Bool`.
+`getName` simply returns the contract name without further calculations:
 
-We will define `totalSupply` and `balanceOf` in this section and discuss `transfer` later on.
+``` java
+@query
+function getName(): String
 
-Both `totalSupply` and `balanceOf` are straightforward to implement. `totalSupply` queries the `State` variable `total_supply` and returns it as a result:
+    return "FIP-1 fungible token";
 
-```c++
+endfunction
+```
+
+The other two query mechanisms demonstrate two different ways of handling undefined states.
+
+`totalSupply` queries the state variable `total_supply` and returns it as a result:
+
+``` java
 @query
 function totalSupply(): UInt64
 
@@ -64,12 +65,11 @@ function totalSupply(): UInt64
     return supply_state.get();
 
 endfunction
-
 ```
 
-`balanceOf`, on the other hand uses the `sharded state` of `balance_state` and does a dynamic look up based on the address of `address`:
+On the other hand, `balanceOf` uses the sharded state of `balance_state` and does a dynamic look up based on an `address`. If the variable does not exist, it returns `0`.
 
-```c++
+``` java
 @query
 function balanceOf(address: Address) : UInt64
     
@@ -79,28 +79,22 @@ function balanceOf(address: Address) : UInt64
 endfunction
 ```
 
-These two query mechanisms demonstrate two different ways of handling undefined states.
-
-In the first query, we request the `total_supply` by calling `get` on the state variable and supplying a default value if the state does not exist.
-
-In the second query, we manually check whether the variable existed at the beginning of the contract call and if not, we return `0`.
-
-Both are valid ways to manage a state existence.
 
 ## Actions
 
-The FIP-1 contract defines one function annotated with `@action`:
+The FIP-1 contract defines one function annotated with `@action`. Actions can alter state and return a value. Like with queries, a contract can contain many of these.
 
--   `transfer(from: Address, to: Address, value: UInt256) : Bool`.
+The only action in this contract transfers an amount between two different addresses. The source of the transfer has to be the caller of the `@action`, and the function is responsible for checking that the source address has signed the transaction.
 
-
-In `transfer`, `from` and `to` are explicit function arguments and whether these addresses signed the transaction is checked within the `@action` function.
-
-```c++
+``` java
 @action
 function transfer(from: Address, to: Address, value: UInt64) : Bool
 
     if(!from.signedTx())
+      return false;
+    endif
+
+    if(from == to)
       return false;
     endif
 
@@ -122,7 +116,8 @@ function transfer(from: Address, to: Address, value: UInt64) : Bool
 endfunction
 ```
 
-The above demonstrates one of the simplest possible token contracts keeping a balance associated with each address and allowing transfers from one address to the other if the address holds sufficient tokens.
+The above demonstrates one of the simplest possible token contracts, keeping a balance associated with each address and allowing transfers from one address to another as long as the source address holds sufficient tokens.
+
 
 ## Implementing allowance
 
@@ -132,7 +127,7 @@ To create this functionality we could use the normal `State` object by simply de
 
 Implementing the `approve` mechanism using the `ShardedState` is relatively easy as it provides dictionary-like functionality:
 
-```c++
+``` java
 @action
 function approve(owner: Address, spender: Address, value: UInt256) : Bool
 
@@ -147,7 +142,7 @@ The above builds object addresses by concatenating the `spender` address with th
 
 Finally, implementing a query mechanism is equally straight forward:
 
-```c++
+``` java
 @query
 function allowance(owner: Address, spender: Address) : UInt256
 
