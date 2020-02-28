@@ -5,7 +5,7 @@ Most people interact with smart contracts that handle the issuance of tokens, su
 - Non-fungible tokens (NFT): These are like collectables, as they cannot be split; you can't cut a baseball collector's card and have two that are worth 50% of the original. One of the most well-known of these is [Cryptokitties](https://www.cryptokitties.co/). Most non-fungible tokens are [ERC721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
 - Fungible tokens (FT): Fungible can be split, and are used for most token issuance. The circulating supply, the issuance foundation and the list of where the tokens are are held and enforced by a smart contract. Most fungible tokens on Ethereum, including non-native FET tokens, are based on [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md).
 
-In this tutorial, we are going to deploy a simple fungible token contract and make some calls to it. We will then transfer some of our new tokens to some owners.
+In this tutorial, we are going to develop a fungible token contract.
 
 !!! note
     As Fetch.ai smart contracts do not have implicit addresses (as in Ethereum), the function signatures are slightly different, but the overall functionality remains the same.
@@ -116,12 +116,12 @@ function transfer(from: Address, to: Address, value: UInt64) : Bool
 endfunction
 ```
 
-The above demonstrates one of the simplest possible token contracts, keeping a balance associated with each address and allowing transfers from one address to another as long as the source address holds sufficient tokens.
+You can find the full contract [here](https://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch).
 
 
 ## Implementing allowance
 
-So far, the functions we've seen constitute a basic token contract that allows creation of tokens and transfer between participants. A more interesting functionality is the `allowance` mechanism in the FIP-1 contract that gives one address the possibility of spending some amount based on the allowance details.
+So far, the functions we have seen constitute a basic token contract to create and transfer tokens between participants. A more interesting functionality is the `allowance` mechanism in the FIP-1 contract, that gives one address the possibility of spending some amount based on the allowance details.
 
 To create this functionality we could use the normal `State` object by simply defining the object identifiers. However, a more appropriate mechanism for this purpose is the `ShardedState` which ensures that the payload is assigned to an appropriate shard within the system.
 
@@ -152,8 +152,6 @@ function allowance(owner: Address, spender: Address) : UInt256
 endfunction
 ```
 
-The contract provided here obviously still need additional functionality for `allowance` to be truly useful as we have not implemented any method to actually spend the allowance.
-
-You can find the full contract within <a href="https://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch" target=_blank>here</a>.
+The contract provided here still needs additional functionality for `allowance` to be truly useful, as we have not implemented any method to actually spend the allowance.
 
 <br/>
