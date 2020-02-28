@@ -3,18 +3,19 @@
     <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
   </div>
 
-    <a id="qs" href="getting-started/quickstart/">
-      <div class="grid-item item2">
-        <h3>Quickstart</h3>
-        <p> If you want to get moving quickly, this is the place.  </p>
-      </div>
+    <a id="aea" href="aea/quickstart" class="grid-item item2">
+      <h3>Developing agents</h3>
+      <p>Speed up the development of Autonomous Economic Agents using our framework</p>
+    </a>
+
+    <a id="ledg" href="walkthrough" class="grid-item item3">
+      <h3>Using the ledger</h3>
+      <p>Learn how to make transfers, deploy smart contracts, etc</p>
     </a>
     
-    <a id="tut" href="./tutorials/" class="grid-item item3 tutorials">
-      <h3>Tutorials</h3>
-            
-      <p> Once you're all setup with Fetch.ai, go here to see and build following excellent tutorials. </p>
-
+    <a id="run" href="ledger/installation/installation-ubuntu" class="grid-item item4">
+      <h3>Deploying a node</h3>
+      <p>Run your own local node</p>
     </a>
 
   <div class="grid-item item_whole_row no-padding">
@@ -28,8 +29,6 @@
       <li>Framework for rapid development of Autonomous Economic Agents (AEAs) that can be deployed in any device</li>
       <li>Support for fixed-point arithmetics to guarantee precision and determinism across all operations and transactions</li>
     </ul>
-    <p><a href="https://fetch.ai/wp-content/uploads/2019/10/technical-introduction.pdf">Whitepaper > </a></p> 
-    <p><a href="https://medium.com/fetch-ai/a-gentle-introduction-to-the-fetch-ai-framework-990b487de4d">Gentle Introduction > </a></p>
   </div>
 
   <div class="grid-item item_whole_row no-padding">
