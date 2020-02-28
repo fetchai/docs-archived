@@ -1,6 +1,6 @@
 # Making transfers
 
-In order to make transfers in the network, you first need to create an address. Please see the [tutorial](/walkthrough/creating-addresses) describing several available ways to do so. We'll be using the address we minted in that tutorial, `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5`. Note that if you use the same address, we might all be fighting over the same test tokens! :)
+In order to make transfers in the network, you first need to create an address. Please see the [tutorial](/ledger/walkthrough/creating-addresses) describing several available ways to do so. We'll be using the address we minted in that tutorial, `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5`. Note that if you use the same address, we might all be fighting over the same test tokens! :)
 
 ## Using Pocketbook
 You can use Pocketbook to send tokens to someone who has provided you with their address, but obviously you won't know their private key. In order to do so, you need to use a command like the following:

@@ -33,7 +33,7 @@ We will execute the example below against a local ledger node. Instructions for 
 
 <div class="admonition tip">
   <p class="admonition-title">Tip</p>
-  <p>Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/smart-contracts/pipenv/" target=_blank>here</a> for updates.</p>
+  <p>Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/ledger/smart-contracts/pipenv/" target=_blank>here</a> for updates.</p>
 </div>
 
 ## `getContext()`, `block()`, and `blockNumber()`
