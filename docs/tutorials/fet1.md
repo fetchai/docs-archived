@@ -2,9 +2,9 @@
 
 The following tutorial assumes that you already have a `constellation` instance running on port `8100` and that you have installed the the Python API.
 
-Details for running a node are <a href="/getting-started/run-a-node/" target=_blank>here</a>.
+Details for running a node are <a href="/ledger/running-a-constellation/" target=_blank>here</a>.
 
-Details of the Python API are <a href="/getting-started/python-api-install/" target=_blank>here</a>.
+Details of the Python API are <a href="/ledger/python-ledger-api/python-api-install/" target=_blank>here</a>.
 
 ## Requirements
 

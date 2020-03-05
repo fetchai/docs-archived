@@ -4,7 +4,7 @@
     A Smart Contract is an agreement with the terms defined as a computer program. The contract exists on a decentralised network, and its execution and transactions can be tracked by anyone and are irreversible. All parties involved can be defined and enforced by the contract and no central authority is required for it to operate.
 
 
-In this tutorial, we are going to deploy a simple "Hello world" smart contract developed in [Etch](/etch-language/) (the Fetch.ai smart contract language) and interact with it.
+In this tutorial, we are going to deploy a simple "Hello world" smart contract developed in [Etch](/ledger/etch-language/) (the Fetch.ai smart contract language) and interact with it.
 
 ``` c++
 @query
@@ -155,7 +155,7 @@ Output: Hello world
 
 You can check the following for more interesting smart contract examples:
 
-* [Fungible token contract example](/tutorials/fet1.md)
-* [Synergetic contracts](/smart-contracts/executing-synergetic-code.md), one of our experimental features
+* [Fungible token contract example](/tutorials/fet1)
+* [Synergetic contracts](/ledger/smart-contracts/executing-synergetic-code), one of our experimental features
 
 We also have an [Etch playground](https://build.fetch.ai) that you can use to learn the Etch language. Please note that we don't recommend it as the environment to develop contracts.

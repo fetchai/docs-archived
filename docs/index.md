@@ -8,7 +8,7 @@
       <p>Speed up the development of Autonomous Economic Agents using our framework</p>
     </a>
 
-    <a id="ledg" href="walkthrough" class="grid-item item3">
+    <a id="ledg" href="ledger/walkthrough" class="grid-item item3">
       <h3>Using the ledger</h3>
       <p>Learn how to make transfers, deploy smart contracts, etc</p>
     </a>

@@ -1,6 +1,6 @@
 # Getting testnet tokens
 
-In order to get testnet tokens, you first need to create an address. Please see the [tutorial](/walkthrough/creating-addresses) describing several available ways to do so.
+In order to get testnet tokens, you first need to create an address. Please see the [tutorial](/ledger/walkthrough/creating-addresses) describing several available ways to do so.
 
 When you have an address, you'll need some tokens to operate in the network. There are three easy ways of getting tokens on testnet.
 
@@ -8,7 +8,7 @@ When you have an address, you'll need some tokens to operate in the network. The
 
 Please visit the [token tap page](https://explore-testnet.fetch.ai/tokentap) in our testnet block explorer, paste the address in and press the DISPENSE button. Wait 30-60 seconds and voila, you'll have 10-500 test-FET just like that.
 
-Using the example account from the [tutorial about creating addresses](/walkthrough/creating-addresses), you can send the above "free for all" account tokens by pasting  `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5` into the address box.
+Using the example account from the [tutorial about creating addresses](/ledger/walkthrough/creating-addresses), you can send the above "free for all" account tokens by pasting  `2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5` into the address box.
 
 ## Transferring tokens from another account you have
 

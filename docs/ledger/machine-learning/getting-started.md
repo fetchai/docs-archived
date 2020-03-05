@@ -2,7 +2,7 @@
 
 Let's look at an example of how to use the Fetch.ai machine learning library to train a neural network in a standalone application. This example will predict house prices for the Boston Housing Dataset, which can be downloaded from [here](http://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html).
 
-The implementation is based on the [Etch language](/etch-language), which is also used to write smart contracts on the Fetch.ai ledger; you saw a very brief example in the previous section. Instructions to set up an Etch development environment can be found [here](/etch-language/getstarted/).
+The implementation is based on the [Etch language](/ledger/etch-language), which is also used to write smart contracts on the Fetch.ai ledger; you saw a very brief example in the previous section. Instructions to set up an Etch development environment can be found [here](/ledger/etch-language/getstarted/).
 
 ## Loading input data
 
