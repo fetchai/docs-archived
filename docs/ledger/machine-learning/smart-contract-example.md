@@ -1,7 +1,7 @@
 
 # AI in Smart Contracts
 
-[The quickstart example](/getting-started/quickstart#training-a-neural-network) demonstrates how to train and execute neural networks in the Etch language locally. This example focuses on reworking that example as a smart contract that can be executed entirely on-chain.
+[The quickstart example](/ledger/machine-learning/getting-started) demonstrates how to train and execute neural networks in the Etch language locally. This example focuses on reworking that example as a smart contract that can be executed entirely on-chain.
 
 ``` c++
 // initial set up creates the model and persistent data
@@ -58,7 +58,7 @@ The main differences from the previous etch example are:
 
 The ledger maintains a state database for smart contracts to store objects. In this example we indicate our intention to access the model in the state database with `use model_state`, we store our model in the state database using `set()`, and we recover it for use with `get()`. It's important to consider carefully what make sense to store in the state database, and what should be managed locally.
 
-A full explanation of persistent storage is given <a href="/etch-language/persistent-globals" target=_blank>here</a>.
+A full explanation of persistent storage is given <a href="/ledger/etch-language/persistent-globals" target=_blank>here</a>.
 
 ### Separately callable functions
 
@@ -119,6 +119,6 @@ function setModel(in_model: String)
 endfunction
 ```
 
-To take this idea further, we may wish to perform most of the expensive work off-chain but automate/manage it on-chain. This would be an ideal application for a <a href="/machine-learning/synergetic-contract-example" target=_blank>synergetic contract</a>.
+To take this idea further, we may wish to perform most of the expensive work off-chain but automate/manage it on-chain. This would be an ideal application for a <a href="/ledger/machine-learning/synergetic-contract-example" target=_blank>synergetic contract</a>.
 
 <br />

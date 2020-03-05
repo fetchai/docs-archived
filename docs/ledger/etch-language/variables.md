@@ -560,7 +560,7 @@ For more information on the integer size ranges, please see the <a href="https:/
 
 `etch` scripts have no traditional global variables. They do, however, have persistent global types that represent any `State` or `ShardedState` type residing on the Fetch.ai Ledger.
 
-Find out more about persistent global types <a href="/etch-language/persistent-globals/" target=_blank>here.</a>
+Find out more about persistent global types <a href="/ledger/etch-language/persistent-globals/" target=_blank>here.</a>
 
 ## Null
 

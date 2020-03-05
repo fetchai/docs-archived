@@ -54,7 +54,7 @@ You can call `transfer()` from a synergetic contract currently invoking against 
 
 ## Example
 
-Let's execute an example against a local ledger node. Instructions for starting up a ledger node are <a href="/../getting-started/run-a-node/" target=_blank>here</a>.
+Let's execute an example against a local ledger node. Instructions for starting up a ledger node are <a href="/ledger/running-a-constellation/" target=_blank>here</a>.
 
 ### `etch` smart contract code
 
@@ -96,7 +96,7 @@ endfunction
 
 <div class="admonition tip">
   <p class="admonition-title">Tip</p>
-  <p>Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/smart-contracts/pipenv/" target=_blank>here</a> for updates.</p>
+  <p>Full and complete documentation for the <a href="https://github.com/fetchai/ledger-api-py" target=_blank>Python Ledger API</a> is currently in development. Please check <a href="/ledger/smart-contracts/pipenv/" target=_blank>here</a> for updates.</p>
 </div>
 
 This beautiful example show how smart contracts may interact with each other.
