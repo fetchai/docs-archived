@@ -178,6 +178,12 @@
 </li>
  
 <li>
+    <a href="../identity/" id="aea-identity-"
+        >Identity</a
+    >
+</li>
+ 
+<li>
     <a href="../trust/" id="aea-trust-"
         >Trust issues</a
     >
@@ -256,6 +262,12 @@
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
         >Frontend intergration</a
+    >
+</li>
+ 
+<li>
+    <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
+        >HTTP Connection</a
     >
 </li>
 
@@ -408,6 +420,12 @@
 <li>
     <a href="../decision-maker-transaction/" id="aea-decision-maker-transaction-"
         >Create decision-maker transaction</a
+    >
+</li>
+ 
+<li>
+    <a href="../deployment/" id="aea-deployment-"
+        >Deployment</a
     >
 </li>
 
@@ -970,7 +988,9 @@
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response
 <div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;multiplexer,some_agent,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.1.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello&quot;</span>
+        <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
 
@@ -1048,7 +1068,9 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;multiplexer,some_agent,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.1.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello&quot;</span>
+        <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
 

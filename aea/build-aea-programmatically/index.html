@@ -178,6 +178,12 @@
 </li>
  
 <li>
+    <a href="../identity/" id="aea-identity-"
+        >Identity</a
+    >
+</li>
+ 
+<li>
     <a href="../trust/" id="aea-trust-"
         >Trust issues</a
     >
@@ -256,6 +262,12 @@
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
         >Frontend intergration</a
+    >
+</li>
+ 
+<li>
+    <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
+        >HTTP Connection</a
     >
 </li>
 
@@ -408,6 +420,12 @@
 <li>
     <a href="../decision-maker-transaction/" id="aea-decision-maker-transaction-"
         >Create decision-maker transaction</a
+    >
+</li>
+ 
+<li>
+    <a href="../deployment/" id="aea-deployment-"
+        >Deployment</a
     >
 </li>
 
@@ -935,14 +953,11 @@
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-
-<span class="kn">import</span> <span class="nn">yaml</span>
 </pre></div>
 
 <p>Then, import the application specific libraries.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
 <span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
-<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolConfig</span><span class="p">,</span> <span class="n">PublicId</span>
 <span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
@@ -950,7 +965,6 @@
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
-<span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
 <span class="kn">from</span> <span class="nn">aea.registries.base</span> <span class="kn">import</span> <span class="n">Resources</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 </pre></div>
@@ -995,19 +1009,8 @@
 </pre></div></p>
 <p>Create the default protocol and add it to the AEA.
 <div class="highlight"><pre><span></span>    <span class="c1"># Add the default protocol (which is part of the AEA distribution)</span>
-    <span class="n">default_protocol_configuration</span> <span class="o">=</span> <span class="n">ProtocolConfig</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
-        <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span>
-            <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;protocol.yaml&quot;</span><span class="p">))</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="p">(</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/default:0.1.0&quot;</span><span class="p">),</span>
-        <span class="n">DefaultSerializer</span><span class="p">(),</span>
-        <span class="n">default_protocol_configuration</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">resources</span><span class="o">.</span><span class="n">protocol_registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/default:0.1.0&quot;</span><span class="p">),</span> <span class="n">default_protocol</span>
-    <span class="p">)</span>
+    <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">))</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">default_protocol</span><span class="p">)</span>
 </pre></div></p>
 <p>Create the error skill (needed by all AEAs) and the echo skill which will bounce our messages back to us, and add them both to the AEA.
 <div class="highlight"><pre><span></span>    <span class="c1"># Add the error skill (from the local packages dir) and the echo skill (which is part of the AEA distribution)</span>
@@ -1033,7 +1036,9 @@
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)
 <div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;my_aea,other_agent,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.1.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello&quot;</span>
+        <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1055,8 +1060,8 @@
 </pre></div></p>
 <h2 id="running-the-aea">Running the AEA</h2>
 <p>If you now run this python script file, you should see this output:</p>
-<pre><code>input message: my_aea,other_agent,fetchai/default:0.1.0,{"type": "bytes", "content": "aGVsbG8="}
-output message: other_agent,my_aea,fetchai/default:0.1.0,{"type": "bytes", "content": "aGVsbG8="}
+<pre><code>input message: my_aea,other_agent,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hello
+output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hello
 </code></pre>
 <h2 id="entire-code-listing">Entire code listing</h2>
 <p>If you just want to copy and past the entire script in you can find it here:</p>
@@ -1067,11 +1072,8 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,{"type": "bytes", "cont
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
-<span class="kn">import</span> <span class="nn">yaml</span>
-
 <span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
 <span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
-<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolConfig</span><span class="p">,</span> <span class="n">PublicId</span>
 <span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
@@ -1079,7 +1081,6 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,{"type": "bytes", "cont
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
-<span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
 <span class="kn">from</span> <span class="nn">aea.registries.base</span> <span class="kn">import</span> <span class="n">Resources</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
@@ -1116,19 +1117,8 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,{"type": "bytes", "cont
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">],</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
 
     <span class="c1"># Add the default protocol (which is part of the AEA distribution)</span>
-    <span class="n">default_protocol_configuration</span> <span class="o">=</span> <span class="n">ProtocolConfig</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
-        <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span>
-            <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;protocol.yaml&quot;</span><span class="p">))</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="p">(</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/default:0.1.0&quot;</span><span class="p">),</span>
-        <span class="n">DefaultSerializer</span><span class="p">(),</span>
-        <span class="n">default_protocol_configuration</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">resources</span><span class="o">.</span><span class="n">protocol_registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/default:0.1.0&quot;</span><span class="p">),</span> <span class="n">default_protocol</span>
-    <span class="p">)</span>
+    <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">))</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">default_protocol</span><span class="p">)</span>
 
     <span class="c1"># Add the error skill (from the local packages dir) and the echo skill (which is part of the AEA distribution)</span>
     <span class="n">echo_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
@@ -1149,7 +1139,9 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,{"type": "bytes", "cont
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="s1">&#39;my_aea,other_agent,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.1.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello&quot;</span>
+        <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>

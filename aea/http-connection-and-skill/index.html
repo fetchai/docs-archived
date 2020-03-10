@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>AEA and web frameworks - Fetch.ai Developer Documentation</title>
+    <title>HTTP Connection - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -113,7 +113,7 @@
 </li>
  
 <li>
-    <a href="./" id="aea-aea-vs-mvc-"
+    <a href="../aea-vs-mvc/" id="aea-aea-vs-mvc-"
         >AEA and web frameworks</a
     >
 </li>
@@ -266,7 +266,7 @@
 </li>
  
 <li>
-    <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
+    <a href="./" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
     >
 </li>
@@ -945,22 +945,30 @@
 
                                     
 
-<p>The AEA borrows several concepts from popular web frameworks like Django and Ruby on Rails.</p>
-<p>Both aforementioned web frameworks use the popular MVC (model-view-controller) architecture.</p>
-<ul>
-<li>Models: contain business logic and data representations</li>
-<li>View: contain the html templates</li>
-<li>Controller: deals with the request-response handling</li>
-</ul>
-<p>The AEA framework is based on asynchronous messaging. Hence, there is not a direct 1-1 relationship between MVC based architectures and the AEA framework. Nevertheless, there are some parallels which can help a developer familiar with MVC make progress in the AEA framework in particular, the development of Skills, quickly:</p>
-<ul>
-<li><code>Handler</code>: receive the messages for the protocol they are registered against and are supposed to handle these messages. They are the reactive parts of a skill and can be thought of as similar to the <code>Controller</code> in MVC.</li>
-<li><code>Behaviour</code>: a behaviour encapsulates pro-active components of the agent. Since web apps do not have any goals or intentions they do not pro-actively pursue an objective. Therefore, there is no equivalent concept in MVC.</li>
-<li><code>Task</code>: are meant to deal with long running executions and can be thought of as the equivalent of background tasks in traditional web apps.</li>
-<li><code>Model</code>: implement business logic and data representation, as such they are similar to the <code>Model</code> in MVC.</li>
-</ul>
-<p>The <code>View</code> concept is probably best compared to the <code>Message</code> of a given protocol in the AEA framework. Whilst views, represent information to the client, messages represent information sent to other agents.</p>
-<p><br /></p>
+<h2 id="description">Description</h2>
+<p>The HTTP connection allows you to run a server inside a connection which accepts requests from clients. The HTTP connection validates requests it receives against the provided OpenAPI file. It translates each valid request into an envelope, sends the envelope to the agent and if it receives, within a timeout window, a valid response envelope, serves the response to the client.</p>
+<h2 id="steps">Steps</h2>
+<p>Create a new AEA:</p>
+<div class="highlight"><pre><span></span>aea create my_aea
+</pre></div>
+
+<p>Add the http connection package</p>
+<div class="highlight"><pre><span></span>aea add connection fetchai/http:0.1.0
+</pre></div>
+
+<p>Modify the <code>api_spec_path</code>:</p>
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.http.config.api_spec_path <span class="s2">&quot;examples/http_ex/petstore.yaml&quot;</span>
+</pre></div>
+
+<p>Install the dependencies:</p>
+<div class="highlight"><pre><span></span>aea install
+</pre></div>
+
+<p>Write and add your skill:</p>
+<div class="highlight"><pre><span></span>aea scaffold skill http_echo
+</pre></div>
+
+<p>We leave it to you to implement a simple http echo skill (modelled after the standard echo skill) which prints out the content of received envelopes.</p>
 
 
                                 </section>
@@ -969,9 +977,9 @@
 
                             <div class="bottomnav">
                                 
-                                <a href="../steps/" class="button left"><strong>Previous:</strong></br>Ways To Build An Aea</a>
+                                <a href="../connect-a-frontend/" class="button left"><strong>Previous:</strong></br>Frontend Intergration</a>
                                 
-                                <a href="../build-aea-step-by-step/" class="button right"><strong>Next:</strong></br>Build An Aea With The Cli</a>
+                                <a href="../thermometer-skills-step-by-step/" class="button right"><strong>Next:</strong></br>Thermometer Skills Step By Step</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

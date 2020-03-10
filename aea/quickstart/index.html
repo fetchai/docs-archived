@@ -178,6 +178,12 @@
 </li>
  
 <li>
+    <a href="../identity/" id="aea-identity-"
+        >Identity</a
+    >
+</li>
+ 
+<li>
     <a href="../trust/" id="aea-trust-"
         >Trust issues</a
     >
@@ -256,6 +262,12 @@
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
         >Frontend intergration</a
+    >
+</li>
+ 
+<li>
+    <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
+        >HTTP Connection</a
     >
 </li>
 
@@ -408,6 +420,12 @@
 <li>
     <a href="../decision-maker-transaction/" id="aea-decision-maker-transaction-"
         >Create decision-maker transaction</a
+    >
+</li>
+ 
+<li>
+    <a href="../deployment/" id="aea-deployment-"
+        >Deployment</a
     >
 </li>
 
@@ -979,6 +997,10 @@ You can install the <code>svn</code> command with (<code>brew install subversion
 <p>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target=_blank>tools for Visual Studio</a>. </p>
 </li>
 </ul>
+<h2 id="setup-author-name">Setup Author name</h2>
+<p>You can now setup your author name:
+<div class="highlight"><pre><span></span>aea init
+</pre></div></p>
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA. 
 The fastest way to create your first AEA is to fetch it! </p>
@@ -997,7 +1019,7 @@ The fastest way to create your first AEA is to fetch it! </p>
 </pre></div>
 
 <p>For example:        </p>
-<div class="highlight"><pre><span></span>recipient_aea,sender_aea,fetchai/default:0.1.0,<span class="o">{</span><span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;bytes&quot;</span>, <span class="s2">&quot;content&quot;</span>: <span class="s2">&quot;aGVsbG8=&quot;</span><span class="o">}</span>
+<div class="highlight"><pre><span></span>recipient_aea,sender_aea,fetchai/default:0.1.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello
 </pre></div>
 
 <h2 id="run-the-aea">Run the AEA</h2>
@@ -1019,7 +1041,7 @@ info: Echo Behaviour: act method called.
 <p>Let's look at the <code>Handler</code> in more depth.</p>
 <h3 id="add-a-message-to-the-input-file">Add a message to the input file</h3>
 <p>From a different terminal and same directory, we send the AEA a message wrapped in an envelope via the input file.</p>
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.1.0,{&quot;type&quot;: &quot;bytes&quot;, &quot;content&quot;: &quot;aGVsbG8=&quot;}&#39;</span> &gt;&gt; input_file
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hello&#39;</span> &gt;&gt; input_file
 </pre></div>
 
 <p>You will see the <code>Echo Handler</code> dealing with the envelope and responding with the same message to the <code>output_file</code>, and also decoding the Base64 encrypted message in this case.</p>
