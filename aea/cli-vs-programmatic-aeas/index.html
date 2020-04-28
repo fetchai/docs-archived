@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1285,14 +1320,14 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<p><code>aea fetch fetchai/weather_station:0.1.0</code></p>
+<p><code>aea fetch fetchai/weather_station:0.2.0</code></p>
 <h3 id="update-the-aea-configs">Update the AEA configs</h3>
 <p>In the terminal change the configuration:
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.is_ledger_tx False --type bool
 </pre></div>
 The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.</p>
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="create-the-weather-client-aea">Create the weather client AEA</h3>
@@ -1350,7 +1385,7 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
     <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">))</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">default_protocol</span><span class="p">)</span>
 
-    <span class="c1"># Add the oef protocol (which is a package)</span>
+    <span class="c1"># Add the oef search protocol (which is a package)</span>
     <span class="n">oef_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;oef_search&quot;</span><span class="p">,)</span>
     <span class="p">)</span>

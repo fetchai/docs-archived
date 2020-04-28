@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1290,9 +1325,11 @@ An other AEA has the role of the controller and it's responsible for calculating
 <span class="nb">cd</span> tac_controller
 </pre></div></p>
 <h3 id="add-the-tac-control-skill">Add the tac control skill</h3>
-<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.2.0
 aea add skill fetchai/tac_control:0.1.0
+aea add contract fetchai/erc1155:0.2.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <p>Add the following configs to the aea config:
@@ -1307,14 +1344,14 @@ aea install
 </pre></div></p>
 <h3 id="update-the-game-parameters">Update the game parameters</h3>
 <p>You can change the game parameters in <code>tac_controller/skills/tac_control/skill.yaml</code> under <code>Parameters</code>.</p>
-<p>You must set the start time to a point in the future <code>start_time: 12 11 2019  15:01</code>.</p>
+<p>You must set the start time to a point in the future <code>start_time: 01 01 2020  00:01</code>.</p>
 <p>Alternatively, use the command line to get and set the start time:</p>
-<div class="highlight"><pre><span></span>aea config get skills.tac_control.models.parameters.args.start_time
-aea config <span class="nb">set</span> skills.tac_control.models.parameters.args.start_time <span class="s1">&#39;21 12 2019  07:14&#39;</span>
+<div class="highlight"><pre><span></span>aea config get vendor.fetchai.skills.tac_control.models.parameters.args.start_time
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </pre></div>
 
 <h3 id="run-the-tac-controller-aea">Run the TAC controller AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="create-the-tac-participants-aea">Create the TAC participants AEA</h3>
@@ -1324,10 +1361,11 @@ aea create tac_participant_two
 </pre></div></p>
 <h3 id="add-the-tac-participation-skill-to-participant-one">Add the tac participation skill to participant one</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/oef:0.1.0
+aea add connection fetchai/oef:0.2.0
 aea add skill fetchai/tac_participation:0.1.0
 aea add skill fetchai/tac_negotiation:0.1.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <p>Set the default ledger to ethereum:
@@ -1335,31 +1373,102 @@ aea install
 </pre></div></p>
 <h3 id="add-the-tac-participation-skill-to-participant-two">Add the tac participation skill to participant two</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/oef:0.1.0
+aea add connection fetchai/oef:0.2.0
 aea add skill fetchai/tac_participation:0.1.0
 aea add skill fetchai/tac_negotiation:0.1.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <p>Set the default ledger to ethereum:
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div></p>
 <h3 id="run-both-the-tac-participant-aeas">Run both the TAC participant AEAs</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
-<h2 id="using-aea-launch">Using <code>aea launch</code></h2>
+<h2 id="using-aea-fetch-and-aea-launch">Using <code>aea fetch</code> and <code>aea launch</code></h2>
+<p>You can fetch the finished agents:
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller:0.1.0
+aea fetch fetchai/tac_participant:0.1.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.1.0 --alias tac_participant_two
+</pre></div></p>
 <p>The CLI tool supports the launch of several agents
 at once.</p>
 <p>For example, assuming you followed the tutorial, you
 can launch the TAC agents as follows:</p>
 <ul>
-<li>set the default connection <code>fetchai/oef:0.1.0</code> for every
+<li>set the default connection <code>fetchai/oef:0.2.0</code> for every
 agent;</li>
 <li>run:
 <div class="highlight"><pre><span></span>aea launch tac_controller tac_participant_one tac_participant_two
 </pre></div></li>
 </ul>
+<h2 id="demo-instructions-2-ledger-transactions">Demo instructions 2: ledger transactions</h2>
+<p>This demo uses another AEA - a controller AEA - to take the role of running the competition. Transactions are validated on an ERC1155 smart contract.</p>
+<h3 id="create-the-tac-controller-aea_1">Create the TAC controller AEA</h3>
+<p>In the root directory, create the tac controller AEA and enter the project.
+<div class="highlight"><pre><span></span>aea create tac_controller_contract
+<span class="nb">cd</span> tac_controller_contract
+</pre></div></p>
+<h3 id="add-the-tac-control-skill_1">Add the tac control skill</h3>
+<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/tac_control_contract:0.1.0
+aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
+</pre></div>
+
+<p>Add the following configs to the aea config:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">ethereum</span><span class="p">:</span>
+    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
+    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
+</pre></div></p>
+<p>Set the default ledger to ethereum:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div></p>
+<h3 id="update-the-game-parameters_1">Update the game parameters</h3>
+<p>You can change the game parameters in <code>tac_controller/skills/tac_control/skill.yaml</code> under <code>Parameters</code>.</p>
+<p>You must set the start time to a point in the future <code>start_time: 01 01 2020  00:01</code>.</p>
+<p>Alternatively, use the command line to get and set the start time:</p>
+<div class="highlight"><pre><span></span>aea config get vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
+</pre></div>
+
+<h3 id="fund-the-controller-aea">Fund the controller AEA</h3>
+<p>We first generate a private key.
+<div class="highlight"><pre><span></span>aea generate-key ethereum
+aea add-key ethereum eth_private_key.txt
+</pre></div></p>
+<p>To create some wealth for your AEAs for the Ethereum <code>ropsten</code> network. Note that this needs to be executed from each AEA folder:</p>
+<div class="highlight"><pre><span></span>aea generate-wealth ethereum
+</pre></div>
+
+<p>To check the wealth use (after some time for the wealth creation to be mined on Ropsten):</p>
+<div class="highlight"><pre><span></span>aea get-wealth ethereum
+</pre></div>
+
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>If no wealth appears after a while, then try funding the private key directly using a web faucet.</p>
+</div>
+
+<h3 id="create-tac-participant-aeas">Create TAC participant AEAs</h3>
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.1.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.1.0 --alias tac_participant_two
+</pre></div>
+
+<p>Then, cd into each project and set the usage to contract:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
+</pre></div></p>
+<h3 id="run-all-aeas">Run all AEAs</h3>
+<div class="highlight"><pre><span></span>aea launch tac_controller_contract tac_participant_one tac_participant_two
+</pre></div>
+
+<p>You may want to try <code>--multithreaded</code>
+option in order to run the agents
+in the same process.</p>
 <h2 id="communication">Communication</h2>
 <p>There are two types of interactions:
 - between the participants and the controller, the game communication
@@ -1443,7 +1552,7 @@ agent;</li>
       <span class="nt">args</span><span class="p">:</span>
         <span class="nt">services_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
   <span class="nt">clean_up</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionCleanUpTask</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionCleanUpBehaviour</span>
     <span class="nt">args</span><span class="p">:</span>
       <span class="nt">tick_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.0</span>
 <span class="nt">handlers</span><span class="p">:</span>
@@ -1484,7 +1593,7 @@ agent;</li>
 <p>The <code>FIPANegotiationHandler</code> deals with receiving <code>FipaMessage</code> types containing FIPA negotiation terms, such as <code>cfp</code>, <code>propose</code>, <code>decline</code>, <code>accept</code> and <code>match_accept</code>.</p>
 <p>The <code>TransactionHandler</code> deals with <code>TransactionMessage</code>s received from the decision maker component. The decision maker component is responsible for cryptoeconomic security.</p>
 <p>The <code>OEFSearchHandler</code> deals with <code>OefSearchMessage</code> types returned from the <a href="../oef-ledger">OEF search node</a></p>
-<p>The <code>TransactionCleanUpTask</code> is responsible for cleaning up transactions which are no longer likely to being settled with the controller AEA.</p>
+<p>The <code>TransactionCleanUpBehaviour</code> is responsible for cleaning up transactions which are no longer likely to being settled with the controller AEA.</p>
 <h3 id="models">Models</h3>
 <p>The <code>models</code> element in the configuration <code>yaml</code> lists a number of important classes which are shared between the handlers, behaviours and tasks.</p>
 <h4 id="search">Search</h4>

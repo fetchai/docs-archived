@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1287,12 +1322,13 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
 <p>First, create the car detector AEA:
 <div class="highlight"><pre><span></span>aea create car_detector
 <span class="nb">cd</span> car_detector
-aea add connection fetchai/oef:0.1.0
+aea add connection fetchai/oef:0.2.0
 aea add skill fetchai/carpark_detection:0.1.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div></p>
 <p>Alternatively to the previous two steps, simply run:
-<div class="highlight"><pre><span></span>aea fetch fetchai/car_detector:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_detector:0.2.0
 <span class="nb">cd</span> car_detector
 aea install
 </pre></div></p>
@@ -1300,12 +1336,13 @@ aea install
 <p>Then, create the car data client AEA:
 <div class="highlight"><pre><span></span>aea create car_data_buyer
 <span class="nb">cd</span> car_data_buyer
-aea add connection fetchai/oef:0.1.0
+aea add connection fetchai/oef:0.2.0
 aea add skill fetchai/carpark_client:0.1.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div></p>
 <p>Alternatively to the previous two steps, simply run:
-<div class="highlight"><pre><span></span>aea fetch fetchai/car_data_buyer:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_data_buyer:0.2.0
 <span class="nb">cd</span> car_data_buyer
 aea install
 </pre></div></p>
@@ -1393,7 +1430,7 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.mode
 </pre></div></p>
 <h3 id="run-both-aeas">Run both AEAs</h3>
 <p>Finally, run both AEAs from their respective directories:
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div></p>
 <p>You can see that the AEAs find each other, negotiate and eventually trade.</p>
 <h3 id="cleaning-up">Cleaning up</h3>
@@ -1443,7 +1480,7 @@ aea delete car_data_buyer
 
                             <div class="bottomnav">
                                 
-                                <a href="../aries-cloud-agent/" class="button left"><strong>Previous:</strong></br>Aries Cloud Agent</a>
+                                <a href="../aries-cloud-agent-demo/" class="button left"><strong>Previous:</strong></br>Aries Cloud Agents Demo</a>
                                 
                                 <a href="../generic-skills/" class="button right"><strong>Next:</strong></br>Generic Skills</a>
                             </div><!-- .bottomnav end -->

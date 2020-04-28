@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1306,7 +1341,7 @@ svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/tru
 </pre></div>
 You can install the <code>svn</code> command with (<code>brew install subversion</code> or <code>sudo apt-get install subversion</code>).</p>
 <h2 id="installation">Installation</h2>
-<p>The following installs the entire AEA package which also includes a command-line interface (CLI).</p>
+<p>The following installs the entire AEA package which also includes a <a href="../cli-commands">command-line interface (CLI)</a>.</p>
 <div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>all<span class="o">]</span>
 </pre></div>
 
@@ -1345,18 +1380,23 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\ </span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.3.0
+v0.3.1
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </pre></div></p>
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>If you would rather not create an account on the registry at this point, then run `aea init --local` instead.</p>
+</div>
+
 <h2 id="echo-skill-demo">Echo skill demo</h2>
-<p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA. 
-The fastest way to create your first AEA is to fetch it! </p>
+<p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA. The fastest way to create your first AEA is to fetch it! </p>
 <p>If you want to follow a step by step guide we show you how to do it at the end of the file.</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/my_first_aea:0.1.0
 <span class="nb">cd</span> my_first_aea
 </pre></div>
 
+<p>To learn more about the folder structure of an AEA project read on <a href="../package-imports">here</a>.</p>
 <h2 id="usage-of-the-stub-connection">Usage of the stub connection</h2>
 <p>AEAs use envelopes containing messages for communication. We use a stub connection to send envelopes to and receive envelopes from the AEA.     </p>
 <p>The stub connection is already added to the AEA by default.     </p>
@@ -1371,12 +1411,12 @@ The fastest way to create your first AEA is to fetch it! </p>
 </pre></div>
 
 <h2 id="run-the-aea">Run the AEA</h2>
-<p>Run the AEA with the default <code>stub</code> connection.</p>
+<p>Run the AEA with the default <code>fetchai/stub:0.2.0</code> connection.</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 <p>or </p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.2.0
 </pre></div>
 
 <p>You will see the echo skill running in the terminal window.</p>
@@ -1386,7 +1426,7 @@ The fastest way to create your first AEA is to fetch it! </p>
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\ </span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.3.0
+v0.3.1
 
 my_first_aea starting ...
 info: Echo Handler: setup method called.
@@ -1422,6 +1462,72 @@ info: Echo Handler: teardown method called.
 info: Echo Behaviour: teardown method called.
 </pre></div>
 
+<h2 id="write-a-test-for-the-aea">Write a test for the AEA</h2>
+<p>We can write an end-to-end test for the AEA utilising helper classes provided by the framework.</p>
+<details><summary>Step by step install</summary>
+
+The following test class replicates the preceding demo and tests it's correct behaviour. The `AEATestCase` is a tool for AEA developers to write useful end-to-end tests of their AEAs.
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DEFAULT_INPUT_FILE_NAME</span><span class="p">,</span>
+    <span class="n">DEFAULT_OUTPUT_FILE_NAME</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
+<span class="kn">from</span> <span class="nn">aea.test_tools.generic</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">read_envelope_from_file</span><span class="p">,</span>
+    <span class="n">write_envelope_to_file</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">aea.test_tools.test_cases</span> <span class="kn">import</span> <span class="n">AEATestCase</span>
+
+
+<span class="k">class</span> <span class="nc">TestEchoSkill</span><span class="p">(</span><span class="n">AEATestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test that echo skill works.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">test_echo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the echo skill sequence.&quot;&quot;&quot;</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_agent</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+        <span class="c1"># add sending and receiving envelope from input/output files</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">BYTES</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">sent_envelope</span> <span class="o">=</span> <span class="n">Envelope</span><span class="p">(</span>
+            <span class="n">to</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+            <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;sender_aea&quot;</span><span class="p">,</span>
+            <span class="n">protocol_id</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">message</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">write_envelope_to_file</span><span class="p">(</span><span class="n">sent_envelope</span><span class="p">,</span> <span class="n">DEFAULT_INPUT_FILE_NAME</span><span class="p">)</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">received_envelope</span> <span class="o">=</span> <span class="n">read_envelope_from_file</span><span class="p">(</span><span class="n">DEFAULT_OUTPUT_FILE_NAME</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">sender</span>
+        <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">to</span>
+        <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">protocol_id</span>
+        <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">message</span>
+
+        <span class="n">process</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">)</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+
+Place the above code into a file `test.py` in your AEA project directory (the same level as the `aea-config.yaml` file).
+
+To run, execute the following:
+
+<div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+</details>
+
 <h2 id="delete-the-aea">Delete the AEA</h2>
 <p>Delete the AEA from the parent directory (<code>cd ..</code> to go to the parent directory).</p>
 <div class="highlight"><pre><span></span>aea delete my_first_aea
@@ -1443,8 +1549,8 @@ info: Echo Behaviour: teardown method called.
 <b> Create a new AEA </b>       
 <br>        
 First, create a new AEA project and enter it.       
-<div class="highlight"><pre><span></span>aea create my_first_aea     
-<span class="nb">cd</span> my_first_aea     
+<div class="highlight"><pre><span></span>aea create my_first_aea
+<span class="nb">cd</span> my_first_aea
 </pre></div>
 <br>  
 <b>Add the echo skill</b>       
@@ -1452,7 +1558,7 @@ First, create a new AEA project and enter it.
 Second, add the echo skill to the project.      
 <div class="highlight"><pre><span></span>aea add skill fetchai/echo:0.1.0        
 </pre></div>
-This copies the `fetchai/echo:0.1.0` skill code containing the "behaviours", and "handlers" into the skill, ready to run. The identifier of the skill `fetchai/echo:0.1.0` consists of the name of the author of the skill, followed by the skill name and its version.     
+This copies the `fetchai/echo:0.1.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.1.0` consists of the name of the author of the skill, followed by the skill name and its version.       
 </details>
 
 

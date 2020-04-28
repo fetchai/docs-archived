@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1274,6 +1309,7 @@
 <p>The skill has a <code>SkillContext</code> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Task</code> objects. The skill context also has a link to the <code>AgentContext</code>. The <code>AgentContext</code> provides read access to AEA specific information like the public key and address of the AEA, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
 <p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the AEA.</p>
 <p>For example, in the <code>ErrorHandler(Handler)</code> class, the code often grabs a reference to its context and by doing so can access initialised and running framework objects such as an <code>OutBox</code> for putting messages into.</p>
+<p>Moreover, you can read/write to the <em>agent context namespace</em> by accessing the attribute <code>SkillContext.namespace</code>.</p>
 <div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="n">recipient</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">protocol_id</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">reply</span><span class="p">))</span>
 </pre></div>
 
@@ -1313,7 +1349,7 @@
 <p>There is another category of behaviours, called <code>CompositeBehaviour</code>. 
 - <code>SequenceBehaviour</code>: a sequence of <code>Behaviour</code> classes, executed 
   one after the other.
-- <code>FSMBehaviour</code>_<code>: a state machine of</code>State` behaviours. 
+- <code>FSMBehaviour</code>: a state machine of <code>State</code> behaviours. 
     A state is in charge of scheduling the next state.</p>
 <p>If your behaviour fits one of the above, we suggest subclassing your
 behaviour class with that behaviour class. Otherwise, you
@@ -1372,6 +1408,7 @@ not be updated.</p>
 
 <span class="k">def</span> <span class="nf">nth_prime_number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A naive algorithm to find the n_th prime number.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">num</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
@@ -1449,7 +1486,8 @@ not be updated.</p>
       <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
 <span class="nt">models</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;fetchai/default:0.1.0&quot;</span><span class="p p-Indicator">]</span>
+<span class="nt">protocols</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.1.0</span>
 </pre></div>
 
 <h2 id="error-skill">Error skill</h2>

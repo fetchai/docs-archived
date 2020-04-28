@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../../../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../../../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../../../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../../../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../../../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../../../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../../../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../../../integration/" id="aea-integration-"
+    <a href="../../../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1344,12 +1379,14 @@
 <p>None</p>
 <p><a name=".aea.skills.tasks.init_worker"></a></p>
 <h4 id="init_worker">init<code>_</code>worker</h4>
-<div class="highlight"><pre><span></span><span class="n">init_worker</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">init_worker</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 <p>Initialize a worker.</p>
 <p>Disable the SIGINT handler.
 Related to a well-known bug: https://bugs.python.org/issue8296</p>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
 <p><a name=".aea.skills.tasks.TaskManager"></a></p>
 <h3 id="taskmanager">TaskManager</h3>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TaskManager</span><span class="p">()</span>
@@ -1358,14 +1395,24 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 <p>A Task manager.</p>
 <p><a name=".aea.skills.tasks.TaskManager.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">nb_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">nb_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_lazy_pool_start</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 <p>Initialize the task manager.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>nb_workers</code>: the number of worker processes.</li>
+<li><code>is_lazy_pool_start</code>: option to postpone pool creation till the first enqueue_task called.</li>
 </ul>
+<p><a name=".aea.skills.tasks.TaskManager.is_started"></a></p>
+<h4 id="is_started">is<code>_</code>started</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">is_started</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+<p>Get started status of TaskManager.</p>
+<p><strong>Returns</strong>:</p>
+<p>bool</p>
 <p><a name=".aea.skills.tasks.TaskManager.nb_workers"></a></p>
 <h4 id="nb_workers">nb<code>_</code>workers</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1373,6 +1420,8 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 </pre></div>
 
 <p>Get the number of workers.</p>
+<p><strong>Returns</strong>:</p>
+<p>int</p>
 <p><a name=".aea.skills.tasks.TaskManager.enqueue_task"></a></p>
 <h4 id="enqueue_task">enqueue<code>_</code>task</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">enqueue_task</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">kwds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
@@ -1396,18 +1445,24 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 </pre></div>
 
 <p>Get the result from a task.</p>
+<p><strong>Returns</strong>:</p>
+<p>async result for task_id</p>
 <p><a name=".aea.skills.tasks.TaskManager.start"></a></p>
 <h4 id="start">start</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 <p>Start the task manager.</p>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
 <p><a name=".aea.skills.tasks.TaskManager.stop"></a></p>
 <h4 id="stop">stop</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 <p>Stop the task manager.</p>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
 
 
                                 </section>

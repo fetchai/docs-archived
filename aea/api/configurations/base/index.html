@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../../../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../../../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../../../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../../../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../../../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../../../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../../../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../../../integration/" id="aea-integration-"
+    <a href="../../../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1283,13 +1318,13 @@ These fields will be forwarded to the 'pip' command.</p>
 The package name must satisfy <a href="https://www.python.org/dev/peps/pep-0426/name">the constraints on Python packages names</a>.</p>
 <p>The main advantage of having a dictionary is that we implicitly filter out dependency duplicates.
 We cannot have two items with the same package name since the keys of a YAML object form a set.</p>
-<p><a name=".aea.configurations.base.ConfigurationType"></a></p>
-<h3 id="configurationtype">ConfigurationType</h3>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConfigurationType</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
+<p><a name=".aea.configurations.base.PackageType"></a></p>
+<h3 id="packagetype">PackageType</h3>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PackageType</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
 </pre></div>
 
-<p>Configuration types.</p>
-<p><a name=".aea.configurations.base.ConfigurationType.to_plural"></a></p>
+<p>Package types.</p>
+<p><a name=".aea.configurations.base.PackageType.to_plural"></a></p>
 <h4 id="to_plural">to<code>_</code>plural</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">to_plural</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
@@ -1298,20 +1333,20 @@ We cannot have two items with the same package name since the keys of a YAML obj
 <blockquote>
 <blockquote>
 <blockquote>
-<p>ConfigurationType.AGENT.to_plural()
+<p>PackageType.AGENT.to_plural()
 'agents'
-ConfigurationType.PROTOCOL.to_plural()
+PackageType.PROTOCOL.to_plural()
 'protocols'
-ConfigurationType.CONNECTION.to_plural()
+PackageType.CONNECTION.to_plural()
 'connections'
-ConfigurationType.SKILL.to_plural()
+PackageType.SKILL.to_plural()
 'skills'
-ConfigurationType.CONTRACT.to_plural()
+PackageType.CONTRACT.to_plural()
 'contracts'</p>
 </blockquote>
 </blockquote>
 </blockquote>
-<p><a name=".aea.configurations.base.ConfigurationType.__str__"></a></p>
+<p><a name=".aea.configurations.base.PackageType.__str__"></a></p>
 <h4 id="__str__"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
 </pre></div>
@@ -1675,7 +1710,7 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
 <p>A package identifier.</p>
 <p><a name=".aea.configurations.base.PackageId.__init__"></a></p>
 <h4 id="__init___3"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">package_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ConfigurationType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">package_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span>
 </pre></div>
 
 <p>Initialize the package id.</p>
@@ -1687,7 +1722,7 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
 <p><a name=".aea.configurations.base.PackageId.package_type"></a></p>
 <h4 id="package_type">package<code>_</code>type</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">package_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ConfigurationType</span>
+ <span class="o">|</span> <span class="n">package_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PackageType</span>
 </pre></div>
 
 <p>Get the package type.</p>
@@ -1722,7 +1757,7 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
 <p><a name=".aea.configurations.base.PackageId.package_prefix"></a></p>
 <h4 id="package_prefix">package<code>_</code>prefix</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">package_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ConfigurationType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+ <span class="o">|</span> <span class="n">package_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
 <p>Get the package identifier without the version.</p>
@@ -1760,7 +1795,7 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
 <blockquote>
 <blockquote>
 <blockquote>
-<p>pacakge_id = PackageId(ConfigurationType.PROTOCOL, PublicId("author", "name", "0.1.0"))
+<p>pacakge_id = PackageId(PackageType.PROTOCOL, PublicId("author", "name", "0.1.0"))
 component_id = ComponentId(ComponentType.PROTOCOL, PublicId("author", "name", "0.1.0"))
 pacakge_id == component_id
 True</p>

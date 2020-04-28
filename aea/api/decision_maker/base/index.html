@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../../../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../../../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../../../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../../../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../../../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../../../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../../../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../../../integration/" id="aea-integration-"
+    <a href="../../../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1318,15 +1353,13 @@
 <p>Represent the ownership state of an agent.</p>
 <p><a name=".aea.decision_maker.base.OwnershipState.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">amount_by_currency_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CurrencyHoldings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">quantities_by_good_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GoodHoldings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
 <p>Instantiate an ownership state object.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>amount_by_currency_id</code>: the currency endowment of the agent in this state.</li>
-<li><code>quantities_by_good_id</code>: the good endowment of the agent in this state.</li>
-<li><code>agent_name</code>: the agent name</li>
+<li><code>decision_maker</code>: the decision maker</li>
 </ul>
 <p><a name=".aea.decision_maker.base.OwnershipState.is_initialized"></a></p>
 <h4 id="is_initialized">is<code>_</code>initialized</h4>
@@ -1372,20 +1405,6 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>transactions</code>: the sequence of transaction messages.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the final state.</p>
-<p><a name=".aea.decision_maker.base.OwnershipState.apply_state_update"></a></p>
-<h4 id="apply_state_update">apply<code>_</code>state<code>_</code>update</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">apply_state_update</span><span class="p">(</span><span class="n">amount_by_currency_id</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">quantities_by_good_id</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;OwnershipState&quot;</span>
-</pre></div>
-
-<p>Apply a state update to (a copy of) the current state.</p>
-<p>This method is used to apply a raw state update without a transaction.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>amount_by_currency_id</code>: the delta in the currency amounts</li>
-<li><code>quantities_by_good_id</code>: the delta in the quantities by good</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the final state.</p>
@@ -1441,16 +1460,10 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p>Class to represent the preferences.</p>
 <p><a name=".aea.decision_maker.base.Preferences.__init__"></a></p>
 <h4 id="__init___3"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">exchange_params_by_currency_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExchangeParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">utility_params_by_good_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">UtilityParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
 <p>Instantiate an agent preference object.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>exchange_params_by_currency_id</code>: the exchange params.</li>
-<li><code>utility_params_by_good_id</code>: the utility params for every asset.</li>
-<li><code>tx_fee</code>: the acceptable transaction fee.</li>
-</ul>
 <p><a name=".aea.decision_maker.base.Preferences.is_initialized"></a></p>
 <h4 id="is_initialized_2">is<code>_</code>initialized</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1552,21 +1565,14 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p>A wrapper of a queue to protect which object can read from it.</p>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.__init__"></a></p>
 <h4 id="__init___4"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">permitted_caller</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">access_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
 </pre></div>
 
 <p>Initialize the protected queue.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>permitted_caller</code>: the permitted caller to the get method</li>
+<li><code>access_code</code>: the access code to read from the queue</li>
 </ul>
-<p><a name=".aea.decision_maker.base.ProtectedQueue.permitted_caller"></a></p>
-<h4 id="permitted_caller">permitted<code>_</code>caller</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">permitted_caller</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;DecisionMaker&quot;</span>
-</pre></div>
-
-<p>Get the permitted caller.</p>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.put"></a></p>
 <h4 id="put">put</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">put</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -1621,13 +1627,13 @@ ignored in that case).</p>
 <p>None</p>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.protected_get"></a></p>
 <h4 id="protected_get">protected<code>_</code>get</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">protected_get</span><span class="p">(</span><span class="n">caller</span><span class="p">:</span> <span class="s2">&quot;DecisionMaker&quot;</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">]</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">protected_get</span><span class="p">(</span><span class="n">access_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">]</span>
 </pre></div>
 
 <p>Access protected get method.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>caller</code>: the permitted caller</li>
+<li><code>access_code</code>: the access code</li>
 <li><code>block</code>: If optional args block is true and timeout is None (the default), block if necessary until an item is available.</li>
 <li><code>timeout</code>: If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time.
 :raises: ValueError, if caller is not permitted</li>

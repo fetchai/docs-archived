@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../../../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../../../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../../../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../../../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../../../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../../../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../../../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../../../integration/" id="aea-integration-"
+    <a href="../../../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1410,51 +1445,50 @@
 <p>Get the underlying API object.</p>
 <p><a name=".aea.crypto.fetchai.FetchAIApi.get_balance"></a></p>
 <h4 id="get_balance">get<code>_</code>balance</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="n">AddressLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
 </pre></div>
 
 <p>Get the balance of a given account.</p>
-<p><a name=".aea.crypto.fetchai.FetchAIApi.send_transaction"></a></p>
-<h4 id="send_transaction">send<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">send_transaction</span><span class="p">(</span><span class="n">crypto</span><span class="p">:</span> <span class="n">Crypto</span><span class="p">,</span> <span class="n">destination_address</span><span class="p">:</span> <span class="n">AddressLike</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_waiting_for_confirmation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>address</code>: the address for which to retrieve the balance.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the balance, if retrivable, otherwise None</p>
+<p><a name=".aea.crypto.fetchai.FetchAIApi.transfer"></a></p>
+<h4 id="transfer">transfer</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">transfer</span><span class="p">(</span><span class="n">crypto</span><span class="p">:</span> <span class="n">Crypto</span><span class="p">,</span> <span class="n">destination_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_waiting_for_confirmation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
 <p>Submit a transaction to the ledger.</p>
-<p><a name=".aea.crypto.fetchai.FetchAIApi.send_raw_transaction"></a></p>
-<h4 id="send_raw_transaction">send<code>_</code>raw<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">send_raw_transaction</span><span class="p">(</span><span class="n">tx_signed</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+<p><a name=".aea.crypto.fetchai.FetchAIApi.send_signed_transaction"></a></p>
+<h4 id="send_signed_transaction">send<code>_</code>signed<code>_</code>transaction</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">send_signed_transaction</span><span class="p">(</span><span class="n">tx_signed</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
 <p>Send a signed transaction and wait for confirmation.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>tx_signed</code>: the signed transaction</li>
+</ul>
 <p><a name=".aea.crypto.fetchai.FetchAIApi.is_transaction_settled"></a></p>
 <h4 id="is_transaction_settled">is<code>_</code>transaction<code>_</code>settled</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_transaction_settled</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 <p>Check whether a transaction is settled or not.</p>
-<p><a name=".aea.crypto.fetchai.FetchAIApi.send_signed_transaction"></a></p>
-<h4 id="send_signed_transaction">send<code>_</code>signed<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">send_signed_transaction</span><span class="p">(</span><span class="n">is_waiting_for_confirmation</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tx_signed</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+<p><a name=".aea.crypto.fetchai.FetchAIApi.get_transaction_receipt"></a></p>
+<h4 id="get_transaction_receipt">get<code>_</code>transaction<code>_</code>receipt</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_transaction_receipt</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
-<p>Send a signed transaction and wait for confirmation.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>is_waiting_for_confirmation</code>: whether or not to wait for confirmation</li>
-<li><code>tx_signed</code>: the signed transaction</li>
-</ul>
-<p><a name=".aea.crypto.fetchai.FetchAIApi.get_transaction_status"></a></p>
-<h4 id="get_transaction_status">get<code>_</code>transaction<code>_</code>status</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_transaction_status</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
-</pre></div>
-
-<p>Get the transaction status for a transaction digest.</p>
+<p>Get the transaction receipt for a transaction digest (non-blocking).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>tx_digest</code>: the digest associated to the transaction.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>the tx status, if present</p>
+<p>the tx receipt, if present</p>
 <p><a name=".aea.crypto.fetchai.FetchAIApi.generate_tx_nonce"></a></p>
 <h4 id="generate_tx_nonce">generate<code>_</code>tx<code>_</code>nonce</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">generate_tx_nonce</span><span class="p">(</span><span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
@@ -1468,12 +1502,12 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>return the hash in hex.</p>
-<p><a name=".aea.crypto.fetchai.FetchAIApi.validate_transaction"></a></p>
-<h4 id="validate_transaction">validate<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">validate_transaction</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+<p><a name=".aea.crypto.fetchai.FetchAIApi.is_transaction_valid"></a></p>
+<h4 id="is_transaction_valid">is<code>_</code>transaction<code>_</code>valid</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_transaction_valid</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
-<p>Check whether a transaction is valid or not.</p>
+<p>Check whether a transaction is valid or not (non-blocking).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>seller</code>: the address of the seller.</li>

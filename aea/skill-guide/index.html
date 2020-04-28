@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1452,8 +1487,9 @@ Ensure, you use the correct author name to reference your skill (here we use <co
 </pre></div></p>
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the oef connection and install its dependencies:
-<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.2.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div></p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>We first start a local <a href="../oef-ledger">OEF search and communication node</a> in a separate terminal window.</p>
@@ -1461,8 +1497,8 @@ aea install
 </pre></div>
 
 <p>In order to be able to find another AEA when searching, from a different terminal window, we fetch and run another finished AEA:
-<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.1.0 &amp;&amp; cd simple_service_registration
-aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.2.0 &amp;&amp; cd simple_service_registration
+aea run --connections fetchai/oef:0.2.0
 </pre></div></p>
 <p>This AEA will simply register a location service on the <a href="../oef-ledger">OEF search node</a> so we can search for it.</p>
 <details><summary>Click here to see full code</summary>
@@ -1671,7 +1707,7 @@ The associated `skill.yaml` is:
 
 <h2 id="step-9-run-the-search-aea">Step 9: Run the Search AEA</h2>
 <p>We can then launch our AEA.</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
 <p>We can see that the AEA sends search requests to the <a href="../oef-ledger">OEF search node</a> and receives search responses from the <a href="../oef-ledger">OEF search node</a>. Since our AEA is only searching on the <a href="../oef-ledger">OEF search node</a> - and not registered on the <a href="../oef-ledger">OEF search node</a> - the search response returns a single agent (the service provider).</p>

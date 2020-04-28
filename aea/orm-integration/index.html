@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="./" id="aea-orm-integration-to-generic-"
+    <a href="./" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1296,16 +1331,16 @@ trusts the seller AEA to send the data upon successful payment.</p>
 <p>Create the AEA that will provide data.</p>
 <div class="highlight"><pre><span></span>aea create my_seller_aea
 <span class="nb">cd</span> my_seller_aea
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/generic_seller:0.1.0
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/generic_seller:0.2.0
 </pre></div>
 
 <h3 id="create-the-buyer-client-ledger-version">Create the buyer client (ledger version)</h3>
 <p>In another terminal, create the AEA that will query the seller AEA.</p>
 <div class="highlight"><pre><span></span>aea create my_buyer_aea
 <span class="nb">cd</span> my_buyer_aea
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/generic_buyer:0.1.0
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/generic_buyer:0.2.0
 </pre></div>
 
 <p>Additionally, create the private key for the buyer AEA based on the network you want to transact.</p>
@@ -1333,14 +1368,17 @@ aea add-key ethereum eth_private_key.txt
     <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
     <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
 </pre></div></p>
-<h3 id="update-the-seller-aea-skill-configs">Update the seller AEA skill configs</h3>
-<p>In <code>my_seller_aea/vendor/fetchai/generi_seller/skill.yaml</code>, replace the <code>data_for_sale</code>, <code>search_schema</code>, and <code>search_data</code> with your data:
+<h3 id="update-the-seller-and-buyer-aea-skill-configs">Update the seller and buyer AEA skill configs</h3>
+<p>In <code>my_seller_aea/vendor/fetchai/generic_seller/skill.yaml</code>, replace the <code>data_for_sale</code>, <code>search_schema</code>, and <code>search_data</code> with your data:
 <div class="highlight"><pre><span></span><span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span>
 <span class="p p-Indicator">|</span><span class="err">         FETCHAI                   |           ETHEREUM               |</span>
 <span class="p p-Indicator">|</span><span class="err">-----------------------------------|----------------------------------|</span>
-<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>              
+<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>
+<span class="nt">|  dialogues</span><span class="p">:</span>                       <span class="nt">|  dialogues</span><span class="p">:</span>                      <span class="p p-Indicator">|</span>
+<span class="nt">|    args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                       <span class="nt">|    args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                      <span class="p p-Indicator">|</span>
+<span class="nt">|    class_name</span><span class="p">:</span> <span class="nt">Dialogues          |    class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues         |</span>
 <span class="nt">|  strategy</span><span class="p">:</span>                        <span class="nt">|  strategy</span><span class="p">:</span>                       <span class="p p-Indicator">|</span>
-<span class="nt">|     class_name</span><span class="p">:</span> <span class="nt">Strategy          |     class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy         |</span>
+<span class="nt">|    class_name</span><span class="p">:</span> <span class="nt">Strategy           |    class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy          |</span>
 <span class="nt">|    args</span><span class="p">:</span>                          <span class="nt">|    args</span><span class="p">:</span>                         <span class="p p-Indicator">|</span>
 <span class="nt">|      total_price</span><span class="p">:</span> <span class="nt">10              |      total_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10             |</span>
 <span class="nt">|      seller_tx_fee</span><span class="p">:</span> <span class="nt">0             |      seller_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0            |</span>
@@ -1361,18 +1399,21 @@ aea add-key ethereum eth_private_key.txt
 <span class="nt">|      search_data</span><span class="p">:</span>                 <span class="nt">|      search_data</span><span class="p">:</span>                <span class="p p-Indicator">|</span>
 <span class="nt">|        country</span><span class="p">:</span> <span class="nt">UK                |        country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK               |</span>
 <span class="nt">|        city</span><span class="p">:</span> <span class="nt">Cambridge            |        city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge           |</span>
-<span class="nt">|dependencies                       |dependencies</span><span class="p">:</span>                     <span class="p p-Indicator">|</span>
+<span class="nt">|dependencies</span><span class="p">:</span>                      <span class="nt">|dependencies</span><span class="p">:</span>                     <span class="p p-Indicator">|</span>
 <span class="nt">|  SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                   <span class="nt">|  SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                  <span class="p p-Indicator">|</span>    
-<span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span> 
+<span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span>
 </pre></div>
 The <code>search_schema</code> and the <code>search_data</code> are used to register the service in the <a href="../oef-ledger">OEF search node</a> and make your agent discoverable. The name of each attribute must be a key in the <code>search_data</code> dictionary.</p>
 <p>In the generic buyer skill config (<code>my_buyer_aea/skills/generic_buyer/skill.yaml</code>) under strategy change the <code>currency_id</code>,<code>ledger_id</code>, and at the bottom of the file the <code>ledgers</code>.</p>
 <p><div class="highlight"><pre><span></span><span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span>
 <span class="p p-Indicator">|</span><span class="err">         FETCHAI                   |           ETHEREUM               |</span>
 <span class="p p-Indicator">|</span><span class="err">-----------------------------------|----------------------------------|</span>
-<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>              
+<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>  
+<span class="nt">|  dialogues</span><span class="p">:</span>                       <span class="nt">|  dialogues</span><span class="p">:</span>                      <span class="p p-Indicator">|</span>
+<span class="nt">|    args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                       <span class="nt">|    args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                      <span class="p p-Indicator">|</span>
+<span class="nt">|    class_name</span><span class="p">:</span> <span class="nt">Dialogues          |    class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues         |</span>
 <span class="nt">|  strategy</span><span class="p">:</span>                        <span class="nt">|  strategy</span><span class="p">:</span>                       <span class="p p-Indicator">|</span>
-<span class="nt">|     class_name</span><span class="p">:</span> <span class="nt">Strategy          |     class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy         |</span>
+<span class="nt">|    class_name</span><span class="p">:</span> <span class="nt">Strategy           |    class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy          |</span>
 <span class="nt">|    args</span><span class="p">:</span>                          <span class="nt">|    args</span><span class="p">:</span>                         <span class="p p-Indicator">|</span>
 <span class="nt">|      max_price</span><span class="p">:</span> <span class="nt">40                |      max_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">40               |</span>
 <span class="nt">|      max_buyer_tx_fee</span><span class="p">:</span> <span class="nt">100        |      max_buyer_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">200000    |</span>
@@ -1395,7 +1436,7 @@ After changing the skill config files you should run the following command for b
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">db</span>
 </pre></div>
 Then modify your strategy's __init__ function to match the following code:
-<div class="highlight"><pre><span></span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the strategy of the agent.</span>
 
@@ -1410,8 +1451,17 @@ Then modify your strategy's __init__ function to match the following code:
         <span class="bp">self</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;is_ledger_tx&quot;</span><span class="p">,</span> <span class="n">DEFAULT_IS_LEDGER_TX</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_total_price</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;total_price&quot;</span><span class="p">,</span> <span class="n">DEFAULT_TOTAL_PRICE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_has_data_source</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;has_data_source&quot;</span><span class="p">,</span> <span class="n">DEFAULT_HAS_DATA_SOURCE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scheme</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_data&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_datamodel</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_schema&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model_name&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL_NAME</span><span class="p">)</span>
+        <span class="n">data_for_sale</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_for_sale&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_FOR_SALE</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///genericdb.db&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite:///genericdb.db&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_database_and_table</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">insert_data</span><span class="p">()</span>
 
@@ -1420,39 +1470,39 @@ Then modify your strategy's __init__ function to match the following code:
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_data_source</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_data_for_sale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collect_from_data_source</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data_for_sale</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_for_sale&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_FOR_SALE</span><span class="p">)</span>
-
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_scheme</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_data&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_datamodel</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_schema&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_for_sale</span> <span class="o">=</span> <span class="n">data_for_sale</span>
 </pre></div></p>
 <p>At the end of the file modify the <code>collect_from_data_source</code> function : 
 <div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">collect_from_data_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Implement the logic to collect data.&quot;&quot;&quot;</span>
         <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">])</span>
         <span class="n">result_proxy</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">result_proxy</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()}</span>
+        <span class="n">data_points</span> <span class="o">=</span> <span class="n">result_proxy</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">data_points</span><span class="p">)))}</span>
 </pre></div>
 Also, create two new functions, one that will create a connection with the database, and another one will populate the database with some fake data:</p>
 <div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">create_database_and_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a database and a table to store the data if not exists.&quot;&quot;&quot;</span>
         <span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
 
-        <span class="n">tbl</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span>
-                       <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
-                       <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;temprature&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-              <span class="p">)</span>
+        <span class="n">tbl</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="p">,</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;temprature&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="p">)</span>
         <span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tbl</span>
 
     <span class="k">def</span> <span class="nf">insert_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Insert data in the database.&quot;&quot;&quot;</span>
         <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Populating the database....&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-            <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">temprature</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Populating the database...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>  <span class="c1"># nosec</span>
+                <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">temprature</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+            <span class="p">)</span>
             <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 </pre></div>
 
@@ -1471,9 +1521,9 @@ Also, create two new functions, one that will create a connection with the datab
 </pre></div>
  and replace it with your ip (The ip of the machine that runs the oef image.)</p>
 <p>Run both AEAs from their respective terminals</p>
-<p><div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.1.0
-aea install
-aea run --connections fetchai/oef:0.1.0
+<p><div class="highlight"><pre><span></span>aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
+aea run --connections fetchai/oef:0.2.0
 </pre></div>
 You will see that the AEAs negotiate and then transact using the Fetch.ai testnet.</p>
 <h2 id="delete-the-aeas">Delete the AEAs</h2>

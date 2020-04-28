@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.1, mkdocs-">
+    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,8 +142,8 @@
     <span class="head">Demos</span>
     <ul id="header_demos"> 
 <li>
-    <a href="../aries-cloud-agent/" id="aea-aries-cloud-agent-"
-        >Aries Cloud Agent</a
+    <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
+        >Aries Cloud Agents Demo</a
     >
 </li>
  
@@ -280,7 +280,7 @@
 </li>
  
 <li>
-    <a href="../orm-integration-to-generic/" id="aea-orm-integration-to-generic-"
+    <a href="../orm-integration/" id="aea-orm-integration-"
         >ORM integration</a
     >
 </li>
@@ -300,6 +300,18 @@
 <li>
     <a href="../http-connection-and-skill/" id="aea-http-connection-and-skill-"
         >HTTP Connection</a
+    >
+</li>
+ 
+<li>
+    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
+        >Identity - Aries Cloud Agent</a
+    >
+</li>
+ 
+<li>
+    <a href="../p2p-connection/" id="aea-p2p-connection-"
+        >P2P Connection</a
     >
 </li>
 
@@ -345,7 +357,7 @@
  
 <li>
     <a href="../package-imports/" id="aea-package-imports-"
-        >Package structure</a
+        >File structure</a
     >
 </li>
  
@@ -358,6 +370,23 @@
 <li>
     <a href="../wealth/" id="aea-wealth-"
         >Generating wealth</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Search & Discovery</span>
+    <ul id="header_search_%26_discovery"> 
+<li>
+    <a href="../defining-data-models/" id="aea-defining-data-models-"
+        >Defining Data Models</a
+    >
+</li>
+ 
+<li>
+    <a href="../query-language/" id="aea-query-language-"
+        >The Query Language</a
     >
 </li>
 
@@ -415,7 +444,7 @@
 </li>
  
 <li>
-    <a href="../integration/" id="aea-integration-"
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
         >Using public ledgers</a
     >
 </li>
@@ -452,6 +481,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+        >Performance benchmark</a
+    >
+</li>
+ 
 <li>
     <span class="head">API</span>
     <ul id="header_api"> 
@@ -1290,14 +1325,14 @@ The <code>aea install</code> command will install each dependency that the speci
 <p>Create the AEA that will provide the data.</p>
 <div class="highlight"><pre><span></span>aea create ml_data_provider
 <span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/ml_data_provider:0.1.0
-aea install
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/ml_data_provider:0.2.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="alternatively-install-the-aea-directly">Alternatively, install the AEA directly</h3>
 <p>In the root directory, fetch the data provider AEA and enter the project.
-<div class="highlight"><pre><span></span>aea fetch fetchai/ml_data_provider:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/ml_data_provider:0.2.0
 <span class="nb">cd</span> ml_data_provider
 </pre></div>
 The <code>aea fetch</code> command creates the entire AEA, including its dependencies for you.</p>
@@ -1306,21 +1341,21 @@ The <code>aea fetch</code> command creates the entire AEA, including its depende
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
 <h3 id="run-the-data-provider-aea">Run the data provider AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="create-the-model-trainer-aea">Create the model trainer AEA</h3>
 <p>In a separate terminal, in the root directory, create the model trainer AEA.</p>
 <div class="highlight"><pre><span></span>aea create ml_model_trainer
 <span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/ml_train:0.1.0
-aea install
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/ml_train:0.2.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="alternatively-install-the-aea-directly_1">Alternatively, install the AEA directly</h3>
 <p>In the root directory, fetch the data provider AEA and enter the project.
-<div class="highlight"><pre><span></span>aea fetch fetchai/ml_model_trainer:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/ml_model_trainer:0.2.0
 <span class="nb">cd</span> ml_model_trainer
 </pre></div></p>
 <h3 id="install-the-dependencies_1">Install the dependencies</h3>
@@ -1328,7 +1363,7 @@ aea install
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
 <h3 id="run-the-model-trainer-aea">Run the model trainer AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div>
 
 <p>After some time, you should see the AEAs transact and the model trainer train its model.</p>
@@ -1339,18 +1374,20 @@ trusts the seller AEA to send the data upon successful payment.</p>
 <p>Create the AEA that will provide the data.</p>
 <div class="highlight"><pre><span></span>aea create ml_data_provider
 <span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/ml_data_provider:0.1.0
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/ml_data_provider:0.2.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <h3 id="create-the-model-trainer-aea_1">Create the model trainer AEA</h3>
 <p>In a separate terminal, in the root directory, create the model trainer AEA.</p>
 <div class="highlight"><pre><span></span>aea create ml_model_trainer
 <span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/oef:0.1.0
-aea add skill fetchai/ml_train:0.1.0
+aea add connection fetchai/oef:0.2.0
+aea add skill fetchai/ml_train:0.2.0
 aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
 </pre></div>
 
 <p>Additionally, create the private key for the model trainer AEA based on the network you want to transact.</p>
@@ -1401,7 +1438,6 @@ aea add-key ethereum eth_private_key.txt
 <span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>         <span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>        <span class="p p-Indicator">|</span>
 <span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;FET&#39;</span>           <span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;ETH&#39;</span>          <span class="p p-Indicator">|</span>
 <span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;fetchai&#39;</span>         <span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;ethereum&#39;</span>       <span class="p p-Indicator">|</span>
-<span class="nt">|      is_ledger_tx</span><span class="p">:</span> <span class="nt">True           |      is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True          |</span>
 <span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span> 
 </pre></div>
 
@@ -1430,10 +1466,11 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.mo
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.max_buyer_tx_fee <span class="m">10000</span> --type int
 aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.currency_id ETH
 aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.ledger_id ethereum
+aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.is_ledger_tx True --type bool
 </pre></div></p>
 <h3 id="run-both-aeas">Run both AEAs</h3>
 <p>From their respective directories, run both AEAs
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.1.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
 </pre></div></p>
 <h3 id="clean-up">Clean up</h3>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
