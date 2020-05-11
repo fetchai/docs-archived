@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1301,7 +1301,7 @@
                                     
 
 <h2 id="preliminaries">Preliminaries</h2>
-<p>These instructions detail the Python code you need for running an AEA outside the <code>cli</code> tool, using the code interface. </p>
+<p>These instructions detail the Python code you need for running an AEA outside the <code>cli</code> tool, using the code interface.</p>
 <p>This guide assumes you have already followed the Preliminaries and Installation section in the <a href="../quickstart/">quick start</a> guide and so have the framework installed and the packages and scripts directory downloaded into the directory you are working in.</p>
 <h2 id="imports">Imports</h2>
 <p>First, import the necessary common Python libraries and classes.</p>
@@ -1312,8 +1312,10 @@
 
 <p>Then, import the application specific libraries.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">SkillConfig</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 </pre></div>
 
 <p>Set up a variable pointing to where the packages directory is located - this should be our current directory - and where the input and output files are located.
@@ -1335,7 +1337,7 @@
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span>
 </pre></div></p>
 <h2 id="initialise-the-aea">Initialise the AEA</h2>
-<p>We use the AEABuilder to readily build an AEA. By default, the AEABuilder adds the <code>fetchai/default:0.1.0</code> protocol, the <code>fetchai/stub:0.2.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.
+<p>We use the AEABuilder to readily build an AEA. By default, the AEABuilder adds the <code>fetchai/default:0.1.0</code> protocol, the <code>fetchai/stub:0.3.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.
 <div class="highlight"><pre><span></span>    <span class="c1"># Instantiate the builder and build the AEA</span>
     <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">AEABuilder</span><span class="p">()</span>
@@ -1350,6 +1352,35 @@
 <p>Next, we add the echo skill which will bounce our messages back to us. We first need to place the echo skill into a relevant directory (see path), either by downloading the <code>packages</code> directory from the AEA repo or by getting the package from the registry.
 <div class="highlight"><pre><span></span>    <span class="c1"># Add the echo skill (assuming it is present in the local directory &#39;packages&#39;)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s2">&quot;./packages/fetchai/skills/echo&quot;</span><span class="p">)</span>
+</pre></div></p>
+<p>Also, we can add a component that was instantiated programmatically. :
+<div class="highlight"><pre><span></span>    <span class="c1"># create skill and handler manually</span>
+    <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+    <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
+    <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
+
+    <span class="k">class</span> <span class="nc">DummyHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dummy handler to handle messages.&quot;&quot;&quot;</span>
+
+        <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span>
+
+        <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Noop setup.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Noop teardown.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Handle incoming message.&quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;You got a message: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)))</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">SkillConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;test_skill&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="s2">&quot;fetchai&quot;</span><span class="p">)</span>
+    <span class="n">skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">dummy_handler</span> <span class="o">=</span> <span class="n">DummyHandler</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dummy_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="n">skill</span><span class="o">.</span><span class="n">skill_context</span>
+    <span class="p">)</span>
+    <span class="n">skill</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dummy_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">dummy_handler</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_component_instance</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 </pre></div></p>
 <p>Finally, we can build our AEA:
 <div class="highlight"><pre><span></span>    <span class="c1"># Create our AEA</span>
@@ -1405,8 +1436,10 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hell
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 
 <span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">SkillConfig</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
 <span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
@@ -1435,6 +1468,34 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hell
 
     <span class="c1"># Add the echo skill (assuming it is present in the local directory &#39;packages&#39;)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s2">&quot;./packages/fetchai/skills/echo&quot;</span><span class="p">)</span>
+
+    <span class="c1"># create skill and handler manually</span>
+    <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+    <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
+    <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
+
+    <span class="k">class</span> <span class="nc">DummyHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dummy handler to handle messages.&quot;&quot;&quot;</span>
+
+        <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span>
+
+        <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Noop setup.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Noop teardown.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;Handle incoming message.&quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;You got a message: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)))</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">SkillConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;test_skill&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="s2">&quot;fetchai&quot;</span><span class="p">)</span>
+    <span class="n">skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">dummy_handler</span> <span class="o">=</span> <span class="n">DummyHandler</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dummy_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="n">skill</span><span class="o">.</span><span class="n">skill_context</span>
+    <span class="p">)</span>
+    <span class="n">skill</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dummy_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">dummy_handler</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_component_instance</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 
     <span class="c1"># Create our AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>

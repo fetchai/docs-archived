@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1316,9 +1316,13 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <li><code>message_id: int</code>, the id of the message. The default value is <code>1</code>.</li>
 <li><code>target: int</code>, the id of the message which is referenced by this message. The default value is <code>0</code>.</li>
 </ul>
-<p>By default, <code>dialogue_reference</code>, <code>message_id</code> and <code>target</code> are set, however, most interactions involve more than one message being sent as part of the interaction and potentially multiple simultaneous interactions utilising the same protocol. In those cases, the <code>dialogue_reference</code> allows different interactions to be identified as such. The <code>message_id</code> and <code>target</code> are used to keep reference to the preceding messages in a dialogue for a given interaction. For instance, following receipt of a message with <code>target=0</code> and <code>message_id=1</code> the responding AEA should respond with a <code>message_id=2</code> and <code>target=1</code>. In particular, <code>target</code> holds the id of the message being referenced. This can be the preceding message, it can also be an older message. Hence, <code>0 &lt; target &lt; message_id</code> for <code>message_id &gt; 1</code> and <code>target=0</code> if <code>message_id = 1</code>. </p>
+<p>By default, <code>dialogue_reference</code>, <code>message_id</code> and <code>target</code> are set, however, most interactions involve more than one message being sent as part of the interaction and potentially multiple simultaneous interactions utilising the same protocol. In those cases, the <code>dialogue_reference</code> allows different interactions to be identified as such. The <code>message_id</code> and <code>target</code> are used to keep reference to the preceding messages in a dialogue for a given interaction. For instance, following receipt of a message with <code>target=0</code> and <code>message_id=1</code> the responding AEA should respond with a <code>message_id=2</code> and <code>target=1</code>. In particular, <code>target</code> holds the id of the message being referenced. This can be the preceding message, it can also be an older message. Hence, <code>0 &lt; target &lt; message_id</code> for <code>message_id &gt; 1</code> and <code>target=0</code> if <code>message_id = 1</code>.</p>
+<h2 id="speech-acts-performatives">Speech acts (<code>Performatives</code>)</h2>
+<p>Each message must define a <code>performative</code>. This is the "type" of the message of a given protocol. The <code>performative</code> is one way in which message flow in a given protocol is handled.</p>
+<h2 id="dialogue-rules">Dialogue rules</h2>
+<p>Protocols can optionaly define dialogue rules. These are rules on the permitted order of message performatives in a given dialogue. For instance, a protocol might specify that a certain performative, say <code>peformative_a</code>, can only be followed by <code>performative_b</code>. It might further specify that <code>performative_b</code> can only be replied to with a message of <code>performative_c</code> or <code>performative_d</code>.</p>
 <h2 id="custom-protocol">Custom protocol</h2>
-<p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. </p>
+<p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech acts, speech act contents as well as the optional reply structure.</p>
 <h2 id="fetchaidefault010-protocol"><code>fetchai/default:0.1.0</code> protocol</h2>
 <p>The <code>fetchai/default:0.1.0</code> protocol is a protocol which each AEA is meant to implement. It serves AEA to AEA interaction and includes two message performatives:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -1517,6 +1521,7 @@ We can then create the message to search these services:
 <span class="p">)</span>
 </pre></div>
 
+<p>The <code>fetchai/fipa:0.1.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
 <p>For examples of the usage of the <code>fetchai/fipa:0.1.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
 <p><br /></p>
 

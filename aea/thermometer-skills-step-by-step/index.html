@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1686,8 +1686,8 @@ The code above is logic for handling <code>FipaMessages</code> received by the <
             <span class="n">dialogue</span><span class="o">.</span><span class="n">temp_data</span> <span class="o">=</span> <span class="n">temp_data</span>
             <span class="n">dialogue</span><span class="o">.</span><span class="n">proposal</span> <span class="o">=</span> <span class="n">proposal</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending sender=</span><span class="si">{}</span><span class="s2"> a PROPOSE with proposal=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">proposal</span><span class="o">.</span><span class="n">values</span>
+                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending a PROPOSE with proposal=</span><span class="si">{}</span><span class="s2"> to sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">proposal_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
@@ -1979,13 +1979,14 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param query: the query</span>
 <span class="sd">        :return: a tuple of proposal and the temprature data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">tx_nonce</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ledger_apis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-            <span class="n">identifier</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span><span class="p">,</span>
-            <span class="n">seller</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_addresses</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span><span class="p">],</span>
-            <span class="n">client</span><span class="o">=</span><span class="n">counterparty</span><span class="p">,</span>
-        <span class="p">)</span>
-
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ledger_tx</span><span class="p">:</span>
+            <span class="n">tx_nonce</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ledger_apis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
+                <span class="n">identifier</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span><span class="p">,</span>
+                <span class="n">seller</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_addresses</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span><span class="p">],</span>
+                <span class="n">client</span><span class="o">=</span><span class="n">counterparty</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
         <span class="n">temp_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_data_payload</span><span class="p">()</span>
         <span class="n">total_price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_price_per_row</span>
         <span class="k">assert</span> <span class="p">(</span>
@@ -2096,7 +2097,7 @@ enable us to identify possible communications problems between the <code>my_ther
 <p>Firstly, we will update the <code>skill.yaml</code>. Make sure that your <code>skill.yaml</code> matches with the following code </p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2.0</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">fingerprint</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.3.0,</span><span class="nv"> </span><span class="s">&lt;0.4.0&#39;</span>

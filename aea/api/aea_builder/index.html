@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1321,6 +1321,42 @@ returns the instance of the builder itself.</p>
 <ul>
 <li><code>with_default_packages</code>: add the default packages.</li>
 </ul>
+<p><a name=".aea.aea_builder.AEABuilder.set_timeout"></a></p>
+<h4 id="set_timeout">set<code>_</code>timeout</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+</pre></div>
+
+<p>Set agent loop idle timeout in seconds.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>timeout</code>: timeout in seconds</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name=".aea.aea_builder.AEABuilder.set_execution_timeout"></a></p>
+<h4 id="set_execution_timeout">set<code>_</code>execution<code>_</code>timeout</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_execution_timeout</span><span class="p">(</span><span class="n">execution_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+</pre></div>
+
+<p>Set agent execution timeout in seconds.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>execution_timeout</code>: execution_timeout in seconds</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name=".aea.aea_builder.AEABuilder.set_max_reactions"></a></p>
+<h4 id="set_max_reactions">set<code>_</code>max<code>_</code>reactions</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_max_reactions</span><span class="p">(</span><span class="n">max_reactions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+</pre></div>
+
+<p>Set agent max reaction in one react.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>max_reactions</code>: int</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
 <p><a name=".aea.aea_builder.AEABuilder.set_name"></a></p>
 <h4 id="set_name">set<code>_</code>name</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
@@ -1440,9 +1476,17 @@ returns the instance of the builder itself.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the AEABuilder</p>
+<p><a name=".aea.aea_builder.AEABuilder.add_component_instance"></a></p>
+<h4 id="add_component_instance">add<code>_</code>component<code>_</code>instance</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_component_instance</span><span class="p">(</span><span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+</pre></div>
+
+<p>Add already initialized component object to resources or connections.</p>
+<p>Please, pay attention, all dependencies have to be already loaded.</p>
+<p>:params component: Component instance already initialized.</p>
 <p><a name=".aea.aea_builder.AEABuilder.set_context_namespace"></a></p>
 <h4 id="set_context_namespace">set<code>_</code>context<code>_</code>namespace</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_context_namespace</span><span class="p">(</span><span class="n">context_namespace</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_context_namespace</span><span class="p">(</span><span class="n">context_namespace</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </pre></div>
 
 <p>Set the context namespace.</p>
@@ -1572,7 +1616,7 @@ returns the instance of the builder itself.</p>
  <span class="o">|</span> <span class="n">from_aea_project</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </pre></div>
 
-<p>Construct the builder from an AEA project</p>
+<p>Construct the builder from an AEA project.</p>
 <ul>
 <li>load agent configuration file</li>
 <li>set name and default configurations</li>

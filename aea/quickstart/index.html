@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1380,7 +1380,7 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\ </span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.3.1
+v0.3.2
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </pre></div></p>
@@ -1392,7 +1392,7 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA. The fastest way to create your first AEA is to fetch it! </p>
 <p>If you want to follow a step by step guide we show you how to do it at the end of the file.</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/my_first_aea:0.1.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/my_first_aea:0.3.0
 <span class="nb">cd</span> my_first_aea
 </pre></div>
 
@@ -1411,12 +1411,12 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 </pre></div>
 
 <h2 id="run-the-aea">Run the AEA</h2>
-<p>Run the AEA with the default <code>fetchai/stub:0.2.0</code> connection.</p>
+<p>Run the AEA with the default <code>fetchai/stub:0.3.0</code> connection.</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 <p>or </p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.2.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.3.0
 </pre></div>
 
 <p>You will see the echo skill running in the terminal window.</p>
@@ -1426,11 +1426,12 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\ </span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.3.1
+v0.3.2
 
 my_first_aea starting ...
 info: Echo Handler: setup method called.
 info: Echo Behaviour: setup method called.
+info: <span class="o">[</span>my_first_aea<span class="o">]</span>: Start processing messages...
 info: Echo Behaviour: act method called.
 info: Echo Behaviour: act method called.
 info: Echo Behaviour: act method called.
@@ -1466,22 +1467,14 @@ info: Echo Behaviour: teardown method called.
 <p>We can write an end-to-end test for the AEA utilising helper classes provided by the framework.</p>
 <details><summary>Step by step install</summary>
 
-The following test class replicates the preceding demo and tests it's correct behaviour. The `AEATestCase` is a tool for AEA developers to write useful end-to-end tests of their AEAs.
+The following test class replicates the preceding demo and tests it's correct behaviour. The `AEATestCase` classes are a tool for AEA developers to write useful end-to-end tests of their AEAs.
 
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">signal</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DEFAULT_INPUT_FILE_NAME</span><span class="p">,</span>
-    <span class="n">DEFAULT_OUTPUT_FILE_NAME</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.default.serialization</span> <span class="kn">import</span> <span class="n">DefaultSerializer</span>
-<span class="kn">from</span> <span class="nn">aea.test_tools.generic</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">read_envelope_from_file</span><span class="p">,</span>
-    <span class="n">write_envelope_to_file</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">aea.test_tools.test_cases</span> <span class="kn">import</span> <span class="n">AEATestCase</span>
 
 
@@ -1491,11 +1484,13 @@ The following test class replicates the preceding demo and tests it's correct be
     <span class="k">def</span> <span class="nf">test_echo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run the echo skill sequence.&quot;&quot;&quot;</span>
         <span class="n">process</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_agent</span><span class="p">()</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">is_running</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">is_running</span><span class="p">,</span> <span class="s2">&quot;AEA not running within timeout!&quot;</span>
 
         <span class="c1"># add sending and receiving envelope from input/output files</span>
+        <span class="n">message_content</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;hello&quot;</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
-            <span class="n">performative</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">BYTES</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">BYTES</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">message_content</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">sent_envelope</span> <span class="o">=</span> <span class="n">Envelope</span><span class="p">(</span>
             <span class="n">to</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
@@ -1504,19 +1499,30 @@ The following test class replicates the preceding demo and tests it's correct be
             <span class="n">message</span><span class="o">=</span><span class="n">DefaultSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">message</span><span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="n">write_envelope_to_file</span><span class="p">(</span><span class="n">sent_envelope</span><span class="p">,</span> <span class="n">DEFAULT_INPUT_FILE_NAME</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_envelope_to_agent</span><span class="p">(</span><span class="n">sent_envelope</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
 
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
-        <span class="n">received_envelope</span> <span class="o">=</span> <span class="n">read_envelope_from_file</span><span class="p">(</span><span class="n">DEFAULT_OUTPUT_FILE_NAME</span><span class="p">)</span>
+        <span class="n">received_envelope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_envelope_from_agent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
 
         <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">sender</span>
         <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">to</span>
         <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">protocol_id</span>
         <span class="k">assert</span> <span class="n">sent_envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="n">received_envelope</span><span class="o">.</span><span class="n">message</span>
 
-        <span class="n">process</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">)</span>
-        <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">check_strings</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Echo Handler: setup method called.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Echo Behaviour: setup method called.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Echo Behaviour: act method called.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;content=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message_content</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">missing_strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing_from_output</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">check_strings</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">missing_strings</span> <span class="o">==</span> <span class="p">[]</span>
+        <span class="p">),</span> <span class="s2">&quot;Strings </span><span class="si">{}</span><span class="s2"> didn&#39;t appear in agent output.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">missing_strings</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_successfully_terminated</span><span class="p">()</span>
+        <span class="p">),</span> <span class="s2">&quot;Echo agent wasn&#39;t successfully terminated.&quot;</span>
 </pre></div>
 
 Place the above code into a file `test.py` in your AEA project directory (the same level as the `aea-config.yaml` file).
@@ -1533,9 +1539,18 @@ To run, execute the following:
 <div class="highlight"><pre><span></span>aea delete my_first_aea
 </pre></div>
 
+<h2 id="next-steps">Next steps</h2>
 <p>For more detailed analysis of the core components of the framework, please check the following:</p>
 <ul>
 <li><a href="../core-components/">Core components</a></li>
+</ul>
+<p>We recommend you learn more about the protocols agents use to communicate with each other. Understanding protocols is core to developing your own agent. Check out the following:</p>
+<ul>
+<li><a href="../protocol/">Protocols</a></li>
+</ul>
+<p>We also recommend you have a look at skill development. Skills are the core business logic commponents of an AEA. Check out the following:</p>
+<ul>
+<li><a href="../skill/">Skills</a></li>
 </ul>
 <p>For more demos, use cases or step by step guides, please check the following:</p>
 <ul>

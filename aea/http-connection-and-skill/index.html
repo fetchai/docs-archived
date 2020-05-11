@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1305,14 +1305,15 @@
 <h2 id="steps">Steps</h2>
 <p>Create a new AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_aea
+<span class="nb">cd</span> my_aea
 </pre></div>
 
 <p>Add the http server connection package</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/http_server:0.1.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/http_server:0.2.0
 </pre></div>
 
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.1.0
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.2.0
 </pre></div>
 
 <p>Modify the <code>api_spec_path</code>:</p>
@@ -1328,7 +1329,7 @@
 <div class="highlight"><pre><span></span>aea scaffold skill http_echo
 </pre></div>
 
-<p>We will implement a simple http echo skill (modelled after the standard echo skill) which prints out the content of received envelopes.</p>
+<p>We will implement a simple http echo skill (modelled after the standard echo skill) which prints out the content of received messages and responds with success.</p>
 <p>First, we delete the <code>my_model.py</code> and <code>behaviour.py</code>. The server will be pyrely reactive, so we only require the <code>handlers.py</code> file. We update the <code>skill.yaml</code> accordingly, so set <code>models: {}</code> and <code>behaviours: {}</code>.</p>
 <p>Next we implement a basic handler which prints the received envelopes and responds:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
@@ -1342,7 +1343,7 @@
 
 
 <span class="k">class</span> <span class="nc">HttpHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This class scaffolds a handler.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;This implements the echo handler.&quot;&quot;&quot;</span>
 
     <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">HttpMessage</span><span class="o">.</span><span class="n">protocol_id</span>
 

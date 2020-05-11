@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1341,9 +1341,22 @@ The following is an example protocol specification:</p>
 <span class="l l-Scalar l-Scalar-Plain">ct:DataModel</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
   <span class="no">bytes data_model = 1;</span>
 <span class="nn">...</span>
+<span class="nn">---</span>
+<span class="nt">reply</span><span class="p">:</span>
+  <span class="nt">cfp</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">propose</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
+  <span class="nt">propose</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">accept</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
+  <span class="nt">accept</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">decline</span><span class="p p-Indicator">,</span> <span class="nv">match_accept</span><span class="p p-Indicator">]</span>
+  <span class="nt">decline</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+  <span class="nt">match_accept</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+<span class="nt">roles</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">buyer</span><span class="p p-Indicator">,</span> <span class="nv">seller</span><span class="p p-Indicator">}</span>
+<span class="nt">end_states</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">successful</span><span class="p p-Indicator">,</span> <span class="nv">failed</span><span class="p p-Indicator">]</span>
+<span class="nn">...</span>
 </pre></div>
 
-<p>Each protocol specification yaml file contains some basic information about the protocol. The allowed fields and what they represent are:</p>
+<p>Each protocol specification yaml file must have a minimum of one, and a maximum of three yaml documents (each yaml document is enclosed within --- and ...). </p>
+<h3 id="basic-protocol-detail-and-messages-syntax">Basic Protocol Detail and Messages Syntax</h3>
+<p>The first yaml document is mandatory in any protocol specification. It contains some basic information about the protocol and describes the syntax of communicative messages allowed under this protocol. </p>
+<p>The allowed fields and what they represent are:</p>
 <ul>
 <li><code>name</code>: The name of the protocol (written in <a href="https://en.wikipedia.org/wiki/Snake_case" target="_blank">snake_case</a>)</li>
 <li><code>author</code>: The creator of the protocol</li>
@@ -1352,14 +1365,14 @@ The following is an example protocol specification:</p>
 <li><code>aea_version</code>: The version(s) of the framework that support this protocol. The format is described <a href="https://www.python.org/dev/peps/pep-0440" target="_blank">here</a>.</li>
 <li><code>description</code>: A short description of the protocol</li>
 </ul>
-<p>Every field is mandatory and each is a key/value pair, where both key and value are yaml strings. </p>
-<p>In addition to the above basic information, a protocol specification must describe the syntax of valid messages according to this protocol.
+<p>All of the above fields are mandatory and each is a key/value pair, where both key and value are yaml strings. </p>
+<p>In addition, the first yaml document in a protocol specification must describe the syntax of valid messages according to this protocol.
 Therefore, there is another mandatory field: <code>speech-acts</code>, which defines the set of <em>performatives</em> valid under this protocol, and a set of <em>contents</em> for each performative. </p>
-<p>A performative defines the type of a message (e.g. propose, accept) and has a set of contents (or parameters) of varying types.    </p>
+<p>A <em>performative</em> defines the type of a message (e.g. propose, accept) and has a set of <em>contents</em> (or parameters) of varying types.    </p>
 <p>The format of the <code>speech-act</code> is as follows:
-<code>speech-act</code> is a dictionary, where each key is a unique <strong>performative</strong> (yaml string), and the value is a <strong>content</strong> dictionary. If a performative does not have any content, then its content dictionary is empty, e.g. <code>accept</code>, <code>decline</code> and <code>match_accept</code> in the above protocol specification.</p>
-<p>Each content dictionary is composed of key/value pairs, where each key is the name of a content (yaml string) and the value is its <a href="./#types">type</a> (yaml string). For example, the <code>cfp</code> (short for 'call for proposal') performative has one content whose name is <code>query</code> and whose type is <code>ct:DataModel</code>.  </p>
-<h3 id="types">Types</h3>
+<code>speech-act</code> is a dictionary, where each key is a <strong>unique</strong> <em>performative</em> (yaml string), and the value is a <em>content</em> dictionary. If a performative does not have any content, then its content dictionary is empty, e.g. <code>accept</code>, <code>decline</code> and <code>match_accept</code> in the above specification.</p>
+<p>A content dictionary in turn is composed of key/value pairs, where each key is the name of a content (yaml string) and the value is its <a href="./#types">type</a> (yaml string). For example, the <code>cfp</code> (short for 'call for proposal') performative has one content whose name is <code>query</code> and whose type is <code>ct:DataModel</code>.  </p>
+<h4 id="types">Types</h4>
 <p>The specific types which could be assigned to contents in a protocol specification are described in the table below.</p>
 <p>Types are either user defined (i.e. custom types) or primitive: </p>
 <ul>
@@ -1370,7 +1383,7 @@ Therefore, there is another mandatory field: <code>speech-acts</code>, which def
 </ul>
 </li>
 </ul>
-<p>A multi type denotes an "or" separated set of sub-types, e.g. <code>pt:union[pt:str, pt:int]</code> as the type of a content <code>c</code> means <code>c</code> is either a <code>pt:int</code> or a <code>pt:float</code>.</p>
+<p>A multi type denotes an "or" separated set of sub-types, e.g. <code>pt:union[pt:str, pt:int]</code> as the type of a <code>content</code> means <code>content</code> should either be a <code>pt:int</code> or a <code>pt:float</code>.</p>
 <p>An optional type for a content denotes that the content's existence is optional, but if it is present, its type must match <code>pt:optional[...]</code>'s sub-type. </p>
 <table>
 <thead>
@@ -1463,10 +1476,33 @@ Therefore, there is another mandatory field: <code>speech-acts</code>, which def
 </tbody>
 </table>
 <p><sup>*</sup> <sub>This is how variable length tuples containing elements of the same type are declared in Python; see <a href="https://docs.python.org/3/library/typing.html#typing.Tuple" target=_blank>here</a> </sub></p>
-<h4 id="notes">Notes</h4>
+<h3 id="protocol-buffer-schema">Protocol Buffer Schema</h3>
+<p>Currently, there are no official method provided by the AEA framework for describing custom types in a programming language independent format. 
+This means that if a protocol specification includes custom types, the required implementations must be provided manually. </p>
+<p>Therefore, if any of the contents declared in `speech-acts is of a custom type, the specification must then have a second yaml document, containing the protocol buffer schema code for every custom type.</p>
+<p>You can see an example of the second yaml document in the above protocol specification.</p>
+<h3 id="dialogues">Dialogues</h3>
+<p>You can optionally describe some of the structural details of dialogues conforming to your protocol in a third yaml document in the protocol specification.</p>
+<p>The allowed fields and what they represent are:</p>
+<ul>
+<li><code>reply</code>: The reply structure of speech-acts</li>
+<li><code>roles</code>: The roles of agents participating in dialogues</li>
+<li><code>end_states</code>: The final states a dialogue could end up in.</li>
+</ul>
+<p>All of the above fields are mandatory. </p>
+<p><code>reply</code> specifies for every performative, what its valid replies are. If a performative <code>per_1</code> is a valid reply to another <code>per_2</code>, this means a message with performative <code>per_1</code> can target a message whose performative is <code>per_2</code>.      </p>
+<p><code>reply</code> is a dictionary, where the keys are the performatives (yaml string) defined in <code>speech-acts</code>. For each performtaive key, its value is a list of performatives which are defined to be a valid reply. 
+For example, valid replies to <code>cfp</code> are <code>propose</code> and <code>decline</code>.</p>
+<p><code>roles</code> lists the roles are agents which participate in dialogues conforming with your protocol. 
+<code>roles</code> takes a set, which may contain two or one roles, each role being a yaml string. </p>
+<p>If there are two roles, each agent has a distinguished role in the dialogue (e.g. buyer and seller in the above specification).
+If there is one role, then the two agents in a dialogue take the same role.</p>
+<p><code>end_states</code> lists the final states a dialogue based on your protocol may terminate in. 
+<code>end_states</code> is a list of yaml strings. </p>
+<h3 id="notes">Notes</h3>
 <ol>
 <li>Currently, there is no way to describe custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required implementations must be provided manually.<ul>
-<li>Before generating the protocol, the protocol buffer schema code for every custom type must be provided in the protocol specification. You can see an example of this in the above protocol specification. In particular, if a specification includes custom types, the specification must include a second yaml document (each yaml document is enclosed within <code>---</code> and <code>...</code>) which for every custom type describes its protocol buffer schema code.   </li>
+<li>Before generating the protocol, the protocol buffer schema code for every custom type must be provided in the protocol specification.    </li>
 <li>Once the generator is called, it produces a <code>custom_types</code> module containing stub implementations for every custom type in the specification. The user must then modify this module and add implementations for every custom type in the specification. This includes implementations of how an object of a custom type can be encoded and decoded using protocol buffer.</li>
 <li>Note, currently the way custom types are dealt with in the generator is admittedly inconvenient. The reason is, the generator does not know the structure of custom types and how they may be serialised/deserialised. Although this approach works, it is only a temporary solution until further work on a programming language-independent type description language is finished (similar to how the generator is designed to be a programming language-independent protocol description language).</li>
 </ul>
@@ -1475,7 +1511,7 @@ Therefore, there is another mandatory field: <code>speech-acts</code>, which def
 <li>In protocol buffer version 3, which is the version used by the generator, there is no way to check whether an optional field (i.e. contents of type <code>pt:optional[...]</code>) has been set or not (see discussion <a href="https://github.com/protocolbuffers/protobuf/issues/1606" target=_blank>here</a>). In proto3, all optional fields are assigned a default value (e.g. <code>0</code> for integers types, <code>false</code> for boolean types, etc). Therefore, given an optional field whose value is the default value, there is no way to know from the optional field itself, whether it is not set, or in fact is set but its value happens to be the default value. Because of this, in the generated protocol schema file (the <code>.proto</code> file), for every optional content there is a second field that declares whether this field is set or not. We will maintain this temporary solution until a cleaner alternative is found.</li>
 <li>Be aware that currently, using the generated protocols in python, there might be some rounding errors when serialising and then deserialising values of <code>pt:float</code> contents.</li>
 </ol>
-<h3 id="generated-protocol-package">Generated protocol package</h3>
+<h2 id="generated-protocol-package">Generated protocol package</h2>
 <p>The generator currently produces the following files (assuming the name of the protocol in the specification is <code>sample</code>):</p>
 <ul>
 <li><code>message.py</code>: defines messages valid under the <code>sample</code> protocol </li>

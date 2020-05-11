@@ -482,7 +482,7 @@
     </ul>
 </li> 
 <li>
-    <a href="../performance_benchmark/" id="aea-performance_benchmark-"
+    <a href="../performance-benchmark/" id="aea-performance-benchmark-"
         >Performance benchmark</a
     >
 </li>
@@ -1320,7 +1320,7 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<p><code>aea fetch fetchai/weather_station:0.2.0</code></p>
+<p><code>aea fetch fetchai/weather_station:0.3.0</code></p>
 <h3 id="update-the-aea-configs">Update the AEA configs</h3>
 <p>In the terminal change the configuration:
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.is_ledger_tx False --type bool
@@ -1398,13 +1398,16 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">fipa_protocol</span><span class="p">)</span>
 
     <span class="c1"># Add the error and weather_station skills</span>
-    <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span>
-    <span class="p">)</span>
+    <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">))</span>
+    <span class="n">error_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">logger_name</span> <span class="o">=</span> <span class="s2">&quot;aea.packages.fetchai.skills.error&quot;</span>
+    <span class="n">error_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
     <span class="n">weather_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;weather_client&quot;</span><span class="p">),</span>
-        <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;weather_client&quot;</span><span class="p">)</span>
     <span class="p">)</span>
+    <span class="n">weather_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">logger_name</span> <span class="o">=</span> <span class="s2">&quot;aea.packages.fetchai.skills.weather_client&quot;</span>
+    <span class="n">weather_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
 
     <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="n">weather_skill</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strategy&quot;</span><span class="p">))</span>
     <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="o">=</span> <span class="kc">False</span>
