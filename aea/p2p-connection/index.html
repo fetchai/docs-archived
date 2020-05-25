@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1305,38 +1359,88 @@
   <p>This section is highly experimental. We will update it soon.</p>
 </div>
 
-<p>The <code>fetchai/p2p_noise:0.2.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.2.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local Demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_noise:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_noise:0.2.0
-aea run --connections fetchai/p2p_noise:0.2.0
+aea add connection fetchai/p2p_libp2p:0.1.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.1.0
+aea run --connections fetchai/p2p_libp2p:0.1.0
 </pre></div>
 
 <h3 id="create-and-run-another-aea">Create and run another AEA</h3>
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_noise:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_noise:0.2.0
+aea add connection fetchai/p2p_libp2p:0.1.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.1.0
 </pre></div>
 
-<p>Provide the AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_noise/connection.yaml</code>:</p>
-<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
-  <span class="nt">noise_entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;127.0.0.1:9000&quot;</span><span class="p p-Indicator">]</span>
-  <span class="nt">noise_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
-  <span class="nt">noise_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">noise_node.log</span>
-  <span class="nt">noise_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
+<p>Provide the AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
+<p><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">libp2p_entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
+  <span class="nt">libp2p_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
+  <span class="nt">libp2p_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">libp2p_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
 </pre></div>
-
+Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_noise:0.2.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.1.0
 </pre></div>
 
-<p>You can inspect the <code>noise_node.log</code> log files of the AEA to see how they discover each other.</p>
+<p>You can inspect the <code>libp2p_node.log</code> log files of the AEA to see how they discover each other.</p>
+<h2 id="local-demo-with-skills">Local Demo with skills</h2>
+<h3 id="fetch-the-weather-station-and-client">Fetch the weather station and client</h3>
+<p>Create one AEA as follows:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.4.0
+aea fetch fetchai/weather_client:0.4.0
+</pre></div>
+
+<p>Then enter each project individually and execute the following to add the <code>p2p_libp2p</code> connection:
+<div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.1.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.1.0
+</pre></div></p>
+<p>Then extend the <code>aea-config.yaml</code> of each project as follows:
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="p p-Indicator">?</span> <span class="s">&quot;fetchai/oef_search:0.1.0&quot;</span>
+  <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.3.0&quot;</span>
+</pre></div></p>
+<h3 id="run-oef">Run OEF</h3>
+<p>Run the oef for search and discovery:
+<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+</pre></div></p>
+<h3 id="run-weather-station">Run weather station</h3>
+<p>Run the weather station first:
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.1.0,fetchai/oef:0.3.0&quot;</span>
+</pre></div>
+The weather station will form the genesis node. Wait until you see the lines:
+<div class="highlight"><pre><span></span>My libp2p addresses: ...
+</pre></div>
+Take note of these as the genesis' <code>MULTI_ADDRESSES = ["{addr1}", "{addr2}"]</code>.</p>
+<h3 id="generate-wealth-for-the-weather-client-aea">Generate wealth for the weather client AEA</h3>
+<p>The weather client needs to have some wealth to purchase the weather station information.</p>
+<p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:
+<div class="highlight"><pre><span></span>aea generate-key fetchai
+aea add-key fetchai fet_private_key.txt
+</pre></div></p>
+<p>Then, create some wealth for your weather client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:
+<div class="highlight"><pre><span></span>aea generate-wealth fetchai
+</pre></div></p>
+<h3 id="run-the-weather-client">Run the weather client</h3>
+<p>Provide the weather client AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">libp2p_entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
+  <span class="nt">libp2p_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
+  <span class="nt">libp2p_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">libp2p_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
+</pre></div>
+Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
+<p>Then fund your
+Now run the weather client:
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.1.0,fetchai/oef:0.3.0&quot;</span>
+</pre></div></p>
 <h2 id="deployed-test-network">Deployed Test Network</h2>
 <div class="admonition note">
   <p class="admonition-title">Note</p>

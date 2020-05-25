@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1313,8 +1367,8 @@
 <p>Then, import the application specific libraries.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">SkillConfig</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 </pre></div>
 
@@ -1326,7 +1380,7 @@
 <h2 id="create-a-private-key">Create a private key</h2>
 <p>We need a private key to populate the AEA's wallet.
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private key</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">()</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 </pre></div></p>
 <h2 id="clearing-the-input-and-output-files">Clearing the input and output files</h2>
 <p>We will use the stub connection to pass envelopes in and out of the AEA. Ensure that any input and output text files are removed before we start.
@@ -1337,7 +1391,7 @@
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span>
 </pre></div></p>
 <h2 id="initialise-the-aea">Initialise the AEA</h2>
-<p>We use the AEABuilder to readily build an AEA. By default, the AEABuilder adds the <code>fetchai/default:0.1.0</code> protocol, the <code>fetchai/stub:0.3.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.
+<p>We use the AEABuilder to readily build an AEA. By default, the AEABuilder adds the <code>fetchai/default:0.1.0</code> protocol, the <code>fetchai/stub:0.4.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.
 <div class="highlight"><pre><span></span>    <span class="c1"># Instantiate the builder and build the AEA</span>
     <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">AEABuilder</span><span class="p">()</span>
@@ -1345,9 +1399,9 @@
 <p>We set the name, add the private key for the AEA to use and set the ledger configurations for the AEA to use.
 <div class="highlight"><pre><span></span>    <span class="n">builder</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
 </pre></div></p>
 <p>Next, we add the echo skill which will bounce our messages back to us. We first need to place the echo skill into a relevant directory (see path), either by downloading the <code>packages</code> directory from the AEA repo or by getting the package from the registry.
 <div class="highlight"><pre><span></span>    <span class="c1"># Add the echo skill (assuming it is present in the local directory &#39;packages&#39;)</span>
@@ -1437,8 +1491,8 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hell
 
 <span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">SkillConfig</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
@@ -1448,7 +1502,7 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hell
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private key</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">()</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 
     <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
@@ -1462,9 +1516,9 @@ output message: other_agent,my_aea,fetchai/default:0.1.0,\x08\x01*\x07\n\x05hell
 
     <span class="n">builder</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
 
     <span class="c1"># Add the echo skill (assuming it is present in the local directory &#39;packages&#39;)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s2">&quot;./packages/fetchai/skills/echo&quot;</span><span class="p">)</span>

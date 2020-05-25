@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1306,178 +1360,12 @@
 <li>The <code>ml_data_provider</code> which sells training data.</li>
 <li>The <code>ml_model_trainer</code> which trains a model</li>
 </ul>
-<h3 id="discussion">Discussion</h3>
+<h2 id="discussion">Discussion</h2>
 <p>The scope of the specific demo is to demonstrate how to create a simple AEA with integration of machine learning, and the usage of the AEA framework. The ml_data_provider AEA
 will provide some sample data and will deliver to the client upon payment. Once the client gets the data, it will train the model. The process can be found in the <code>tasks.py</code> file.
 This demo does not utilize a smart contract. As a result, we interact with a ledger only to complete a transaction.</p>
 <p>Since the AEA framework enables us to use third-party libraries hosted on PyPI we can directly reference the external dependencies.
 The <code>aea install</code> command will install each dependency that the specific AEA needs and is listed in the skill's YAML file. </p>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
-<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div></p>
-<p>Keep it running for all the following demos.</p>
-<h2 id="demo-instructions-1-no-ledger-payment">Demo instructions 1 - no ledger payment:</h2>
-<h3 id="create-the-data-provider-aea">Create the data provider AEA</h3>
-<p>Create the AEA that will provide the data.</p>
-<div class="highlight"><pre><span></span>aea create ml_data_provider
-<span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/oef:0.2.0
-aea add skill fetchai/ml_data_provider:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
-</pre></div>
-
-<h3 id="alternatively-install-the-aea-directly">Alternatively, install the AEA directly</h3>
-<p>In the root directory, fetch the data provider AEA and enter the project.
-<div class="highlight"><pre><span></span>aea fetch fetchai/ml_data_provider:0.3.0
-<span class="nb">cd</span> ml_data_provider
-</pre></div>
-The <code>aea fetch</code> command creates the entire AEA, including its dependencies for you.</p>
-<h3 id="install-the-dependencies">Install the dependencies</h3>
-<p>The ml data provider uses <code>tensorflow</code> and <code>numpy</code>.
-<div class="highlight"><pre><span></span>aea install
-</pre></div></p>
-<h3 id="run-the-data-provider-aea">Run the data provider AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
-</pre></div>
-
-<h3 id="create-the-model-trainer-aea">Create the model trainer AEA</h3>
-<p>In a separate terminal, in the root directory, create the model trainer AEA.</p>
-<div class="highlight"><pre><span></span>aea create ml_model_trainer
-<span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/oef:0.2.0
-aea add skill fetchai/ml_train:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
-</pre></div>
-
-<h3 id="alternatively-install-the-aea-directly_1">Alternatively, install the AEA directly</h3>
-<p>In the root directory, fetch the data provider AEA and enter the project.
-<div class="highlight"><pre><span></span>aea fetch fetchai/ml_model_trainer:0.3.0
-<span class="nb">cd</span> ml_model_trainer
-</pre></div></p>
-<h3 id="install-the-dependencies_1">Install the dependencies</h3>
-<p>The ml data provider uses <code>tensorflow</code> and <code>numpy</code>.
-<div class="highlight"><pre><span></span>aea install
-</pre></div></p>
-<h3 id="run-the-model-trainer-aea">Run the model trainer AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
-</pre></div>
-
-<p>After some time, you should see the AEAs transact and the model trainer train its model.</p>
-<h2 id="demo-instructions-ledger-payment">Demo instructions - Ledger payment:</h2>
-<p>We will now run the same demo but with a real ledger transaction on Fetch.ai or Ethereum <code>ropsten</code> network. This demo assumes the buyer
-trusts the seller AEA to send the data upon successful payment.</p>
-<h3 id="create-the-data-provider-aea_1">Create the data provider AEA</h3>
-<p>Create the AEA that will provide the data.</p>
-<div class="highlight"><pre><span></span>aea create ml_data_provider
-<span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/oef:0.2.0
-aea add skill fetchai/ml_data_provider:0.2.0
-aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
-</pre></div>
-
-<h3 id="create-the-model-trainer-aea_1">Create the model trainer AEA</h3>
-<p>In a separate terminal, in the root directory, create the model trainer AEA.</p>
-<div class="highlight"><pre><span></span>aea create ml_model_trainer
-<span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/oef:0.2.0
-aea add skill fetchai/ml_train:0.2.0
-aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.2.0
-</pre></div>
-
-<p>Additionally, create the private key for the model trainer AEA based on the network you want to transact.</p>
-<p>To generate and add a key for Fetch.ai use:
-<div class="highlight"><pre><span></span>aea generate-key fetchai
-aea add-key fetchai fet_private_key.txt
-</pre></div></p>
-<p>To generate and add a key for Ethereum use:
-<div class="highlight"><pre><span></span>aea generate-key ethereum
-aea add-key ethereum eth_private_key.txt
-</pre></div></p>
-<h3 id="update-the-aea-configs">Update the AEA configs</h3>
-<p>Both in <code>ml_model_trainer/aea-config.yaml</code> and
-<code>ml_data_provider/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following based on the network you want to connect.</p>
-<p>To connect to Fetchai:
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div></p>
-<p>To connect to Ethereum:
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">ethereum</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
-    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
-</pre></div></p>
-<h3 id="fund-the-ml-model-trainer-aea">Fund the ml model trainer AEA</h3>
-<p>Create some wealth for your ml model trainer based on the network you want to transact with: </p>
-<p>On the Fetch.ai <code>testnet</code> network.
-<div class="highlight"><pre><span></span>aea generate-wealth fetchai
-</pre></div></p>
-<p>On the Ethereum <code>ropsten</code> . (It takes a while).
-<div class="highlight"><pre><span></span>aea generate-wealth ethereum
-</pre></div></p>
-<h3 id="update-the-skill-configs">Update the skill configs</h3>
-<p>In the ml data provider skill config (<code>ml_data_provider/skills/ml_data_provider/skill.yaml</code>) under strategy, amend the <code>currency_id</code> and <code>ledger_id</code> as follows.</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span>
-<span class="p p-Indicator">|</span><span class="err">         FETCHAI                   |           ETHEREUM               |</span>
-<span class="p p-Indicator">|</span><span class="err">-----------------------------------|----------------------------------|</span>
-<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>              
-<span class="nt">|  strategy</span><span class="p">:</span>                        <span class="nt">|  strategy</span><span class="p">:</span>                       <span class="p p-Indicator">|</span>
-<span class="nt">|     class_name</span><span class="p">:</span> <span class="nt">Strategy          |     class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy         |</span>
-<span class="nt">|    args</span><span class="p">:</span>                          <span class="nt">|    args</span><span class="p">:</span>                         <span class="p p-Indicator">|</span>
-<span class="nt">|      price_per_data_batch</span><span class="p">:</span> <span class="nt">100    |      price_per_data_batch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100   |</span>
-<span class="nt">|      batch_size</span><span class="p">:</span> <span class="nt">2                |      batch_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2               |</span>
-<span class="nt">|      seller_tx_fee</span><span class="p">:</span> <span class="nt">0             |      seller_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0            |</span>
-<span class="nt">|      buyer_tx_fee</span><span class="p">:</span> <span class="nt">10             |      buyer_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10            |</span>
-<span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>         <span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>        <span class="p p-Indicator">|</span>
-<span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;FET&#39;</span>           <span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;ETH&#39;</span>          <span class="p p-Indicator">|</span>
-<span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;fetchai&#39;</span>         <span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;ethereum&#39;</span>       <span class="p p-Indicator">|</span>
-<span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span> 
-</pre></div>
-
-<p>Another way to update the skill config is via the <code>aea config get/set</code> command.
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.models.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.models.strategy.args.ledger_id ethereum
-</pre></div></p>
-<p>In the ml model trainer skill config (<code>ml_model_trainer/skills/ml_train/skill.yaml</code>) under strategy, amend the <code>currency_id</code> and <code>ledger_id</code> as follows.</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span>
-<span class="p p-Indicator">|</span><span class="err">         FETCHAI                   |           ETHEREUM               |</span>
-<span class="p p-Indicator">|</span><span class="err">-----------------------------------|----------------------------------|</span>
-<span class="nt">|models</span><span class="p">:</span>                            <span class="nt">|models</span><span class="p">:</span>                           <span class="p p-Indicator">|</span>              
-<span class="nt">|  strategy</span><span class="p">:</span>                        <span class="nt">|  strategy</span><span class="p">:</span>                       <span class="p p-Indicator">|</span>
-<span class="nt">|     class_name</span><span class="p">:</span> <span class="nt">Strategy          |     class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy         |</span>
-<span class="nt">|    args</span><span class="p">:</span>                          <span class="nt">|    args</span><span class="p">:</span>                         <span class="p p-Indicator">|</span>
-<span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>         <span class="nt">|      dataset_id</span><span class="p">:</span> <span class="s">&#39;fmnist&#39;</span>        <span class="p p-Indicator">|</span>
-<span class="nt">|      max_unit_price</span><span class="p">:</span> <span class="nt">70           |      max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">70          |</span>
-<span class="nt">|      max_buyer_tx_fee</span><span class="p">:</span> <span class="nt">20         |      max_buyer_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20        |</span>
-<span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;FET&#39;</span>           <span class="nt">|      currency_id</span><span class="p">:</span> <span class="s">&#39;ETH&#39;</span>          <span class="p p-Indicator">|</span>
-<span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;fetchai&#39;</span>         <span class="nt">|      ledger_id</span><span class="p">:</span> <span class="s">&#39;ethereum&#39;</span>       <span class="p p-Indicator">|</span>
-<span class="nt">|      is_ledger_tx</span><span class="p">:</span> <span class="nt">True           |      is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True          |</span>
-<span class="p p-Indicator">|</span><span class="err">----------------------------------------------------------------------|</span> 
-</pre></div>
-
-<p>Another way to update the skill config is via the <code>aea config get/set</code> command.
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.max_buyer_tx_fee <span class="m">10000</span> --type int
-aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.ledger_id ethereum
-aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.is_ledger_tx True --type bool
-</pre></div></p>
-<h3 id="run-both-aeas">Run both AEAs</h3>
-<p>From their respective directories, run both AEAs
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
-</pre></div></p>
-<h3 id="clean-up">Clean up</h3>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-aea delete ml_data_provider
-aea delete ml_model_trainer
-</pre></div>
-
 <h2 id="communication">Communication</h2>
 <p>This diagram shows the communication between the two AEAs.</p>
 <div class="mermaid">
@@ -1511,6 +1399,180 @@ aea delete ml_model_trainer
         deactivate Ledger
 
 </div>
+
+<h2 id="preparation-instructions">Preparation instructions</h2>
+<h3 id="dependencies">Dependencies</h3>
+<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
+<h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
+<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.
+<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+</pre></div></p>
+<p>Keep it running for the following demo.</p>
+<h2 id="demo-instructions">Demo instructions</h2>
+<h3 id="create-data-provider-aea">Create data provider AEA</h3>
+<p>First, fetch the data provider AEA:
+<div class="highlight"><pre><span></span>aea fetch fetchai/ml_data_provider:0.4.0
+<span class="nb">cd</span> ml_data_provider
+aea install
+</pre></div></p>
+<details><summary>Alternatively, create from scratch.</summary>
+<p>
+
+The following steps create the data provider from scratch:
+<div class="highlight"><pre><span></span>aea create ml_data_provider
+<span class="nb">cd</span> ml_data_provider
+aea add connection fetchai/oef:0.3.0
+aea add skill fetchai/ml_data_provider:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.3.0
+aea install
+</pre></div>
+
+In `ml_data_provider/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">fetchai</span><span class="p">:</span>
+    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
+</pre></div>
+
+</p>
+</details>
+
+<h3 id="create-model-trainer-aea">Create model trainer AEA</h3>
+<p>Then, fetch the model trainer AEA:
+<div class="highlight"><pre><span></span>aea fetch fetchai/ml_model_trainer:0.4.0
+<span class="nb">cd</span> ml_model_trainer
+aea install
+</pre></div></p>
+<details><summary>Alternatively, create from scratch.</summary>
+<p>
+
+The following steps create the model trainer from scratch:
+<div class="highlight"><pre><span></span>aea create ml_model_trainer
+<span class="nb">cd</span> ml_model_trainer
+aea add connection fetchai/oef:0.3.0
+aea add skill fetchai/ml_train:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.3.0
+aea install
+</pre></div>
+
+In `ml_model_trainer/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
+
+To connect to Fetchai:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">fetchai</span><span class="p">:</span>
+    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
+</pre></div>
+
+</p>
+</details>
+
+<h3 id="generate-wealth-for-the-model-trainer-aea">Generate wealth for the model trainer AEA</h3>
+<p>The model trainer needs to have some wealth to purchase the training data.</p>
+<p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:
+<div class="highlight"><pre><span></span>aea generate-key fetchai
+aea add-key fetchai fet_private_key.txt
+</pre></div></p>
+<p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:
+<div class="highlight"><pre><span></span>aea generate-wealth fetchai
+</pre></div></p>
+<details><summary>Alternatively, create wealth for other test networks.</summary>
+<p>
+
+<strong>Ledger Config:</strong>
+<br>
+
+In `ml_model_trainer/aea-config.yaml` and `ml_data_provider/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
+
+To connect to Ethereum:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">ethereum</span><span class="p">:</span>
+    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
+    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
+</pre></div>
+
+Alternatively, to connect to Cosmos:
+<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
+  <span class="nt">cosmos</span><span class="p">:</span>
+    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://aea-testnet.sandbox.fetch-ai.com:1317</span>
+</pre></div>
+
+<strong>Wealth:</strong>
+<br>
+
+To generate and add a private-public key pair for Ethereum use:
+<div class="highlight"><pre><span></span>aea generate-key ethereum
+aea add-key ethereum eth_private_key.txt
+</pre></div>
+
+On the Ethereum `ropsten` network.
+<div class="highlight"><pre><span></span>aea generate-wealth ethereum
+</pre></div>
+
+Alternatively, to generate and add a private-public key pair for Cosmos use:
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+</pre></div>
+
+On the Cosmos `testnet` network.
+<div class="highlight"><pre><span></span>aea generate-wealth cosmos
+</pre></div>
+
+</p>
+</details>
+
+<h3 id="update-the-skill-configs">Update the skill configs</h3>
+<p>The default skill configs assume that the transaction is settled against the fetchai ledger.</p>
+<details><summary>Alternatively, configure skills for other test networks.</summary>
+<p>
+
+<strong>Data provider:</strong>
+<br>
+Ensure you are in the ml_data_provider project directory.
+
+For ethereum, update the skill config of the data provider via the `aea config get/set` command like so:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills. ml_data_provider.models.strategy.args.currency_id ETH
+aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.models.strategy.args.ledger_id ethereum
+</pre></div>
+
+Or for cosmos, like so:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.models.strategy.args.currency_id ATOM
+aea config <span class="nb">set</span> vendor.fetchai.skills.ml_data_provider.models.strategy.args.ledger_id cosmos
+</pre></div>
+
+This updates the ml_data_provider skill config (`ml_data_provider/vendor/fetchai/skills/ml_data_provider/skill.yaml`).
+
+
+<strong>Model trainer:</strong>
+<br>
+Ensure you are in the ml_model_trainer project directory.
+
+For ethereum, update the skill config of the ml_model_trainer via the `aea config get/set` command like so:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_trainer.models.strategy.args.currency_id ETH
+aea config <span class="nb">set</span> vendor.fetchai.skills.ml_trainer.models.strategy.args.ledger_id ethereum
+</pre></div>
+
+Or for cosmos, like so:
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.currency_id ATOM
+aea config <span class="nb">set</span> vendor.fetchai.skills.ml_train.models.strategy.args.ledger_id cosmos
+</pre></div>
+
+This updates the ml_nodel_trainer skill config (`ml_model_trainer/vendor/fetchai/skills/ml_train/skill.yaml`).
+
+</p>
+</details>
+
+<h3 id="run-both-aeas">Run both AEAs</h3>
+<p>Finally, run both AEAs from their respective directories:
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.3.0
+</pre></div></p>
+<p>You can see that the AEAs find each other, negotiate and eventually trade.</p>
+<h3 id="cleaning-up">Cleaning up</h3>
+<p>When you're finished, delete your AEAs:
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+aea delete ml_data_provider
+aea delete ml_model_trainer
+</pre></div></p>
+<p><br /></p>
 
 
                                 </section>

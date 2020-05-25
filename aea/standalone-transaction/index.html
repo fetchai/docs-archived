@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1305,8 +1359,8 @@ we get the transaction digest. With this we can search for the transaction on th
 <p>First, import the python and application specific libraries and set the static variables.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">_create_fetchai_private_key</span><span class="p">,</span> <span class="n">_try_generate_testnet_wealth</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 
@@ -1320,38 +1374,47 @@ we get the transaction digest. With this we can search for the transaction on th
 
 <h2 id="create-the-private-keys">Create the private keys</h2>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private keys</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">(</span><span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">(</span><span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
+    <span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
+    <span class="p">)</span>
 </pre></div>
 
 <h2 id="create-the-wallets">Create the wallets</h2>
 <p>Once we created the private keys we need to generate the wallets.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set up the wallets</span>
-    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
-    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
+    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 </pre></div>
 
 <h2 id="create-ledgerapis">Create LedgerApis</h2>
 <p>We need to create the LedgerApis object in order to be able to interact with the Fetch.ai <code>testnet</code>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set up the LedgerApis</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">}},</span> <span class="n">FETCHAI</span><span class="p">)</span>
+    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">}},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span>
+    <span class="p">)</span>
 </pre></div></p>
 <h2 id="generate-wealth">Generate wealth</h2>
 <p>Since we want to send funds from <code>wallet_1</code> to <code>wallet_2</code>, we need to generate some wealth for the <code>wallet_1</code>. We can
 do this with the following code
 <div class="highlight"><pre><span></span>    <span class="c1"># Generate some wealth</span>
-    <span class="n">_try_generate_testnet_wealth</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FETCHAI</span><span class="p">])</span>
+    <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
+    <span class="p">)</span>
 </pre></div></p>
 <h2 id="send-transaction">Send transaction</h2>
 <p>Finally, we create a transaction that sends the funds to the <code>wallet_2</code></p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create the transaction and send it to the ledger.</span>
-    <span class="n">ledger_api</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FETCHAI</span><span class="p">]</span>
+    <span class="n">ledger_api</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
     <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">ledger_api</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">)</span>
+        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">tx_digest</span> <span class="o">=</span> <span class="n">ledger_api</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
-        <span class="n">crypto</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">crypto_objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span>
-        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span>
+        <span class="n">crypto</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">crypto_objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
@@ -1364,8 +1427,8 @@ do this with the following code
 
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">_create_fetchai_private_key</span><span class="p">,</span> <span class="n">_try_generate_testnet_wealth</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 
@@ -1379,29 +1442,40 @@ do this with the following code
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private keys</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">(</span><span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">(</span><span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
+    <span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
+    <span class="p">)</span>
 
     <span class="c1"># Set up the wallets</span>
-    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
-    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
+    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 
     <span class="c1"># Set up the LedgerApis</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">}},</span> <span class="n">FETCHAI</span><span class="p">)</span>
+    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">}},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span>
+    <span class="p">)</span>
 
     <span class="c1"># Generate some wealth</span>
-    <span class="n">_try_generate_testnet_wealth</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FETCHAI</span><span class="p">])</span>
+    <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
+    <span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Sending amount to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">)))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Sending amount to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
+    <span class="p">)</span>
 
     <span class="c1"># Create the transaction and send it to the ledger.</span>
-    <span class="n">ledger_api</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FETCHAI</span><span class="p">]</span>
+    <span class="n">ledger_api</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
     <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">ledger_api</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">)</span>
+        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">tx_digest</span> <span class="o">=</span> <span class="n">ledger_api</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
-        <span class="n">crypto</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">crypto_objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span>
-        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">),</span>
+        <span class="n">crypto</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">crypto_objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>

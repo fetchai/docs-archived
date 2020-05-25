@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1320,14 +1374,16 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<p><code>aea fetch fetchai/weather_station:0.3.0</code></p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.4.0
+</pre></div>
+
 <h3 id="update-the-aea-configs">Update the AEA configs</h3>
 <p>In the terminal change the configuration:
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.is_ledger_tx False --type bool
 </pre></div>
 The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.</p>
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.2.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.3.0
 </pre></div>
 
 <h3 id="create-the-weather-client-aea">Create the weather client AEA</h3>
@@ -1337,20 +1393,19 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
 
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
 
 <span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
 <span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FETCHAI</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">_create_fetchai_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
 <span class="kn">from</span> <span class="nn">aea.registries.resources</span> <span class="kn">import</span> <span class="n">Resources</span>
-<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span><span class="p">,</span> <span class="n">SkillContext</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.connections.oef.connection</span> <span class="kn">import</span> <span class="n">OEFConnection</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.weather_client.strategy</span> <span class="kn">import</span> <span class="n">Strategy</span>
@@ -1360,20 +1415,22 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private key</span>
-    <span class="n">_create_fetchai_private_key</span><span class="p">()</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 
     <span class="c1"># Set up the wallet, identity, oef connection, ledger and (empty) resources</span>
-    <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FETCHAI</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">})</span>
-    <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FETCHAI</span><span class="p">))</span>
+    <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">})</span>
+    <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
+        <span class="s2">&quot;my_aea&quot;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+    <span class="p">)</span>
     <span class="n">oef_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="p">(</span>
         <span class="n">address</span><span class="o">=</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">oef_addr</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">oef_port</span><span class="o">=</span><span class="n">PORT</span>
     <span class="p">)</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({},</span> <span class="n">FETCHAI</span><span class="p">)</span>
+    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
     <span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">()</span>
 
     <span class="c1"># create the AEA</span>
@@ -1398,38 +1455,34 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">fipa_protocol</span><span class="p">)</span>
 
     <span class="c1"># Add the error and weather_station skills</span>
-    <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">))</span>
-    <span class="n">error_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">error_skill_context</span> <span class="o">=</span> <span class="n">SkillContext</span><span class="p">()</span>
+    <span class="n">error_skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
     <span class="n">logger_name</span> <span class="o">=</span> <span class="s2">&quot;aea.packages.fetchai.skills.error&quot;</span>
-    <span class="n">error_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
-    <span class="n">weather_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;weather_client&quot;</span><span class="p">)</span>
+    <span class="n">error_skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
+    <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">skill_context</span><span class="o">=</span><span class="n">error_skill_context</span>
     <span class="p">)</span>
-    <span class="n">weather_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
-    <span class="n">logger_name</span> <span class="o">=</span> <span class="s2">&quot;aea.packages.fetchai.skills.weather_client&quot;</span>
-    <span class="n">weather_skill</span><span class="o">.</span><span class="n">skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
+    <span class="n">weather_skill_context</span> <span class="o">=</span> <span class="n">SkillContext</span><span class="p">()</span>
+    <span class="n">weather_skill_context</span><span class="o">.</span><span class="n">set_agent_context</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">logger_name</span> <span class="o">=</span> <span class="s2">&quot;aea.packages.fetchai.skills.error&quot;</span>
+    <span class="n">weather_skill_context</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span>
+    <span class="n">weather_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;weather_client&quot;</span><span class="p">),</span>
+        <span class="n">skill_context</span><span class="o">=</span><span class="n">weather_skill_context</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="n">weather_skill</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strategy&quot;</span><span class="p">))</span>
     <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">strategy</span><span class="o">.</span><span class="n">max_buyer_tx_fee</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">strategy</span><span class="o">.</span><span class="n">max_row_price</span> <span class="o">=</span> <span class="mi">40</span>
 
     <span class="k">for</span> <span class="n">skill</span> <span class="ow">in</span> <span class="p">[</span><span class="n">error_skill</span><span class="p">,</span> <span class="n">weather_skill</span><span class="p">]:</span>
         <span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 
-    <span class="c1"># Set the AEA running in a different thread</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STARTING AEA NOW!&quot;</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-        <span class="c1"># Let it run long enough to interact with the weather station</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="c1"># Shut down the AEA</span>
+        <span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STOPPING AEA NOW!&quot;</span><span class="p">)</span>
         <span class="n">my_aea</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

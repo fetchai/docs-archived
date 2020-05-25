@@ -420,6 +420,12 @@
 </li>
  
 <li>
+    <a href="../config/" id="aea-config-"
+        >Configurations</a
+    >
+</li>
+ 
+<li>
     <a href="../scaffolding/" id="aea-scaffolding-"
         >Scaffolding packages</a
     >
@@ -509,6 +515,12 @@
 </li>
  
 <li>
+    <a href="../api/agent_loop/" id="aea-api-agent_loop-"
+        >Agent Loop</a
+    >
+</li>
+ 
+<li>
     <span class="head">Configurations</span>
     <ul id="header_configurations"> 
 <li>
@@ -581,6 +593,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/cosmos/" id="aea-api-crypto-cosmos-"
+        >Cosmos</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/ethereum/" id="aea-api-crypto-ethereum-"
         >Ethereum</a
     >
@@ -599,6 +617,12 @@
 </li>
  
 <li>
+    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
+        >Registry</a
+    >
+</li>
+ 
+<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
@@ -612,6 +636,12 @@
 <li>
     <a href="../api/decision_maker/base/" id="aea-api-decision_maker-base-"
         >Base</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/decision_maker/default/" id="aea-api-decision_maker-default-"
+        >Default</a
     >
 </li>
  
@@ -644,6 +674,18 @@
     <span class="head">Helpers</span>
     <ul id="header_helpers"> 
 <li>
+    <a href="../api/helpers/async_friendly_queue/" id="aea-api-helpers-async_friendly_queue-"
+        >Async Friendly Queue</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/base/" id="aea-api-helpers-base-"
+        >Base</a
+    >
+</li>
+ 
+<li>
     <span class="head">Dialogue</span>
     <ul id="header_dialogue"> 
 <li>
@@ -654,6 +696,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/exception_policy/" id="aea-api-helpers-exception_policy-"
+        >Exception Policy</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/exec_timeout/" id="aea-api-helpers-exec_timeout-"
+        >Exec Timeout</a
+    >
+</li>
+ 
 <li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
@@ -692,7 +746,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
+        >Test Cases</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -781,7 +841,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
+        >Test Tools</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1261,25 +1327,13 @@
     <ul id="header_tutorials"> 
 <li>
     <a href="../../tutorials/" id="tutorials-"
-        >Introduction</a
+        >Index</a
     >
 </li>
  
 <li>
     <a href="../../tutorials/fet1/" id="tutorials-fet1-"
         >Create FET-1 contract</a
-    >
-</li>
- 
-<li>
-    <a href="../../tutorials/python-deployment/" id="tutorials-python-deployment-"
-        >Deploying an Etch contract with Python</a
-    >
-</li>
- 
-<li>
-    <a href="https://www.youtube.com/watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ" id="https:--www.youtube.com-watch?v=mwkAUh-_uxA&list=PL09jEkqdEp94oV7XYsHvfvHwMTBC0QfwJ"
-        >Videos</a
     >
 </li>
 
@@ -1300,7 +1354,7 @@
 
                                     
 
-<p>A <code>Protocol</code> manages message representation (syntax, <code>message.py</code>), optionally rules of the message exchange (semantics, <code>dialogues.py</code>), as well as encoding, and decoding (<code>serialization.py</code>). All protocols are for point to point interaction between two agents. Agents can be AEAs or other types of agent-like services.</p>
+<p>A <code>Protocol</code> manages message representation (syntax in <code>message.py</code>), optionally rules of the message exchange (semantics in <code>dialogues.py</code>), as well as encoding and decoding (in <code>serialization.py</code>). All protocols are for point to point interactions between two agents. Agents can be AEAs or other types of agent-like services.</p>
 <!-- ## Interaction Protocols
 
 Protocols are not to be conflated with Interaction Protocols. The latter consist of three components in the AEA:
@@ -1310,19 +1364,23 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 - Behaviours: which execute pro-active patterns of one-shot, cyclic or even finite-state-machine-like type. -->
 
 <h2 id="metadata">Metadata</h2>
-<p>Each <code>Message</code> in an interaction protocol has a set of default metadata, which includes:</p>
+<p>Each <code>Message</code> in an interaction protocol has a set of default fields:</p>
 <ul>
-<li><code>dialogue_reference: Tuple[str, str]</code>, a reference of the dialogue the message is part of. The first part of the tuple is the reference assigned to by the dialogue initiator, the second part of the tuple is the reference assigned to by the dialogue responder. The default value is <code>("", "")</code>.</li>
-<li><code>message_id: int</code>, the id of the message. The default value is <code>1</code>.</li>
-<li><code>target: int</code>, the id of the message which is referenced by this message. The default value is <code>0</code>.</li>
+<li><code>dialogue_reference: Tuple[str, str]</code>, a reference of the dialogue the message is part of. The first part of the tuple is the reference assigned to by the agent who first initiates the dialogue (i.e. sends the first message). The second part of the tuple is the reference assigned to by the other agent. * <code>dialogue_reference: Tuple[str, str]</code>, a reference of the dialogue the message is part of. The first part of the tuple is the reference assigned to by the dialogue initiator, the second part of the tuple is the reference assigned to by the dialogue responder. The default value is <code>("", "")</code>.</li>
+<li><code>message_id: int</code>, the identifier of the message in a dialogue. The default value is <code>1</code>.</li>
+<li><code>target: int</code>, the id of the message this message is replying to. The default value is <code>0</code>.</li>
+<li><code>Performative: Enum</code>, the purpose/intention of the message. </li>
+<li><code>is_incoming: bool</code>, a boolean specifying whether the message is outgoing (from the agent), or incoming (from the other agent). The default value is <code>False</code>. </li>
+<li><code>counterparty: Address</code>, the address of the counterparty of this agent; the other agent, this agent is communicating with.  </li>
 </ul>
-<p>By default, <code>dialogue_reference</code>, <code>message_id</code> and <code>target</code> are set, however, most interactions involve more than one message being sent as part of the interaction and potentially multiple simultaneous interactions utilising the same protocol. In those cases, the <code>dialogue_reference</code> allows different interactions to be identified as such. The <code>message_id</code> and <code>target</code> are used to keep reference to the preceding messages in a dialogue for a given interaction. For instance, following receipt of a message with <code>target=0</code> and <code>message_id=1</code> the responding AEA should respond with a <code>message_id=2</code> and <code>target=1</code>. In particular, <code>target</code> holds the id of the message being referenced. This can be the preceding message, it can also be an older message. Hence, <code>0 &lt; target &lt; message_id</code> for <code>message_id &gt; 1</code> and <code>target=0</code> if <code>message_id = 1</code>.</p>
-<h2 id="speech-acts-performatives">Speech acts (<code>Performatives</code>)</h2>
-<p>Each message must define a <code>performative</code>. This is the "type" of the message of a given protocol. The <code>performative</code> is one way in which message flow in a given protocol is handled.</p>
+<p>The default values for the above fields assume the message is the first message by the agent in a dialogue. Therefore, the <code>message_id</code> is set to <code>1</code> indicating the first message in the dialogue, <code>target</code> is <code>0</code> since the first  message is the only message that does not reply to any other, and <code>is_incoming</code> is <code>False</code> indicating the message is by the agent itself.</p>
+<p>By default, the values of <code>dialogue_reference</code>, <code>message_id</code>, <code>target</code>, <code>is_incoming</code>, <code>counterparty</code> are set. However, most interactions involve more than one message being sent as part of the interaction and potentially multiple simultaneous interactions utilising the same protocol. In those cases, the <code>dialogue_reference</code> allows different interactions to be identified as such. The <code>message_id</code> and <code>target</code> are used to keep track of messages and their replies. For instance, on receiving of a message with <code>message_id=1</code> and <code>target=0</code>, the responding agent could respond with a another with <code>message_id=2</code> and <code>target=1</code> replying to the first message. In particular, <code>target</code> holds the id of the message being replied to. This can be the preceding message, or an older one. </p>
+<h2 id="contents">Contents</h2>
+<p>Each message may optionally have any number of contents of varying types. </p>
 <h2 id="dialogue-rules">Dialogue rules</h2>
-<p>Protocols can optionaly define dialogue rules. These are rules on the permitted order of message performatives in a given dialogue. For instance, a protocol might specify that a certain performative, say <code>peformative_a</code>, can only be followed by <code>performative_b</code>. It might further specify that <code>performative_b</code> can only be replied to with a message of <code>performative_c</code> or <code>performative_d</code>.</p>
+<p>Protocols can optionally have a dialogue module. A <em>dialogue</em>, respectively <em>dialogues</em> object, maintains the state of a single dialogue, respectively all dialogues, associated with the protocol. </p>
 <h2 id="custom-protocol">Custom protocol</h2>
-<p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech acts, speech act contents as well as the optional reply structure.</p>
+<p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech-acts as well as optionally the dialogue structure (e.g. roles of agents participating in a dialogue, the states a dialogue may end in, and the reply structure of the speech-acts in a dialogue).</p>
 <h2 id="fetchaidefault010-protocol"><code>fetchai/default:0.1.0</code> protocol</h2>
 <p>The <code>fetchai/default:0.1.0</code> protocol is a protocol which each AEA is meant to implement. It serves AEA to AEA interaction and includes two message performatives:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -1491,8 +1549,8 @@ We can then create the message to search these services:
 </pre></div></p>
 </li>
 </ul>
-<h2 id="fetchaifipa010-protocol"><code>fetchai/fipa:0.1.0</code> protocol</h2>
-<p>The <code>fetchai/fipa:0.1.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
+<h2 id="fetchaifipa020-protocol"><code>fetchai/fipa:0.2.0</code> protocol</h2>
+<p>The <code>fetchai/fipa:0.2.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Performatives for the fipa protocol.&quot;&quot;&quot;</span>
 
@@ -1506,7 +1564,7 @@ We can then create the message to search these services:
     <span class="n">PROPOSE</span> <span class="o">=</span> <span class="s2">&quot;propose&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get string representation.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get the string representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 
@@ -1521,8 +1579,8 @@ We can then create the message to search these services:
 <span class="p">)</span>
 </pre></div>
 
-<p>The <code>fetchai/fipa:0.1.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
-<p>For examples of the usage of the <code>fetchai/fipa:0.1.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
+<p>The <code>fetchai/fipa:0.2.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
+<p>For examples of the usage of the <code>fetchai/fipa:0.2.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
 <p><br /></p>
 
 
