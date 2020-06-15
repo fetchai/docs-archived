@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../api/launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1477,12 +1489,13 @@ aea add connection fetchai/p2p_libp2p:0.2.0
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
 </pre></div>
 
-<p>Provide the AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
+<p>Provide the AEA with the information it needs to find the genesis by replacing the following block in <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
 <p><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
-  <span class="nt">libp2p_entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
-  <span class="nt">libp2p_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
-  <span class="nt">libp2p_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
-  <span class="nt">libp2p_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div>
 Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
@@ -1530,14 +1543,14 @@ aea add-key fetchai fet_private_key.txt
 <h3 id="run-the-weather-client">Run the weather client</h3>
 <p>Provide the weather client AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
-  <span class="nt">libp2p_entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
-  <span class="nt">libp2p_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
-  <span class="nt">libp2p_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
-  <span class="nt">libp2p_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div>
 Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
-<p>Then fund your
-Now run the weather client:
+<p>Now run the weather client:
 <div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.2.0,fetchai/oef:0.4.0&quot;</span>
 </pre></div></p>
 <h2 id="deployed-test-network">Deployed Test Network</h2>
@@ -1549,10 +1562,11 @@ Now run the weather client:
 
 <p>In particular, by modiying the configuration such that:
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
-  <span class="nt">libp2p_entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span><span class="p p-Indicator">]</span>
-  <span class="nt">libp2p_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
-  <span class="nt">libp2p_log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
-  <span class="nt">libp2p_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9001</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div></p>
 
 

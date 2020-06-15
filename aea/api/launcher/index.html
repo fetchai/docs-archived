@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>AEA Builder - Fetch.ai Developer Documentation</title>
+    <title>Launcher - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -538,7 +538,7 @@
 </li>
  
 <li>
-    <a href="./" id="aea-api-aea_builder-"
+    <a href="../aea_builder/" id="aea-api-aea_builder-"
         >AEA Builder</a
     >
 </li>
@@ -556,7 +556,7 @@
 </li>
  
 <li>
-    <a href="../launcher/" id="aea-api-launcher-"
+    <a href="./" id="aea-api-launcher-"
         >Launcher</a
     >
 </li>
@@ -1465,483 +1465,116 @@
 
                                     
 
-<p><a name=".aea.aea_builder"></a></p>
-<h1 id="aeaaea_builder">aea.aea<code>_</code>builder</h1>
-<p>This module contains utilities for building an AEA.</p>
-<p><a name=".aea.aea_builder.AEABuilder"></a></p>
-<h2 id="aeabuilder-objects">AEABuilder Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AEABuilder</span><span class="p">()</span>
+<p><a name=".aea.launcher"></a></p>
+<h1 id="aealauncher">aea.launcher</h1>
+<p>This module contains the implementation of multiple AEA configs launcher.</p>
+<p><a name=".aea.launcher.load_agent"></a></p>
+<h4 id="load_agent">load<code>_</code>agent</h4>
+<div class="highlight"><pre><span></span><span class="n">load_agent</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AEA</span>
 </pre></div>
 
-<p>This class helps to build an AEA.</p>
-<p>It follows the fluent interface. Every method of the builder
-returns the instance of the builder itself.</p>
-<p>Note: the method 'build()' is guaranteed of being
-re-entrant with respect to the 'add_component(path)'
-method. That is, you can invoke the building method
-many times against the same builder instance, and the
-returned agent instance will not share the
-components with other agents, e.g.:</p>
-<p>builder = AEABuilder()
-builder.add_component(...)
-...</p>
-<h1 id="first-call">first call</h1>
-<p>my_aea_1 = builder.build()</p>
-<h1 id="following-agents-will-have-different-components">following agents will have different components.</h1>
-<p>my_aea_2 = builder.build()  # all good</p>
-<p>However, if you manually loaded some of the components and added
-them with the method 'add_component_instance()', then calling build
-more than one time is prevented:</p>
-<p>builder = AEABuilder()
-builder.add_component_instance(...)
-...  # other initialization code</p>
-<h1 id="first-call_1">first call</h1>
-<p>my_aea_1 = builder.build()</p>
-<h1 id="second-call-to-build-would-raise-a-value-error">second call to <code>build()</code> would raise a Value Error.</h1>
-<h1 id="call-reset">call reset</h1>
-<p>builder.reset()</p>
-<h1 id="re-add-the-component-and-private-keys">re-add the component and private keys</h1>
-<p>builder.add_component_instance(...)
-... # add private keys</p>
-<h1 id="second-call">second call</h1>
-<p>my_aea_2 = builder.builder()</p>
-<p><a name=".aea.aea_builder.AEABuilder.__init__"></a></p>
+<p>Load AEA from directory.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_dir</code>: agent configuration directory</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>AEA instance</p>
+<p><a name=".aea.launcher.AEADirTask"></a></p>
+<h2 id="aeadirtask-objects">AEADirTask Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AEADirTask</span><span class="p">(</span><span class="n">AbstractExecutorTask</span><span class="p">)</span>
+</pre></div>
+
+<p>Task to run agent from agent configuration directory.</p>
+<p><a name=".aea.launcher.AEADirTask.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">with_default_packages</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
-<p>Initialize the builder.</p>
+<p>Init aea config dir task.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>with_default_packages</code>: add the default packages.</li>
+<li><code>agent_dir</code>: direcory with aea config.</li>
 </ul>
-<p><a name=".aea.aea_builder.AEABuilder.reset"></a></p>
-<h4 id="reset">reset</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">reset</span><span class="p">(</span><span class="n">is_full_reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<p><a name=".aea.launcher.AEADirTask.start"></a></p>
+<h4 id="start">start</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
-<p>Reset the builder.</p>
-<p>A full reset causes a reset of all data on the builder. A partial reset
-only resets:
-- name,
-- private keys, and
-- component instances</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>is_full_reset</code>: whether it is a full reset or not.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_timeout"></a></p>
-<h4 id="set_timeout">set<code>_</code>timeout</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+<p>Start task.</p>
+<p><a name=".aea.launcher.AEADirTask.stop"></a></p>
+<h4 id="stop">stop</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span>
 </pre></div>
 
-<p>Set agent loop idle timeout in seconds.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>timeout</code>: timeout in seconds</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_execution_timeout"></a></p>
-<h4 id="set_execution_timeout">set<code>_</code>execution<code>_</code>timeout</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_execution_timeout</span><span class="p">(</span><span class="n">execution_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+<p>Stop task.</p>
+<p><a name=".aea.launcher.AEADirTask.create_async_task"></a></p>
+<h4 id="create_async_task">create<code>_</code>async<code>_</code>task</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create_async_task</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">AbstractEventLoop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span>
 </pre></div>
 
-<p>Set agent execution timeout in seconds.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>execution_timeout</code>: execution_timeout in seconds</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_max_reactions"></a></p>
-<h4 id="set_max_reactions">set<code>_</code>max<code>_</code>reactions</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_max_reactions</span><span class="p">(</span><span class="n">max_reactions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set agent max reaction in one react.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>max_reactions</code>: int</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_decision_maker_handler"></a></p>
-<h4 id="set_decision_maker_handler">set<code>_</code>decision<code>_</code>maker<code>_</code>handler</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_decision_maker_handler</span><span class="p">(</span><span class="n">decision_maker_handler_dotted_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set decision maker handler class.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>decision_maker_handler_dotted_path</code>: the dotted path to the decision maker handler</li>
-<li><code>file_path</code>: the file path to the file which contains the decision maker handler</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_skill_exception_policy"></a></p>
-<h4 id="set_skill_exception_policy">set<code>_</code>skill<code>_</code>exception<code>_</code>policy</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_skill_exception_policy</span><span class="p">(</span><span class="n">skill_exception_policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExceptionPolicyEnum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set skill exception policy.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>skill_exception_policy</code>: the policy</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_default_routing"></a></p>
-<h4 id="set_default_routing">set<code>_</code>default<code>_</code>routing</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_default_routing</span><span class="p">(</span><span class="n">default_routing</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set default routing.</p>
-<p>This is a map from public ids (protocols) to public ids (connections).</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>default_routing</code>: the default routing mapping</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_loop_mode"></a></p>
-<h4 id="set_loop_mode">set<code>_</code>loop<code>_</code>mode</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_loop_mode</span><span class="p">(</span><span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set the loop mode.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>loop_mode</code>: the agent loop mode</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_runtime_mode"></a></p>
-<h4 id="set_runtime_mode">set<code>_</code>runtime<code>_</code>mode</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_runtime_mode</span><span class="p">(</span><span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set the runtime mode.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>runtime_mode</code>: the agent runtime mode</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>self</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_name"></a></p>
-<h4 id="set_name">set<code>_</code>name</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set the name of the agent.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>name</code>: the name of the agent.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_default_connection"></a></p>
-<h4 id="set_default_connection">set<code>_</code>default<code>_</code>connection</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_default_connection</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set the default connection.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>public_id</code>: the public id of the default connection package.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_private_key"></a></p>
-<h4 id="add_private_key">add<code>_</code>private<code>_</code>key</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_private_key</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">private_key_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PathLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_connection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a private key path.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>identifier</code>: the identifier for that private key path.</li>
-<li><code>private_key_path</code>: an (optional) path to the private key file.
-If None, the key will be created at build time.</li>
-<li><code>is_connection</code>: if the pair is for the connection cryptos</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_private_key"></a></p>
-<h4 id="remove_private_key">remove<code>_</code>private<code>_</code>key</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_private_key</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_connection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove a private key path by identifier, if present.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>identifier</code>: the identifier of the private key.</li>
-<li><code>is_connection</code>: if the pair is for the connection cryptos</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.private_key_paths"></a></p>
-<h4 id="private_key_paths">private<code>_</code>key<code>_</code>paths</h4>
+<p>Return asyncio Task for task run in asyncio loop.</p>
+<p><a name=".aea.launcher.AEADirTask.id"></a></p>
+<h4 id="id">id</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">private_key_paths</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+ <span class="o">|</span> <span class="nb">id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
-<p>Get the private key paths.</p>
-<p><a name=".aea.aea_builder.AEABuilder.connection_private_key_paths"></a></p>
-<h4 id="connection_private_key_paths">connection<code>_</code>private<code>_</code>key<code>_</code>paths</h4>
+<p>Return agent_dir.</p>
+<p><a name=".aea.launcher.AEADirMultiprocessTask"></a></p>
+<h2 id="aeadirmultiprocesstask-objects">AEADirMultiprocessTask Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AEADirMultiprocessTask</span><span class="p">(</span><span class="n">AbstractMultiprocessExecutorTask</span><span class="p">)</span>
+</pre></div>
+
+<p>Task to run agent from agent configuration directory.</p>
+<p>Version for multiprocess executor mode.</p>
+<p><a name=".aea.launcher.AEADirMultiprocessTask.__init__"></a></p>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span>
+</pre></div>
+
+<p>Init aea config dir task.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_dir</code>: direcory with aea config.</li>
+</ul>
+<p><a name=".aea.launcher.AEADirMultiprocessTask.start"></a></p>
+<h4 id="start_1">start</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
+</pre></div>
+
+<p>Return function and arguments to call within subprocess.</p>
+<p><a name=".aea.launcher.AEADirMultiprocessTask.stop"></a></p>
+<h4 id="stop_1">stop</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+<p>Stop task.</p>
+<p><a name=".aea.launcher.AEADirMultiprocessTask.id"></a></p>
+<h4 id="id_1">id</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">connection_private_key_paths</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+ <span class="o">|</span> <span class="nb">id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
-<p>Get the connection private key paths.</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_ledger_api_config"></a></p>
-<h4 id="add_ledger_api_config">add<code>_</code>ledger<code>_</code>api<code>_</code>config</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+<p>Return agent_dir.</p>
+<p><a name=".aea.launcher.AEALauncher"></a></p>
+<h2 id="aealauncher-objects">AEALauncher Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AEALauncher</span><span class="p">(</span><span class="n">AbstractMultipleRunner</span><span class="p">)</span>
 </pre></div>
 
-<p>Add a configuration for a ledger API to be supported by the agent.</p>
+<p>Run multiple AEA instances.</p>
+<p><a name=".aea.launcher.AEALauncher.__init__"></a></p>
+<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_dirs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">PathLike</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fail_policy</span><span class="p">:</span> <span class="n">ExecutorExceptionPolicies</span> <span class="o">=</span> <span class="n">ExecutorExceptionPolicies</span><span class="o">.</span><span class="n">propagate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+<p>Init AEARunner.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>identifier</code>: the identifier of the ledger api</li>
-<li><code>config</code>: the configuration of the ledger api</li>
+<li><code>agent_dirs</code>: sequence of AEA config directories.</li>
+<li><code>mode</code>: executor name to use.</li>
+<li><code>fail_policy</code>: one of ExecutorExceptionPolicies to be used with Executor</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_ledger_api_config"></a></p>
-<h4 id="remove_ledger_api_config">remove<code>_</code>ledger<code>_</code>api<code>_</code>config</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_ledger_api_config</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove a ledger API configuration.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>identifier</code>: the identifier of the ledger api</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.ledger_apis_config"></a></p>
-<h4 id="ledger_apis_config">ledger<code>_</code>apis<code>_</code>config</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">ledger_apis_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span>
-</pre></div>
-
-<p>Get the ledger api configurations.</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_default_ledger"></a></p>
-<h4 id="set_default_ledger">set<code>_</code>default<code>_</code>ledger</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_default_ledger</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set a default ledger API to use.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>identifier</code>: the identifier of the ledger api</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_component"></a></p>
-<h4 id="add_component">add<code>_</code>component</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_component</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a component, given its type and the directory.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>component_type</code>: the component type.</li>
-<li><code>directory</code>: the directory path.</li>
-<li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
-</ul>
-<p><strong>Raises</strong>:</p>
-<ul>
-<li><code>AEAException</code>: if a component is already registered with the same component id.
-| or if there's a missing dependency.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_component_instance"></a></p>
-<h4 id="add_component_instance">add<code>_</code>component<code>_</code>instance</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_component_instance</span><span class="p">(</span><span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add already initialized component object to resources or connections.</p>
-<p>Please, pay attention, all dependencies have to be already loaded.</p>
-<p>Notice also that this will make the call to 'build()' non re-entrant.
-You will have to <code>reset()</code> the builder before calling <code>build()</code> again.</p>
-<p>:params component: Component instance already initialized.</p>
-<p><a name=".aea.aea_builder.AEABuilder.set_context_namespace"></a></p>
-<h4 id="set_context_namespace">set<code>_</code>context<code>_</code>namespace</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_context_namespace</span><span class="p">(</span><span class="n">context_namespace</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Set the context namespace.</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_component"></a></p>
-<h4 id="remove_component">remove<code>_</code>component</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_component</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove a component.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>component_id</code>: the public id of the component.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_protocol"></a></p>
-<h4 id="add_protocol">add<code>_</code>protocol</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_protocol</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a protocol to the agent.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>directory</code>: the path to the protocol directory</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_protocol"></a></p>
-<h4 id="remove_protocol">remove<code>_</code>protocol</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_protocol</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove protocol.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>public_id</code>: the public id of the protocol</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_connection"></a></p>
-<h4 id="add_connection">add<code>_</code>connection</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_connection</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a connection to the agent.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>directory</code>: the path to the connection directory</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_connection"></a></p>
-<h4 id="remove_connection">remove<code>_</code>connection</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_connection</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove a connection.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>public_id</code>: the public id of the connection</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_skill"></a></p>
-<h4 id="add_skill">add<code>_</code>skill</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_skill</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a skill to the agent.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>directory</code>: the path to the skill directory</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_skill"></a></p>
-<h4 id="remove_skill">remove<code>_</code>skill</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_skill</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove protocol.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>public_id</code>: the public id of the skill</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.add_contract"></a></p>
-<h4 id="add_contract">add<code>_</code>contract</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_contract</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Add a contract to the agent.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>directory</code>: the path to the contract directory</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.remove_contract"></a></p>
-<h4 id="remove_contract">remove<code>_</code>contract</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_contract</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Remove protocol.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>public_id</code>: the public id of the contract</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEABuilder</p>
-<p><a name=".aea.aea_builder.AEABuilder.build"></a></p>
-<h4 id="build">build</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">build</span><span class="p">(</span><span class="n">connection_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Collection</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LedgerApis</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AEA</span>
-</pre></div>
-
-<p>Build the AEA.</p>
-<p>This method is re-entrant only if the components have been
-added through the method 'add_component'. If some of them
-have been loaded with 'add_component_instance', it
-can be called only once, and further calls are only possible
-after a call to 'reset' and re-loading of the components added
-via 'add_component_instance' and the private keys.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>connection_ids</code>: select only these connections to run the AEA.</li>
-<li><code>ledger_apis</code>: the api ledger that we want to use.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the AEA object.</p>
-<p><strong>Raises</strong>:</p>
-<ul>
-<li><code>ValueError</code>: if we cannot</li>
-</ul>
-<p><a name=".aea.aea_builder.AEABuilder.set_from_configuration"></a></p>
-<h4 id="set_from_configuration">set<code>_</code>from<code>_</code>configuration</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_from_configuration</span><span class="p">(</span><span class="n">agent_configuration</span><span class="p">:</span> <span class="n">AgentConfig</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-<p>Set builder variables from AgentConfig.</p>
-<p>:params agent_configuration: AgentConfig to get values from.
-:params aea_project_path: PathLike root directory of the agent project.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.aea_builder.AEABuilder.from_aea_project"></a></p>
-<h4 id="from_aea_project">from<code>_</code>aea<code>_</code>project</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_aea_project</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
-</pre></div>
-
-<p>Construct the builder from an AEA project.</p>
-<ul>
-<li>load agent configuration file</li>
-<li>set name and default configurations</li>
-<li>load private keys</li>
-<li>load ledger API configurations</li>
-<li>set default ledger</li>
-<li>load every component</li>
-</ul>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>aea_project_path</code>: path to the AEA project.</li>
-<li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>an AEABuilder.</p>
 
 
                                 </section>
@@ -1950,9 +1583,9 @@ via 'add_component_instance' and the private keys.</p>
 
                             <div class="bottomnav">
                                 
-                                <a href="../aea/" class="button left"><strong>Previous:</strong></br>Aea</a>
+                                <a href="../agent_loop/" class="button left"><strong>Previous:</strong></br>Agent Loop</a>
                                 
-                                <a href="../agent/" class="button right"><strong>Next:</strong></br>Agent</a>
+                                <a href="../multiplexer/" class="button right"><strong>Next:</strong></br>Multiplexer</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

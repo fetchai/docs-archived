@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../../launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../../runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1498,34 +1510,6 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
-<p><a name=".aea.helpers.base.load_all_modules"></a></p>
-<h4 id="load_all_modules">load<code>_</code>all<code>_</code>modules</h4>
-<div class="highlight"><pre><span></span><span class="n">load_all_modules</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">glob</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*.py&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">]</span>
-</pre></div>
-
-<p>Load all modules of a directory, recursively.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>directory</code>: the directory where to search for .py modules.</li>
-<li><code>glob</code>: the glob pattern to match. By default *.py</li>
-<li><code>prefix</code>: the prefix to apply in the import path.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>a mapping from import path to module objects.</p>
-<p><a name=".aea.helpers.base._SysModules.load_modules"></a></p>
-<h4 id="load_modules">load<code>_</code>modules</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@staticmethod</span>
- <span class="o">|</span> <span class="nd">@contextmanager</span>
- <span class="o">|</span> <span class="n">load_modules</span><span class="p">(</span><span class="n">modules</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">]])</span>
-</pre></div>
-
-<p>Load modules as a context manager.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>modules</code>: a list of pairs (import path, module object).</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None.</p>
 <p><a name=".aea.helpers.base.load_module"></a></p>
 <h4 id="load_module">load<code>_</code>module</h4>
 <div class="highlight"><pre><span></span><span class="n">load_module</span><span class="p">(</span><span class="n">dotted_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span>
@@ -1544,53 +1528,6 @@
 <li><code>ValueError</code>: if the filepath provided is not a module.</li>
 <li><code>Exception</code>: if the execution of the module raises exception.</li>
 </ul>
-<p><a name=".aea.helpers.base.import_aea_module"></a></p>
-<h4 id="import_aea_module">import<code>_</code>aea<code>_</code>module</h4>
-<div class="highlight"><pre><span></span><span class="n">import_aea_module</span><span class="p">(</span><span class="n">dotted_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">module_obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-<p>Add an AEA module to sys.modules.</p>
-<p>The parameter dotted_path has the form:</p>
-<p>packages.<author_name>.<package_type>.<package_name></p>
-<p>If the closed-prefix packages are not present, add them to sys.modules.
-This is done in order to emulate the behaviour of the true Python import system,
-which in fact imports the packages recursively, for every prefix.</p>
-<p>E.g. see https://docs.python.org/3/library/importlib.html#approximating-importlib-import-module
-for an explanation on how the 'import' built-in function works.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>dotted_path</code>: the dotted path to be used in the imports.</li>
-<li><code>module_obj</code>: the module object. It is assumed it has been already executed.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.helpers.base.load_agent_component_package"></a></p>
-<h4 id="load_agent_component_package">load<code>_</code>agent<code>_</code>component<code>_</code>package</h4>
-<div class="highlight"><pre><span></span><span class="n">load_agent_component_package</span><span class="p">(</span><span class="n">item_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">item_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span>
-</pre></div>
-
-<p>Load a Python package associated to a component..</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>item_type</code>: the type of the item. One of "protocol", "connection", "skill".</li>
-<li><code>item_name</code>: the name of the item to load.</li>
-<li><code>author_name</code>: the name of the author of the item to load.</li>
-<li><code>directory</code>: the component directory.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the module associated to the Python package of the component.</p>
-<p><a name=".aea.helpers.base.add_modules_to_sys_modules"></a></p>
-<h4 id="add_modules_to_sys_modules">add<code>_</code>modules<code>_</code>to<code>_</code>sys<code>_</code>modules</h4>
-<div class="highlight"><pre><span></span><span class="n">add_modules_to_sys_modules</span><span class="p">(</span><span class="n">modules_by_import_path</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-<p>Load all modules in sys.modules.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>modules_by_import_path</code>: a dictionary from import path to module objects.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name=".aea.helpers.base.load_env_file"></a></p>
 <h4 id="load_env_file">load<code>_</code>env<code>_</code>file</h4>
 <div class="highlight"><pre><span></span><span class="n">load_env_file</span><span class="p">(</span><span class="n">env_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
@@ -1622,14 +1559,19 @@ both on Posix and Windows with a single method.</p>
 <p>None</p>
 <p><a name=".aea.helpers.base.RegexConstrainedString"></a></p>
 <h2 id="regexconstrainedstring-objects">RegexConstrainedString Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RegexConstrainedString</span><span class="p">(</span><span class="n">UserString</span><span class="p">):</span>
- <span class="o">|</span>  <span class="n">RegexConstrainedString</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RegexConstrainedString</span><span class="p">(</span><span class="n">UserString</span><span class="p">)</span>
 </pre></div>
 
 <p>A string that is constrained by a regex.</p>
 <p>The default behaviour is to match anything.
 Subclass this class and change the 'REGEX' class
 attribute to implement a different behaviour.</p>
+<p><a name=".aea.helpers.base.RegexConstrainedString.__init__"></a></p>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+</pre></div>
+
+<p>Initialize a regex constrained string.</p>
 <p><a name=".aea.helpers.base.cd"></a></p>
 <h4 id="cd">cd</h4>
 <div class="highlight"><pre><span></span><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>

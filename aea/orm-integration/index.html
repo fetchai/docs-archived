@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../api/launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1687,7 +1699,12 @@ The <code>search_schema</code> and the <code>search_data</code> are used to regi
 <div class="highlight"><pre><span></span>aea install
 </pre></div></p>
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
-<p>Open the <code>strategy.py</code> with your IDE and modify the following.</p>
+<p>Before being able to modify a package we need to eject it from vendor:</p>
+<div class="highlight"><pre><span></span>aea eject skill fetchai/generic_seller:0.5.0
+</pre></div>
+
+<p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
+<p>Open the <code>strategy.py</code> (in <code>my_seller_aea/skills/generic_seller/strategy.py</code>) with your IDE and modify the following.</p>
 <p>Import the newly installed library to your strategy.
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">db</span>
 </pre></div>
@@ -1758,6 +1775,10 @@ Also, create two new functions, one that will create a connection with the datab
                 <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">temprature</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
             <span class="p">)</span>
             <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</pre></div>
+
+<p>After modifying the skill we need to fingerprint it:</p>
+<div class="highlight"><pre><span></span>aea fingerprint skill <span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/generic_seller:0.1.0
 </pre></div>
 
 <h2 id="run-the-aeas">Run the AEAs</h2>

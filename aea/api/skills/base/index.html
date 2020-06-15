@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../../launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../../runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1468,6 +1480,8 @@
 </pre></div>
 
 <p>Initialize a skill context.</p>
+<p>:agent_context: the agent context.
+:skill: the skill.</p>
 <p><a name=".aea.skills.base.SkillContext.set_agent_context"></a></p>
 <h4 id="set_agent_context">set<code>_</code>agent<code>_</code>context</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_agent_context</span><span class="p">(</span><span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -1508,7 +1522,7 @@
  <span class="o">|</span> <span class="n">new_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Queue</span>
 </pre></div>
 
-<p>The queue for the new behaviours.</p>
+<p>Queue for the new behaviours.</p>
 <p>This queue can be used to send messages to the framework
 to request the registration of a behaviour.</p>
 <p>:return the queue of new behaviours.</p>
@@ -1703,6 +1717,20 @@ to request the registration of a behaviour.</p>
 <p>Abstract behaviour for periodical calls.</p>
 <p>tick_interval: float, interval to call behaviour's act.
 start_at: optional datetime, when to start periodical calls.</p>
+<p><a name=".aea.skills.base.AbstractBehaviour.tick_interval"></a></p>
+<h4 id="tick_interval">tick<code>_</code>interval</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">tick_interval</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+
+<p>Get the tick_interval in seconds.</p>
+<p><a name=".aea.skills.base.AbstractBehaviour.start_at"></a></p>
+<h4 id="start_at">start<code>_</code>at</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">start_at</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]</span>
+</pre></div>
+
+<p>Get the start time of the behaviour.</p>
 <p><a name=".aea.skills.base.Behaviour"></a></p>
 <h2 id="behaviour-objects">Behaviour Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Behaviour</span><span class="p">(</span><span class="n">AbstractBehaviour</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
@@ -1827,6 +1855,10 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>configuration</code>: the skill configuration.</li>
+<li><code>skill_context</code>: the skill context.</li>
+<li><code>handlers</code>: dictionary of handlers.</li>
+<li><code>behaviours</code>: dictionary of behaviours.</li>
+<li><code>models</code>: dictionary of models.</li>
 </ul>
 <p><a name=".aea.skills.base.Skill.contracts"></a></p>
 <h4 id="contracts_1">contracts</h4>
@@ -1872,27 +1904,28 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p><a name=".aea.skills.base.Skill.from_dir"></a></p>
 <h4 id="from_dir">from<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skill_context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SkillContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
+ <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
 </pre></div>
 
 <p>Load the skill from a directory.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>directory</code>: the directory to the skill package.</li>
-<li><code>skill_context</code>: the skill context</li>
+<li><code>agent_context</code>: the skill context</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the skill object.</p>
 <p><a name=".aea.skills.base.Skill.from_config"></a></p>
 <h4 id="from_config">from<code>_</code>config</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">SkillConfig</span><span class="p">,</span> <span class="n">skill_context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SkillContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
+ <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">SkillConfig</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
 </pre></div>
 
 <p>Load the skill from configuration.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>configuration</code>: a skill configuration. Must be associated with a directory.</li>
+<li><code>agent_context</code>: the agent context.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the skill.</p>

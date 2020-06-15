@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../api/launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1541,7 +1553,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.2.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.3.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </pre></div></p>
@@ -1552,7 +1564,7 @@ The following steps create the controller from scratch:
 <div class="highlight"><pre><span></span>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
 aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_control_contract:0.2.0
+aea add skill fetchai/tac_control_contract:0.3.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
@@ -1589,13 +1601,15 @@ aea add-key ethereum eth_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.2.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.2.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 aea install
 </pre></div></p>
 <details><summary>Alternatively, create from scratch.</summary>
@@ -1609,30 +1623,34 @@ aea create tac_participant_two
 Build participant one:
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
 aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_participation:0.2.0
-aea add skill fetchai/tac_negotiation:0.2.0
+aea add skill fetchai/tac_participation:0.3.0
+aea add skill fetchai/tac_negotiation:0.3.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 </pre></div>
 
 Then, build participant two:
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
 aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_participation:0.2.0
-aea add skill fetchai/tac_negotiation:0.2.0
+aea add skill fetchai/tac_participation:0.3.0
+aea add skill fetchai/tac_negotiation:0.3.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 </pre></div>
 
 </p>
 </details>
 
+<h3 id="fund-both-tac-participants">Fund both tac participants</h3>
+<p>Similar to how you funded the controller, fund both tac participants.</p>
 <h3 id="update-the-game-parameters-in-the-controller">Update the game parameters in the controller</h3>
-<p>Navigate to the tac controller project, then use the command line to get and set the start time (set it to at least five minutes in the future):</p>
+<p>Navigate to the tac controller project, then use the command line to get and set the start time (set it to at least five minutes - better 10 - in the future):</p>
 <div class="highlight"><pre><span></span>aea config get vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </pre></div>
@@ -1653,97 +1671,6 @@ in the same process.</p>
 aea delete tac_participant_one
 aea delete tac_participant_two
 </pre></div></p>
-<!-- ## Negotiation skill - deep dive
-
-The AEA `tac_negotiation` skill demonstrates how negotiation strategies may be embedded into an Autonomous Economic Agent.
-
-The `tac_negotiation` skill `skill.yaml` configuration file looks like this.
-
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tac_negotiation</span>
-<span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
-<span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
-<span class="nt">description</span><span class="p">:</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">tac</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">skill</span><span class="nv"> </span><span class="s">implements</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">logic</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">AEA</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">fipa</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">TAC.&quot;</span>
-<span class="nt">behaviours</span><span class="p">:</span>
-  <span class="nt">behaviour</span><span class="p">:</span>
-      <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GoodsRegisterAndSearchBehaviour</span>
-      <span class="nt">args</span><span class="p">:</span>
-        <span class="nt">services_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-  <span class="nt">clean_up</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionCleanUpBehaviour</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">tick_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.0</span>
-<span class="nt">handlers</span><span class="p">:</span>
-  <span class="nt">fipa</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FIPANegotiationHandler</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="nt">transaction</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TransactionHandler</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="nt">oef</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OEFSearchHandler</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-<span class="nt">models</span><span class="p">:</span>
-  <span class="nt">search</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Search</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">search_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-  <span class="nt">registration</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Registration</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">update_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
-  <span class="nt">strategy</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">register_as</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">both</span>
-      <span class="nt">search_for</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">both</span>
-  <span class="nt">dialogues</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="nt">transactions</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Transactions</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai/oef_search:0.2.0&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fetchai/fipa:0.3.0&#39;</span><span class="p p-Indicator">]</span>
-</pre></div>
-
-Above, you can see the registered `Behaviour` class name `GoodsRegisterAndSearchBehaviour` which implements register and search behaviour of an AEA for the `tac_negotiation` skill.
-
-The `FIPANegotiationHandler` deals with receiving `FipaMessage` types containing FIPA negotiation terms, such as `cfp`, `propose`, `decline`, `accept` and `match_accept`.
-
-The `TransactionHandler` deals with `TransactionMessage`s received from the decision maker component. The decision maker component is responsible for cryptoeconomic security.
-
-The `OEFSearchHandler` deals with `OefSearchMessage` types returned from the [OEF search node](../oef-ledger)
-
-The `TransactionCleanUpBehaviour` is responsible for cleaning up transactions which are no longer likely to being settled with the controller AEA.
-
-### Models
-
-The `models` element in the configuration `yaml` lists a number of important classes which are shared between the handlers, behaviours and tasks.
-
-#### Search
-
-This class abstracts the logic required by AEAs performing searches for other buying/selling AEAs according to strategy (see below).
-
-#### Registration
-
-This class abstracts the logic required by AEAs performing service registrations on the [OEF search node](../oef-ledger).
-
-#### Strategy
-
-This class defines the strategy behind an AEA's activities.
-
-The class is instantiated with the AEA's goals, for example whether the AEA intends to buy/sell something, and is therefore looking for other sellers, buyers, or both.
-
-It also provides methods for defining what goods AEAs are looking for and what goods they may have to sell, for generating proposal queries, and checking whether a proposal is profitable or not.
-
-#### Dialogue
-
-`Dialogues` abstract the negotiations that take place between AEAs including all negotiation end states, such as accepted, declined, etc. and all the negotiation states in between.
-
-#### Transactions
-
-This class deals with representing potential transactions between AEAs. -->
 
 
                                 </section>

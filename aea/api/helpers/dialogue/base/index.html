@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../../../launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1676,7 +1688,7 @@
  <span class="o">|</span> <span class="n">is_empty</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
-<p>Check whether the dialogue is empty</p>
+<p>Check whether the dialogue is empty.</p>
 <p><strong>Returns</strong>:</p>
 <p>True if empty, False otherwise</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogue.update"></a></p>
@@ -1684,7 +1696,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
-<p>Extend the list of incoming/outgoing messages with 'message', if 'message' is valid</p>
+<p>Extend the list of incoming/outgoing messages with 'message', if 'message' is valid.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>message</code>: a message to be added</li>
@@ -1707,13 +1719,23 @@ additional rules are applied for the time being, and more specific rules are cap
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if yes, False otherwise.</p>
+<p><a name=".aea.helpers.dialogue.base.Dialogue.update_dialogue_label"></a></p>
+<h4 id="update_dialogue_label">update<code>_</code>dialogue<code>_</code>label</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">update_dialogue_label</span><span class="p">(</span><span class="n">final_dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+<p>Update the dialogue label of the dialogue.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>final_dialogue_label</code>: the final dialogue label</li>
+</ul>
 <p><a name=".aea.helpers.dialogue.base.Dialogue.initial_performative"></a></p>
 <h4 id="initial_performative">initial<code>_</code>performative</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">initial_performative</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Enum</span>
 </pre></div>
 
-<p>Get the performative which the initial message in the dialogue must have</p>
+<p>Get the performative which the initial message in the dialogue must have.</p>
 <p><strong>Returns</strong>:</p>
 <p>the performative of the initial message</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogue.get_replies"></a></p>
@@ -1722,7 +1744,7 @@ additional rules are applied for the time being, and more specific rules are cap
  <span class="o">|</span> <span class="n">get_replies</span><span class="p">(</span><span class="n">performative</span><span class="p">:</span> <span class="n">Enum</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FrozenSet</span>
 </pre></div>
 
-<p>Given a <code>performative</code>, return the list of performatives which are its valid replies in a dialogue</p>
+<p>Given a <code>performative</code>, return the list of performatives which are its valid replies in a dialogue.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>performative</code>: the performative in a message</li>
@@ -1751,32 +1773,6 @@ additional rules are applied for the time being, and more specific rules are cap
 <p>Get the string representation.</p>
 <p><strong>Returns</strong>:</p>
 <p>The string representation of the dialogue</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogue.outgoing_extend"></a></p>
-<h4 id="outgoing_extend">outgoing<code>_</code>extend</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">outgoing_extend</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-<p>UNSAFE TO USE - IS DEPRECATED - USE update(message) METHOD INSTEAD
-Extend the list of outgoing messages with 'message'</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>message</code>: a message to be added</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogue.incoming_extend"></a></p>
-<h4 id="incoming_extend">incoming<code>_</code>extend</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">incoming_extend</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-<p>UNSAFE TO USE - IS DEPRECATED - USE update(message) METHOD INSTEAD
-Extend the list of incoming messages with 'message'</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>message</code>: a message to be added</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogues"></a></p>
 <h2 id="dialogues-objects">Dialogues Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dialogues</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
@@ -1814,7 +1810,7 @@ Extend the list of incoming messages with 'message'</p>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">new_self_initiated_dialogue_reference</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
-<p>Return a dialogue label for a new self initiated dialogue</p>
+<p>Return a dialogue label for a new self initiated dialogue.</p>
 <p><strong>Returns</strong>:</p>
 <p>the next nonce</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogues.update"></a></p>
@@ -1832,6 +1828,18 @@ If there are any errors, e.g. the message dialogue reference does not exists or 
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the new or existing dialogue the message is intended for, or None in case of any errors.</p>
+<p><a name=".aea.helpers.dialogue.base.Dialogues.get_dialogue"></a></p>
+<h4 id="get_dialogue">get<code>_</code>dialogue</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_dialogue</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dialogue</span><span class="p">]</span>
+</pre></div>
+
+<p>Retrieve the dialogue 'message' belongs to.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>message</code>: a message</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the dialogue, or None in case such a dialogue does not exist</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogues.create_dialogue"></a></p>
 <h4 id="create_dialogue">create<code>_</code>dialogue</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
@@ -1853,83 +1861,13 @@ If there are any errors, e.g. the message dialogue reference does not exists or 
  <span class="o">|</span> <span class="n">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span>
 </pre></div>
 
-<p>Infer the role of the agent from an incoming or outgoing first message</p>
+<p>Infer the role of the agent from an incoming or outgoing first message.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>message</code>: an incoming/outgoing first message</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the agent's role</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogues.is_belonging_to_registered_dialogue"></a></p>
-<h4 id="is_belonging_to_registered_dialogue">is<code>_</code>belonging<code>_</code>to<code>_</code>registered<code>_</code>dialogue</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_belonging_to_registered_dialogue</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">agent_addr</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-<p>DEPRECATED</p>
-<p>Check whether an agent message is part of a registered dialogue.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>msg</code>: the agent message</li>
-<li><code>agent_addr</code>: the address of the agent</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>boolean indicating whether the message belongs to a registered dialogue</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogues.is_permitted_for_new_dialogue"></a></p>
-<h4 id="is_permitted_for_new_dialogue">is<code>_</code>permitted<code>_</code>for<code>_</code>new<code>_</code>dialogue</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_permitted_for_new_dialogue</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-<p>DEPRECATED</p>
-<p>Check whether an agent message is permitted for a new dialogue.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>msg</code>: the agent message</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>a boolean indicating whether the message is permitted for a new dialogue</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogues.get_dialogue"></a></p>
-<h4 id="get_dialogue">get<code>_</code>dialogue</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_dialogue</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span>
-</pre></div>
-
-<p>DEPRECATED</p>
-<p>Retrieve dialogue.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>fipa_msg</code>: the fipa message</li>
-<li><code>agent_addr</code>: the address of the agent</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the dialogue</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogues.create_self_initiated"></a></p>
-<h4 id="create_self_initiated">create<code>_</code>self<code>_</code>initiated</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create_self_initiated</span><span class="p">(</span><span class="n">dialogue_opponent_addr</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span>
-</pre></div>
-
-<p>DEPRECATED</p>
-<p>Create a self initiated dialogue.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>dialogue_opponent_addr</code>: the pbk of the agent with which the dialogue is kept.</li>
-<li><code>role</code>: the agent's role</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the created dialogue.</p>
-<p><a name=".aea.helpers.dialogue.base.Dialogues.create_opponent_initiated"></a></p>
-<h4 id="create_opponent_initiated">create<code>_</code>opponent<code>_</code>initiated</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create_opponent_initiated</span><span class="p">(</span><span class="n">dialogue_opponent_addr</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">dialogue_reference</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">role</span><span class="p">:</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span>
-</pre></div>
-
-<p>DEPRECATED</p>
-<p>Create an opponent initiated dialogue.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>dialogue_opponent_addr</code>: the address of the agent with which the dialogue is kept.</li>
-<li><code>dialogue_reference</code>: the reference of the dialogue.</li>
-<li><code>role</code>: the agent's role</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>the created dialogue</p>
 
 
                                 </section>

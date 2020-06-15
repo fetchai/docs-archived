@@ -556,8 +556,20 @@
 </li>
  
 <li>
+    <a href="../launcher/" id="aea-api-launcher-"
+        >Launcher</a
+    >
+</li>
+ 
+<li>
     <a href="../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
+    >
+</li>
+ 
+<li>
+    <a href="../runner/" id="aea-api-runner-"
+        >Runner</a
     >
 </li>
  
@@ -1519,7 +1531,7 @@
 <li><code>timeout</code>: the time in (fractions of) seconds to time out an agent between act and react</li>
 <li><code>is_debug</code>: if True, run the agent in debug mode (does not connect the multiplexer).</li>
 <li><code>loop_mode</code>: loop_mode to choose agent run loop.</li>
-<li><code>runtime</code>: runtime to up agent.</li>
+<li><code>runtime_mode</code>: runtime mode to up agent.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1589,8 +1601,15 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
  <span class="o">|</span> <span class="n">tick</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 
-<p>Get the tick (or agent loop count).</p>
+<p>Get the tick or agent loop count.</p>
 <p>Each agent loop (one call to each one of act(), react(), update()) increments the tick.</p>
+<p><a name=".aea.agent.Agent.timeout"></a></p>
+<h4 id="timeout">timeout</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">timeout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</pre></div>
+
+<p>Get the time in (fractions of) seconds to time out an agent between act and react.</p>
 <p><a name=".aea.agent.Agent.agent_state"></a></p>
 <h4 id="agent_state">agent<code>_</code>state</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1611,6 +1630,26 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 </pre></div>
 
 <p>Get the agent loop mode.</p>
+<p><a name=".aea.agent.Agent.main_loop"></a></p>
+<h4 id="main_loop">main<code>_</code>loop</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">main_loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">BaseAgentLoop</span>
+</pre></div>
+
+<p>Get the main agent loop.</p>
+<p><a name=".aea.agent.Agent.runtime"></a></p>
+<h4 id="runtime">runtime</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">runtime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">BaseRuntime</span>
+</pre></div>
+
+<p>Get the runtime.</p>
+<p><a name=".aea.agent.Agent.setup_multiplexer"></a></p>
+<h4 id="setup_multiplexer">setup<code>_</code>multiplexer</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">setup_multiplexer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+<p>Set up the multiplexer</p>
 <p><a name=".aea.agent.Agent.start"></a></p>
 <h4 id="start_1">start</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -1632,9 +1671,18 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li>call to react(),</li>
 <li>call to update().</li>
 </ul>
-<p><strong>Arguments</strong>:</p>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name=".aea.agent.Agent.start_setup"></a></p>
+<h4 id="start_setup">start<code>_</code>setup</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start_setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+<p>Set up Agent on start.</p>
 <ul>
-<li><code>loop_mode</code>: loop mode to choose  agent run loop. if not specified default one will be used</li>
+<li>connect Multiplexer</li>
+<li>call agent.setup</li>
+<li>set liveness to started</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
