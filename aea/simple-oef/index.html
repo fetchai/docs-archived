@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Identity - Aries Cloud Agent - Fetch.ai Developer Documentation</title>
+    <title>Simple OEF - Fetch.ai Developer Documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
@@ -160,12 +160,6 @@
 </li>
  
 <li>
-    <a href="../generic-skills/" id="aea-generic-skills-"
-        >Generic skills</a
-    >
-</li>
- 
-<li>
     <a href="../gym-example/" id="aea-gym-example-"
         >Gym example</a
     >
@@ -263,7 +257,7 @@
     <span class="head">Topic guides</span>
     <ul id="header_topic_guides"> 
 <li>
-    <a href="../step_one/" id="aea-step_one-"
+    <a href="../step-one/" id="aea-step-one-"
         >Ways to build an AEA</a
     >
 </li>
@@ -359,7 +353,7 @@
  
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
-        >Frontend intergration</a
+        >Front-end intergration</a
     >
 </li>
  
@@ -382,20 +376,8 @@
 </li>
  
 <li>
-    <a href="./" id="aea-aries-cloud-agent-example-"
-        >Identity - Aries Cloud Agent</a
-    >
-</li>
- 
-<li>
     <a href="../p2p-connection/" id="aea-p2p-connection-"
         >P2P Connection</a
-    >
-</li>
- 
-<li>
-    <a href="../ledger-integration/" id="aea-ledger-integration-"
-        >Using public ledgers</a
     >
 </li>
  
@@ -449,6 +431,12 @@
 <li>
     <a href="../decision-maker/" id="aea-decision-maker-"
         >Decision Maker</a
+    >
+</li>
+ 
+<li>
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
+        >Ledger & Crypto APIs</a
     >
 </li>
  
@@ -962,6 +950,12 @@
     </ul>
 </li> 
 <li>
+    <a href="./" id="aea-simple-oef-"
+        >Simple OEF</a
+    >
+</li>
+ 
+<li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
     >
@@ -1465,149 +1459,294 @@
 
                                     
 
-<p>Demonstrating interactions between AEAs and and an instance of Aries Cloud Agent (ACA).</p>
-<h3 id="discussion">Discussion</h3>
-<p>This demo illustrates how an AEA may connect to an Aries Cloud Agent (ACA). </p>
-<p>Hyperledger Aries Cloud Agent is a foundation for building self-sovereign identity/decentralized identity services using verifiable credentials. You can read more about Hyperledger <a href="https://www.hyperledger.org" target=_blank>here</a> and the Aries project <a href="https://github.com/hyperledger/aries-cloudagent-python" target=_blank>here</a>.</p>
-<p>In this demo, you will learn how an AEA could connect with an ACA, to send it administrative commands (e.g. issue verifiable credential to another AEA) and receive DID related notifications (e.g. receive a request for a credential proof from another AEA). </p>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
-<p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="aca">ACA</h2>
-<h3 id="install-aca">Install ACA</h3>
-<p>Install Aries cloud-agents (run <code>pip install aries-cloudagent</code> or see <a href="https://github.com/hyperledger/aries-cloudagent-python#install" target=_blank>here</a>) if you do not have it on your machine.</p>
-<h2 id="run-the-demo-test">Run the demo test</h2>
-<p>Run the following test file using PyTest:</p>
-<div class="highlight"><pre><span></span>pytest tests/test_examples/test_http_client_connection_to_aries_cloud_agent.py
+<p>This documentation has been produced for the Simple-OEF version <code>0.1.19</code>.</p>
+<h2 id="concepts">Concepts</h2>
+<p>The Simple-OEF, or soef, is a <strong>search and discovery</strong> mechanism for <strong>autonomous economic agents</strong>. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. </p>
+<p>The work-flow is:</p>
+<ul>
+<li>Find relevant agents on the soef,</li>
+<li>Communicate using the Agent Framework's peer-to-peer network,</li>
+<li>Negotiate and then transact on the ledger in order to exchange value for tokens</li>
+</ul>
+<p>When an agent registers with the soef, it is issued with a <em>unique reference</em> which is quoted in all subsequent transactions. This way, the soef knows who its talking to. The soef is transaction based, so it does not need a permanent connection to be maintained in order to work with it. If it does not hear from an agent for a period of time, that agent will be timed out and automatically unregistered. This period of time is typically about one hour, but you can see the soef's configuration at:</p>
+<p>http://soef.fetch.ai:9002</p>
+<p>Agents identify themselves in a number of ways. These include their address, their given name, their classification and their genus. They can also describe how they "look" in other ways, and specify the services that they provide. </p>
+<p>In order to register, agents <em>must</em> provide a valid address and a given name. The address can be for the Fetch.ai native ledger, the Fetch.ai Cosmos ledger or the ethereum ledger. It is this that uniquely identifies them, and addresses cannot be duplicated or shared. The given name can be anything and it is not used for search filtering. Typically, it can be thought of as a debugging aid or a context. Names could be Alice, Bob or Jim, as well as they could be a flight number, train identity or reference code. They <em>appear</em> in find results, but are not used to find by.</p>
+<h2 id="describing-an-agent">Describing an Agent</h2>
+<p>Agents describe themselves in three ways:</p>
+<ol>
+<li>Their address and ledger type along with their given name</li>
+<li>Personality pieces: how they <em>look</em></li>
+<li>Service keys: what they <em>do</em>, <em>sell</em> or <em>want</em>. </li>
+</ol>
+<p>We cover all of these in this next section. It's important to understand the difference between personality pieces and service keys, as agents only have one appearance, but they can provide many services. Search results can be filtered by a number of both, and wildcards are permitted where relevant.</p>
+<h3 id="personality-pieces">Personality Pieces</h3>
+<p>Agents can have a number of personality peices. These describe how an agent appears, where it is, and other properties such as heading, supported protocols and types of transactions. All personality pieces are optional. </p>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>genus</code></td>
+<td>Coarse type of agent, includes things such as <code>vehicle</code>, <code>building</code>, <code>iot</code>. See the genus table below.</td>
+</tr>
+<tr>
+<td><code>classification</code></td>
+<td>An agent's classification, typically in the form <code>mobility.railway.train</code>. See note below on classifications. No fixed classifications are specified.</td>
+</tr>
+<tr>
+<td><code>dynamics.moving</code></td>
+<td>Boolean, indicates if the agent is moving or not.</td>
+</tr>
+<tr>
+<td><code>dynamics.heading</code></td>
+<td>Indicates the heading of the agent, in radians, with 0.0 pointing due north.</td>
+</tr>
+<tr>
+<td><code>dynamics.position</code></td>
+<td>Indicates the GPS co-ordinates of the agent as latitude and longitude.</td>
+</tr>
+<tr>
+<td><code>action.buyer</code></td>
+<td>Boolean, indicates whether the agent wishes to buy information, i.e., is an agent that requires value from another agent.</td>
+</tr>
+<tr>
+<td><code>action.seller</code></td>
+<td>Boolean, indicates whether the agent sells information, i.e., provides value. Value provided can be zero-cost.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="genus-list">Genus list</h4>
+<p>A genus is a coarse agent class. It is the roughest description of what an agent is, and an easy way of filtering large groups of agents out of searches. The supported genus list is:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vehicle</code></td>
+<td>Moving objects such as trains, planes and automobiles</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>An agent that <em>represents</em> a human being</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>An agent that provides a service</td>
+</tr>
+<tr>
+<td><code>iot</code></td>
+<td>An agent that represents an Internet of Things device</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>An agent that represents data</td>
+</tr>
+<tr>
+<td><code>furniture</code></td>
+<td>Small fixed location items such as signs, mobile masts</td>
+</tr>
+<tr>
+<td><code>building</code></td>
+<td>Large fixed location item such as house, railway station, school</td>
+</tr>
+<tr>
+<td><code>buyer</code></td>
+<td>Indicates the agent is a buyer <em>only</em> and does not have value to deliver</td>
+</tr>
+</tbody>
+</table>
+<p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see https://community.fetch.ai for the instructions on joining, or the "Further Information" section below). </p>
+<h4 id="a-note-on-classifications">A note on classifications</h4>
+<p>There is currently no fixed set of guidelines as to how classifications are used. It is expected that agent builders will converge on a set of standards, and as those become clearer, they will be documented as "by convention" classification uses. Here are some examples of classifications in use:</p>
+<div class="highlight"><pre><span></span>mobility.railway.station
+mobility.railway.train
+mobility.road.taxi
+infrastructure.road.sign
 </pre></div>
 
-<p>You should see that the two tests pass.</p>
-<h2 id="demo-code">Demo code</h2>
-<p>Take a look at the test file you ran above <code>tests/test_examples/test_http_client_connection_to_aries_cloud_agent.py</code>. </p>
-<p>The main class is <code>TestAEAToACA</code>. The <code>setup_class</code> method initialises the scenario. </p>
-<div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">asyncio</span>
-<span class="k">class</span> <span class="nc">TestAEAToACA</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;End-to-end test for an AEA connecting to an ACA via the http client connection.&quot;&quot;&quot;</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">setup_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialise the class.&quot;&quot;&quot;</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">aca_admin_address</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">aca_admin_port</span> <span class="o">=</span> <span class="mi">8020</span>
+<p>When filtering by classifications, the <code>*</code> wildcard can be used to, for example, capture all mobility related agents with a wildcard of <code>mobility.*</code>. </p>
+<h3 id="service-keys">Service Keys</h3>
+<p>Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent <em>looks</em>, service keys are what an agent <em>has</em> or <em>does</em>. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's descretion. As this changes, the documentation will be updated. However, for <em>buyer</em> agents, two suggested keys are:</p>
+<div class="highlight"><pre><span></span>buying_genus
+buying_classifications
 </pre></div>
 
-<p>The address and port fields <code>cls.aca_admin_address</code> and <code>cls.aca_admin_port</code> specify where the ACA should listen to receive administrative commands from the AEA.</p>
-<p>The following runs an ACA:</p>
-<div class="highlight"><pre><span></span><span class="bp">cls</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>  <span class="c1"># nosec</span>
-            <span class="p">[</span>
-                <span class="s2">&quot;aca-py&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;start&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--admin&quot;</span><span class="p">,</span>
-                <span class="bp">cls</span><span class="o">.</span><span class="n">aca_admin_address</span><span class="p">,</span>
-                <span class="nb">str</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">aca_admin_port</span><span class="p">),</span>
-                <span class="s2">&quot;--admin-insecure-mode&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--inbound-transport&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;http&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;8000&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--outbound-transport&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;http&quot;</span><span class="p">,</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
+<p>This allows searches to look for potential buyers of classifications or genus. </p>
+<h2 id="finding-agents">Finding Agents</h2>
+<p>The soef is designed for <strong>geographic searches</strong> where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. Future versions of the soef will support searches across nodes, positionless searches and dimensional reduction-based fuzzy searches. Right now, the soef supports the <code>find_around_me</code> operation for agents. This allows searches that:</p>
+<ul>
+<li>Are within a certain range in KM</li>
+<li>That have a specified set of personality pieces (with wildcards where applicable)</li>
+<li>That have a specified set of service keys (with wildcards)</li>
+<li>Where chain identifiers match</li>
+</ul>
+<p>Some limits apply to the maximum number of filters or range. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at <a href="http://soef.fetch.ai:9002">http://soef.fetch.ai:9002</a>.</p>
+<p>The soef returns XML that includes information about all found agents. An example of that, unparsed, looks like this:</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
+  <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
+  <span class="nt">&lt;total&gt;</span>1<span class="nt">&lt;/total&gt;</span>
+  <span class="nt">&lt;capped&gt;</span>0<span class="nt">&lt;/capped&gt;</span>
+    <span class="nt">&lt;results&gt;</span>
+    <span class="nt">&lt;agent</span> <span class="na">name=</span><span class="s">&quot;Alice&quot;</span> <span class="na">genus=</span><span class="s">&quot;vehicle&quot;</span> <span class="na">classification=</span><span class="s">&quot;mobility.railway.train&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;identities&gt;</span>
+                <span class="nt">&lt;identity</span> <span class="na">chain_identifier=</span><span class="s">&quot;fetchai&quot;</span><span class="nt">&gt;</span>2h6fi8oCkMz9GCpL7EUYMHjzgdRFGmDP5V4Ls97jZpzjg523yY<span class="err">&lt;</span>/identity
+        <span class="nt">&lt;/identities&gt;</span>
+        <span class="nt">&lt;range_in_km&gt;</span>55.7363<span class="nt">&lt;/range_in_km&gt;</span>
+            <span class="nt">&lt;location</span> <span class="na">accuracy=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;latitude&gt;</span>52.5<span class="nt">&lt;/latitude&gt;</span>
+                <span class="nt">&lt;longitude&gt;</span>0.2<span class="nt">&lt;/longitude&gt;</span>
+            <span class="nt">&lt;/location&gt;</span>
+        <span class="nt">&lt;/agent&gt;</span>
+    <span class="nt">&lt;/results&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
-<p>Now take a look at the following method. This is where the demo resides. It first creates an AEA programmatically.</p>
-<div class="highlight"><pre><span></span>    <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">asyncio</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">test_end_to_end_aea_aca</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># AEA components</span>
-        <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-        <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">})</span>
-        <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_aea_1&quot;</span><span class="p">,</span>
-            <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
-            <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">http_client_connection</span> <span class="o">=</span> <span class="n">HTTPClientConnection</span><span class="p">(</span>
-            <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span>
-            <span class="n">provider_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aca_admin_address</span><span class="p">,</span>
-            <span class="n">provider_port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aca_admin_port</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">()</span>
-        <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">http_client_connection</span><span class="p">)</span>
-
-        <span class="c1"># create AEA</span>
-        <span class="n">aea</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+<p><strong>The <code>&lt;location&gt;</code> block is only returned if the agent has set itself to disclose its position in a find.</strong> Normally, the default is not to, and agents will then only return the <code>&lt;range_in_km&gt;</code> item. This is because agents may deliver their precise location as part of the value that they deliver, and therefore it would need to be negotiated and potentially paid for. However, sometimes, it is desirable for agents to always deliver their position when found but specify the accuracy. Because of this, the soef supports four levels of accuracy:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td><strong>Default</strong> do <em>not</em> disclose position, range only.</td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td>Rounded to nearest 11km</td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td>Rounded to nearest 1.1km</td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td>Rounded to nearest 110 metres</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td>No rounding: supplied in maximum available detail</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-details">Technical Details</h2>
+<p>For the majority of use cases, the soef will be used from the Agent Framework. As a result, talking to it directly will not be needed. There are some occasions where interacting with the soef directly may be required, and this section documents the API functionality. </p>
+<p>Until version 1.0 (expected in Q3/Q4 2020), some of the security and paid-for-services are not implemented and where they are, generally not enforced. Digital signatures for the sign-on process and unique identity recovery will be implemented, as will encryption on sensitive data transport, for example. Thus the API is likely to change substantially in the coming months, particularly the initial registration process. It is not recommended that you invest in substantial code that talks to the soef directly until after 1.0, and it is always preferred to go through the Agent Framework.</p>
+<h3 id="registration">Registration</h3>
+<p>Agents register at the <code>/register</code> page on the soef. They are expected to provide four pieces of information:</p>
+<ol>
+<li>An API key</li>
+<li>A chain identifier, which can be either <code>fetchai</code> for the Fetch native network (testnet or mainnet), <code>fetchai_cosmos</code> for the Fetch Cosmos testnet or <code>ethereum</code> for the ethereum network</li>
+<li>An address, which must be a valid address for the specified chain identifier</li>
+<li>A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context</li>
+</ol>
+<p>If registration is successful, the soef will return a result like this:</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
+    <span class="nt">&lt;encrypted&gt;</span>0<span class="nt">&lt;/encrypted&gt;</span>
+    <span class="nt">&lt;token&gt;</span>0A709D1ED170A3E96C4AC9D014BCAE30<span class="nt">&lt;/token&gt;</span>
+    <span class="nt">&lt;page_address&gt;</span>
+oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
+    <span class="nt">&lt;/page_address&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
-<p>It then adds the HTTP protocol to the AEA. THe HTTP protocol defines the format of HTTP interactions (e.g. HTTP Request and Response). </p>
-<div class="highlight"><pre><span></span>        <span class="c1"># Add http protocol to AEA resources</span>
-        <span class="n">http_protocol_configuration</span> <span class="o">=</span> <span class="n">ProtocolConfig</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
-            <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span>
-                <span class="nb">open</span><span class="p">(</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">cwd</span><span class="p">,</span>
-                        <span class="s2">&quot;packages&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;protocols&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;http&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;protocol.yaml&quot;</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">http_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="p">(</span><span class="n">http_protocol_configuration</span><span class="p">,</span> <span class="n">HttpMessage</span><span class="o">.</span><span class="n">serializer</span><span class="p">())</span>
-        <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">http_protocol</span><span class="p">)</span>
+<p>This indicates success and that the agent is now in the <strong>Lobby</strong>. The lobby is a temporary holding pen where newly registered agents wait until the negotiation is complete. If an agent does not respond and complete its registration within 60 seconds, it is removed from the lobby and registration is cancelled. </p>
+<p>The <code>&lt;page_address&gt;</code> is the <strong>unique URL</strong> for the new agent. This must be quoted in all subsequent interactions and is how the soef identifies that specific agent. To complete registration, use the unique URL and specify the parameters:</p>
+<ul>
+<li><code>token=</code> with the token that was returned above and</li>
+<li><code>command=acknowledge</code></li>
+</ul>
+<p>If this works, you will receive a success response:</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
+    <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
-<p>Then, the request message and envelope is created:</p>
-<div class="highlight"><pre><span></span>        <span class="c1"># Request message &amp; envelope</span>
-        <span class="n">request_http_message</span> <span class="o">=</span> <span class="n">HttpMessage</span><span class="p">(</span>
-            <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-            <span class="n">target</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">message_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">performative</span><span class="o">=</span><span class="n">HttpMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,</span>
-            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-            <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">/status&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">aca_admin_address</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">aca_admin_port</span>
-            <span class="p">),</span>
-            <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">version</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">bodyy</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">request_http_message</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="s2">&quot;ACA&quot;</span>
-        <span class="n">request_envelope</span> <span class="o">=</span> <span class="n">Envelope</span><span class="p">(</span>
-            <span class="n">to</span><span class="o">=</span><span class="s2">&quot;ACA&quot;</span><span class="p">,</span>
-            <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;AEA&quot;</span><span class="p">,</span>
-            <span class="n">protocol_id</span><span class="o">=</span><span class="n">HTTP_PROTOCOL_PUBLIC_ID</span><span class="p">,</span>
-            <span class="n">message</span><span class="o">=</span><span class="n">request_http_message</span><span class="p">,</span>
-        <span class="p">)</span>
-</pre></div>
-
-<p>Note that the <code>performative</code> is set to <code>HttpMessage.Performative.REQUEST</code>, the method <code>GET</code> corresponds with HTTP GET method, and <code>url</code> is where the request is sent. This is the location the ACA is listening for administrative commands. </p>
-<p>In the following part, the AEA is started in another thread <code>t_aea = Thread(target=aea.start)</code>, the HTTP request message created above is placed in the agent's outbox <code>aea.outbox.put(request_envelope)</code> to be sent to the ACA, and the received response is checked for success (e.g. <code>assert aea_handler.handled_message.status_text == "OK"</code>).</p>
-<div class="highlight"><pre><span></span>        <span class="c1"># start AEA thread</span>
-        <span class="n">t_aea</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">aea</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">t_aea</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-            <span class="n">aea</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">request_envelope</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="p">(</span>
-                <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">performative</span>
-                <span class="o">==</span> <span class="n">HttpMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">RESPONSE</span>
-            <span class="p">)</span>
-            <span class="k">assert</span> <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
-            <span class="k">assert</span> <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-            <span class="k">assert</span> <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">status_text</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span>
-            <span class="k">assert</span> <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="k">assert</span> <span class="n">aea_handler</span><span class="o">.</span><span class="n">handled_message</span><span class="o">.</span><span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">aea</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-            <span class="n">t_aea</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</pre></div>
-
-<p>Note that the response from the ACA is caught by the <code>AEAHandler</code> class which just saves the handled message.</p>
-<p>In the above interaction, and in general, the HTTP client connection the added to the AEA, takes care of the translation between messages and envelopes in the AEA world and the HTTP request/response format in the HTTP connection with the ACA.</p>
+<p>At this point, your agent is now fully registered and can then communicate with the soef. </p>
+<p>Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.</p>
+<h3 id="commands">Commands</h3>
+<p>The soef has a number of commands that can be used to set or update personality pieces, manage service keys, unregister, find other agents and other operations. These commands are specified using the agent's unique URL and a <code>command=</code> parameter. There may then be other required and optional parameters for that particular command.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unregister</code></td>
+<td>Unregisters the agent from the soef. The unique URL is invalidated and the agent will no longer appear in searches. No parameters.</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>Say hello. This is for agents that have been idle for a long period of time and wish to maintain their connection. No parameters.</td>
+</tr>
+<tr>
+<td><code>set_personality_piece</code></td>
+<td>Sets or updates a personality piece. Specify the <code>piece</code> (see personality piece table above) and the <code>value</code>. For personality pieces with multiple values, such as <code>dynamics.position</code>, separate them with the pipe character <code>|</code>.</td>
+</tr>
+<tr>
+<td><code>set_service_key</code></td>
+<td>Sets or updates a service key. Specify the <code>key</code> and the <code>value</code> to assign to it.</td>
+</tr>
+<tr>
+<td><code>remove_service_key</code></td>
+<td>Removes an existing service key. Specify the <code>key</code>.</td>
+</tr>
+<tr>
+<td><code>set_find_position_disclosure_accuracy</code></td>
+<td>Sets the find disclosure accuracy. See the table in "Finding Agents", above, for the accepted values for the parameter <code>accuracy</code>.</td>
+</tr>
+<tr>
+<td><code>find_around_me</code></td>
+<td>Find agents around me. This allows various filters, such as personality pieces and service keys, to be specified. See below, as this is more complex.</td>
+</tr>
+<tr>
+<td><code>set_position</code></td>
+<td>This is a direct internal mapping to <code>set_personality_piece</code> with a piece of <code>dynamics.position</code>. It existed in the earliest versions of the soef and remains as a short-cut. It expects <code>longitude</code> and <code>latitude</code> as parameters.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="find-around-me-in-detail">Find around me in detail</h4>
+<p><code>find_around_me</code> is the big command. Ultimately, it will cost a small amount of tokens to use it, depending on the size of the request as it involves the most computing time. This provides an incentive for soef operators to maintain soef nodes that correspond to subject areas, geographic areas or both. The command has a number of parameters specifying the filtering required. Only one of the parameters is required, which is <code>range_in_km</code>. This cannot exceed a certain range, typically between 50 and 75km. This, and other configuration items, are available on the soef's configuration page. There are other parameters that are optional. They are:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chains_must_match</code></td>
+<td>Boolean. Must be <code>true</code> or <code>false</code>. Default is <code>false</code>. If specified, this ensures that any agents returned in the search will have the same chain identifier as you.</td>
+</tr>
+<tr>
+<td><code>ppfilter</code></td>
+<td>Specify a personality piece filter. Multiple <code>ppfilter</code>s can be specified. Example use is: <code>ppfilter=dynamics.moving,true</code>. Wildcards can be used where relevant, e.g.: <code>ppfilter=classification,mobility*</code> will match all classifications that <em>start</em> with <code>mobility</code>, whereas <code>ppfilter=classification,*mobility*</code> will match all classifications with <code>mobility</code> anywhere in it.</td>
+</tr>
+<tr>
+<td><code>skfilter</code></td>
+<td>Specify a service key filter. Multiple <code>skfilter</code>s can be specified. Example use is: <code>skfilter=fruit,peach</code> which will require any returned results to have a service key of <code>fruit</code> and a value of <code>peach</code>. Wildcards can be specified, so <code>skfilter=fruit,pea*</code> will match any agent with a service key of <code>fruit</code> that starts <code>pea</code>, so <code>pear</code> and <code>peach</code> would match.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="further-information">Further information</h2>
+<p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY">here</a>.</p>
+<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. </p>
 
 
                                 </section>
@@ -1616,9 +1755,9 @@
 
                             <div class="bottomnav">
                                 
-                                <a href="../erc1155-skills/" class="button left"><strong>Previous:</strong></br>Contract Deploy And Interact</a>
+                                <a href="../api/test_tools/generic/" class="button left"><strong>Previous:</strong></br>Test Tools</a>
                                 
-                                <a href="../p2p-connection/" class="button right"><strong>Next:</strong></br>P2p Connection</a>
+                                <a href="../questions-and-answers/" class="button right"><strong>Next:</strong></br>Q&a</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

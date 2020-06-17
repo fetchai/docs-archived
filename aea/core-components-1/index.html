@@ -160,12 +160,6 @@
 </li>
  
 <li>
-    <a href="../generic-skills/" id="aea-generic-skills-"
-        >Generic skills</a
-    >
-</li>
- 
-<li>
     <a href="../gym-example/" id="aea-gym-example-"
         >Gym example</a
     >
@@ -263,7 +257,7 @@
     <span class="head">Topic guides</span>
     <ul id="header_topic_guides"> 
 <li>
-    <a href="../step_one/" id="aea-step_one-"
+    <a href="../step-one/" id="aea-step-one-"
         >Ways to build an AEA</a
     >
 </li>
@@ -359,7 +353,7 @@
  
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
-        >Frontend intergration</a
+        >Front-end intergration</a
     >
 </li>
  
@@ -382,20 +376,8 @@
 </li>
  
 <li>
-    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
-        >Identity - Aries Cloud Agent</a
-    >
-</li>
- 
-<li>
     <a href="../p2p-connection/" id="aea-p2p-connection-"
         >P2P Connection</a
-    >
-</li>
- 
-<li>
-    <a href="../ledger-integration/" id="aea-ledger-integration-"
-        >Using public ledgers</a
     >
 </li>
  
@@ -449,6 +431,12 @@
 <li>
     <a href="../decision-maker/" id="aea-decision-maker-"
         >Decision Maker</a
+    >
+</li>
+ 
+<li>
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
+        >Ledger & Crypto APIs</a
     >
 </li>
  
@@ -962,6 +950,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../simple-oef/" id="aea-simple-oef-"
+        >Simple OEF</a
+    >
+</li>
+ 
+<li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
     >
@@ -1467,9 +1461,10 @@
 
 <p>The AEA framework consists of several core elements, some which are required to run an AEA and others which are optional.</p>
 <h2 id="the-elements-each-aea-uses">The elements each AEA uses</h2>
-<p><a href="api/aea">AEAs</a> communicate asynchronously via envelopes.</p>
+<p><a href="../api/aea#aea-objects"><code>AEAs</code></a> communicate asynchronously via envelopes.</p>
 <h3 id="envelope">Envelope</h3>
-<p>An <a href="api/mail/base">Envelope</a> is the core object with which agents communicate. An <code>Envelope</code> is a vehicle for messages with five attribute parameters:</p>
+<p><center><img alt="Envelope of an AEA" src="../assets/envelope.jpg" /></center></p>
+<p>An <a href="../api/mail/base#envelope-objects"><code>Envelope</code></a> is the core object with which agents communicate. It is a vehicle for messages with five attribute parameters:</p>
 <ul>
 <li>
 <p><code>to</code>: defines the destination address.</p>
@@ -1489,36 +1484,48 @@
 </ul>
 <p>Messages must adhere to a protocol.</p>
 <h3 id="protocol">Protocol</h3>
-<p>Protocols define how messages are represented and encoded for transport. They also, optionally, define the rules to which messages have to adhere in a message sequence. </p>
-<p>For instance, a protocol may contain messages of type <code>START</code> and <code>FINISH</code>. From there, the rules may prescribe that a message of type <code>FINISH</code> must be preceded by a message of type <code>START</code>.</p>
-<p>The <a href="api/protocols/base">Message</a> class in the <code>protocols/base.py</code> module provides an abstract class with all the functionality a derived <code>Protocol</code> message class requires for a custom protocol, such as basic message generating and management functions and serialisation details.</p>
-<p>The framework provides one default protocol, called <code>default</code>. This protocol provides a bare bones implementation for an AEA protocol which includes a <code>DefaultMessage</code> class and a <code>DefaultSerialization</code> class with functions for managing serialisation.</p>
-<p>Additional protocols can be added as packages or generated with the <a href="protocol-generator">protocol generator</a>.</p>
+<p><a href="../api/protocols/base#protocol-objects"><code>Protocols</code></a> define agent to agent interactions, which include:</p>
+<ul>
+<li>
+<p>messages, which define the representation;</p>
+</li>
+<li>
+<p>serialization logic, which define how a message is encoded for transport; and, optionally</p>
+</li>
+<li>
+<p>dialogues, which define rules over message sequences.</p>
+</li>
+</ul>
+<p>The framework provides one default protocol, called <code>default</code>. This protocol provides a bare bones implementation for an AEA protocol which includes a <a href="../api/protocols/default/message#defaultmessage-objects"><code>DefaultMessage</code></a>  class and associated <a href="../api/protocols/default/serialization#defaultserializer-objects"><code>DefaultSerializer</code></a> and <a href="..api/protocols/default/dialogues#defaultdialogues-objects"><code>DefaultDialogue</code></a> classes.</p>
+<p>Additional protocols - i.e. a new type of interaction - can be added as packages or generated with the <a href="../protocol-generator">protocol generator</a>. For more details on protocols also read the protocol guide <a href="../protocol">here</a>.</p>
 <p>Protocol specific messages, wrapped in envelopes, are sent and received to other agents and services via connections.</p>
 <h3 id="connection">Connection</h3>
-<p>The module <code>connections/base.py</code> contains the abstract class which defines a <a href="api/connections/base">Connection</a>. A <code>Connection</code> acts as a bridge to the SDK or API to be wrapped, and is, where necessary, responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service or third-party protocol (e.g. <code>HTTP</code>).</p>
-<p>The framework provides one default connection, called <code>stub</code>. It implements an I/O reader and writer to send messages to the agent from a local file. Additional connections can be added as packages.</p>
-<p>An AEA can run connections via the <code>Multiplexer</code>.</p>
+<p>A <a href="../api/connections/base#connection-objects"><code>Connection</code></a> wraps an SDK or API and provides an interface to network, ledgers and other services. Where necessary, a connection is responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service or third-party protocol (e.g. <code>HTTP</code>).</p>
+<p>The framework provides one default connection, called <code>stub</code>. It implements an I/O reader and writer to send messages to the agent from a local file.</p>
+<p>Additional connections can be added as packages. For more details on connections also read the connection guide <a href="../connection">here</a>.</p>
+<p>An AEA can run connections via a multiplexer.</p>
 <h3 id="multiplexer">Multiplexer</h3>
-<p>The <a href="api/mail/base">Multiplexer</a> is responsible for maintaining potentially multiple connections.</p>
-<p>It maintains an <code>InBox</code> and <code>OutBox</code>, which are, respectively, queues for incoming and outgoing <code>Envelopes</code>. They are used to separate the main agent loop from the loop which runs the <code>Multiplexer</code>.</p>
+<p><center><img alt="Multiplexer of an AEA" src="../assets/multiplexer.jpg" /></center> </p>
+<p>The <a href="../api/multiplexer#multiplexer-objects"><code>Multiplexer</code></a> is responsible for maintaining potentially multiple connections.</p>
+<p>It maintains an <a href="../api/multiplexer#inbox-objects"><code>InBox</code></a> and <a href="../api/multiplexer#outbox-objects"><code>OutBox</code></a>, which are, respectively, queues for incoming and outgoing envelopes.</p>
 <h3 id="skill">Skill</h3>
-<p><a href="api/skill/base">Skills</a> are the core focus of the framework's extensibility. They are self-contained capabilities that AEAs can dynamically take on board, in order to expand their effectiveness in different situations.</p>
+<p><center><img alt="Skills of an AEA" src="../assets/skills.jpg" /></center></p>
+<p><a href="../api/skills/base#skill-objects"><code>Skills</code></a> are the core focus of the framework's extensibility as they implement business logic to deliver economic value for the AEA. They are self-contained capabilities that AEAs can dynamically take on board, in order to expand their effectiveness in different situations.</p>
 <p>A skill encapsulates implementations of the three abstract base classes <code>Handler</code>, <code>Behaviour</code>, <code>Model</code>, and is closely related with the abstract base class <code>Task</code>:</p>
 <ul>
-<li><code>Handler</code>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement AEAs' reactive behaviour. If the AEA understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages (see next section).</li>
-<li><code>Behaviour</code>: none, one or more <code>Behaviours</code> encapsulate actions that cause interactions with other agents initiated by the AEA. Behaviours implement AEAs' pro-activeness.</li>
-<li><code>Models</code>: none, one or more <code>Models</code> that inherit from the <code>Model</code> can be accessed via the <code>SkillContext</code>.</li>
-<li><code>Task</code>: none, one or more <code>Tasks</code> encapsulate background work internal to the AEA.</li>
+<li><a href="../api/skills/base#handler-objects"><code>Handler</code></a>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement AEAs' <strong>reactive</strong> behaviour. If the AEA understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages (see next section).</li>
+<li><a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a>: none, one or more <code>Behaviours</code> encapsulate actions which futher the AEAs goal and are initiated by internals of the AEA, rather than external events. Behaviours implement AEAs' <strong>pro-activeness</strong>. The framework provides a number of <a href="../api/skills/behaviours">abstract base classes</a> implementing different types of behaviours (e.g. cyclic/one-shot/finite-state-machine/etc.).</li>
+<li><a href="../api/skills/base#model-objects"><code>Model</code></a>: none, one or more <code>Models</code> that inherit from the <code>Model</code> can be accessed via the <code>SkillContext</code>.</li>
+<li><a href="../api/skills/tasks#task-objects"><code>Task</code></a>: none, one or more <code>Tasks</code> encapsulate background work internal to the AEA. <code>Task</code> differs from the other three in that it is not a part of skills, but <code>Task</code>s are declared in or from skills if a packaging approach for AEA creation is used.</li>
 </ul>
-<p><code>Task</code> differs from the other three in that it is not a part of skills, but <code>Task</code>s are declared in or from skills if a packaging approach for AEA creation is used.</p>
-<p>A skill can read (parts of) the state of the the AEA, and suggest action(s) to the AEA according to its specific logic.  As such, more than one skill could exist per protocol, competing with each other in suggesting to the AEA the best course of actions to take. </p>
+<p>A skill can read (parts of) the state of the the AEA (as summarised in the <a href="../api/context/base#agentcontext-objects"><code>AgentContext</code></a>), and suggest actions to the AEA according to its specific logic. As such, more than one skill could exist per protocol, competing with each other in suggesting to the AEA the best course of actions to take. In technical terms this means skills are horizontally arranged.</p>
 <p>For instance, an AEA who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy.  The skills could then read the preference and ownership state of the AEA, and independently suggest profitable transactions.</p>
-<p>The framework provides one default skill, called <code>error</code>. Additional skills can be added as packages.</p>
+<p>The framework places no limits on the complexity of skills. They can implement simple (e.g. <code>if-this-then-that</code>) or complex (e.g. a deep learning model or reinforcement learning agent).</p>
+<p>The framework provides one default skill, called <code>error</code>. Additional skills can be added as packages. For more details on skills also read the skill guide <a href="../skill">here</a>.</p>
 <h3 id="main-loop">Main loop</h3>
 <p>The main agent loop performs a series of activities while the <code>Agent</code> state is not stopped.</p>
 <ul>
-<li><code>act()</code>: this function calls the <code>act()</code> function of all active registered Behaviours (described below).</li>
+<li><code>act()</code>: this function calls the <code>act()</code> function of all active registered Behaviours.</li>
 <li><code>react()</code>: this function grabs all Envelopes waiting in the <code>InBox</code> queue and calls the <code>handle()</code> function for the Handlers currently registered against the protocol of the <code>Envelope</code>.</li>
 <li><code>update()</code>: this function dispatches the internal messages from the decision maker (described below) to the handler in the relevant skill.</li>
 </ul>
@@ -1526,21 +1533,21 @@
 <h3 id="recommended">Recommended</h3>
 <p>We recommend you continue with the next step in the 'Getting Started' series:</p>
 <ul>
-<li><a href="../aea-vs-mvc/">AEA and web frameworks</a></li>
+<li><a href="../aea-vs-mvc">AEA and web frameworks</a></li>
 </ul>
 <h3 id="relevant-deep-dives">Relevant deep-dives</h3>
 <p>Most AEA development focuses on developing the skills and protocols necessary for an AEA to deliver against its economic objectives.</p>
 <p>Understanding protocols is core to developing your own agent. You can learn more about the protocols agents use to communicate with each other and how they are created in the following section:</p>
 <ul>
-<li><a href="../protocol/">Protocols</a></li>
+<li><a href="../protocol">Protocols</a></li>
 </ul>
 <p>Most of an AEA developer's time is spent on skill development. Skills are the core business logic commponents of an AEA. Check out the following guide to learn more:</p>
 <ul>
-<li><a href="../skill/">Skills</a></li>
+<li><a href="../skill">Skills</a></li>
 </ul>
 <p>In most cases, one of the available connection packages can be used. Occassionally, you might develop your own connection:</p>
 <ul>
-<li><a href="../connection/">Connections</a></li>
+<li><a href="../connection">Connections</a></li>
 </ul>
 <p><br /></p>
 

@@ -160,12 +160,6 @@
 </li>
  
 <li>
-    <a href="../generic-skills/" id="aea-generic-skills-"
-        >Generic skills</a
-    >
-</li>
- 
-<li>
     <a href="../gym-example/" id="aea-gym-example-"
         >Gym example</a
     >
@@ -263,7 +257,7 @@
     <span class="head">Topic guides</span>
     <ul id="header_topic_guides"> 
 <li>
-    <a href="../step_one/" id="aea-step_one-"
+    <a href="../step-one/" id="aea-step-one-"
         >Ways to build an AEA</a
     >
 </li>
@@ -359,7 +353,7 @@
  
 <li>
     <a href="../connect-a-frontend/" id="aea-connect-a-frontend-"
-        >Frontend intergration</a
+        >Front-end intergration</a
     >
 </li>
  
@@ -382,20 +376,8 @@
 </li>
  
 <li>
-    <a href="../aries-cloud-agent-example/" id="aea-aries-cloud-agent-example-"
-        >Identity - Aries Cloud Agent</a
-    >
-</li>
- 
-<li>
     <a href="../p2p-connection/" id="aea-p2p-connection-"
         >P2P Connection</a
-    >
-</li>
- 
-<li>
-    <a href="../ledger-integration/" id="aea-ledger-integration-"
-        >Using public ledgers</a
     >
 </li>
  
@@ -449,6 +431,12 @@
 <li>
     <a href="../decision-maker/" id="aea-decision-maker-"
         >Decision Maker</a
+    >
+</li>
+ 
+<li>
+    <a href="../ledger-integration/" id="aea-ledger-integration-"
+        >Ledger & Crypto APIs</a
     >
 </li>
  
@@ -962,6 +950,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../simple-oef/" id="aea-simple-oef-"
+        >Simple OEF</a
+    >
+</li>
+ 
+<li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
     >
@@ -1469,11 +1463,13 @@
 <h2 id="what-is-it">What is it?</h2>
 <p>The benchmark module is a set of tools to measure execution time, CPU load and memory usage of the AEA Python code. It produces text reports and draws charts to present the results.</p>
 <h2 id="how-does-it-work">How does it work?</h2>
-<p>The framework:
-* spawns a dedicated process for each test run to execute the function to test.
-* measures CPU and RAM usage periodically.
-* waits for function exits or terminates them by timeout.
-* repeats test execution multiple times to get more accurate results.</p>
+<p>The framework:</p>
+<ul>
+<li>spawns a dedicated process for each test run to execute the function to test.</li>
+<li>measures CPU and RAM usage periodically.</li>
+<li>waits for function exits or terminates them by timeout.</li>
+<li>repeats test execution multiple times to get more accurate results.</li>
+</ul>
 <h2 id="how-to-use">How to use</h2>
 <p>Steps to run a test:</p>
 <ul>
@@ -1642,7 +1638,7 @@ Memory usage and execution time can slightly differ per case execution.</p>
 <h2 id="limitations">Limitations</h2>
 <p>Currently, the benchmark framework does not measure resources consumed by subprocess spawned in python code. So try to keep one process solutions during tests.</p>
 <p>Asynchronous functions or coroutines are not supported directly. So you have to set up an event loop inside test function and start loop manually.</p>
-<h2 id="testing-aea-handlers-example">Testing AEA. Handlers example:</h2>
+<h2 id="testing-aea-handlers-example">Testing AEA: handlers example</h2>
 <p>Test react speed on specific messages amount.</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">react_speed_in_loop</span><span class="p">(</span><span class="n">benchmark</span><span class="p">:</span> <span class="n">BenchmarkControl</span><span class="p">,</span> <span class="n">inbox_amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1677,7 +1673,7 @@ Memory usage and execution time can slightly differ per case execution.</p>
     <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">stop_loop</span><span class="p">()</span>
 </pre></div>
 
-<p><strong>create AEA wrapper with specified handler</strong>
+<p>Create AEA wrapper with specified handler:
 <div class="highlight"><pre><span></span><span class="n">skill_definition</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dummy_handler&quot;</span><span class="p">:</span> <span class="n">DummyHandler</span><span class="p">}</span>
 <span class="p">}</span>
@@ -1686,20 +1682,18 @@ Memory usage and execution time can slightly differ per case execution.</p>
     <span class="n">skills</span><span class="o">=</span><span class="p">[</span><span class="n">skill_definition</span><span class="p">],</span>
 <span class="p">)</span>
 </pre></div></p>
-<p><strong>populate inbox with dummy messages</strong>
+<p>Populate inbox with dummy messages:
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">inbox_amount</span><span class="p">):</span>
     <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">put_inbox</span><span class="p">(</span><span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">dummy_envelope</span><span class="p">())</span>
 </pre></div></p>
-<p><strong>set timeout 0, for maximum messages processing speed</strong>
-<code>aea_test_wrapper.set_loop_timeout(0.0)</code></p>
-<p><strong>start benchmark</strong>
-<code>benchmark.start()</code></p>
-<p><strong>start/stop AEA</strong>
+<p>Set timeout <code>0</code>, for maximum messages processing speed: <code>aea_test_wrapper.set_loop_timeout(0.0)</code></p>
+<p>Start benchmark: <code>benchmark.start()</code></p>
+<p>Start/stop AEA:
 <div class="highlight"><pre><span></span><span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="o">...</span>
 <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div></p>
-<p><strong>wait till messages present in inbox.</strong>
+<p>Wait till messages present in inbox:
 <div class="highlight"><pre><span></span><span class="k">while</span> <span class="ow">not</span> <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">is_inbox_empty</span><span class="p">():</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div></p>
