@@ -950,19 +950,19 @@
     </ul>
 </li> 
 <li>
-    <a href="../simple-oef/" id="aea-simple-oef-"
-        >Simple OEF</a
-    >
-</li>
- 
-<li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
     >
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../simple-oef/" id="aea-simple-oef-"
+        >Simple OEF</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -1473,6 +1473,7 @@
 </ul>
 <p>The framework provides one default protocol, called <code>default</code> and introduced <a href="#fetchaidefault020-protocol">below</a>. This protocol provides a bare bones implementation for an AEA protocol which includes a <a href="../api/protocols/default/message#defaultmessage-objects"><code>DefaultMessage</code></a>  class and associated <a href="../api/protocols/default/serialization#defaultserializer-objects"><code>DefaultSerializer</code></a> and <a href="..api/protocols/default/dialogues#defaultdialogues-objects"><code>DefaultDialogue</code></a> classes.</p>
 <p>Additional protocols - i.e. a new type of interaction - can be added as packages or generated with the <a href="../protocol-generator">protocol generator</a>.</p>
+<p>We highly recommend you <strong>do not</strong> attempt to write your own protocol code; always use existing packages or the protocol generator!</p>
 <h2 id="components-of-a-protocol">Components of a protocol</h2>
 <p>A protocol package contains the following files:</p>
 <ul>
@@ -1512,6 +1513,7 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <p>The framework provides a number of helpful classes which implement most of the logic to maintain dialogues, namely the <a href="../api/helpers/dialogue/base#dialogue-objects"><code>Dialogue</code></a> and <a href="../api/helpers/dialogue/base#dialogues-objects"><code>Dialogues</code></a> base classes.</p>
 <h2 id="custom-protocol">Custom protocol</h2>
 <p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech-acts as well as optionally the dialogue structure (e.g. roles of agents participating in a dialogue, the states a dialogue may end in, and the reply structure of the speech-acts in a dialogue).</p>
+<p>We highly recommend you <strong>do not</strong> attempt to write your own protocol code; always use existing packages or the protocol generator!</p>
 <h2 id="fetchaidefault020-protocol"><code>fetchai/default:0.2.0</code> protocol</h2>
 <p>The <code>fetchai/default:0.2.0</code> protocol is a protocol which each AEA is meant to implement. It serves AEA to AEA interaction and includes two message performatives:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -1713,6 +1715,200 @@ We can then create the message to search these services:
 
 <p>The <code>fetchai/fipa:0.3.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
 <p>For examples of the usage of the <code>fetchai/fipa:0.3.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
+<h3 id="fipa-dialogue">Fipa dialogue</h3>
+<p>Below, we give an example of a dialogue between two agents. In practice; both dialogues would be maintained in the respective agent.</p>
+<p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span> <span class="k">as</span> <span class="n">BaseDialogue</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">DialogueLabel</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Query</span>
+<span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Address</span><span class="p">,</span> <span class="n">Envelope</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.fipa.dialogues</span> <span class="kn">import</span> <span class="n">FipaDialogue</span><span class="p">,</span> <span class="n">FipaDialogues</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.fipa.message</span> <span class="kn">import</span> <span class="n">FipaMessage</span>
+
+
+<span class="k">class</span> <span class="nc">BuyerDialogue</span><span class="p">(</span><span class="n">FipaDialogue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The dialogue class maintains state of a dialogue and manages it.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span>
+        <span class="n">agent_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span>
+        <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param agent_address: the address of the agent for whom this dialogue is maintained</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">FipaDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proposal</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[Description]</span>
+
+
+<span class="k">class</span> <span class="nc">BuyerDialogues</span><span class="p">(</span><span class="n">FipaDialogues</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The dialogues class keeps track of all dialogues.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">FipaDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BuyerDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">BuyerDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">AgentRole</span><span class="o">.</span><span class="n">BUYER</span>
+
+
+<span class="k">class</span> <span class="nc">SellerDialogue</span><span class="p">(</span><span class="n">FipaDialogue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The dialogue class maintains state of a dialogue and manages it.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span>
+        <span class="n">agent_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span>
+        <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param agent_address: the address of the agent for whom this dialogue is maintained</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">FipaDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proposal</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[Description]</span>
+
+
+<span class="k">class</span> <span class="nc">SellerDialogues</span><span class="p">(</span><span class="n">FipaDialogues</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The dialogues class keeps track of all dialogues.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">FipaDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SellerDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">SellerDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">AgentRole</span><span class="o">.</span><span class="n">SELLER</span>
+</pre></div></p>
+<p>Next, we can immitate a dialogue between the buyer and the seller. We first instantiate the dialogues models:
+<div class="highlight"><pre><span></span><span class="n">buyer_address</span> <span class="o">=</span> <span class="s2">&quot;buyer_address_stub&quot;</span>
+<span class="n">seller_address</span> <span class="o">=</span> <span class="s2">&quot;seller_address_stub&quot;</span>
+<span class="n">buyer_dialogues</span> <span class="o">=</span> <span class="n">BuyerDialogues</span><span class="p">(</span><span class="n">buyer_address</span><span class="p">)</span>
+<span class="n">seller_dialogues</span> <span class="o">=</span> <span class="n">SellerDialogues</span><span class="p">(</span><span class="n">seller_address</span><span class="p">)</span>
+</pre></div></p>
+<p>First, the buyer creates a message destined for the seller and updates the dialogues:
+<div class="highlight"><pre><span></span><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
+    <span class="n">message_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">buyer_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+    <span class="n">target</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">CFP</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">([</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;something&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))]),</span>
+<span class="p">)</span>
+<span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">seller_addr</span>
+
+<span class="c1"># Extends the outgoing list of messages.</span>
+<span class="n">buyer_dialogue</span> <span class="o">=</span> <span class="n">buyer_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
+</pre></div>
+If the message has been correctly constructed, the <code>buyer_dialogue</code> will be returned, otherwise it will be <code>None</code>.</p>
+<p>In a skill, the message could now be sent:
+<div class="highlight"><pre><span></span><span class="c1"># In a skill we would do:</span>
+<span class="c1"># self.context.outbox.put_message(message=cfp_msg)</span>
+</pre></div></p>
+<p>However, here we simply continue with the seller:
+<div class="highlight"><pre><span></span><span class="c1"># change the incoming message field &amp; counterparty</span>
+<span class="n">cfp_msg</span><span class="o">.</span><span class="n">is_incoming</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">buyer_address</span>
+</pre></div>
+In the skill, the above two lines will be done by the framework; you can simply receive the message in the handler.</p>
+<p>We update the seller's dialogues model next to generate a new dialogue:
+<div class="highlight"><pre><span></span><span class="c1"># Creates a new dialogue for the seller side based on the income message.</span>
+<span class="n">seller_dialogue</span> <span class="o">=</span> <span class="n">seller_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
+</pre></div></p>
+<p>Next, the seller can generate a proposal:
+<div class="highlight"><pre><span></span><span class="c1"># Generate a proposal message to send to the buyer.</span>
+<span class="n">proposal</span> <span class="o">=</span> <span class="n">Description</span><span class="p">({</span><span class="s2">&quot;foo1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar1&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">message_id</span> <span class="o">=</span> <span class="n">cfp_msg</span><span class="o">.</span><span class="n">message_id</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">cfp_msg</span><span class="o">.</span><span class="n">message_id</span>
+<span class="n">proposal_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
+    <span class="n">message_id</span><span class="o">=</span><span class="n">message_id</span><span class="p">,</span>
+    <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">seller_dialogue</span><span class="o">.</span><span class="n">dialogue_label</span><span class="o">.</span><span class="n">dialogue_reference</span><span class="p">,</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
+    <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">PROPOSE</span><span class="p">,</span>
+    <span class="n">proposal</span><span class="o">=</span><span class="n">proposal</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">proposal_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span>
+
+<span class="c1"># Then we update the dialogue</span>
+<span class="n">seller_dialogue</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">proposal_msg</span><span class="p">)</span>
+</pre></div></p>
+<p>In a skill, the message could now be sent:
+<div class="highlight"><pre><span></span><span class="c1"># In a skill we would do:</span>
+<span class="c1"># self.context.outbox.put_message(message=proposal_msg)</span>
+</pre></div></p>
+<p>The dialogue can continue like this.</p>
+<p>To retrieve a dialogue for a given message, we can do the following:</p>
+<div class="highlight"><pre><span></span><span class="n">retrieved_dialogue</span> <span class="o">=</span> <span class="n">seller_dialogues</span><span class="o">.</span><span class="n">get_dialogue</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
+</pre></div>
+
 <p><br /></p>
 
 
