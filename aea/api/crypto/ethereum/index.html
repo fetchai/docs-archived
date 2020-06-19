@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../../..';</script>
     <link href="../../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1467,11 +1468,13 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EthereumCrypto</span><span class="p">(</span><span class="n">Crypto</span><span class="p">[</span><span class="n">Account</span><span class="p">])</span>
 </pre></div>
 
+
 <p>Class wrapping the Account Generation from Ethereum ledger.</p>
 <p><a name=".aea.crypto.ethereum.EthereumCrypto.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">private_key_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
+
 
 <p>Instantiate an ethereum crypto object.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1484,6 +1487,7 @@
  <span class="o">|</span> <span class="n">public_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
 
+
 <p>Return a public key in hex format.</p>
 <p><strong>Returns</strong>:</p>
 <p>a public key string in hex format</p>
@@ -1493,6 +1497,7 @@
  <span class="o">|</span> <span class="n">address</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
 
+
 <p>Return the address for the key pair.</p>
 <p><strong>Returns</strong>:</p>
 <p>a display_address str</p>
@@ -1501,6 +1506,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">load_private_key_from_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Account</span>
 </pre></div>
+
 
 <p>Load a private key in hex format from a file.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1513,6 +1519,7 @@
 <h4 id="sign_message">sign<code>_</code>message</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">sign_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">is_deprecated_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
+
 
 <p>Sign a message in bytes string form.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1527,6 +1534,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">sign_transaction</span><span class="p">(</span><span class="n">transaction</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
+
 <p>Sign a transaction in bytes string form.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1538,6 +1546,7 @@
 <h4 id="recover_message">recover<code>_</code>message</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">recover_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_deprecated_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Address</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
+
 
 <p>Recover the addresses from the hash.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1554,12 +1563,14 @@
  <span class="o">|</span> <span class="n">generate_private_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Account</span>
 </pre></div>
 
+
 <p>Generate a key pair for ethereum network.</p>
 <p><a name=".aea.crypto.ethereum.EthereumCrypto.get_address_from_public_key"></a></p>
 <h4 id="get_address_from_public_key">get<code>_</code>address<code>_</code>from<code>_</code>public<code>_</code>key</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">get_address_from_public_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
+
 
 <p>Get the address from the public key.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1573,6 +1584,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">dump</span><span class="p">(</span><span class="n">fp</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
+
 <p>Serialize crypto object as binary stream to <code>fp</code> (a <code>.write()</code>-supporting file-like object).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1585,11 +1597,13 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EthereumApi</span><span class="p">(</span><span class="n">LedgerApi</span><span class="p">)</span>
 </pre></div>
 
+
 <p>Class to interact with the Ethereum Web3 APIs.</p>
 <p><a name=".aea.crypto.ethereum.EthereumApi.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gas_price</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_GAS_PRICE</span><span class="p">)</span>
 </pre></div>
+
 
 <p>Initialize the Ethereum ledger APIs.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1602,17 +1616,20 @@
  <span class="o">|</span> <span class="n">api</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Web3</span>
 </pre></div>
 
+
 <p>Get the underlying API object.</p>
 <p><a name=".aea.crypto.ethereum.EthereumApi.get_balance"></a></p>
 <h4 id="get_balance">get<code>_</code>balance</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Get the balance of a given account.</p>
 <p><a name=".aea.crypto.ethereum.EthereumApi.transfer"></a></p>
 <h4 id="transfer">transfer</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">transfer</span><span class="p">(</span><span class="n">crypto</span><span class="p">:</span> <span class="n">Crypto</span><span class="p">,</span> <span class="n">destination_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chain_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
+
 
 <p>Submit a transfer transaction to the ledger.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1631,6 +1648,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">send_signed_transaction</span><span class="p">(</span><span class="n">tx_signed</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Send a signed transaction and wait for confirmation.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1642,6 +1660,7 @@
 <h4 id="is_transaction_settled">is<code>_</code>transaction<code>_</code>settled</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_transaction_settled</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
+
 
 <p>Check whether a transaction is settled or not.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1655,6 +1674,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_transaction_receipt</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Get the transaction receipt for a transaction digest (non-blocking).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1666,6 +1686,7 @@
 <h4 id="generate_tx_nonce">generate<code>_</code>tx<code>_</code>nonce</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">generate_tx_nonce</span><span class="p">(</span><span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
+
 
 <p>Generate a unique hash to distinguish txs with the same terms.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1679,6 +1700,7 @@
 <h4 id="is_transaction_valid">is<code>_</code>transaction<code>_</code>valid</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_transaction_valid</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
+
 
 <p>Check whether a transaction is valid or not (non-blocking).</p>
 <p><strong>Arguments</strong>:</p>
@@ -1696,11 +1718,13 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EthereumFaucetApi</span><span class="p">(</span><span class="n">FaucetApi</span><span class="p">)</span>
 </pre></div>
 
+
 <p>Ethereum testnet faucet API.</p>
 <p><a name=".aea.crypto.ethereum.EthereumFaucetApi.get_wealth"></a></p>
 <h4 id="get_wealth">get<code>_</code>wealth</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_wealth</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
+
 
 <p>Get wealth from the faucet for the provided address.</p>
 <p><strong>Arguments</strong>:</p>

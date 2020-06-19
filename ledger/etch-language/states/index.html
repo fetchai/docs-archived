@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1470,9 +1471,11 @@
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myState1</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;simple_state_declaration&quot;</span><span class="p">);</span>
 </pre></div>
 
+
 <p>Or even this:</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myState2</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="p">(</span><span class="s">&quot;nested_array_state_declaration&quot;</span><span class="p">);</span>
 </pre></div>
+
 
 <p>A <code>State</code> is not like a normal variable, you have to create a <em>reference</em> to it. For example:</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -1484,9 +1487,10 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <p>The above code creates a variable name <code>contract_amount_state</code> and assigns it to a <code>State&lt;Int32&gt;</code> with a reference <code>contract_amount</code>. It then sets a value on the <code>State</code>. </p>
 <p><code>State</code> references can be <code>Address</code> or <code>String</code> types.</p>
-<p><div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">account</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">&quot;2ifr5dSFRAnXexBMC3HYEVp3JHSuz7KBPXWDRBV4xdFrqGy6R9&quot;</span><span class="p">);</span>
     <span class="n">var</span> <span class="n">supply</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span><span class="mi">1000u64</span><span class="p">);</span>
@@ -1495,7 +1499,9 @@
 
 <span class="n">endfunction</span>
 </pre></div>
-You can get and set values on a <code>State</code> object.</p>
+
+
+<p>You can get and set values on a <code>State</code> object.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">contract_amount_state</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">UInt256</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;contract_amount&quot;</span><span class="p">);</span>
@@ -1506,6 +1512,7 @@ You can get and set values on a <code>State</code> object.</p>
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h2 id="default-values">Default values</h2>
 <p>If a value has not yet been set on the <code>State</code> object and the <code>State</code> does not already exist on the ledger, a run-time error is thrown on calling <code>get()</code>. </p>
@@ -1518,6 +1525,7 @@ You can get and set values on a <code>State</code> object.</p>
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h2 id="test-a-state-exists">Test a <code>State</code> exists</h2>
 <p>You can test if a state already exists with <code>existed()</code>.</p>
@@ -1535,6 +1543,7 @@ You can get and set values on a <code>State</code> object.</p>
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <p>This test is useful for scenarios in which you use states to see who has what, as you might do in a token contract where you need to keep track of token ownership.</p>
 <h2 id="state-references-and-scope">State references and scope</h2>
 <p>In the example below, <code>ownerState</code> and <code>contractState</code> point to the same <code>State</code> object on the ledger.</p>
@@ -1551,6 +1560,7 @@ You can get and set values on a <code>State</code> object.</p>
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <p>Assuming the referenced <code>State</code> object does not exist on the ledger, attempting to print the value of the second declaration of <code>State</code> generates an error - even though a value was set on it previously. </p>
 <p>This is because the data set in <code>ownerState</code> has not yet been written to the intermediate cache or ledger storage, so when <code>contractState</code> tries to access it, it finds no value and the <code>etch</code> VM generates a runtime error.</p>
@@ -1582,6 +1592,7 @@ You can get and set values on a <code>State</code> object.</p>
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <p>Once control reaches the end of the function, the data is written to an intermediate ledger cache mechanism and is available throughout the contract.</p>
 <p>Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.</p>
 <p><center></p>
@@ -1598,6 +1609,7 @@ You can get and set values on a <code>State</code> object.</p>
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <p>This is useful for <code>ShardedState</code> types which initialise using these immediate write anonymous <code>State</code> types behind the scenes.</p>
 <h2 id="passing-states-around">Passing States around</h2>
@@ -1643,6 +1655,7 @@ You can get and set values on a <code>State</code> object.</p>
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <h2 id="verify-an-address">Verify an Address</h2>
 <p>Often, a contract needs to confirm whether an <code>@action</code> or <code>@query</code> comes from a specific address. This can be done with the <code>signedTx()</code> function of the <code>Address</code> type. </p>
 <p>In the example below, an <code>@action</code> establishes if the the signer of the calling transaction is a specific authorised address.</p>
@@ -1673,6 +1686,7 @@ You can get and set values on a <code>State</code> object.</p>
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <p><br/></p>
 

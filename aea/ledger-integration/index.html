@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1470,7 +1471,7 @@
 <p>The <code>LedgerApis</code> holds instantiation of the abstract <code>LedgerApi</code> base class, in particular <code>FetchaiLedgerApi</code> and <code>EthereumLedgerApi</code>.
 You can think the concrete implementations of the base class <code>LedgerApi</code> as wrappers of the blockchain specific python SDK. </p>
 <h2 id="abstract-class-ledgerapi">Abstract class LedgerApi</h2>
-<p>Each <code>LedgerApi</code> must implement all the methods based on the abstract class.
+<p>Each <code>LedgerApi</code> must implement all the methods based on the abstract class.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LedgerApi</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Interface for ledger APIs.&quot;&quot;&quot;</span>
 
@@ -1486,8 +1487,10 @@ You can think the concrete implementations of the base class <code>LedgerApi</co
 <span class="sd">        If there is no such object, return None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </pre></div>
-The api property can be used for low-level operation with the concrete ledger APIs.</p>
-<p><div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
+
+
+<p>The api property can be used for low-level operation with the concrete ledger APIs.</p>
+<div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the balance of a given account.</span>
@@ -1498,7 +1501,9 @@ The api property can be used for low-level operation with the concrete ledger AP
 <span class="sd">        :return: the balance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </pre></div>
-The <code>get_balance</code> method returns the amount of tokens we hold for a specific address.
+
+
+<p>The <code>get_balance</code> method returns the amount of tokens we hold for a specific address.</p>
 <div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1523,8 +1528,10 @@ The <code>get_balance</code> method returns the amount of tokens we hold for a s
 <span class="sd">        :return: tx digest if successful, otherwise None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </pre></div>
-The <code>transfer</code> is where we must implement the logic for sending a transaction to the ledger. </p>
-<p><div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
+
+
+<p>The <code>transfer</code> is where we must implement the logic for sending a transaction to the ledger. </p>
+<div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">is_transaction_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether a transaction is settled or not.</span>
@@ -1554,7 +1561,9 @@ The <code>transfer</code> is where we must implement the logic for sending a tra
 <span class="sd">        :return: True if the transaction referenced by the tx_digest matches the terms.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </pre></div>
-The <code>is_transaction_settled</code> and <code>is_transaction_valid</code> are two functions that helps us to verify a transaction digest.
+
+
+<p>The <code>is_transaction_settled</code> and <code>is_transaction_valid</code> are two functions that helps us to verify a transaction digest.</p>
 <div class="highlight"><pre><span></span>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">generate_tx_nonce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1565,11 +1574,13 @@ The <code>is_transaction_settled</code> and <code>is_transaction_valid</code> ar
 <span class="sd">        :return: return the hash in hex.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 </pre></div>
-Lastly, we implemented a support function that generates a random hash to help us with verifying the uniqueness of transactions. The sender of the funds must include this hash in the transaction
+
+
+<p>Lastly, we implemented a support function that generates a random hash to help us with verifying the uniqueness of transactions. The sender of the funds must include this hash in the transaction
 as extra data for the transaction to be considered valid.</p>
 <p>Next, we are going to discuss the different implementation of <code>send_transaction</code> and <code>validate_transacaction</code> for the two natively supported ledgers of the framework.</p>
 <h2 id="fetchai-ledger">Fetch.ai Ledger</h2>
-<p><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>  <span class="c1"># pylint: disable=arguments-differ</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>  <span class="c1"># pylint: disable=arguments-differ</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">crypto</span><span class="p">:</span> <span class="n">Crypto</span><span class="p">,</span>
         <span class="n">destination_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span>
@@ -1585,13 +1596,15 @@ as extra data for the transaction to be considered valid.</p>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">tx_digest</span>
 </pre></div>
-As you can see, the implementation for sending a transcation to the Fetch.ai ledger is relatively trivial.</p>
+
+
+<p>As you can see, the implementation for sending a transcation to the Fetch.ai ledger is relatively trivial.</p>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>We cannot use the tx_nonce yet in the Fetch.ai ledger.</p>
 </div>
 
-<p><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Check whether a transaction is settled or not.&quot;&quot;&quot;</span>
         <span class="n">tx_status</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">TxStatus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_get_transaction_receipt</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">))</span>
         <span class="n">is_successful</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1599,6 +1612,8 @@ As you can see, the implementation for sending a transcation to the Fetch.ai led
             <span class="n">is_successful</span> <span class="o">=</span> <span class="n">tx_status</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="n">SUCCESSFUL_TERMINAL_STATES</span>
         <span class="k">return</span> <span class="n">is_successful</span>
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_valid</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -1629,11 +1644,13 @@ As you can see, the implementation for sending a transcation to the Fetch.ai led
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">is_valid</span>
 </pre></div>
-Inside the <code>validate_transcation</code> we request the contents of the transaction based on the tx_digest we received. We are checking that the address
+
+
+<p>Inside the <code>validate_transcation</code> we request the contents of the transaction based on the tx_digest we received. We are checking that the address
 of the client is the same as the one that is inside the <code>from</code> field of the transaction. Lastly, we are checking that the transaction is settled.
 If both of these checks return True we consider the transaction as valid.</p>
 <h2 id="ethereum-ledger">Ethereum Ledger</h2>
-<p><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>  <span class="c1"># pylint: disable=arguments-differ</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>  <span class="c1"># pylint: disable=arguments-differ</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">crypto</span><span class="p">:</span> <span class="n">Crypto</span><span class="p">,</span>
         <span class="n">destination_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span>
@@ -1684,7 +1701,9 @@ If both of these checks return True we consider the transaction as valid.</p>
 
         <span class="k">return</span> <span class="n">tx_digest</span>
 </pre></div>
-On contrary to the Fetch.ai implementation of the <code>send_transaction</code> function, the Ethereum implementation is more complicated. This happens because we must create 
+
+
+<p>On contrary to the Fetch.ai implementation of the <code>send_transaction</code> function, the Ethereum implementation is more complicated. This happens because we must create 
 the transaction dictionary and send a raw transaction.</p>
 <ul>
 <li>The <code>nonce</code> is a counter for the transaction we are sending. This is an auto-increment int based on how many transactions we are sending from the specific account.</li>
@@ -1697,7 +1716,7 @@ the transaction dictionary and send a raw transaction.</p>
 </ul>
 <p>Once we filled the transaction dictionary. We are checking that the transaction fee is more than the estimated gas for the transaction otherwise we will not be able to complete the transfer. Then we are signing and we are sending the transaction. Once we get the transaction receipt we consider the transaction completed and
 we return the transaction digest. </p>
-<p><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_settled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether a transaction is settled or not.</span>
 
@@ -1710,6 +1729,8 @@ we return the transaction digest. </p>
             <span class="n">is_successful</span> <span class="o">=</span> <span class="n">tx_receipt</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">is_successful</span>
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">is_transaction_valid</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -1739,7 +1760,9 @@ we return the transaction digest. </p>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">is_valid</span>
 </pre></div>
-The <code>validate_transaction</code> and <code>is_transaction_settled</code> functions help us to check if a transaction digest is valid and is settled. 
+
+
+<p>The <code>validate_transaction</code> and <code>is_transaction_settled</code> functions help us to check if a transaction digest is valid and is settled. 
 In the Ethereum API, we can pass the <code>tx_nonce</code>, so we can check that it's the same. If it is different, we consider that transaction as no valid. The same happens if any of <code>amount</code>, <code>client</code> address
 or the <code>seller</code> address is different.</p>
 <p>Lastly, the <code>generate_tx_nonce</code> function is the same for both <code>LedgerApi</code> implementations but we use different hashing functions. 
@@ -1759,6 +1782,7 @@ Both use the timestamp as a random factor alongside the seller and client addres
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">aggregate_hash</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
 </pre></div>
+
 
 <h4 id="ethereum-implementation">Ethereum implementation</h4>
 <div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">generate_tx_nonce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

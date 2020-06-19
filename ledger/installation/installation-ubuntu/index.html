@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1466,21 +1467,26 @@
 <span class="nb">export</span> <span class="nv">CXX</span><span class="o">=</span>clang++
 </pre></div>
 
+
 <p>Update:</p>
 <div class="highlight"><pre><span></span>sudo apt-get update
 </pre></div>
+
 
 <p>Install dependencies:</p>
 <div class="highlight"><pre><span></span>apt-get install build-essential clang git cmake libssl-dev doxygen python3-dev python3-pip python3-venv
 </pre></div>
 
+
 <p>Update:</p>
 <div class="highlight"><pre><span></span>sudo apt-get update
 </pre></div>
 
+
 <p>Add the git alias:</p>
 <div class="highlight"><pre><span></span>git config --global alias.pullall <span class="s1">&#39;!f(){ git pull &quot;$@&quot; &amp;&amp; git submodule sync --recursive &amp;&amp; git submodule update --init --recursive; }; f&#39;</span>
 </pre></div>
+
 
 <h2 id="download-the-ledger-code">Download the ledger code</h2>
 <p>If you need them, here are the <a href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent" target=_blank>Git SSH key generation instructions.</a></p>
@@ -1490,15 +1496,18 @@ git clone https://github.com/fetchai/ledger.git
 git checkout release/v0.9.x
 </pre></div>
 
+
 <p>Update and initialise submodules from the repository root directory:</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ledger
 git pull
 git submodule update --init --recursive
 </pre></div>
 
+
 <p>Make sure you have all the submodules:</p>
 <div class="highlight"><pre><span></span>git submodule status
 </pre></div>
+
 
 <p>If any submodules are missing, please check your installation.</p>
 <h2 id="build-the-ledger">Build the ledger</h2>
@@ -1509,16 +1518,22 @@ cmake ..
 make -j constellation
 </pre></div>
 
+
 <p>You may have memory issues on <code>make</code>, so limit the number of cores (we chose 4):</p>
 <div class="highlight"><pre><span></span>make -j <span class="m">4</span> constellation
 </pre></div>
 
-<p>If you want, you can build all the libraries:
+
+<p>If you want, you can build all the libraries:</p>
 <div class="highlight"><pre><span></span>make -j <span class="m">4</span>
-</pre></div></p>
-<p>For the <code>etch</code> simulator, build the <code>etch</code> library:
+</pre></div>
+
+
+<p>For the <code>etch</code> simulator, build the <code>etch</code> library:</p>
 <div class="highlight"><pre><span></span>make etch
-</pre></div></p>
+</pre></div>
+
+
 <p><br/></p>
 
 

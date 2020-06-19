@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1460,27 +1461,32 @@
                                     
 
 <h2 id="local-node">Local node</h2>
-<p>From the <code>build</code> folder, navigate to the constellation app folder:
+<p>From the <code>build</code> folder, navigate to the constellation app folder:</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> apps/constellation
-</pre></div></p>
-<p>Create a <code>genesis_file.json</code>:</p>
-<p>Create a file saved as <code>genesis_file.json</code> and is saved in the constellation root dir, paste in the below code:</p>
-<div class="highlight"><pre><span></span>{
-  &quot;version&quot;: 4,
-  &quot;accounts&quot;: [
-    {
-      &quot;address&quot;: &quot;Your base64 address&quot;,
-      &quot;balance&quot;: 1152997575,
-      &quot;stake&quot;: 0
-    }
-  ]
-}
 </pre></div>
 
-<p>Start a standalone test node:
+
+<p>Create a <code>genesis_file.json</code>:</p>
+<p>Create a file saved as <code>genesis_file.json</code> and is saved in the constellation root dir, paste in the below code:</p>
+<div class="highlight"><pre><span></span><span class="err">{</span>
+<span class="err">  &quot;version&quot;: 4,</span>
+<span class="err">  &quot;accounts&quot;: [</span>
+<span class="err">    {</span>
+<span class="err">      &quot;address&quot;: &quot;Your base64 address&quot;,</span>
+<span class="err">      &quot;balance&quot;: 1152997575,</span>
+<span class="err">      &quot;stake&quot;: 0</span>
+<span class="err">    }</span>
+<span class="err">  ]</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>Start a standalone test node:</p>
 <div class="highlight"><pre><span></span>./constellation -block-interval <span class="m">4000</span> -standalone -genesis-file-location genesis_file.json
 </pre></div>
-You should see output like this:
+
+
+<p>You should see output like this:</p>
 <div class="highlight"><pre><span></span>■ ■ ■ .
 ■ ■ . .
 ■ . . .
@@ -1541,9 +1547,11 @@ Proof of Stake.......: <span class="m">0</span>
 Agents...............: <span class="m">0</span>
 Messenger Port.......: <span class="m">9010</span>
 Mailbox Port.........: <span class="m">0</span>
-</pre></div></p>
+</pre></div>
+
+
 <p>When you see the following message...</p>
-<p><div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101</span>
+<div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] CORE URI: tcp://127.0.0.1:8101</span>
 <span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] Num Initial Peers: 0</span>
 <span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.383, <span class="c1"># 1 INFO  :                          P2PService ] Starting P2PService...</span>
 <span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.484, <span class="c1"># 5 INFO  :                          HTTPServer ] Starting HTTPServer on http://127.0.0.1:8100</span>
@@ -1552,11 +1560,15 @@ Mailbox Port.........: <span class="m">0</span>
 <span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:39.525, <span class="c1"># 7 INFO  :                    BlockCoordinator ] Chain Sync complete on 0x780bbb1c050cd3d5c20fce89fa6f4e61c884315efeb44c54ceb956a50563683a (block: 0 prev: 0xd3efbefbefbefbefbefbefbefbe19e9deb22b3efbefbefbefbefbefbefbefbed)</span>
 <span class="o">[</span> <span class="m">2019</span>-06-15 <span class="m">15</span>:24:40.487, <span class="c1"># 1 INFO  :                       constellation ] Startup complete</span>
 </pre></div>
-...your node is running and you will be able to test smart contracts and autonomous agents.</p>
+
+
+<p>...your node is running and you will be able to test smart contracts and autonomous agents.</p>
 <h2 id="connect-to-a-node-on-testnet">Connect to a node on testnet</h2>
-<p>From the same <code>build/apps/constellation</code> folder, run the following.
+<p>From the same <code>build/apps/constellation</code> folder, run the following.</p>
 <div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">constellation</span> <span class="o">-</span><span class="n">bootstrap</span> <span class="o">-</span><span class="n">network</span> <span class="n">testnet</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="compiler-flags">Compiler flags</h2>
 <p>The following compiler flags run the constellation in various modes.</p>
 <ul>

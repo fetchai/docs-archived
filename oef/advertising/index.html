@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1508,6 +1509,7 @@ function newPopup(url) {
     <span class="n">attr_bookshop</span> <span class="o">=</span> <span class="n">AttributeSchema</span><span class="p">(</span><span class="s2">&quot;bookshop_pos&quot;</span><span class="p">,</span>    <span class="n">Location</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;The location of the bookshop where you can find the book&quot;</span><span class="p">)</span>
 </pre></div>
 
+
 <h3 id="data-model">Data model</h3>
 <p>A <code>DataModel</code> is a set of <code>attributes</code>. </p>
 <p>Let's group the book attributes into a <code>DataModel</code> called <code>book</code>. </p>
@@ -1525,6 +1527,7 @@ function newPopup(url) {
         <span class="n">attr_bookshop</span>
     <span class="p">],</span> <span class="s2">&quot;A data model to describe books.&quot;</span><span class="p">)</span>
 </pre></div>
+
 
 <p>A <code>DataModel</code> class requires a name, a list of attributes, and an optional description.</p>
 <h3 id="description">Description</h3>
@@ -1552,6 +1555,7 @@ function newPopup(url) {
     <span class="p">},</span> <span class="n">book_model</span><span class="p">)</span>
 </pre></div>
 
+
 <p><code>Attributes</code> are instantiated as part of a <code>Description</code> using a dictionary where:</p>
 <ul>
 <li><code>key</code> = the name of the attributes.</li>
@@ -1559,7 +1563,7 @@ function newPopup(url) {
 </ul>
 <p>Note that in the latter book we were able to omit the <code>average_rating</code> field because it was optional. </p>
 <p>In the <code>oef-sdk-python/examples/weather</code> folder, you will find the <code>weather_schema.py</code> file describing the data advertised by a weather service.</p>
-<p><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.schema</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">AttributeSchema</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">oef.schema</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">AttributeSchema</span>
 
   <span class="n">WIND_SPEED_ATTR</span> <span class="o">=</span> <span class="n">AttributeSchema</span><span class="p">(</span><span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
                                   <span class="nb">bool</span><span class="p">,</span>
@@ -1586,7 +1590,9 @@ function newPopup(url) {
                                <span class="p">[</span><span class="n">WIND_SPEED_ATTR</span><span class="p">,</span> <span class="n">TEMPERATURE_ATTR</span><span class="p">,</span> <span class="n">AIR_PRESSURE_ATTR</span><span class="p">,</span> <span class="n">HUMIDITY_ATTR</span><span class="p">],</span>
                                <span class="s2">&quot;All possible weather data.&quot;</span><span class="p">)</span>
 </pre></div>
-The <code>WeatherStation</code> class in the same directory, implements the behaviour of the weather station by creating a service description that mirrors the schema.</p>
+
+
+<p>The <code>WeatherStation</code> class in the same directory, implements the behaviour of the weather station by creating a service description that mirrors the schema.</p>
 <div class="highlight"><pre><span></span>    <span class="n">weather_service_description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
             <span class="p">{</span>
                 <span class="s2">&quot;wind_speed&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -1597,6 +1603,7 @@ The <code>WeatherStation</code> class in the same directory, implements the beha
             <span class="n">WEATHER_DATA_MODEL</span>
         <span class="p">)</span>
 </pre></div>
+
 
 <h3 id="searching-for-schemas">Searching for schemas</h3>
 <p>Agents searching for services do not have to match the advertised schema precisely as the OEF executes a fuzzy search algorithm/learned matching.</p>

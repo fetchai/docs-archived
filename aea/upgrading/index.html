@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1485,15 +1486,21 @@
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
 </pre></div>
 
+
+
 Now this has been simplified to:
+
 <div class="highlight"><pre><span></span><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">opponent_addr</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">cfp_msg</span><span class="p">)</span>
 </pre></div>
 
+
+
 You must update your skills as the old implementation is no longer supported.
 </li>
 <li> Connection constructors have been simplified. In the past you had to implement both the `__init__` as well as the `from_config` methods of a Connection. Now you only have to implement the `__init__` method which by default at load time now receives the following kwargs: `configuration: ConnectionConfig, identity: Identity, crypto_store: CryptoStore`. See for example in the scaffold connection:
+
 
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyScaffoldConnection</span><span class="p">(</span><span class="n">Connection</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Proxy to the functionality of the SDK or API.&quot;&quot;&quot;</span>
@@ -1517,6 +1524,8 @@ You must update your skills as the old implementation is no longer supported.
             <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">crypto_store</span><span class="o">=</span><span class="n">crypto_store</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span>
         <span class="p">)</span>
 </pre></div>
+
+
 
 As a result of this feature, you are now able to pass key-pairs to your connections via the `CryptoStore`.
 

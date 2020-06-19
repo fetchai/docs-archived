@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../../..';</script>
     <link href="../../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1467,11 +1468,13 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AgentContext</span><span class="p">()</span>
 </pre></div>
 
+
 <p>Provide read access to relevant objects of the agent for the skills.</p>
 <p><a name=".aea.context.base.AgentContext.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">:</span> <span class="n">LedgerApis</span><span class="p">,</span> <span class="n">connection_status</span><span class="p">:</span> <span class="n">ConnectionStatus</span><span class="p">,</span> <span class="n">outbox</span><span class="p">:</span> <span class="n">OutBox</span><span class="p">,</span> <span class="n">decision_maker_message_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">decision_maker_handler_context</span><span class="p">:</span> <span class="n">SimpleNamespace</span><span class="p">,</span> <span class="n">task_manager</span><span class="p">:</span> <span class="n">TaskManager</span><span class="p">,</span> <span class="n">default_connection</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicId</span><span class="p">],</span> <span class="n">default_routing</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
+
 
 <p>Initialize an agent context.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1491,6 +1494,7 @@
  <span class="o">|</span> <span class="n">shared_state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Get the shared state dictionary.</p>
 <p>The shared state is the only object which skills can use
 to exchange state directly. It is accessible (read and write) from
@@ -1501,12 +1505,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">identity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Identity</span>
 </pre></div>
 
+
 <p>Get the identity.</p>
 <p><a name=".aea.context.base.AgentContext.agent_name"></a></p>
 <h4 id="agent_name">agent<code>_</code>name</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">agent_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
+
 
 <p>Get agent name.</p>
 <p><a name=".aea.context.base.AgentContext.addresses"></a></p>
@@ -1515,12 +1521,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">addresses</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Address</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Get addresses.</p>
 <p><a name=".aea.context.base.AgentContext.address"></a></p>
 <h4 id="address">address</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">address</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Address</span>
 </pre></div>
+
 
 <p>Get the default address.</p>
 <p><a name=".aea.context.base.AgentContext.connection_status"></a></p>
@@ -1529,12 +1537,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">connection_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ConnectionStatus</span>
 </pre></div>
 
+
 <p>Get connection status of the multiplexer.</p>
 <p><a name=".aea.context.base.AgentContext.outbox"></a></p>
 <h4 id="outbox">outbox</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">outbox</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OutBox</span>
 </pre></div>
+
 
 <p>Get outbox.</p>
 <p><a name=".aea.context.base.AgentContext.decision_maker_message_queue"></a></p>
@@ -1543,12 +1553,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">decision_maker_message_queue</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Queue</span>
 </pre></div>
 
+
 <p>Get decision maker queue.</p>
 <p><a name=".aea.context.base.AgentContext.decision_maker_handler_context"></a></p>
 <h4 id="decision_maker_handler_context">decision<code>_</code>maker<code>_</code>handler<code>_</code>context</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">decision_maker_handler_context</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SimpleNamespace</span>
 </pre></div>
+
 
 <p>Get the decision maker handler context.</p>
 <p><a name=".aea.context.base.AgentContext.ledger_apis"></a></p>
@@ -1557,12 +1569,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">ledger_apis</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LedgerApis</span>
 </pre></div>
 
+
 <p>Get the ledger APIs.</p>
 <p><a name=".aea.context.base.AgentContext.task_manager"></a></p>
 <h4 id="task_manager">task<code>_</code>manager</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">task_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TaskManager</span>
 </pre></div>
+
 
 <p>Get the task manager.</p>
 <p><a name=".aea.context.base.AgentContext.search_service_address"></a></p>
@@ -1571,12 +1585,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">search_service_address</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Address</span>
 </pre></div>
 
+
 <p>Get the address of the search service.</p>
 <p><a name=".aea.context.base.AgentContext.default_connection"></a></p>
 <h4 id="default_connection">default<code>_</code>connection</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">default_connection</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span>
 </pre></div>
+
 
 <p>Get the default connection.</p>
 <p><a name=".aea.context.base.AgentContext.default_routing"></a></p>
@@ -1585,12 +1601,14 @@ all skills.</p>
  <span class="o">|</span> <span class="n">default_routing</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">]</span>
 </pre></div>
 
+
 <p>Get the default routing.</p>
 <p><a name=".aea.context.base.AgentContext.namespace"></a></p>
 <h4 id="namespace">namespace</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">namespace</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SimpleNamespace</span>
 </pre></div>
+
 
 <p>Get the agent context namespace.</p>
 

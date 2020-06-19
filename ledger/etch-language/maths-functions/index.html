@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1500,6 +1501,7 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <p>And positive unsigned integer types.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
@@ -1521,6 +1523,7 @@
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <p>And fixed point types.</p>
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -1548,6 +1551,7 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <h2 id="exponential-function">Exponential function</h2>
 <p>The exponential function returns the value of <code>e</code> to the number given, <code>exp(x) = e<sup>x</sup></code> where <code>e</code> is Euler's base of natural logarithms.</p>
 <p>The exponential function is limited to fixed point variables.</p>
@@ -1562,6 +1566,7 @@
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h3 id="range-restrictions">Range restrictions</h3>
 <p><code>Fixed32</code> accuracy is limited within the range <code>[-10.3974, 10.3974]</code>.</p>
@@ -1631,6 +1636,7 @@ also: https://github.com/fetchai/ledger/blob/master/libs/vectorise/include/vecto
 
 Natural log values are currently available for `UInt256` types only with the `logValue()` member function.
 
+
 <div class="highlight"><pre><span></span><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
     <span class="n">var</span> <span class="n">uint256</span> <span class="o">=</span> <span class="n">UInt256</span><span class="p">(</span><span class="mi">256u64</span><span class="p">);</span>
@@ -1639,6 +1645,8 @@ Natural log values are currently available for `UInt256` types only with the `lo
 
 <span class="n">endfunction</span>
 </pre></div>
+
+
 
 In a future release, log values will be available for all types as well as in base 2 and 10.
 -->
@@ -1663,12 +1671,15 @@ In a future release, log values will be available for all types as well as in ba
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <div class="admonition warn">
 <p class="admonition-title">Warn</p>
 </div>
 <p>The <code>pow()</code> implementation depends on <code>exp()</code> so the range is limited. The implementation is as follows:</p>
-<pre><code>`x^y = exp(y * log(x));`
-</code></pre>
+<div class="highlight"><pre><span></span><span class="err">`x^y = exp(y * log(x));`</span>
+</pre></div>
+
+
 <h3 id="special-cases_1">Special cases</h3>
 <table>
 <thead>
@@ -1759,6 +1770,7 @@ In a future release, log values will be available for all types as well as in ba
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <h2 id="square-root">Square root</h2>
 <p>The square root of a number is found with the <code>sqrt()</code> function.</p>
 <p>The square root function is limited to fixed point variables.</p>
@@ -1773,6 +1785,7 @@ In a future release, log values will be available for all types as well as in ba
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h3 id="special-cases_2">Special cases</h3>
 <table>
@@ -1852,6 +1865,7 @@ In a future release, log values will be available for all types as well as in ba
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h4 id="sin-special-cases"><code>Sin</code> special cases</h4>
 <table>
@@ -1991,6 +2005,7 @@ In a future release, log values will be available for all types as well as in ba
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <h4 id="asin-special-cases"><code>ASin</code> special cases</h4>
 <table>
 <thead>
@@ -2125,12 +2140,15 @@ In a future release, log values will be available for all types as well as in ba
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <div class="admonition warn">
 <p class="admonition-title">Warn</p>
 </div>
 <p>The <code>sinh()</code> implementation depends on <code>exp()</code> so the range is limited. The implementation is as follows:</p>
-<pre><code>`sinh(x) = (e^x - e^(-x)) / 2`
-</code></pre>
+<div class="highlight"><pre><span></span><span class="err">`sinh(x) = (e^x - e^(-x)) / 2`</span>
+</pre></div>
+
+
 <h4 id="sinh-special-cases"><code>SinH</code> special cases</h4>
 <table>
 <thead>
@@ -2178,8 +2196,10 @@ In a future release, log values will be available for all types as well as in ba
 <p class="admonition-title">Warn</p>
 </div>
 <p>The <code>cosh()</code> implementation depends on <code>exp()</code> so the range is limited. The implementation is as follows:</p>
-<pre><code>`cosh(x) = (e^x + e^(-x)) / 2`
-</code></pre>
+<div class="highlight"><pre><span></span><span class="err">`cosh(x) = (e^x + e^(-x)) / 2`</span>
+</pre></div>
+
+
 <h4 id="errors-for-x-5-5_2">Errors for x ∈ (-5, 5)</h4>
 <ul>
 <li><code>Fixed32</code>: average: <code>6.92127e-05</code>, max: <code>0.000487532</code></li>
@@ -2208,8 +2228,10 @@ In a future release, log values will be available for all types as well as in ba
 <p class="admonition-title">Warn</p>
 </div>
 <p>The <code>tanh()</code> implementation depends on <code>exp()</code> so the range is limited. The implementation is as follows:</p>
-<pre><code>`tanh(x) = (e^x - e^(-x)) / (e^x + e^(-x))`
-</code></pre>
+<div class="highlight"><pre><span></span><span class="err">`tanh(x) = (e^x - e^(-x)) / (e^x + e^(-x))`</span>
+</pre></div>
+
+
 <h4 id="errors-for-x-3-3">Errors for x ∈ (-3, 3)</h4>
 <ul>
 <li><code>Fixed32</code>: average: <code>1.25046e-05</code>, max: <code>7.0897e-05</code></li>
@@ -2256,6 +2278,7 @@ In a future release, log values will be available for all types as well as in ba
 
 <span class="n">endfunction</span>
 </pre></div>
+
 
 <h4 id="arcsin-special-cases"><code>ArcSin</code> special cases</h4>
 <table>

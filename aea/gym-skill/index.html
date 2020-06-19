@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1468,35 +1469,44 @@ The example decouples the RL agent from the <code>gym.Env</code> allowing them t
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-aea">Create the AEA</h3>
-<p>In the root directory, create the gym AEA and enter the project.
+<p>In the root directory, create the gym AEA and enter the project.</p>
 <div class="highlight"><pre><span></span>aea create my_gym_aea
 <span class="nb">cd</span> my_gym_aea
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="add-the-gym-skill">Add the gym skill</h3>
 <div class="highlight"><pre><span></span>aea add skill fetchai/gym:0.3.0
 </pre></div>
+
 
 <h3 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory</h3>
 <div class="highlight"><pre><span></span>mkdir gyms
 cp -a ../examples/gym_ex/gyms/. gyms/
 </pre></div>
 
+
 <h3 id="add-a-gym-connection">Add a gym connection</h3>
 <div class="highlight"><pre><span></span>aea add connection fetchai/gym:0.2.0
 aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.2.0
 </pre></div>
 
+
 <h3 id="update-the-connection-config">Update the connection config</h3>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </pre></div>
 
+
 <h3 id="install-the-skill-dependencies">Install the skill dependencies</h3>
-<p>To install the <code>gym</code> package, a dependency of the gym skill, from Pypi run
+<p>To install the <code>gym</code> package, a dependency of the gym skill, from Pypi run</p>
 <div class="highlight"><pre><span></span>aea install
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
 <div class="highlight"><pre><span></span>aea run --connections fetchai/gym:0.2.0
 </pre></div>
+
 
 <p>You will see the gym training logs.</p>
 <p><center><img alt="AEA gym training logs" src="../assets/gym-training.png" /></center></p>
@@ -1505,6 +1515,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.2.
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
 aea delete my_gym_aea
 </pre></div>
+
 
 <h2 id="communication">Communication</h2>
 <p>This diagram shows the communication between the AEA and the gym environment </p>

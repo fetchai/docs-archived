@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1464,8 +1465,11 @@
 
 Clone the repo:
 
+
 <div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fetchai</span><span class="o">/</span><span class="n">oef</span><span class="o">-</span><span class="n">search</span><span class="o">-</span><span class="n">pluto</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">oef</span><span class="o">-</span><span class="n">search</span><span class="o">-</span><span class="n">pluto</span>
 </pre></div>
+
+
 
 !!! Warning
     At 13/6/2019, the correct code was still in private repo and cloning the above link did not function correctly.
@@ -1473,8 +1477,11 @@ Clone the repo:
 
 Checkout the master branch:
 
+
 <div class="highlight"><pre><span></span>git checkout master
 </pre></div>
+
+
 
 If you are only going to run a standalone single node, you only need the `scripts` directory from the repo.
 
@@ -1485,16 +1492,22 @@ If you are only going to run a standalone single node, you only need the `script
 <div class="highlight"><pre><span></span>docker pull fetchai/oef-search:latest
 </pre></div>
 
+
 <p>Now download the <a href="/oef/assets/node_config.json" download=""><code>node_config.json</code></a> file.</p>
 <p>And run the Docker image with the configuration.</p>
 <div class="highlight"><pre><span></span>docker run -it -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/config -p <span class="m">20000</span>:20000 -p <span class="m">10000</span>:10000 -p <span class="m">40000</span>:40000 -p <span class="m">7500</span> fetchai/oef-search:latest /config/node_config.json
 </pre></div>
 
+
 <p>A successful run will start producing stats dumps after a few seconds. </p>
 <p>You'll need to have several ports available on your machine: <code>10000</code>, <code>20000</code>, <code>30000</code>, and <code>7500</code>.</p>
 <!--
+
 <div class="highlight"><pre><span></span>sudo python3 scripts/launch.py -c ./scripts/launch_config.json
 </pre></div>
+
+
+
 
 You are now running a full OEF node. It contains a core node on `port 10000` connected to a search node on `port 20000`.
 
@@ -1520,8 +1533,11 @@ First, configure logging on the node.
 
 Now launch the node with the `background` flag.
 
+
 <div class="highlight"><pre><span></span>python3 scripts/launch.py -c ./scripts/launch_config.json --background
 </pre></div>
+
+
 
 You will see `search.log`, `core.log`, etc. in the `/logs` directory.
 
@@ -1545,8 +1561,11 @@ Use `docker-images/demo_network.py` to start multiple nodes at once. There are a
 
 For example, start two connected nodes:
 
+
 <div class="highlight"><pre><span></span>python3 docker-images/demo_network.py --num_nodes <span class="m">2</span> --link <span class="m">0</span>:1 --http_port_map <span class="m">0</span>:7500 --log_dir <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/docker-images/logs/ --run_director
 </pre></div>
+
+
 
 The above command runs two full nodes, two search nodes, and two oef-core nodes. Core nodes are connected to their search nodes. 
 
@@ -1566,8 +1585,11 @@ The ports for the running nodes are as follows:
 
 Let's try another example. Start three connected nodes, where every node is connected to every other node, and two of the nodes have `http` interfaces:
 
+
 <div class="highlight"><pre><span></span>python3 docker-images/demo_network.py --num_nodes <span class="m">3</span> --link <span class="m">0</span>:1 <span class="m">0</span>:2 <span class="m">1</span>:0 <span class="m">1</span>:2 <span class="m">2</span>:0 <span class="m">2</span>:0 --http_port_map <span class="m">0</span>:7500 <span class="m">1</span>:7501 --log_dir <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/docker-images/logs/ --run_director
 </pre></div>
+
+
 
 -->
 

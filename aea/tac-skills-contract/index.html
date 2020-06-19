@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1543,21 +1544,26 @@
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.
+<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div></p>
+</pre></div>
+
+
 <p>Keep it running for the following demo.</p>
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
-<p>In the root directory, fetch the controller AEA:
+<p>In the root directory, fetch the controller AEA:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.3.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the controller from scratch:
+
 <div class="highlight"><pre><span></span>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
 aea add connection fetchai/oef:0.4.0
@@ -1567,7 +1573,10 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
+
+
 Add the following configs to the aea config:
+
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">ethereum</span><span class="p">:</span>
     <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
@@ -1575,21 +1584,27 @@ Add the following configs to the aea config:
     <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
 </pre></div>
 
+
+
 </p>
 </details>
 
 <h3 id="fund-the-controller-aea">Fund the controller AEA</h3>
-<p>We first generate a private key.
+<p>We first generate a private key.</p>
 <div class="highlight"><pre><span></span>aea generate-key ethereum
 aea add-key ethereum eth_private_key.txt
-</pre></div></p>
+</pre></div>
+
+
 <p>To create some wealth for your AEAs for the Ethereum <code>ropsten</code> network. Note that this needs to be executed from each AEA folder:</p>
 <div class="highlight"><pre><span></span>aea generate-wealth ethereum
 </pre></div>
 
+
 <p>To check the wealth use (after some time for the wealth creation to be mined on Ropsten):</p>
 <div class="highlight"><pre><span></span>aea get-wealth ethereum
 </pre></div>
+
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
@@ -1597,7 +1612,7 @@ aea add-key ethereum eth_private_key.txt
 </div>
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
-<p>In a separate terminal, in the root directory, fetch at least two participants:
+<p>In a separate terminal, in the root directory, fetch at least two participants:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
@@ -1608,16 +1623,22 @@ aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 In a separate terminal, in the root directory, create at least two tac participant AEAs:
+
 <div class="highlight"><pre><span></span>aea create tac_participant_one
 aea create tac_participant_two
 </pre></div>
 
+
+
 Build participant one:
+
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
 aea add connection fetchai/oef:0.4.0
 aea add skill fetchai/tac_participation:0.3.0
@@ -1629,7 +1650,10 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.m
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 </pre></div>
 
+
+
 Then, build participant two:
+
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
 aea add connection fetchai/oef:0.4.0
 aea add skill fetchai/tac_participation:0.3.0
@@ -1640,6 +1664,8 @@ aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 </pre></div>
+
+
 
 </p>
 </details>
@@ -1652,22 +1678,25 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </pre></div>
 
+
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>The CLI tool supports the launch of several agents
 at once.</p>
 <p>For example, assuming you followed the tutorial, you
-can launch all the TAC agents as follows from the root directory:
+can launch all the TAC agents as follows from the root directory:</p>
 <div class="highlight"><pre><span></span>aea launch tac_controller_contract tac_participant_one tac_participant_two
-</pre></div></p>
+</pre></div>
+
+
 <p>You may want to try <code>--multithreaded</code>
 option in order to run the agents
 in the same process.</p>
 <h3 id="cleaning-up">Cleaning up</h3>
-<p>When you're finished, delete your AEAs:
+<p>When you're finished, delete your AEAs:</p>
 <div class="highlight"><pre><span></span>aea delete tac_controller_contract
 aea delete tac_participant_one
 aea delete tac_participant_two
-</pre></div></p>
+</pre></div>
 
 
                                 </section>

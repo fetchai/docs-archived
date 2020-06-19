@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1470,11 +1471,13 @@
 <div class="highlight"><pre><span></span>pip3 install -U pocketbook
 </pre></div>
 
+
 <p>The <code>-U</code> option ensures that if you already have it installed, it will upgrade where applicable.</p>
 <p>Pocketbook defaults to access the main network. You can change the network using the <code>-n</code> parameter. E.g.:</p>
 <div class="highlight"><pre><span></span>pocketbook -n testnet &lt;command&gt;
 pocketbook -n mainnet &lt;command&gt;
 </pre></div>
+
 
 <p>For details of how to use Pocketbook, you can use its help option <code>-h</code>.</p>
 <h2 id="creating-a-new-address">Creating a new address</h2>
@@ -1484,11 +1487,13 @@ pocketbook -n mainnet &lt;command&gt;
 <div class="highlight"><pre><span></span>pocketbook create
 </pre></div>
 
+
 <p>You will be prompted to enter a name for this key pair, followed by a password for the key. Below is a sample output:</p>
-<div class="highlight"><pre><span></span>Enter name for key: foo
-Enter password for key...:
-Confirm password for key.:
+<div class="highlight"><pre><span></span><span class="err">Enter name for key: foo</span>
+<span class="err">Enter password for key...:</span>
+<span class="err">Confirm password for key.:</span>
 </pre></div>
+
 
 <p>It is the user's responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually, but you do need to back them up yourself. </p>
 <p>Pocketbook stores all information in the <code>~/.pocketbook</code> folder on your computer. You can back this folder up entirely to store your encrypted private keys. We <strong>strongly recommend</strong> that you do this regularly and keep the backups in an encrypted safe place in order to provide a mechanism for recovering your accounts.</p>
@@ -1515,13 +1520,15 @@ Confirm password for key.:
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;    Address: &quot;</span><span class="p">,</span> <span class="n">Address</span><span class="p">(</span><span class="n">entity</span><span class="p">))</span>
 </pre></div>
 
+
 <p>For example, if you save the above file into a program called <code>generate_address.py</code>, you can run it and will get a result like this:</p>
 <div class="highlight"><pre><span></span>$ python3 generate_address.py 
 Fetch.ai Address Generator v1.0
 Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
-           :  b&#39;4\x1f\x00\xf7\x89\x00c\xee\xfd5h\xf2\xf5\xc7\xc3\x10\x80/\xd3+:\x15\xa1\x11\xac\x0f\xbf\xb4\xa6\\\xe0{&#39;
+           :  b<span class="s1">&#39;4\x1f\x00\xf7\x89\x00c\xee\xfd5h\xf2\xf5\xc7\xc3\x10\x80/\xd3+:\x15\xa1\x11\xac\x0f\xbf\xb4\xa6\\\xe0{&#39;</span>
     Address:  2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </pre></div>
+
 
 <div class="admonition warning">
 <p class="admonition-title"><strong>Do not use this account</strong></p>
@@ -1532,20 +1539,23 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
 <div class="highlight"><pre><span></span>pocketbook -n &lt;network&gt; add &lt;name-for-the-address&gt; &lt;address&gt;
 </pre></div>
 
+
 <p>For our particular example:</p>
 <div class="highlight"><pre><span></span>pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </pre></div>
+
 
 <h2 id="listing-an-address-balance">Listing an address balance</h2>
 <p>You can query the balance of your accounts and address book entries with a command like the following:</p>
 <div class="highlight"><pre><span></span>pocketbook -n &lt;network&gt; list <span class="o">[</span>-v<span class="o">]</span>
 </pre></div>
 
+
 <p>Adding the <code>-v</code> option will display the addresses alongside the names and balances.</p>
 <p>For our particular example:</p>
 <div class="highlight"><pre><span></span>$ pocketbook -n testnet ls -v
 Name                    Type Balance          Stake Address
-GeneratedTestnetAddress addr 0.0              0.0   2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
+GeneratedTestnetAddress addr <span class="m">0</span>.0              <span class="m">0</span>.0   2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </pre></div>
 
 

@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1484,6 +1485,7 @@
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <h2 id="setting-up-the-model">Setting up the model</h2>
 <p>We then create a <code>Model</code> type and set a flag on it that describes what kind of <code>Model</code> we want. A <code>sequential</code> model allows us to manually add layers specifying:</p>
 <ul>
@@ -1500,20 +1502,24 @@
     <span class="n">model</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;mse&quot;</span><span class="p">,</span> <span class="s">&quot;adam&quot;</span><span class="p">);</span>
 </pre></div>
 
+
 <h2 id="training-and-evaluating-the-model">Training and evaluating the model</h2>
 <p>Training the model once set up is easy: we just call <code>fit</code> with the data, labels, and chosen batch size.</p>
 <div class="highlight"><pre><span></span>    <span class="n">var</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10u64</span><span class="p">;</span>
     <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">);</span>
 </pre></div>
 
+
 <p>Evaluating the model will return the training loss by default, but other metrics may be specified.</p>
 <div class="highlight"><pre><span></span>    <span class="n">var</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">();</span>
 </pre></div>
+
 
 <h2 id="making-predictions-on-the-model">Making predictions on the model</h2>
 <p>Finally, we make house price predictions by passing in the test data. Since <code>test_data</code> contains input data for multiple houses, the output tensor contains multiple predictions.</p>
 <div class="highlight"><pre><span></span>    <span class="n">var</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_data</span><span class="p">);</span>
 </pre></div>
+
 
 <h2 id="running-the-script">Running the script</h2>
 <p>The script can be run from the root of the ledger folder, passing the input files as arguments with the following:</p>

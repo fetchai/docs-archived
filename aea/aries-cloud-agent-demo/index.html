@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1543,6 +1544,7 @@
 <div class="highlight"><pre><span></span>pip install aries-cloudagent
 </pre></div>
 
+
 <h3 id="terminals">Terminals</h3>
 <p>Open four terminals. Each terminal will be used to run one of the four agents in this demo.</p>
 <h2 id="alice-and-faber-acas">Alice and Faber ACAs</h2>
@@ -1550,10 +1552,12 @@
 <div class="highlight"><pre><span></span>aca-py start --help
 </pre></div>
 
+
 <h3 id="faber_aca">Faber_ACA</h3>
 <p>In the first terminal:</p>
 <div class="highlight"><pre><span></span>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8021</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8020</span> --outbound-transport http --webhook-url http://127.0.0.1:8022/webhooks
 </pre></div>
+
 
 <p>Make sure the ports above are unused.</p>
 <p>Take note of the specific IP addresses and ports you used in the above command. We will refer to them by the following names: </p>
@@ -1568,6 +1572,7 @@
 <p>In the second terminal:</p>
 <div class="highlight"><pre><span></span>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8031</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8030</span> --outbound-transp http --webhook-url http://127.0.0.1:8032/webhooks
 </pre></div>
+
 
 <p>Again, make sure the above ports are unused and take note of the specific IP addresses and ports. In this case:</p>
 <ul>
@@ -1584,21 +1589,31 @@
 <span class="nb">cd</span> aries_alice
 </pre></div>
 
+
 <h4 id="add-and-configure-the-skill">Add and Configure the Skill</h4>
 <p>Add the <code>aries_alice</code> skill:</p>
 <div class="highlight"><pre><span></span>aea add skill fetchai/aries_alice:0.2.0
 </pre></div>
 
+
 <p>You now need to configure this skill to ensure <code>admin_host</code> and <code>admin_port</code> values in the skill's configuration file <code>alice/vendor/fetchai/skills/aries_alice/skill.yaml</code> match with the values you noted above for <strong>Alice_ACA</strong>.</p>
 <p>You can use the framework's handy <code>config</code> <a href="../cli-commands">CLI command</a> to set these values:</p>
-<p><div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_host <span class="m">127</span>.0.0.1
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_http.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_port <span class="m">8031</span>
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.handlers.aries_demo_http.args.admin_port <span class="m">8031</span>
-</pre></div></p>
+</pre></div>
+
+
 <h4 id="add-and-configure-the-connections">Add and Configure the Connections</h4>
 <p>Add <code>http_client</code>, <code>oef</code> and <code>webhook</code> connections:</p>
 <div class="highlight"><pre><span></span>aea add connection fetchai/http_client:0.3.0
@@ -1606,19 +1621,23 @@ aea add connection fetchai/webhook:0.2.0
 aea add connection fetchai/oef:0.4.0
 </pre></div>
 
+
 <p>You now need to configure the <code>webhook</code> connection. </p>
 <p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>. </p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
 </pre></div>
 
+
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </pre></div>
+
 
 <h4 id="configure-alice_aea">Configure Alice_AEA:</h4>
 <p>Now you must ensure <strong>Alice_AEA</strong>'s default connection is <code>oef</code>. </p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 </pre></div>
+
 
 <h3 id="alice_aea-method-2-fetch-the-agent">Alice_AEA -- Method 2: Fetch the Agent</h3>
 <p>Alternatively, in the third terminal, fetch <strong>Alice_AEA</strong> and move into its project folder: </p>
@@ -1626,38 +1645,52 @@ aea add connection fetchai/oef:0.4.0
 <span class="nb">cd</span> aries_alice
 </pre></div>
 
+
 <h4 id="configure-the-skill-and-connections">Configure the skill and connections:</h4>
 <p>You need to configure the <code>aries_alice</code> skill of the AEA to ensure <code>admin_host</code> and <code>admin_port</code> values in the skill's configuration file <code>alice/vendor/fetchai/skills/aries_alice/skill.yaml</code> match with the values you noted above for <strong>Alice_ACA</strong>.</p>
 <p>You can use the framework's handy <code>config</code> <a href="../cli-commands">CLI command</a> to set these values:</p>
-<p><div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_host <span class="m">127</span>.0.0.1
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.handlers.aries_demo_http.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.handlers.aries_demo_default.args.admin_port <span class="m">8031</span>
 </pre></div>
+
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.handlers.aries_demo_http.args.admin_port <span class="m">8031</span>
-</pre></div></p>
+</pre></div>
+
+
 <p>You now need to configure the <code>webhook</code> connection. </p>
 <p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>. </p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
 </pre></div>
 
+
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </pre></div>
+
 
 <h3 id="install-the-dependencies-and-run-alice_aea">Install the Dependencies and Run Alice_AEA:</h3>
 <p>After creating <strong>Alice_AEA</strong> using either of the methods above, you must install all the dependencies:</p>
 <div class="highlight"><pre><span></span>aea install
 </pre></div>
 
+
 <p>Finally run <strong>Alice_AEA</strong>:</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
+
 <p>You should see <strong>Alice_AEA</strong> running and showing its identity on the terminal. For example:</p>
 <div class="highlight"><pre><span></span>My address is: YrP7H2qdCb3VyPwpQa53o39cWCDHhVcjwCtJLes6HKWM8FpVK
 </pre></div>
+
 
 <p>Take note of this value. We will refer to this as <strong>Alice_AEA's address</strong>.</p>
 <h3 id="faber_aea-method-1-construct-the-agent">Faber_AEA -- Method 1: Construct the Agent</h3>
@@ -1666,26 +1699,34 @@ aea add connection fetchai/oef:0.4.0
 <span class="nb">cd</span> aries_faber
 </pre></div>
 
+
 <h4 id="add-and-configure-the-skill_1">Add and Configure the Skill:</h4>
 <p>Add the <code>aries_faber</code> skill:</p>
-<p><div class="highlight"><pre><span></span>aea add skill fetchai/aries_faber:0.2.0
+<div class="highlight"><pre><span></span>aea add skill fetchai/aries_faber:0.2.0
 </pre></div>
-You now need to configure this skill to ensure <code>admin_host</code> and <code>admin_port</code> values in the skill's configuration file <code>faber/vendor/fetchai/skills/aries_alice/skill.yaml</code> match with the values you noted above for <strong>Faber_ACA</strong>.</p>
+
+
+<p>You now need to configure this skill to ensure <code>admin_host</code> and <code>admin_port</code> values in the skill's configuration file <code>faber/vendor/fetchai/skills/aries_alice/skill.yaml</code> match with the values you noted above for <strong>Faber_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.behaviours.aries_demo_faber.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
 
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
 
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.behaviours.aries_demo_faber.args.admin_port <span class="m">8021</span>
 </pre></div>
+
 
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.admin_port <span class="m">8021</span>
 </pre></div>
 
+
 <p>Additionally, make sure that the value of <code>alice_id</code> matches <strong>Alice_AEA's address</strong> as displayed in the third terminal.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.alice_id &lt;Alice_AEA<span class="err">&#39;</span>s address&gt;
 </pre></div>
+
 
 <h4 id="add-and-configure-the-connections_1">Add and Configure the Connections:</h4>
 <p>Add <code>http_client</code>, <code>oef</code> and <code>webhook</code> connections:</p>
@@ -1694,19 +1735,23 @@ aea add connection fetchai/webhook:0.2.0
 aea add connection fetchai/oef:0.4.0
 </pre></div>
 
+
 <p>You now need to configure the <code>webhook</code> connection. </p>
 <p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>. </p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
 </pre></div>
 
+
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </pre></div>
+
 
 <h4 id="configure-faber_aea">Configure Faber_AEA:</h4>
 <p>Now you must ensure <strong>Faber_AEA</strong>'s default connection is <code>http_client</code>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_client:0.3.0
 </pre></div>
+
 
 <h3 id="alice_aea-method-2-fetch-the-agent_1">Alice_AEA -- Method 2: Fetch the Agent</h3>
 <p>Alternatively, in the fourth terminal, fetch <strong>Faber_AEA</strong> and move into its project folder: </p>
@@ -1714,41 +1759,51 @@ aea add connection fetchai/oef:0.4.0
 <span class="nb">cd</span> aries_faber
 </pre></div>
 
+
 <h4 id="configure-the-skill-and-connections_1">Configure the skill and connections:</h4>
 <p>You need to configure the <code>aries_faber</code> skill of the AEA to ensure <code>admin_host</code> and <code>admin_port</code> values in the skill's configuration file <code>faber/vendor/fetchai/skills/aries_alice/skill.yaml</code> match with the values you noted above for <strong>Faber_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.behaviours.aries_demo_faber.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
 
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.admin_host <span class="m">127</span>.0.0.1
 </pre></div>
+
 
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.behaviours.aries_demo_faber.args.admin_port <span class="m">8021</span>
 </pre></div>
 
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.admin_port <span class="m">8021</span>
 </pre></div>
+
 
 <p>Additionally, make sure that the value of <code>alice_id</code> matches <strong>Alice_AEA's address</strong> as displayed in the third terminal.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.handlers.aries_demo_http.args.alice_id &lt;Alice_AEA<span class="err">&#39;</span>s address&gt;
 </pre></div>
+
 
 <p>You now need to configure the <code>webhook</code> connection. </p>
 <p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>. </p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
 </pre></div>
 
+
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </pre></div>
+
 
 <h3 id="install-the-dependencies-and-run-faber_aea">Install the Dependencies and Run Faber_AEA:</h3>
 <p>After creating <strong>Faber_AEA</strong> using either of the methods above, you must install all the dependencies:</p>
 <div class="highlight"><pre><span></span>aea install
 </pre></div>
 
+
 <p>Finally run <strong>Faber_AEA</strong>:</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
+
 
 <p>You should see <strong>Faber_AEA</strong> running and showing logs of its activities. For example: </p>
 <p><center><img alt="Aries demo: Faber terminal" src="../assets/aries-demo-faber.png" /></center></p>
@@ -1761,6 +1816,7 @@ aea add connection fetchai/oef:0.4.0
 <div class="highlight"><pre><span></span>aea delete aries_faber
 aea delete aries_alice
 </pre></div>
+
 
 <h2 id="further-developments">Further developments</h2>
 <p>In the next update to this demo, the remaining interactions between AEAs and ACAs must be implemented. This means:</p>

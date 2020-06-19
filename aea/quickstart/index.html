@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1470,15 +1471,18 @@ you can use the Fetch.ai AEA framework. </p>
 <span class="nb">cd</span> my_aea_projects/
 </pre></div>
 
+
 <p>We highly recommend using a virtual environment to ensure consistency across dependencies.</p>
 <p>Check that you have <a href="https://github.com/pypa/pipenv"><code>pipenv</code></a>.</p>
 <div class="highlight"><pre><span></span>which pipenv
 </pre></div>
 
+
 <p>If you don't have it, install it. Instructions are <a href="https://pypi.org/project/pipenv/" target=_blank>here</a>.</p>
 <p>Once installed, create a new environment and open it (here we use Python 3.7 but the AEA framework supports any Python &gt;= 3.6).</p>
 <div class="highlight"><pre><span></span>touch Pipfile <span class="o">&amp;&amp;</span> pipenv --python <span class="m">3</span>.7 <span class="o">&amp;&amp;</span> pipenv shell
 </pre></div>
+
 
 <h3 id="installing-docker">Installing docker</h3>
 <div class="admonition note">
@@ -1494,38 +1498,45 @@ you can use the Fetch.ai AEA framework. </p>
   <p>For the purpose of the quickstart only, you can skip downloading the scripts and examples directories.</p>
 </div>
 
-<p>Download folders containing examples and scripts:
+<p>Download folders containing examples and scripts:</p>
 <div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/examples
 svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/scripts
 </pre></div>
-You can install the <code>svn</code> command with (<code>brew install subversion</code> or <code>sudo apt-get install subversion</code>).</p>
+
+
+<p>You can install the <code>svn</code> command with (<code>brew install subversion</code> or <code>sudo apt-get install subversion</code>).</p>
 <h2 id="installation">Installation</h2>
 <p>The following installs the entire AEA package which also includes a <a href="../cli-commands">command-line interface (CLI)</a>.</p>
 <div class="highlight"><pre><span></span>pip install aea<span class="o">[</span>all<span class="o">]</span>
 </pre></div>
 
-<p>If you are using <code>zsh</code> rather than <code>bash</code> type 
+
+<p>If you are using <code>zsh</code> rather than <code>bash</code> type </p>
 <div class="highlight"><pre><span></span>pip install <span class="s1">&#39;aea[all]&#39;</span>
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="known-issues">Known issues</h3>
 <p>If the installation steps fail, it might be a dependency issue. </p>
 <p>The following hints can help:</p>
 <ul>
-<li>
-<p>Ubuntu/Debian systems only: install Python 3.7 headers.
+<li>Ubuntu/Debian systems only: install Python 3.7 headers.</li>
+</ul>
 <div class="highlight"><pre><span></span>sudo apt-get install python3.7-dev
-</pre></div></p>
-</li>
-<li>
-<p>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target=_blank>tools for Visual Studio</a>. </p>
-</li>
+</pre></div>
+
+
+<ul>
+<li>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target=_blank>tools for Visual Studio</a>. </li>
 </ul>
 <h2 id="setup-author-name">Setup Author name</h2>
-<p>You can now setup your author name:
+<p>You can now setup your author name:</p>
 <div class="highlight"><pre><span></span>aea init
-</pre></div></p>
+</pre></div>
+
+
 <p>This is your unique author name in the Fetch.ai ecosystem.</p>
-<p>You should see a similar output (with your input replacing the sample input):
+<p>You should see a similar output (with your input replacing the sample input):</p>
 <div class="highlight"><pre><span></span>Do you have a Registry account? <span class="o">[</span>y/N<span class="o">]</span>: n
 Create a new account on the Registry now:
 Username: fetchai
@@ -1542,7 +1553,9 @@ Confirm password:
 v0.4.1
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
-</pre></div></p>
+</pre></div>
+
+
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>If you would rather not create an account on the registry at this point, then run `aea init --local` instead.</p>
@@ -1555,21 +1568,28 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 <span class="nb">cd</span> my_first_aea
 </pre></div>
 
+
 <p>To learn more about the folder structure of an AEA project read on <a href="../package-imports">here</a>.</p>
 <details><summary>Alternatively: step by step install</summary>
 
 <b> Create a new AEA </b>   
 <br>    
 First, create a new AEA project and enter it.   
+
 <div class="highlight"><pre><span></span>aea create my_first_aea
 <span class="nb">cd</span> my_first_aea
 </pre></div>
+
+
 <br>  
 <b>Add the echo skill</b>     
 <br>    
 Second, add the echo skill to the project. 
+
 <div class="highlight"><pre><span></span>aea add skill fetchai/echo:0.2.0
 </pre></div>
+
+
 This copies the `fetchai/echo:0.2.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.2.0` consists of the name of the author of the skill, followed by the skill name and its version.   
 </details>
 
@@ -1582,18 +1602,22 @@ This copies the `fetchai/echo:0.2.0` skill code containing the "behaviours", and
 <div class="highlight"><pre><span></span>TO,SENDER,PROTOCOL_ID,ENCODED_MESSAGE,
 </pre></div>
 
+
 <p>For example:</p>
 <div class="highlight"><pre><span></span>recipient_aea,sender_aea,fetchai/default:0.2.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
 </pre></div>
+
 
 <h2 id="run-the-aea">Run the AEA</h2>
 <p>Run the AEA with the default <code>fetchai/stub:0.5.0</code> connection.</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
+
 <p>or </p>
 <div class="highlight"><pre><span></span>aea run --connections fetchai/stub:0.5.0
 </pre></div>
+
 
 <p>You will see the echo skill running in the terminal window.</p>
 <div class="highlight"><pre><span></span>    _     _____     _    
@@ -1614,12 +1638,14 @@ info: Echo Behaviour: act method called.
 ...
 </pre></div>
 
+
 <p>The framework first calls the <code>setup</code> method on the <code>Handler</code>, and <code>Behaviour</code> code in that order; after which it repeatedly calls the Behaviour method act. This is the main agent loop in action.</p>
 <p>Let's look at the <code>Handler</code> in more depth.</p>
 <h3 id="add-a-message-to-the-input-file">Add a message to the input file</h3>
 <p>From a different terminal and same directory, we send the AEA a message wrapped in an envelope via the input file.</p>
 <div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
 </pre></div>
+
 
 <p>You will see the <code>Echo Handler</code> dealing with the envelope and responding with the same message to the <code>output_file</code>, and also decoding the Base64 encrypted message in this case.</p>
 <div class="highlight"><pre><span></span>info: Echo Behaviour: act method called.
@@ -1628,12 +1654,16 @@ info: Echo Behaviour: act method called.
 info: Echo Behaviour: act method called.
 </pre></div>
 
+
 <details><summary>CLI interact command</summary>
 
 Optionally, use the CLI interact command from a different terminal:
 
+
 <div class="highlight"><pre><span></span>aea interact
 </pre></div>
+
+
 
 You can then send the AEA messages via an interactive tool by typing `hello` into the prompt and hitting enter twice (once to send, once more to check for a response).
 
@@ -1650,11 +1680,13 @@ info: Echo Handler: teardown method called.
 info: Echo Behaviour: teardown method called.
 </pre></div>
 
+
 <h2 id="write-a-test-for-the-aea">Write a test for the AEA</h2>
 <p>We can write an end-to-end test for the AEA utilising helper classes provided by the framework.</p>
 <details><summary>Writing tests</summary>
 
 The following test class replicates the preceding demo and tests it's correct behaviour. The `AEATestCase` classes are a tool for AEA developers to write useful end-to-end tests of their AEAs.
+
 
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">signal</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -1712,12 +1744,17 @@ The following test class replicates the preceding demo and tests it's correct be
         <span class="p">),</span> <span class="s2">&quot;Echo agent wasn&#39;t successfully terminated.&quot;</span>
 </pre></div>
 
+
+
 Place the above code into a file `test.py` in your AEA project directory (the same level as the `aea-config.yaml` file).
 
 To run, execute the following:
 
+
 <div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
+
+
 
 </details>
 
@@ -1725,6 +1762,7 @@ To run, execute the following:
 <p>Delete the AEA from the parent directory (<code>cd ..</code> to go to the parent directory).</p>
 <div class="highlight"><pre><span></span>aea delete my_first_aea
 </pre></div>
+
 
 <h2 id="next-steps">Next steps</h2>
 <p>To gain an understanding of the core components of the framework, please continue to the next step of 'Getting Started':</p>

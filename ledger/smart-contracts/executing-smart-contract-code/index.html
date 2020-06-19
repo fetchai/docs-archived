@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1467,18 +1468,22 @@
 <div class="highlight"><pre><span></span>rm *.db
 </pre></div>
 
+
 <p>Build the Python API libraries like this:</p>
 <div class="highlight"><pre><span></span>pip3 install -U fetchai-ledger-api
 </pre></div>
+
 
 <h3 id="simple-transfer-example-in-python">Simple transfer example in Python</h3>
 <p>If you want to examine the code in more detail and look at some examples, you may prefer to clone or download the repo.</p>
 <div class="highlight"><pre><span></span>git clone https://github.com/fetchai/ledger-api-py.git
 </pre></div>
 
+
 <p>And run the installation script:</p>
 <div class="highlight"><pre><span></span>python3 ledger-api-py/setup.py install
 </pre></div>
+
 
 <p>In your favourite Python IDE, open the <code>create_and_send.py</code> script in the <code>examples</code> directory.</p>
 <p>This script creates two <code>Entity</code> objects, sets a balance of 1000 tokens on <code>your_identity</code>, and makes a transfer to <code>other_identity</code>.</p>
@@ -1515,6 +1520,7 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
+
 <div class="admonition tip">
   <p class="admonition-title">Tip</p>
   <p>Make sure you have the correct port number for the running ledger node.</p>
@@ -1528,6 +1534,7 @@ Submitting transfer...
 Balance <span class="m">1</span>: <span class="m">749</span>
 Balance <span class="m">2</span>: <span class="m">250</span>
 </pre></div>
+
 
 <h2 id="embedding-contract-code">Embedding contract code</h2>
 <p>Smart contract code is embedded into a Python script as a string.</p>
@@ -1569,6 +1576,7 @@ Balance <span class="m">2</span>: <span class="m">250</span>
 <span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
+
 <p>From here, you can create a Python <code>SmartContract</code> type and feed it the contract string. Then deploy the contract with the Python <code>LedgerApi</code>.</p>
 <p>The code below takes the <code>CONTRACT_TEXT</code> string above and deploys it to the ledger along with details of the contract owner and the fee.</p>
 <div class="highlight"><pre><span></span><span class="c1"># create the smart contract</span>
@@ -1577,6 +1585,7 @@ Balance <span class="m">2</span>: <span class="m">250</span>
 <span class="c1"># deploy the contract to the network</span>
 <span class="n">api</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">contracts</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">contract</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
 </pre></div>
+
 
 <h2 id="public-keys">Public keys</h2>
 <p>Generate a public key for your smart contract, or <code>Agent</code>, with the <code>Entity</code> class in the Python API <code>crypto</code> package which generates a full private/public key object having a number of useful functions available on it.</p>
@@ -1589,12 +1598,14 @@ Balance <span class="m">2</span>: <span class="m">250</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">entity_address</span><span class="p">)</span>
 </pre></div>
 
+
 <p>There are many more functions available for <code>Entity</code> and <code>Address</code> which will be documented in due course.</p>
 <h2 id="test-network">Test network</h2>
 <p>You can run the examples on our test network, replacing the hostname and port.</p>
 <div class="highlight"><pre><span></span><span class="nv">HOST</span> <span class="o">=</span> <span class="s1">&#39;bootstrap.fetch.ai&#39;</span>
 <span class="nv">PORT</span> <span class="o">=</span> <span class="m">80</span>
 </pre></div>
+
 
 <p><center><img alt="Testnet" src="../img/testnet-dev.png" /></center></p>
 <p>However, you will need some FET tokens and an <code>Address</code>.</p>

@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1467,6 +1468,7 @@
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 </pre></div>
 
+
 <p>Then, import the application specific libraries.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">SkillConfig</span>
@@ -1475,42 +1477,55 @@
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 </pre></div>
 
-<p>Set up a variable pointing to where the packages directory is located - this should be our current directory - and where the input and output files are located.
+
+<p>Set up a variable pointing to where the packages directory is located - this should be our current directory - and where the input and output files are located.</p>
 <div class="highlight"><pre><span></span><span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
 <span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
 <span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output_file&quot;</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="create-a-private-key">Create a private key</h2>
-<p>We need a private key to populate the AEA's wallet.
+<p>We need a private key to populate the AEA's wallet.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="clearing-the-input-and-output-files">Clearing the input and output files</h2>
-<p>We will use the stub connection to pass envelopes in and out of the AEA. Ensure that any input and output text files are removed before we start.
+<p>We will use the stub connection to pass envelopes in and out of the AEA. Ensure that any input and output text files are removed before we start.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="initialise-the-aea">Initialise the AEA</h2>
-<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.2.0</code> protocol, the <code>fetchai/stub:0.5.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.
+<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.2.0</code> protocol, the <code>fetchai/stub:0.5.0</code> connection and the <code>fetchai/error:0.2.0</code> skill.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Instantiate the builder and build the AEA</span>
     <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">AEABuilder</span><span class="p">()</span>
-</pre></div></p>
-<p>We set the name, add the private key for the AEA to use and set the ledger configurations for the AEA to use.
+</pre></div>
+
+
+<p>We set the name, add the private key for the AEA to use and set the ledger configurations for the AEA to use.</p>
 <div class="highlight"><pre><span></span>    <span class="n">builder</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">)</span>
 
     <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
 
     <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
-</pre></div></p>
-<p>Next, we add the echo skill which will bounce our messages back to us. We first need to place the echo skill into a relevant directory (see path), either by downloading the <code>packages</code> directory from the AEA repo or by getting the package from the registry.
+</pre></div>
+
+
+<p>Next, we add the echo skill which will bounce our messages back to us. We first need to place the echo skill into a relevant directory (see path), either by downloading the <code>packages</code> directory from the AEA repo or by getting the package from the registry.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Add the echo skill (assuming it is present in the local directory &#39;packages&#39;)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s2">&quot;./packages/fetchai/skills/echo&quot;</span><span class="p">)</span>
-</pre></div></p>
-<p>Also, we can add a component that was instantiated programmatically. :
+</pre></div>
+
+
+<p>Also, we can add a component that was instantiated programmatically. :</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># create skill and handler manually</span>
     <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
     <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
@@ -1538,13 +1553,17 @@
     <span class="p">)</span>
     <span class="n">skill</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dummy_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">dummy_handler</span><span class="p">})</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_component_instance</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
-</pre></div></p>
-<p>Finally, we can build our AEA:
+</pre></div>
+
+
+<p>Finally, we can build our AEA:</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create our AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="start-the-aea">Start the AEA</h2>
-<p>We run the AEA from a different thread so that we can still use the main thread to pass it messages.
+<p>We run the AEA from a different thread so that we can still use the main thread to pass it messages.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set the AEA running in a different thread</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
@@ -1552,9 +1571,11 @@
 
         <span class="c1"># Wait for everything to start up</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
-<p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)
+<p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)</p>
 <div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.2.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
@@ -1569,20 +1590,26 @@
         <span class="c1"># Read the output envelope generated by the echo skill</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="shutdown">Shutdown</h2>
-<p>Finally stop our AEA and wait for it to finish
+<p>Finally stop our AEA and wait for it to finish</p>
 <div class="highlight"><pre><span></span>    <span class="k">finally</span><span class="p">:</span>
         <span class="c1"># Shut down the AEA</span>
         <span class="n">my_aea</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
         <span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="running-the-aea">Running the AEA</h2>
 <p>If you now run this python script file, you should see this output:</p>
-<pre><code>input message: my_aea,other_agent,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hello
-output message: other_agent,my_aea,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hello
-</code></pre>
+<div class="highlight"><pre><span></span><span class="err">input message: my_aea,other_agent,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hello</span>
+<span class="err">output message: other_agent,my_aea,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hello</span>
+</pre></div>
+
+
 <h2 id="entire-code-listing">Entire code listing</h2>
 <p>If you just want to copy and past the entire script in you can find it here:</p>
 <details><summary>Click here to see full listing</summary>
@@ -1689,6 +1716,8 @@ output message: other_agent,my_aea,fetchai/default:0.2.0,\x08\x01*\x07\n\x05hell
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">run</span><span class="p">()</span>
 </pre></div>
+
+
 </p>
 </details>
 

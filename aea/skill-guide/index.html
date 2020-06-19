@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1474,6 +1475,7 @@
 aea scaffold skill my_search
 </pre></div>
 
+
 <p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../oef-ledger">OEF search node</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
@@ -1535,6 +1537,7 @@ aea scaffold skill my_search
         <span class="p">)</span>
 </pre></div>
 
+
 <p>Searches are proactive and, as such, well placed in a <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a>. Specifically, we subclass the <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>TickerBehaviour</code></a> as it allows us to repeatedly search at a defined tick interval.</p>
 <p>We place this code in <code>my_aea/skills/my_search/behaviours.py</code>.</p>
 <h2 id="step-3-develop-a-handler">Step 3: Develop a Handler</h2>
@@ -1595,6 +1598,7 @@ aea scaffold skill my_search
         <span class="p">)</span>
 </pre></div>
 
+
 <p>We create a handler which is registered for the <code>oef_search</code> protocol. Whenever it receives a search result, we log the number of agents returned in the search - the agents matching the search query - and update the counter of received searches.</p>
 <p>We also implement a trivial check on the difference between the amount of search requests sent and responses received.</p>
 <p>Note, how the handler simply reacts to incoming events (i.e. messages). It could initiate further actions, however, they are still reactions to the upstream search event.</p>
@@ -1629,38 +1633,49 @@ aea scaffold skill my_search
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
 
+
 <p>Ensure, you replace the author field with your author name! (Run <code>aea init</code> to set or check the author name.)</p>
 <p>Importantly, the keys <code>my_search_behaviour</code> and <code>my_search_handler</code> are used in the above handler to access these skill components at runtime via the context. We also set the <code>tick_interval</code> of the <code>TickerBehaviour</code> to <code>5</code> seconds.</p>
 <p>We place this code in <code>my_aea/skills/my_search/skill.yaml</code>.</p>
 <h2 id="step-6-update-fingerprint">Step 6: Update fingerprint</h2>
-<p>We need to update the fingerprint of our skill next:
+<p>We need to update the fingerprint of our skill next:</p>
 <div class="highlight"><pre><span></span>aea fingerprint skill fetchai/my_search:0.1.0
 </pre></div>
-Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
+
+
+<p>Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
 <h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the oef protocol and connection</h2>
-<p>Our AEA does not have the oef protocol yet so let's add it.
+<p>Our AEA does not have the oef protocol yet so let's add it.</p>
 <div class="highlight"><pre><span></span>aea add protocol fetchai/oef_search:0.2.0
-</pre></div></p>
+</pre></div>
+
+
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
-<p>We also need to add the oef connection and install its dependencies:
+<p>We also need to add the oef connection and install its dependencies:</p>
 <div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.4.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>We first start a local <a href="../oef-ledger">OEF search and communication node</a> in a separate terminal window.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
 </pre></div>
 
-<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch and run another finished AEA:
+
+<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch and run another finished AEA:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.5.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
 aea run --connections fetchai/oef:0.4.0
-</pre></div></p>
+</pre></div>
+
+
 <p>This AEA will simply register a location service on the <a href="../oef-ledger">OEF search node</a> so we can search for it.</p>
 <details><summary>Click here to see full code</summary>
 <p>
 
 We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehaviour`</a> to update the service registration at regular intervals. The following code is placed in `behaviours.py`. 
+
 
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
 
@@ -1756,7 +1771,10 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
             <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 
+
+
 We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy class and place it in `strategy.py`. We use a generic data model to register the service.
+
 
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 
@@ -1809,7 +1827,10 @@ We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy
         <span class="k">return</span> <span class="n">desc</span>
 </pre></div>
 
+
+
 The associated `skill.yaml` is:
+
 
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">simple_service_registration</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
@@ -1850,6 +1871,8 @@ The associated `skill.yaml` is:
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
+
+
 </p>
 </details>
 
@@ -1857,6 +1880,7 @@ The associated `skill.yaml` is:
 <p>We can then launch our AEA.</p>
 <div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
 </pre></div>
+
 
 <p>We can see that the AEA sends search requests to the <a href="../oef-ledger">OEF search node</a> and receives search responses from the <a href="../oef-ledger">OEF search node</a>. Since our AEA is only searching on the <a href="../oef-ledger">OEF search node</a> - and not registered on the <a href="../oef-ledger">OEF search node</a> - the search response returns a single agent (the service provider).</p>
 <p>We stop the AEA with <code>CTRL + C</code>.</p>

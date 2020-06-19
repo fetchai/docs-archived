@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../../..';</script>
     <link href="../../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1467,17 +1468,20 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TimeoutResult</span><span class="p">()</span>
 </pre></div>
 
+
 <p>Result of ExecTimeout context manager.</p>
 <p><a name=".aea.helpers.exec_timeout.TimeoutResult.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
+
 <p>Init.</p>
 <p><a name=".aea.helpers.exec_timeout.TimeoutResult.set_cancelled_by_timeout"></a></p>
 <h4 id="set_cancelled_by_timeout">set<code>_</code>cancelled<code>_</code>by<code>_</code>timeout</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_cancelled_by_timeout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
+
 
 <p>Set code was terminated cause timeout.</p>
 <p><strong>Returns</strong>:</p>
@@ -1487,6 +1491,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_cancelled_by_timeout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
+
 <p>Return True if code was terminated by ExecTimeout cause timeout.</p>
 <p><strong>Returns</strong>:</p>
 <p>bool</p>
@@ -1495,6 +1500,7 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TimeoutException</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">)</span>
 </pre></div>
 
+
 <p>TimeoutException raised by ExecTimeout context managers in thread with limited execution time.</p>
 <p>Used internally, does not propagated outside of context manager</p>
 <p><a name=".aea.helpers.exec_timeout.BaseExecTimeout"></a></p>
@@ -1502,12 +1508,14 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseExecTimeout</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </pre></div>
 
+
 <p>Base class for implementing context managers to limit python code execution time.</p>
 <p>exception_class - is exception type to raise in code controlled in case of timeout.</p>
 <p><a name=".aea.helpers.exec_timeout.BaseExecTimeout.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
 </pre></div>
+
 
 <p>Init.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1519,6 +1527,7 @@
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__enter__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TimeoutResult</span>
 </pre></div>
 
+
 <p>Enter context manager.</p>
 <p><strong>Returns</strong>:</p>
 <p>TimeoutResult</p>
@@ -1526,6 +1535,7 @@
 <h4 id="__exit__"><code>__</code>exit<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="ne">Exception</span><span class="p">],</span> <span class="n">exc_val</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">:</span> <span class="n">TracebackType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
+
 
 <p>Exit context manager.</p>
 <p><strong>Returns</strong>:</p>
@@ -1535,12 +1545,14 @@
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExecTimeoutSigAlarm</span><span class="p">(</span><span class="n">BaseExecTimeout</span><span class="p">)</span>
 </pre></div>
 
+
 <p>ExecTimeout context manager implementation using signals and SIGALARM.</p>
 <p>Does not support threads, have to be used only in main thread.</p>
 <p><a name=".aea.helpers.exec_timeout.ExecTimeoutThreadGuard"></a></p>
 <h2 id="exectimeoutthreadguard-objects">ExecTimeoutThreadGuard Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExecTimeoutThreadGuard</span><span class="p">(</span><span class="n">BaseExecTimeout</span><span class="p">)</span>
 </pre></div>
+
 
 <p>ExecTimeout context manager implementation using threads and PyThreadState_SetAsyncExc.</p>
 <p>Support threads.
@@ -1550,6 +1562,7 @@ Possible will be not accurate in case of long c functions used inside code contr
 <h4 id="__init___2"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
 </pre></div>
+
 
 <p>Init ExecTimeoutThreadGuard variables.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1562,6 +1575,7 @@ Possible will be not accurate in case of long c functions used inside code contr
  <span class="o">|</span> <span class="n">start</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
+
 <p>Start supervisor thread to check timeouts.</p>
 <p>Supervisor starts once but number of start counted.</p>
 <p><strong>Returns</strong>:</p>
@@ -1571,6 +1585,7 @@ Possible will be not accurate in case of long c functions used inside code contr
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">stop</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
+
 
 <p>Stop supervisor thread.</p>
 <p>Actual stop performed on force == True or if  number of stops == number of starts</p>

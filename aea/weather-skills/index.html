@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1506,23 +1507,28 @@ This demo does not utilize a smart contract. As a result, we interact with a led
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.
+<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div></p>
+</pre></div>
+
+
 <p>Keep it running for all the following demos.</p>
 <h2 id="demo-instructions">Demo instructions:</h2>
 <p>A demo to run the same scenario but with a true ledger transaction on Fetch.ai <code>testnet</code> or Ethereum <code>ropsten</code> network. This demo assumes the buyer
 trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-weather-station">Create the weather station</h3>
-<p>First, fetch the AEA that will provide weather measurements:
+<p>First, fetch the AEA that will provide weather measurements:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.5.0 --alias my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the weather station from scratch:
+
 <div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea add connection fetchai/oef:0.4.0
@@ -1531,25 +1537,33 @@ aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 </pre></div>
 
+
+
 In `weather_station/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
+
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
     <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
 </pre></div>
 
+
+
 </p>
 </details>
 
 <h3 id="create-the-weather-client">Create the weather client</h3>
-<p>In another terminal, fetch the AEA that will query the weather station:
+<p>In another terminal, fetch the AEA that will query the weather station:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/weather_client:0.5.0 --alias my_weather_client
 <span class="nb">cd</span> my_weather_client
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the weather client from scratch:
+
 <div class="highlight"><pre><span></span>aea create my_weather_client
 <span class="nb">cd</span> my_weather_client
 aea add connection fetchai/oef:0.4.0
@@ -1558,26 +1572,35 @@ aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 </pre></div>
 
+
+
 In `my_weather_client/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
 
 To connect to Fetchai:
+
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
     <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
 </pre></div>
+
+
 
 </p>
 </details>
 
 <h3 id="generate-wealth-for-the-weather-client-aea">Generate wealth for the weather client AEA</h3>
 <p>The weather client needs to have some wealth to purchase the weather station information.</p>
-<p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:
+<p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:</p>
 <div class="highlight"><pre><span></span>aea generate-key fetchai
 aea add-key fetchai fet_private_key.txt
-</pre></div></p>
-<p>Then, create some wealth for your weather client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:
+</pre></div>
+
+
+<p>Then, create some wealth for your weather client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:</p>
 <div class="highlight"><pre><span></span>aea generate-wealth fetchai
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create wealth for other test networks.</summary>
 <p>
 
@@ -1587,6 +1610,7 @@ aea add-key fetchai fet_private_key.txt
 In `my_weather_station/aea-config.yaml` and `my_weather_client/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
 
 To connect to Ethereum:
+
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">ethereum</span><span class="p">:</span>
     <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
@@ -1594,32 +1618,49 @@ To connect to Ethereum:
     <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
 </pre></div>
 
+
+
 Alternatively, to connect to Cosmos:
+
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">cosmos</span><span class="p">:</span>
     <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://aea-testnet.sandbox.fetch-ai.com:1317</span>
 </pre></div>
 
+
+
 <strong>Wealth:</strong>
 <br>
 
 To generate and add a private-public key pair for Ethereum use:
+
 <div class="highlight"><pre><span></span>aea generate-key ethereum
 aea add-key ethereum eth_private_key.txt
 </pre></div>
 
+
+
 On the Ethereum `ropsten` network.
+
 <div class="highlight"><pre><span></span>aea generate-wealth ethereum
 </pre></div>
 
+
+
 Alternatively, to generate and add a private-public key pair for Cosmos use:
+
 <div class="highlight"><pre><span></span>aea generate-key cosmos
 aea add-key cosmos cosmos_private_key.txt
 </pre></div>
 
+
+
 On the Cosmos `testnet` network.
+
 <div class="highlight"><pre><span></span>aea generate-wealth cosmos
 </pre></div>
+
+
 
 </p>
 </details>
@@ -1634,14 +1675,20 @@ On the Cosmos `testnet` network.
 Ensure you are in the weather station project directory.
 
 For ethereum, update the skill config of the weather station via the `aea config get/set` command like so:
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.currency_id ETH
 aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.ledger_id ethereum
 </pre></div>
 
+
+
 Or for cosmos, like so:
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.currency_id ATOM
 aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.ledger_id cosmos
 </pre></div>
+
+
 
 This updates the weather station skill config (`my_weather_station/vendor/fetchai/skills/weather_station/skill.yaml`).
 
@@ -1651,14 +1698,20 @@ This updates the weather station skill config (`my_weather_station/vendor/fetcha
 Ensure you are in the weather client project directory.
 
 For ethereum, update the skill config of the weather client via the `aea config get/set` command like so:
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.models.strategy.args.currency_id ETH
 aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.models.strategy.args.ledger_id ethereum
 </pre></div>
 
+
+
 Or for cosmos, like so:
+
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.models.strategy.args.currency_id ATOM
 aea config <span class="nb">set</span> vendor.fetchai.skills.weather_client.models.strategy.args.ledger_id cosmos
 </pre></div>
+
+
 
 This updates the weather client skill config (`my_weather_client/vendor/fetchai/skills/weather_client/skill.yaml`).
 
@@ -1666,9 +1719,11 @@ This updates the weather client skill config (`my_weather_client/vendor/fetchai/
 </details>
 
 <h3 id="run-the-aeas">Run the AEAs</h3>
-<p>Run both AEAs from their respective terminals.
+<p>Run both AEAs from their respective terminals.</p>
 <div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
-</pre></div></p>
+</pre></div>
+
+
 <p>You will see that the AEAs negotiate and then transact using the selected ledger.</p>
 <h3 id="delete-the-aeas">Delete the AEAs</h3>
 <p>When you're done, go up a level and delete the AEAs.</p>

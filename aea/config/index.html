@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1461,13 +1462,15 @@
 
 <p>This document describes the configuration files of the different packages.</p>
 <h2 id="aea-config-yaml">AEA config yaml</h2>
-<p>The following provides a list of the relevant regex used:
+<p>The following provides a list of the relevant regex used:</p>
 <div class="highlight"><pre><span></span><span class="nt">PACKAGE_REGEX</span><span class="p">:</span> <span class="s">&quot;[a-zA-Z_][a-zA-Z0-9_]*&quot;</span>
 <span class="nt">AUTHOR_REGEX</span><span class="p">:</span> <span class="s">&quot;[a-zA-Z_][a-zA-Z0-9_]*&quot;</span>
 <span class="nt">PUBLIC_ID_REGEX</span><span class="p">:</span> <span class="s">&quot;^[a-zA-Z0-9_]*/[a-zA-Z_][a-zA-Z0-9_]*:(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$&quot;</span>
 <span class="nt">LEDGER_ID_REGEX</span><span class="p">:</span> <span class="s">&quot;^[^\\d\\W]\\w*\\Z&quot;</span>
-</pre></div></p>
-<p>The <code>aea-config.yaml</code> defines the AEA project. The compulsary components are listed below:
+</pre></div>
+
+
+<p>The <code>aea-config.yaml</code> defines the AEA project. The compulsary components are listed below:</p>
 <div class="highlight"><pre><span></span><span class="nt">agent_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my_agent</span>                            <span class="c1"># Name of the AEA project (must satisfy PACKAGE_REGEX)</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                                 <span class="c1"># Author handle of the project&#39;s author (must satisfy AUTHOR_REGEX)</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>                                  <span class="c1"># Version of the AEA project (a semantic version number, see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string&quot;)</span>
@@ -1492,8 +1495,10 @@
 <span class="nt">private_key_paths</span><span class="p">:</span>                              <span class="c1"># The private key paths the AEA project uses (keys must satisfy LEDGER_ID_REGEX, values must be file paths)</span>
   <span class="nt">fetchai</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fet_private_key.txt</span>
 <span class="nt">registry_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../packages</span>                      <span class="c1"># The path to the local package registry (must be a directory path and point to a directory called `packages`)</span>
-</pre></div></p>
-<p>The <code>aea-config.yaml</code> can be extended with a number of optional fields:
+</pre></div>
+
+
+<p>The <code>aea-config.yaml</code> can be extended with a number of optional fields:</p>
 <div class="highlight"><pre><span></span><span class="nt">execution_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>                            <span class="c1"># The execution time limit on each call to `react` and `act` (0 disables the feature)</span>
 <span class="nt">timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>                                   <span class="c1"># The sleep time on each AEA loop spin (only relevant for the `sync` mode)</span>
 <span class="nt">max_reactions</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>                               <span class="c1"># The maximum number of envelopes processed per call to `react` (only relevant for the `sync` mode)</span>
@@ -1501,9 +1506,11 @@
 <span class="nt">default_routing</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                             <span class="c1"># The default routing scheme applied to envelopes sent by the AEA, it maps from protocol public ids to connection public ids (both keys and values must satisfy PUBLIC_ID_REGEX)</span>
 <span class="nt">loop_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">async</span>                                <span class="c1"># The agent loop mode (must be one of &quot;sync&quot; or &quot;async&quot;)</span>
 <span class="nt">runtime_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">threaded</span>                          <span class="c1"># The runtime mode (must be one of &quot;threaded&quot; or &quot;async&quot;) and determines how agent loop and multiplexer are run</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="connection-config-yaml">Connection config yaml</h2>
-<p>The <code>connection.yaml</code>, which is present in each connection package, has the following required fields:
+<p>The <code>connection.yaml</code>, which is present in each connection package, has the following required fields:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scaffold</span>                                  <span class="c1"># Name of the package (must satisfy PACKAGE_REGEX)</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                                 <span class="c1"># Author handle of the package&#39;s author (must satisfy AUTHOR_REGEX)</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>                                  <span class="c1"># Version of the package (a semantic version number, see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string&quot;)</span>
@@ -1521,9 +1528,11 @@
 <span class="nt">excluded_protocols</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                          <span class="c1"># The list of protocol public ids the package does not permit (each public id must satisfy PUBLIC_ID_REGEX).</span>
 <span class="nt">restricted_to_protocols</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                     <span class="c1"># The list of protocol public ids the package is limited to (each public id must satisfy PUBLIC_ID_REGEX).</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="contract-config-yaml">Contract config yaml</h2>
-<p>The <code>contract.yaml</code>, which is present in each contract package, has the following required fields:
+<p>The <code>contract.yaml</code>, which is present in each contract package, has the following required fields:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scaffold</span>                                  <span class="c1"># Name of the package (must satisfy PACKAGE_REGEX)</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                                 <span class="c1"># Author handle of the package&#39;s author (must satisfy AUTHOR_REGEX)</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>                                  <span class="c1"># Version of the package (a semantic version number, see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string&quot;)</span>
@@ -1539,9 +1548,11 @@
 <span class="nt">config</span><span class="p">:</span>                                         <span class="c1"># A dictionary containing the kwargs for the contract instantiation.</span>
   <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="protocol-config-yaml">Protocol config yaml</h2>
-<p>The <code>protocol.yaml</code>, which is present in each protocol package, has the following required fields:
+<p>The <code>protocol.yaml</code>, which is present in each protocol package, has the following required fields:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scaffold</span>                                  <span class="c1"># Name of the package (must satisfy PACKAGE_REGEX)</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                                 <span class="c1"># Author handle of the package&#39;s author (must satisfy AUTHOR_REGEX)</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>                                  <span class="c1"># Version of the package (a semantic version number, see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string&quot;)</span>
@@ -1554,9 +1565,11 @@
   <span class="nt">serialization.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmVUzwaSMErJgNFYQZkzsDhuuT2Ht4EdbGJ443usHmPxVv</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                 <span class="c1"># Ignore pattern for the fingerprinting tool.</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="skill-config-yaml">Skill config yaml</h2>
-<p>The <code>skill.yaml</code>, which is present in each protocol package, has the following required fields:
+<p>The <code>skill.yaml</code>, which is present in each protocol package, has the following required fields:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scaffold</span>                                  <span class="c1"># Name of the package (must satisfy PACKAGE_REGEX)</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                                 <span class="c1"># Author handle of the package&#39;s author (must satisfy AUTHOR_REGEX)</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>                                  <span class="c1"># Version of the package (a semantic version number, see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string&quot;)</span>
@@ -1587,7 +1600,7 @@
       <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MyModel</span>                         <span class="c1"># The class name of the class implementing the model interface.</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
-</pre></div></p>
+</pre></div>
 
 
                                 </section>

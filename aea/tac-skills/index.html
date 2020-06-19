@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1541,21 +1542,26 @@
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.
+<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div></p>
+</pre></div>
+
+
 <p>Keep it running for the following demo.</p>
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
-<p>In the root directory, fetch the controller AEA:
+<p>In the root directory, fetch the controller AEA:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller:0.2.0
 <span class="nb">cd</span> tac_controller
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the controller from scratch:
+
 <div class="highlight"><pre><span></span>aea create tac_controller
 <span class="nb">cd</span> tac_controller
 aea add connection fetchai/oef:0.4.0
@@ -1565,25 +1571,33 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
+
+
 </p>
 </details>
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
-<p>In a separate terminal, in the root directory, fetch at least two participants:
+<p>In a separate terminal, in the root directory, fetch at least two participants:</p>
 <div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_one
 aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea install
-</pre></div></p>
+</pre></div>
+
+
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 In a separate terminal, in the root directory, create at least two tac participant AEAs:
+
 <div class="highlight"><pre><span></span>aea create tac_participant_one
 aea create tac_participant_two
 </pre></div>
 
+
+
 Build participant one:
+
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
 aea add connection fetchai/oef:0.4.0
 aea add skill fetchai/tac_participation:0.3.0
@@ -1593,7 +1607,10 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
+
+
 Then, build participant two:
+
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
 aea add connection fetchai/oef:0.4.0
 aea add skill fetchai/tac_participation:0.3.0
@@ -1602,6 +1619,8 @@ aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
+
+
 
 </p>
 </details>
@@ -1612,27 +1631,33 @@ aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </pre></div>
 
+
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>The CLI tool supports the launch of several agents
 at once.</p>
 <p>For example, assuming you followed the tutorial, you
-can launch all the TAC agents as follows from the root directory:
+can launch all the TAC agents as follows from the root directory:</p>
 <div class="highlight"><pre><span></span>aea launch tac_controller tac_participant_one tac_participant_two
-</pre></div></p>
+</pre></div>
+
+
 <p>You may want to try <code>--multithreaded</code>
 option in order to run the agents
 in the same process.</p>
 <h3 id="cleaning-up">Cleaning up</h3>
-<p>When you're finished, delete your AEAs:
+<p>When you're finished, delete your AEAs:</p>
 <div class="highlight"><pre><span></span>aea delete tac_controller
 aea delete tac_participant_one
 aea delete tac_participant_two
-</pre></div></p>
+</pre></div>
+
+
 <!-- ## Negotiation skill - deep dive
 
 The AEA `tac_negotiation` skill demonstrates how negotiation strategies may be embedded into an Autonomous Economic Agent.
 
 The `tac_negotiation` skill `skill.yaml` configuration file looks like this.
+
 
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tac_negotiation</span>
 <span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
@@ -1681,6 +1706,8 @@ The `tac_negotiation` skill `skill.yaml` configuration file looks like this.
       <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
 <span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai/oef_search:0.2.0&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fetchai/fipa:0.3.0&#39;</span><span class="p p-Indicator">]</span>
 </pre></div>
+
+
 
 Above, you can see the registered `Behaviour` class name `GoodsRegisterAndSearchBehaviour` which implements register and search behaviour of an AEA for the `tac_negotiation` skill.
 

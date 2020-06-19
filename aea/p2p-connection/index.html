@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1470,6 +1471,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 aea run --connections fetchai/p2p_libp2p:0.2.0
 </pre></div>
 
+
 <h3 id="create-and-run-another-aea">Create and run another AEA</h3>
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_other_aea
@@ -1478,18 +1480,22 @@ aea add connection fetchai/p2p_libp2p:0.2.0
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
 </pre></div>
 
+
 <p>Provide the AEA with the information it needs to find the genesis by replacing the following block in <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
-<p><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div>
-Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
+
+
+<p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
 <div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.2.0
 </pre></div>
+
 
 <p>You can inspect the <code>libp2p_node.log</code> log files of the AEA to see how they discover each other.</p>
 <h2 id="local-demo-with-skills">Local demo with skills</h2>
@@ -1499,38 +1505,53 @@ Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi ad
 aea fetch fetchai/weather_client:0.5.0
 </pre></div>
 
-<p>Then enter each project individually and execute the following to add the <code>p2p_libp2p</code> connection:
+
+<p>Then enter each project individually and execute the following to add the <code>p2p_libp2p</code> connection:</p>
 <div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.2.0
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
-</pre></div></p>
-<p>Then extend the <code>aea-config.yaml</code> of each project as follows:
+</pre></div>
+
+
+<p>Then extend the <code>aea-config.yaml</code> of each project as follows:</p>
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="p p-Indicator">?</span> <span class="s">&quot;fetchai/oef_search:0.2.0&quot;</span>
   <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.4.0&quot;</span>
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="run-oef">Run OEF</h3>
-<p>Run the oef for search and discovery:
+<p>Run the oef for search and discovery:</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="run-weather-station">Run weather station</h3>
-<p>Run the weather station first:
+<p>Run the weather station first:</p>
 <div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.2.0,fetchai/oef:0.4.0&quot;</span>
 </pre></div>
-The weather station will form the genesis node. Wait until you see the lines:
+
+
+<p>The weather station will form the genesis node. Wait until you see the lines:</p>
 <div class="highlight"><pre><span></span>My libp2p addresses: ...
 </pre></div>
-Take note of these as the genesis' <code>MULTI_ADDRESSES = ["{addr1}", "{addr2}"]</code>.</p>
+
+
+<p>Take note of these as the genesis' <code>MULTI_ADDRESSES = ["{addr1}", "{addr2}"]</code>.</p>
 <h3 id="generate-wealth-for-the-weather-client-aea">Generate wealth for the weather client AEA</h3>
 <p>The weather client needs to have some wealth to purchase the weather station information.</p>
-<p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:
+<p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:</p>
 <div class="highlight"><pre><span></span>aea generate-key fetchai
 aea add-key fetchai fet_private_key.txt
-</pre></div></p>
-<p>Then, create some wealth for your weather client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:
+</pre></div>
+
+
+<p>Then, create some wealth for your weather client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:</p>
 <div class="highlight"><pre><span></span>aea generate-wealth fetchai
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="run-the-weather-client">Run the weather client</h3>
-<p>Provide the weather client AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:
+<p>Provide the weather client AEA with the information it needs to find the genesis by adding the following block to <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MULTI_ADDRESSES</span>
@@ -1538,10 +1559,14 @@ aea add-key fetchai fet_private_key.txt
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div>
-Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
-<p>Now run the weather client:
+
+
+<p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
+<p>Now run the weather client:</p>
 <div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.2.0,fetchai/oef:0.4.0&quot;</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="deployed-agent-communication-network">Deployed agent communication network</h2>
 <p>You can connect to the deployed public test network by adding one or multiple of the following addresses as the <code>lipp2p_entry_peers</code>:</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span>
@@ -1549,14 +1574,15 @@ Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi ad
 <span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span>
 </pre></div>
 
-<p>In particular, by modiying the configuration such that:
+
+<p>In particular, by modiying the configuration such that:</p>
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span><span class="p p-Indicator">]</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
-</pre></div></p>
+</pre></div>
 
 
                                 </section>

@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1567,18 +1568,20 @@
 <p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see https://community.fetch.ai for the instructions on joining, or the "Further Information" section below). </p>
 <h4 id="a-note-on-classifications">A note on classifications</h4>
 <p>There is currently no fixed set of guidelines as to how classifications are used. It is expected that agent builders will converge on a set of standards, and as those become clearer, they will be documented as "by convention" classification uses. Here are some examples of classifications in use:</p>
-<div class="highlight"><pre><span></span>mobility.railway.station
-mobility.railway.train
-mobility.road.taxi
-infrastructure.road.sign
+<div class="highlight"><pre><span></span><span class="err">mobility.railway.station</span>
+<span class="err">mobility.railway.train</span>
+<span class="err">mobility.road.taxi</span>
+<span class="err">infrastructure.road.sign</span>
 </pre></div>
+
 
 <p>When filtering by classifications, the <code>*</code> wildcard can be used to, for example, capture all mobility related agents with a wildcard of <code>mobility.*</code>. </p>
 <h3 id="service-keys">Service Keys</h3>
 <p>Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent <em>looks</em>, service keys are what an agent <em>has</em> or <em>does</em>. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's descretion. As this changes, the documentation will be updated. However, for <em>buyer</em> agents, two suggested keys are:</p>
-<div class="highlight"><pre><span></span>buying_genus
-buying_classifications
+<div class="highlight"><pre><span></span><span class="err">buying_genus</span>
+<span class="err">buying_classifications</span>
 </pre></div>
+
 
 <p>This allows searches to look for potential buyers of classifications or genus. </p>
 <h2 id="finding-agents">Finding Agents</h2>
@@ -1609,6 +1612,7 @@ buying_classifications
     <span class="nt">&lt;/results&gt;</span>
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
+
 
 <p><strong>The <code>&lt;location&gt;</code> block is only returned if the agent has set itself to disclose its position in a find.</strong> Normally, the default is not to, and agents will then only return the <code>&lt;range_in_km&gt;</code> item. This is because agents may deliver their precise location as part of the value that they deliver, and therefore it would need to be negotiated and potentially paid for. However, sometimes, it is desirable for agents to always deliver their position when found but specify the accuracy. Because of this, the soef supports four levels of accuracy:</p>
 <table>
@@ -1662,6 +1666,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
+
 <p>This indicates success and that the agent is now in the <strong>Lobby</strong>. The lobby is a temporary holding pen where newly registered agents wait until the negotiation is complete. If an agent does not respond and complete its registration within 60 seconds, it is removed from the lobby and registration is cancelled. </p>
 <p>The <code>&lt;page_address&gt;</code> is the <strong>unique URL</strong> for the new agent. This must be quoted in all subsequent interactions and is how the soef identifies that specific agent. To complete registration, use the unique URL and specify the parameters:</p>
 <ul>
@@ -1673,6 +1678,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
     <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
+
 
 <p>At this point, your agent is now fully registered and can then communicate with the soef. </p>
 <p>Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.</p>

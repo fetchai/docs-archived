@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1476,6 +1477,7 @@
 <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fet_private_key_2.txt&quot;</span>
 </pre></div>
 
+
 <h2 id="create-the-private-keys">Create the private keys</h2>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private keys</span>
     <span class="n">create_private_key</span><span class="p">(</span>
@@ -1486,6 +1488,7 @@
     <span class="p">)</span>
 </pre></div>
 
+
 <h2 id="create-the-wallets">Create the wallets</h2>
 <p>Once we created the private keys we need to generate the wallets.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set up the wallets</span>
@@ -1493,21 +1496,26 @@
     <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 </pre></div>
 
+
 <h2 id="create-ledgerapis">Create LedgerApis</h2>
-<p>We need to create the LedgerApis object in order to be able to interact with the Fetch.ai <code>testnet</code>
+<p>We need to create the LedgerApis object in order to be able to interact with the Fetch.ai <code>testnet</code></p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set up the LedgerApis</span>
     <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">(</span>
         <span class="p">{</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">}},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span>
     <span class="p">)</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="generate-wealth">Generate wealth</h2>
 <p>Since we want to send funds from <code>wallet_1</code> to <code>wallet_2</code>, we need to generate some wealth for the <code>wallet_1</code>. We can
-do this with the following code
+do this with the following code</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Generate some wealth</span>
     <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
         <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
     <span class="p">)</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="send-transaction">Send transaction</h2>
 <p>Finally, we create a transaction that sends the funds to the <code>wallet_2</code></p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create the transaction and send it to the ledger.</span>
@@ -1526,6 +1534,7 @@ do this with the following code
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction complete.&quot;</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The transaction digest is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tx_digest</span><span class="p">))</span>
 </pre></div>
+
 
 <details><summary>Stand-alone transaction full code</summary>
 
@@ -1591,6 +1600,8 @@ do this with the following code
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">run</span><span class="p">()</span>
 </pre></div>
+
+
 </details>
 
 

@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../..';</script>
     <link href="../../css/style.min.css" rel="stylesheet">
-    <link href="../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../css/my-styles.css" rel="stylesheet">
+    <link href="../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1529,19 +1530,22 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 
+
 <ul>
-<li>
-<p>The <code>DefaultMessage</code> of performative <code>DefaultMessage.Performative.BYTES</code> is used to send payloads of byte strings to other AEAs. An example is:
+<li>The <code>DefaultMessage</code> of performative <code>DefaultMessage.Performative.BYTES</code> is used to send payloads of byte strings to other AEAs. An example is:</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
 
 <span class="n">msg</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
     <span class="n">performative</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">BYTES</span><span class="p">,</span>
     <span class="n">content</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;This is a bytes payload&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div></p>
-</li>
-<li>
-<p>The <code>DefaultMessage</code> of performative <code>DefaultMessage.Performative.ERROR</code> is used to notify other AEAs of errors in an interaction, including errors with other protocols, by including an <code>error_code</code> in the payload:
+</pre></div>
+
+
+<ul>
+<li>The <code>DefaultMessage</code> of performative <code>DefaultMessage.Performative.ERROR</code> is used to notify other AEAs of errors in an interaction, including errors with other protocols, by including an <code>error_code</code> in the payload:</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ErrorCode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This class represents an instance of ErrorCode.&quot;&quot;&quot;</span>
 
@@ -1551,16 +1555,18 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
     <span class="n">UNSUPPORTED_SKILL</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="n">INVALID_DIALOGUE</span> <span class="o">=</span> <span class="mi">4</span>
 </pre></div>
-An example is:
+
+
+<p>An example is:</p>
 <div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
     <span class="n">performative</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
     <span class="n">error_code</span><span class="o">=</span><span class="n">DefaultMessage</span><span class="o">.</span><span class="n">ErrorCode</span><span class="o">.</span><span class="n">UNSUPPORTED_PROTOCOL</span><span class="p">,</span>
     <span class="n">error_msg</span><span class="o">=</span><span class="s2">&quot;This protocol is not supported by this AEA.&quot;</span><span class="p">,</span>
     <span class="n">error_data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;unsupported_msg&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;serialized unsupported protocol message&quot;</span><span class="p">},</span>
 <span class="p">)</span>
-</pre></div></p>
-</li>
-</ul>
+</pre></div>
+
+
 <p>Each AEA's <code>fetchai/error:0.2.0</code> skill utilises the <code>fetchai/default:0.2.0</code> protocol for error handling.</p>
 <h2 id="fetchaioef_search020-protocol"><code>fetchai/oef_search:0.2.0</code> protocol</h2>
 <p>The <code>fetchai/oef_search:0.2.0</code> protocol is used by AEAs to interact with an <a href="../oef-ledger">OEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
@@ -1579,13 +1585,16 @@ An example is:
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 
+
 <p>We show some example messages below:</p>
 <ul>
-<li>
-<p>To register a service, we require a reference to the dialogue in string form (used to keep different dialogues apart), for instance
+<li>To register a service, we require a reference to the dialogue in string form (used to keep different dialogues apart), for instance</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="n">my_dialogue_reference</span> <span class="o">=</span> <span class="s2">&quot;a_unique_register_service_dialogue_reference&quot;</span>
 </pre></div>
-and a description of the service we would like to register, for instance
+
+
+<p>and a description of the service we would like to register, for instance</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
 
 <span class="n">my_service_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Cambridge&quot;</span><span class="p">}</span>
@@ -1594,7 +1603,9 @@ and a description of the service we would like to register, for instance
     <span class="n">data_model</span><span class="o">=</span><span class="n">my_data_model</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-where we use, for instance
+
+
+<p>where we use, for instance</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="n">GenericDataModel</span>
 
 <span class="n">data_model_name</span> <span class="o">=</span> <span class="s2">&quot;location&quot;</span>
@@ -1612,31 +1623,41 @@ where we use, for instance
 <span class="p">}</span>
 <span class="n">my_data_model</span> <span class="o">=</span> <span class="n">GenericDataModel</span><span class="p">(</span><span class="n">data_model_name</span><span class="p">,</span> <span class="n">data_model</span><span class="p">)</span>
 </pre></div>
-We can then create the message to register this service:
+
+
+<p>We can then create the message to register this service:</p>
 <div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
     <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span><span class="p">,</span>
     <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="n">my_dialogue_reference</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
     <span class="n">service_description</span><span class="o">=</span><span class="n">my_service_description</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div></p>
-</li>
-<li>
-<p>To unregister a service, we require a reference to the dialogue in string form, for instance
+</pre></div>
+
+
+<ul>
+<li>To unregister a service, we require a reference to the dialogue in string form, for instance</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="n">my_dialogue_reference</span> <span class="o">=</span> <span class="s2">&quot;a_unique_unregister_service_dialogue_reference&quot;</span>
 </pre></div>
-the description of the service we would like to unregister, say <code>my_service_description</code> from above and construct the message:
+
+
+<p>the description of the service we would like to unregister, say <code>my_service_description</code> from above and construct the message:</p>
 <div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
     <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
     <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="n">my_dialogue_reference</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
     <span class="n">service_description</span><span class="o">=</span><span class="n">my_service_description</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div></p>
-</li>
-<li>
-<p>To search a service, we require a reference to the dialogue in string form, for instance
+</pre></div>
+
+
+<ul>
+<li>To search a service, we require a reference to the dialogue in string form, for instance</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="n">my_dialogue_reference</span> <span class="o">=</span> <span class="s2">&quot;a_unique_search_dialogue_reference&quot;</span>
 </pre></div>
-and a query we would like the search node to evaluate, for instance
+
+
+<p>and a query we would like the search node to evaluate, for instance</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Query</span>
 
 <span class="n">query_data</span> <span class="o">=</span> <span class="p">{</span>
@@ -1657,19 +1678,25 @@ and a query we would like the search node to evaluate, for instance
     <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-We can then create the message to search these services:
+
+
+<p>We can then create the message to search these services:</p>
 <div class="highlight"><pre><span></span><span class="n">oef_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
     <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SEARCH_SERVICES</span><span class="p">,</span>
     <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="n">my_dialogue_reference</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
     <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div></p>
-</li>
+</pre></div>
+
+
+<ul>
 <li>
 <p>The <a href="../oef-ledger">OEF search node</a> will respond with a message, say <code>msg</code> of type <code>OefSearchMessage</code>, of performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code>. To access the tuple of agents which match the query, simply use <code>msg.agents</code>. In particular, this will return the agent addresses matching the query. The <a href="../identity">agent address</a> can then be used to send a message to the agent utilising the <a href="../oef-ledger">OEF communication node</a> and any protocol other than <code>fetchai/oef_search:0.2.0</code>.</p>
 </li>
 <li>
-<p>If the <a href="../oef-ledger">OEF search node</a> encounters any errors with the messages you send, it will return an <code>OefSearchMessage</code> of performative <code>OefSearchMessage.Performative.OEF_ERROR</code> and indicate the error operation encountered:
+<p>If the <a href="../oef-ledger">OEF search node</a> encounters any errors with the messages you send, it will return an <code>OefSearchMessage</code> of performative <code>OefSearchMessage.Performative.OEF_ERROR</code> and indicate the error operation encountered:</p>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OefErrorOperation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;This class represents an instance of OefErrorOperation.&quot;&quot;&quot;</span>
@@ -1679,9 +1706,9 @@ We can then create the message to search these services:
     <span class="n">SEND_MESSAGE</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="n">OTHER</span> <span class="o">=</span> <span class="mi">10000</span>
-</pre></div></p>
-</li>
-</ul>
+</pre></div>
+
+
 <h2 id="fetchaifipa030-protocol"><code>fetchai/fipa:0.3.0</code> protocol</h2>
 <p>This protocol provides classes and functions necessary for communication between AEAs via a variant of the <a href="http://www.fipa.org/repository/aclspecs.html">FIPA</a> Agent Communication Language.</p>
 <p>The <code>fetchai/fipa:0.3.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
@@ -1702,6 +1729,7 @@ We can then create the message to search these services:
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 
+
 <p><code>FipaMessages</code> are constructed with a <code>performative</code>, <code>dialogue_reference</code>, <code>message_id</code>, and <code>target</code> as well as the <code>kwargs</code> specific to each message performative.</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1713,11 +1741,12 @@ We can then create the message to search these services:
 <span class="p">)</span>
 </pre></div>
 
+
 <p>The <code>fetchai/fipa:0.3.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
 <p>For examples of the usage of the <code>fetchai/fipa:0.3.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
 <h3 id="fipa-dialogue">Fipa dialogue</h3>
 <p>Below, we give an example of a dialogue between two agents. In practice; both dialogues would be maintained in the respective agent.</p>
-<p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:
+<p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span> <span class="k">as</span> <span class="n">BaseDialogue</span>
 <span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">DialogueLabel</span>
 <span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Query</span>
@@ -1848,14 +1877,18 @@ We can then create the message to search these services:
 <span class="sd">        :return: The role of the agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">AgentRole</span><span class="o">.</span><span class="n">SELLER</span>
-</pre></div></p>
-<p>Next, we can immitate a dialogue between the buyer and the seller. We first instantiate the dialogues models:
+</pre></div>
+
+
+<p>Next, we can immitate a dialogue between the buyer and the seller. We first instantiate the dialogues models:</p>
 <div class="highlight"><pre><span></span><span class="n">buyer_address</span> <span class="o">=</span> <span class="s2">&quot;buyer_address_stub&quot;</span>
 <span class="n">seller_address</span> <span class="o">=</span> <span class="s2">&quot;seller_address_stub&quot;</span>
 <span class="n">buyer_dialogues</span> <span class="o">=</span> <span class="n">BuyerDialogues</span><span class="p">(</span><span class="n">buyer_address</span><span class="p">)</span>
 <span class="n">seller_dialogues</span> <span class="o">=</span> <span class="n">SellerDialogues</span><span class="p">(</span><span class="n">seller_address</span><span class="p">)</span>
-</pre></div></p>
-<p>First, the buyer creates a message destined for the seller and updates the dialogues:
+</pre></div>
+
+
+<p>First, the buyer creates a message destined for the seller and updates the dialogues:</p>
 <div class="highlight"><pre><span></span><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
     <span class="n">message_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">buyer_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
@@ -1868,22 +1901,30 @@ We can then create the message to search these services:
 <span class="c1"># Extends the outgoing list of messages.</span>
 <span class="n">buyer_dialogue</span> <span class="o">=</span> <span class="n">buyer_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
 </pre></div>
-If the message has been correctly constructed, the <code>buyer_dialogue</code> will be returned, otherwise it will be <code>None</code>.</p>
-<p>In a skill, the message could now be sent:
+
+
+<p>If the message has been correctly constructed, the <code>buyer_dialogue</code> will be returned, otherwise it will be <code>None</code>.</p>
+<p>In a skill, the message could now be sent:</p>
 <div class="highlight"><pre><span></span><span class="c1"># In a skill we would do:</span>
 <span class="c1"># self.context.outbox.put_message(message=cfp_msg)</span>
-</pre></div></p>
-<p>However, here we simply continue with the seller:
+</pre></div>
+
+
+<p>However, here we simply continue with the seller:</p>
 <div class="highlight"><pre><span></span><span class="c1"># change the incoming message field &amp; counterparty</span>
 <span class="n">cfp_msg</span><span class="o">.</span><span class="n">is_incoming</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">buyer_address</span>
 </pre></div>
-In the skill, the above two lines will be done by the framework; you can simply receive the message in the handler.</p>
-<p>We update the seller's dialogues model next to generate a new dialogue:
+
+
+<p>In the skill, the above two lines will be done by the framework; you can simply receive the message in the handler.</p>
+<p>We update the seller's dialogues model next to generate a new dialogue:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Creates a new dialogue for the seller side based on the income message.</span>
 <span class="n">seller_dialogue</span> <span class="o">=</span> <span class="n">seller_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
-</pre></div></p>
-<p>Next, the seller can generate a proposal:
+</pre></div>
+
+
+<p>Next, the seller can generate a proposal:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Generate a proposal message to send to the buyer.</span>
 <span class="n">proposal</span> <span class="o">=</span> <span class="n">Description</span><span class="p">({</span><span class="s2">&quot;foo1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar1&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 <span class="n">message_id</span> <span class="o">=</span> <span class="n">cfp_msg</span><span class="o">.</span><span class="n">message_id</span> <span class="o">+</span> <span class="mi">1</span>
@@ -1899,15 +1940,20 @@ In the skill, the above two lines will be done by the framework; you can simply 
 
 <span class="c1"># Then we update the dialogue</span>
 <span class="n">seller_dialogue</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">proposal_msg</span><span class="p">)</span>
-</pre></div></p>
-<p>In a skill, the message could now be sent:
+</pre></div>
+
+
+<p>In a skill, the message could now be sent:</p>
 <div class="highlight"><pre><span></span><span class="c1"># In a skill we would do:</span>
 <span class="c1"># self.context.outbox.put_message(message=proposal_msg)</span>
-</pre></div></p>
+</pre></div>
+
+
 <p>The dialogue can continue like this.</p>
 <p>To retrieve a dialogue for a given message, we can do the following:</p>
 <div class="highlight"><pre><span></span><span class="n">retrieved_dialogue</span> <span class="o">=</span> <span class="n">seller_dialogues</span><span class="o">.</span><span class="n">get_dialogue</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
 </pre></div>
+
 
 <p><br /></p>
 

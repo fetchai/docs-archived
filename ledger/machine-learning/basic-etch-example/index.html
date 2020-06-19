@@ -33,7 +33,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>var base_url = '../../..';</script>
     <link href="../../../css/style.min.css" rel="stylesheet">
-    <link href="../../../css/my-styles.css" rel="stylesheet"> 
+    <link href="../../../css/my-styles.css" rel="stylesheet">
+    <link href="../../../css/default.css" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/392c70381a.js" crossorigin="anonymous" SameSite="None" Secure></script>
 </head>
@@ -1496,6 +1497,7 @@ Writing machine learning applications in the <code>etch</code> language should b
 <span class="n">endfunction</span>
 </pre></div>
 
+
 <p>Above is code example for an etch script that trains a fully connected model on csv's read in from the command line.</p>
 <p>We can break it down into the following steps:</p>
 <ol>
@@ -1520,6 +1522,7 @@ Writing machine learning applications in the <code>etch</code> language should b
 <span class="n">endif</span>
 </pre></div>
 
+
 <h3 id="load-the-input-data">Load the input data</h3>
 <p>Next, we load the input data from the files.</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">data</span> <span class="o">=</span> <span class="n">readCSV</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Argv</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
@@ -1527,6 +1530,7 @@ Writing machine learning applications in the <code>etch</code> language should b
 <span class="n">var</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">readCSV</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Argv</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
 <span class="n">var</span> <span class="n">test_label</span> <span class="o">=</span> <span class="n">readCSV</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Argv</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
 </pre></div>
+
 
 <h3 id="set-up-the-model">Set up the model</h3>
 <p>First, we create a <code>Model</code> type and set a flag on it that describes what kind of <code>Model</code> we want. The <code>sequential</code> model allows us to manually add the layers.</p>
@@ -1539,25 +1543,32 @@ Writing machine learning applications in the <code>etch</code> language should b
 <span class="n">model</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;mse&quot;</span><span class="p">,</span> <span class="s">&quot;adam&quot;</span><span class="p">);</span>
 </pre></div>
 
+
 <h3 id="train-the-model">Train the model</h3>
 <p>Training the model once set up is easy; we just call <code>fit</code> with the data, labels, and chosen batch size.</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10u64</span><span class="p">;</span>
 <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">);</span>
 </pre></div>
 
+
 <h3 id="evaluate-the-model">Evaluate the model</h3>
-<p>Evaluating the model will, by default, return the training loss; but other metrics may be specified.
+<p>Evaluating the model will, by default, return the training loss; but other metrics may be specified.</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">();</span>
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="make-predictions-on-the-model">Make predictions on the model</h3>
 <p>Finally we make house price predictions by passing in the test data. Since the test_data contains input
-data for multiple houses, the output tensor contains multiple predictions.
+data for multiple houses, the output tensor contains multiple predictions.</p>
 <div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_data</span><span class="p">);</span>
-</pre></div></p>
+</pre></div>
+
+
 <h3 id="run-the-script">Run the script</h3>
 <p>Run the script from the ledger repo adding the input files as input arguments with the following.</p>
 <div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">etch</span> <span class="n">boston</span><span class="o">-</span><span class="n">training</span><span class="p">.</span><span class="n">etch</span> <span class="o">--</span> <span class="mi">1</span><span class="n">st</span><span class="o">-</span><span class="n">file</span> <span class="mi">2</span><span class="n">nd</span><span class="o">-</span><span class="n">file</span> <span class="mi">3</span><span class="n">rd</span><span class="o">-</span><span class="n">file</span> <span class="mi">4</span><span class="n">th</span><span class="o">-</span><span class="n">file</span>
 </pre></div>
+
 
 <p><br /></p>
 
