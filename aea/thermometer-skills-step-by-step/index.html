@@ -1124,7 +1124,7 @@
     <span class="head">Python API</span>
     <ul id="header_python_api"> 
 <li>
-    <a href="../../ledger/python-ledger-aea/api/python-api-install.md" id="ledger-python-ledger-aea-api-python-api-install.md"
+    <a href="../../ledger/python-ledger-api/python-api-install/" id="ledger-python-ledger-api-python-api-install-"
         >Installation</a
     >
 </li>
@@ -1133,7 +1133,7 @@
     <span class="head">Examples</span>
     <ul id="header_examples"> 
 <li>
-    <a href="../../ledger/python-ledger-aea/api/examples/block-number.md" id="ledger-python-ledger-aea-api-examples-block-number.md"
+    <a href="../../ledger/python-ledger-api/examples/block-number/" id="ledger-python-ledger-api-examples-block-number-"
         >Block Number</a
     >
 </li>
@@ -1480,7 +1480,7 @@
 </ul>
 <p>The AEA will “live” inside the Raspberry Pi and will read the data from a sensor. Then it will connect to the <a href="../oef-ledger">OEF search and communication node</a> and will identify itself as a seller of that data.</p>
 <p>If you simply want to follow the software part of the guide then you only require the dependencies listed in the <a href="#dependencies">Dependencies</a> section.</p>
-<h3 id="setup-the-environment">Setup the environment</h3>
+<h3 id="setup-the-environment-optional">Setup the environment (Optional)</h3>
 <p>You can follow the guide <a href=../raspberry-set-up> here </a> in order to setup your environment and prepare your Raspberry Pi.</p>
 <p>Once you setup your Raspberry Pi, open a terminal and navigate to <code>/etc/udev/rules.d/</code>. Create a new file there  (I named mine <code>99-hidraw-permissions.rules</code>)</p>
 <div class="highlight"><pre><span></span>sudo nano <span class="m">99</span>-hidraw-permissions.rules
@@ -1493,8 +1493,24 @@
 
 
 <p>this assigns all devices coming out of the hidraw subsystem in the kernel to the group <code>plugdev</code> and sets the permissions to <code>r/w r/w r</code> (for root [the default owner], plugdev, and everyone else respectively).</p>
-<h2 id="dependencies">Dependencies</h2>
+<h2 id="dependencies-required">Dependencies (Required)</h2>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
+<h2 id="reference-optional">Reference (Optional)</h2>
+<p>This step-by-step guide recreates two AEAs already developed by Fetch.ai. You can get the finished AEAs to compare your code against by following the next steps:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_aea:0.3.0
+<span class="nb">cd</span> thermometer_aea
+aea eject fetchai/thermometer:0.4.0
+<span class="nb">cd</span> ..
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_client:0.3.0
+<span class="nb">cd</span> thermometer_client
+aea eject fetchai/thermometer_client:0.3.0
+<span class="nb">cd</span> ..
+</pre></div>
+
+
 <h2 id="thermometer-aea">Thermometer AEA</h2>
 <h3 id="step-1-create-the-aea">Step 1: Create the AEA</h3>
 <p>Create a new AEA by typing the following command in the terminal: </p>
@@ -2253,7 +2269,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <p>Since we made so many changes to our AEA we have to update the <code>skill.yaml</code> (at <code>my_thermometer/skills/thermometer/skill.yaml</code>). Make sure that your <code>skill.yaml</code> matches with the following code </p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2.0</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">fingerprint</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.4.0,</span><span class="nv"> </span><span class="s">&lt;0.5.0&#39;</span>
@@ -3055,24 +3071,32 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 
 <p>This will hash each file and save the hash in the fingerprint. This way, in the future we can easily track if any of the files have changed.</p>
 <h2 id="run-the-aeas">Run the AEAs</h2>
+<details><summary>Additional steps for Raspberry Pi only!</summary>
+
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>If you are using the Raspberry Pi, make sure that your thermometer sensor is connected to the Raspberry Pi's USB port.</p>
 </div>
 
-<p>You can change the end-point's address and port by modifying the connection's yaml file (<code>*vendor/fetchai/connections/oef/connection.yaml</code>)</p>
-<p>Under config locate:</p>
+You can change the end-point's address and port by modifying the connection's yaml file (`*vendor/fetchai/connections/oef/connection.yaml`)
+
+Under config locate:
+
+
 <div class="highlight"><pre><span></span><span class="nt">addr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${OEF_ADDR</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1}</span>
 </pre></div>
 
 
-<p>and replace it with your IP (the IP of the machine that runs the <a href="../oef-ledger">OEF search and communication node</a> image.)</p>
+and replace it with your IP (the IP of the machine that runs the [OEF search and communication node](../oef-ledger) image.)
+
+</details>
+
 <p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
 <div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
 </pre></div>
 
 
-<h3 id="fetchai-ledger-payment">Fetch.ai ledger payment</h3>
+<h3 id="option-1-fetchai-ledger-payment">Option 1: Fetch.ai ledger payment</h3>
 <p>Create the private key for the weather client AEA.</p>
 <div class="highlight"><pre><span></span>aea generate-key fetchai
 aea add-key fetchai fet_private_key.txt
@@ -3103,7 +3127,7 @@ aea run --connections fetchai/oef:0.4.0
 
 
 <p>You will see that the AEAs negotiate and then transact using the Fetch.ai testnet.</p>
-<h3 id="ethereum-ledger-payment">Ethereum ledger payment</h3>
+<h3 id="option-2-ethereum-ledger-payment">Option 2: Ethereum ledger payment</h3>
 <p>A demo to run the same scenario but with a true ledger transaction on the Ethereum Ropsten testnet. 
 This demo assumes the temperature client trusts our AEA to send the temperature data upon successful payment.</p>
 <p>Create the private key for the <code>my_client</code> AEA.</p>
