@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../../../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../../../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../../../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../../../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../../../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../../../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../../crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../../crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../../crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../../helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../../protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../../protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1469,7 +1549,7 @@
 </pre></div>
 
 
-<p>Represent the ownership state of an agent.</p>
+<p>Represent the ownership state of an agent (can proxy a ledger).</p>
 <p><a name=".aea.decision_maker.base.OwnershipState.set"></a></p>
 <h4 id="set">set</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
@@ -1511,28 +1591,28 @@
 <p><a name=".aea.decision_maker.base.OwnershipState.is_affordable_transaction"></a></p>
 <h4 id="is_affordable_transaction">is<code>_</code>affordable<code>_</code>transaction</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+ <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 
 <p>Check if the transaction is affordable (and consistent).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>tx_message</code>: the transaction message</li>
+<li><code>terms</code>: the transaction terms</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if the transaction is legal wrt the current state, false otherwise.</p>
 <p><a name=".aea.decision_maker.base.OwnershipState.apply_transactions"></a></p>
 <h4 id="apply_transactions">apply<code>_</code>transactions</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">apply_transactions</span><span class="p">(</span><span class="n">transactions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TransactionMessage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;OwnershipState&quot;</span>
+ <span class="o">|</span> <span class="n">apply_transactions</span><span class="p">(</span><span class="n">list_of_terms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Terms</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;OwnershipState&quot;</span>
 </pre></div>
 
 
 <p>Apply a list of transactions to (a copy of) the current state.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>transactions</code>: the sequence of transaction messages.</li>
+<li><code>list_of_terms</code>: the sequence of transaction terms.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the final state.</p>
@@ -1544,36 +1624,6 @@
 
 
 <p>Copy the object.</p>
-<p><a name=".aea.decision_maker.base.LedgerStateProxy"></a></p>
-<h2 id="ledgerstateproxy-objects">LedgerStateProxy Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LedgerStateProxy</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Class to represent a proxy to a ledger state.</p>
-<p><a name=".aea.decision_maker.base.LedgerStateProxy.is_initialized"></a></p>
-<h4 id="is_initialized_1">is<code>_</code>initialized</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">is_initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Get the initialization status.</p>
-<p><a name=".aea.decision_maker.base.LedgerStateProxy.is_affordable_transaction"></a></p>
-<h4 id="is_affordable_transaction_1">is<code>_</code>affordable<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Check if the transaction is affordable on the default ledger.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>tx_message</code>: the transaction message</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>whether the transaction is affordable on the ledger</p>
 <p><a name=".aea.decision_maker.base.Preferences"></a></p>
 <h2 id="preferences-objects">Preferences Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Preferences</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
@@ -1594,7 +1644,7 @@
 <li><code>kwargs</code>: the relevant key word arguments</li>
 </ul>
 <p><a name=".aea.decision_maker.base.Preferences.is_initialized"></a></p>
-<h4 id="is_initialized_2">is<code>_</code>initialized</h4>
+<h4 id="is_initialized_1">is<code>_</code>initialized</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">is_initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -1621,7 +1671,7 @@
 <p><a name=".aea.decision_maker.base.Preferences.utility_diff_from_transaction"></a></p>
 <h4 id="utility_diff_from_transaction">utility<code>_</code>diff<code>_</code>from<code>_</code>transaction</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">utility_diff_from_transaction</span><span class="p">(</span><span class="n">ownership_state</span><span class="p">:</span> <span class="n">OwnershipState</span><span class="p">,</span> <span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+ <span class="o">|</span> <span class="n">utility_diff_from_transaction</span><span class="p">(</span><span class="n">ownership_state</span><span class="p">:</span> <span class="n">OwnershipState</span><span class="p">,</span> <span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
 
 
@@ -1629,7 +1679,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ownership_state</code>: the ownership state against which to apply the transaction.</li>
-<li><code>tx_message</code>: a transaction message.</li>
+<li><code>terms</code>: the transaction terms.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the score.</p>
@@ -1661,7 +1711,7 @@
 </ul>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.put"></a></p>
 <h4 id="put">put</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">put</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">put</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1682,7 +1732,7 @@ ignored in that case).</p>
 <p>None</p>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.put_nowait"></a></p>
 <h4 id="put_nowait">put<code>_</code>nowait</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">put_nowait</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">put_nowait</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1717,7 +1767,7 @@ ignored in that case).</p>
 <p>None</p>
 <p><a name=".aea.decision_maker.base.ProtectedQueue.protected_get"></a></p>
 <h4 id="protected_get">protected<code>_</code>get</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">protected_get</span><span class="p">(</span><span class="n">access_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InternalMessage</span><span class="p">]</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">protected_get</span><span class="p">(</span><span class="n">access_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1794,7 +1844,7 @@ ignored in that case).</p>
 <p><a name=".aea.decision_maker.base.DecisionMakerHandler.handle"></a></p>
 <h4 id="handle">handle</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">InternalMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+ <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1877,7 +1927,7 @@ ignored in that case).</p>
 <p>None</p>
 <p><a name=".aea.decision_maker.base.DecisionMaker.handle"></a></p>
 <h4 id="handle_1">handle</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">InternalMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1896,7 +1946,7 @@ ignored in that case).</p>
 
                             <div class="bottomnav">
                                 
-                                <a href="../../crypto/wallet/" class="button left"><strong>Previous:</strong></br>Wallet</a>
+                                <a href="../../crypto/registries/base/" class="button left"><strong>Previous:</strong></br>Base</a>
                                 
                                 <a href="../default/" class="button right"><strong>Next:</strong></br>Default</a>
                             </div><!-- .bottomnav end -->

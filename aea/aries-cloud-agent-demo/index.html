@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1469,7 +1549,7 @@
 <p>Demonstrating an entire decentralised identity scenario involving AEAs and instances of Aries Cloud Agents (ACAs).</p>
 <h2 id="discussion">Discussion</h2>
 <p>This demo corresponds with the one <a href="https://github.com/hyperledger/aries-cloudagent-python/blob/master/demo/README.md" target=_blank>here</a> from <a href="https://github.com/hyperledger/aries-cloudagent-python" target=_blank> aries cloud agent repository </a>.</p>
-<p>The aim of this demo is to illustrate how AEAs can connect to ACAs, thus gaining all of their capabilities, such as issuing and requesting verifiable credentials, selective disclosure and zero knowledge proofs. </p>
+<p>The aim of this demo is to illustrate how AEAs can connect to ACAs, thus gaining all of their capabilities, such as issuing and requesting verifiable credentials, selective disclosure and zero knowledge proofs.</p>
 <div class="mermaid">
     sequenceDiagram
         participant faea as Faber_AEA
@@ -1482,7 +1562,7 @@
         activate aaca
         activate aaea
 
-        Note right of aaea: Shows identity 
+        Note right of aaea: Shows identity
 
         faea->>faca: Request status?
         faca->>faea: status
@@ -1497,10 +1577,10 @@
         deactivate aaea
 </div>
 
-<p>There are two AEAs: </p>
+<p>There are two AEAs:</p>
 <ul>
 <li><strong>Alice_AEA</strong></li>
-<li><strong>Faber_AEA</strong> </li>
+<li><strong>Faber_AEA</strong></li>
 </ul>
 <p>and two ACAs:</p>
 <ul>
@@ -1531,11 +1611,11 @@
 <li><strong>Alice_ACA</strong>: sends a matching invitation request to <strong>Faber_ACA</strong>.</li>
 <li><strong>Faber_ACA</strong>: accepts</li>
 </ul>
-<p>At this point, the two ACAs are connected to each other. </p>
+<p>At this point, the two ACAs are connected to each other.</p>
 <ul>
 <li><strong>Faber_AEA</strong>: requests <strong>Faber_ACA</strong> to issue a credential (e.g. university degree) to <strong>Alice_AEA</strong>, which <strong>Faber_ACA</strong> does via <strong>Alice_ACA</strong>.</li>
 <li><strong>Faber_AEA</strong>: requests proof that <strong>Alice_AEA</strong>'s age is above 18.</li>
-<li><strong>Alice_AEA</strong>: presents proof that it's age is above 18, without presenting its credential.       </li>
+<li><strong>Alice_AEA</strong>: presents proof that it's age is above 18, without presenting its credential.</li>
 </ul>
 <h2 id="preparation-instructions">Preparation Instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
@@ -1548,7 +1628,7 @@
 <h3 id="terminals">Terminals</h3>
 <p>Open four terminals. Each terminal will be used to run one of the four agents in this demo.</p>
 <h2 id="alice-and-faber-acas">Alice and Faber ACAs</h2>
-<p>To learn about the command for starting an ACA and its various options: </p>
+<p>To learn about the command for starting an ACA and its various options:</p>
 <div class="highlight"><pre><span></span>aca-py start --help
 </pre></div>
 
@@ -1560,13 +1640,13 @@
 
 
 <p>Make sure the ports above are unused.</p>
-<p>Take note of the specific IP addresses and ports you used in the above command. We will refer to them by the following names: </p>
+<p>Take note of the specific IP addresses and ports you used in the above command. We will refer to them by the following names:</p>
 <ul>
 <li><strong>Faber admin IP</strong>: 127.0.0.1</li>
 <li><strong>Faber admin port</strong>: 8021</li>
 <li><strong>Faber webhook port</strong>: 8022</li>
 </ul>
-<p>The admin IP and port will be used to send administrative commands to this ACA from an AEA. </p>
+<p>The admin IP and port will be used to send administrative commands to this ACA from an AEA.</p>
 <p>The webhook port is where the ACA will send notifications to. We will expose this from the AEA so it receives this ACA's notifications.</p>
 <h3 id="alice_aca">Alice_ACA</h3>
 <p>In the second terminal:</p>
@@ -1584,7 +1664,7 @@
 <p>Now you can create <strong>Alice_AEA</strong> and <strong>Faber_AEA</strong> in terminals 3 and 4 respectively.</p>
 <p>There are two methods for creating each AEA, constructing it piece by piece, or fetching the whole agent project.</p>
 <h3 id="alice_aea-method-1-construct-the-agent">Alice_AEA -- Method 1: Construct the Agent</h3>
-<p>In the third terminal, create <strong>Alice_AEA</strong> and move into its project folder: </p>
+<p>In the third terminal, create <strong>Alice_AEA</strong> and move into its project folder:</p>
 <div class="highlight"><pre><span></span>aea create aries_alice
 <span class="nb">cd</span> aries_alice
 </pre></div>
@@ -1592,7 +1672,7 @@
 
 <h4 id="add-and-configure-the-skill">Add and Configure the Skill</h4>
 <p>Add the <code>aries_alice</code> skill:</p>
-<div class="highlight"><pre><span></span>aea add skill fetchai/aries_alice:0.2.0
+<div class="highlight"><pre><span></span>aea add skill fetchai/aries_alice:0.3.0
 </pre></div>
 
 
@@ -1616,14 +1696,14 @@
 
 <h4 id="add-and-configure-the-connections">Add and Configure the Connections</h4>
 <p>Add <code>http_client</code>, <code>oef</code> and <code>webhook</code> connections:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/http_client:0.3.0
-aea add connection fetchai/webhook:0.2.0
-aea add connection fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/http_client:0.4.0
+aea add connection fetchai/webhook:0.3.0
+aea add connection fetchai/oef:0.5.0
 </pre></div>
 
 
-<p>You now need to configure the <code>webhook</code> connection. </p>
-<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>. </p>
+<p>You now need to configure the <code>webhook</code> connection.</p>
+<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
 </pre></div>
 
@@ -1634,14 +1714,14 @@ aea add connection fetchai/oef:0.4.0
 
 
 <h4 id="configure-alice_aea">Configure Alice_AEA:</h4>
-<p>Now you must ensure <strong>Alice_AEA</strong>'s default connection is <code>oef</code>. </p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
+<p>Now you must ensure <strong>Alice_AEA</strong>'s default connection is <code>oef</code>.</p>
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 </pre></div>
 
 
 <h3 id="alice_aea-method-2-fetch-the-agent">Alice_AEA -- Method 2: Fetch the Agent</h3>
-<p>Alternatively, in the third terminal, fetch <strong>Alice_AEA</strong> and move into its project folder: </p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/aries_alice:0.3.0 
+<p>Alternatively, in the third terminal, fetch <strong>Alice_AEA</strong> and move into its project folder:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/aries_alice:0.4.0
 <span class="nb">cd</span> aries_alice
 </pre></div>
 
@@ -1665,8 +1745,8 @@ aea add connection fetchai/oef:0.4.0
 </pre></div>
 
 
-<p>You now need to configure the <code>webhook</code> connection. </p>
-<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>. </p>
+<p>You now need to configure the <code>webhook</code> connection.</p>
+<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Alice_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
 </pre></div>
 
@@ -1694,7 +1774,7 @@ aea add connection fetchai/oef:0.4.0
 
 <p>Take note of this value. We will refer to this as <strong>Alice_AEA's address</strong>.</p>
 <h3 id="faber_aea-method-1-construct-the-agent">Faber_AEA -- Method 1: Construct the Agent</h3>
-<p>In the fourth terminal, create <strong>Faber_AEA</strong> and move into its project folder: </p>
+<p>In the fourth terminal, create <strong>Faber_AEA</strong> and move into its project folder:</p>
 <div class="highlight"><pre><span></span>aea create aries_faber
 <span class="nb">cd</span> aries_faber
 </pre></div>
@@ -1702,7 +1782,7 @@ aea add connection fetchai/oef:0.4.0
 
 <h4 id="add-and-configure-the-skill_1">Add and Configure the Skill:</h4>
 <p>Add the <code>aries_faber</code> skill:</p>
-<div class="highlight"><pre><span></span>aea add skill fetchai/aries_faber:0.2.0
+<div class="highlight"><pre><span></span>aea add skill fetchai/aries_faber:0.3.0
 </pre></div>
 
 
@@ -1730,14 +1810,14 @@ aea add connection fetchai/oef:0.4.0
 
 <h4 id="add-and-configure-the-connections_1">Add and Configure the Connections:</h4>
 <p>Add <code>http_client</code>, <code>oef</code> and <code>webhook</code> connections:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/http_client:0.3.0
-aea add connection fetchai/webhook:0.2.0
-aea add connection fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/http_client:0.4.0
+aea add connection fetchai/webhook:0.3.0
+aea add connection fetchai/oef:0.5.0
 </pre></div>
 
 
-<p>You now need to configure the <code>webhook</code> connection. </p>
-<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>. </p>
+<p>You now need to configure the <code>webhook</code> connection.</p>
+<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
 </pre></div>
 
@@ -1749,13 +1829,13 @@ aea add connection fetchai/oef:0.4.0
 
 <h4 id="configure-faber_aea">Configure Faber_AEA:</h4>
 <p>Now you must ensure <strong>Faber_AEA</strong>'s default connection is <code>http_client</code>.</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_client:0.3.0
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_client:0.4.0
 </pre></div>
 
 
 <h3 id="alice_aea-method-2-fetch-the-agent_1">Alice_AEA -- Method 2: Fetch the Agent</h3>
-<p>Alternatively, in the fourth terminal, fetch <strong>Faber_AEA</strong> and move into its project folder: </p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/aries_faber:0.3.0 
+<p>Alternatively, in the fourth terminal, fetch <strong>Faber_AEA</strong> and move into its project folder:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/aries_faber:0.4.0
 <span class="nb">cd</span> aries_faber
 </pre></div>
 
@@ -1783,8 +1863,8 @@ aea add connection fetchai/oef:0.4.0
 </pre></div>
 
 
-<p>You now need to configure the <code>webhook</code> connection. </p>
-<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>. </p>
+<p>You now need to configure the <code>webhook</code> connection.</p>
+<p>First is ensuring the value of <code>webhook_port</code> in <code>webhook</code> connection's configuration file <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code> matches with what you used above for <strong>Faber_ACA</strong>.</p>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
 </pre></div>
 
@@ -1805,13 +1885,13 @@ aea add connection fetchai/oef:0.4.0
 </pre></div>
 
 
-<p>You should see <strong>Faber_AEA</strong> running and showing logs of its activities. For example: </p>
+<p>You should see <strong>Faber_AEA</strong> running and showing logs of its activities. For example:</p>
 <p><center><img alt="Aries demo: Faber terminal" src="../assets/aries-demo-faber.png" /></center></p>
 <p>Looking now at <strong>Alice_AEA</strong> terminal, you should also see more activity by <strong>Alice_AEA</strong> after <strong>Faber_AEA</strong> was started. For example:</p>
 <p><center><img alt="Aries demo: Alice terminal" src="../assets/aries-demo-alice.png" /></center></p>
 <p>The last error line in <strong>Alice_AEA</strong>'s terminal is caused due to the absence of an Indy ledger instance. In the next update to this demo, this will be resolved.</p>
 <h2 id="terminate-and-delete-the-agents">Terminate and Delete the Agents</h2>
-<p>You can terminate each agent by pressing Ctrl+C. </p>
+<p>You can terminate each agent by pressing Ctrl+C.</p>
 <p>To delete the AEAs, go to the projects' parent directory and delete the AEAs:</p>
 <div class="highlight"><pre><span></span>aea delete aries_faber
 aea delete aries_alice
@@ -1823,7 +1903,7 @@ aea delete aries_alice
 <ul>
 <li>An instance of Indy ledger must be installed and running. See <a href="https://github.com/bcgov/von-network#running-the-network-locally" target=_blank>here</a> for more detail.</li>
 <li>The commands for running the ACAs need to be adjusted. Additional options relating to a wallet (wallet-name, type, key, storage-type, config, creds) need to be fed to the ACAs as well as the ledger's genesis file so the ACAs can connect to the ledger.</li>
-<li>The remaining interactions between the AEAs and ACAs as described <a href="./#discussion">here</a> need to be implemented.     </li>
+<li>The remaining interactions between the AEAs and ACAs as described <a href="./#discussion">here</a> need to be implemented.</li>
 </ul>
 
 

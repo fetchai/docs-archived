@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1485,15 +1565,48 @@ with a one-step atomic swap functionality. That means the trade between the two 
 <p>Keep it running for all the following demos.</p>
 <h2 id="demo">Demo</h2>
 <h3 id="create-the-deployer-aea">Create the deployer AEA</h3>
-<p>Create the AEA that will deploy the contract.</p>
-<div class="highlight"><pre><span></span>aea create erc1155_deployer
+<p>Fetch the AEA that will deploy the contract.</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/erc1155_deployer:0.7.0
 <span class="nb">cd</span> erc1155_deployer
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/erc1155_deploy:0.6.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 </pre></div>
 
+
+<details><summary>Alternatively, create from scratch.</summary>
+<p>
+
+Create the AEA that will deploy the contract.
+
+
+<div class="highlight"><pre><span></span>aea create erc1155_deployer
+<span class="nb">cd</span> erc1155_deployer
+aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/ledger:0.1.0
+aea add skill fetchai/erc1155_deploy:0.7.0
+aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
+</pre></div>
+
+
+
+Then update the agent config (`aea-config.yaml`) with the default routing:
+
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
+</pre></div>
+
+
+
+And change the default ledger:
+
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div>
+
+
+
+</p>
+</details>
 
 <p>Additionally, create the private key for the deployer AEA. Generate and add a key for Ethereum use:</p>
 <div class="highlight"><pre><span></span>aea generate-key ethereum
@@ -1502,15 +1615,48 @@ aea add-key ethereum eth_private_key.txt
 
 
 <h3 id="create-the-client-aea">Create the client AEA</h3>
-<p>In another terminal, create the AEA that will sign the transaction.</p>
-<div class="highlight"><pre><span></span>aea create erc1155_client
+<p>In another terminal, fetch the AEA that will get some tokens from the deployer.</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/erc1155_client:0.7.0
 <span class="nb">cd</span> erc1155_client
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/erc1155_client:0.5.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
 </pre></div>
 
+
+<details><summary>Alternatively, create from scratch.</summary>
+<p>
+
+Create the AEA that will get some tokens from the deployer.
+
+
+<div class="highlight"><pre><span></span>aea create erc1155_client
+<span class="nb">cd</span> erc1155_client
+aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/ledger:0.1.0
+aea add skill fetchai/erc1155_client:0.6.0
+aea install
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
+</pre></div>
+
+
+
+Then update the agent config (`aea-config.yaml`) with the default routing:
+
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
+</pre></div>
+
+
+
+And change the default ledger:
+
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
+</pre></div>
+
+
+
+</p>
+</details>
 
 <p>Additionally, create the private key for the client AEA. Generate and add a key for Ethereum use:</p>
 <div class="highlight"><pre><span></span>aea generate-key ethereum
@@ -1519,19 +1665,14 @@ aea add-key ethereum eth_private_key.txt
 
 
 <h3 id="update-the-aea-configs">Update the AEA configs</h3>
-<p>Both in <code>my_erc1155_deploy/aea-config.yaml</code> and
-<code>my_erc1155_client/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following based on the network you want to connect</p>
+<p>Both in <code>erc1155_deployer/aea-config.yaml</code> and
+<code>erc1155_client/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following based on the network you want to connect</p>
 <p>Connect to Ethereum:</p>
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">ethereum</span><span class="p">:</span>
     <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
     <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
     <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
-</pre></div>
-
-
-<p>And change the default ledger:</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
 
@@ -1553,7 +1694,7 @@ aea add-key ethereum eth_private_key.txt
 
 <h2 id="run-the-aeas">Run the AEAs</h2>
 <p>First, run the deployer AEA.</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 
@@ -1567,7 +1708,7 @@ aea add-key ethereum eth_private_key.txt
 
 
 <p>Then, in the separate terminal run the client AEA.</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 

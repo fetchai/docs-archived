@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1460,11 +1540,11 @@
 
                                     
 
-<p>The AEA generic seller with ORM integration demonstrates how to configure an AEA to interact with a database using python-sql objects.</p>
+<p>This guide demonstrates how to configure an AEA to interact with a database using python-sql objects.</p>
 <h2 id="discussion">Discussion</h2>
 <p>Object-relational-mapping is the idea of being able to write SQL queries, using the object-oriented paradigm of your preferred programming language. The scope of the specific demo is to demonstrate how to create an easy configurable AEA that reads data from a database using ORMs.</p>
 <ul>
-<li>We assume, that you followed the guide for the <a href="/generic-skills/"> generic-skills. </a></li>
+<li>We assume, that you followed the guide for the <a href="../thermometer-skills/"> thermometer-skills. </a></li>
 <li>We assume, that we have a database <code>genericdb.db</code> with table name <code>data</code>. This table contains the following columns <code>timestamp</code> and <code>thermometer</code></li>
 <li>We assume, that we have a hardware thermometer sensor that adds the readings in the <code>genericdb</code> database (although you can follow the guide without having access to a sensor).</li>
 </ul>
@@ -1516,8 +1596,8 @@
 <p>A demo to run a scenario with a true ledger transaction on Fetch.ai <code>testnet</code> network or Ethereum <code>ropsten</code> network. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA, which will provide data:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/generic_seller:0.2.0 --alias my_seller_aea
-<span class="nb">cd</span> my_seller_aea
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_aea:0.4.0 --alias my_thermometer_aea
+<span class="nb">cd</span> my_thermometer_aea
 aea install
 </pre></div>
 
@@ -1527,21 +1607,29 @@ aea install
 
 The following steps create the seller from scratch:
 
-<div class="highlight"><pre><span></span>aea create my_seller_aea
-<span class="nb">cd</span> my_seller_aea
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/generic_seller:0.5.0
+<div class="highlight"><pre><span></span>aea create my_thermometer_aea
+<span class="nb">cd</span> my_thermometer_aea
+aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/ledger:0.1.0
+aea add skill fetchai/thermometer:0.5.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 </pre></div>
 
 
 
-In `my_seller_aea/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
+In `my_thermometer_aea/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
 
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
     <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
+</pre></div>
+
+
+and add 
+
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
 </pre></div>
 
 
@@ -1551,8 +1639,8 @@ In `my_seller_aea/aea-config.yaml` replace `ledger_apis: {}` with the following 
 
 <h3 id="create-the-buyer-client">Create the buyer client</h3>
 <p>In another terminal, fetch the AEA that will query the seller AEA.</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/generic_buyer:0.2.0 --alias my_buyer_aea
-<span class="nb">cd</span> my_buyer_aea
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_client:0.4.0 --alias my_thermometer_client
+<span class="nb">cd</span> my_thermometer_client
 aea install
 </pre></div>
 
@@ -1562,12 +1650,13 @@ aea install
 
 The following steps create the car data client from scratch:
 
-<div class="highlight"><pre><span></span>aea create my_buyer_aea
-<span class="nb">cd</span> my_buyer_aea
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/generic_buyer:0.4.0
+<div class="highlight"><pre><span></span>aea create my_thermometer_client
+<span class="nb">cd</span> my_thermometer_client
+aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/ledger:0.1.0
+aea add skill fetchai/thermometer_client:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 </pre></div>
 
 
@@ -1579,6 +1668,13 @@ To connect to Fetchai:
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">fetchai</span><span class="p">:</span>
     <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
+</pre></div>
+
+
+and add 
+
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.1.0</span>
 </pre></div>
 
 
@@ -1623,7 +1719,7 @@ Alternatively, to connect to Cosmos:
 
 <div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
   <span class="nt">cosmos</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://aea-testnet.sandbox.fetch-ai.com:1317</span>
+    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://rest-agent-land.prod.fetch-ai.com:443</span>
 </pre></div>
 
 
@@ -1665,57 +1761,71 @@ On the Cosmos `testnet` network.
 </details>
 
 <h3 id="update-the-seller-and-buyer-aea-skill-configs">Update the seller and buyer AEA skill configs</h3>
-<p>In <code>my_seller_aea/vendor/fetchai/skills/generic_seller/skill.yaml</code>, replace the <code>data_for_sale</code>, <code>search_schema</code>, and <code>search_data</code> with your data:</p>
+<p>In <code>my_thermometer_aea/vendor/fetchai/skills/thermometer/skill.yaml</code>, replace the <code>data_for_sale</code> with your data:</p>
 <div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="nt">dialogues</span><span class="p">:</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-  <span class="nt">strategy</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
     <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">total_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-      <span class="nt">seller_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="s">&#39;FET&#39;</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="s">&#39;fetchai&#39;</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">data_for_sale</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-      <span class="nt">search_schema</span><span class="p">:</span>
+      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
+      <span class="nt">data_for_sale</span><span class="p">:</span>
+        <span class="nt">temperature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">26</span>
+      <span class="nt">data_model</span><span class="p">:</span>
         <span class="nt">attribute_one</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
           <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
           <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
         <span class="nt">attribute_two</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
           <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
           <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">search_data</span><span class="p">:</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
+      <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">service_data</span><span class="p">:</span>
         <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
+        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+      <span class="nt">unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 <span class="nt">dependencies</span><span class="p">:</span>
   <span class="nt">SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
 
 
-<p>The <code>search_schema</code> and the <code>search_data</code> are used to register the service in the <a href="../oef-ledger">OEF search node</a> and make your agent discoverable. The name of each attribute must be a key in the <code>search_data</code> dictionary.</p>
-<p>In the generic buyer skill config (<code>my_buyer_aea/vendor/fetchai/skills/generic_buyer/skill.yaml</code>) under strategy change the <code>currency_id</code>,<code>ledger_id</code>, and at the bottom of the file the <code>ledgers</code>.</p>
+<p>The <code>data_model</code> and the <code>service_data</code> are used to register the service in the <a href="../oef-ledger">OEF search node</a> and make your agent discoverable. The name of each attribute must be a key in the <code>service_data</code> dictionary.</p>
+<p>In <code>my_thermometer_client/vendor/fetchai/skills/thermometer_client/skill.yaml</code>) ensure you have matching data.</p>
 <div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="nt">dialogues</span><span class="p">:</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-  <span class="nt">strategy</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
     <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">max_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">40</span>
-      <span class="nt">max_buyer_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="s">&#39;FET&#39;</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="s">&#39;fetchai&#39;</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
+      <span class="nt">data_model</span><span class="p">:</span>
+        <span class="nt">attribute_one</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+        <span class="nt">attribute_two</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
+      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">max_negotiations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">max_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
       <span class="nt">search_query</span><span class="p">:</span>
-        <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-        <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-        <span class="nt">constraint_type</span><span class="p">:</span> <span class="s">&#39;==&#39;</span>
-<span class="nt">ledgers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai&#39;</span><span class="p p-Indicator">]</span>
+        <span class="nt">constraint_one</span><span class="p">:</span>
+          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
+          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+        <span class="nt">constraint_two</span><span class="p">:</span>
+          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
+          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 </pre></div>
 
 
@@ -1726,31 +1836,31 @@ On the Cosmos `testnet` network.
 <br>
 
 <div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="nt">dialogues</span><span class="p">:</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-  <span class="nt">strategy</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
     <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">total_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-      <span class="nt">seller_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="s">&#39;ETH&#39;</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="s">&#39;ethereum&#39;</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">data_for_sale</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-      <span class="nt">search_schema</span><span class="p">:</span>
+      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ETH</span>
+      <span class="nt">data_for_sale</span><span class="p">:</span>
+        <span class="nt">temperature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">26</span>
+      <span class="nt">data_model</span><span class="p">:</span>
         <span class="nt">attribute_one</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
           <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
           <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
         <span class="nt">attribute_two</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
           <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
           <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-      <span class="nt">search_data</span><span class="p">:</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
+      <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethereum</span>
+      <span class="nt">service_data</span><span class="p">:</span>
         <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
+        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+      <span class="nt">unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 <span class="nt">dependencies</span><span class="p">:</span>
   <span class="nt">SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
@@ -1759,22 +1869,36 @@ On the Cosmos `testnet` network.
 
 
 <div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="nt">dialogues</span><span class="p">:</span>
-    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dialogues</span>
-  <span class="nt">strategy</span><span class="p">:</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
     <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">max_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">40</span>
-      <span class="nt">max_buyer_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20000</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="s">&#39;ETH&#39;</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="s">&#39;ethereum&#39;</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ETH</span>
+      <span class="nt">data_model</span><span class="p">:</span>
+        <span class="nt">attribute_one</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+        <span class="nt">attribute_two</span><span class="p">:</span>
+          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
+      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethereum</span>
+      <span class="nt">max_negotiations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">max_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
       <span class="nt">search_query</span><span class="p">:</span>
-        <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-        <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-        <span class="nt">constraint_type</span><span class="p">:</span> <span class="s">&#39;==&#39;</span>
-<span class="nt">ledgers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ethereum&#39;</span><span class="p p-Indicator">]</span>
+        <span class="nt">constraint_one</span><span class="p">:</span>
+          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
+          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+        <span class="nt">constraint_two</span><span class="p">:</span>
+          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
+          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 </pre></div>
 
 
@@ -1789,19 +1913,22 @@ On the Cosmos `testnet` network.
 
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span>aea eject skill fetchai/generic_seller:0.5.0
+<div class="highlight"><pre><span></span>aea eject skill fetchai/thermometer:0.6.0
 </pre></div>
 
 
 <p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
-<p>Open the <code>strategy.py</code> (in <code>my_seller_aea/skills/generic_seller/strategy.py</code>) with your IDE and modify the following.</p>
+<p>Open the <code>strategy.py</code> (in <code>my_thermometer_aea/skills/thermometer/strategy.py</code>) with your IDE and modify the following.</p>
 <p>Import the newly installed library to your strategy.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">db</span>
 </pre></div>
 
 
 <p>Then modify your strategy's __init__ function to match the following code:</p>
-<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class defines a strategy for the agent.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the strategy of the agent.</span>
 
@@ -1810,35 +1937,15 @@ On the Cosmos `testnet` network.
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_seller_tx_fee</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;seller_tx_fee&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SELLER_TX_FEE</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_currency_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;currency_id&quot;</span><span class="p">,</span> <span class="n">DEFAULT_CURRENCY_PBK</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ledger_id&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LEDGER_ID</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;is_ledger_tx&quot;</span><span class="p">,</span> <span class="n">DEFAULT_IS_LEDGER_TX</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_total_price</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;total_price&quot;</span><span class="p">,</span> <span class="n">DEFAULT_TOTAL_PRICE</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_has_data_source</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;has_data_source&quot;</span><span class="p">,</span> <span class="n">DEFAULT_HAS_DATA_SOURCE</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model_name&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL_NAME</span><span class="p">)</span>
-        <span class="n">data_for_sale</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_for_sale&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_FOR_SALE</span><span class="p">)</span>
-
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite:///genericdb.db&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_database_and_table</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">insert_data</span><span class="p">()</span>
-
-        <span class="c1"># Read the data from the sensor if the bool is set to True.</span>
-        <span class="c1"># Enables us to let the user implement his data collection logic without major changes.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_data_source</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data_for_sale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collect_from_data_source</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data_for_sale</span> <span class="o">=</span> <span class="n">data_for_sale</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
 
 <p>At the end of the file modify the <code>collect_from_data_source</code> function : </p>
-<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">collect_from_data_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">collect_from_data_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Implement the logic to collect data.&quot;&quot;&quot;</span>
         <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">])</span>
@@ -1865,7 +1972,6 @@ On the Cosmos `testnet` network.
     <span class="k">def</span> <span class="nf">insert_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Insert data in the database.&quot;&quot;&quot;</span>
         <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Populating the database...&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
             <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>  <span class="c1"># nosec</span>
                 <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">temprature</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
@@ -1875,13 +1981,13 @@ On the Cosmos `testnet` network.
 
 
 <p>After modifying the skill we need to fingerprint it:</p>
-<div class="highlight"><pre><span></span>aea fingerprint skill <span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/generic_seller:0.1.0
+<div class="highlight"><pre><span></span>aea fingerprint skill <span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/thermometer:0.1.0
 </pre></div>
 
 
 <h2 id="run-the-aeas">Run the AEAs</h2>
 <p>Run both AEAs from their respective terminals</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 
@@ -1889,8 +1995,8 @@ On the Cosmos `testnet` network.
 <h2 id="delete-the-aeas">Delete the AEAs</h2>
 <p>When you're done, go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..
-aea delete my_seller_aea
-aea delete my_buyer_aea
+aea delete my_thermometer_aea
+aea delete my_thermometer_client
 </pre></div>
 
 

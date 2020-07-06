@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../../../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../../../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../../../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../../../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../../../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../../../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../../crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../../crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../../crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../../helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../../protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../../protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1470,91 +1550,21 @@
 
 
 <p>Definition of an ethereum contract.</p>
-<p><a name=".aea.contracts.ethereum.Contract.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ContractConfig</span><span class="p">,</span> <span class="n">contract_interface</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<p><a name=".aea.contracts.ethereum.Contract.get_instance"></a></p>
+<h4 id="get_instance">get<code>_</code>instance</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">get_instance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
 
-<p>Initialize the contract.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>config</code>: the contract configurations.</li>
-<li><code>contract_interface</code>: the contract interface.</li>
-</ul>
-<p><a name=".aea.contracts.ethereum.Contract.abi"></a></p>
-<h4 id="abi">abi</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">abi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</pre></div>
-
-
-<p>Get the abi.</p>
-<p><a name=".aea.contracts.ethereum.Contract.bytecode"></a></p>
-<h4 id="bytecode">bytecode</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">bytecode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
-</pre></div>
-
-
-<p>Get the bytecode.</p>
-<p><a name=".aea.contracts.ethereum.Contract.instance"></a></p>
-<h4 id="instance">instance</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">instance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">EthereumContract</span>
-</pre></div>
-
-
-<p>Get the contract instance.</p>
-<p><a name=".aea.contracts.ethereum.Contract.is_deployed"></a></p>
-<h4 id="is_deployed">is<code>_</code>deployed</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">is_deployed</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Check if the contract is deployed.</p>
-<p><a name=".aea.contracts.ethereum.Contract.set_instance"></a></p>
-<h4 id="set_instance">set<code>_</code>instance</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_instance</span><span class="p">(</span><span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set the instance.</p>
+<p>Get the instance.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ledger_api</code>: the ledger api we are using.</li>
+<li><code>contract_address</code>: the contract address.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.contracts.ethereum.Contract.set_address"></a></p>
-<h4 id="set_address">set<code>_</code>address</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_address</span><span class="p">(</span><span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set the contract address.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>ledger_api</code>: the ledger_api we are using.</li>
-<li><code>contract_address</code>: the contract address</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name=".aea.contracts.ethereum.Contract.set_deployed_instance"></a></p>
-<h4 id="set_deployed_instance">set<code>_</code>deployed<code>_</code>instance</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_deployed_instance</span><span class="p">(</span><span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set the contract address.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>ledger_api</code>: the ledger_api we are using.</li>
-<li><code>contract_address</code>: the contract address</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>the contract instance</p>
 
 
                                 </section>

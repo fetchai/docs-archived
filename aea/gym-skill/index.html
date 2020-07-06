@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1469,42 +1549,66 @@ The example decouples the RL agent from the <code>gym.Env</code> allowing them t
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-aea">Create the AEA</h3>
-<p>In the root directory, create the gym AEA and enter the project.</p>
+<p>First, fetch the gym AEA:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/gym_aea:0.4.0 --alias my_gym_aea
+<span class="nb">cd</span> my_gym_aea
+aea install
+</pre></div>
+
+
+<details><summary>Alternatively, create from scratch.</summary>
+<p>
+
+### Create the AEA
+In the root directory, create the gym AEA and enter the project.
+
 <div class="highlight"><pre><span></span>aea create my_gym_aea
 <span class="nb">cd</span> my_gym_aea
 </pre></div>
 
 
-<h3 id="add-the-gym-skill">Add the gym skill</h3>
-<div class="highlight"><pre><span></span>aea add skill fetchai/gym:0.3.0
+
+### Add the gym skill 
+
+<div class="highlight"><pre><span></span>aea add skill fetchai/gym:0.4.0
 </pre></div>
 
 
-<h3 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory</h3>
+
+### Add a gym connection
+
+<div class="highlight"><pre><span></span>aea add connection fetchai/gym:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.3.0
+</pre></div>
+
+
+
+### Install the skill dependencies
+
+To install the `gym` package, a dependency of the gym skill, from Pypi run
+
+<div class="highlight"><pre><span></span>aea install
+</pre></div>
+
+
+
+</p>
+</details>
+
+<h3 id="set-up-the-training-environment">Set up the training environment</h3>
+<h4 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory</h4>
 <div class="highlight"><pre><span></span>mkdir gyms
 cp -a ../examples/gym_ex/gyms/. gyms/
 </pre></div>
 
 
-<h3 id="add-a-gym-connection">Add a gym connection</h3>
-<div class="highlight"><pre><span></span>aea add connection fetchai/gym:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.2.0
-</pre></div>
-
-
-<h3 id="update-the-connection-config">Update the connection config</h3>
+<h4 id="update-the-connection-config">Update the connection config</h4>
 <div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </pre></div>
 
 
-<h3 id="install-the-skill-dependencies">Install the skill dependencies</h3>
-<p>To install the <code>gym</code> package, a dependency of the gym skill, from Pypi run</p>
-<div class="highlight"><pre><span></span>aea install
-</pre></div>
-
-
 <h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/gym:0.2.0
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 

@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1515,8 +1595,8 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <h2 id="custom-protocol">Custom protocol</h2>
 <p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech-acts as well as optionally the dialogue structure (e.g. roles of agents participating in a dialogue, the states a dialogue may end in, and the reply structure of the speech-acts in a dialogue).</p>
 <p>We highly recommend you <strong>do not</strong> attempt to write your own protocol code; always use existing packages or the protocol generator!</p>
-<h2 id="fetchaidefault020-protocol"><code>fetchai/default:0.2.0</code> protocol</h2>
-<p>The <code>fetchai/default:0.2.0</code> protocol is a protocol which each AEA is meant to implement. It serves AEA to AEA interaction and includes two message performatives:</p>
+<h2 id="fetchaidefault030-protocol"><code>fetchai/default:0.3.0</code> protocol</h2>
+<p>The <code>fetchai/default:0.3.0</code> protocol is a protocol which each AEA is meant to implement. It serves AEA to AEA interaction and includes two message performatives:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -1567,10 +1647,10 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 </pre></div>
 
 
-<p>Each AEA's <code>fetchai/error:0.2.0</code> skill utilises the <code>fetchai/default:0.2.0</code> protocol for error handling.</p>
-<h2 id="fetchaioef_search020-protocol"><code>fetchai/oef_search:0.2.0</code> protocol</h2>
-<p>The <code>fetchai/oef_search:0.2.0</code> protocol is used by AEAs to interact with an <a href="../oef-ledger">OEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
-<p>The <code>fetchai/oef_search:0.2.0</code> protocol definition includes an <code>OefSearchMessage</code> with the following message types:</p>
+<p>Each AEA's <code>fetchai/error:0.3.0</code> skill utilises the <code>fetchai/default:0.3.0</code> protocol for error handling.</p>
+<h2 id="fetchaioef_search030-protocol"><code>fetchai/oef_search:0.3.0</code> protocol</h2>
+<p>The <code>fetchai/oef_search:0.3.0</code> protocol is used by AEAs to interact with an <a href="../oef-ledger">OEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
+<p>The <code>fetchai/oef_search:0.3.0</code> protocol definition includes an <code>OefSearchMessage</code> with the following message types:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Performatives for the oef_search protocol.&quot;&quot;&quot;</span>
@@ -1691,7 +1771,7 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 
 <ul>
 <li>
-<p>The <a href="../oef-ledger">OEF search node</a> will respond with a message, say <code>msg</code> of type <code>OefSearchMessage</code>, of performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code>. To access the tuple of agents which match the query, simply use <code>msg.agents</code>. In particular, this will return the agent addresses matching the query. The <a href="../identity">agent address</a> can then be used to send a message to the agent utilising the <a href="../oef-ledger">OEF communication node</a> and any protocol other than <code>fetchai/oef_search:0.2.0</code>.</p>
+<p>The <a href="../oef-ledger">OEF search node</a> will respond with a message, say <code>msg</code> of type <code>OefSearchMessage</code>, of performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code>. To access the tuple of agents which match the query, simply use <code>msg.agents</code>. In particular, this will return the agent addresses matching the query. The <a href="../identity">agent address</a> can then be used to send a message to the agent utilising the <a href="../oef-ledger">OEF communication node</a> and any protocol other than <code>fetchai/oef_search:0.3.0</code>.</p>
 </li>
 <li>
 <p>If the <a href="../oef-ledger">OEF search node</a> encounters any errors with the messages you send, it will return an <code>OefSearchMessage</code> of performative <code>OefSearchMessage.Performative.OEF_ERROR</code> and indicate the error operation encountered:</p>
@@ -1709,9 +1789,9 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 </pre></div>
 
 
-<h2 id="fetchaifipa030-protocol"><code>fetchai/fipa:0.3.0</code> protocol</h2>
+<h2 id="fetchaifipa040-protocol"><code>fetchai/fipa:0.4.0</code> protocol</h2>
 <p>This protocol provides classes and functions necessary for communication between AEAs via a variant of the <a href="http://www.fipa.org/repository/aclspecs.html">FIPA</a> Agent Communication Language.</p>
-<p>The <code>fetchai/fipa:0.3.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
+<p>The <code>fetchai/fipa:0.4.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Performatives for the fipa protocol.&quot;&quot;&quot;</span>
 
@@ -1742,8 +1822,8 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 </pre></div>
 
 
-<p>The <code>fetchai/fipa:0.3.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
-<p>For examples of the usage of the <code>fetchai/fipa:0.3.0</code> protocol check out the <a href="../thermometer-skills-step-by-step" target=_blank> thermometer skill step by step guide</a>.</p>
+<p>The <code>fetchai/fipa:0.4.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
+<p>For examples of the usage of the <code>fetchai/fipa:0.4.0</code> protocol check out the <a href="../generic-skills-step-by-step" target=_blank> generic skills step by step guide</a>.</p>
 <h3 id="fipa-dialogue">Fipa dialogue</h3>
 <p>Below, we give an example of a dialogue between two agents. In practice; both dialogues would be maintained in the respective agent.</p>
 <p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:</p>
@@ -1815,7 +1895,7 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <span class="sd">        :param message: an incoming/outgoing first message</span>
 <span class="sd">        :return: The role of the agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">AgentRole</span><span class="o">.</span><span class="n">BUYER</span>
+        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">BUYER</span>
 
 
 <span class="k">class</span> <span class="nc">SellerDialogue</span><span class="p">(</span><span class="n">FipaDialogue</span><span class="p">):</span>
@@ -1876,7 +1956,7 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <span class="sd">        :param message: an incoming/outgoing first message</span>
 <span class="sd">        :return: The role of the agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">AgentRole</span><span class="o">.</span><span class="n">SELLER</span>
+        <span class="k">return</span> <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">SELLER</span>
 </pre></div>
 
 

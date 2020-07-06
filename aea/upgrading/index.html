@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="./" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1461,6 +1541,12 @@
                                     
 
 <p>This page provides some tipps of how to upgrade between versions.</p>
+<h2 id="v041-to-050">v0.4.1 to 0.5.0</h2>
+<p>A number of breaking changes where introduced which make backwards compatibility of skills rare.</p>
+<ul>
+<li>Ledger apis <a href="../api/crypto/ledger_apis#ledger-apis-objects"><code>LedgerApis</code></a> have been removed from the AEA constructor and skill context. <code>LedgerApis</code> are now exposed in the <code>LedgerConnection</code> (<code>fetchai/ledger</code>). To communicate with the <code>LedgerApis</code> use the <code>fetchai/ledger_api</code> protocol. This allows for more flexibility (anyone can add another <code>LedgerAPI</code> to the registry and execute it with the connection) and removes dependencies from the core framework.</li>
+<li>Skills can now depend on other skills. As a result, skills have a new required config field in <code>skill.yaml</code> files, by default empty: <code>skills: []</code>.</li>
+</ul>
 <h2 id="v040-to-v041">v0.4.0 to v0.4.1</h2>
 <p>There are no upgrage requirements if you use the CLI based approach to AEA development.</p>
 <p>Connections are now added via <a href="../api/registries/resources#resources-objects"><code>Resources</code></a> to the AEA, not the AEA constructor directly. For programmatic usage remove the list of connections from the AEA constructor and instead add the connections to resources.</p>
@@ -1542,7 +1628,7 @@ You must update your connections as the old implementation is no longer supporte
                                 
                                 <a href="../agent-vs-aea/" class="button left"><strong>Previous:</strong></br>Aeas Vs Agents</a>
                                 
-                                <a href="../generic-skills/" class="button right"><strong>Next:</strong></br>Generic Skills</a>
+                                <a href="../modes/" class="button right"><strong>Next:</strong></br>Modes Of Running An Aea</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

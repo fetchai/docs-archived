@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../../../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../../../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../../../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../../../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../../../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../../../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../../crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../../crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../../crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../../protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../../protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1584,6 +1664,71 @@ attribute to implement a different behaviour.</p>
 
 
 <p>Change working directory temporarily.</p>
+<p><a name=".aea.helpers.base.get_logger_method"></a></p>
+<h4 id="get_logger_method">get<code>_</code>logger<code>_</code>method</h4>
+<div class="highlight"><pre><span></span><span class="n">get_logger_method</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">logger_method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
+</pre></div>
+
+
+<p>Get logger method for function.</p>
+<p>Get logger in <code>fn</code> definion module or creates logger is module.<strong>name</strong>.
+Or return logger_method if it's callable.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>fn</code>: function to get logger for.</li>
+<li><code>logger_method</code>: logger name or callable.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>callable to write log with</p>
+<p><a name=".aea.helpers.base.try_decorator"></a></p>
+<h4 id="try_decorator">try<code>_</code>decorator</h4>
+<div class="highlight"><pre><span></span><span class="n">try_decorator</span><span class="p">(</span><span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_return</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Run function, log and return default value on exception.</p>
+<p>Does not support async or coroutines!</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>error_message</code>: message template with one <code>{}</code> for exception</li>
+<li><code>default_return</code>: value to return on exception, by default None</li>
+<li><code>logger_method</code>: name of the logger method or callable to print logs</li>
+</ul>
+<p><a name=".aea.helpers.base.MaxRetriesError"></a></p>
+<h2 id="maxretrieserror-objects">MaxRetriesError Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MaxRetriesError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Exception for retry decorator.</p>
+<p><a name=".aea.helpers.base.retry_decorator"></a></p>
+<h4 id="retry_decorator">retry<code>_</code>decorator</h4>
+<div class="highlight"><pre><span></span><span class="n">retry_decorator</span><span class="p">(</span><span class="n">number_of_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Run function with several attempts.</p>
+<p>Does not support async or coroutines!</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>number_of_retries</code>: amount of attempts</li>
+<li><code>error_message</code>: message template with one <code>{}</code> for exception</li>
+<li><code>delay</code>: num of seconds to sleep between retries. default 0</li>
+<li><code>logger_method</code>: name of the logger method or callable to print logs</li>
+</ul>
+<p><a name=".aea.helpers.base.exception_log_and_reraise"></a></p>
+<h4 id="exception_log_and_reraise">exception<code>_</code>log<code>_</code>and<code>_</code>reraise</h4>
+<div class="highlight"><pre><span></span><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="n">exception_log_and_reraise</span><span class="p">(</span><span class="n">log_method</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Run code in context to log and re raise exception.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>log_method</code>: function to print log</li>
+<li><code>message</code>: message template to add error text.</li>
+</ul>
 
 
                                 </section>

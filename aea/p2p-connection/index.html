@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1460,15 +1540,15 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.2.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.3.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
-aea run --connections fetchai/p2p_libp2p:0.2.0
+aea add connection fetchai/p2p_libp2p:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
+aea run --connections fetchai/p2p_libp2p:0.3.0
 </pre></div>
 
 
@@ -1476,8 +1556,8 @@ aea run --connections fetchai/p2p_libp2p:0.2.0
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
+aea add connection fetchai/p2p_libp2p:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
 </pre></div>
 
 
@@ -1493,7 +1573,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.2.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.3.0
 </pre></div>
 
 
@@ -1501,21 +1581,21 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <h2 id="local-demo-with-skills">Local demo with skills</h2>
 <h3 id="fetch-the-weather-station-and-client">Fetch the weather station and client</h3>
 <p>Create one AEA as follows:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.5.0
-aea fetch fetchai/weather_client:0.5.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.6.0
+aea fetch fetchai/weather_client:0.6.0
 </pre></div>
 
 
 <p>Then enter each project individually and execute the following to add the <code>p2p_libp2p</code> connection:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.2.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.2.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.3.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
 </pre></div>
 
 
 <p>Then extend the <code>aea-config.yaml</code> of each project as follows:</p>
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="p p-Indicator">?</span> <span class="s">&quot;fetchai/oef_search:0.2.0&quot;</span>
-  <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.4.0&quot;</span>
+  <span class="p p-Indicator">?</span> <span class="s">&quot;fetchai/oef_search:0.3.0&quot;</span>
+  <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.5.0&quot;</span>
 </pre></div>
 
 
@@ -1527,7 +1607,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <h3 id="run-weather-station">Run weather station</h3>
 <p>Run the weather station first:</p>
-<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.2.0,fetchai/oef:0.4.0&quot;</span>
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.3.0,fetchai/oef:0.5.0&quot;</span>
 </pre></div>
 
 
@@ -1563,25 +1643,24 @@ aea add-key fetchai fet_private_key.txt
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
 <p>Now run the weather client:</p>
-<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.2.0,fetchai/oef:0.4.0&quot;</span>
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.3.0,fetchai/oef:0.5.0&quot;</span>
 </pre></div>
 
 
 <h2 id="deployed-agent-communication-network">Deployed agent communication network</h2>
-<p>You can connect to the deployed public test network by adding one or multiple of the following addresses as the <code>lipp2p_entry_peers</code>:</p>
+<p>You can connect to the deployed public test network by adding one or multiple of the following addresses as the <code>libp2p_entry_peers</code>:</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span>
 <span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span>
 <span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span>
 </pre></div>
 
 
-<p>In particular, by modiying the configuration such that:</p>
+<p>In particular, by modifying the configuration such that:</p>
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span><span class="p p-Indicator">]</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
-  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </pre></div>
 
 

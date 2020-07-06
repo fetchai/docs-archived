@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1479,7 +1559,8 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.5.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.6.0
+<span class="nb">cd</span> weather_station
 </pre></div>
 
 
@@ -1491,7 +1572,7 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 
 <p>The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.</p>
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.4.0
+<div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 
@@ -1507,16 +1588,16 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 
 <span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
 <span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
-<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span>
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">PublicId</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
 <span class="kn">from</span> <span class="nn">aea.registries.resources</span> <span class="kn">import</span> <span class="n">Resources</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
+<span class="kn">from</span> <span class="nn">packages.fetchai.connections.ledger.connection</span> <span class="kn">import</span> <span class="n">LedgerConnection</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.connections.oef.connection</span> <span class="kn">import</span> <span class="n">OEFConnection</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.weather_client.strategy</span> <span class="kn">import</span> <span class="n">Strategy</span>
 
@@ -1532,41 +1613,69 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
     <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 
-    <span class="c1"># Set up the wallet, identity, oef connection, ledger and (empty) resources</span>
+    <span class="c1"># Set up the wallet, identity and (empty) resources</span>
     <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">})</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
         <span class="s2">&quot;my_aea&quot;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConnectionConfig</span><span class="p">(</span>
-        <span class="n">addr</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">PORT</span><span class="p">,</span> <span class="n">connection_id</span><span class="o">=</span><span class="n">OEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
-    <span class="p">)</span>
-    <span class="n">oef_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">)</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">({},</span> <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
     <span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">()</span>
 
+    <span class="c1"># specify the default routing for some protocols</span>
+    <span class="n">default_routing</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/ledger_api:0.1.0&quot;</span><span class="p">):</span> <span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span>
+    <span class="p">}</span>
+    <span class="n">default_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
+
     <span class="c1"># create the AEA</span>
-    <span class="n">my_aea</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">,</span> <span class="n">resources</span><span class="p">,)</span>  <span class="c1"># stub_connection,</span>
+    <span class="n">my_aea</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span>
+        <span class="n">identity</span><span class="p">,</span>
+        <span class="n">wallet</span><span class="p">,</span>
+        <span class="n">resources</span><span class="p">,</span>
+        <span class="n">default_connection</span><span class="o">=</span><span class="n">default_connection</span><span class="p">,</span>
+        <span class="n">default_routing</span><span class="o">=</span><span class="n">default_routing</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="c1"># Add the default protocol (which is part of the AEA distribution)</span>
     <span class="n">default_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">))</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">default_protocol</span><span class="p">)</span>
 
-    <span class="c1"># Add the oef search protocol (which is a package)</span>
+    <span class="c1"># Add the signing protocol (which is part of the AEA distribution)</span>
+    <span class="n">signing_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;signing&quot;</span><span class="p">))</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">signing_protocol</span><span class="p">)</span>
+
+    <span class="c1"># Add the ledger_api protocol</span>
+    <span class="n">ledger_api_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;ledger_api&quot;</span><span class="p">,)</span>
+    <span class="p">)</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">ledger_api_protocol</span><span class="p">)</span>
+
+    <span class="c1"># Add the oef_search protocol</span>
     <span class="n">oef_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;oef_search&quot;</span><span class="p">,)</span>
     <span class="p">)</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">oef_protocol</span><span class="p">)</span>
 
-    <span class="c1"># Add the fipa protocol (which is a package)</span>
+    <span class="c1"># Add the fipa protocol</span>
     <span class="n">fipa_protocol</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="s2">&quot;protocols&quot;</span><span class="p">,</span> <span class="s2">&quot;fipa&quot;</span><span class="p">,)</span>
     <span class="p">)</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_protocol</span><span class="p">(</span><span class="n">fipa_protocol</span><span class="p">)</span>
 
+    <span class="c1"># Add the LedgerAPI connection</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConnectionConfig</span><span class="p">(</span><span class="n">connection_id</span><span class="o">=</span><span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">)</span>
+    <span class="n">ledger_api_connection</span> <span class="o">=</span> <span class="n">LedgerConnection</span><span class="p">(</span>
+        <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span>
+    <span class="p">)</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">ledger_api_connection</span><span class="p">)</span>
+
     <span class="c1"># Add the OEF connection</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConnectionConfig</span><span class="p">(</span>
+        <span class="n">addr</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">PORT</span><span class="p">,</span> <span class="n">connection_id</span><span class="o">=</span><span class="n">OEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
+    <span class="p">)</span>
+    <span class="n">oef_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">)</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">oef_connection</span><span class="p">)</span>
 
-    <span class="c1"># Add the error and weather_station skills</span>
+    <span class="c1"># Add the error and weather_client skills</span>
     <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AEA_DIR</span><span class="p">,</span> <span class="s2">&quot;skills&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">agent_context</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span>
     <span class="p">)</span>
@@ -1576,11 +1685,12 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
     <span class="p">)</span>
 
     <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="n">weather_skill</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strategy&quot;</span><span class="p">))</span>
-    <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">strategy</span><span class="o">.</span><span class="n">_is_ledger_tx</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">for</span> <span class="n">skill</span> <span class="ow">in</span> <span class="p">[</span><span class="n">error_skill</span><span class="p">,</span> <span class="n">weather_skill</span><span class="p">]:</span>
         <span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 
+    <span class="c1"># Run the AEA</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STARTING AEA NOW!&quot;</span><span class="p">)</span>
         <span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>

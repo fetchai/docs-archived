@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1460,25 +1540,25 @@
 
                                     
 
-<p>This documentation has been produced for the Simple-OEF version <code>0.1.19</code>.</p>
+<p>This documentation has been produced for the Simple-OEF version <code>0.1.20</code>.</p>
 <h2 id="concepts">Concepts</h2>
 <p>The Simple-OEF, or soef, is a <strong>search and discovery</strong> mechanism for <strong>autonomous economic agents</strong>. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. </p>
 <p>The work-flow is:</p>
 <ul>
-<li>Find relevant agents on the soef,</li>
-<li>Communicate using the Agent Framework's peer-to-peer network,</li>
-<li>Negotiate and then transact on the ledger in order to exchange value for tokens</li>
+<li><em>Find</em> relevant agents on the soef,</li>
+<li><em>Communicate</em> using the Agent Framework's peer-to-peer network,</li>
+<li><em>Negotiate</em> and then transact on the ledger in order to exchange value for tokens</li>
 </ul>
 <p>When an agent registers with the soef, it is issued with a <em>unique reference</em> which is quoted in all subsequent transactions. This way, the soef knows who its talking to. The soef is transaction based, so it does not need a permanent connection to be maintained in order to work with it. If it does not hear from an agent for a period of time, that agent will be timed out and automatically unregistered. This period of time is typically about one hour, but you can see the soef's configuration at:</p>
-<p>http://soef.fetch.ai:9002</p>
+<p><a href="http://soef.fetch.ai:9002">http://soef.fetch.ai:9002</a></p>
 <p>Agents identify themselves in a number of ways. These include their address, their given name, their classification and their genus. They can also describe how they "look" in other ways, and specify the services that they provide. </p>
 <p>In order to register, agents <em>must</em> provide a valid address and a given name. The address can be for the Fetch.ai native ledger, the Fetch.ai Cosmos ledger or the ethereum ledger. It is this that uniquely identifies them, and addresses cannot be duplicated or shared. The given name can be anything and it is not used for search filtering. Typically, it can be thought of as a debugging aid or a context. Names could be Alice, Bob or Jim, as well as they could be a flight number, train identity or reference code. They <em>appear</em> in find results, but are not used to find by.</p>
 <h2 id="describing-an-agent">Describing an Agent</h2>
 <p>Agents describe themselves in three ways:</p>
 <ol>
-<li>Their address and ledger type along with their given name</li>
-<li>Personality pieces: how they <em>look</em></li>
-<li>Service keys: what they <em>do</em>, <em>sell</em> or <em>want</em>. </li>
+<li><strong>Identity</strong>: their address and ledger type along with their given name</li>
+<li><strong>Personality pieces</strong>: how they <em>look</em></li>
+<li><strong>Service keys</strong>: what they <em>do</em>, <em>sell</em> or <em>want</em>. </li>
 </ol>
 <p>We cover all of these in this next section. It's important to understand the difference between personality pieces and service keys, as agents only have one appearance, but they can provide many services. Search results can be filtered by a number of both, and wildcards are permitted where relevant.</p>
 <h3 id="personality-pieces">Personality Pieces</h3>
@@ -1498,6 +1578,10 @@
 <tr>
 <td><code>classification</code></td>
 <td>An agent's classification, typically in the form <code>mobility.railway.train</code>. See note below on classifications. No fixed classifications are specified.</td>
+</tr>
+<tr>
+<td><code>architecture</code></td>
+<td>Agent's architecture. See the architecture table below. Introduced in version <code>0.1.20</code>. The vast majority of agents should set this to <code>agentframework</code>.</td>
 </tr>
 <tr>
 <td><code>dynamics.moving</code></td>
@@ -1565,25 +1649,46 @@
 </tr>
 </tbody>
 </table>
-<p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see https://community.fetch.ai for the instructions on joining, or the "Further Information" section below). </p>
+<p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see <a href="https://community.fetch.ai">here</a> for the instructions on joining, or the "Further Information" section below). </p>
+<h4 id="architectures">Architectures</h4>
+<p>An architecture is a clue to other agents to describe how the agent is built. The vast majority of agents will be built using the Fetch Agent Framework, but in some cases, such as light-weight IoT devices or test/debugging, agents are built otherwise. Architecture offers a way of describing or filtering, as agents with a similar architecture are more likely to be able to communicate with each other in a meaninful way.</p>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>custom</code></td>
+<td>Custom agent architecture</td>
+</tr>
+<tr>
+<td><code>agentframework</code></td>
+<td>Built using the Fetch Agent Framework</td>
+</tr>
+</tbody>
+</table>
 <h4 id="a-note-on-classifications">A note on classifications</h4>
 <p>There is currently no fixed set of guidelines as to how classifications are used. It is expected that agent builders will converge on a set of standards, and as those become clearer, they will be documented as "by convention" classification uses. Here are some examples of classifications in use:</p>
-<div class="highlight"><pre><span></span><span class="err">mobility.railway.station</span>
-<span class="err">mobility.railway.train</span>
-<span class="err">mobility.road.taxi</span>
-<span class="err">infrastructure.road.sign</span>
+<div class="highlight"><pre><span></span>mobility.railway.station
+mobility.railway.train
+mobility.road.taxi
+infrastructure.road.sign
 </pre></div>
 
 
 <p>When filtering by classifications, the <code>*</code> wildcard can be used to, for example, capture all mobility related agents with a wildcard of <code>mobility.*</code>. </p>
 <h3 id="service-keys">Service Keys</h3>
-<p>Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent <em>looks</em>, service keys are what an agent <em>has</em> or <em>does</em>. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's descretion. As this changes, the documentation will be updated. However, for <em>buyer</em> agents, two suggested keys are:</p>
-<div class="highlight"><pre><span></span><span class="err">buying_genus</span>
-<span class="err">buying_classifications</span>
+<p>Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent <em>looks</em>, service keys are what an agent <em>has</em> or <em>does</em>. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's descretion. As this changes, the documentation will be updated. However, for <em>buyer</em> agents, three suggested keys are:</p>
+<div class="highlight"><pre><span></span>buying_genus
+buying_architecture
+buying_classifications
 </pre></div>
 
 
-<p>This allows searches to look for potential buyers of classifications or genus. </p>
+<p>This allows searches to look for potential buyers of classifications, genus or with a compatible architecture. </p>
 <h2 id="finding-agents">Finding Agents</h2>
 <p>The soef is designed for <strong>geographic searches</strong> where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. Future versions of the soef will support searches across nodes, positionless searches and dimensional reduction-based fuzzy searches. Right now, the soef supports the <code>find_around_me</code> operation for agents. This allows searches that:</p>
 <ul>
@@ -1592,24 +1697,25 @@
 <li>That have a specified set of service keys (with wildcards)</li>
 <li>Where chain identifiers match</li>
 </ul>
-<p>Some limits apply to the maximum number of filters or range. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at <a href="http://soef.fetch.ai:9002">http://soef.fetch.ai:9002</a>.</p>
+<p>Some limits apply to the maximum number of filters or range. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at:</p>
+<p><a href="http://soef.fetch.ai:9002">http://soef.fetch.ai:9002</a></p>
 <p>The soef returns XML that includes information about all found agents. An example of that, unparsed, looks like this:</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
   <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
   <span class="nt">&lt;total&gt;</span>1<span class="nt">&lt;/total&gt;</span>
   <span class="nt">&lt;capped&gt;</span>0<span class="nt">&lt;/capped&gt;</span>
-    <span class="nt">&lt;results&gt;</span>
+  <span class="nt">&lt;results&gt;</span>
     <span class="nt">&lt;agent</span> <span class="na">name=</span><span class="s">&quot;Alice&quot;</span> <span class="na">genus=</span><span class="s">&quot;vehicle&quot;</span> <span class="na">classification=</span><span class="s">&quot;mobility.railway.train&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;identities&gt;</span>
-                <span class="nt">&lt;identity</span> <span class="na">chain_identifier=</span><span class="s">&quot;fetchai&quot;</span><span class="nt">&gt;</span>2h6fi8oCkMz9GCpL7EUYMHjzgdRFGmDP5V4Ls97jZpzjg523yY<span class="err">&lt;</span>/identity
-        <span class="nt">&lt;/identities&gt;</span>
-        <span class="nt">&lt;range_in_km&gt;</span>55.7363<span class="nt">&lt;/range_in_km&gt;</span>
-            <span class="nt">&lt;location</span> <span class="na">accuracy=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;latitude&gt;</span>52.5<span class="nt">&lt;/latitude&gt;</span>
-                <span class="nt">&lt;longitude&gt;</span>0.2<span class="nt">&lt;/longitude&gt;</span>
-            <span class="nt">&lt;/location&gt;</span>
-        <span class="nt">&lt;/agent&gt;</span>
-    <span class="nt">&lt;/results&gt;</span>
+      <span class="nt">&lt;identities&gt;</span>
+        <span class="nt">&lt;identity</span> <span class="na">chain_identifier=</span><span class="s">&quot;fetchai&quot;</span><span class="nt">&gt;</span>2h6fi8oCkMz9GCpL7EUYMHjzgdRFGmDP5V4Ls97jZpzjg523yY<span class="nt">&lt;/identity&gt;</span>
+      <span class="nt">&lt;/identities&gt;</span>
+      <span class="nt">&lt;range_in_km&gt;</span>55.7363<span class="nt">&lt;/range_in_km&gt;</span>
+      <span class="nt">&lt;location</span> <span class="na">accuracy=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;latitude&gt;</span>52.5<span class="nt">&lt;/latitude&gt;</span>
+        <span class="nt">&lt;longitude&gt;</span>0.2<span class="nt">&lt;/longitude&gt;</span>
+      <span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;/agent&gt;</span>
+  <span class="nt">&lt;/results&gt;</span>
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
@@ -1658,11 +1764,11 @@
 </ol>
 <p>If registration is successful, the soef will return a result like this:</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
-    <span class="nt">&lt;encrypted&gt;</span>0<span class="nt">&lt;/encrypted&gt;</span>
-    <span class="nt">&lt;token&gt;</span>0A709D1ED170A3E96C4AC9D014BCAE30<span class="nt">&lt;/token&gt;</span>
-    <span class="nt">&lt;page_address&gt;</span>
+  <span class="nt">&lt;encrypted&gt;</span>0<span class="nt">&lt;/encrypted&gt;</span>
+  <span class="nt">&lt;token&gt;</span>0A709D1ED170A3E96C4AC9D014BCAE30<span class="nt">&lt;/token&gt;</span>
+  <span class="nt">&lt;page_address&gt;</span>
 oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
-    <span class="nt">&lt;/page_address&gt;</span>
+  <span class="nt">&lt;/page_address&gt;</span>
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
@@ -1675,7 +1781,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </ul>
 <p>If this works, you will receive a success response:</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;response&gt;</span>
-    <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
+  <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
 <span class="nt">&lt;/response&gt;</span>
 </pre></div>
 
@@ -1751,7 +1857,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </tbody>
 </table>
 <h2 id="further-information">Further information</h2>
-<p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY">here</a>.</p>
+<p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY">here</a>. </p>
 <p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. </p>
 
 

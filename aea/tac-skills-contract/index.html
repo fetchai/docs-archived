@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../api/crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../api/crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../api/crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../api/helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../api/protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../api/protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1553,7 +1633,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.3.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.4.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </pre></div>
@@ -1566,10 +1646,10 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_control_contract:0.3.0
+aea add connection fetchai/oef:0.5.0
+aea add skill fetchai/tac_control_contract:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
@@ -1613,12 +1693,12 @@ aea add-key ethereum eth_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.4.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.3.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.4.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1640,11 +1720,11 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_participation:0.3.0
-aea add skill fetchai/tac_negotiation:0.3.0
+aea add connection fetchai/oef:0.5.0
+aea add skill fetchai/tac_participation:0.4.0
+aea add skill fetchai/tac_negotiation:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1655,11 +1735,11 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/oef:0.4.0
-aea add skill fetchai/tac_participation:0.3.0
-aea add skill fetchai/tac_negotiation:0.3.0
+aea add connection fetchai/oef:0.5.0
+aea add skill fetchai/tac_participation:0.4.0
+aea add skill fetchai/tac_negotiation:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool

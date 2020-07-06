@@ -247,7 +247,7 @@
 </li>
  
 <li>
-    <a href="../../../thermometer-skills-step-by-step/" id="aea-thermometer-skills-step-by-step-"
+    <a href="../../../generic-skills-step-by-step/" id="aea-generic-skills-step-by-step-"
         >Trade between two AEAs</a
     >
 </li>
@@ -338,6 +338,12 @@
 <li>
     <a href="../../../upgrading/" id="aea-upgrading-"
         >Upgrading versions</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../modes/" id="aea-modes-"
+        >Modes of running an AEA</a
     >
 </li>
 
@@ -442,6 +448,12 @@
 </li>
  
 <li>
+    <a href="../../../message-routing/" id="aea-message-routing-"
+        >Message routing</a
+    >
+</li>
+ 
+<li>
     <a href="../../../config/" id="aea-config-"
         >Configurations</a
     >
@@ -461,6 +473,12 @@
 <li>
     <a href="../../../query-language/" id="aea-query-language-"
         >The Query Language</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../simple-oef-usage/" id="aea-simple-oef-usage-"
+        >SOEF Connection</a
     >
 </li>
 
@@ -694,17 +712,22 @@
 </li>
  
 <li>
-    <a href="../../crypto/registry/" id="aea-api-crypto-registry-"
-        >Registry</a
-    >
-</li>
- 
-<li>
     <a href="../../crypto/wallet/" id="aea-api-crypto-wallet-"
         >Wallet</a
     >
 </li>
+ 
+<li>
+    <span class="head">Registries</span>
+    <ul id="header_registries"> 
+<li>
+    <a href="../../crypto/registries/base/" id="aea-api-crypto-registries-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -803,6 +826,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -835,7 +864,18 @@
         >Test Cases</a
     >
 </li>
+ 
+<li>
+    <span class="head">Transaction</span>
+    <ul id="header_transaction"> 
+<li>
+    <a href="../../helpers/transaction/base/" id="aea-api-helpers-transaction-base-"
+        >Base</a
+    >
+</li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -882,6 +922,46 @@
  
 <li>
     <a href="../../protocols/default/serialization/" id="aea-api-protocols-default-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">Signing Protocol</span>
+    <ul id="header_signing_protocol"> 
+<li>
+    <a href="../../protocols/signing/custom_types/" id="aea-api-protocols-signing-custom_types-"
+        >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/message/" id="aea-api-protocols-signing-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/signing/serialization/" id="aea-api-protocols-signing-serialization-"
+        >Serialization</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <span class="head">State Update Protocol</span>
+    <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
+        >Message</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/state_update/serialization/" id="aea-api-protocols-state_update-serialization-"
         >Serialization</a
     >
 </li>
@@ -1463,6 +1543,102 @@
 <p><a name=".aea.decision_maker.default"></a></p>
 <h1 id="aeadecision_makerdefault">aea.decision<code>_</code>maker.default</h1>
 <p>This module contains the decision maker class.</p>
+<p><a name=".aea.decision_maker.default.SigningDialogues"></a></p>
+<h2 id="signingdialogues-objects">SigningDialogues Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SigningDialogues</span><span class="p">(</span><span class="n">BaseSigningDialogues</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This class keeps track of all oef_search dialogues.</p>
+<p><a name=".aea.decision_maker.default.SigningDialogues.__init__"></a></p>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Initialize dialogues.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_address</code>: the address of the agent for whom dialogues are maintained</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name=".aea.decision_maker.default.SigningDialogues.role_from_first_message"></a></p>
+<h4 id="role_from_first_message">role<code>_</code>from<code>_</code>first<code>_</code>message</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@staticmethod</span>
+ <span class="o">|</span> <span class="n">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span>
+</pre></div>
+
+
+<p>Infer the role of the agent from an incoming/outgoing first message</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>message</code>: an incoming/outgoing first message</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>The role of the agent</p>
+<p><a name=".aea.decision_maker.default.SigningDialogues.create_dialogue"></a></p>
+<h4 id="create_dialogue">create<code>_</code>dialogue</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create_dialogue</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">BaseDialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SigningDialogue</span>
+</pre></div>
+
+
+<p>Create an instance of fipa dialogue.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>dialogue_label</code>: the identifier of the dialogue</li>
+<li><code>role</code>: the role of the agent this dialogue is maintained for</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the created dialogue</p>
+<p><a name=".aea.decision_maker.default.StateUpdateDialogues"></a></p>
+<h2 id="stateupdatedialogues-objects">StateUpdateDialogues Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StateUpdateDialogues</span><span class="p">(</span><span class="n">BaseStateUpdateDialogues</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This class keeps track of all oef_search dialogues.</p>
+<p><a name=".aea.decision_maker.default.StateUpdateDialogues.__init__"></a></p>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Initialize dialogues.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_address</code>: the address of the agent for whom dialogues are maintained</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name=".aea.decision_maker.default.StateUpdateDialogues.role_from_first_message"></a></p>
+<h4 id="role_from_first_message_1">role<code>_</code>from<code>_</code>first<code>_</code>message</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@staticmethod</span>
+ <span class="o">|</span> <span class="n">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span>
+</pre></div>
+
+
+<p>Infer the role of the agent from an incoming/outgoing first message</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>message</code>: an incoming/outgoing first message</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>The role of the agent</p>
+<p><a name=".aea.decision_maker.default.StateUpdateDialogues.create_dialogue"></a></p>
+<h4 id="create_dialogue_1">create<code>_</code>dialogue</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create_dialogue</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">BaseDialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateUpdateDialogue</span>
+</pre></div>
+
+
+<p>Create an instance of fipa dialogue.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>dialogue_label</code>: the identifier of the dialogue</li>
+<li><code>role</code>: the role of the agent this dialogue is maintained for</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the created dialogue</p>
 <p><a name=".aea.decision_maker.default.GoalPursuitReadiness"></a></p>
 <h2 id="goalpursuitreadiness-objects">GoalPursuitReadiness Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GoalPursuitReadiness</span><span class="p">()</span>
@@ -1483,7 +1659,7 @@
 <li>Status.NOT_READY: when the agent is not ready to pursuit its goal</li>
 </ul>
 <p><a name=".aea.decision_maker.default.GoalPursuitReadiness.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
@@ -1516,9 +1692,9 @@
 </pre></div>
 
 
-<p>Represent the ownership state of an agent.</p>
+<p>Represent the ownership state of an agent (can proxy a ledger).</p>
 <p><a name=".aea.decision_maker.default.OwnershipState.__init__"></a></p>
-<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
@@ -1581,7 +1757,7 @@
 <p>Get good holdings in this state.</p>
 <p><a name=".aea.decision_maker.default.OwnershipState.is_affordable_transaction"></a></p>
 <h4 id="is_affordable_transaction">is<code>_</code>affordable<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
 
 
@@ -1590,33 +1766,46 @@
 Note, the agent is the sender of the transaction message by design.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>tx_message</code>: the transaction message</li>
+<li><code>terms</code>: the transaction terms</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if the transaction is legal wrt the current state, false otherwise.</p>
+<p><a name=".aea.decision_maker.default.OwnershipState.is_affordable"></a></p>
+<h4 id="is_affordable">is<code>_</code>affordable</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_affordable</span><span class="p">(</span><span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if the tx is affordable.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>terms</code>: the transaction terms</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>whether the transaction is affordable or not</p>
 <p><a name=".aea.decision_maker.default.OwnershipState.update"></a></p>
 <h4 id="update_1">update</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
 <p>Update the agent state from a transaction.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>tx_message</code>: the transaction message</li>
+<li><code>terms</code>: the transaction terms</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name=".aea.decision_maker.default.OwnershipState.apply_transactions"></a></p>
 <h4 id="apply_transactions">apply<code>_</code>transactions</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">apply_transactions</span><span class="p">(</span><span class="n">transactions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TransactionMessage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;OwnershipState&quot;</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">apply_transactions</span><span class="p">(</span><span class="n">list_of_terms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Terms</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;OwnershipState&quot;</span>
 </pre></div>
 
 
 <p>Apply a list of transactions to (a copy of) the current state.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>transactions</code>: the sequence of transaction messages.</li>
+<li><code>list_of_terms</code>: the sequence of transaction terms.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the final state.</p>
@@ -1627,49 +1816,6 @@ Note, the agent is the sender of the transaction message by design.</p>
 
 
 <p>Copy the object.</p>
-<p><a name=".aea.decision_maker.default.LedgerStateProxy"></a></p>
-<h2 id="ledgerstateproxy-objects">LedgerStateProxy Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LedgerStateProxy</span><span class="p">(</span><span class="n">BaseLedgerStateProxy</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Class to represent a proxy to a ledger state.</p>
-<p><a name=".aea.decision_maker.default.LedgerStateProxy.__init__"></a></p>
-<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">ledger_apis</span><span class="p">:</span> <span class="n">LedgerApis</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Instantiate a ledger state proxy.</p>
-<p><a name=".aea.decision_maker.default.LedgerStateProxy.ledger_apis"></a></p>
-<h4 id="ledger_apis">ledger<code>_</code>apis</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">ledger_apis</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LedgerApis</span>
-</pre></div>
-
-
-<p>Get the ledger_apis.</p>
-<p><a name=".aea.decision_maker.default.LedgerStateProxy.is_initialized"></a></p>
-<h4 id="is_initialized_1">is<code>_</code>initialized</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">is_initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Get the initialization status.</p>
-<p><a name=".aea.decision_maker.default.LedgerStateProxy.is_affordable_transaction"></a></p>
-<h4 id="is_affordable_transaction_1">is<code>_</code>affordable<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_affordable_transaction</span><span class="p">(</span><span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Check if the transaction is affordable on the default ledger.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>tx_message</code>: the transaction message</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>whether the transaction is affordable on the ledger</p>
 <p><a name=".aea.decision_maker.default.Preferences"></a></p>
 <h2 id="preferences-objects">Preferences Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Preferences</span><span class="p">(</span><span class="n">BasePreferences</span><span class="p">)</span>
@@ -1678,7 +1824,7 @@ Note, the agent is the sender of the transaction message by design.</p>
 
 <p>Class to represent the preferences.</p>
 <p><a name=".aea.decision_maker.default.Preferences.__init__"></a></p>
-<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___4"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
@@ -1686,7 +1832,7 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p>Instantiate an agent preference object.</p>
 <p><a name=".aea.decision_maker.default.Preferences.set"></a></p>
 <h4 id="set_1">set</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">exchange_params_by_currency_id</span><span class="p">:</span> <span class="n">ExchangeParams</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">utility_params_by_good_id</span><span class="p">:</span> <span class="n">UtilityParams</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">exchange_params_by_currency_id</span><span class="p">:</span> <span class="n">ExchangeParams</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">utility_params_by_good_id</span><span class="p">:</span> <span class="n">UtilityParams</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1695,10 +1841,9 @@ Note, the agent is the sender of the transaction message by design.</p>
 <ul>
 <li><code>exchange_params_by_currency_id</code>: the exchange params.</li>
 <li><code>utility_params_by_good_id</code>: the utility params for every asset.</li>
-<li><code>tx_fee</code>: the acceptable transaction fee.</li>
 </ul>
 <p><a name=".aea.decision_maker.default.Preferences.is_initialized"></a></p>
-<h4 id="is_initialized_2">is<code>_</code>initialized</h4>
+<h4 id="is_initialized_1">is<code>_</code>initialized</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </pre></div>
@@ -1722,22 +1867,6 @@ Note, the agent is the sender of the transaction message by design.</p>
 
 
 <p>Get utility parameter for each good.</p>
-<p><a name=".aea.decision_maker.default.Preferences.seller_transaction_fee"></a></p>
-<h4 id="seller_transaction_fee">seller<code>_</code>transaction<code>_</code>fee</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">seller_transaction_fee</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
-</pre></div>
-
-
-<p>Get the transaction fee.</p>
-<p><a name=".aea.decision_maker.default.Preferences.buyer_transaction_fee"></a></p>
-<h4 id="buyer_transaction_fee">buyer<code>_</code>transaction<code>_</code>fee</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">buyer_transaction_fee</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
-</pre></div>
-
-
-<p>Get the transaction fee.</p>
 <p><a name=".aea.decision_maker.default.Preferences.logarithmic_utility"></a></p>
 <h4 id="logarithmic_utility">logarithmic<code>_</code>utility</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">logarithmic_utility</span><span class="p">(</span><span class="n">quantities_by_good_id</span><span class="p">:</span> <span class="n">GoodHoldings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
@@ -1795,7 +1924,7 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p>the marginal utility score</p>
 <p><a name=".aea.decision_maker.default.Preferences.utility_diff_from_transaction"></a></p>
 <h4 id="utility_diff_from_transaction">utility<code>_</code>diff<code>_</code>from<code>_</code>transaction</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">utility_diff_from_transaction</span><span class="p">(</span><span class="n">ownership_state</span><span class="p">:</span> <span class="n">BaseOwnershipState</span><span class="p">,</span> <span class="n">tx_message</span><span class="p">:</span> <span class="n">TransactionMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">utility_diff_from_transaction</span><span class="p">(</span><span class="n">ownership_state</span><span class="p">:</span> <span class="n">BaseOwnershipState</span><span class="p">,</span> <span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </pre></div>
 
 
@@ -1803,10 +1932,24 @@ Note, the agent is the sender of the transaction message by design.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ownership_state</code>: the ownership state against which to apply the transaction.</li>
-<li><code>tx_message</code>: a transaction message.</li>
+<li><code>terms</code>: the transaction terms.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the score.</p>
+<p><a name=".aea.decision_maker.default.Preferences.is_utility_enhancing"></a></p>
+<h4 id="is_utility_enhancing">is<code>_</code>utility<code>_</code>enhancing</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_utility_enhancing</span><span class="p">(</span><span class="n">ownership_state</span><span class="p">:</span> <span class="n">BaseOwnershipState</span><span class="p">,</span> <span class="n">terms</span><span class="p">:</span> <span class="n">Terms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if the tx is utility enhancing.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>ownership_state</code>: the ownership state against which to apply the transaction.</li>
+<li><code>terms</code>: the transaction terms</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>whether the transaction is utility enhancing or not</p>
 <p><a name=".aea.decision_maker.default.Preferences.__copy__"></a></p>
 <h4 id="__copy___1"><code>__</code>copy<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">__copy__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preferences&quot;</span>
@@ -1822,8 +1965,8 @@ Note, the agent is the sender of the transaction message by design.</p>
 
 <p>This class implements the decision maker.</p>
 <p><a name=".aea.decision_maker.default.DecisionMakerHandler.__init__"></a></p>
-<h4 id="__init___4"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">wallet</span><span class="p">:</span> <span class="n">Wallet</span><span class="p">,</span> <span class="n">ledger_apis</span><span class="p">:</span> <span class="n">LedgerApis</span><span class="p">)</span>
+<h4 id="__init___5"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">wallet</span><span class="p">:</span> <span class="n">Wallet</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1832,11 +1975,10 @@ Note, the agent is the sender of the transaction message by design.</p>
 <ul>
 <li><code>identity</code>: the identity</li>
 <li><code>wallet</code>: the wallet</li>
-<li><code>ledger_apis</code>: the ledger apis</li>
 </ul>
 <p><a name=".aea.decision_maker.default.DecisionMakerHandler.handle"></a></p>
 <h4 id="handle">handle</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">InternalMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
