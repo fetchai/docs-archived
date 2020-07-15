@@ -1540,15 +1540,15 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.3.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.4.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.3.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
-aea run --connections fetchai/p2p_libp2p:0.3.0
+aea add connection fetchai/p2p_libp2p:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.4.0
+aea run --connections fetchai/p2p_libp2p:0.4.0
 </pre></div>
 
 
@@ -1556,8 +1556,8 @@ aea run --connections fetchai/p2p_libp2p:0.3.0
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.3.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
+aea add connection fetchai/p2p_libp2p:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.4.0
 </pre></div>
 
 
@@ -1573,7 +1573,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.3.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.4.0
 </pre></div>
 
 
@@ -1581,21 +1581,21 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <h2 id="local-demo-with-skills">Local demo with skills</h2>
 <h3 id="fetch-the-weather-station-and-client">Fetch the weather station and client</h3>
 <p>Create one AEA as follows:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.6.0
-aea fetch fetchai/weather_client:0.6.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.7.0
+aea fetch fetchai/weather_client:0.7.0
 </pre></div>
 
 
 <p>Then enter each project individually and execute the following to add the <code>p2p_libp2p</code> connection:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.3.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.3.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/p2p_libp2p:0.4.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.4.0
 </pre></div>
 
 
 <p>Then extend the <code>aea-config.yaml</code> of each project as follows:</p>
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="p p-Indicator">?</span> <span class="s">&quot;fetchai/oef_search:0.3.0&quot;</span>
-  <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.5.0&quot;</span>
+  <span class="p p-Indicator">:</span> <span class="s">&quot;fetchai/oef:0.6.0&quot;</span>
 </pre></div>
 
 
@@ -1607,7 +1607,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <h3 id="run-weather-station">Run weather station</h3>
 <p>Run the weather station first:</p>
-<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.3.0,fetchai/oef:0.5.0&quot;</span>
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.4.0,fetchai/oef:0.6.0&quot;</span>
 </pre></div>
 
 
@@ -1643,7 +1643,7 @@ aea add-key fetchai fet_private_key.txt
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the weather station AEA.</p>
 <p>Now run the weather client:</p>
-<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.3.0,fetchai/oef:0.5.0&quot;</span>
+<div class="highlight"><pre><span></span>aea run --connections <span class="s2">&quot;fetchai/p2p_libp2p:0.4.0,fetchai/oef:0.6.0&quot;</span>
 </pre></div>
 
 

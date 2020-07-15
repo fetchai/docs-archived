@@ -1633,7 +1633,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.4.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller_contract:0.5.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </pre></div>
@@ -1646,10 +1646,10 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
-aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/oef:0.6.0
 aea add skill fetchai/tac_control_contract:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </pre></div>
 
@@ -1693,12 +1693,12 @@ aea add-key ethereum eth_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.4.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.5.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.4.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.5.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1720,11 +1720,11 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/oef:0.6.0
 aea add skill fetchai/tac_participation:0.4.0
 aea add skill fetchai/tac_negotiation:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1735,11 +1735,11 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/oef:0.5.0
+aea add connection fetchai/oef:0.6.0
 aea add skill fetchai/tac_participation:0.4.0
 aea add skill fetchai/tac_negotiation:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.5.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool

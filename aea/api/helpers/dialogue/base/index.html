@@ -1749,7 +1749,7 @@
 <p>Get the string representation.</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogue.__init__"></a></p>
 <h4 id="__init___2"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Address</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Role</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Rules</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">message_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">agent_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Address</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Role</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Rules</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1882,6 +1882,21 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if message successfully added, false otherwise</p>
+<p><a name=".aea.helpers.dialogue.base.Dialogue.reply"></a></p>
+<h4 id="reply">reply</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">reply</span><span class="p">(</span><span class="n">target_message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">performative</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span>
+</pre></div>
+
+
+<p>Reply to the 'target_message' in this dialogue with a message with 'performative', and contents from kwargs.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>target_message</code>: the message to reply to.</li>
+<li><code>performative</code>: the performative of the reply message.</li>
+<li><code>kwargs</code>: the content of the reply message.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the reply message if it was successfully added as a reply, None otherwise.</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogue.is_valid_next_message"></a></p>
 <h4 id="is_valid_next_message">is<code>_</code>valid<code>_</code>next<code>_</code>message</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_valid_next_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -1991,7 +2006,7 @@ additional rules are applied for the time being, and more specific rules are cap
 <p>The dialogues class keeps track of all dialogues for an agent.</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogues.__init__"></a></p>
 <h4 id="__init___4"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">end_states</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="n">Dialogue</span><span class="o">.</span><span class="n">EndState</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">end_states</span><span class="p">:</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="n">Dialogue</span><span class="o">.</span><span class="n">EndState</span><span class="p">],</span> <span class="n">message_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dialogue_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Dialogue</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">role_from_first_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Message</span><span class="p">],</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -2038,13 +2053,28 @@ additional rules are applied for the time being, and more specific rules are cap
 <p>Return a dialogue label for a new self initiated dialogue.</p>
 <p><strong>Returns</strong>:</p>
 <p>the next nonce</p>
+<p><a name=".aea.helpers.dialogue.base.Dialogues.create"></a></p>
+<h4 id="create">create</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">create</span><span class="p">(</span><span class="n">counterparty</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">performative</span><span class="p">:</span> <span class="n">Message</span><span class="o">.</span><span class="n">Performative</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Message</span><span class="p">,</span> <span class="n">Dialogue</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Create a dialogue with 'counterparty', with an initial message whose performative is 'performative' and contents are from 'kwargs'.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>counterparty</code>: the counterparty of the dialogue.</li>
+<li><code>performative</code>: the performative of the initial message.</li>
+<li><code>kwargs</code>: the content of the initial message.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the initial message and the dialogue.</p>
 <p><a name=".aea.helpers.dialogue.base.Dialogues.update"></a></p>
 <h4 id="update_1">update</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dialogue</span><span class="p">]</span>
 </pre></div>
 
 
-<p>Update the state of dialogues with a new message.</p>
+<p>Update the state of dialogues with a new incoming message.</p>
 <p>If the message is for a new dialogue, a new dialogue is created with 'message' as its first message, and returned.
 If the message is addressed to an existing dialogue, the dialogue is retrieved, extended with this message and returned.
 If there are any errors, e.g. the message dialogue reference does not exists or the message is invalid w.r.t. the dialogue, return None.</p>
@@ -2087,6 +2117,7 @@ If there are any errors, e.g. the message dialogue reference does not exists or 
 </pre></div>
 
 
+<p>THIS METHOD IS DEPRECATED AND WILL BE REMOVED IN THE NEXT VERSION. USE THE NEW CONSTRUCTOR ARGUMENTS INSTEAD.</p>
 <p>Create a dialogue instance.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2098,7 +2129,6 @@ If there are any errors, e.g. the message dialogue reference does not exists or 
 <p><a name=".aea.helpers.dialogue.base.Dialogues.role_from_first_message"></a></p>
 <h4 id="role_from_first_message">role<code>_</code>from<code>_</code>first<code>_</code>message</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@staticmethod</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span>
 </pre></div>
 
