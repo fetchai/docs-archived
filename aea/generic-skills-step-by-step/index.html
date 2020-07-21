@@ -1580,16 +1580,16 @@ this assigns all devices coming out of the hidraw subsystem in the kernel to the
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="reference-optional">Reference (Optional)</h2>
 <p>This step-by-step guide recreates two AEAs already developed by Fetch.ai. You can get the finished AEAs to compare your code against by following the next steps:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/generic_seller:0.4.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/generic_seller:0.5.0
 <span class="nb">cd</span> generic_seller
-aea eject skill fetchai/generic_seller:0.7.0
+aea eject skill fetchai/generic_seller:0.8.0
 <span class="nb">cd</span> ..
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>aea fetch fetchai/generic_buyer:0.4.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/generic_buyer:0.5.0
 <span class="nb">cd</span> generic_buyer
-aea eject skill fetchai/generic_buyer:0.6.0
+aea eject skill fetchai/generic_buyer:0.7.0
 <span class="nb">cd</span> ..
 </pre></div>
 
@@ -1618,9 +1618,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <h3 id="step-2-create-the-behaviour">Step 2: Create the behaviour</h3>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to actions initiated by the AEA rather than reactions to other events.</p>
 <p>Open the <code>behaviours.py</code> file (<code>my_generic_seller/skills/generic_seller/behaviours.py</code>) and add the following code:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
 
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
 <span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.ledger_api.message</span> <span class="kn">import</span> <span class="n">LedgerApiMessage</span>
@@ -1632,7 +1631,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.generic_seller.strategy</span> <span class="kn">import</span> <span class="n">GenericStrategy</span>
 
 
-<span class="n">DEFAULT_SERVICES_INTERVAL</span> <span class="o">=</span> <span class="mf">30.0</span>
+<span class="n">DEFAULT_SERVICES_INTERVAL</span> <span class="o">=</span> <span class="mf">60.0</span>
 <span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.2.0&quot;</span>
 
 
@@ -1645,7 +1644,6 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="s2">&quot;services_interval&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICES_INTERVAL</span>
         <span class="p">)</span>  <span class="c1"># type: int</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tick_interval</span><span class="o">=</span><span class="n">services_interval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[Description]</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1667,6 +1665,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">LEDGER_API_ADDRESS</span>
             <span class="n">ledger_api_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">ledger_api_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_agent</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_service</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1675,8 +1674,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_register_service</span><span class="p">()</span>
+        <span class="c1"># self._unregister_service()</span>
+        <span class="c1"># self._register_service()</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1685,16 +1684,16 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_agent</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register to the OEF Service Directory.</span>
+<span class="sd">        Register the agent&#39;s location.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_service_description</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
             <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
         <span class="p">)</span>
@@ -1706,37 +1705,70 @@ aea eject skill fetchai/generic_buyer:0.6.0
         <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
         <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: updating services on OEF service directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Unregister service from OEF Service Directory.</span>
+<span class="sd">        Register the agent&#39;s service.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_service_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering service on SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unregister service from the SOEF.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_unregister_service_description</span><span class="p">()</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
             <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
         <span class="p">)</span>
         <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
             <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
             <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
-            <span class="n">service_description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span><span class="p">,</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
         <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: unregistering services from OEF service directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering service from SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_unregister_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unregister agent from the SOEF.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering agent from SOEF.&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1871,9 +1903,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid fipa message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received invalid fipa message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">default_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">DefaultDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">default_dialogues</span><span class="p">)</span>
         <span class="n">default_msg</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
@@ -1902,9 +1932,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received CFP from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received CFP from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_matching_supply</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">query</span><span class="p">):</span>
@@ -1914,8 +1942,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">data_for_sale</span> <span class="o">=</span> <span class="n">data_for_sale</span>
             <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">terms</span> <span class="o">=</span> <span class="n">terms</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending a PROPOSE with proposal=</span><span class="si">{}</span><span class="s2"> to sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;sending a PROPOSE with proposal=</span><span class="si">{}</span><span class="s2"> to sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">proposal_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
@@ -1930,9 +1958,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">proposal_msg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: declined the CFP from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;declined the CFP from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
             <span class="p">)</span>
             <span class="n">decline_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
                 <span class="n">message_id</span><span class="o">=</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">message_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
@@ -1964,9 +1990,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
         <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">dialogue_stats</span><span class="o">.</span><span class="n">add_dialogue_endstate</span><span class="p">(</span>
             <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">EndState</span><span class="o">.</span><span class="n">DECLINED_PROPOSE</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">is_self_initiated</span>
@@ -1989,9 +2013,7 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received ACCEPT from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received ACCEPT from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
         <span class="n">match_accept_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
             <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">MATCH_ACCEPT_W_INFORM</span><span class="p">,</span>
@@ -2001,10 +2023,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">terms</span><span class="o">.</span><span class="n">sender_address</span><span class="p">},</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending MATCH_ACCEPT_W_INFORM to sender=</span><span class="si">{}</span><span class="s2"> with info=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
-                <span class="n">match_accept_msg</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
+            <span class="s2">&quot;sending MATCH_ACCEPT_W_INFORM to sender=</span><span class="si">{}</span><span class="s2"> with info=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">match_accept_msg</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">match_accept_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span>
@@ -2031,16 +2051,14 @@ aea eject skill fetchai/generic_buyer:0.6.0
         <span class="n">new_message_id</span> <span class="o">=</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">message_id</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">new_target</span> <span class="o">=</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">message_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
 
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="ow">and</span> <span class="s2">&quot;transaction_digest&quot;</span> <span class="ow">in</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: checking whether transaction=</span><span class="si">{}</span><span class="s2"> has been received ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;transaction_digest&quot;</span><span class="p">]</span>
+                <span class="s2">&quot;checking whether transaction=</span><span class="si">{}</span><span class="s2"> has been received ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;transaction_digest&quot;</span><span class="p">]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">ledger_api_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
@@ -2064,8 +2082,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">ledger_api_msg</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: did not receive transaction digest from sender=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;did not receive transaction digest from sender=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span> <span class="ow">and</span> <span class="s2">&quot;Done&quot;</span> <span class="ow">in</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -2084,16 +2102,14 @@ aea eject skill fetchai/generic_buyer:0.6.0
                 <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">EndState</span><span class="o">.</span><span class="n">SUCCESSFUL</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">is_self_initiated</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction confirmed, sending data=</span><span class="si">{}</span><span class="s2"> to buyer=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                    <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">data_for_sale</span><span class="p">,</span>
-                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
+                <span class="s2">&quot;transaction confirmed, sending data=</span><span class="si">{}</span><span class="s2"> to buyer=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">data_for_sale</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: did not receive transaction confirmation from sender=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;did not receive transaction confirmation from sender=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 </pre></div>
@@ -2112,8 +2128,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">fipa_dialogue</span>
+            <span class="s2">&quot;cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">fipa_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2175,8 +2191,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span>
+            <span class="s2">&quot;received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2190,10 +2206,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: starting balance on </span><span class="si">{}</span><span class="s2"> ledger=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span>
-                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span>
+            <span class="s2">&quot;starting balance on </span><span class="si">{}</span><span class="s2"> ledger=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2238,16 +2252,14 @@ aea eject skill fetchai/generic_buyer:0.6.0
                 <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">EndState</span><span class="o">.</span><span class="n">SUCCESSFUL</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">is_self_initiated</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction confirmed, sending data=</span><span class="si">{}</span><span class="s2"> to buyer=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                    <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">data_for_sale</span><span class="p">,</span>
-                    <span class="n">last_message</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
+                <span class="s2">&quot;transaction confirmed, sending data=</span><span class="si">{}</span><span class="s2"> to buyer=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">data_for_sale</span><span class="p">,</span> <span class="n">last_message</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction_receipt=</span><span class="si">{}</span><span class="s2"> not settled or not valid, aborting&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">transaction_receipt</span>
+                <span class="s2">&quot;transaction_receipt=</span><span class="si">{}</span><span class="s2"> not settled or not valid, aborting&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">transaction_receipt</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 
@@ -2261,8 +2273,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received ledger_api error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span>
+            <span class="s2">&quot;received ledger_api error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2276,10 +2288,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle ledger_api message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span>
-                <span class="n">ledger_api_dialogue</span><span class="p">,</span>
+            <span class="s2">&quot;cannot handle ledger_api message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2334,8 +2344,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :param msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">oef_search_msg</span>
+            <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2350,8 +2360,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+            <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -2366,10 +2376,8 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span>
-                <span class="n">oef_search_dialogue</span><span class="p">,</span>
+            <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 </pre></div>
@@ -2380,26 +2388,28 @@ aea eject skill fetchai/generic_buyer:0.6.0
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
+<span class="kn">from</span> <span class="nn">aea.configurations.constants</span> <span class="kn">import</span> <span class="n">DEFAULT_LEDGER</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
-<span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="n">GenericDataModel</span>
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Query</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AGENT_LOCATION_MODEL</span><span class="p">,</span>
+    <span class="n">AGENT_REMOVE_SERVICE_MODEL</span><span class="p">,</span>
+    <span class="n">AGENT_SET_SERVICE_MODEL</span><span class="p">,</span>
+    <span class="n">SIMPLE_SERVICE_MODEL</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Query</span>
 <span class="kn">from</span> <span class="nn">aea.helpers.transaction.base</span> <span class="kn">import</span> <span class="n">Terms</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Address</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Model</span>
 
-<span class="n">DEFAULT_LEDGER_ID</span> <span class="o">=</span> <span class="s2">&quot;fetchai&quot;</span>
+<span class="n">DEFAULT_LEDGER_ID</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span>
 <span class="n">DEFAULT_IS_LEDGER_TX</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">DEFAULT_CURRENCY_ID</span> <span class="o">=</span> <span class="s2">&quot;FET&quot;</span>
 <span class="n">DEFAULT_UNIT_PRICE</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">DEFAULT_SERVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;generic_service&quot;</span>
 
-<span class="n">DEFAULT_SERVICE_DATA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Cambridge&quot;</span><span class="p">}</span>
-<span class="n">DEFAULT_DATA_MODEL</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;attribute_one&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="s2">&quot;attribute_two&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="p">}</span>  <span class="c1"># type: Optional[Dict[str, Any]]</span>
-<span class="n">DEFAULT_DATA_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;location&quot;</span>
+<span class="n">DEFAULT_LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">51.5194</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">0.1270</span><span class="p">}</span>
+<span class="n">DEFAULT_SERVICE_DATA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;seller_service&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_service&quot;</span><span class="p">}</span>
 
 <span class="n">DEFAULT_HAS_DATA_SOURCE</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">DEFAULT_DATA_FOR_SALE</span> <span class="o">=</span> <span class="p">{</span>
@@ -2426,9 +2436,20 @@ aea eject skill fetchai/generic_buyer:0.6.0
         <span class="bp">self</span><span class="o">.</span><span class="n">_unit_price</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;unit_price&quot;</span><span class="p">,</span> <span class="n">DEFAULT_UNIT_PRICE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_service_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_id&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_ID</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model_name&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL_NAME</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="ow">and</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span>
+            <span class="ow">and</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span>
+        <span class="p">),</span> <span class="s2">&quot;service_data must contain keys `key` and `value`&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_remove_service_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simple_service_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_has_data_source</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;has_data_source&quot;</span><span class="p">,</span> <span class="n">DEFAULT_HAS_DATA_SOURCE</span><span class="p">)</span>
         <span class="n">data_for_sale_ordered</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_for_sale&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_FOR_SALE</span><span class="p">)</span>
@@ -2463,15 +2484,47 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="sd">&quot;&quot;&quot;Check whether or not tx are settled on a ledger.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ledger_tx</span>
 
-    <span class="k">def</span> <span class="nf">get_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_location_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the service description.</span>
+<span class="sd">        Get the location description.</span>
+
+<span class="sd">        :return: a description of the agent&#39;s location</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_LOCATION_MODEL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
+
+    <span class="k">def</span> <span class="nf">get_register_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the register service description.</span>
 
 <span class="sd">        :return: a description of the offered services</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span><span class="p">,</span>
-            <span class="n">data_model</span><span class="o">=</span><span class="n">GenericDataModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_SET_SERVICE_MODEL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
+
+    <span class="k">def</span> <span class="nf">get_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the simple service description.</span>
+
+<span class="sd">        :return: a description of the offered services</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simple_service_data</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">SIMPLE_SERVICE_MODEL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
+
+    <span class="k">def</span> <span class="nf">get_unregister_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the unregister service description.</span>
+
+<span class="sd">        :return: a description of the to be removed service</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_service_data</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_REMOVE_SERVICE_MODEL</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">description</span>
 
@@ -2801,17 +2854,17 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <p>Since we made so many changes to our AEA we have to update the <code>skill.yaml</code> (at <code>my_generic_seller/skills/generic_seller/skill.yaml</code>). Make sure that your <code>skill.yaml</code> matches with the following code </p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_seller</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6.0</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.8.0</span>
 <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The weather station skill implements the functionality to sell weather</span>
   <span class="l l-Scalar l-Scalar-Plain">data.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.5.0,</span><span class="nv"> </span><span class="s">&lt;0.6.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span>
   <span class="nt">__init__.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmbfkeFnZVKppLEHpBrTXUXBwg2dpPABJWSLND8Lf1cmpG</span>
-  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmTwUHrRrBvadNp4RBBEKcMBUvgv2MuGojz7gDsuYDrauE</span>
-  <span class="nt">dialogues.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmY44eSrEzaZxtAG1dqbddwouj5iVMEitzpmt2xFC6MDUm</span>
-  <span class="nt">handlers.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmSiquvAA4ULXPEJfmT3Z85Lqm9Td2H2uXXKuXrZjcZcPK</span>
-  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYt74ucz8GfddfwP5dFgQBbD1dkcWvydUyEZ8jn9uxEDK</span>
+  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmZuzEpqCZjW1rAYT1PZXoYRPjCXxKNQ2ZEkL32WQhxtwf</span>
+  <span class="nt">dialogues.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmNf96REY7PiRdStRJrn97fuCRgqTAeQti5uf4sPzgMNau</span>
+  <span class="nt">handlers.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmfFY8HGULapXzCHHLuwWhgADXvBw8NJvfX155pY3qWS1h</span>
+  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmRVkBtcCUKXf68RAqnHAi6UWqcygesppUNzSm9oceYNHH</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
@@ -2853,22 +2906,15 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
       <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
       <span class="nt">data_for_sale</span><span class="p">:</span>
         <span class="nt">generic</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
       <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
       <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cosmos</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
       <span class="nt">service_data</span><span class="p">:</span>
-        <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
       <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
       <span class="nt">unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GenericStrategy</span>
@@ -2960,7 +3006,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span><span class="p">:</span>
-            <span class="n">query</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_service_query</span><span class="p">()</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_and_service_query</span><span class="p">()</span>
             <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
                 <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
             <span class="p">)</span>
@@ -3074,9 +3120,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid fipa message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received invalid fipa message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">default_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">DefaultDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">default_dialogues</span><span class="p">)</span>
         <span class="n">default_msg</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="p">(</span>
@@ -3104,10 +3148,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received proposal=</span><span class="si">{}</span><span class="s2"> from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
+            <span class="s2">&quot;received proposal=</span><span class="si">{}</span><span class="s2"> from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
@@ -3115,8 +3157,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="n">affordable</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_affordable_proposal</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">proposal</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">acceptable</span> <span class="ow">and</span> <span class="n">affordable</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: accepting the proposal from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;accepting the proposal from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">terms</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">terms_from_proposal</span><span class="p">(</span>
@@ -3134,8 +3176,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">accept_msg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: declining the proposal from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;declining the proposal from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">decline_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
@@ -3167,9 +3209,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">dialogue_stats</span><span class="o">.</span><span class="n">add_dialogue_endstate</span><span class="p">(</span>
@@ -3195,8 +3235,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received MATCH_ACCEPT_W_INFORM from sender=</span><span class="si">{}</span><span class="s2"> with info=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span>
+            <span class="s2">&quot;received MATCH_ACCEPT_W_INFORM from sender=</span><span class="si">{}</span><span class="s2"> with info=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
@@ -3223,9 +3263,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
             <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">associated_ledger_api_dialogue</span> <span class="o">=</span> <span class="n">ledger_api_dialogue</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">ledger_api_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: requesting transfer transaction from ledger api...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;requesting transfer transaction from ledger api...&quot;</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">inform_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span>
@@ -3239,8 +3277,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
             <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inform_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">inform_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: informing counterparty=</span><span class="si">{}</span><span class="s2"> of payment.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="s2">&quot;informing counterparty=</span><span class="si">{}</span><span class="s2"> of payment.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 </pre></div>
@@ -3263,25 +3301,19 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">info</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received the following data=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;received the following data=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
             <span class="p">)</span>
             <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">dialogue_stats</span><span class="o">.</span><span class="n">add_dialogue_endstate</span><span class="p">(</span>
                 <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">EndState</span><span class="o">.</span><span class="n">SUCCESSFUL</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">is_self_initiated</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received no data from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;received no data from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
@@ -3295,8 +3327,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">fipa_dialogue</span>
+            <span class="s2">&quot;cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fipa_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">fipa_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 </pre></div>
@@ -3357,8 +3389,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">oef_search_msg</span>
+            <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3373,8 +3405,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+            <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3388,16 +3420,11 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found no agents, continue searching.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;found no agents, continue searching.&quot;</span><span class="p">)</span>
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found agents=</span><span class="si">{}</span><span class="s2">, stopping search.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+            <span class="s2">&quot;found agents=</span><span class="si">{}</span><span class="s2">, stopping search.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)),</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -3417,9 +3444,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
             <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">cfp_msg</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending CFP to agent=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;sending CFP to agent=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counterparty</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
@@ -3433,10 +3458,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span>
-                <span class="n">oef_search_dialogue</span><span class="p">,</span>
+            <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 </pre></div>
@@ -3494,8 +3517,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid signing message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">signing_msg</span>
+            <span class="s2">&quot;received invalid signing message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3509,9 +3532,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param signing_dialogue: the dialogue</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction signing was successful.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;transaction signing was successful.&quot;</span><span class="p">)</span>
         <span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">signing_dialogue</span><span class="o">.</span><span class="n">associated_fipa_dialogue</span>
         <span class="n">ledger_api_dialogue</span> <span class="o">=</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">associated_ledger_api_dialogue</span>
         <span class="n">last_ledger_api_msg</span> <span class="o">=</span> <span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">last_incoming_message</span>
@@ -3528,9 +3549,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">LEDGER_API_ADDRESS</span>
         <span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">ledger_api_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending transaction to ledger.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;sending transaction to ledger.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
@@ -3543,8 +3562,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction signing was not successful. Error_code=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">error_code</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="s2">&quot;transaction signing was not successful. Error_code=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">error_code</span><span class="p">,</span> <span class="n">signing_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3559,8 +3578,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle signing message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="s2">&quot;cannot handle signing message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">signing_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3626,8 +3645,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span>
+            <span class="s2">&quot;received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3643,17 +3662,15 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: starting balance on </span><span class="si">{}</span><span class="s2"> ledger=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">strategy</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span>
+                <span class="s2">&quot;starting balance on </span><span class="si">{}</span><span class="s2"> ledger=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">strategy</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">strategy</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span>
             <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: you have no starting balance on </span><span class="si">{}</span><span class="s2"> ledger!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">strategy</span><span class="o">.</span><span class="n">ledger_id</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;you have no starting balance on </span><span class="si">{}</span><span class="s2"> ledger!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">strategy</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -3666,11 +3683,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param ledger_api_message: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received raw transaction=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;received raw transaction=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">))</span>
         <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
         <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="p">(</span>
             <span class="n">performative</span><span class="o">=</span><span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SIGN_TRANSACTION</span><span class="p">,</span>
@@ -3690,9 +3703,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: proposing the transaction to the decision maker. Waiting for confirmation ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-            <span class="p">)</span>
+            <span class="s2">&quot;proposing the transaction to the decision maker. Waiting for confirmation ...&quot;</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_handle_transaction_digest</span><span class="p">(</span>
@@ -3706,8 +3717,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">associated_fipa_dialogue</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: transaction was successfully submitted. Transaction digest=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">transaction_digest</span>
+            <span class="s2">&quot;transaction was successfully submitted. Transaction digest=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">transaction_digest</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">fipa_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Optional</span><span class="p">[</span><span class="n">FipaMessage</span><span class="p">],</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">last_incoming_message</span><span class="p">)</span>
@@ -3723,8 +3734,7 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inform_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">inform_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: informing counterparty=</span><span class="si">{}</span><span class="s2"> of transaction digest.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+            <span class="s2">&quot;informing counterparty=</span><span class="si">{}</span><span class="s2"> of transaction digest.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">dialogue_label</span><span class="o">.</span><span class="n">dialogue_opponent_addr</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -3739,8 +3749,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: received ledger_api error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span>
+            <span class="s2">&quot;received ledger_api error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -3754,10 +3764,8 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: cannot handle ledger_api message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
-                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span>
-                <span class="n">ledger_api_dialogue</span><span class="p">,</span>
+            <span class="s2">&quot;cannot handle ledger_api message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 </pre></div>
@@ -3768,15 +3776,20 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <p>If the transaction was unsuccessful, the <code>DecisionMaker</code> will inform us that something went wrong and the transaction was not successful.</p>
 <h3 id="step-4-create-the-strategy_1">Step 4: Create the strategy</h3>
 <p>We are going to create the strategy that we want our AEA to follow. Rename the <code>my_model.py</code> file (in <code>my_generic_buyer/skills/generic_buyer/</code>) to <code>strategy.py</code> and paste the following code: </p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
-
-<span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="n">GenericDataModel</span>
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Query</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.configurations.constants</span> <span class="kn">import</span> <span class="n">DEFAULT_LEDGER</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="n">SIMPLE_SERVICE_MODEL</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Constraint</span><span class="p">,</span>
+    <span class="n">ConstraintType</span><span class="p">,</span>
+    <span class="n">Description</span><span class="p">,</span>
+    <span class="n">Location</span><span class="p">,</span>
+    <span class="n">Query</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">aea.helpers.transaction.base</span> <span class="kn">import</span> <span class="n">Terms</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Address</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Model</span>
 
-<span class="n">DEFAULT_LEDGER_ID</span> <span class="o">=</span> <span class="s2">&quot;fetchai&quot;</span>
+<span class="n">DEFAULT_LEDGER_ID</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span>
 <span class="n">DEFAULT_IS_LEDGER_TX</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">DEFAULT_CURRENCY_ID</span> <span class="o">=</span> <span class="s2">&quot;FET&quot;</span>
@@ -3784,23 +3797,13 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <span class="n">DEFAULT_MAX_TX_FEE</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">DEFAULT_SERVICE_ID</span> <span class="o">=</span> <span class="s2">&quot;generic_service&quot;</span>
 
+<span class="n">DEFAULT_LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">51.5194</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">0.1270</span><span class="p">}</span>
 <span class="n">DEFAULT_SEARCH_QUERY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;constraint_one&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;search_term&quot;</span><span class="p">:</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;constraint_type&quot;</span><span class="p">:</span> <span class="s2">&quot;==&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;constraint_two&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;search_term&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;Cambridge&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;constraint_type&quot;</span><span class="p">:</span> <span class="s2">&quot;==&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
+    <span class="s2">&quot;search_key&quot;</span><span class="p">:</span> <span class="s2">&quot;seller_service&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_service&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;constraint_type&quot;</span><span class="p">:</span> <span class="s2">&quot;==&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="n">DEFAULT_DATA_MODEL</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;attribute_one&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="s2">&quot;attribute_two&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="p">}</span>  <span class="c1"># type: Optional[Dict[str, Any]]</span>
-<span class="n">DEFAULT_DATA_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;location&quot;</span>
+<span class="n">DEFAULT_SEARCH_RADIUS</span> <span class="o">=</span> <span class="mf">5.0</span>
 
 <span class="n">DEFAULT_MAX_NEGOTIATIONS</span> <span class="o">=</span> <span class="mi">2</span>
 
@@ -3823,8 +3826,9 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="bp">self</span><span class="o">.</span><span class="n">_service_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_id&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_ID</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_query&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_QUERY</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model_name&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL_NAME</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_radius&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_RADIUS</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_negotiations</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
             <span class="s2">&quot;max_negotiations&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MAX_NEGOTIATIONS</span>
@@ -3873,24 +3877,39 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
         <span class="sd">&quot;&quot;&quot;Get the maximum number of negotiations the agent can start.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_negotiations</span>
 
+    <span class="k">def</span> <span class="nf">get_location_and_service_query</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Query</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the location and service query of the agent.</span>
+
+<span class="sd">        :return: the query</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">close_to_my_service</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;distance&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">service_key_filter</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;search_key&quot;</span><span class="p">],</span>
+            <span class="n">ConstraintType</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;constraint_type&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;search_value&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">Query</span><span class="p">([</span><span class="n">close_to_my_service</span><span class="p">,</span> <span class="n">service_key_filter</span><span class="p">],)</span>
+        <span class="k">return</span> <span class="n">query</span>
+
     <span class="k">def</span> <span class="nf">get_service_query</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Query</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the service query of the agent.</span>
 
 <span class="sd">        :return: the query</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="n">Constraint</span><span class="p">(</span>
-                    <span class="n">constraint</span><span class="p">[</span><span class="s2">&quot;search_term&quot;</span><span class="p">],</span>
-                    <span class="n">ConstraintType</span><span class="p">(</span>
-                        <span class="n">constraint</span><span class="p">[</span><span class="s2">&quot;constraint_type&quot;</span><span class="p">],</span> <span class="n">constraint</span><span class="p">[</span><span class="s2">&quot;search_value&quot;</span><span class="p">],</span>
-                    <span class="p">),</span>
-                <span class="p">)</span>
-                <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-            <span class="p">],</span>
-            <span class="n">model</span><span class="o">=</span><span class="n">GenericDataModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span><span class="p">),</span>
+        <span class="n">service_key_filter</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;search_key&quot;</span><span class="p">],</span>
+            <span class="n">ConstraintType</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;constraint_type&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_query</span><span class="p">[</span><span class="s2">&quot;search_value&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
         <span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">Query</span><span class="p">([</span><span class="n">service_key_filter</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="n">SIMPLE_SERVICE_MODEL</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">query</span>
 </pre></div>
 
@@ -4333,16 +4352,16 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
 <p>First, we update the <code>skill.yaml</code>. Make sure that your <code>skill.yaml</code> matches with the following code:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_buyer</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5.0</span>
-<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The generic buyer skill implements the skill to purchase data.</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.7.0</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The weather client skill implements the skill to purchase weather data.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.5.0,</span><span class="nv"> </span><span class="s">&lt;0.6.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span>
   <span class="nt">__init__.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmaEDrNJBeHCJpbdFckRUhLSBqCXQ6umdipTMpYhqSKxSG</span>
-  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYfAMPG5Rnm9fGp7frZLky6cV6Z7qAhtsPNhfwtVYRuEx</span>
-  <span class="nt">dialogues.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmXe9VAuinv6jgi5So7e25qgWXN16pB6tVG1iD7oAxUZ56</span>
-  <span class="nt">handlers.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmX9Pphv5VkfKgYriUkzqnVBELLkpdfZd6KzEQKkCG6Da3</span>
-  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmP3fLkBnLyQhHngZELHeLfK59WY6Xz76bxCVm6pfE6tLh</span>
+  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmUHgMCuvWYyAU382c7hUikNi6R6rfmH1toKUB1K2rcbXQ</span>
+  <span class="nt">dialogues.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYMR28TDqE56GdUxP9LwerktaJrD9SBkGoeJsoLSMHpx6</span>
+  <span class="nt">handlers.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYevHGuYJ8bsQUT22ZJcSx2aotUveNTLbdyEMMzCEMw7U</span>
+  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmU2gH921MoxvVCCQhnEvcFNbDsgBojeHeTXDEY3ZBMC2A</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
@@ -4388,30 +4407,19 @@ the <a href="../oef-ledger">OEF search node</a> registration and we assume that 
   <span class="nt">strategy</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span>
       <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
       <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cosmos</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
       <span class="nt">max_negotiations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
       <span class="nt">max_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
       <span class="nt">max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
       <span class="nt">search_query</span><span class="p">:</span>
-        <span class="nt">constraint_one</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-        <span class="nt">constraint_two</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
+        <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+        <span class="nt">search_key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+      <span class="nt">search_radius</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.0</span>
       <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GenericStrategy</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
@@ -4460,14 +4468,7 @@ aea add-key fetchai fet_private_key.txt
 
 
 <h4 id="update-the-aea-configs">Update the AEA configs</h4>
-<p>Both in <code>my_generic_seller/aea-config.yaml</code> and <code>my_generic_buyer/aea-config.yaml</code>, replace <code>ledger_apis</code>: {} with the following.</p>
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div>
-
-
-<p>and</p>
+<p>Both in <code>my_generic_seller/aea-config.yaml</code> and <code>my_generic_buyer/aea-config.yaml</code>, and</p>
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.2.0</span>
 </pre></div>
@@ -4496,16 +4497,6 @@ This demo assumes the buyer trusts our AEA to send the temperature data upon suc
 <p>Create the private key for the <code>my_generic_buyer</code> AEA.</p>
 <div class="highlight"><pre><span></span>aea generate-key ethereum
 aea add-key ethereum eth_private_key.txt
-</pre></div>
-
-
-<h4 id="update-the-aea-configs_1">Update the AEA configs</h4>
-<p>Both in <code>my_generic_seller/aea-config.yaml</code> and <code>my_generic_buyer/aea-config.yaml</code>, replace <code>ledger_apis: {}</code> with the following.</p>
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">ethereum</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
-    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
 </pre></div>
 
 

@@ -1584,17 +1584,10 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
 <h2 id="preparation-instructions">Preparation instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h3 id="launch-the-oef-search-and-communication-node">Launch the OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div>
-
-
-<p>Keep it running for all the following.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-car-detector-aea">Create car detector AEA</h3>
 <p>First, fetch the car detector AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/car_detector:0.7.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_detector:0.8.0
 <span class="nb">cd</span> car_detector
 aea install
 </pre></div>
@@ -1607,27 +1600,21 @@ The following steps create the car detector from scratch:
 
 <div class="highlight"><pre><span></span>aea create car_detector
 <span class="nb">cd</span> car_detector
-aea add connection fetchai/oef:0.6.0
+aea add connection fetchai/p2p_libp2p:0.5.0
+aea add connection fetchai/soef:0.5.0
 aea add connection fetchai/ledger:0.2.0
-aea add skill fetchai/carpark_detection:0.6.0
+aea add skill fetchai/carpark_detection:0.7.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
 </pre></div>
 
 
 
-In `car_detector/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div>
-
-
-and add 
+In `car_detector/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.2.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
 </pre></div>
 
 
@@ -1637,7 +1624,7 @@ and add
 
 <h3 id="create-car-data-buyer-aea">Create car data buyer AEA</h3>
 <p>Then, fetch the car data client AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/car_data_buyer:0.7.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/car_data_buyer:0.8.0
 <span class="nb">cd</span> car_data_buyer
 aea install
 </pre></div>
@@ -1650,29 +1637,21 @@ The following steps create the car data client from scratch:
 
 <div class="highlight"><pre><span></span>aea create car_data_buyer
 <span class="nb">cd</span> car_data_buyer
-aea add connection fetchai/oef:0.6.0
+aea add connection fetchai/p2p_libp2p:0.5.0
+aea add connection fetchai/soef:0.5.0
 aea add connection fetchai/ledger:0.2.0
-aea add skill fetchai/carpark_client:0.6.0
+aea add skill fetchai/carpark_client:0.7.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
 </pre></div>
 
 
 
-In `car_data_buyer/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
-
-To connect to Fetchai:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div>
-
-
-and add 
+In `car_data_buyer/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.2.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
 </pre></div>
 
 
@@ -1680,145 +1659,53 @@ and add
 </p>
 </details>
 
-<h3 id="generate-wealth-for-the-car-data-buyer-aea">Generate wealth for the car data buyer AEA</h3>
-<p>The car data buyer needs to have some wealth to purchase the car park information.</p>
-<p>First, create the private key for the car data buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:</p>
-<div class="highlight"><pre><span></span>aea generate-key fetchai
-aea add-key fetchai fet_private_key.txt
-</pre></div>
-
-
-<p>Then, create some wealth for your car data buyer based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:</p>
-<div class="highlight"><pre><span></span>aea generate-wealth fetchai
-</pre></div>
-
-
-<details><summary>Alternatively, create wealth for other test networks.</summary>
-<p>
-
-<strong>Ledger Config:</strong>
-<br>
-
-In `car_data_buyer/aea-config.yaml` and `car_detector/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
-
-To connect to Ethereum:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">ethereum</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
-    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
-</pre></div>
-
-
-
-Alternatively, to connect to Cosmos:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">cosmos</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://rest-agent-land.prod.fetch-ai.com:443</span>
-</pre></div>
-
-
-
-<strong>Wealth:</strong>
-<br>
-
-To generate and add a private-public key pair for Ethereum use:
-
-<div class="highlight"><pre><span></span>aea generate-key ethereum
-aea add-key ethereum eth_private_key.txt
-</pre></div>
-
-
-
-On the Ethereum `ropsten` network.
-
-<div class="highlight"><pre><span></span>aea generate-wealth ethereum
-</pre></div>
-
-
-
-Alternatively, to generate and add a private-public key pair for Cosmos use:
-
+<h3 id="add-keys-for-the-car-data-seller-aea">Add keys for the car data seller AEA</h3>
+<p>First, create the private key for the car data seller AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
 <div class="highlight"><pre><span></span>aea generate-key cosmos
 aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
 </pre></div>
 
 
+<h3 id="add-keys-and-generate-wealth-for-the-car-data-buyer-aea">Add keys and generate wealth for the car data buyer AEA</h3>
+<p>The buyer needs to have some wealth to purchase the service from the seller.</p>
+<p>First, create the private key for the car data buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
+</pre></div>
 
-On the Cosmos `testnet` network.
 
+<p>Then, create some wealth for your car data buyer based on the network you want to transact with. On the Fetch.ai <code>AgentLand</code> network:</p>
 <div class="highlight"><pre><span></span>aea generate-wealth cosmos
 </pre></div>
 
 
-
-</p>
-</details>
-
-<h3 id="update-the-skill-configs">Update the skill configs</h3>
-<p>The default skill configs assume that the transaction is settled against the fetchai ledger.</p>
-<details><summary>Alternatively, configure skills for other test networks.</summary>
-<p>
-
-<strong>Car detector:</strong>
-<br>
-Ensure you are in the car detector project directory.
-
-For ethereum, update the skill config of the car detector via the `aea config get/set` command like so:
-
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_detection.models.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_detection.models.strategy.args.ledger_id ethereum
-</pre></div>
-
-
-
-Or for cosmos, like so:
-
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_detection.models.strategy.args.currency_id ATOM
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_detection.models.strategy.args.ledger_id cosmos
-</pre></div>
-
-
-
-This updates the carpark detection skill config (`car_detector/vendor/fetchai/skills/carpark_detection/skill.yaml`).
-
-
-<strong>Car data buyer:</strong>
-<br>
-Ensure you are in the car data buyer project directory.
-
-For ethereum, update the skill config of the car detector via the `aea config get/set` command like so:
-
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.max_buyer_tx_fee <span class="m">6000</span> --type int
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.currency_id ETH
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.ledger_id ethereum
-</pre></div>
-
-
-
-Or for cosmos, like so:
-
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.max_buyer_tx_fee <span class="m">6000</span> --type int
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.currency_id ATOM
-aea config <span class="nb">set</span> vendor.fetchai.skills.carpark_client.models.strategy.args.ledger_id cosmos
-</pre></div>
-
-
-
-This updates the car data buyer skill config (`car_data_buyer/vendor/fetchai/skills/carpark_client/skill.yaml`).
-
-</p>
-</details>
-
-<h3 id="run-both-aeas">Run both AEAs</h3>
-<p>Finally, run both AEAs from their respective directories:</p>
+<h2 id="run-the-aeas">Run the AEAs</h2>
+<p>Run both AEAs from their respective terminals.</p>
+<p>First, run the car data seller AEA:</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 
-<p>You can see that the AEAs find each other, negotiate and eventually trade.</p>
+<p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
+<p>Then, update the configuration of the car data buyer AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+</pre></div>
+
+
+<p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
+<p>Then run the buyer AEA:</p>
+<div class="highlight"><pre><span></span>aea run
+</pre></div>
+
+
+<p>You will see that the AEAs negotiate and then transact using the Fetch.ai testnet.</p>
 <h3 id="cleaning-up">Cleaning up</h3>
 <p>When you're finished, delete your AEAs:</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ..

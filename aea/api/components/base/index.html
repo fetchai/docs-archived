@@ -1540,17 +1540,17 @@
 
                                     
 
-<p><a name=".aea.components.base"></a></p>
+<p><a name="aea.components.base"></a></p>
 <h1 id="aeacomponentsbase">aea.components.base</h1>
 <p>This module contains definitions of agent components.</p>
-<p><a name=".aea.components.base.Component"></a></p>
+<p><a name="aea.components.base.Component"></a></p>
 <h2 id="component-objects">Component Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Component</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span>  <span class="n">WithLogger</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Abstract class for an agent component.</p>
-<p><a name=".aea.components.base.Component.__init__"></a></p>
+<p><a name="aea.components.base.Component.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ComponentConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_vendor</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -1562,7 +1562,7 @@
 <li><code>configuration</code>: the package configuration.</li>
 <li><code>is_vendor</code>: whether the package is vendorized.</li>
 </ul>
-<p><a name=".aea.components.base.Component.component_type"></a></p>
+<p><a name="aea.components.base.Component.component_type"></a></p>
 <h4 id="component_type">component<code>_</code>type</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">component_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentType</span>
@@ -1570,7 +1570,7 @@
 
 
 <p>Get the component type.</p>
-<p><a name=".aea.components.base.Component.is_vendor"></a></p>
+<p><a name="aea.components.base.Component.is_vendor"></a></p>
 <h4 id="is_vendor">is<code>_</code>vendor</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_vendor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -1578,7 +1578,7 @@
 
 
 <p>Get whether the component is vendorized or not.</p>
-<p><a name=".aea.components.base.Component.prefix_import_path"></a></p>
+<p><a name="aea.components.base.Component.prefix_import_path"></a></p>
 <h4 id="prefix_import_path">prefix<code>_</code>import<code>_</code>path</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">prefix_import_path</span><span class="p">()</span>
@@ -1586,7 +1586,7 @@
 
 
 <p>Get the prefix import path for this component.</p>
-<p><a name=".aea.components.base.Component.component_id"></a></p>
+<p><a name="aea.components.base.Component.component_id"></a></p>
 <h4 id="component_id">component<code>_</code>id</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">component_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentId</span>
@@ -1594,7 +1594,7 @@
 
 
 <p>Ge the package id.</p>
-<p><a name=".aea.components.base.Component.public_id"></a></p>
+<p><a name="aea.components.base.Component.public_id"></a></p>
 <h4 id="public_id">public<code>_</code>id</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">public_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PublicId</span>
@@ -1602,7 +1602,7 @@
 
 
 <p>Get the public id.</p>
-<p><a name=".aea.components.base.Component.configuration"></a></p>
+<p><a name="aea.components.base.Component.configuration"></a></p>
 <h4 id="configuration">configuration</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">configuration</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentConfiguration</span>
@@ -1610,8 +1610,16 @@
 
 
 <p>Get the component configuration.</p>
-<p><a name=".aea.components.base.Component.directory"></a></p>
+<p><a name="aea.components.base.Component.directory"></a></p>
 <h4 id="directory">directory</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">directory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span>
+</pre></div>
+
+
+<p>Get the directory. Raise error if it has not been set yet.</p>
+<p><a name="aea.components.base.Component.directory"></a></p>
+<h4 id="directory_1">directory</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@directory</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">directory</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>

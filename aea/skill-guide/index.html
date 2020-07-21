@@ -1540,12 +1540,6 @@
 
                                     
 
-<!-- <div class="admonition note">
-  <p class="admonition-title">Note</p>
-  <p>Before developing your first skill, please read the <a href="../skill/">skill guide</a>.</p>
-</div>
- -->
-
 <p>This guide will take you through the development of a simple skill.</p>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
@@ -1559,11 +1553,22 @@ aea scaffold skill my_search
 <p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../oef-ledger">OEF search node</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
-<p>In this example, we implement a simple search behaviour. Each time, <code>act()</code> gets called by the main agent loop, we will send a search request to the <a href="../oef-ledger">OEF search node</a> via the <a href="../oef-ledger">OEF communication network</a>.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Query</span>
+<p>In this example, we implement a simple search behaviour. Each time, <code>act()</code> gets called by the main agent loop, we will send a search request to the <a href="../simple-oef">SOEF search node</a> via the <a href="../oef-ledger">P2P communication network</a>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">,</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Query</span>
 <span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.skills.my_search.dialogues</span> <span class="kn">import</span> <span class="n">OefSearchDialogues</span>
+
+<span class="n">DEFAULT_LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">51.5194</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">0.1270</span><span class="p">}</span>
+<span class="n">DEFAULT_SEARCH_QUERY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;search_key&quot;</span><span class="p">:</span> <span class="s2">&quot;seller_service&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_service&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;constraint_type&quot;</span><span class="p">:</span> <span class="s2">&quot;==&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">DEFAULT_SEARCH_RADIUS</span> <span class="o">=</span> <span class="mf">5.0</span>
 
 
 <span class="k">class</span> <span class="nc">MySearchBehaviour</span><span class="p">(</span><span class="n">TickerBehaviour</span><span class="p">):</span>
@@ -1571,6 +1576,22 @@ aea scaffold skill my_search
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize the search behaviour.&quot;&quot;&quot;</span>
+
+        <span class="n">search_query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_query&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_QUERY</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
+        <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_radius&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_RADIUS</span><span class="p">)</span>
+
+        <span class="n">close_to_my_service</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;distance&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">agent_location</span><span class="p">,</span> <span class="n">radius</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">service_key_filter</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
+            <span class="n">search_query</span><span class="p">[</span><span class="s2">&quot;search_key&quot;</span><span class="p">],</span>
+            <span class="n">ConstraintType</span><span class="p">(</span>
+                <span class="n">search_query</span><span class="p">[</span><span class="s2">&quot;constraint_type&quot;</span><span class="p">],</span> <span class="n">search_query</span><span class="p">[</span><span class="s2">&quot;search_value&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">Query</span><span class="p">([</span><span class="n">close_to_my_service</span><span class="p">,</span> <span class="n">service_key_filter</span><span class="p">])</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -1591,12 +1612,13 @@ aea scaffold skill my_search
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">search_constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;UK&quot;</span><span class="p">))]</span>
-        <span class="n">search_query_w_empty_model</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">search_constraints</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
         <span class="n">search_request</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
             <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SEARCH_SERVICES</span><span class="p">,</span>
-            <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-            <span class="n">query</span><span class="o">=</span><span class="n">search_query_w_empty_model</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">query</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending search request to OEF search node, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -1604,6 +1626,7 @@ aea scaffold skill my_search
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">search_request</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">search_request</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">search_request</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1621,11 +1644,18 @@ aea scaffold skill my_search
 <p>Searches are proactive and, as such, well placed in a <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a>. Specifically, we subclass the <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>TickerBehaviour</code></a> as it allows us to repeatedly search at a defined tick interval.</p>
 <p>We place this code in <code>my_aea/skills/my_search/behaviours.py</code>.</p>
 <h2 id="step-3-develop-a-handler">Step 3: Develop a Handler</h2>
-<p>So far, we have tasked the AEA with sending search requests to the <a href="../oef-ledger">OEF search node</a>. However, we have no way of handling the responses sent to the AEA by the <a href="../oef-ledger">OEF search node</a> at the moment. The AEA would simply respond to the <a href="../oef-ledger">OEF search node</a> via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
+<p>So far, we have tasked the AEA with sending search requests to the <a href="../simple-oef">SOEF search node</a>. However, we have no way of handling the responses sent to the AEA by the <a href="../simple-oef">SOEF search node</a> at the moment. The AEA would simply respond to the <a href="../simple-oef">SOEF search node</a> via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
 <p>Let us now implement a <a href="../api/skills/base#handler-objects"><code>Handler</code></a> to deal with the incoming search responses.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.skills.my_search.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogue</span><span class="p">,</span>
+    <span class="n">OefSearchDialogues</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">MySearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
@@ -1640,30 +1670,103 @@ aea scaffold skill my_search
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Set up the handler.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+        <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Handle the message.</span>
+<span class="sd">        Implement the reaction to a message.</span>
 
-<span class="sd">        :param message: the message.</span>
+<span class="sd">        :param message: the message</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg_type</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">performative</span><span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">is</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SEARCH_RESULT</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">nb_agents_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;agents&quot;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span>
-                <span class="p">)</span>
+        <span class="c1"># recover dialogue</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">Optional</span><span class="p">[</span><span class="n">OefSearchDialogue</span><span class="p">],</span> <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">oef_search_dialogue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_unidentified_dialogue</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># handle message</span>
+        <span class="k">if</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">OEF_ERROR</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_error</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SEARCH_RESULT</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_search</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an unidentified dialogue.</span>
+
+<span class="sd">        :param msg: the message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span>
             <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_search</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle the search response.</span>
+
+<span class="sd">        :param agents: the agents returned by the search</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">nb_agents_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">my_search_behaviour</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
@@ -1684,33 +1787,100 @@ aea scaffold skill my_search
 <p>Note, how the handler simply reacts to incoming events (i.e. messages). It could initiate further actions, however, they are still reactions to the upstream search event.</p>
 <p>Also note, how we have access to other objects in the skill via <code>self.context</code>, the <a href="../api/skills/base#skillcontext-objects"><code>SkillContext</code></a>.</p>
 <p>We place this code in <code>my_aea/skills/my_search/handlers.py</code>.</p>
-<h2 id="step-4-remove-unused-model">Step 4: Remove unused Model</h2>
-<p>We have implemented a behaviour and a handler. We could also implement a <a href="../api/skills/base#model-objects"><code>Model</code></a>, but instead we delete this file in this case, to keep it simple.</p>
-<p>We remove the file <code>my_aea/skills/my_search/my_model.py</code>.</p>
+<h2 id="step-4-add-dialogues-model">Step 4: Add dialogues model</h2>
+<p>We have implemented a behaviour and a handler. We now implement a <a href="../api/skills/base#model-objects"><code>Model</code></a>, in particular we implement the <a href="../api/helpers/dialogue/base#dialogue-objects"><code>Dialogue</code></a> and <a href="../api/helpers/dialogue/base#dialogues-objects"><code>Dialogues</code></a> classes.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span> <span class="k">as</span> <span class="n">BaseDialogue</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">DialogueLabel</span> <span class="k">as</span> <span class="n">BaseDialogueLabel</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogue</span> <span class="k">as</span> <span class="n">BaseOefSearchDialogue</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogues</span> <span class="k">as</span> <span class="n">BaseOefSearchDialogues</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">OefSearchDialogue</span> <span class="o">=</span> <span class="n">BaseOefSearchDialogue</span>
+
+
+<span class="k">class</span> <span class="nc">OefSearchDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseOefSearchDialogues</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
+
+<span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">BaseOefSearchDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BaseOefSearchDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">AGENT</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">BaseDialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OefSearchDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">OefSearchDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+</pre></div>
+
+
+<p>We add this code in the file <code>my_aea/skills/my_search/my_model.py</code>, replacing its original content. We then renamce <code>my_aea/skills/my_search/my_model.py</code> to <code>my_aea/skills/my_search/dialogues.py</code>.</p>
 <h2 id="step-5-create-the-config-file">Step 5: Create the config file</h2>
 <p>Based on our skill components above, we create the following config file.</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my_search</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
-<span class="nt">description</span><span class="p">:</span> <span class="s">&#39;A</span><span class="nv"> </span><span class="s">simple</span><span class="nv"> </span><span class="s">search</span><span class="nv"> </span><span class="s">skill</span><span class="nv"> </span><span class="s">utilising</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">OEF</span><span class="nv"> </span><span class="s">search</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">communication</span><span class="nv"> </span><span class="s">node.&#39;</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A simple search skill utilising the SOEF search node.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.5.0,</span><span class="nv"> </span><span class="s">&lt;0.6.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="s">&#39;fetchai/oef_search:0.3.0&#39;</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">my_search_behaviour</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
+      <span class="nt">search_query</span><span class="p">:</span>
+        <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+        <span class="nt">search_key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+      <span class="nt">search_radius</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.0</span>
       <span class="nt">tick_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchBehaviour</span>
 <span class="nt">handlers</span><span class="p">:</span>
   <span class="nt">my_search_handler</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MySearchHandler</span>
-<span class="nt">models</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">models</span><span class="p">:</span>
+  <span class="nt">oef_search_dialogues</span><span class="p">:</span>
+    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
 
@@ -1732,38 +1902,55 @@ aea scaffold skill my_search
 
 
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
-<p>We also need to add the oef connection and install its dependencies:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/oef:0.6.0
+<p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
+<div class="highlight"><pre><span></span>aea add connection fetchai/soef:0.5.0
+aea add connection fetchai/p2p_libp2p:0.5.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
 </pre></div>
 
 
+<p>Finally, in the <code>aea-config.yaml</code> add the following lines:</p>
+<div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
+</pre></div>
+
+
+<p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
-<p>We first start a local <a href="../oef-ledger">OEF search and communication node</a> in a separate terminal window.</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA:</p>
+<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.8.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
 </pre></div>
 
 
-<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch and run another finished AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.7.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
-aea run --connections fetchai/oef:0.6.0
+<p>This AEA will simply register a location service on the <a href="../simple-oef">SOEF search node</a> so we can search for it.</p>
+<p>We first create the private key for the service provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
 </pre></div>
 
 
-<p>This AEA will simply register a location service on the <a href="../oef-ledger">OEF search node</a> so we can search for it.</p>
+<p>Then we run the aea:</p>
+<div class="highlight"><pre><span></span>aea run
+</pre></div>
+
+
+<p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <details><summary>Click here to see full code</summary>
 <p>
 
 We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehaviour`</a> to update the service registration at regular intervals. The following code is placed in `behaviours.py`. 
 
 
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
 
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
 <span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.skills.simple_service_registration.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogues</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.simple_service_registration.strategy</span> <span class="kn">import</span> <span class="n">Strategy</span>
 
 <span class="n">DEFAULT_SERVICES_INTERVAL</span> <span class="o">=</span> <span class="mf">30.0</span>
@@ -1778,7 +1965,6 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
             <span class="s2">&quot;services_interval&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICES_INTERVAL</span>
         <span class="p">)</span>  <span class="c1"># type: int</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tick_interval</span><span class="o">=</span><span class="n">services_interval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[Description]</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1786,6 +1972,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_agent</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_service</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1794,8 +1981,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_register_service</span><span class="p">()</span>
+        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1804,52 +1990,91 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_agent</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register to the OEF Service Directory.</span>
+<span class="sd">        Register the agent&#39;s location.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-        <span class="n">desc</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_service_description</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="n">desc</span>
-        <span class="n">oef_msg_id</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_next_oef_msg_id</span><span class="p">()</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
             <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span><span class="p">,</span>
-            <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">oef_msg_id</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-            <span class="n">service_description</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: updating services on OEF service directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Unregister service from OEF Service Directory.</span>
+<span class="sd">        Register the agent&#39;s service.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-            <span class="n">oef_msg_id</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_next_oef_msg_id</span><span class="p">()</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
-                <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
-                <span class="n">dialogue_reference</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">oef_msg_id</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-                <span class="n">service_description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: unregistering services from OEF service directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_registered_service_description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_service_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering service on SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unregister service from the SOEF.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_unregister_service_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering service from SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_unregister_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unregister agent from the SOEF.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Strategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="p">(</span>
+            <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">UNREGISTER_SERVICE</span><span class="p">,</span>
+            <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+            <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
+        <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering agent from SOEF.&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1857,18 +2082,16 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehav
 We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy class and place it in `strategy.py`. We use a generic data model to register the service.
 
 
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
-
-<span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="n">GenericDataModel</span>
-<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.search.generic</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AGENT_LOCATION_MODEL</span><span class="p">,</span>
+    <span class="n">AGENT_REMOVE_SERVICE_MODEL</span><span class="p">,</span>
+    <span class="n">AGENT_SET_SERVICE_MODEL</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Location</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Model</span>
 
-<span class="n">DEFAULT_DATA_MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;location&quot;</span>
-<span class="n">DEFAULT_DATA_MODEL</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;attribute_one&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;attribute_two&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;is_required&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">},</span>
-<span class="p">}</span>  <span class="c1"># type: Optional[Dict[str, Any]]</span>
-<span class="n">DEFAULT_SERVICE_DATA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Cambridge&quot;</span><span class="p">}</span>
+<span class="n">DEFAULT_LOCATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">51.5194</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">0.1270</span><span class="p">}</span>
+<span class="n">DEFAULT_SERVICE_DATA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;seller_service&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_service&quot;</span><span class="p">}</span>
 
 
 <span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -1880,32 +2103,219 @@ We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model_name&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL_NAME</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;data_model&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DATA_MODEL</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="ow">and</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span>
+            <span class="ow">and</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span>
+        <span class="p">),</span> <span class="s2">&quot;service_data must contain keys `key` and `value`&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_remove_service_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]}</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">get_next_oef_msg_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_location_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the next oef msg id.</span>
+<span class="sd">        Get the location description.</span>
 
-<span class="sd">        :return: the next oef msg id</span>
+<span class="sd">        :return: a description of the agent&#39;s location</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_oef_msg_id</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_LOCATION_MODEL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
 
-    <span class="k">def</span> <span class="nf">get_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_register_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the service description.</span>
+<span class="sd">        Get the register service description.</span>
 
 <span class="sd">        :return: a description of the offered services</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">desc</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_service_data</span><span class="p">,</span>
-            <span class="n">data_model</span><span class="o">=</span><span class="n">GenericDataModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_model</span><span class="p">),</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_SET_SERVICE_MODEL</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">desc</span>
+        <span class="k">return</span> <span class="n">description</span>
+
+    <span class="k">def</span> <span class="nf">get_unregister_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the unregister service description.</span>
+
+<span class="sd">        :return: a description of the to be removed service</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_service_data</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_REMOVE_SERVICE_MODEL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
+</pre></div>
+
+
+
+We create a <a href="../api/skills/base#model-objects">`Model`</a> type dialogue class and place it in `dialogues.py`.
+
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span> <span class="k">as</span> <span class="n">BaseDialogue</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">DialogueLabel</span> <span class="k">as</span> <span class="n">BaseDialogueLabel</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogue</span> <span class="k">as</span> <span class="n">BaseOefSearchDialogue</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogues</span> <span class="k">as</span> <span class="n">BaseOefSearchDialogues</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">OefSearchDialogue</span> <span class="o">=</span> <span class="n">BaseOefSearchDialogue</span>
+
+
+<span class="k">class</span> <span class="nc">OefSearchDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseOefSearchDialogues</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
+
+<span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">BaseOefSearchDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BaseOefSearchDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">AGENT</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">BaseDialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OefSearchDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">OefSearchDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+</pre></div>
+
+
+
+Finally, we have a handler, placed in `handlers.py`:
+
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolId</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span>
+
+<span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.skills.simple_service_registration.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OefSearchDialogue</span><span class="p">,</span>
+    <span class="n">OefSearchDialogues</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.2.0&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">OefSearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class implements an OEF search handler.&quot;&quot;&quot;</span>
+
+    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[ProtocolId]</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Call to setup the handler.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement the reaction to a message.</span>
+
+<span class="sd">        :param message: the message</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="c1"># recover dialogue</span>
+        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="p">)</span>
+        <span class="n">oef_search_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">Optional</span><span class="p">[</span><span class="n">OefSearchDialogue</span><span class="p">],</span> <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">oef_search_dialogue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_unidentified_dialogue</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># handle message</span>
+        <span class="k">if</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">OEF_ERROR</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_error</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implement the handler teardown.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an unidentified dialogue.</span>
+
+<span class="sd">        :param msg: the message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 
 
@@ -1915,40 +2325,42 @@ The associated `skill.yaml` is:
 
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">simple_service_registration</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.2.0</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4.0</span>
 <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The simple service registration skills is a skill to register a service.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.5.0,</span><span class="nv"> </span><span class="s">&lt;0.6.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span>
   <span class="nt">__init__.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmNkZAetyctaZCUf6ACxP5onGWsSxu2hjSNoFmJ3ta6Lta</span>
-  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmT4nDbtEz5BDtSbw34fXzdZg4HfbYgV3dfMfsGe9R61n4</span>
-  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmWwPzDvmeuVutPwxL5taU1tBGA6aiMDRwo6bTTtLxxHRn</span>
+  <span class="nt">behaviours.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmRr1oe3zWKyPcktzKP4BiKqjCqmKjEDdLUQhn1JzNm4nD</span>
+  <span class="nt">dialogues.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmayFh6ytPefJng5ENTUg46zsd6guHCZSsG3Cc2sy3xz6y</span>
+  <span class="nt">handlers.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmViyyV5KvR3kkLEMpvDfqH5QtHowTbnpDxRYnKABpVvpC</span>
+  <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Qmdp6LCPZSnnyfM4EdRDTGZPqwxiJ3A1jsc3oF2Hv4m5Mv</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span>
+<span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">service</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span>
       <span class="nt">services_interval</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceRegistrationBehaviour</span>
-<span class="nt">handlers</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">handlers</span><span class="p">:</span>
+  <span class="nt">oef_search</span><span class="p">:</span>
+    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OefSearchHandler</span>
 <span class="nt">models</span><span class="p">:</span>
+  <span class="nt">oef_search_dialogues</span><span class="p">:</span>
+    <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span>
   <span class="nt">strategy</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
       <span class="nt">service_data</span><span class="p">:</span>
-        <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </pre></div>
@@ -1958,12 +2370,30 @@ The associated `skill.yaml` is:
 </details>
 
 <h2 id="step-9-run-the-search-aea">Step 9: Run the Search AEA</h2>
-<p>We can then launch our AEA.</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/oef:0.6.0
+<p>First, create the private key for the search AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
 </pre></div>
 
 
-<p>We can see that the AEA sends search requests to the <a href="../oef-ledger">OEF search node</a> and receives search responses from the <a href="../oef-ledger">OEF search node</a>. Since our AEA is only searching on the <a href="../oef-ledger">OEF search node</a> - and not registered on the <a href="../oef-ledger">OEF search node</a> - the search response returns a single agent (the service provider).</p>
+<p>Then, update the configuration of the buyer AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+</pre></div>
+
+
+<p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
+<p>We can then launch our AEA.</p>
+<div class="highlight"><pre><span></span>aea run
+</pre></div>
+
+
+<p>We can see that the AEA sends search requests to the <a href="../simple-oef">SOEF search node</a> and receives search responses from the <a href="../simple-oef">SOEF search node</a>. The search response returns one or more agents (the service provider and potentially other agents which match the query).</p>
 <p>We stop the AEA with <code>CTRL + C</code>.</p>
 <h2 id="next-steps">Next steps</h2>
 <h3 id="recommended">Recommended</h3>

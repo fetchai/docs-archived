@@ -1548,18 +1548,17 @@ The buyer of weather data (managed programmatically).</p>
 <p>The scope of the specific demo is to demonstrate how a CLI based AEA can interact with a programmatically managed AEA. In order 
 to achieve this we are going to use the weather station skills. 
 This demo does not utilize a smart contract or a ledger interaction. </p>
-<h2 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h2>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
+<h2 id="get-required-packages">Get required packages</h2>
+<p>Copy the packages directory into your local working directory:</p>
+<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
 </pre></div>
 
 
-<p>Keep it running for the entire demo.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.7.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.8.0
 <span class="nb">cd</span> weather_station
 </pre></div>
 
@@ -1571,11 +1570,20 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 
 
 <p>The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.</p>
+<h3 id="add-keys">Add keys</h3>
+<p>Add keys for the weather station.</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
+</pre></div>
+
+
 <h3 id="run-the-weather-station-aea">Run the weather station AEA</h3>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
 
+<p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <h3 id="create-the-weather-client-aea">Create the weather client AEA</h3>
 <p>Since we want to show the interaction between a programmatically created AEA with a CLI based AEA we are going to write some code for the client.</p>
 <p>Create a new python file and name it <code>weather_client.py</code> and add the following code</p>
@@ -1589,8 +1597,8 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <span class="kn">from</span> <span class="nn">aea</span> <span class="kn">import</span> <span class="n">AEA_DIR</span>
 <span class="kn">from</span> <span class="nn">aea.aea</span> <span class="kn">import</span> <span class="n">AEA</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">PublicId</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">COSMOS_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">create_private_key</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Protocol</span>
@@ -1598,11 +1606,16 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.connections.ledger.connection</span> <span class="kn">import</span> <span class="n">LedgerConnection</span>
-<span class="kn">from</span> <span class="nn">packages.fetchai.connections.oef.connection</span> <span class="kn">import</span> <span class="n">OEFConnection</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.connections.p2p_libp2p.connection</span> <span class="kn">import</span> <span class="n">P2PLibp2pConnection</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.connections.soef.connection</span> <span class="kn">import</span> <span class="n">SOEFConnection</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.weather_client.strategy</span> <span class="kn">import</span> <span class="n">Strategy</span>
 
-<span class="n">HOST</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span>
-<span class="n">PORT</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="s2">&quot;TwiCIriSl0mLahw17pyqoA&quot;</span>
+<span class="n">SOEF_ADDR</span> <span class="o">=</span> <span class="s2">&quot;soef.fetch.ai&quot;</span>
+<span class="n">SOEF_PORT</span> <span class="o">=</span> <span class="mi">9002</span>
+<span class="n">ENTRY_PEER_ADDRESS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;/dns4/127.0.0.1/tcp/9000/p2p/16Uiu2HAmAzvu5uNbcnD2qaqrkSULhJsc6GJUg3iikWerJkoD72pr&quot;</span>
+<span class="p">)</span>
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
@@ -1611,20 +1624,22 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private key</span>
-    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 
     <span class="c1"># Set up the wallet, identity and (empty) resources</span>
-    <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">})</span>
-    <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
-        <span class="s2">&quot;my_aea&quot;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+    <span class="n">wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">(</span>
+        <span class="n">private_key_paths</span><span class="o">=</span><span class="p">{</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE</span><span class="p">},</span>
+        <span class="n">connection_private_key_paths</span><span class="o">=</span><span class="p">{</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE</span><span class="p">},</span>
     <span class="p">)</span>
+    <span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
     <span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">()</span>
 
     <span class="c1"># specify the default routing for some protocols</span>
     <span class="n">default_routing</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/ledger_api:0.1.0&quot;</span><span class="p">):</span> <span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span>
+        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/ledger_api:0.1.0&quot;</span><span class="p">):</span> <span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
+        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.3.0&quot;</span><span class="p">):</span> <span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">default_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
+    <span class="n">default_connection</span> <span class="o">=</span> <span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
 
     <span class="c1"># create the AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">AEA</span><span class="p">(</span>
@@ -1668,12 +1683,37 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
     <span class="p">)</span>
     <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">ledger_api_connection</span><span class="p">)</span>
 
-    <span class="c1"># Add the OEF connection</span>
+    <span class="c1"># Add the P2P connection</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConnectionConfig</span><span class="p">(</span>
-        <span class="n">addr</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">PORT</span><span class="p">,</span> <span class="n">connection_id</span><span class="o">=</span><span class="n">OEFConnection</span><span class="o">.</span><span class="n">connection_id</span>
+        <span class="n">connection_id</span><span class="o">=</span><span class="n">P2PLibp2pConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
+        <span class="n">delegate_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:11001&quot;</span><span class="p">,</span>
+        <span class="n">entry_peers</span><span class="o">=</span><span class="p">[</span><span class="n">ENTRY_PEER_ADDRESS</span><span class="p">],</span>
+        <span class="n">local_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:9001&quot;</span><span class="p">,</span>
+        <span class="n">log_file</span><span class="o">=</span><span class="s2">&quot;libp2p_node.log&quot;</span><span class="p">,</span>
+        <span class="n">public_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:9001&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">oef_connection</span> <span class="o">=</span> <span class="n">OEFConnection</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">)</span>
-    <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">oef_connection</span><span class="p">)</span>
+    <span class="n">p2p_connection</span> <span class="o">=</span> <span class="n">P2PLibp2pConnection</span><span class="p">(</span>
+        <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span>
+        <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span>
+        <span class="n">crypto_store</span><span class="o">=</span><span class="n">wallet</span><span class="o">.</span><span class="n">connection_cryptos</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">p2p_connection</span><span class="p">)</span>
+
+    <span class="c1"># Add the SOEF connection</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">ConnectionConfig</span><span class="p">(</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
+        <span class="n">soef_addr</span><span class="o">=</span><span class="n">SOEF_ADDR</span><span class="p">,</span>
+        <span class="n">soef_port</span><span class="o">=</span><span class="n">SOEF_PORT</span><span class="p">,</span>
+        <span class="n">restricted_to_protocols</span><span class="o">=</span><span class="p">{</span><span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.3.0&quot;</span><span class="p">)},</span>
+        <span class="n">connection_id</span><span class="o">=</span><span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
+        <span class="n">delegate_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:11001&quot;</span><span class="p">,</span>
+        <span class="n">entry_peers</span><span class="o">=</span><span class="p">[</span><span class="n">ENTRY_PEER_ADDRESS</span><span class="p">],</span>
+        <span class="n">local_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:9001&quot;</span><span class="p">,</span>
+        <span class="n">log_file</span><span class="o">=</span><span class="s2">&quot;libp2p_node.log&quot;</span><span class="p">,</span>
+        <span class="n">public_uri</span><span class="o">=</span><span class="s2">&quot;127.0.0.1:9001&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">soef_connection</span> <span class="o">=</span> <span class="n">SOEFConnection</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">)</span>
+    <span class="n">resources</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">soef_connection</span><span class="p">)</span>
 
     <span class="c1"># Add the error and weather_client skills</span>
     <span class="n">error_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
@@ -1706,7 +1746,8 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 
 </details>
 
-<p>For more details on how to create an agent programmatically follow this guide <a href='/build-aea-programmatically/'>here</a></p>
+<p>Now replace <code>ENTRY_PEER_ADDRESS</code> with the peer address (<code>SOME_ADDRESS</code>) noted above.</p>
+<p>For more details on how to create an agent programmatically follow this guide <a href='/build-aea-programmatically/'>here</a>.</p>
 <h3 id="run-the-weather-station-aea_1">Run the weather station AEA</h3>
 <p>In a new terminal window, navigate to the folder that you created the script and run:</p>
 <div class="highlight"><pre><span></span>python weather_client.py

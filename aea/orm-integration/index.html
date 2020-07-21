@@ -1585,18 +1585,11 @@
 <h2 id="preparation-instructions">Preparation instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div>
-
-
-<p>Keep it running for all the following demos.</p>
 <h2 id="demo-instructions">Demo instructions</h2>
 <p>A demo to run a scenario with a true ledger transaction on Fetch.ai <code>testnet</code> network or Ethereum <code>ropsten</code> network. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA, which will provide data:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_aea:0.5.0 --alias my_thermometer_aea
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_aea:0.6.0 --alias my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
 aea install
 </pre></div>
@@ -1609,27 +1602,21 @@ The following steps create the seller from scratch:
 
 <div class="highlight"><pre><span></span>aea create my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
-aea add connection fetchai/oef:0.6.0
+aea add connection fetchai/p2p_libp2p:0.5.0
+aea add connection fetchai/soef:0.5.0
 aea add connection fetchai/ledger:0.2.0
-aea add skill fetchai/thermometer:0.6.0
+aea add skill fetchai/thermometer:0.7.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
 </pre></div>
 
 
 
-In `my_thermometer_aea/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect. To connect to Fetchai:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div>
-
-
-and add 
+In `my_thermometer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.2.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
 </pre></div>
 
 
@@ -1639,7 +1626,7 @@ and add
 
 <h3 id="create-the-buyer-client">Create the buyer client</h3>
 <p>In another terminal, fetch the AEA that will query the seller AEA.</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_client:0.5.0 --alias my_thermometer_client
+<div class="highlight"><pre><span></span>aea fetch fetchai/thermometer_client:0.6.0 --alias my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
 aea install
 </pre></div>
@@ -1652,29 +1639,21 @@ The following steps create the car data client from scratch:
 
 <div class="highlight"><pre><span></span>aea create my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
-aea add connection fetchai/oef:0.6.0
+aea add connection fetchai/p2p_libp2p:0.5.0
+aea add connection fetchai/soef:0.5.0
 aea add connection fetchai/ledger:0.2.0
-aea add skill fetchai/thermometer_client:0.5.0
+aea add skill fetchai/thermometer_client:0.6.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
 </pre></div>
 
 
 
-In `my_buyer_aea/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
-
-To connect to Fetchai:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">fetchai</span><span class="p">:</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">testnet</span>
-</pre></div>
-
-
-and add 
+In `my_buyer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.1.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.2.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
 </pre></div>
 
 
@@ -1682,83 +1661,27 @@ and add
 </p>
 </details>
 
-<h3 id="generate-wealth-for-the-buyer-aea">Generate wealth for the buyer AEA</h3>
-<p>Additionally, create the private key for the buyer AEA based on the network you want to transact.</p>
-<p>To generate and add a key for Fetch.ai use:</p>
-<div class="highlight"><pre><span></span>aea generate-key fetchai
-aea add-key fetchai fet_private_key.txt
-</pre></div>
-
-
-<p>To create some wealth for your buyer AEA based on the network you want to transact with:</p>
-<p>On the Fetch.ai <code>testnet</code> network.</p>
-<div class="highlight"><pre><span></span>aea generate-wealth fetchai
-</pre></div>
-
-
-<details><summary>Alternatively, create wealth for other test networks.</summary>
-<p>
-
-<strong>Ledger Config:</strong>
-<br>
-
-In `my_buyer_aea/aea-config.yaml` and `my_seller_aea/aea-config.yaml` replace `ledger_apis: {}` with the following based on the network you want to connect.
-
-To connect to Ethereum:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">ethereum</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://ropsten.infura.io/v3/f00f7b3ba0e848ddbdc8941c527447fe</span>
-    <span class="nt">chain_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-    <span class="nt">gas_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
-</pre></div>
-
-
-
-Alternatively, to connect to Cosmos:
-
-<div class="highlight"><pre><span></span><span class="nt">ledger_apis</span><span class="p">:</span>
-  <span class="nt">cosmos</span><span class="p">:</span>
-    <span class="nt">address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://rest-agent-land.prod.fetch-ai.com:443</span>
-</pre></div>
-
-
-
-<strong>Wealth:</strong>
-<br>
-
-To generate and add a private-public key pair for Ethereum use:
-
-<div class="highlight"><pre><span></span>aea generate-key ethereum
-aea add-key ethereum eth_private_key.txt
-</pre></div>
-
-
-
-On the Ethereum `ropsten` network.
-
-<div class="highlight"><pre><span></span>aea generate-wealth ethereum
-</pre></div>
-
-
-
-Alternatively, to generate and add a private-public key pair for Cosmos use:
-
+<h3 id="add-keys-for-the-thermometer-aea">Add keys for the thermometer AEA</h3>
+<p>First, create the private key for the thermometer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
 <div class="highlight"><pre><span></span>aea generate-key cosmos
 aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
 </pre></div>
 
 
-
-On the Cosmos `testnet` network.
-
-<div class="highlight"><pre><span></span>aea generate-wealth cosmos
+<h3 id="add-keys-and-generate-wealth-for-the-thermometer-client-aea">Add keys and generate wealth for the thermometer client AEA</h3>
+<p>The thermometer client needs to have some wealth to purchase the thermometer information.</p>
+<p>First, create the private key for the thermometer client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
 </pre></div>
 
 
+<p>Then, create some wealth for your thermometer client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+</pre></div>
 
-</p>
-</details>
 
 <h3 id="update-the-seller-and-buyer-aea-skill-configs">Update the seller and buyer AEA skill configs</h3>
 <p>In <code>my_thermometer_aea/vendor/fetchai/skills/thermometer/skill.yaml</code>, replace the <code>data_for_sale</code> with your data:</p>
@@ -1769,23 +1692,16 @@ On the Cosmos `testnet` network.
       <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
       <span class="nt">data_for_sale</span><span class="p">:</span>
         <span class="nt">temperature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">26</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
       <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
       <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cosmos</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
       <span class="nt">service_data</span><span class="p">:</span>
-        <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
       <span class="nt">unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 <span class="nt">dependencies</span><span class="p">:</span>
@@ -1800,111 +1716,23 @@ On the Cosmos `testnet` network.
   <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
     <span class="nt">args</span><span class="p">:</span>
       <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">FET</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
       <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cosmos</span>
+      <span class="nt">location</span><span class="p">:</span>
+        <span class="nt">latitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.127</span>
+        <span class="nt">longitude</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51.5194</span>
       <span class="nt">max_negotiations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
       <span class="nt">max_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
       <span class="nt">max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
       <span class="nt">search_query</span><span class="p">:</span>
-        <span class="nt">constraint_one</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-        <span class="nt">constraint_two</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+        <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
+        <span class="nt">search_key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+        <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+      <span class="nt">search_radius</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.0</span>
+      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 </pre></div>
 
-
-<details><summary>Alternatively, configure skills for other test networks.</summary>
-<p>
-
-<strong>Ethereum:</strong>
-<br>
-
-<div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">...</span>
-  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ETH</span>
-      <span class="nt">data_for_sale</span><span class="p">:</span>
-        <span class="nt">temperature</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">26</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
-      <span class="nt">has_data_source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethereum</span>
-      <span class="nt">service_data</span><span class="p">:</span>
-        <span class="nt">city</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-        <span class="nt">country</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
-      <span class="nt">unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
-<span class="nt">dependencies</span><span class="p">:</span>
-  <span class="nt">SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-</pre></div>
-
-
-
-
-<div class="highlight"><pre><span></span><span class="nt">models</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">...</span>
-  <span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
-    <span class="nt">args</span><span class="p">:</span>
-      <span class="nt">currency_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ETH</span>
-      <span class="nt">data_model</span><span class="p">:</span>
-        <span class="nt">attribute_one</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-        <span class="nt">attribute_two</span><span class="p">:</span>
-          <span class="nt">is_required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-          <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
-      <span class="nt">data_model_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">location</span>
-      <span class="nt">is_ledger_tx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">ledger_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethereum</span>
-      <span class="nt">max_negotiations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-      <span class="nt">max_tx_fee</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-      <span class="nt">max_unit_price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
-      <span class="nt">search_query</span><span class="p">:</span>
-        <span class="nt">constraint_one</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">country</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UK</span>
-        <span class="nt">constraint_two</span><span class="p">:</span>
-          <span class="nt">constraint_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">==</span>
-          <span class="nt">search_term</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">city</span>
-          <span class="nt">search_value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cambridge</span>
-      <span class="nt">service_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">generic_service</span>
-    <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
-</pre></div>
-
-
-
-</p>
-</details>
 
 <p>After changing the skill config files you should run the following command for both agents to install each dependency:</p>
 <div class="highlight"><pre><span></span>aea install
@@ -1913,7 +1741,7 @@ On the Cosmos `testnet` network.
 
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span>aea eject skill fetchai/thermometer:0.6.0
+<div class="highlight"><pre><span></span>aea eject skill fetchai/thermometer:0.7.0
 </pre></div>
 
 
@@ -1985,8 +1813,26 @@ On the Cosmos `testnet` network.
 </pre></div>
 
 
-<h2 id="run-the-aeas">Run the AEAs</h2>
-<p>Run both AEAs from their respective terminals</p>
+<h3 id="run-both-aeas">Run both AEAs</h3>
+<p>Run both AEAs from their respective terminals.</p>
+<p>First, run the thermometer AEA:</p>
+<div class="highlight"><pre><span></span>aea run
+</pre></div>
+
+
+<p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
+<p>Then, update the configuration of the thermometer client AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+</pre></div>
+
+
+<p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
+<p>Then run the thermometer client AEA:</p>
 <div class="highlight"><pre><span></span>aea run
 </pre></div>
 
