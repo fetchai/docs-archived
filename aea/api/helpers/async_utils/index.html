@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1560,7 +1571,7 @@
 <p>Awaitable state.</p>
 <p><a name="aea.helpers.async_utils.AsyncState.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">initial_state</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">initial_state</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">states_enum</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Container</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1568,23 +1579,8 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>initial_state</code>: state to set on start.</li>
+<li><code>states_enum</code>: container of valid states if not provided state not checked on set.</li>
 </ul>
-<p><a name="aea.helpers.async_utils.AsyncState.state"></a></p>
-<h4 id="state">state</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span>
-</pre></div>
-
-
-<p>Return current state.</p>
-<p><a name="aea.helpers.async_utils.AsyncState.state"></a></p>
-<h4 id="state_1">state</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@state</span><span class="o">.</span><span class="n">setter</span>
- <span class="o">|</span> <span class="n">state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set state.</p>
 <p><a name="aea.helpers.async_utils.AsyncState.set"></a></p>
 <h4 id="set">set</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -1592,6 +1588,19 @@
 
 
 <p>Set state.</p>
+<p><a name="aea.helpers.async_utils.AsyncState.add_callback"></a></p>
+<h4 id="add_callback">add<code>_</code>callback</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_callback</span><span class="p">(</span><span class="n">callback_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Add callback to track state changes.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>callback_fn</code>: callable object to be called on state changed.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
 <p><a name="aea.helpers.async_utils.AsyncState.get"></a></p>
 <h4 id="get">get</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span>
@@ -1698,14 +1707,6 @@
 
 
 <p>Cancel coroutine task execution in a target loop.</p>
-<p><a name="aea.helpers.async_utils.AnotherThreadTask.future_cancel"></a></p>
-<h4 id="future_cancel">future<code>_</code>cancel</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">future_cancel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Cancel task waiting future.</p>
-<p>In this case future result will raise CanclledError not waiting for real task exit.</p>
 <p><a name="aea.helpers.async_utils.AnotherThreadTask.done"></a></p>
 <h4 id="done">done</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">done</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>

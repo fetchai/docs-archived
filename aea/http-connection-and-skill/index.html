@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1551,12 +1562,12 @@
 
 
 <p>Add the http server connection package</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/http_server:0.5.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/http_server:0.6.0
 </pre></div>
 
 
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.5.0
+<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.6.0
 </pre></div>
 
 
@@ -1611,8 +1622,7 @@
         <span class="n">http_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">HttpMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">http_msg</span><span class="o">.</span><span class="n">performative</span> <span class="o">==</span> <span class="n">HttpMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] received http request with method=</span><span class="si">{}</span><span class="s2">, url=</span><span class="si">{}</span><span class="s2"> and body=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+                <span class="s2">&quot;received http request with method=</span><span class="si">{}</span><span class="s2">, url=</span><span class="si">{}</span><span class="s2"> and body=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">http_msg</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
                     <span class="n">http_msg</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
                     <span class="n">http_msg</span><span class="o">.</span><span class="n">bodyy</span><span class="p">,</span>
@@ -1624,9 +1634,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_handle_post</span><span class="p">(</span><span class="n">http_msg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] received response (</span><span class="si">{}</span><span class="s2">) unexpectedly!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">http_msg</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;received response (</span><span class="si">{}</span><span class="s2">) unexpectedly!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">http_msg</span><span class="p">)</span>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_handle_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">http_msg</span><span class="p">:</span> <span class="n">HttpMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1648,7 +1656,7 @@
             <span class="n">bodyy</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;tom&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] responding with: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">http_response</span><span class="p">)</span>
+            <span class="s2">&quot;responding with: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">http_response</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">http_response</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">http_msg</span><span class="o">.</span><span class="n">counterparty</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">http_response</span><span class="p">)</span>
@@ -1672,7 +1680,7 @@
             <span class="n">bodyy</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">] responding with: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">http_response</span><span class="p">)</span>
+            <span class="s2">&quot;responding with: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">http_response</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">http_response</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">http_msg</span><span class="o">.</span><span class="n">counterparty</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">http_response</span><span class="p">)</span>
@@ -1696,7 +1704,7 @@
 
 
 <p>Finally, we run the fingerprinter:</p>
-<div class="highlight"><pre><span></span>aea fingerprint skill fetchai/http_echo:0.3.0
+<div class="highlight"><pre><span></span>aea fingerprint skill fetchai/http_echo:0.4.0
 </pre></div>
 
 

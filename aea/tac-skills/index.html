@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1622,17 +1633,10 @@
 <h2 id="preparation-instructions">Preparation instructions</h2>
 <h3 id="dependencies">Dependencies</h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h3 id="launch-an-oef-search-and-communication-node">Launch an OEF search and communication node</h3>
-<p>In a separate terminal, launch a local <a href="../oef-ledger">OEF search and communication node</a>.</p>
-<div class="highlight"><pre><span></span>python scripts/oef/launch.py -c ./scripts/oef/launch_config.json
-</pre></div>
-
-
-<p>Keep it running for the following demo.</p>
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller:0.5.0
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_controller:0.6.0
 <span class="nb">cd</span> tac_controller
 aea install
 </pre></div>
@@ -1645,11 +1649,13 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span>aea create tac_controller
 <span class="nb">cd</span> tac_controller
-aea add connection fetchai/oef:0.6.0
-aea add skill fetchai/tac_control:0.3.0
+aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/soef:0.6.0
+aea add connection fetchai/ledger:0.3.0
+aea add skill fetchai/tac_control:0.4.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
-aea config <span class="nb">set</span> agent.default_ledger ethereum
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_ledger cosmos
 </pre></div>
 
 
@@ -1659,8 +1665,8 @@ aea config <span class="nb">set</span> agent.default_ledger ethereum
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.6.0 --alias tac_participant_one
-aea fetch fetchai/tac_participant:0.6.0 --alias tac_participant_two
+<div class="highlight"><pre><span></span>aea fetch fetchai/tac_participant:0.7.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.7.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea install
 </pre></div>
@@ -1680,12 +1686,14 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/oef:0.6.0
-aea add skill fetchai/tac_participation:0.4.0
-aea add skill fetchai/tac_negotiation:0.5.0
+aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/soef:0.6.0
+aea add connection fetchai/ledger:0.3.0
+aea add skill fetchai/tac_participation:0.5.0
+aea add skill fetchai/tac_negotiation:0.6.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
-aea config <span class="nb">set</span> agent.default_ledger ethereum
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_ledger cosmos
 </pre></div>
 
 
@@ -1693,18 +1701,28 @@ aea config <span class="nb">set</span> agent.default_ledger ethereum
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/oef:0.6.0
-aea add skill fetchai/tac_participation:0.4.0
-aea add skill fetchai/tac_negotiation:0.5.0
+aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/soef:0.6.0
+aea add connection fetchai/ledger:0.3.0
+aea add skill fetchai/tac_participation:0.5.0
+aea add skill fetchai/tac_negotiation:0.6.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/oef:0.6.0
-aea config <span class="nb">set</span> agent.default_ledger ethereum
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_ledger cosmos
 </pre></div>
 
 
 
 </p>
 </details>
+
+<h3 id="add-keys-for-all-aeas">Add keys for all AEAs</h3>
+<p>Create the private key for the AEA for Fetch.ai <code>AgentLand</code>:</p>
+<div class="highlight"><pre><span></span>aea generate-key cosmos
+aea add-key cosmos cosmos_private_key.txt
+aea add-key cosmos cosmos_private_key.txt --connection
+</pre></div>
+
 
 <h3 id="update-the-game-parameters-in-the-controller">Update the game parameters in the controller</h3>
 <p>Navigate to the tac controller project, then use the command line to get and set the start time (set it to at least two minutes in the future):</p>
@@ -1713,6 +1731,33 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.
 </pre></div>
 
 
+<h3 id="update-the-connection-params">Update the connection params</h3>
+<p>Briefly run the controller AEA:</p>
+<div class="highlight"><pre><span></span>aea run
+</pre></div>
+
+
+<p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
+<p>Then, update the configuration of the weather client AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11002</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
+  <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9002</span>
+  <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+  <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9002</span>
+</pre></div>
+
+
+<p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>The CLI tool supports the launch of several agents
 at once.</p>
@@ -1785,7 +1830,7 @@ The `tac_negotiation` skill `skill.yaml` configuration file looks like this.
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Transactions</span>
     <span class="nt">args</span><span class="p">:</span>
       <span class="nt">pending_transaction_timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai/oef_search:0.3.0&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fetchai/fipa:0.4.0&#39;</span><span class="p p-Indicator">]</span>
+<span class="nt">protocols</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;fetchai/oef_search:0.4.0&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fetchai/fipa:0.5.0&#39;</span><span class="p p-Indicator">]</span>
 </pre></div>
 
 

@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1644,6 +1655,15 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>an item</p>
+<p><a name="aea.crypto.registries.base.ItemSpec.get_class"></a></p>
+<h4 id="get_class">get<code>_</code>class</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_class</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">ItemType</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the class of the item with class variables instantiated.</p>
+<p><strong>Returns</strong>:</p>
+<p>an item class</p>
 <p><a name="aea.crypto.registries.base.Registry"></a></p>
 <h2 id="registry-objects">Registry Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Registry</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">ItemType</span><span class="p">])</span>
@@ -1705,6 +1725,28 @@ the make can then find the identifier.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the new item instance.</p>
+<p><a name="aea.crypto.registries.base.Registry.make_cls"></a></p>
+<h4 id="make_cls">make<code>_</code>cls</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">make_cls</span><span class="p">(</span><span class="n">id_</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ItemId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">module</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">ItemType</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Load a class of the associated type item id.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>id_</code>: the id of the item class. Make sure it has been registered earlier
+before calling this function.</li>
+<li><code>module</code>: dotted path to a module.
+whether a module should be loaded before creating the object.
+this argument is useful when the item might not be registered
+beforehand, and loading the specified module will make the registration.
+E.g. suppose the call to 'register' for a custom object
+is located in some_package/<strong>init</strong>.py. By providing module="some_package",
+the call to 'register' in such module gets triggered and
+the make can then find the identifier.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the new item class.</p>
 <p><a name="aea.crypto.registries.base.Registry.has_spec"></a></p>
 <h4 id="has_spec">has<code>_</code>spec</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">has_spec</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">ItemId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>

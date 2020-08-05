@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1577,6 +1588,63 @@
 <li><code>body</code>: the dictionary of values to hold.</li>
 <li><code>kwargs</code>: any additional value to add to the body. It will overwrite the body values.</li>
 </ul>
+<p><a name="aea.protocols.base.Message.has_sender"></a></p>
+<h4 id="has_sender">has<code>_</code>sender</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">has_sender</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if it has a sender.</p>
+<p><a name="aea.protocols.base.Message.sender"></a></p>
+<h4 id="sender">sender</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">sender</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Address</span>
+</pre></div>
+
+
+<p>Get the sender of the message in Address form.</p>
+<p>:return the address</p>
+<p><a name="aea.protocols.base.Message.sender"></a></p>
+<h4 id="sender_1">sender</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@sender</span><span class="o">.</span><span class="n">setter</span>
+ <span class="o">|</span> <span class="n">sender</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Set the sender of the message.</p>
+<p><a name="aea.protocols.base.Message.has_to"></a></p>
+<h4 id="has_to">has<code>_</code>to</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">has_to</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if it has a sender.</p>
+<p><a name="aea.protocols.base.Message.to"></a></p>
+<h4 id="to">to</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">to</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Address</span>
+</pre></div>
+
+
+<p>Get address of receiver.</p>
+<p><a name="aea.protocols.base.Message.to"></a></p>
+<h4 id="to_1">to</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@to</span><span class="o">.</span><span class="n">setter</span>
+ <span class="o">|</span> <span class="n">to</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Set address of receiver.</p>
+<p><a name="aea.protocols.base.Message.has_counterparty"></a></p>
+<h4 id="has_counterparty">has<code>_</code>counterparty</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">has_counterparty</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if the counterparty is set.</p>
 <p><a name="aea.protocols.base.Message.counterparty"></a></p>
 <h4 id="counterparty">counterparty</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1844,7 +1912,7 @@
 <p>It includes a serializer to encode/decode a message.</p>
 <p><a name="aea.protocols.base.Protocol.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ProtocolConfig</span><span class="p">,</span> <span class="n">message_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">])</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ProtocolConfig</span><span class="p">,</span> <span class="n">message_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1852,7 +1920,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>configuration</code>: the protocol configurations.</li>
-<li><code>serializer</code>: the serializer.</li>
+<li><code>message_class</code>: the message class.</li>
 </ul>
 <p><a name="aea.protocols.base.Protocol.serializer"></a></p>
 <h4 id="serializer">serializer</h4>
@@ -1865,7 +1933,7 @@
 <p><a name="aea.protocols.base.Protocol.from_dir"></a></p>
 <h4 id="from_dir">from<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Protocol&quot;</span>
+ <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Protocol&quot;</span>
 </pre></div>
 
 
@@ -1879,7 +1947,7 @@
 <p><a name="aea.protocols.base.Protocol.from_config"></a></p>
 <h4 id="from_config">from<code>_</code>config</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ProtocolConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Protocol&quot;</span>
+ <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ProtocolConfig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Protocol&quot;</span>
 </pre></div>
 
 

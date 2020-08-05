@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1603,7 +1614,7 @@ aea scaffold skill my_search
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+            <span class="s2">&quot;setting up MySearchBehaviour&quot;</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1622,8 +1633,8 @@ aea scaffold skill my_search
             <span class="n">query</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: sending search request to OEF search node, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span>
+            <span class="s2">&quot;sending search request to OEF search node, search_count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="n">search_request</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span>
@@ -1637,7 +1648,7 @@ aea scaffold skill my_search
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchBehaviour&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+            <span class="s2">&quot;tearing down MySearchBehaviour&quot;</span>
         <span class="p">)</span>
 </pre></div>
 
@@ -1672,7 +1683,7 @@ aea scaffold skill my_search
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Set up the handler.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: setting up MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+            <span class="s2">&quot;setting up MySearchHandler&quot;</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1743,13 +1754,12 @@ aea scaffold skill my_search
         <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">nb_agents_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span> <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span>
+            <span class="s2">&quot;found number of agents=</span><span class="si">{}</span><span class="s2">, received search count=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">nb_agents_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span>
             <span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">,</span>
+            <span class="s2">&quot;number of search requests sent=</span><span class="si">{}</span><span class="s2"> vs. number of search responses received=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">my_search_behaviour</span><span class="o">.</span><span class="n">sent_search_count</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span><span class="p">,</span>
             <span class="p">)</span>
@@ -1778,7 +1788,7 @@ aea scaffold skill my_search
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: tearing down MySearchHandler&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_name</span><span class="p">)</span>
+            <span class="s2">&quot;tearing down MySearchHandler&quot;</span>
         <span class="p">)</span>
 </pre></div>
 
@@ -1859,7 +1869,7 @@ aea scaffold skill my_search
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.4.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">my_search_behaviour</span><span class="p">:</span>
@@ -1898,29 +1908,29 @@ aea scaffold skill my_search
 <p>Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
 <h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the oef protocol and connection</h2>
 <p>Our AEA does not have the oef protocol yet so let's add it.</p>
-<div class="highlight"><pre><span></span>aea add protocol fetchai/oef_search:0.3.0
+<div class="highlight"><pre><span></span>aea add protocol fetchai/oef_search:0.4.0
 </pre></div>
 
 
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/soef:0.5.0
-aea add connection fetchai/p2p_libp2p:0.5.0
+<div class="highlight"><pre><span></span>aea add connection fetchai/soef:0.6.0
+aea add connection fetchai/p2p_libp2p:0.6.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.5.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
 </pre></div>
 
 
 <p>Finally, in the <code>aea-config.yaml</code> add the following lines:</p>
 <div class="highlight"><pre><span></span><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.5.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.6.0</span>
 </pre></div>
 
 
 <p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.8.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
+<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.9.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
 </pre></div>
 
 
@@ -2228,7 +2238,7 @@ Finally, we have a handler, placed in `handlers.py`:
     <span class="n">OefSearchDialogues</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.2.0&quot;</span>
+<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.3.0&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">OefSearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
@@ -2339,7 +2349,7 @@ The associated `skill.yaml` is:
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.3.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.4.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">service</span><span class="p">:</span>

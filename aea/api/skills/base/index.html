@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1563,7 +1574,7 @@
 <p><a name="aea.skills.base.SkillContext.logger"></a></p>
 <h4 id="logger">logger</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Logger</span><span class="p">,</span> <span class="n">LoggerAdapter</span><span class="p">]</span>
+ <span class="o">|</span> <span class="n">logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Logger</span>
 </pre></div>
 
 
@@ -1618,7 +1629,7 @@
 <p><a name="aea.skills.base.SkillContext.new_behaviours"></a></p>
 <h4 id="new_behaviours">new<code>_</code>behaviours</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">new_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Queue</span>
+ <span class="o">|</span> <span class="n">new_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Queue[Behaviour]&quot;</span>
 </pre></div>
 
 
@@ -1626,6 +1637,17 @@
 <p>This queue can be used to send messages to the framework
 to request the registration of a behaviour.</p>
 <p>:return the queue of new behaviours.</p>
+<p><a name="aea.skills.base.SkillContext.new_handlers"></a></p>
+<h4 id="new_handlers">new<code>_</code>handlers</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">new_handlers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Queue[Handler]&quot;</span>
+</pre></div>
+
+
+<p>Queue for the new handlers.</p>
+<p>This queue can be used to send messages to the framework
+to request the registration of a handler.</p>
+<p>:return the queue of new handlers.</p>
 <p><a name="aea.skills.base.SkillContext.agent_addresses"></a></p>
 <h4 id="agent_addresses">agent<code>_</code>addresses</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1714,14 +1736,6 @@ to request the registration of a behaviour.</p>
 
 
 <p>Get behaviours of the skill.</p>
-<p><a name="aea.skills.base.SkillContext.contracts"></a></p>
-<h4 id="contracts">contracts</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">contracts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SimpleNamespace</span>
-</pre></div>
-
-
-<p>Get contracts the skill has access to.</p>
 <p><a name="aea.skills.base.SkillContext.namespace"></a></p>
 <h4 id="namespace">namespace</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1994,21 +2008,6 @@ start_at: optional datetime, when to start periodical calls.</p>
 <li><code>behaviours</code>: dictionary of behaviours.</li>
 <li><code>models</code>: dictionary of models.</li>
 </ul>
-<p><a name="aea.skills.base.Skill.contracts"></a></p>
-<h4 id="contracts_1">contracts</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">contracts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Contract</span><span class="p">]</span>
-</pre></div>
-
-
-<p>Get the contracts associated with the skill.</p>
-<p><a name="aea.skills.base.Skill.inject_contracts"></a></p>
-<h4 id="inject_contracts">inject<code>_</code>contracts</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">inject_contracts</span><span class="p">(</span><span class="n">contracts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Contract</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Add the contracts to the skill.</p>
 <p><a name="aea.skills.base.Skill.skill_context"></a></p>
 <h4 id="skill_context">skill<code>_</code>context</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -2044,7 +2043,7 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p><a name="aea.skills.base.Skill.from_dir"></a></p>
 <h4 id="from_dir">from<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
+ <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
 </pre></div>
 
 
@@ -2059,7 +2058,7 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p><a name="aea.skills.base.Skill.logger"></a></p>
 <h4 id="logger_1">logger</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Logger</span><span class="p">,</span> <span class="n">LoggerAdapter</span><span class="p">]</span>
+ <span class="o">|</span> <span class="n">logger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Logger</span>
 </pre></div>
 
 
@@ -2077,7 +2076,7 @@ logger provided by the skill context.</p>
 <p><a name="aea.skills.base.Skill.from_config"></a></p>
 <h4 id="from_config">from<code>_</code>config</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">SkillConfig</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
+ <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">SkillConfig</span><span class="p">,</span> <span class="n">agent_context</span><span class="p">:</span> <span class="n">AgentContext</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Skill&quot;</span>
 </pre></div>
 
 

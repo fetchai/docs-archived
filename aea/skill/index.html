@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1580,6 +1591,13 @@
 <ul>
 <li>By declaring it in the skill configuration file <code>skill.yaml</code> (see <a href="#skill-config">below</a>)</li>
 </ul>
+<p>It is possible to register new handlers dynamically by enqueuing new
+<code>Handler</code> instances in the queue <code>context.new_handlers</code>, e.g. in a skill
+component we can write:</p>
+<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_handlers</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
+</pre></div>
+
+
 <h3 id="behaviourspy"><code>behaviours.py</code></h3>
 <p>Conceptually, a <code>Behaviour</code>  class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
 <p>There can be one or more <code>Behaviour</code> classes per skill. The developer must create a subclass from the abstract class <code>Behaviour</code> to create a new <code>Behaviour</code>.</p>
@@ -1749,7 +1767,7 @@ not be updated.</p>
 <span class="nt">models</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.3.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.4.0</span>
 </pre></div>
 
 
@@ -1761,7 +1779,7 @@ not be updated.</p>
 <li>Envelopes with decoding errors</li>
 <li>Invalid messages with respect to the registered protocol</li>
 </ul>
-<p>The error skill relies on the <code>fetchai/default:0.3.0</code> protocol which provides error codes for the above.</p>
+<p>The error skill relies on the <code>fetchai/default:0.4.0</code> protocol which provides error codes for the above.</p>
 <p><br /></p>
 
 

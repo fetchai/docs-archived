@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1561,7 +1572,7 @@
 <p><a name="aea.registries.base.Registry.register"></a></p>
 <h4 id="register">register</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">ItemId</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+ <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">ItemId</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Item</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1570,6 +1581,7 @@
 <ul>
 <li><code>item_id</code>: the public id of the item.</li>
 <li><code>item</code>: the item.</li>
+<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None
@@ -1651,7 +1663,7 @@
 <p>None</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.register"></a></p>
 <h4 id="register_1">register</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1660,6 +1672,7 @@
 <ul>
 <li><code>component_id</code>: the id of the component.</li>
 <li><code>component</code>: the component object.</li>
+<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
 </ul>
 <p><a name="aea.registries.base.AgentComponentRegistry.unregister"></a></p>
 <h4 id="unregister_1">unregister</h4>
@@ -1742,7 +1755,7 @@
 <p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry.register"></a></p>
 <h4 id="register_2">register</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">SkillComponentType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">SkillComponentType</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1751,6 +1764,7 @@
 <ul>
 <li><code>item_id</code>: a pair (skill id, item name).</li>
 <li><code>item</code>: the item to register.</li>
+<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None
@@ -1839,7 +1853,7 @@
 <p>None</p>
 <p><a name="aea.registries.base.HandlerRegistry.register"></a></p>
 <h4 id="register_3">register</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">Handler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -1848,6 +1862,7 @@
 <ul>
 <li><code>item_id</code>: the item id.</li>
 <li><code>item</code>: the handler.</li>
+<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>

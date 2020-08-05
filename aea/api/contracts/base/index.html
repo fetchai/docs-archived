@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1553,7 +1564,7 @@
 <p>Abstract definition of a contract.</p>
 <p><a name="aea.contracts.base.Contract.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">contract_config</span><span class="p">:</span> <span class="n">ContractConfig</span><span class="p">)</span>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">contract_config</span><span class="p">:</span> <span class="n">ContractConfig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1597,7 +1608,7 @@
 <p><a name="aea.contracts.base.Contract.from_dir"></a></p>
 <h4 id="from_dir">from<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Contract&quot;</span>
+ <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Contract&quot;</span>
 </pre></div>
 
 
@@ -1611,7 +1622,7 @@
 <p><a name="aea.contracts.base.Contract.from_config"></a></p>
 <h4 id="from_config">from<code>_</code>config</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ContractConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Contract&quot;</span>
+ <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ContractConfig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Contract&quot;</span>
 </pre></div>
 
 
@@ -1622,6 +1633,74 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the contract object.</p>
+<p><a name="aea.contracts.base.Contract.get_deploy_transaction"></a></p>
+<h4 id="get_deploy_transaction">get<code>_</code>deploy<code>_</code>transaction</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">get_deploy_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</pre></div>
+
+
+<p>Handler method for the 'GET_DEPLOY_TRANSACTION' requests.</p>
+<p>Implement this method in the sub class if you want
+to handle the contract requests manually.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>ledger_api</code>: the ledger apis.</li>
+<li><code>kwargs</code>: keyword arguments.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the bytes representing the state.</p>
+<p><a name="aea.contracts.base.Contract.get_raw_transaction"></a></p>
+<h4 id="get_raw_transaction">get<code>_</code>raw<code>_</code>transaction</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">get_raw_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</pre></div>
+
+
+<p>Handler method for the 'GET_RAW_TRANSACTION' requests.</p>
+<p>Implement this method in the sub class if you want
+to handle the contract requests manually.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>ledger_api</code>: the ledger apis.</li>
+<li><code>contract_address</code>: the contract address.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the bytes representing the state.</p>
+<p><a name="aea.contracts.base.Contract.get_raw_message"></a></p>
+<h4 id="get_raw_message">get<code>_</code>raw<code>_</code>message</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">get_raw_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</pre></div>
+
+
+<p>Handler method for the 'GET_RAW_MESSAGE' requests.</p>
+<p>Implement this method in the sub class if you want
+to handle the contract requests manually.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>ledger_api</code>: the ledger apis.</li>
+<li><code>contract_address</code>: the contract address.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the bytes representing the state.</p>
+<p><a name="aea.contracts.base.Contract.get_state"></a></p>
+<h4 id="get_state">get<code>_</code>state</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">get_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</pre></div>
+
+
+<p>Handler method for the 'GET_STATE' requests.</p>
+<p>Implement this method in the sub class if you want
+to handle the contract requests manually.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>ledger_api</code>: the ledger apis.</li>
+<li><code>contract_address</code>: the contract address.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the bytes representing the state.</p>
 
 
                                 </section>

@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1544,55 +1555,6 @@
 <p><a name="aea.agent"></a></p>
 <h1 id="aeaagent">aea.agent</h1>
 <p>This module contains the implementation of a generic agent.</p>
-<p><a name="aea.agent.AgentState"></a></p>
-<h2 id="agentstate-objects">AgentState Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Enumeration for an agent state.</p>
-<p>In particular, it can be one of the following states:</p>
-<ul>
-<li>AgentState.INITIATED: when the Agent object has been created.</li>
-<li>AgentState.CONNECTED: when the agent is connected.</li>
-<li>AgentState.RUNNING: when the agent is running.</li>
-</ul>
-<p><a name="aea.agent.Liveness"></a></p>
-<h2 id="liveness-objects">Liveness Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Liveness</span><span class="p">()</span>
-</pre></div>
-
-
-<p>Determines the liveness of the agent.</p>
-<p><a name="aea.agent.Liveness.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
-</pre></div>
-
-
-<p>Instantiate the liveness.</p>
-<p><a name="aea.agent.Liveness.is_stopped"></a></p>
-<h4 id="is_stopped">is<code>_</code>stopped</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
-
-
-<p>Check whether the liveness is stopped.</p>
-<p><a name="aea.agent.Liveness.start"></a></p>
-<h4 id="start">start</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Start the liveness.</p>
-<p><a name="aea.agent.Liveness.stop"></a></p>
-<h4 id="stop">stop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Stop the liveness.</p>
 <p><a name="aea.agent.Agent"></a></p>
 <h2 id="agent-objects">Agent Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
@@ -1601,7 +1563,7 @@
 
 <p>This class provides an abstract base class for a generic agent.</p>
 <p><a name="aea.agent.Agent.__init__"></a></p>
-<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
@@ -1627,7 +1589,7 @@
 
 <p>Get running state of the runtime and agent.</p>
 <p><a name="aea.agent.Agent.is_stopped"></a></p>
-<h4 id="is_stopped_1">is<code>_</code>stopped</h4>
+<h4 id="is_stopped">is<code>_</code>stopped</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span>
 </pre></div>
@@ -1678,14 +1640,6 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 
 
 <p>Get the agent name.</p>
-<p><a name="aea.agent.Agent.liveness"></a></p>
-<h4 id="liveness">liveness</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">liveness</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Liveness</span>
-</pre></div>
-
-
-<p>Get the liveness.</p>
 <p><a name="aea.agent.Agent.tick"></a></p>
 <h4 id="tick">tick</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1703,20 +1657,6 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 
 
 <p>Get the time in (fractions of) seconds to time out an agent between act and react.</p>
-<p><a name="aea.agent.Agent.agent_state"></a></p>
-<h4 id="agent_state">agent<code>_</code>state</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">agent_state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AgentState</span>
-</pre></div>
-
-
-<p>Get the state of the agent.</p>
-<p><strong>Raises</strong>:</p>
-<ul>
-<li><code>ValueError</code>: if the state does not satisfy any of the foreseen conditions.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.loop_mode"></a></p>
 <h4 id="loop_mode">loop<code>_</code>mode</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1747,9 +1687,9 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 </pre></div>
 
 
-<p>Set up the multiplexer</p>
+<p>Set up the multiplexer.</p>
 <p><a name="aea.agent.Agent.start"></a></p>
-<h4 id="start_1">start</h4>
+<h4 id="start">start</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
@@ -1787,7 +1727,7 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.agent.Agent.stop"></a></p>
-<h4 id="stop_1">stop</h4>
+<h4 id="stop">stop</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 
@@ -1850,6 +1790,16 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p>Tear down the agent.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
+<p><a name="aea.agent.Agent.state"></a></p>
+<h4 id="state">state</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RuntimeStates</span>
+</pre></div>
+
+
+<p>Get state of the agent's runtime.</p>
+<p><strong>Returns</strong>:</p>
+<p>RuntimeStates</p>
 
 
                                 </section>

@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../../../../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1641,6 +1652,13 @@
 
 
 <p>Get dialogue label from json.</p>
+<p><a name="aea.helpers.dialogue.base.DialogueLabel.get_incomplete_version"></a></p>
+<h4 id="get_incomplete_version">get<code>_</code>incomplete<code>_</code>version</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_incomplete_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;DialogueLabel&quot;</span>
+</pre></div>
+
+
+<p>Get the incomplete version of the label.</p>
 <p><a name="aea.helpers.dialogue.base.DialogueLabel.__str__"></a></p>
 <h4 id="__str__"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
@@ -1648,6 +1666,14 @@
 
 
 <p>Get the string representation.</p>
+<p><a name="aea.helpers.dialogue.base.DialogueLabel.from_str"></a></p>
+<h4 id="from_str">from<code>_</code>str</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">from_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DialogueLabel&quot;</span>
+</pre></div>
+
+
+<p>Get the dialogue label from string representation.</p>
 <p><a name="aea.helpers.dialogue.base.Dialogue"></a></p>
 <h2 id="dialogue-objects">Dialogue Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dialogue</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
@@ -1774,6 +1800,26 @@
 <p>Get the dialogue label.</p>
 <p><strong>Returns</strong>:</p>
 <p>The dialogue label</p>
+<p><a name="aea.helpers.dialogue.base.Dialogue.incomplete_dialogue_label"></a></p>
+<h4 id="incomplete_dialogue_label">incomplete<code>_</code>dialogue<code>_</code>label</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">incomplete_dialogue_label</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">DialogueLabel</span>
+</pre></div>
+
+
+<p>Get the dialogue label.</p>
+<p><strong>Returns</strong>:</p>
+<p>The incomplete dialogue label</p>
+<p><a name="aea.helpers.dialogue.base.Dialogue.dialogue_labels"></a></p>
+<h4 id="dialogue_labels">dialogue<code>_</code>labels</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">dialogue_labels</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">DialogueLabel</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the dialogue labels (incomplete and complete, if it exists)</p>
+<p><strong>Returns</strong>:</p>
+<p>the dialogue labels</p>
 <p><a name="aea.helpers.dialogue.base.Dialogue.agent_address"></a></p>
 <h4 id="agent_address">agent<code>_</code>address</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
@@ -1896,13 +1942,39 @@
 </pre></div>
 
 
-<p>Extend the list of incoming/outgoing messages with 'message', if 'message' is valid.</p>
+<p>Extend the list of incoming/outgoing messages with 'message', if 'message' belongs to dialogue and is valid.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>message</code>: a message to be added</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if message successfully added, false otherwise</p>
+<p><a name="aea.helpers.dialogue.base.Dialogue.ensure_counterparty"></a></p>
+<h4 id="ensure_counterparty">ensure<code>_</code>counterparty</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">ensure_counterparty</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Ensure the counterparty is set (set if not) correctly.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>message</code>: a message</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name="aea.helpers.dialogue.base.Dialogue.is_belonging_to_dialogue"></a></p>
+<h4 id="is_belonging_to_dialogue">is<code>_</code>belonging<code>_</code>to<code>_</code>dialogue</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">is_belonging_to_dialogue</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</pre></div>
+
+
+<p>Check if the message is belonging to the dialogue.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>message</code>: the message</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Ture if message is part of the dialogue, False otherwise</p>
 <p><a name="aea.helpers.dialogue.base.Dialogue.reply"></a></p>
 <h4 id="reply">reply</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">reply</span><span class="p">(</span><span class="n">target_message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">performative</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span>
@@ -2118,6 +2190,18 @@ If there are any errors, e.g. the message dialogue reference does not exists or 
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the dialogue, or None in case such a dialogue does not exist</p>
+<p><a name="aea.helpers.dialogue.base.Dialogues.get_latest_label"></a></p>
+<h4 id="get_latest_label">get<code>_</code>latest<code>_</code>label</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_latest_label</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DialogueLabel</span>
+</pre></div>
+
+
+<p>Retrieve the latest dialogue label if present otherwise return same label.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>dialogue_label</code>: the dialogue label
+:return dialogue_label: the dialogue label</li>
+</ul>
 <p><a name="aea.helpers.dialogue.base.Dialogues.get_dialogue_from_label"></a></p>
 <h4 id="get_dialogue_from_label">get<code>_</code>dialogue<code>_</code>from<code>_</code>label</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_dialogue_from_label</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dialogue</span><span class="p">]</span>

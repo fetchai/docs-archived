@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1547,7 +1558,7 @@
 
 <span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">DEFAULT_LEDGER_CONFIGS</span><span class="p">,</span> <span class="n">LedgerApis</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 
 
@@ -1578,13 +1589,6 @@
 </pre></div>
 
 
-<h2 id="create-ledgerapis">Create LedgerApis</h2>
-<p>We need to create the LedgerApis object in order to be able to interact with the Fetch.ai <code>testnet</code></p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Set up the LedgerApis</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">(</span><span class="n">DEFAULT_LEDGER_CONFIGS</span><span class="p">,</span> <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-</pre></div>
-
-
 <h2 id="generate-wealth">Generate wealth</h2>
 <p>Since we want to send funds from <code>wallet_1</code> to <code>wallet_2</code>, we need to generate some wealth for the <code>wallet_1</code>. We can
 do this with the following code</p>
@@ -1598,12 +1602,12 @@ do this with the following code</p>
 <h2 id="send-transaction">Send transaction</h2>
 <p>Finally, we create a transaction that sends the funds to the <code>wallet_2</code></p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create the transaction and send it to the ledger.</span>
-    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
+    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
         <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
         <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
-    <span class="n">transaction</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
+    <span class="n">transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
         <span class="n">identifier</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
         <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
@@ -1612,7 +1616,7 @@ do this with the following code</p>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
-    <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
+    <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
         <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
     <span class="p">)</span>
 
@@ -1627,7 +1631,7 @@ do this with the following code</p>
 
 <span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">DEFAULT_LEDGER_CONFIGS</span><span class="p">,</span> <span class="n">LedgerApis</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
 
 
@@ -1651,9 +1655,6 @@ do this with the following code</p>
     <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
     <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 
-    <span class="c1"># Set up the LedgerApis</span>
-    <span class="n">ledger_apis</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="p">(</span><span class="n">DEFAULT_LEDGER_CONFIGS</span><span class="p">,</span> <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-
     <span class="c1"># Generate some wealth</span>
     <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
         <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
@@ -1664,12 +1665,12 @@ do this with the following code</p>
     <span class="p">)</span>
 
     <span class="c1"># Create the transaction and send it to the ledger.</span>
-    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
+    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
         <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
         <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
-    <span class="n">transaction</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
+    <span class="n">transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
         <span class="n">identifier</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
         <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
@@ -1678,7 +1679,7 @@ do this with the following code</p>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
-    <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">ledger_apis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
+    <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
         <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
     <span class="p">)</span>
 

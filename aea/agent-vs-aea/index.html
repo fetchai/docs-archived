@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1599,6 +1610,8 @@
                 <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
                 <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
                 <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">sender</span>
                 <span class="nb">print</span><span class="p">(</span>
                     <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
@@ -1653,7 +1666,7 @@
 <p>We use the input and output text files to send an envelope to our agent and receive a response</p>
 <div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.3.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
@@ -1724,6 +1737,8 @@
                 <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
                 <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
                 <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">sender</span>
                 <span class="nb">print</span><span class="p">(</span>
                     <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
@@ -1769,7 +1784,7 @@
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.3.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>

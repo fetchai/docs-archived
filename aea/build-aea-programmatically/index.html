@@ -463,6 +463,17 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Agent Communication</span>
+    <ul id="header_agent_communication"> 
+<li>
+    <a href="../acn/" id="aea-acn-"
+        >Agent Communication Network</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
     <span class="head">Search & Discovery</span>
     <ul id="header_search_%26_discovery"> 
 <li>
@@ -1569,7 +1580,7 @@
 <h2 id="create-a-private-key">Create a private key</h2>
 <p>We need a private key to populate the AEA's wallet.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private key</span>
-    <span class="n">create_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">COSMOS_PRIVATE_KEY_FILE</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1584,7 +1595,7 @@
 
 
 <h2 id="initialise-the-aea">Initialise the AEA</h2>
-<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.3.0</code> protocol, the <code>fetchai/stub:0.6.0</code> connection and the <code>fetchai/error:0.3.0</code> skill.</p>
+<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.4.0</code> protocol, the <code>fetchai/stub:0.7.0</code> connection and the <code>fetchai/error:0.4.0</code> skill.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Instantiate the builder and build the AEA</span>
     <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">AEABuilder</span><span class="p">()</span>
@@ -1657,7 +1668,7 @@
 <p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)</p>
 <div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.3.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
@@ -1684,8 +1695,8 @@
 
 <h2 id="running-the-aea">Running the AEA</h2>
 <p>If you now run this python script file, you should see this output:</p>
-<div class="highlight"><pre><span></span><span class="err">input message: my_aea,other_agent,fetchai/default:0.3.0,\x08\x01*\x07\n\x05hello</span>
-<span class="err">output message: other_agent,my_aea,fetchai/default:0.3.0,\x08\x01*\x07\n\x05hello</span>
+<div class="highlight"><pre><span></span><span class="err">input message: my_aea,other_agent,fetchai/default:0.4.0,\x08\x01*\x07\n\x05hello</span>
+<span class="err">output message: other_agent,my_aea,fetchai/default:0.4.0,\x08\x01*\x07\n\x05hello</span>
 </pre></div>
 
 
@@ -1711,7 +1722,7 @@
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private key</span>
-    <span class="n">create_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+    <span class="n">create_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">COSMOS_PRIVATE_KEY_FILE</span><span class="p">)</span>
 
     <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
@@ -1771,7 +1782,7 @@
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.3.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="s2">&quot;my_aea,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
