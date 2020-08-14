@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1555,6 +1626,113 @@
 <p><a name="aea.aea_builder"></a></p>
 <h1 id="aeaaea_builder">aea.aea<code>_</code>builder</h1>
 <p>This module contains utilities for building an AEA.</p>
+<p><a name="aea.aea_builder._DependenciesManager"></a></p>
+<h2 id="_dependenciesmanager-objects"><code>_</code>DependenciesManager Objects</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">_DependenciesManager</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Class to manage dependencies of agent packages.</p>
+<p><a name="aea.aea_builder._DependenciesManager.__init__"></a></p>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Initialize the dependency graph.</p>
+<p><a name="aea.aea_builder._DependenciesManager.all_dependencies"></a></p>
+<h4 id="all_dependencies">all<code>_</code>dependencies</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">all_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get all dependencies.</p>
+<p><a name="aea.aea_builder._DependenciesManager.dependencies_highest_version"></a></p>
+<h4 id="dependencies_highest_version">dependencies<code>_</code>highest<code>_</code>version</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">dependencies_highest_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the dependencies with highest version.</p>
+<p><a name="aea.aea_builder._DependenciesManager.get_components_by_type"></a></p>
+<h4 id="get_components_by_type">get<code>_</code>components<code>_</code>by<code>_</code>type</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">get_components_by_type</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">ComponentConfiguration</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the components by type.</p>
+<p><a name="aea.aea_builder._DependenciesManager.protocols"></a></p>
+<h4 id="protocols">protocols</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">protocols</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">ProtocolConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the protocols.</p>
+<p><a name="aea.aea_builder._DependenciesManager.connections"></a></p>
+<h4 id="connections">connections</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">connections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">ConnectionConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the connections.</p>
+<p><a name="aea.aea_builder._DependenciesManager.skills"></a></p>
+<h4 id="skills">skills</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">skills</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">SkillConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the skills.</p>
+<p><a name="aea.aea_builder._DependenciesManager.contracts"></a></p>
+<h4 id="contracts">contracts</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">contracts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">ContractConfig</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Get the contracts.</p>
+<p><a name="aea.aea_builder._DependenciesManager.add_component"></a></p>
+<h4 id="add_component">add<code>_</code>component</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_component</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ComponentConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p>Add a component to the dependency manager..</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>configuration</code>: the component configuration to add.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name="aea.aea_builder._DependenciesManager.remove_component"></a></p>
+<h4 id="remove_component">remove<code>_</code>component</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_component</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Remove a component.</p>
+<p>:return None</p>
+<p><strong>Raises</strong>:</p>
+<ul>
+<li><code>ValueError</code>: if some component depends on this package.</li>
+</ul>
+<p><a name="aea.aea_builder._DependenciesManager.pypi_dependencies"></a></p>
+<h4 id="pypi_dependencies">pypi<code>_</code>dependencies</h4>
+<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">pypi_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dependencies</span>
+</pre></div>
+
+
+<p>Get all the PyPI dependencies.</p>
+<p>We currently consider only dependency that have the
+default PyPI index url and that specify only the
+version field.</p>
+<p><strong>Returns</strong>:</p>
+<p>the merged PyPI dependencies</p>
 <p><a name="aea.aea_builder.AEABuilder"></a></p>
 <h2 id="aeabuilder-objects">AEABuilder Objects</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AEABuilder</span><span class="p">()</span>
@@ -1594,7 +1772,7 @@ builder.add_component_instance(...)
 <h1 id="second-call">second call</h1>
 <p>my_aea_2 = builder.builder()</p>
 <p><a name="aea.aea_builder.AEABuilder.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">with_default_packages</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
@@ -1827,7 +2005,7 @@ If None, the key will be created at build time.</li>
 <p><strong>Returns</strong>:</p>
 <p>the AEABuilder</p>
 <p><a name="aea.aea_builder.AEABuilder.add_component"></a></p>
-<h4 id="add_component">add<code>_</code>component</h4>
+<h4 id="add_component_1">add<code>_</code>component</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">add_component</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </pre></div>
 
@@ -1865,7 +2043,7 @@ You will have to <code>reset()</code> the builder before calling <code>build()</
 
 <p>Set the context namespace.</p>
 <p><a name="aea.aea_builder.AEABuilder.remove_component"></a></p>
-<h4 id="remove_component">remove<code>_</code>component</h4>
+<h4 id="remove_component_1">remove<code>_</code>component</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">remove_component</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </pre></div>
 

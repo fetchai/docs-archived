@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../../helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../../helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../../protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../../protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../../protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../../protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../../protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../../protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../../protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../../protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../../protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1557,7 +1628,7 @@
 <p>The base contract.</p>
 <p><a name="aea.contracts.base.Contract"></a></p>
 <h2 id="contract-objects">Contract Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Contract</span><span class="p">(</span><span class="n">Component</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Contract</span><span class="p">(</span><span class="n">Component</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1592,7 +1663,6 @@
 <p><a name="aea.contracts.base.Contract.get_instance"></a></p>
 <h4 id="get_instance">get<code>_</code>instance</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">get_instance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 
@@ -1636,7 +1706,7 @@
 <p><a name="aea.contracts.base.Contract.get_deploy_transaction"></a></p>
 <h4 id="get_deploy_transaction">get<code>_</code>deploy<code>_</code>transaction</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">get_deploy_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+ <span class="o">|</span> <span class="n">get_deploy_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">deployer_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1646,14 +1716,15 @@ to handle the contract requests manually.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ledger_api</code>: the ledger apis.</li>
+<li><code>deployer_address</code>: The address that will deploy the contract.</li>
 <li><code>kwargs</code>: keyword arguments.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>the bytes representing the state.</p>
+<p>the tx</p>
 <p><a name="aea.contracts.base.Contract.get_raw_transaction"></a></p>
 <h4 id="get_raw_transaction">get<code>_</code>raw<code>_</code>transaction</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">get_raw_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+ <span class="o">|</span> <span class="n">get_raw_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1666,11 +1737,11 @@ to handle the contract requests manually.</p>
 <li><code>contract_address</code>: the contract address.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>the bytes representing the state.</p>
+<p>the tx</p>
 <p><a name="aea.contracts.base.Contract.get_raw_message"></a></p>
 <h4 id="get_raw_message">get<code>_</code>raw<code>_</code>message</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">get_raw_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+ <span class="o">|</span> <span class="n">get_raw_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1683,11 +1754,11 @@ to handle the contract requests manually.</p>
 <li><code>contract_address</code>: the contract address.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>the bytes representing the state.</p>
+<p>the tx</p>
 <p><a name="aea.contracts.base.Contract.get_state"></a></p>
 <h4 id="get_state">get<code>_</code>state</h4>
 <div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">get_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+ <span class="o">|</span> <span class="n">get_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api</span><span class="p">:</span> <span class="n">LedgerApi</span><span class="p">,</span> <span class="n">contract_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1700,7 +1771,7 @@ to handle the contract requests manually.</p>
 <li><code>contract_address</code>: the contract address.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>the bytes representing the state.</p>
+<p>the tx</p>
 
 
                                 </section>
@@ -1711,7 +1782,7 @@ to handle the contract requests manually.</p>
                                 
                                 <a href="../../context/base/" class="button left"><strong>Previous:</strong></br>Context</a>
                                 
-                                <a href="../ethereum/" class="button right"><strong>Next:</strong></br>Ethereum</a>
+                                <a href="../../crypto/base/" class="button right"><strong>Next:</strong></br>Base</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

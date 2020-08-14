@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../api/contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../api/protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../api/protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../api/protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../api/protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../api/protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1561,7 +1632,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span>
-<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
+<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span><span class="p">,</span> <span class="n">write_with_lock</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.multiplexer</span> <span class="kn">import</span> <span class="n">Multiplexer</span>
@@ -1611,7 +1682,7 @@
             <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
+            <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
 
         <span class="c1"># Wait for the envelope to get processed</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -1664,7 +1735,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span>
-<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span>
+<span class="kn">from</span> <span class="nn">aea.connections.stub.connection</span> <span class="kn">import</span> <span class="n">StubConnection</span><span class="p">,</span> <span class="n">write_with_lock</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.multiplexer</span> <span class="kn">import</span> <span class="n">Multiplexer</span>
@@ -1703,7 +1774,7 @@
             <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message_text</span><span class="p">)</span>
+            <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
 
         <span class="c1"># Wait for the envelope to get processed</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>

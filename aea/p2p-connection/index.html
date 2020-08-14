@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../api/contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../api/protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../api/protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../api/protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../api/protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../api/protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1552,15 +1623,15 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.6.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.7.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.6.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
-aea run --connections fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/p2p_libp2p:0.7.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.7.0
+aea run --connections fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 
@@ -1568,8 +1639,8 @@ aea run --connections fetchai/p2p_libp2p:0.6.0
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.6.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/p2p_libp2p:0.7.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 
@@ -1585,7 +1656,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.6.0
+<div class="highlight"><pre><span></span>aea run --connections fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 
@@ -1596,17 +1667,68 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <p>You can connect to the deployed public test network by adding one or multiple of the following addresses as the <code>libp2p_entry_peers</code>:</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span>
 <span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span>
-<span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span>
 </pre></div>
 
 
 <p>In particular, by modifying the configuration such that:</p>
 <div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
-  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">,</span> <span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9002/p2p/16Uiu2HAmNJ8ZPRaXgYjhFf8xo8RBTX8YoUU5kzTW7Z4E5J3x9L1t</span><span class="p p-Indicator">]</span>
+  <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9000/p2p/16Uiu2HAkw1ypeQYQbRFV5hKUxGRHocwU5ohmVmCnyJNg36tnPFdx</span><span class="p p-Indicator">,</span><span class="nv">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span><span class="p p-Indicator">]</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
 </pre></div>
+
+
+<h2 id="configuring-the-connectionyaml-entries">Configuring the <code>connection.yaml</code> entries:</h2>
+<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.7.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
+<h2 id="running-go-peer-standalone">Running Go peer standalone</h2>
+<p>You can run the peer node only, a Go process. Make sure you satisfy the <a href="../quickstart">system requirements</a>.</p>
+<p>First, fetch the code and enter the directory:</p>
+<div class="highlight"><pre><span></span>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages/fetchai/connections/p2p_libp2p
+<span class="nb">cd</span> p2p_libp2p
+</pre></div>
+
+
+<p>Second, build the node:</p>
+<div class="highlight"><pre><span></span>go build
+</pre></div>
+
+
+<p>Third, create an environment file:</p>
+<div class="highlight"><pre><span></span><span class="err">AEA_AGENT_ADDR=cosmos1azvdhesjk739d2j0xdmhyzlu3kfvqqje9r7uay</span>
+<span class="err">AEA_P2P_ID=1ceb61fb96132480c8a8bc3023801e626fff0f871965858584744ed5a6299773</span>
+<span class="err">AEA_P2P_URI=127.0.0.1:9001</span>
+<span class="err">AEA_P2P_ENTRY_URIS=/dns4/127.0.0.1/tcp/9000/p2p/16Uiu2HAm6ghFe59TZ2vHQCcr1dx5P4WWEEAfVp5K6jcgmXjG8bGQ</span>
+<span class="err">NODE_TO_AEA=033a2-libp2p_to_aea</span>
+<span class="err">AEA_TO_NODE=033a2-aea_to_libp2p</span>
+<span class="err">AEA_P2P_URI_PUBLIC=127.0.0.1:9001</span>
+<span class="err">AEA_P2P_DELEGATE_URI=127.0.0.1:11001</span>
+</pre></div>
+
+
+<p>with the values set correctly and save it as <code>.env.libp2p</code>.</p>
+<p>The entries can be described as follow:</p>
+<ul>
+<li><code>AEA_AGENT_ADDR</code>: the agent's address</li>
+<li><code>AEA_P2P_ID</code>: the agent's private key</li>
+<li><code>AEA_P2P_URI</code>: the URI under which the peer is reachable locally</li>
+<li><code>AEA_P2P_ENTRY_URIS</code>: an optionally supplied list of entry URIs for the peer to bootstrap</li>
+<li><code>NODE_TO_AEA</code>: the <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)">pipe</a> for the peer to agent comms</li>
+<li><code>AEA_TO_NODE</code>: the pipe for the agent to peer comms</li>
+<li><code>AEA_P2P_URI_PUBLIC</code>: the URI under which the peer is reachable publicly</li>
+<li><code>AEA_P2P_DELEGATE_URI</code>: the URI under which the peer receives delegate connections</li>
+</ul>
+<p>Fourth, make the build file executable:</p>
+<div class="highlight"><pre><span></span>chmod +x libp2p_node
+</pre></div>
+
+
+<p>Finally, run it:</p>
+<div class="highlight"><pre><span></span>./libp2p_node .env.libp2p
+</pre></div>
+
+
+<p>Note, for the peer to successfully run, the <code>AEA_TO_NODE</code> pipe must already be initialized.</p>
 
 
                                 </section>

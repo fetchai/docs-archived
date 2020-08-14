@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../api/contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../api/protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../api/protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../api/protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../api/protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../api/protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1603,7 +1674,7 @@ This demo does not utilize a smart contract. As a result, we interact with a led
 trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-weather-station">Create the weather station</h3>
 <p>First, fetch the AEA that will provide weather measurements:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.9.0 --alias my_weather_station
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_station:0.10.0 --alias my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea install
 </pre></div>
@@ -1616,12 +1687,12 @@ The following steps create the weather station from scratch:
 
 <div class="highlight"><pre><span></span>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
-aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/p2p_libp2p:0.7.0
 aea add connection fetchai/soef:0.6.0
 aea add connection fetchai/ledger:0.3.0
-aea add skill fetchai/weather_station:0.8.0
+aea add skill fetchai/weather_station:0.9.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 
@@ -1640,7 +1711,7 @@ In `weather_station/aea-config.yaml` add
 
 <h3 id="create-the-weather-client">Create the weather client</h3>
 <p>In another terminal, fetch the AEA that will query the weather station:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/weather_client:0.9.0 --alias my_weather_client
+<div class="highlight"><pre><span></span>aea fetch fetchai/weather_client:0.10.0 --alias my_weather_client
 <span class="nb">cd</span> my_weather_client
 aea install
 </pre></div>
@@ -1653,12 +1724,12 @@ The following steps create the weather client from scratch:
 
 <div class="highlight"><pre><span></span>aea create my_weather_client
 <span class="nb">cd</span> my_weather_client
-aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/p2p_libp2p:0.7.0
 aea add connection fetchai/soef:0.6.0
 aea add connection fetchai/ledger:0.3.0
-aea add skill fetchai/weather_client:0.7.0
+aea add skill fetchai/weather_client:0.8.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 

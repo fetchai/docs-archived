@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../api/contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../api/protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../api/protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../api/protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../api/protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../api/protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1552,8 +1623,7 @@
 
                                     
 
-<p>This guide can be considered as a part two of the <a href="../standalone-transaction/">stand-alone transaction demo</a> we did in a previous guide. There, after the completion of the transaction,
-we get the transaction digest. With this we can search for the transaction on the <a href='https://explore-testnet.fetch.ai'>block explorer</a>. The main difference is that here we are going to use the <a href="/decision-maker/">decision maker</a> to settle the transaction.</p>
+<p>This guide can be considered as a part 2 of the <a href="../standalone-transaction/">the stand-alone transaction demo</a>. The main difference is that now we are going to use the decision-maker to sign the transaction.</p>
 <p>First, import the libraries and the set the constant values.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -1562,19 +1632,24 @@ we get the transaction digest. With this we can search for the transaction on th
 
 <span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolId</span><span class="p">,</span> <span class="n">SkillConfig</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
-<span class="kn">from</span> <span class="nn">aea.decision_maker.messages.transaction</span> <span class="kn">import</span> <span class="n">TransactionMessage</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span><span class="p">,</span> <span class="n">DialogueLabel</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.transaction.base</span> <span class="kn">import</span> <span class="n">RawTransaction</span><span class="p">,</span> <span class="n">Terms</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
-<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">Skill</span><span class="p">,</span> <span class="n">SkillContext</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.dialogues</span> <span class="kn">import</span> <span class="n">SigningDialogue</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.dialogues</span> <span class="kn">import</span> <span class="n">SigningDialogues</span> <span class="k">as</span> <span class="n">BaseSigningDialogues</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.message</span> <span class="kn">import</span> <span class="n">SigningMessage</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Skill</span><span class="p">,</span> <span class="n">SkillContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
-<span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;fet_private_key_1.txt&quot;</span>
-<span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fet_private_key_2.txt&quot;</span>
+<span class="n">COSMOS_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_1.txt&quot;</span>
+<span class="n">COSMOS_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_2.txt&quot;</span>
 </pre></div>
 
 
@@ -1582,7 +1657,7 @@ we get the transaction digest. With this we can search for the transaction on th
 <p>To have access to the decision-maker, which is responsible for signing transactions, we need to create an AEA. We can create a an AEA with the builder, providing it with a private key we generate first.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
+        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_1</span>
     <span class="p">)</span>
 
     <span class="c1"># Instantiate the builder and build the AEA</span>
@@ -1591,32 +1666,30 @@ we get the transaction digest. With this we can search for the transaction on th
 
     <span class="n">builder</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
-
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
 
     <span class="c1"># Create our AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </pre></div>
 
 
-<h2 id="generate-wealth">Generate wealth</h2>
-<p>Since we want to send funds from our AEA's <code>wallet</code>, we need to generate some wealth for the <code>wallet</code>. We can do this with the following code where we use the default address</p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Generate some wealth for the default address</span>
-    <span class="n">try_generate_testnet_wealth</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-</pre></div>
-
-
 <h2 id="add-a-simple-skill">Add a simple skill</h2>
-<p>Add a simple skill with a transaction handler.</p>
+<p>Add a simple skill with a signing handler and the signing dialogues.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># add a simple skill with handler</span>
     <span class="n">skill_context</span> <span class="o">=</span> <span class="n">SkillContext</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
     <span class="n">skill_config</span> <span class="o">=</span> <span class="n">SkillConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;simple_skill&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">)</span>
-    <span class="n">tx_handler</span> <span class="o">=</span> <span class="n">TransactionHandler</span><span class="p">(</span>
-        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;transaction_handler&quot;</span>
+    <span class="n">signing_handler</span> <span class="o">=</span> <span class="n">SigningHandler</span><span class="p">(</span>
+        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;signing_handler&quot;</span>
     <span class="p">)</span>
+    <span class="n">signing_dialogues_model</span> <span class="o">=</span> <span class="n">SigningDialogues</span><span class="p">(</span>
+        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;signing_dialogues&quot;</span>
+    <span class="p">)</span>
+
     <span class="n">simple_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="p">(</span>
-        <span class="n">skill_config</span><span class="p">,</span> <span class="n">skill_context</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="n">tx_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tx_handler</span><span class="p">}</span>
+        <span class="n">skill_config</span><span class="p">,</span>
+        <span class="n">skill_context</span><span class="p">,</span>
+        <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="n">signing_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">signing_handler</span><span class="p">},</span>
+        <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="n">signing_dialogues_model</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">signing_dialogues_model</span><span class="p">},</span>
     <span class="p">)</span>
     <span class="n">my_aea</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">simple_skill</span><span class="p">)</span>
 </pre></div>
@@ -1624,55 +1697,67 @@ we get the transaction digest. With this we can search for the transaction on th
 
 <h2 id="create-a-second-identity">Create a second identity</h2>
 <div class="highlight"><pre><span></span>    <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
+        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_2</span>
     <span class="p">)</span>
 
-    <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 
     <span class="n">counterparty_identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;counterparty_aea&quot;</span><span class="p">,</span>
         <span class="n">addresses</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">,</span>
-        <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">default_address_key</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 
 
-<h2 id="create-the-transaction-message">Create the transaction message</h2>
-<p>Next, we are creating the transaction message and we send it to the decision-maker.</p>
-<div class="highlight"><pre><span></span>    <span class="c1"># create tx message for decision maker to process</span>
-    <span class="n">fetchai_ledger_api</span> <span class="o">=</span> <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
-    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">fetchai_ledger_api</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span>
+<h2 id="create-the-signing-message">Create the signing message</h2>
+<p>Next, we are creating the signing message and we send it to the decision-maker.</p>
+<div class="highlight"><pre><span></span>    <span class="c1"># create signing message for decision maker to sign</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">Terms</span><span class="p">(</span>
+        <span class="n">ledger_id</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">sender_address</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="n">counterparty_address</span><span class="o">=</span><span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="n">amount_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+        <span class="n">quantities_by_good_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_service&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="n">nonce</span><span class="o">=</span><span class="s2">&quot;some_nonce&quot;</span><span class="p">,</span>
+        <span class="n">fee_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
     <span class="p">)</span>
-
-    <span class="n">tx_msg</span> <span class="o">=</span> <span class="n">TransactionMessage</span><span class="p">(</span>
-        <span class="n">performative</span><span class="o">=</span><span class="n">TransactionMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">PROPOSE_FOR_SETTLEMENT</span><span class="p">,</span>
-        <span class="n">skill_callback_ids</span><span class="o">=</span><span class="p">[</span><span class="n">skill_config</span><span class="o">.</span><span class="n">public_id</span><span class="p">],</span>
-        <span class="n">tx_id</span><span class="o">=</span><span class="s2">&quot;transaction0&quot;</span><span class="p">,</span>
-        <span class="n">tx_sender_addr</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">tx_counterparty_addr</span><span class="o">=</span><span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">tx_amount_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-        <span class="n">tx_sender_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">tx_counterparty_fee</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">tx_quantities_by_good_id</span><span class="o">=</span><span class="p">{},</span>
-        <span class="n">ledger_id</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_info_key&quot;</span><span class="p">:</span> <span class="s2">&quot;some_info_value&quot;</span><span class="p">},</span>
-        <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
+    <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
+    <span class="n">stub_transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_address</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">counterparty_address</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_payable_amount</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_fee</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">nonce</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">tx_msg</span><span class="p">)</span>
+    <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="p">(</span>
+        <span class="n">performative</span><span class="o">=</span><span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SIGN_TRANSACTION</span><span class="p">,</span>
+        <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">signing_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+        <span class="n">skill_callback_ids</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">skill_context</span><span class="o">.</span><span class="n">skill_id</span><span class="p">),),</span>
+        <span class="n">raw_transaction</span><span class="o">=</span><span class="n">RawTransaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">stub_transaction</span><span class="p">),</span>
+        <span class="n">terms</span><span class="o">=</span><span class="n">terms</span><span class="p">,</span>
+        <span class="n">skill_callback_info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_info_key&quot;</span><span class="p">:</span> <span class="s2">&quot;some_info_value&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">signing_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="s2">&quot;decision_maker&quot;</span>
+    <span class="n">signing_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="n">SigningDialogue</span><span class="p">],</span> <span class="n">signing_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">signing_dialogue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
 </pre></div>
 
 
 <h2 id="run-the-agent">Run the agent</h2>
-<p>Finally, we are running the agent and we expect the transaction digest to be printed in the terminal.</p>
+<p>Finally, we are running the agent and we expect the signed transaction to be printed in the terminal.</p>
 <div class="highlight"><pre><span></span>    <span class="c1"># Set the AEA running in a different thread</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STARTING AEA NOW!&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-        <span class="c1"># Let it run long enough to interact with the weather station</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+        <span class="c1"># Let it run long enough to interact with the decision maker</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="c1"># Shut down the AEA</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STOPPING AEA NOW!&quot;</span><span class="p">)</span>
@@ -1681,12 +1766,49 @@ we get the transaction digest. With this we can search for the transaction on th
 </pre></div>
 
 
+<p>After the completion of the signing, we get the signed transaction.</p>
 <h2 id="more-details">More details</h2>
-<p>To be able to register a handler that reads the internal messages, we have to create a class at the end of the file with the name TransactionHandler</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransactionHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Implement the transaction handler.&quot;&quot;&quot;</span>
+<p>To be able to register a handler that reads the internal messages, we have to create a class at the end of the file which processes the signing messages.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SigningDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseSigningDialogues</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
 
-    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">TransactionMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[ProtocolId]</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">BaseSigningDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SigningDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">SKILL</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SigningDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">SigningDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+
+
+<span class="k">class</span> <span class="nc">SigningHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
+
+    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[ProtocolId]</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
@@ -1699,17 +1821,24 @@ we get the transaction digest. With this we can search for the transaction on th
 <span class="sd">        :param message: the message</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tx_msg_response</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">TransactionMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tx_msg_response</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="n">tx_msg_response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="ow">and</span> <span class="n">tx_msg_response</span><span class="o">.</span><span class="n">performative</span>
-            <span class="o">==</span> <span class="n">TransactionMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SUCCESSFUL_SETTLEMENT</span>
-        <span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction was successful.&quot;</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tx_msg_response</span><span class="o">.</span><span class="n">tx_digest</span><span class="p">)</span>
+        <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="c1"># recover dialogue</span>
+        <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
+        <span class="n">signing_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">Optional</span><span class="p">[</span><span class="n">SigningDialogue</span><span class="p">],</span> <span class="n">signing_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">signing_dialogue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_unidentified_dialogue</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># handle message</span>
+        <span class="k">if</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SIGNED_TRANSACTION</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_signed_transaction</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_error</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction was not successful.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1718,6 +1847,63 @@ we get the transaction digest. With this we can search for the transaction on th
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an unidentified dialogue.</span>
+
+<span class="sd">        :param msg: the message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received invalid signing message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_signed_transaction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle a signing message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;transaction signing was successful.&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">signing_msg</span><span class="o">.</span><span class="n">signed_transaction</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;transaction signing was not successful. Error_code=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">error_code</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;cannot handle signing message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 
 
@@ -1731,25 +1917,30 @@ we get the transaction digest. With this we can search for the transaction on th
 
 <span class="kn">from</span> <span class="nn">aea.aea_builder</span> <span class="kn">import</span> <span class="n">AEABuilder</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ProtocolId</span><span class="p">,</span> <span class="n">SkillConfig</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
-<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
-<span class="kn">from</span> <span class="nn">aea.decision_maker.messages.transaction</span> <span class="kn">import</span> <span class="n">TransactionMessage</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span><span class="p">,</span> <span class="n">DialogueLabel</span>
+<span class="kn">from</span> <span class="nn">aea.helpers.transaction.base</span> <span class="kn">import</span> <span class="n">RawTransaction</span><span class="p">,</span> <span class="n">Terms</span>
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
-<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">Skill</span><span class="p">,</span> <span class="n">SkillContext</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.dialogues</span> <span class="kn">import</span> <span class="n">SigningDialogue</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.dialogues</span> <span class="kn">import</span> <span class="n">SigningDialogues</span> <span class="k">as</span> <span class="n">BaseSigningDialogues</span>
+<span class="kn">from</span> <span class="nn">aea.protocols.signing.message</span> <span class="kn">import</span> <span class="n">SigningMessage</span>
+<span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Skill</span><span class="p">,</span> <span class="n">SkillContext</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
-<span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;fet_private_key_1.txt&quot;</span>
-<span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fet_private_key_2.txt&quot;</span>
+<span class="n">COSMOS_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_1.txt&quot;</span>
+<span class="n">COSMOS_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_2.txt&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
+        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_1</span>
     <span class="p">)</span>
 
     <span class="c1"># Instantiate the builder and build the AEA</span>
@@ -1758,61 +1949,75 @@ we get the transaction digest. With this we can search for the transaction on th
 
     <span class="n">builder</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;my_aea&quot;</span><span class="p">)</span>
 
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
-
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_ledger_api_config</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;testnet&quot;</span><span class="p">})</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_private_key</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_1</span><span class="p">)</span>
 
     <span class="c1"># Create our AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="c1"># Generate some wealth for the default address</span>
-    <span class="n">try_generate_testnet_wealth</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-
     <span class="c1"># add a simple skill with handler</span>
     <span class="n">skill_context</span> <span class="o">=</span> <span class="n">SkillContext</span><span class="p">(</span><span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
     <span class="n">skill_config</span> <span class="o">=</span> <span class="n">SkillConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;simple_skill&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="s2">&quot;fetchai&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">)</span>
-    <span class="n">tx_handler</span> <span class="o">=</span> <span class="n">TransactionHandler</span><span class="p">(</span>
-        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;transaction_handler&quot;</span>
+    <span class="n">signing_handler</span> <span class="o">=</span> <span class="n">SigningHandler</span><span class="p">(</span>
+        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;signing_handler&quot;</span>
     <span class="p">)</span>
+    <span class="n">signing_dialogues_model</span> <span class="o">=</span> <span class="n">SigningDialogues</span><span class="p">(</span>
+        <span class="n">skill_context</span><span class="o">=</span><span class="n">skill_context</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;signing_dialogues&quot;</span>
+    <span class="p">)</span>
+
     <span class="n">simple_skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="p">(</span>
-        <span class="n">skill_config</span><span class="p">,</span> <span class="n">skill_context</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="n">tx_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tx_handler</span><span class="p">}</span>
+        <span class="n">skill_config</span><span class="p">,</span>
+        <span class="n">skill_context</span><span class="p">,</span>
+        <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="n">signing_handler</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">signing_handler</span><span class="p">},</span>
+        <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="n">signing_dialogues_model</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">signing_dialogues_model</span><span class="p">},</span>
     <span class="p">)</span>
     <span class="n">my_aea</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">simple_skill</span><span class="p">)</span>
 
     <span class="c1"># create a second identity</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
+        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_2</span>
     <span class="p">)</span>
 
-    <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 
     <span class="n">counterparty_identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;counterparty_aea&quot;</span><span class="p">,</span>
         <span class="n">addresses</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">,</span>
-        <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">default_address_key</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1"># create tx message for decision maker to process</span>
-    <span class="n">fetchai_ledger_api</span> <span class="o">=</span> <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">ledger_apis</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
-    <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">fetchai_ledger_api</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span>
+    <span class="c1"># create signing message for decision maker to sign</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">Terms</span><span class="p">(</span>
+        <span class="n">ledger_id</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">sender_address</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="n">counterparty_address</span><span class="o">=</span><span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="n">amount_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+        <span class="n">quantities_by_good_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_service&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="n">nonce</span><span class="o">=</span><span class="s2">&quot;some_nonce&quot;</span><span class="p">,</span>
+        <span class="n">fee_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
     <span class="p">)</span>
-
-    <span class="n">tx_msg</span> <span class="o">=</span> <span class="n">TransactionMessage</span><span class="p">(</span>
-        <span class="n">performative</span><span class="o">=</span><span class="n">TransactionMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">PROPOSE_FOR_SETTLEMENT</span><span class="p">,</span>
-        <span class="n">skill_callback_ids</span><span class="o">=</span><span class="p">[</span><span class="n">skill_config</span><span class="o">.</span><span class="n">public_id</span><span class="p">],</span>
-        <span class="n">tx_id</span><span class="o">=</span><span class="s2">&quot;transaction0&quot;</span><span class="p">,</span>
-        <span class="n">tx_sender_addr</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">tx_counterparty_addr</span><span class="o">=</span><span class="n">counterparty_identity</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">tx_amount_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-        <span class="n">tx_sender_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">tx_counterparty_fee</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">tx_quantities_by_good_id</span><span class="o">=</span><span class="p">{},</span>
-        <span class="n">ledger_id</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_info_key&quot;</span><span class="p">:</span> <span class="s2">&quot;some_info_value&quot;</span><span class="p">},</span>
-        <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
+    <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
+    <span class="n">stub_transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_address</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">counterparty_address</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_payable_amount</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">sender_fee</span><span class="p">,</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">nonce</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">tx_msg</span><span class="p">)</span>
+    <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="p">(</span>
+        <span class="n">performative</span><span class="o">=</span><span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SIGN_TRANSACTION</span><span class="p">,</span>
+        <span class="n">dialogue_reference</span><span class="o">=</span><span class="n">signing_dialogues</span><span class="o">.</span><span class="n">new_self_initiated_dialogue_reference</span><span class="p">(),</span>
+        <span class="n">skill_callback_ids</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">skill_context</span><span class="o">.</span><span class="n">skill_id</span><span class="p">),),</span>
+        <span class="n">raw_transaction</span><span class="o">=</span><span class="n">RawTransaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">stub_transaction</span><span class="p">),</span>
+        <span class="n">terms</span><span class="o">=</span><span class="n">terms</span><span class="p">,</span>
+        <span class="n">skill_callback_info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_info_key&quot;</span><span class="p">:</span> <span class="s2">&quot;some_info_value&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">signing_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="s2">&quot;decision_maker&quot;</span>
+    <span class="n">signing_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+        <span class="n">Optional</span><span class="p">[</span><span class="n">SigningDialogue</span><span class="p">],</span> <span class="n">signing_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">signing_dialogue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
 
     <span class="c1"># Set the AEA running in a different thread</span>
     <span class="k">try</span><span class="p">:</span>
@@ -1820,8 +2025,8 @@ we get the transaction digest. With this we can search for the transaction on th
         <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_aea</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-        <span class="c1"># Let it run long enough to interact with the weather station</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+        <span class="c1"># Let it run long enough to interact with the decision maker</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="c1"># Shut down the AEA</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;STOPPING AEA NOW!&quot;</span><span class="p">)</span>
@@ -1829,10 +2034,46 @@ we get the transaction digest. With this we can search for the transaction on th
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">TransactionHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Implement the transaction handler.&quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">SigningDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseSigningDialogues</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize dialogues.</span>
 
-    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">TransactionMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[ProtocolId]</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">BaseSigningDialogues</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+
+<span class="sd">        :param message: an incoming/outgoing first message</span>
+<span class="sd">        :return: The role of the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SigningDialogue</span><span class="o">.</span><span class="n">Role</span><span class="o">.</span><span class="n">SKILL</span>
+
+    <span class="k">def</span> <span class="nf">create_dialogue</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SigningDialogue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of fipa dialogue.</span>
+
+<span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
+<span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
+
+<span class="sd">        :return: the created dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue</span> <span class="o">=</span> <span class="n">SigningDialogue</span><span class="p">(</span>
+            <span class="n">dialogue_label</span><span class="o">=</span><span class="n">dialogue_label</span><span class="p">,</span> <span class="n">agent_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">role</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dialogue</span>
+
+
+<span class="k">class</span> <span class="nc">SigningHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
+
+    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[ProtocolId]</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
@@ -1845,17 +2086,24 @@ we get the transaction digest. With this we can search for the transaction on th
 <span class="sd">        :param message: the message</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tx_msg_response</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">TransactionMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tx_msg_response</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="n">tx_msg_response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="ow">and</span> <span class="n">tx_msg_response</span><span class="o">.</span><span class="n">performative</span>
-            <span class="o">==</span> <span class="n">TransactionMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SUCCESSFUL_SETTLEMENT</span>
-        <span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction was successful.&quot;</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tx_msg_response</span><span class="o">.</span><span class="n">tx_digest</span><span class="p">)</span>
+        <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="c1"># recover dialogue</span>
+        <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
+        <span class="n">signing_dialogue</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">Optional</span><span class="p">[</span><span class="n">SigningDialogue</span><span class="p">],</span> <span class="n">signing_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">signing_dialogue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_unidentified_dialogue</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># handle message</span>
+        <span class="k">if</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SIGNED_TRANSACTION</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_signed_transaction</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_error</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction was not successful.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1864,6 +2112,63 @@ we get the transaction digest. With this we can search for the transaction on th
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an unidentified dialogue.</span>
+
+<span class="sd">        :param msg: the message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received invalid signing message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_signed_transaction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle a signing message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;transaction signing was successful.&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">signing_msg</span><span class="o">.</span><span class="n">signed_transaction</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;transaction signing was not successful. Error_code=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">error_code</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param signing_msg: the signing message</span>
+<span class="sd">        :param signing_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;cannot handle signing message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">signing_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span> <span class="n">signing_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

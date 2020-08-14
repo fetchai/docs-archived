@@ -677,7 +677,7 @@
 </li>
  
 <li>
-    <a href="../api/contracts/ethereum/" id="aea-api-contracts-ethereum-"
+    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
         >Ethereum</a
     >
 </li>
@@ -827,6 +827,12 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
+        >File Lock</a
+    >
+</li>
+ 
+<li>
     <span class="head">IPFS</span>
     <ul id="header_ipfs"> 
 <li>
@@ -844,6 +850,18 @@
 </li>
  
 <li>
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/pipe/" id="aea-api-helpers-pipe-"
+        >Pipe</a
+    >
+</li>
+ 
+<li>
     <span class="head">Preferences</span>
     <ul id="header_preferences"> 
 <li>
@@ -854,6 +872,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
+        >Pypi</a
+    >
+</li>
+ 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -887,7 +911,13 @@
 </li>
 
     </ul>
+</li> 
+<li>
+    <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
+        >Win32</a
+    >
 </li>
+
     </ul>
 </li> 
 <li>
@@ -912,17 +942,46 @@
 </li>
  
 <li>
-    <a href="../api/protocols/generator/" id="aea-api-protocols-generator-"
-        >Generator</a
+    <span class="head">Generator</span>
+    <ul id="header_generator"> 
+<li>
+    <a href="../api/protocols/generator/base/" id="aea-api-protocols-generator-base-"
+        >Base</a
     >
 </li>
  
+<li>
+    <a href="../api/protocols/generator/common/" id="aea-api-protocols-generator-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/extract_specification/" id="aea-api-protocols-generator-extract_specification-"
+        >Extract Specification</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/generator/validate/" id="aea-api-protocols-generator-validate-"
+        >Validate</a
+    >
+</li>
+
+    </ul>
+</li> 
 <li>
     <span class="head">Default Protocol</span>
     <ul id="header_default_protocol"> 
 <li>
     <a href="../api/protocols/default/custom_types/" id="aea-api-protocols-default-custom_types-"
         >Custom Types</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/protocols/default/dialogues/" id="aea-api-protocols-default-dialogues-"
+        >Dialogues</a
     >
 </li>
  
@@ -950,6 +1009,12 @@
 </li>
  
 <li>
+    <a href="../api/protocols/signing/dialogues/" id="aea-api-protocols-signing-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
+<li>
     <a href="../api/protocols/signing/message/" id="aea-api-protocols-signing-message-"
         >Message</a
     >
@@ -966,6 +1031,12 @@
 <li>
     <span class="head">State Update Protocol</span>
     <ul id="header_state_update_protocol"> 
+<li>
+    <a href="../api/protocols/state_update/dialogues/" id="aea-api-protocols-state_update-dialogues-"
+        >Dialogues</a
+    >
+</li>
+ 
 <li>
     <a href="../api/protocols/state_update/message/" id="aea-api-protocols-state_update-message-"
         >Message</a
@@ -1562,7 +1633,7 @@ aea scaffold skill my_search
 </pre></div>
 
 
-<p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../oef-ledger">OEF search node</a> and process the resulting response.</p>
+<p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../simple-oef">SOEF search node</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
 <p>In this example, we implement a simple search behaviour. Each time, <code>act()</code> gets called by the main agent loop, we will send a search request to the <a href="../simple-oef">SOEF search node</a> via the <a href="../oef-ledger">P2P communication network</a>.</p>
@@ -1591,7 +1662,7 @@ aea scaffold skill my_search
 
         <span class="n">search_query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_query&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_QUERY</span><span class="p">)</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
-        <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
         <span class="n">radius</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_radius&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_RADIUS</span><span class="p">)</span>
 
         <span class="n">close_to_my_service</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
@@ -1915,9 +1986,9 @@ aea scaffold skill my_search
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
 <div class="highlight"><pre><span></span>aea add connection fetchai/soef:0.6.0
-aea add connection fetchai/p2p_libp2p:0.6.0
+aea add connection fetchai/p2p_libp2p:0.7.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.6.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.7.0
 </pre></div>
 
 
@@ -1930,7 +2001,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA:</p>
-<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.9.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
+<div class="highlight"><pre><span></span>aea fetch fetchai/simple_service_registration:0.10.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
 </pre></div>
 
 
@@ -1951,7 +2022,7 @@ aea add-key cosmos cosmos_private_key.txt --connection
 <details><summary>Click here to see full code</summary>
 <p>
 
-We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehaviour`</a> to update the service registration at regular intervals. The following code is placed in `behaviours.py`. 
+We use a <a href="../api/skills/behaviours#tickerbehaviour-objects">`TickerBehaviour`</a> to update the service registration at regular intervals. The following code is placed in `behaviours.py`.
 
 
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
@@ -2116,7 +2187,7 @@ We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
         <span class="k">assert</span> <span class="p">(</span>
