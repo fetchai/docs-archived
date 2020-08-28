@@ -1,5 +1,5 @@
 <a href="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests">
-<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/agents-aea/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master">
+<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master">
 </a>
 
 # Fetch.ai Developer Documentation
