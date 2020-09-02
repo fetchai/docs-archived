@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1624,6 +1630,63 @@
                                     
 
 <p>This page provides some tipps of how to upgrade between versions.</p>
+<h2 id="v054-to-v060">v0.5.4 to v0.6.0</h2>
+<h3 id="dialogue-and-dialogues-api-updates"><code>Dialogue</code> and <code>Dialogues</code> API updates</h3>
+<p>The dialogue and dialogues APIs have changed significantly. The constructor is different for both classes and there are now four primary methods for the developer:</p>
+<ul>
+<li>Dialogues.create: this method is used to create a new dialogue and message:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">cfp_msg</span><span class="p">,</span> <span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">counterparty</span><span class="o">=</span><span class="n">opponent_address</span><span class="p">,</span>
+    <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">CFP</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>The method will raise if the provided arguments are inconsistent.</p>
+<ul>
+<li>Dialogues.create_with_message: this method is used to create a new dialogue from a message:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">create_with_message</span><span class="p">(</span>
+    <span class="n">counterparty</span><span class="o">=</span><span class="n">opponent_address</span><span class="p">,</span>
+    <span class="n">initial_message</span><span class="o">=</span><span class="n">cfp_msg</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>The method will raise if the provided arguments are inconsistent.</p>
+<ul>
+<li>Dialogues.update: this method is used to handle messages passed by the framework:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">message</span><span class="o">=</span><span class="n">cfp_msg</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>The method will return a valid dialogue if it is a valid message, otherwise it will return <code>None</code>.</p>
+<ul>
+<li>Dialogue.reply: this method is used to reply within a dialogue:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">proposal_msg</span> <span class="o">=</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span>
+    <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">PROPOSE</span><span class="p">,</span>
+    <span class="n">target_message</span><span class="o">=</span><span class="n">cfp_msg</span><span class="p">,</span>
+    <span class="n">proposal</span><span class="o">=</span><span class="n">proposal</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>The method will raise if the provided arguments are inconsistent.</p>
+<p>The new methods significantly reduce the lines of code needed to maintain a dialogue. They also make it easier for the developer to construct valid dialogues and messages.</p>
+<h3 id="fetchaicrypto-default-crypto">FetchAICrypto - default crypto</h3>
+<p>The FetchAICrypto has been upgraded to the default crypto. Update your <code>default_ledger</code> to <code>fetchai</code>.</p>
+<h3 id="private-key-file-naming">Private key file naming</h3>
+<p>The private key files are now consistenly named with the <code>ledger_id</code> followed by <code>_private_key.txt</code> (e.g. <code>fetchai_private_key.txt</code>). Rename your existing files to match this pattern.</p>
+<h3 id="type-in-package-yaml">Type in package yaml</h3>
+<p>The package yamls now contain a type field. This must be added for the loading mechanism to work properly.</p>
+<h3 id="moved-address-type">Moved address type</h3>
+<p>The address type has moved to <code>aea.common</code>. The import paths must be updated.</p>
 <h2 id="v053-to-v054">v0.5.3 to v0.5.4</h2>
 <p>The contract base class was slightly modified. If you have implemented your own contract package you need to update it accordingly.</p>
 <p>The dialogue reference nonce is now randomly generated. This can result in previously working but buggy implementations (which relied on the order of dialogue reference nonces) to now fail.</p>
@@ -1647,7 +1710,7 @@
 <ul>
 <li> Message sending in the skills has been updated. In the past you had to construct messages, then serialize them and place them in an envelope:
 
-<div class="highlight"><pre><span></span><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span>
     <span class="n">to</span><span class="o">=</span><span class="n">opponent_addr</span><span class="p">,</span>
     <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_address</span><span class="p">,</span>
@@ -1663,16 +1726,16 @@
     <span class="n">message</span><span class="o">=</span><span class="n">FipaSerializer</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">cfp_msg</span><span class="p">),</span>
 <span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 
 Now this has been simplified to:
 
-<div class="highlight"><pre><span></span><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">cfp_msg</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">cfp_msg</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">opponent_addr</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">cfp_msg</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 
@@ -1681,7 +1744,7 @@ You must update your skills as the old implementation is no longer supported.
 <li> Connection constructors have been simplified. In the past you had to implement both the `__init__` as well as the `from_config` methods of a Connection. Now you only have to implement the `__init__` method which by default at load time now receives the following kwargs: `configuration: ConnectionConfig, identity: Identity, crypto_store: CryptoStore`. See for example in the scaffold connection:
 
 
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyScaffoldConnection</span><span class="p">(</span><span class="n">Connection</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyScaffoldConnection</span><span class="p">(</span><span class="n">Connection</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Proxy to the functionality of the SDK or API.&quot;&quot;&quot;</span>
 
     <span class="n">connection_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/scaffold:0.1.0&quot;</span><span class="p">)</span>
@@ -1702,7 +1765,7 @@ You must update your skills as the old implementation is no longer supported.
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">crypto_store</span><span class="o">=</span><span class="n">crypto_store</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span>
         <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 

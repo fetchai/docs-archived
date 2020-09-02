@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../../../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../../abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../../aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../../agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../../common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../../exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../../configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../../configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../../configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../../contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../../contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../../decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../../decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../../decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../../../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1628,54 +1634,53 @@
 <p>Miscellaneous helpers.</p>
 <p><a name="aea.helpers.base.yaml_load"></a></p>
 <h4 id="yaml_load">yaml<code>_</code>load</h4>
-<div class="highlight"><pre><span></span><span class="n">yaml_load</span><span class="p">(</span><span class="n">stream</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@_ordered_loading</span>
+<span class="n">yaml_load</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
 
 
 <p>Load a yaml from a file pointer in an ordered way.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>stream</code>: the file pointer</li>
-</ul>
+<p><strong>Returns</strong>:</p>
+<p>the yaml</p>
+<p><a name="aea.helpers.base.yaml_load_all"></a></p>
+<h4 id="yaml_load_all">yaml<code>_</code>load<code>_</code>all</h4>
+<div class="highlight"><pre><span></span><code><span class="nd">@_ordered_loading</span>
+<span class="n">yaml_load_all</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+</code></pre></div>
+
+
+<p>Load a multi-paged yaml from a file pointer in an ordered way.</p>
 <p><strong>Returns</strong>:</p>
 <p>the yaml</p>
 <p><a name="aea.helpers.base.yaml_dump"></a></p>
 <h4 id="yaml_dump">yaml<code>_</code>dump</h4>
-<div class="highlight"><pre><span></span><span class="n">yaml_dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@_ordered_dumping</span>
+<span class="n">yaml_dump</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
-<p>Dump data to a yaml file in an ordered way.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>data</code>: the data to be dumped</li>
-<li><code>stream</code>: the file pointer</li>
-</ul>
+<p>Dump multi-paged yaml data to a yaml file in an ordered way.</p>
+<p>:return None</p>
+<p><a name="aea.helpers.base.yaml_dump_all"></a></p>
+<h4 id="yaml_dump_all">yaml<code>_</code>dump<code>_</code>all</h4>
+<div class="highlight"><pre><span></span><code><span class="nd">@_ordered_dumping</span>
+<span class="n">yaml_dump_all</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Dump multi-paged yaml data to a yaml file in an ordered way.</p>
+<p>:return None</p>
 <p><a name="aea.helpers.base.locate"></a></p>
 <h4 id="locate">locate</h4>
-<div class="highlight"><pre><span></span><span class="n">locate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">locate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
 
 
 <p>Locate an object by name or dotted path, importing as necessary.</p>
-<p><a name="aea.helpers.base.load_aea_package"></a></p>
-<h4 id="load_aea_package">load<code>_</code>aea<code>_</code>package</h4>
-<div class="highlight"><pre><span></span><span class="n">load_aea_package</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ComponentConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Load the AEA package.</p>
-<p>It adds all the <strong>init</strong>.py modules into <code>sys.modules</code>.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>configuration</code>: the configuration object.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.base.load_module"></a></p>
 <h4 id="load_module">load<code>_</code>module</h4>
-<div class="highlight"><pre><span></span><span class="n">load_module</span><span class="p">(</span><span class="n">dotted_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">load_module</span><span class="p">(</span><span class="n">dotted_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span>
+</code></pre></div>
 
 
 <p>Load a module.</p>
@@ -1693,8 +1698,8 @@
 </ul>
 <p><a name="aea.helpers.base.load_env_file"></a></p>
 <h4 id="load_env_file">load<code>_</code>env<code>_</code>file</h4>
-<div class="highlight"><pre><span></span><span class="n">load_env_file</span><span class="p">(</span><span class="n">env_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">load_env_file</span><span class="p">(</span><span class="n">env_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Load the content of the environment file into the process environment.</p>
@@ -1706,8 +1711,8 @@
 <p>None.</p>
 <p><a name="aea.helpers.base.sigint_crossplatform"></a></p>
 <h4 id="sigint_crossplatform">sigint<code>_</code>crossplatform</h4>
-<div class="highlight"><pre><span></span><span class="n">sigint_crossplatform</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">sigint_crossplatform</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Send a SIGINT, cross-platform.</p>
@@ -1724,8 +1729,8 @@ both on Posix and Windows with a single method.</p>
 <p>None</p>
 <p><a name="aea.helpers.base.win_popen_kwargs"></a></p>
 <h4 id="win_popen_kwargs">win<code>_</code>popen<code>_</code>kwargs</h4>
-<div class="highlight"><pre><span></span><span class="n">win_popen_kwargs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">win_popen_kwargs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
 
 
 <p>Return kwargs to start a process in windows with new process group.</p>
@@ -1733,8 +1738,8 @@ both on Posix and Windows with a single method.</p>
 Return empty dict if platform is not win32</p>
 <p><a name="aea.helpers.base.send_control_c"></a></p>
 <h4 id="send_control_c">send<code>_</code>control<code>_</code>c</h4>
-<div class="highlight"><pre><span></span><span class="n">send_control_c</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">,</span> <span class="n">kill_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">send_control_c</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">,</span> <span class="n">kill_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Send ctrl-C crossplatform to terminate a subprocess.</p>
@@ -1746,8 +1751,8 @@ Return empty dict if platform is not win32</p>
 <p>None</p>
 <p><a name="aea.helpers.base.RegexConstrainedString"></a></p>
 <h2 id="regexconstrainedstring-objects">RegexConstrainedString Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RegexConstrainedString</span><span class="p">(</span><span class="n">UserString</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexConstrainedString</span><span class="p">(</span><span class="n">UserString</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>A string that is constrained by a regex.</p>
@@ -1756,23 +1761,23 @@ Subclass this class and change the 'REGEX' class
 attribute to implement a different behaviour.</p>
 <p><a name="aea.helpers.base.RegexConstrainedString.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Initialize a regex constrained string.</p>
 <p><a name="aea.helpers.base.cd"></a></p>
 <h4 id="cd">cd</h4>
-<div class="highlight"><pre><span></span><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="n">cd</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Change working directory temporarily.</p>
 <p><a name="aea.helpers.base.get_logger_method"></a></p>
 <h4 id="get_logger_method">get<code>_</code>logger<code>_</code>method</h4>
-<div class="highlight"><pre><span></span><span class="n">get_logger_method</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">logger_method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">get_logger_method</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">logger_method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
+</code></pre></div>
 
 
 <p>Get logger method for function.</p>
@@ -1787,8 +1792,8 @@ Or return logger_method if it's callable.</p>
 <p>callable to write log with</p>
 <p><a name="aea.helpers.base.try_decorator"></a></p>
 <h4 id="try_decorator">try<code>_</code>decorator</h4>
-<div class="highlight"><pre><span></span><span class="n">try_decorator</span><span class="p">(</span><span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_return</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">try_decorator</span><span class="p">(</span><span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_return</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Run function, log and return default value on exception.</p>
@@ -1801,15 +1806,15 @@ Or return logger_method if it's callable.</p>
 </ul>
 <p><a name="aea.helpers.base.MaxRetriesError"></a></p>
 <h2 id="maxretrieserror-objects">MaxRetriesError Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MaxRetriesError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MaxRetriesError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Exception for retry decorator.</p>
 <p><a name="aea.helpers.base.retry_decorator"></a></p>
 <h4 id="retry_decorator">retry<code>_</code>decorator</h4>
-<div class="highlight"><pre><span></span><span class="n">retry_decorator</span><span class="p">(</span><span class="n">number_of_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">retry_decorator</span><span class="p">(</span><span class="n">number_of_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logger_method</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Run function with several attempts.</p>
@@ -1823,9 +1828,9 @@ Or return logger_method if it's callable.</p>
 </ul>
 <p><a name="aea.helpers.base.exception_log_and_reraise"></a></p>
 <h4 id="exception_log_and_reraise">exception<code>_</code>log<code>_</code>and<code>_</code>reraise</h4>
-<div class="highlight"><pre><span></span><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="n">exception_log_and_reraise</span><span class="p">(</span><span class="n">log_method</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Run code in context to log and re raise exception.</p>

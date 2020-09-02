@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1628,15 +1634,15 @@
 <p>This module contains the implementation of a generic agent.</p>
 <p><a name="aea.agent.Agent"></a></p>
 <h2 id="agent-objects">Agent Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="n">AbstractAgent</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>This class provides an abstract base class for a generic agent.</p>
 <p><a name="aea.agent.Agent.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Instantiate the agent.</p>
@@ -1645,49 +1651,66 @@
 <li><code>identity</code>: the identity of the agent.</li>
 <li><code>connections</code>: the list of connections of the agent.</li>
 <li><code>loop</code>: the event loop to run the connections.</li>
-<li><code>timeout</code>: the time in (fractions of) seconds to time out an agent between act and react</li>
+<li><code>period</code>: period to call agent's act</li>
 <li><code>loop_mode</code>: loop_mode to choose agent run loop.</li>
 <li><code>runtime_mode</code>: runtime mode to up agent.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
+<p><a name="aea.agent.Agent.connections"></a></p>
+<h4 id="connections">connections</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">connections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Return list of connections.</p>
+<p><a name="aea.agent.Agent.active_connections"></a></p>
+<h4 id="active_connections">active<code>_</code>connections</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">active_connections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Return list of active connections.</p>
 <p><a name="aea.agent.Agent.is_running"></a></p>
 <h4 id="is_running">is<code>_</code>running</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">is_running</span><span class="p">()</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">is_running</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
 
 
 <p>Get running state of the runtime and agent.</p>
 <p><a name="aea.agent.Agent.is_stopped"></a></p>
 <h4 id="is_stopped">is<code>_</code>stopped</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
 
 
 <p>Get running state of the runtime and agent.</p>
+<p><a name="aea.agent.Agent.get_multiplexer_setup_options"></a></p>
+<h4 id="get_multiplexer_setup_options">get<code>_</code>multiplexer<code>_</code>setup<code>_</code>options</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_multiplexer_setup_options</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Get options to pass to Multiplexer.setup.</p>
+<p><strong>Returns</strong>:</p>
+<p>dict of kwargs</p>
 <p><a name="aea.agent.Agent.identity"></a></p>
 <h4 id="identity">identity</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">identity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Identity</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the identity.</p>
-<p><a name="aea.agent.Agent.multiplexer"></a></p>
-<h4 id="multiplexer">multiplexer</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">multiplexer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Multiplexer</span>
-</pre></div>
-
-
-<p>Get the multiplexer.</p>
 <p><a name="aea.agent.Agent.inbox"></a></p>
 <h4 id="inbox">inbox</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">inbox</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InBox</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the inbox.</p>
@@ -1695,9 +1718,9 @@
 The agent can pick these messages for processing.</p>
 <p><a name="aea.agent.Agent.outbox"></a></p>
 <h4 id="outbox">outbox</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">outbox</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OutBox</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the outbox.</p>
@@ -1705,64 +1728,54 @@ The agent can pick these messages for processing.</p>
 Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p><a name="aea.agent.Agent.name"></a></p>
 <h4 id="name">name</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the agent name.</p>
 <p><a name="aea.agent.Agent.tick"></a></p>
 <h4 id="tick">tick</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">tick</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the tick or agent loop count.</p>
 <p>Each agent loop (one call to each one of act(), react(), update()) increments the tick.</p>
-<p><a name="aea.agent.Agent.timeout"></a></p>
-<h4 id="timeout">timeout</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">timeout</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span>
-</pre></div>
+<p><a name="aea.agent.Agent.handle_envelope"></a></p>
+<h4 id="handle_envelope">handle<code>_</code>envelope</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle_envelope</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
-<p>Get the time in (fractions of) seconds to time out an agent between act and react.</p>
-<p><a name="aea.agent.Agent.loop_mode"></a></p>
-<h4 id="loop_mode">loop<code>_</code>mode</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">loop_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
-</pre></div>
+<p>Handle an envelope.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>envelope</code>: the envelope to handle.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name="aea.agent.Agent.period"></a></p>
+<h4 id="period">period</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">period</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</code></pre></div>
 
 
-<p>Get the agent loop mode.</p>
-<p><a name="aea.agent.Agent.main_loop"></a></p>
-<h4 id="main_loop">main<code>_</code>loop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">main_loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">BaseAgentLoop</span>
-</pre></div>
-
-
-<p>Get the main agent loop.</p>
+<p>Get a period to call act.</p>
 <p><a name="aea.agent.Agent.runtime"></a></p>
 <h4 id="runtime">runtime</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">runtime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">BaseRuntime</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get the runtime.</p>
-<p><a name="aea.agent.Agent.setup_multiplexer"></a></p>
-<h4 id="setup_multiplexer">setup<code>_</code>multiplexer</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">setup_multiplexer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set up the multiplexer.</p>
 <p><a name="aea.agent.Agent.start"></a></p>
 <h4 id="start">start</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Start the agent.</p>
@@ -1783,24 +1796,10 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
-<p><a name="aea.agent.Agent.start_setup"></a></p>
-<h4 id="start_setup">start<code>_</code>setup</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start_setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set up Agent on start.</p>
-<ul>
-<li>connect Multiplexer</li>
-<li>call agent.setup</li>
-<li>set liveness to started</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.stop"></a></p>
 <h4 id="stop">stop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Stop the agent.</p>
@@ -1812,65 +1811,48 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
-<p><a name="aea.agent.Agent.setup"></a></p>
-<h4 id="setup">setup</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Set up the agent.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name="aea.agent.Agent.act"></a></p>
-<h4 id="act">act</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Perform actions.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name="aea.agent.Agent.react"></a></p>
-<h4 id="react">react</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">react</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>React to events.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
-<p><a name="aea.agent.Agent.update"></a></p>
-<h4 id="update">update</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">update</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Update the internals of the agent which are not exposed to the skills.</p>
-<p>:return None</p>
-<p><a name="aea.agent.Agent.teardown"></a></p>
-<h4 id="teardown">teardown</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
-
-
-<p>Tear down the agent.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.state"></a></p>
 <h4 id="state">state</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RuntimeStates</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get state of the agent's runtime.</p>
 <p><strong>Returns</strong>:</p>
 <p>RuntimeStates</p>
+<p><a name="aea.agent.Agent.get_periodic_tasks"></a></p>
+<h4 id="get_periodic_tasks">get<code>_</code>periodic<code>_</code>tasks</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_periodic_tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]]]</span>
+</code></pre></div>
+
+
+<p>Get all periodic tasks for agent.</p>
+<p><strong>Returns</strong>:</p>
+<p>dict of callable with period specified</p>
+<p><a name="aea.agent.Agent.get_message_handlers"></a></p>
+<h4 id="get_message_handlers">get<code>_</code>message<code>_</code>handlers</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_message_handlers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span>
+</code></pre></div>
+
+
+<p>Get handlers with message getters.</p>
+<p><strong>Returns</strong>:</p>
+<p>List of tuples of callables: handler and coroutine to get a message</p>
+<p><a name="aea.agent.Agent.exception_handler"></a></p>
+<h4 id="exception_handler">exception<code>_</code>handler</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">exception_handler</span><span class="p">(</span><span class="n">exception</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+
+
+<p>Handle exception raised during agent main loop execution.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>exception</code>: exception raised</li>
+<li><code>function</code>: a callable exception raised in.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>bool, propagate exception if True otherwise skip it.</p>
 
 
                                 </section>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1643,8 +1649,8 @@
 <p>The skill has a <a href="../api/skills/base#skillcontext-objects"><code>SkillContext</code></a> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Model</code> objects. The skill context also has a link to the <code>AgentContext</code>. The <code>AgentContext</code> provides read access to AEA specific information like the public key and address of the AEA, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
 <p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the AEA.</p>
 <p>For example, in the <code>ErrorHandler(Handler)</code> class, the code often grabs a reference to its context and by doing so can access initialised and running framework objects such as an <code>OutBox</code> for putting messages into.</p>
-<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">reply</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">reply</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Moreover, you can read/write to the <em>agent context namespace</em> by accessing the attribute <code>SkillContext.namespace</code>.</p>
@@ -1665,8 +1671,8 @@
 <p>It is possible to register new handlers dynamically by enqueuing new
 <code>Handler</code> instances in the queue <code>context.new_handlers</code>, e.g. in a skill
 component we can write:</p>
-<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_handlers</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_handlers</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
+</code></pre></div>
 
 
 <h3 id="behaviourspy"><code>behaviours.py</code></h3>
@@ -1695,7 +1701,7 @@ component we can write:</p>
 behaviour class with that behaviour class. Otherwise, you
 can always subclass the general-purpose <code>Behaviour</code> class.</p>
 <p>Follows an example of a custom behaviour:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">OneShotBehaviour</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">OneShotBehaviour</span>
 
 <span class="k">class</span> <span class="nc">HelloWorldBehaviour</span><span class="p">(</span><span class="n">OneShotBehaviour</span><span class="p">):</span>
 
@@ -1708,21 +1714,21 @@ can always subclass the general-purpose <code>Behaviour</code> class.</p>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This method is called once, when the behaviour is teared down.&quot;&quot;&quot;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>If we want to register this behaviour dynamically, in any part of the skill code
 (i.e. wherever the skill context is available), we can write:</p>
-<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_behaviours</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">HelloWorldBehaviour</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_behaviours</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">HelloWorldBehaviour</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
+</code></pre></div>
 
 
 <p>Or, equivalently to the previous two code blocks:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
 
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_behaviours</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">OneShotBehaviour</span><span class="p">(</span><span class="n">act</span><span class="o">=</span><span class="n">hello</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>The callable passed to the <code>act</code> parameter is equivalent to the implementation
@@ -1735,7 +1741,7 @@ for execution.</p>
 <ul>
 <li><code>execute(self)</code>: is how the framework calls a <code>Task</code>. </li>
 </ul>
-<p>The <code>Task</code> class implements the <a href="https://en.wikipedia.org/wiki/Function_object">functor pattern</a>.
+<p>The <code>Task</code> class implements the <a href="https://en.wikipedia.org/wiki/Function_object" target="_blank">functor pattern</a>.
 An instance of the <code>Task</code> class can be invoked as if it 
 were an ordinary function. Once completed, it will store the
 result in the property <code>result</code>. Raises error if the task has not been executed yet,
@@ -1746,7 +1752,7 @@ schedule tasks, so be aware that the changes on the task object will
 not be updated.</p>
 <p>Here's an example:</p>
 <p>In <code>tasks.py</code>:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.skills.tasks</span> <span class="kn">import</span> <span class="n">Task</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.skills.tasks</span> <span class="kn">import</span> <span class="n">Task</span>
 
 
 <span class="k">def</span> <span class="nf">nth_prime_number</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -1776,11 +1782,11 @@ not be updated.</p>
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Clean the task up after execution.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>In <code>behaviours.py</code>:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 <span class="kn">from</span> <span class="nn">packages.my_author_name.skills.my_skill.tasks</span> <span class="kn">import</span> <span class="n">LongTask</span>
 
 
@@ -1802,26 +1808,26 @@ not be updated.</p>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3 id="models">Models</h3>
 <p>The developer might want to add other classes on the context level which are shared equally across the <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> classes. To this end, the developer can subclass an abstract <a href="../api/skills/base#model-objects"><code>Model</code></a>. These models are made available on the context level upon initialization of the AEA.</p>
 <p>Say, the developer has a class called <code>SomeModel</code></p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SomeModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="o">...</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Then, an instance of this class is available on the context level like so:</p>
-<div class="highlight"><pre><span></span><span class="n">some_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">some_model</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">some_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">some_model</span>
+</code></pre></div>
 
 
 <h3 id="skill-config">Skill config</h3>
 <p>Each skill has a <code>skill.yaml</code> configuration file which lists all <code>Behaviour</code>, <code>Handler</code>, and <code>Task</code> objects pertaining to the skill.</p>
 <p>It also details the protocol types used in the skill and points to shared modules, i.e. modules of type <code>Model</code>, which allow custom classes within the skill to be accessible in the skill context.</p>
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo</span>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">echo</span>
 <span class="nt">authors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
@@ -1838,8 +1844,8 @@ not be updated.</p>
 <span class="nt">models</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.4.0</span>
-</pre></div>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.5.0</span>
+</code></pre></div>
 
 
 <h2 id="error-skill">Error skill</h2>
@@ -1850,7 +1856,7 @@ not be updated.</p>
 <li>Envelopes with decoding errors</li>
 <li>Invalid messages with respect to the registered protocol</li>
 </ul>
-<p>The error skill relies on the <code>fetchai/default:0.4.0</code> protocol which provides error codes for the above.</p>
+<p>The error skill relies on the <code>fetchai/default:0.5.0</code> protocol which provides error codes for the above.</p>
 <p><br /></p>
 
 

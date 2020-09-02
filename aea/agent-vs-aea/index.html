@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1628,10 +1634,10 @@
 <p>In this guide we show some of the differences in terms of code.</p>
 <p>The <a href="../build-aea-programmatically">Build an AEA programmatically</a> guide shows how to programmatically build an AEA. We can build an agent of the <a href="../api/agent#agent-objects"><code>Agent</code></a> class programmatically as well.</p>
 <p>First, import the python and application specific libraries.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">aea.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span>
@@ -1640,26 +1646,28 @@
 <span class="kn">from</span> <span class="nn">aea.identity.base</span> <span class="kn">import</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Unlike an <code>AEA</code>, an <code>Agent</code> does not require a <code>Wallet</code>, <code>LedgerApis</code> or <code>Resources</code> module.</p>
-<p>However, we need to implement 5 abstract methods:
+<p>However, we need to implement 4 abstract methods:
 - <code>setup()</code>
 - <code>act()</code>
-- <code>react()</code>
-- <code>update()</code>
+- <code>handle_envelope()</code>
 - <code>teardown()</code></p>
 <p>When we run an agent, <code>start()</code> calls <code>setup()</code> and then the main agent loop. The main agent loop calls <code>act()</code>, <code>react()</code> and <code>update()</code> on each tick. When the agent is stopped via <code>stop()</code> then <code>teardown()</code> is called.</p>
 <p>Such a lightweight agent can be used to implement simple logic.</p>
 <h2 id="code-an-agent">Code an <code>Agent</code></h2>
 <p>We define our <code>Agent</code> which simply receives envelopes, prints the sender address and protocol_id and returns it unopened.</p>
-<div class="highlight"><pre><span></span><span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
 <span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output_file&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">MyAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple agent.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise the agent.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1668,38 +1676,30 @@
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Act called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">react</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;React called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-            <span class="n">envelope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>  <span class="c1"># type: Optional[Envelope]</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">envelope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span>
-            <span class="p">):</span>
-                <span class="n">sender</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span>
-                <span class="n">receiver</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">to</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">sender</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
-                    <span class="p">)</span>
+        <span class="k">if</span> <span class="n">envelope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">:</span>
+            <span class="n">sender</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span>
+            <span class="n">receiver</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">to</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message_bytes</span><span class="p">)</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
                 <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Update called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="instantiate-an-agent">Instantiate an <code>Agent</code></h2>
-<div class="highlight"><pre><span></span>    <span class="c1"># Ensure the input and output files do not exist initially</span>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">):</span>
@@ -1718,26 +1718,26 @@
 
     <span class="c1"># Create our Agent</span>
     <span class="n">my_agent</span> <span class="o">=</span> <span class="n">MyAgent</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">])</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="start-the-agent">Start the agent</h2>
 <p>We run the agent from a different thread so that we can still use the main thread to pass it messages.</p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Set the agent running in a different thread</span>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Set the agent running in a different thread</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">my_agent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
         <span class="c1"># Wait for everything to start up</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response</p>
-<div class="highlight"><pre><span></span>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
+<div class="highlight"><pre><span></span><code>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1748,16 +1748,16 @@
         <span class="c1"># Read the output envelope generated by the agent</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="shutdown">Shutdown</h2>
 <p>Finally stop our agent and wait for it to finish</p>
-<div class="highlight"><pre><span></span>    <span class="k">finally</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code>    <span class="k">finally</span><span class="p">:</span>
         <span class="c1"># Shut down the agent</span>
         <span class="n">my_agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="your-turn">Your turn</h2>
@@ -1767,10 +1767,10 @@
 <details><summary>Click here to see full listing</summary>
 <p>
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">aea.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
 <span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">ConnectionConfig</span>
@@ -1786,7 +1786,10 @@
 
 
 <span class="k">class</span> <span class="nc">MyAgent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple agent.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise the agent.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1795,30 +1798,22 @@
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Act called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">react</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;React called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-            <span class="n">envelope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>  <span class="c1"># type: Optional[Envelope]</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">envelope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-                <span class="ow">and</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span>
-            <span class="p">):</span>
-                <span class="n">sender</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span>
-                <span class="n">receiver</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">to</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
-                <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">counterparty</span> <span class="o">=</span> <span class="n">sender</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
-                    <span class="p">)</span>
+        <span class="k">if</span> <span class="n">envelope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span> <span class="o">==</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">protocol_id</span><span class="p">:</span>
+            <span class="n">sender</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span>
+            <span class="n">receiver</span> <span class="o">=</span> <span class="n">envelope</span><span class="o">.</span><span class="n">to</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">DefaultMessage</span><span class="o">.</span><span class="n">serializer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">envelope</span><span class="o">.</span><span class="n">message_bytes</span><span class="p">)</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">receiver</span>
+            <span class="n">envelope</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">sender</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Received envelope from </span><span class="si">{}</span><span class="s2"> with protocol_id=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">sender</span><span class="p">,</span> <span class="n">envelope</span><span class="o">.</span><span class="n">protocol_id</span>
                 <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Update called for tick </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tick</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">envelope</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -1855,7 +1850,7 @@
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.4.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1874,7 +1869,7 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">run</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 
 </p>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1627,41 +1633,41 @@
 <p>The HTTP server connection allows you to run a server inside a connection which accepts requests from clients. The HTTP server connection validates requests it receives against the provided OpenAPI file. It translates each valid request into an envelope, sends the envelope to the agent and if it receives, within a timeout window, a valid response envelope, serves the response to the client.</p>
 <h2 id="steps">Steps</h2>
 <p>Create a new AEA:</p>
-<div class="highlight"><pre><span></span>aea create my_aea
+<div class="highlight"><pre><span></span><code>aea create my_aea
 <span class="nb">cd</span> my_aea
-</pre></div>
+</code></pre></div>
 
 
 <p>Add the http server connection package</p>
-<div class="highlight"><pre><span></span>aea add connection fetchai/http_server:0.6.0
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.7.0
+</code></pre></div>
 
 
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.6.0
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.7.0
+</code></pre></div>
 
 
 <p>Modify the <code>api_spec_path</code>:</p>
-<div class="highlight"><pre><span></span>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
+</code></pre></div>
 
 
 <p>Ensure the file exists under the specified path!</p>
 <p>Install the dependencies:</p>
-<div class="highlight"><pre><span></span>aea install
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea install
+</code></pre></div>
 
 
 <p>Write and add your skill:</p>
-<div class="highlight"><pre><span></span>aea scaffold skill http_echo
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea scaffold skill http_echo
+</code></pre></div>
 
 
 <p>We will implement a simple http echo skill (modelled after the standard echo skill) which prints out the content of received messages and responds with success.</p>
 <p>First, we delete the <code>my_model.py</code> and <code>behaviour.py</code> (in <code>my_aea/skills/http_echo/</code>). The server will be purely reactive, so we only require the <code>handlers.py</code> file. We update the <code>skill.yaml</code> accordingly, so set <code>models: {}</code> and <code>behaviours: {}</code>.</p>
 <p>Next we implement a basic handler which prints the received envelopes and responds:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
 
 <span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
@@ -1763,30 +1769,30 @@
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>We also need to update the <code>skill.yaml</code> accordingly:</p>
-<div class="highlight"><pre><span></span><span class="nt">handlers</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">handlers</span><span class="p">:</span>
   <span class="nt">http_handler</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HttpHandler</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Finally, we run the fingerprinter:</p>
-<div class="highlight"><pre><span></span>aea fingerprint skill fetchai/http_echo:0.4.0
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.5.0
+</code></pre></div>
 
 
 <p>Note, you will have to replace the author name with your author handle.</p>
 <p>We can now run the AEA:</p>
-<div class="highlight"><pre><span></span>aea run
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea run
+</code></pre></div>
 
 
 <p>In a separate terminal, we can create a client and communicate with the server:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:8000&#39;</span><span class="p">)</span>
 <span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
@@ -1804,7 +1810,7 @@
 <span class="c1"># &gt;&gt;&gt; 200</span>
 <span class="n">response</span><span class="o">.</span><span class="n">content</span>
 <span class="c1"># &gt;&gt;&gt; b&#39;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 
                                 </section>

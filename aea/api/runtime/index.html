@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1628,66 +1634,121 @@
 <p>This module contains the implementation of runtime for economic agent (AEA).</p>
 <p><a name="aea.runtime.RuntimeStates"></a></p>
 <h2 id="runtimestates-objects">RuntimeStates Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RuntimeStates</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RuntimeStates</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Runtime states.</p>
 <p><a name="aea.runtime.BaseRuntime"></a></p>
 <h2 id="baseruntime-objects">BaseRuntime Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseRuntime</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseRuntime</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Abstract runtime class to create implementations.</p>
 <p><a name="aea.runtime.BaseRuntime.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">:</span> <span class="s2">&quot;Agent&quot;</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">:</span> <span class="n">AbstractAgent</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Init runtime.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>agent</code>: Agent to run.</li>
+<li><code>loop_mode</code>: agent main loop mode.</li>
 <li><code>loop</code>: optional event loop. if not provided a new one will be created.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
+<p><a name="aea.runtime.BaseRuntime.loop_mode"></a></p>
+<h4 id="loop_mode">loop<code>_</code>mode</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">loop_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+
+<p>Get current loop mode.</p>
+<p><a name="aea.runtime.BaseRuntime.setup_multiplexer"></a></p>
+<h4 id="setup_multiplexer">setup<code>_</code>multiplexer</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup_multiplexer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Set up the multiplexer.</p>
+<p><a name="aea.runtime.BaseRuntime.task_manager"></a></p>
+<h4 id="task_manager">task<code>_</code>manager</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">task_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TaskManager</span>
+</code></pre></div>
+
+
+<p>Get the task manager.</p>
+<p><a name="aea.runtime.BaseRuntime.loop"></a></p>
+<h4 id="loop">loop</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AbstractEventLoop</span>
+</code></pre></div>
+
+
+<p>Get event loop.</p>
+<p><a name="aea.runtime.BaseRuntime.multiplexer"></a></p>
+<h4 id="multiplexer">multiplexer</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">multiplexer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Multiplexer</span>
+</code></pre></div>
+
+
+<p>Get multiplexer.</p>
+<p><a name="aea.runtime.BaseRuntime.decision_maker"></a></p>
+<h4 id="decision_maker">decision<code>_</code>maker</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">decision_maker</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">DecisionMaker</span>
+</code></pre></div>
+
+
+<p>Return decision maker if set.</p>
+<p><a name="aea.runtime.BaseRuntime.set_decision_maker"></a></p>
+<h4 id="set_decision_maker">set<code>_</code>decision<code>_</code>maker</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_decision_maker</span><span class="p">(</span><span class="n">decision_maker_handler</span><span class="p">:</span> <span class="n">DecisionMakerHandler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Set decision maker with handler provided.</p>
 <p><a name="aea.runtime.BaseRuntime.start"></a></p>
 <h4 id="start">start</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Start agent using runtime.</p>
 <p><a name="aea.runtime.BaseRuntime.stop"></a></p>
 <h4 id="stop">stop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Stop agent and runtime.</p>
 <p><a name="aea.runtime.BaseRuntime.is_running"></a></p>
 <h4 id="is_running">is<code>_</code>running</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_running</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get running state of the runtime.</p>
 <p><a name="aea.runtime.BaseRuntime.is_stopped"></a></p>
 <h4 id="is_stopped">is<code>_</code>stopped</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get stopped state of the runtime.</p>
 <p><a name="aea.runtime.BaseRuntime.set_loop"></a></p>
 <h4 id="set_loop">set<code>_</code>loop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">AbstractEventLoop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">AbstractEventLoop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Set event loop to be used.</p>
@@ -1697,9 +1758,9 @@
 </ul>
 <p><a name="aea.runtime.BaseRuntime.state"></a></p>
 <h4 id="state">state</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="nd">@property</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RuntimeStates</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Get runtime state.</p>
@@ -1707,29 +1768,30 @@
 <p>RuntimeStates</p>
 <p><a name="aea.runtime.AsyncRuntime"></a></p>
 <h2 id="asyncruntime-objects">AsyncRuntime Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AsyncRuntime</span><span class="p">(</span><span class="n">BaseRuntime</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AsyncRuntime</span><span class="p">(</span><span class="n">BaseRuntime</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Asynchronous runtime: uses asyncio loop for multiplexer and async agent main loop.</p>
 <p><a name="aea.runtime.AsyncRuntime.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">:</span> <span class="s2">&quot;Agent&quot;</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">:</span> <span class="n">AbstractAgent</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Init runtime.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>agent</code>: Agent to run.</li>
+<li><code>loop_mode</code>: agent main loop mode.</li>
 <li><code>loop</code>: optional event loop. if not provided a new one will be created.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.runtime.AsyncRuntime.set_loop"></a></p>
 <h4 id="set_loop_1">set<code>_</code>loop</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="n">set_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">AbstractEventLoop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">AbstractEventLoop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Set event loop to be used.</p>
@@ -1739,15 +1801,15 @@
 </ul>
 <p><a name="aea.runtime.AsyncRuntime.run_runtime"></a></p>
 <h4 id="run_runtime">run<code>_</code>runtime</h4>
-<div class="highlight"><pre><span></span> <span class="o">|</span> <span class="k">async</span> <span class="n">run_runtime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">run_runtime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
 
 
 <p>Run agent and starts multiplexer.</p>
 <p><a name="aea.runtime.ThreadedRuntime"></a></p>
 <h2 id="threadedruntime-objects">ThreadedRuntime Objects</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ThreadedRuntime</span><span class="p">(</span><span class="n">BaseRuntime</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ThreadedRuntime</span><span class="p">(</span><span class="n">BaseRuntime</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Run agent and multiplexer in different threads with own asyncio loops.</p>

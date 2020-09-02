@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1623,11 +1629,11 @@
 
                                     
 
-<p>In this guide, we will generate some wealth for the Fetch.ai testnet and create a standalone transaction. After the completion of the transaction, we get the transaction digest. With this we can search for the transaction on the <a href='https://explore-agent-land.fetch.ai/'>block explorer</a></p>
+<p>In this guide, we will generate some wealth for the Fetch.ai testnet and create a standalone transaction. After the completion of the transaction, we get the transaction digest. With this we can search for the transaction on the <a href='https://explore-agent-land.fetch.ai/' target="_blank">block explorer</a></p>
 <p>First, import the python and application specific libraries and set the static variables.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
@@ -1636,71 +1642,73 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
-<span class="n">COSMOS_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_1.txt&quot;</span>
-<span class="n">COSMOS_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_2.txt&quot;</span>
-</pre></div>
+<span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;fetchai_private_key_1.txt&quot;</span>
+<span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fetchai_private_key_2.txt&quot;</span>
+</code></pre></div>
 
 
 <h2 id="create-the-private-keys">Create the private keys</h2>
-<div class="highlight"><pre><span></span>    <span class="c1"># Create a private keys</span>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Create a private keys</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_1</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
     <span class="p">)</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_2</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
     <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="create-the-wallets">Create the wallets</h2>
 <p>Once we created the private keys we need to generate the wallets.</p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Set up the wallets</span>
-    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
-    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Set up the wallets</span>
+    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
+    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+</code></pre></div>
 
 
 <h2 id="generate-wealth">Generate wealth</h2>
 <p>Since we want to send funds from <code>wallet_1</code> to <code>wallet_2</code>, we need to generate some wealth for the <code>wallet_1</code>. We can
 do this with the following code</p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Generate some wealth</span>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Generate some wealth</span>
     <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
     <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="send-transaction">Send transaction</h2>
 <p>Finally, we create a transaction that sends the funds to the <code>wallet_2</code></p>
-<div class="highlight"><pre><span></span>    <span class="c1"># Create the transaction and send it to the ledger.</span>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># Create the transaction and send it to the ledger.</span>
     <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
-        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
-        <span class="n">identifier</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
-        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">identifier</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+    <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span>
+    <span class="p">)</span>
     <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction complete.&quot;</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The transaction digest is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">transaction_digest</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 
 
 <details><summary>Stand-alone transaction full code</summary>
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">aea.crypto.cosmos</span> <span class="kn">import</span> <span class="n">CosmosCrypto</span>
+<span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">create_private_key</span><span class="p">,</span> <span class="n">try_generate_testnet_wealth</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.ledger_apis</span> <span class="kn">import</span> <span class="n">LedgerApis</span>
 <span class="kn">from</span> <span class="nn">aea.crypto.wallet</span> <span class="kn">import</span> <span class="n">Wallet</span>
@@ -1709,49 +1717,51 @@ do this with the following code</p>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
-<span class="n">COSMOS_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_1.txt&quot;</span>
-<span class="n">COSMOS_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;cosmos_private_key_2.txt&quot;</span>
+<span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span> <span class="o">=</span> <span class="s2">&quot;fetchai_private_key_1.txt&quot;</span>
+<span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fetchai_private_key_2.txt&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
     <span class="c1"># Create a private keys</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_1</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span>
     <span class="p">)</span>
     <span class="n">create_private_key</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">COSMOS_PRIVATE_KEY_FILE_2</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
     <span class="p">)</span>
 
     <span class="c1"># Set up the wallets</span>
-    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
-    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">COSMOS_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">wallet_1</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_1</span><span class="p">})</span>
+    <span class="n">wallet_2</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
 
     <span class="c1"># Generate some wealth</span>
     <span class="n">try_generate_testnet_wealth</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-        <span class="s2">&quot;Sending amount to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
+        <span class="s2">&quot;Sending amount to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
     <span class="p">)</span>
 
     <span class="c1"># Create the transaction and send it to the ledger.</span>
     <span class="n">tx_nonce</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">generate_tx_nonce</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
-        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
-        <span class="n">identifier</span><span class="o">=</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
-        <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
-        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">identifier</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
+        <span class="n">sender_address</span><span class="o">=</span><span class="n">wallet_1</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
+        <span class="n">destination_address</span><span class="o">=</span><span class="n">wallet_2</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">),</span>
         <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_fee</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">tx_nonce</span><span class="o">=</span><span class="n">tx_nonce</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+    <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">wallet_1</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">transaction</span>
+    <span class="p">)</span>
     <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span>
-        <span class="n">CosmosCrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
+        <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">signed_transaction</span>
     <span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transaction complete.&quot;</span><span class="p">)</span>
@@ -1760,7 +1770,7 @@ do this with the following code</p>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">run</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 
 </details>

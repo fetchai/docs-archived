@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1648,7 +1654,7 @@
 </ul>
 <p>Messages must adhere to a protocol.</p>
 <h3 id="protocol">Protocol</h3>
-<p><a href="../api/protocols/base#protocol-objects"><code>Protocols</code></a> define agent to agent interactions, which include:</p>
+<p><a href="../api/protocols/base#protocol-objects"><code>Protocols</code></a> define agent to agent as well as agent component to component interactions, which include:</p>
 <ul>
 <li>
 <p>messages, which define the representation;</p>
@@ -1660,9 +1666,9 @@
 <p>dialogues, which define rules over message sequences.</p>
 </li>
 </ul>
-<p>The framework provides one default protocol, called <code>default</code>. This protocol provides a bare bones implementation for an AEA protocol which includes a <a href="../api/protocols/default/message#aea.protocols.default.message"><code>DefaultMessage</code></a>  class and associated <a href="../api/protocols/default/serialization#aea.protocols.default.serialization"><code>DefaultSerializer</code></a> and <a href="../api/protocols/default/dialogues#aea.protocols.default.dialogues"><code>DefaultDialogue</code></a> classes.</p>
+<p>The framework provides one default protocol, called <code>default</code> (current version <code>fetchai/default:0.5.0</code>). This protocol provides a bare bones implementation for an AEA protocol which includes a <a href="../api/protocols/default/message#aea.protocols.default.message"><code>DefaultMessage</code></a>  class and associated <a href="../api/protocols/default/serialization#aea.protocols.default.serialization"><code>DefaultSerializer</code></a> and <a href="../api/protocols/default/dialogues#aea.protocols.default.dialogues"><code>DefaultDialogue</code></a> classes.</p>
 <p>Additional protocols - i.e. a new type of interaction - can be added as packages or generated with the <a href="../protocol-generator">protocol generator</a>. For more details on protocols also read the protocol guide <a href="../protocol">here</a>.</p>
-<p>Protocol specific messages, wrapped in envelopes, are sent and received to other agents and services via connections.</p>
+<p>Protocol specific messages, wrapped in envelopes, are sent and received to other agents, agent components and services via connections.</p>
 <h3 id="connection">Connection</h3>
 <p>A <a href="../api/connections/base#connection-objects"><code>Connection</code></a> wraps an SDK or API and provides an interface to network, ledgers and other services. Where necessary, a connection is responsible for translating between the framework specific <code>Envelope</code> with its contained <code>Message</code> and the external service or third-party protocol (e.g. <code>HTTP</code>).</p>
 <p>The framework provides one default connection, called <code>stub</code>. It implements an I/O reader and writer to send messages to the agent from a local file.</p>
@@ -1671,19 +1677,19 @@
 <h3 id="multiplexer">Multiplexer</h3>
 <p><img src="../assets/multiplexer.png" alt="Multiplexer of an AEA" class="center" style="display: block; margin-left: auto; margin-right: auto;width:50%;"></p>
 <p>The <a href="../api/multiplexer#multiplexer-objects"><code>Multiplexer</code></a> is responsible for maintaining potentially multiple connections.</p>
-<p>It maintains an <a href="../api/multiplexer#inbox-objects"><code>InBox</code></a> and <a href="../api/multiplexer#outbox-objects"><code>OutBox</code></a>, which are, respectively, queues for incoming and outgoing envelopes.</p>
+<p>It maintains an <a href="../api/multiplexer#inbox-objects"><code>InBox</code></a> and <a href="../api/multiplexer#outbox-objects"><code>OutBox</code></a>, which are, respectively, queues for incoming and outgoing envelopes from the perspective of skills.</p>
 <h3 id="skill">Skill</h3>
 <p><img src="../assets/skills.png" alt="Skills of an AEA" class="center" style="display: block; margin-left: auto; margin-right: auto;width:50%;"></p>
 <p><a href="../api/skills/base#skill-objects"><code>Skills</code></a> are the core focus of the framework's extensibility as they implement business logic to deliver economic value for the AEA. They are self-contained capabilities that AEAs can dynamically take on board, in order to expand their effectiveness in different situations.</p>
 <p>A skill encapsulates implementations of the three abstract base classes <code>Handler</code>, <code>Behaviour</code>, <code>Model</code>, and is closely related with the abstract base class <code>Task</code>:</p>
 <ul>
-<li><a href="../api/skills/base#handler-objects"><code>Handler</code></a>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement AEAs' <strong>reactive</strong> behaviour. If the AEA understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol. A <code>Handler</code> is also capable of dealing with internal messages (see next section).</li>
+<li><a href="../api/skills/base#handler-objects"><code>Handler</code></a>: each skill has none, one or more <code>Handler</code> objects, each responsible for the registered messaging protocol. Handlers implement AEAs' <strong>reactive</strong> behaviour. If the AEA understands the protocol referenced in a received <code>Envelope</code>, the <code>Handler</code> reacts appropriately to the corresponding message. Each <code>Handler</code> is responsible for only one protocol.</li>
 <li><a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a>: none, one or more <code>Behaviours</code> encapsulate actions which futher the AEAs goal and are initiated by internals of the AEA, rather than external events. Behaviours implement AEAs' <strong>pro-activeness</strong>. The framework provides a number of <a href="../api/skills/behaviours">abstract base classes</a> implementing different types of behaviours (e.g. cyclic/one-shot/finite-state-machine/etc.).</li>
 <li><a href="../api/skills/base#model-objects"><code>Model</code></a>: none, one or more <code>Models</code> that inherit from the <code>Model</code> can be accessed via the <code>SkillContext</code>.</li>
-<li><a href="../api/skills/tasks#task-objects"><code>Task</code></a>: none, one or more <code>Tasks</code> encapsulate background work internal to the AEA. <code>Task</code> differs from the other three in that it is not a part of skills, but <code>Task</code>s are declared in or from skills if a packaging approach for AEA creation is used.</li>
+<li><a href="../api/skills/tasks#task-objects"><code>Task</code></a>: none, one or more <code>Tasks</code> encapsulate background work internal to the AEA. <code>Task</code> differs from the other three in that it is not a part of skills, but <code>Tasks</code> are declared in or from skills if a packaging approach for AEA creation is used.</li>
 </ul>
 <p>A skill can read (parts of) the state of the the AEA (as summarised in the <a href="../api/context/base#agentcontext-objects"><code>AgentContext</code></a>), and suggest actions to the AEA according to its specific logic. As such, more than one skill could exist per protocol, competing with each other in suggesting to the AEA the best course of actions to take. In technical terms this means skills are horizontally arranged.</p>
-<p>For instance, an AEA who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy.  The skills could then read the preference and ownership state of the AEA, and independently suggest profitable transactions.</p>
+<p>For instance, an AEA which is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy.  The skills could then read the preference and ownership state of the AEA, and independently suggest profitable transactions.</p>
 <p>The framework places no limits on the complexity of skills. They can implement simple (e.g. <code>if-this-then-that</code>) or complex (e.g. a deep learning model or reinforcement learning agent).</p>
 <p>The framework provides one default skill, called <code>error</code>. Additional skills can be added as packages. For more details on skills also read the skill guide <a href="../skill">here</a>.</p>
 <h3 id="main-loop">Main loop</h3>

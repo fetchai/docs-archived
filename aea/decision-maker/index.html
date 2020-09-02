@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="description" content="Everything you need to know about Fetch.ai.">
-    <meta name="generator" content="mkdocs-1.0.4, mkdocs-">
+    <meta name="generator" content="mkdocs-1.1.2, mkdocs-">
     
     <meta name="author" content="developer@fetch.ai">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,6 +149,12 @@
 <li>
     <span class="head">Demos</span>
     <ul id="header_demos"> 
+<li>
+    <a href="../demos/" id="aea-demos-"
+        >Demos</a
+    >
+</li>
+ 
 <li>
     <a href="../aries-cloud-agent-demo/" id="aea-aries-cloud-agent-demo-"
         >Aries Cloud Agents Demo</a
@@ -551,6 +557,12 @@
     <span class="head">API</span>
     <ul id="header_api"> 
 <li>
+    <a href="../api/abstract_agent/" id="aea-api-abstract_agent-"
+        >AbstractAgent</a
+    >
+</li>
+ 
+<li>
     <a href="../api/aea/" id="aea-api-aea-"
         >AEA</a
     >
@@ -571,6 +583,18 @@
 <li>
     <a href="../api/agent_loop/" id="aea-api-agent_loop-"
         >Agent Loop</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/common/" id="aea-api-common-"
+        >Common</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/exceptions/" id="aea-api-exceptions-"
+        >Exceptions</a
     >
 </li>
  
@@ -625,12 +649,6 @@
 </li>
  
 <li>
-    <a href="../api/configurations/components/" id="aea-api-configurations-components-"
-        >Components</a
-    >
-</li>
- 
-<li>
     <a href="../api/configurations/constants/" id="aea-api-configurations-constants-"
         >Constants</a
     >
@@ -639,6 +657,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/pypi/" id="aea-api-configurations-pypi-"
+        >Pypi</a
     >
 </li>
 
@@ -673,12 +697,6 @@
 <li>
     <a href="../api/contracts/base/" id="aea-api-contracts-base-"
         >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/contracts/ethereum.md" id="aea-api-contracts-ethereum.md"
-        >Ethereum</a
     >
 </li>
 
@@ -756,30 +774,7 @@
         >Default</a
     >
 </li>
- 
-<li>
-    <span class="head">Messages</span>
-    <ul id="header_messages"> 
-<li>
-    <a href="../api/decision_maker/messages/base/" id="aea-api-decision_maker-messages-base-"
-        >Base</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/state_update/" id="aea-api-decision_maker-messages-state_update-"
-        >State Update</a
-    >
-</li>
- 
-<li>
-    <a href="../api/decision_maker/messages/transaction/" id="aea-api-decision_maker-messages-transaction-"
-        >Transaction</a
-    >
-</li>
 
-    </ul>
-</li>
     </ul>
 </li> 
 <li>
@@ -844,14 +839,25 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
-        >MultipleExecutor</a
+    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
+        >Logging</a
     >
 </li>
  
 <li>
-    <a href="../api/helpers/logging/" id="aea-api-helpers-logging-"
-        >Logging</a
+    <span class="head">MultiAddress</span>
+    <ul id="header_multiaddress"> 
+<li>
+    <a href="../api/helpers/multiaddr/base/" id="aea-api-helpers-multiaddr-base-"
+        >Base</a
+    >
+</li>
+
+    </ul>
+</li> 
+<li>
+    <a href="../api/helpers/multiple_executor/" id="aea-api-helpers-multiple_executor-"
+        >MultipleExecutor</a
     >
 </li>
  
@@ -872,12 +878,6 @@
 
     </ul>
 </li> 
-<li>
-    <a href="../api/helpers/pypi/" id="aea-api-helpers-pypi-"
-        >Pypi</a
-    >
-</li>
- 
 <li>
     <span class="head">Search</span>
     <ul id="header_search"> 
@@ -1113,6 +1113,12 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../glossary/" id="aea-glossary-"
+        >Glossary</a
+    >
+</li>
+ 
 <li>
     <a href="../questions-and-answers/" id="aea-questions-and-answers-"
         >Q&A</a
@@ -1625,43 +1631,43 @@
 
 <p>The <a href="../api/decision_maker/base#decisionmaker-objects"><code>DecisionMaker</code></a> can be thought of like a wallet manager plus "economic brain" of the AEA. It is responsible for the AEA's crypto-economic security and goal management, and it contains the preference and ownership representation of the AEA. The decision maker is the only component which has access to the wallet's private keys.</p>
 <h2 id="interaction-with-skills">Interaction with skills</h2>
-<p>Skills communicate with the decision maker via <a href="../api/decision_maker/messages/base#internalmessage-objects"><code>InternalMessages</code></a>. There exist two types of these:</p>
+<p>Skills communicate with the decision maker via <a href="../api/protocols/base#message-objects"><code>Messages</code></a>. At present, the decision maker processes messages of two protocols:</p>
 <ul>
 <li>
-<p><a href="../api/decision_maker/messages/transaction#transactionmessage-objects"><code>TransactionMessage</code></a>: it is used by skills to propose a transaction to the decision-maker. It can be used either for settling the transaction on-chain or to sign a transaction to be used within a negotiation.</p>
+<p><a href="../api/protocols/signing/message#signingmessage-objects"><code>SigningMessage</code></a>: it is used by skills to propose a transaction to the decision-maker for signing.</p>
 </li>
 <li>
-<p><a href="../api/decision_maker/messages/state_update#stateupdatemessage-objects"><code>StateUpdateMessage</code></a>: it is used to initialize the decision maker with preferences and ownership states. It can also be used to update the ownership states in the decision maker if the settlement of transaction takes place off chain.</p>
+<p><a href="../api/protocols/state_update/message#stateupdatemessage-objects"><code>StateUpdateMessage</code></a>: it is used to initialize the decision maker with preferences and ownership states. It can also be used to update the ownership states in the decision maker if the settlement of transaction takes place.</p>
 </li>
 </ul>
-<p>An <code>InternalMessage</code>, say <code>tx_msg</code> is sent to the decision maker like so from any skill:</p>
-<div class="highlight"><pre><span></span><span class="err">self.context.decision_maker_message_queue.put_nowait(tx_msg)</span>
-</pre></div>
+<p>A message, say <code>msg</code>, is sent to the decision maker like so from any skill:</p>
+<div class="highlight"><pre><span></span><code><span class="err">self.context.decision_maker_message_queue.put_nowait(msg)</span>
+</code></pre></div>
 
 
 <p>The decision maker processes messages and can accept or reject them.</p>
-<p>To process <code>InternalMessages</code> from the decision maker in a given skill you need to create a <code>TransactionHandler</code> like so:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransactionHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
+<p>To process <code>Messages</code> from the decision maker in a given skill you need to create a <code>Handler</code>, in particular a <code>SigningHandler</code> like so:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SigningHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
 
-    <span class="n">protocol_id</span> <span class="o">=</span> <span class="n">InternalMessage</span><span class="o">.</span><span class="n">protocol_id</span>
+    <span class="n">protocol_id</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">protocol_id</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Handle an internal message.</span>
+<span class="sd">        Handle a signing message.</span>
 
-<span class="sd">        :param message: the internal message from the decision maker.</span>
+<span class="sd">        :param message: the signing message from the decision maker.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># code to handle the message</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="custom-decisionmaker">Custom DecisionMaker</h2>
 <p>The framework implements a default <a href="../api/decision_maker/default#decisionmakerhandler-objects"><code>DecisionMakerHandler</code></a>. You can implement your own and mount it. The easiest way to do this is to run the following command to scaffold a custom <code>DecisionMakerHandler</code>:</p>
-<div class="highlight"><pre><span></span>aea scaffold decision-maker-handler
-</pre></div>
+<div class="highlight"><pre><span></span><code>aea scaffold decision-maker-handler
+</code></pre></div>
 
 
-<p>You can then implement your own custom logic to process <code>InternalMessages</code> and interact with the <code>Wallet</code>. </p>
+<p>You can then implement your own custom logic to process messages and interact with the <code>Wallet</code>. </p>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>For examples how to use these concepts have a look at the `tac_` skills. These functionalities are experimental and subject to change.
