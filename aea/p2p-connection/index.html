@@ -1629,15 +1629,15 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.8.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.9.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span><code>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.8.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.8.0
-aea run --connections fetchai/p2p_libp2p:0.8.0
+aea add connection fetchai/p2p_libp2p:0.9.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
+aea run --connections fetchai/p2p_libp2p:0.9.0
 </code></pre></div>
 
 
@@ -1645,8 +1645,8 @@ aea run --connections fetchai/p2p_libp2p:0.8.0
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span><code>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.8.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.8.0
+aea add connection fetchai/p2p_libp2p:0.9.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
 </code></pre></div>
 
 
@@ -1662,7 +1662,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.8.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.9.0
 </code></pre></div>
 
 
@@ -1686,55 +1686,59 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 
 <h2 id="configuring-the-connectionyaml-entries">Configuring the <code>connection.yaml</code> entries:</h2>
-<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.8.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
+<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.9.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
 <h2 id="running-go-peer-standalone">Running Go peer standalone</h2>
-<p>You can run the peer node only, a Go process. Make sure you satisfy the <a href="../quickstart">system requirements</a>.</p>
-<p>First, fetch the code and enter the directory:</p>
-<div class="highlight"><pre><span></span><code>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages/fetchai/connections/p2p_libp2p
-<span class="nb">cd</span> p2p_libp2p
-</code></pre></div>
-
-
-<p>Second, build the node:</p>
-<div class="highlight"><pre><span></span><code>go build
-</code></pre></div>
-
-
-<p>Third, create an environment file:</p>
-<div class="highlight"><pre><span></span><code><span class="err">AEA_AGENT_ADDR=cosmos1azvdhesjk739d2j0xdmhyzlu3kfvqqje9r7uay</span>
-<span class="err">AEA_P2P_ID=1ceb61fb96132480c8a8bc3023801e626fff0f871965858584744ed5a6299773</span>
-<span class="err">AEA_P2P_URI=127.0.0.1:9001</span>
-<span class="err">AEA_P2P_ENTRY_URIS=/dns4/127.0.0.1/tcp/9000/p2p/16Uiu2HAm6ghFe59TZ2vHQCcr1dx5P4WWEEAfVp5K6jcgmXjG8bGQ</span>
-<span class="err">NODE_TO_AEA=033a2-libp2p_to_aea</span>
-<span class="err">AEA_TO_NODE=033a2-aea_to_libp2p</span>
-<span class="err">AEA_P2P_URI_PUBLIC=127.0.0.1:9001</span>
-<span class="err">AEA_P2P_DELEGATE_URI=127.0.0.1:11001</span>
-</code></pre></div>
-
-
-<p>with the values set correctly and save it as <code>.env.libp2p</code>.</p>
-<p>The entries can be described as follow:</p>
+<p>You can run the peer node in standalone mode, that is, as a Go process with no dependency to the agents framework. 
+To facilitate the deployment, we provide a script
+ <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/acn/run_acn_node_standalone.py"><code>run_acn_node_standalone.py</code></a>
+ and a corresponding 
+ <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/acn/Dockerfile">Dockerfile</a>.</p>
+<p>First, you need to build the node's binary (<code>libp2p_node</code>) either:</p>
 <ul>
-<li><code>AEA_AGENT_ADDR</code>: the agent's address</li>
-<li><code>AEA_P2P_ID</code>: the agent's private key</li>
-<li><code>AEA_P2P_URI</code>: the URI under which the peer is reachable locally</li>
-<li><code>AEA_P2P_ENTRY_URIS</code>: an optionally supplied list of entry URIs for the peer to bootstrap</li>
-<li><code>NODE_TO_AEA</code>: the <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank">pipe</a> for the peer to agent comms</li>
-<li><code>AEA_TO_NODE</code>: the pipe for the agent to peer comms</li>
+<li>locally
+  <code>bash
+  svn export https://github.com/fetchai/agents-aea.git/trunk/packages/fetchai/connections/p2p_libp2p
+  cd p2p_libp2p
+  go build
+  chmod +x libp2p_node</code>
+  Make sure you satisfy the <a href="../quickstart">system requirements</a>.</li>
+<li>or within a docker image using the provided Dockerfile
+  <code>bash
+  docker build -t acn_node_standalone -f scripts/acn/Dockerfile .</code></li>
+</ul>
+<p>Next, to run the node binary in standalone mode, it requires values for the following entries:</p>
+<ul>
+<li><code>AEA_P2P_ID</code>: the node's private key, will be used as its identity</li>
+<li><code>AEA_P2P_URI</code>: the local host and port to use by node</li>
 <li><code>AEA_P2P_URI_PUBLIC</code>: the URI under which the peer is reachable publicly</li>
 <li><code>AEA_P2P_DELEGATE_URI</code>: the URI under which the peer receives delegate connections</li>
+<li><code>AEA_P2P_ENTRY_URIS</code>: an optionally supplied list of entry Multiaddresses for the peer to bootstrap, comma-separated (<code>,</code>)</li>
 </ul>
-<p>Fourth, make the build file executable:</p>
-<div class="highlight"><pre><span></span><code>chmod +x libp2p_node
-</code></pre></div>
-
-
-<p>Finally, run it:</p>
-<div class="highlight"><pre><span></span><code>./libp2p_node .env.libp2p
-</code></pre></div>
-
-
-<p>Note, for the peer to successfully run, the <code>AEA_TO_NODE</code> pipe must already be initialized.</p>
+<p>The script allows different methods to pass these values to the node:</p>
+<ul>
+<li>as environment variables exported in format <code>&lt;ENTRY_KEYWORD&gt;=&lt;ENTRY_VALUE&gt;</code> for each entry
+  <code>bash
+  python3 run_acn_node_standalone.py libp2p_node --config-from-env</code></li>
+<li>using an environment file containing the entries and their values in format <code>&lt;ENTRY_KEYWORD&gt;=&lt;ENTRY_VALUE&gt;</code>, one per line
+  <code>bash
+  python3 run_acn_node_standalone.py libp2p_node --config-from-file &lt;env-file-path&gt;</code>
+  or
+  <code>bash
+  docker run -v &lt;acn_config_file&gt;:/acn/acn_config -it acn_node_standalone --config-from-file /acn/acn_config</code></li>
+<li>using command line arguments as follow
+  <code>bash
+  python3 run_acn_node_standalone.py libp2p_node --key-file &lt;node_private_key.txt&gt; \
+    --uri &lt;AEA_P2P_URI&gt; --uri-external &lt;AEA_P2P_URI_PUBLIC&gt;  \
+    --uri-delegate &lt;AEA_P2P_DELEGATE_URI&gt; \
+    --entry-peers-maddrs &lt;AEA_P2P_ENTRY_URI_1&gt; &lt;AEA_P2P_ENTRY_URI_2&gt; ...</code>
+  or 
+  <code>bash
+  docker run -v &lt;node_private_key.txt&gt;:/acn/key.txt -it acn_node_standalone --key-file /acn/key.txt \
+    --uri &lt;AEA_P2P_URI&gt; --uri-external &lt;AEA_P2P_URI_PUBLIC&gt;  \
+    --uri-delegate &lt;AEA_P2P_DELEGATE_URI&gt; \
+    --entry-peers-maddrs &lt;AEA_P2P_ENTRY_URI_1&gt; &lt;AEA_P2P_ENTRY_URI_2&gt; ...</code></li>
+</ul>
+<p>Note that the script will always save the configuration of the running node as a file under name <code>.acn_config</code> within current working directory. This can be handy to ensure exact same configuration for future runs of the node.</p>
 
 
                                 </section>

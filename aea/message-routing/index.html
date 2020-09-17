@@ -1629,32 +1629,26 @@
 
                                     
 
-<p>Message routing can be split up into the routing of incoming and outgoing messages.</p>
-<h1 id="incoming-messages">Incoming messages</h1>
+<p>Message routing can be split up into the routing of incoming and outgoing <code>Messages</code>.</p>
+<h2 id="incoming-messages">Incoming <code>Messages</code></h2>
 <ul>
-<li>connections receive envelopes which they deposit in inbox</li>
-<li>agent loop's react picks envelopes off the inbox</li>
-<li>tries to decode the message; errors are handled by the error skill</li>
-<li>messages are dispatched to all relevant handlers</li>
+<li><code>Connections</code> receive <code>Envelopes</code> which they deposit in <code>InBox</code></li>
+<li><code>AgentLoop</code>'s react picks <code>Envelopes</code> off the <code>InBox</code></li>
+<li>the AEA tries to decode the message; errors are handled by the error <code>Skill</code></li>
+<li><code>Messages</code> are dispatched to all relevant <code>Handlers</code>. To limit dispatch to a specific <code>Handler</code> in a specific <code>Skill</code> the <code>EnvelopeContext</code> can be used to reference a unique <code>skill id</code>.</li>
 </ul>
-<h1 id="outgoing-messages">Outgoing messages</h1>
+<h2 id="outgoing-messages">Outgoing <code>Messages</code></h2>
 <ul>
-<li>skills deposit messages in outbox</li>
-<li>
-<p>outbox constructs an envelope from the message</p>
-</li>
-<li>
-<p>multiplexer assigns messages to relevant connection based on three rules:</p>
-</li>
-<li>checks if envelope context exists and uses that</li>
-<li>checks if default routing applies</li>
-<li>
-<p>sends to default connection</p>
-</li>
-<li>
-<p>connections can encode envelopes where necessary</p>
-</li>
+<li><code>Skills</code> deposit <code>Messages</code> in <code>OutBox</code></li>
+<li><code>OutBox</code> constructs an <code>Envelope</code> from the <code>Message</code></li>
+<li><code>Multiplexer</code> assigns messages to relevant <code>Connection</code> based on three rules:</li>
+<li>checks if <code>EnvelopeContext</code> exists and specifies a <code>Connection</code>, if so uses that else</li>
+<li>checks if default routing is specified for the <code>protocol_id</code> referenced in the <code>Envelope</code>, if so uses that else</li>
+<li>sends to default <code>Connection</code>.</li>
+<li><code>Connections</code> can encode envelopes where necessary or pass them on for transport to another agent</li>
 </ul>
+<h2 id="address-fields-in-envelopesmessages">Address fields in <code>Envelopes</code>/<code>Messages</code></h2>
+<p>Addresses can reference agents or components within an agent. If the address references an agent then it must follow the address standard of agents. If the address references a component then it must be a public id.</p>
 
 
                                 </section>

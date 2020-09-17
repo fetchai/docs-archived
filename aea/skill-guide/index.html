@@ -1935,7 +1935,7 @@ aea scaffold skill my_search
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.5.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.6.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">my_search_behaviour</span><span class="p">:</span>
@@ -1974,29 +1974,29 @@ aea scaffold skill my_search
 <p>Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
 <h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the oef protocol and connection</h2>
 <p>Our AEA does not have the oef protocol yet so let's add it.</p>
-<div class="highlight"><pre><span></span><code>aea add protocol fetchai/oef_search:0.5.0
+<div class="highlight"><pre><span></span><code>aea add protocol fetchai/oef_search:0.6.0
 </code></pre></div>
 
 
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.7.0
-aea add connection fetchai/p2p_libp2p:0.8.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.8.0
+aea add connection fetchai/p2p_libp2p:0.9.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.8.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
 </code></pre></div>
 
 
 <p>Finally, in the <code>aea-config.yaml</code> add the following lines:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.6.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.8.0</span>
 </code></pre></div>
 
 
 <p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.11.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.12.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
 </code></pre></div>
 
 
@@ -2295,7 +2295,7 @@ Finally, we have a handler, placed in `handlers.py`:
     <span class="n">OefSearchDialogues</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.4.0&quot;</span>
+<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.5.0&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">OefSearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
@@ -2407,7 +2407,7 @@ The associated `skill.yaml` is:
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.5.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.6.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">service</span><span class="p">:</span>

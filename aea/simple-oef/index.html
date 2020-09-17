@@ -1629,7 +1629,7 @@
 
                                     
 
-<p>This documentation has been produced for the Simple-OEF version <code>0.1.20</code>.</p>
+<p>This documentation has been produced for the Simple-OEF version <code>0.1.30</code>.</p>
 <h2 id="concepts">Concepts</h2>
 <p>The Simple-OEF, or soef, is a <strong>search and discovery</strong> mechanism for <strong>autonomous economic agents</strong>. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. </p>
 <p>The work-flow is:</p>
@@ -1666,7 +1666,7 @@
 </tr>
 <tr>
 <td><code>classification</code></td>
-<td>An agent's classification, typically in the form <code>mobility.railway.train</code>. See note below on classifications. No fixed classifications are specified.</td>
+<td>An agent's classification, typically in the form <code>mobility.railway.train</code>. See note below on classifications. No fixed classifications are specified. Classifications can contain alphanumeric characters, the period, underscore and colon (<code>_.:</code>).</td>
 </tr>
 <tr>
 <td><code>architecture</code></td>
@@ -1736,6 +1736,10 @@
 <td><code>buyer</code></td>
 <td>Indicates the agent is a buyer <em>only</em> and does not have value to deliver</td>
 </tr>
+<tr>
+<td><code>viewer</code></td>
+<td>The agent is a view in the world, acting as a "camera" to view content</td>
+</tr>
 </tbody>
 </table>
 <p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see <a href="https://community.fetch.ai" target="_blank">here</a> for the instructions on joining, or the "Further Information" section below). </p>
@@ -1794,7 +1798,7 @@ buying_classifications
   <span class="nt">&lt;total&gt;</span>1<span class="nt">&lt;/total&gt;</span>
   <span class="nt">&lt;capped&gt;</span>0<span class="nt">&lt;/capped&gt;</span>
   <span class="nt">&lt;results&gt;</span>
-    <span class="nt">&lt;agent</span> <span class="na">name=</span><span class="s">&quot;Alice&quot;</span> <span class="na">genus=</span><span class="s">&quot;vehicle&quot;</span> <span class="na">classification=</span><span class="s">&quot;mobility.railway.train&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;agent</span> <span class="na">name=</span><span class="s">&quot;TrainNumber1234&quot;</span> <span class="na">genus=</span><span class="s">&quot;vehicle&quot;</span> <span class="na">classification=</span><span class="s">&quot;mobility.railway.train&quot;</span> <span class="na">user_context=</span><span class="s">&quot;18:00 to Berlin&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;identities&gt;</span>
         <span class="nt">&lt;identity</span> <span class="na">chain_identifier=</span><span class="s">&quot;fetchai&quot;</span><span class="nt">&gt;</span>2h6fi8oCkMz9GCpL7EUYMHjzgdRFGmDP5V4Ls97jZpzjg523yY<span class="nt">&lt;/identity&gt;</span>
       <span class="nt">&lt;/identities&gt;</span>
@@ -1809,7 +1813,7 @@ buying_classifications
 </code></pre></div>
 
 
-<p><strong>The <code>&lt;location&gt;</code> block is only returned if the agent has set itself to disclose its position in a find.</strong> Normally, the default is not to, and agents will then only return the <code>&lt;range_in_km&gt;</code> item. This is because agents may deliver their precise location as part of the value that they deliver, and therefore it would need to be negotiated and potentially paid for. However, sometimes, it is desirable for agents to always deliver their position when found but specify the accuracy. Because of this, the soef supports four levels of accuracy:</p>
+<p><strong>The <code>&lt;location&gt;</code> block is only returned if the agent has set itself to disclose its position in a find.</strong> Likewise, <strong>the <code>user_context=""</code> is only returned if enabled</strong>. Normally, the default is not to, and agents will then only return the <code>&lt;range_in_km&gt;</code> item. This is because agents may deliver their precise location as part of the value that they deliver, and therefore it would need to be negotiated and potentially paid for. However, sometimes, it is desirable for agents to always deliver their position when found but specify the accuracy. Because of this, the soef supports four levels of accuracy:</p>
 <table>
 <thead>
 <tr>
@@ -1849,7 +1853,7 @@ buying_classifications
 <li>An API key</li>
 <li>A chain identifier, which can be either <code>fetchai</code> for the Fetch native network (testnet or mainnet), <code>fetchai_cosmos</code> for the Fetch Cosmos testnet or <code>ethereum</code> for the ethereum network</li>
 <li>An address, which must be a valid address for the specified chain identifier</li>
-<li>A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context</li>
+<li>A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context. It must not exceed 128 characters. </li>
 </ol>
 <p>If registration is successful, the soef will return a result like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;response&gt;</span>
@@ -1919,6 +1923,18 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 <td><code>set_position</code></td>
 <td>This is a direct internal mapping to <code>set_personality_piece</code> with a piece of <code>dynamics.position</code>. It existed in the earliest versions of the soef and remains as a short-cut. It expects <code>longitude</code> and <code>latitude</code> as parameters.</td>
 </tr>
+<tr>
+<td><code>set_declared_name</code></td>
+<td>This allows an agent's declared name to be changed after registration. It takes one parameter, <code>name</code>, to specify the replacement name. Names cannot exceed 128 characters and must not contain illegal characters.</td>
+</tr>
+<tr>
+<td><code>set_user_context</code></td>
+<td>Sets an <strong>optional</strong> user-context for an agent. This can be optionally disclosed in <code>find_around_me</code> if enabled. See <code>set_disclose_user_context</code>, below. The user context must not contain illegal characters and is limited to 160 maximum.</td>
+</tr>
+<tr>
+<td><code>set_disclose_user_context</code></td>
+<td>If set to <code>true</code>, the optional user context is disclosed if set. Default is <code>false</code>.</td>
+</tr>
 </tbody>
 </table>
 <h4 id="find-around-me-in-detail">Find around me in detail</h4>
@@ -1947,7 +1963,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </table>
 <h2 id="further-information">Further information</h2>
 <p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY" target="_blank">here</a>.</p>
-<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. </p>
+<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches.  </p>
 
 
                                 </section>
