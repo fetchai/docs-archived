@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1701,7 +1719,7 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.6.1
+v0.6.2
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </code></pre></div>
@@ -1714,7 +1732,7 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>The echo skill is a simple demo that introduces you to the main business logic components of an AEA. The fastest way to create your first AEA is to fetch it!</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.11.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.12.0
 <span class="nb">cd</span> my_first_aea
 </code></pre></div>
 
@@ -1736,11 +1754,11 @@ First, create a new AEA project and enter it.
 <br>
 Second, add the echo skill to the project.
 
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.7.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.8.0
 </code></pre></div>
 
 
-This copies the `fetchai/echo:0.7.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.7.0` consists of the name of the author of the skill, followed by the skill name and its version.
+This copies the `fetchai/echo:0.8.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.8.0` consists of the name of the author of the skill, followed by the skill name and its version.
 </details>
 
 <h2 id="communication-via-envelopes-and-messages">Communication via envelopes and messages</h2>
@@ -1756,18 +1774,18 @@ This copies the `fetchai/echo:0.7.0` skill code containing the "behaviours", and
 
 
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:0.5.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
+<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:0.6.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
 </code></pre></div>
 
 
 <h2 id="run-the-aea">Run the AEA</h2>
-<p>Run the AEA with the default <code>fetchai/stub:0.9.0</code> connection.</p>
+<p>Run the AEA with the default <code>fetchai/stub:0.10.0</code> connection.</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
 
 
 <p>or</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/stub:0.9.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/stub:0.10.0
 </code></pre></div>
 
 
@@ -1778,7 +1796,7 @@ This copies the `fetchai/echo:0.7.0` skill code containing the "behaviours", and
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.6.1
+v0.6.2
 
 Starting AEA <span class="s1">&#39;my_first_aea&#39;</span> in <span class="s1">&#39;async&#39;</span> mode ...
 info: Echo Handler: setup method called.
@@ -1812,7 +1830,7 @@ info: Echo Behaviour: act method called.
 Optionally, from a different terminal and same directory (i.e. the `my_first_aea` project), we send the AEA a message wrapped in an envelope via the input file.
 
 
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.5.0,\x08\x01\x12\x011*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.6.0,\x08\x01\x12\x011*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
 </code></pre></div>
 
 

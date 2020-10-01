@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1647,7 +1665,7 @@ This demo does not utilize a smart contract or a ledger interaction. </p>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA</h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_station:0.12.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_station:0.13.0
 <span class="nb">cd</span> weather_station
 </code></pre></div>
 
@@ -1699,6 +1717,7 @@ aea add-key fetchai fetchai_private_key.txt --connection
 <span class="kn">from</span> <span class="nn">packages.fetchai.connections.soef.connection</span> <span class="kn">import</span> <span class="n">SOEFConnection</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.weather_client.strategy</span> <span class="kn">import</span> <span class="n">Strategy</span>
 
+
 <span class="n">API_KEY</span> <span class="o">=</span> <span class="s2">&quot;TwiCIriSl0mLahw17pyqoA&quot;</span>
 <span class="n">SOEF_ADDR</span> <span class="o">=</span> <span class="s2">&quot;soef.fetch.ai&quot;</span>
 <span class="n">SOEF_PORT</span> <span class="o">=</span> <span class="mi">9002</span>
@@ -1716,6 +1735,8 @@ aea add-key fetchai fetchai_private_key.txt --connection
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
+
     <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
     <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_CONNECTION</span><span class="p">)</span>
@@ -1734,8 +1755,8 @@ aea add-key fetchai fetchai_private_key.txt --connection
 
     <span class="c1"># specify the default routing for some protocols</span>
     <span class="n">default_routing</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/ledger_api:0.3.0&quot;</span><span class="p">):</span> <span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
-        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.6.0&quot;</span><span class="p">):</span> <span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
+        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/ledger_api:0.4.0&quot;</span><span class="p">):</span> <span class="n">LedgerConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
+        <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.7.0&quot;</span><span class="p">):</span> <span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">default_connection</span> <span class="o">=</span> <span class="n">P2PLibp2pConnection</span><span class="o">.</span><span class="n">connection_id</span>
 
@@ -1802,7 +1823,7 @@ aea add-key fetchai fetchai_private_key.txt --connection
         <span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
         <span class="n">soef_addr</span><span class="o">=</span><span class="n">SOEF_ADDR</span><span class="p">,</span>
         <span class="n">soef_port</span><span class="o">=</span><span class="n">SOEF_PORT</span><span class="p">,</span>
-        <span class="n">restricted_to_protocols</span><span class="o">=</span><span class="p">{</span><span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.6.0&quot;</span><span class="p">)},</span>
+        <span class="n">restricted_to_protocols</span><span class="o">=</span><span class="p">{</span><span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/oef_search:0.7.0&quot;</span><span class="p">)},</span>
         <span class="n">connection_id</span><span class="o">=</span><span class="n">SOEFConnection</span><span class="o">.</span><span class="n">connection_id</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">soef_connection</span> <span class="o">=</span> <span class="n">SOEFConnection</span><span class="p">(</span><span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">identity</span><span class="p">)</span>

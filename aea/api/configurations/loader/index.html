@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../../manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="./" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1645,15 +1663,64 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the string in URI form.</p>
-<p><a name="aea.configurations.loader.ConfigLoader"></a></p>
-<h2 id="configloader-objects">ConfigLoader Objects</h2>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConfigLoader</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">])</span>
+<p><a name="aea.configurations.loader.BaseConfigLoader"></a></p>
+<h2 id="baseconfigloader-objects">BaseConfigLoader Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseConfigLoader</span><span class="p">()</span>
 </code></pre></div>
 
 
-<p>This class implement parsing, serialization and validation functionalities for the 'aea' configuration files.</p>
-<p><a name="aea.configurations.loader.ConfigLoader.__init__"></a></p>
+<p>Base class for configuration loader classes.</p>
+<p><a name="aea.configurations.loader.BaseConfigLoader.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">schema_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Initialize the base configuration loader.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>schema_filename</code>: the path to the schema.</li>
+</ul>
+<p><a name="aea.configurations.loader.BaseConfigLoader.validator"></a></p>
+<h4 id="validator">validator</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">validator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Draft4Validator</span>
+</code></pre></div>
+
+
+<p>Get the json schema validator.</p>
+<p><a name="aea.configurations.loader.BaseConfigLoader.validate"></a></p>
+<h4 id="validate">validate</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">validate</span><span class="p">(</span><span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Validate a JSON object.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>json_data</code>: the JSON data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None.</p>
+<p><a name="aea.configurations.loader.BaseConfigLoader.required_fields"></a></p>
+<h4 id="required_fields">required<code>_</code>fields</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">required_fields</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Get the required fields.</p>
+<p><strong>Returns</strong>:</p>
+<p>list of required fields.</p>
+<p><a name="aea.configurations.loader.ConfigLoader"></a></p>
+<h2 id="configloader-objects">ConfigLoader Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConfigLoader</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>  <span class="n">BaseConfigLoader</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Parsing, serialization and validation for package configuration files.</p>
+<p><a name="aea.configurations.loader.ConfigLoader.__init__"></a></p>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">schema_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configuration_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">])</span>
 </code></pre></div>
 
@@ -1664,24 +1731,6 @@
 <li><code>schema_filename</code>: the path to the JSON-schema file in 'aea/configurations/schemas'.</li>
 <li><code>configuration_class</code>: the configuration class (e.g. AgentConfig, SkillConfig etc.)</li>
 </ul>
-<p><a name="aea.configurations.loader.ConfigLoader.validator"></a></p>
-<h4 id="validator">validator</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">validator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Draft4Validator</span>
-</code></pre></div>
-
-
-<p>Get the json schema validator.</p>
-<p><a name="aea.configurations.loader.ConfigLoader.required_fields"></a></p>
-<h4 id="required_fields">required<code>_</code>fields</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">required_fields</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</code></pre></div>
-
-
-<p>Get required fields.</p>
-<p><strong>Returns</strong>:</p>
-<p>list of required fields.</p>
 <p><a name="aea.configurations.loader.ConfigLoader.configuration_class"></a></p>
 <h4 id="configuration_class">configuration<code>_</code>class</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -1705,7 +1754,7 @@
 <p>the configuration object.
 :raises</p>
 <p><a name="aea.configurations.loader.ConfigLoader.validate"></a></p>
-<h4 id="validate">validate</h4>
+<h4 id="validate_1">validate</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">validate</span><span class="p">(</span><span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1752,6 +1801,19 @@
 
 
 <p>Get the configuration loader from the type.</p>
+<p><a name="aea.configurations.loader.ConfigLoader.load_agent_config_from_json"></a></p>
+<h4 id="load_agent_config_from_json">load<code>_</code>agent<code>_</code>config<code>_</code>from<code>_</code>json</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">load_agent_config_from_json</span><span class="p">(</span><span class="n">configuration_json</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AgentConfig</span>
+</code></pre></div>
+
+
+<p>Load agent configuration from configuration json data.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>configuration_json</code>: list of dicts with aea configuration</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>AgentConfig instance</p>
 <p><a name="aea.configurations.loader.ConfigLoaders"></a></p>
 <h2 id="configloaders-objects">ConfigLoaders Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConfigLoaders</span><span class="p">()</span>
@@ -1796,7 +1858,7 @@
                                 
                                 <a href="../constants/" class="button left"><strong>Previous:</strong></br>Constants</a>
                                 
-                                <a href="../pypi/" class="button right"><strong>Next:</strong></br>Pypi</a>
+                                <a href="../project/" class="button right"><strong>Next:</strong></br>Project</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

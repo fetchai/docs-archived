@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1629,15 +1647,15 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.9.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.10.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span><code>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.9.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
-aea run --connections fetchai/p2p_libp2p:0.9.0
+aea add connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea run --connections fetchai/p2p_libp2p:0.10.0
 </code></pre></div>
 
 
@@ -1645,8 +1663,8 @@ aea run --connections fetchai/p2p_libp2p:0.9.0
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span><code>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.9.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
+aea add connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
 </code></pre></div>
 
 
@@ -1662,7 +1680,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.9.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.10.0
 </code></pre></div>
 
 
@@ -1686,13 +1704,13 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 
 <h2 id="configuring-the-connectionyaml-entries">Configuring the <code>connection.yaml</code> entries:</h2>
-<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.9.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
+<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.10.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
 <h2 id="running-go-peer-standalone">Running Go peer standalone</h2>
 <p>You can run the peer node in standalone mode, that is, as a Go process with no dependency to the agents framework. 
 To facilitate the deployment, we provide a script
- <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/acn/run_acn_node_standalone.py"><code>run_acn_node_standalone.py</code></a>
+ <a href="https://github.com/fetchai/agents-aea/blob/master/scripts/acn/run_acn_node_standalone.py" target="_blank"><code>run_acn_node_standalone.py</code></a>
  and a corresponding 
- <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/acn/Dockerfile">Dockerfile</a>.</p>
+ <a href="https://github.com/fetchai/agents-aea/blob/master/scripts/acn/Dockerfile" target="_blank">Dockerfile</a>.</p>
 <p>First, you need to build the node's binary (<code>libp2p_node</code>) either:</p>
 <ul>
 <li>locally

@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../../manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../../configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1748,20 +1766,6 @@
 
 
 <p>Remove from schedule.</p>
-<p><a name="aea.helpers.async_utils.ensure_loop"></a></p>
-<h4 id="ensure_loop">ensure<code>_</code>loop</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ensure_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AbstractEventLoop</span>
-</code></pre></div>
-
-
-<p>Use loop provided or create new if not provided or closed.</p>
-<p>Return loop passed if its provided,not closed and not running, otherwise returns new event loop.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>loop</code>: optional event loop</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>asyncio event loop</p>
 <p><a name="aea.helpers.async_utils.AnotherThreadTask"></a></p>
 <h2 id="anotherthreadtask-objects">AnotherThreadTask Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AnotherThreadTask</span><span class="p">()</span>
@@ -1863,7 +1867,7 @@
 </code></pre></div>
 
 
-<p>Async-friendly subprocess.Popen</p>
+<p>Async-friendly subprocess.Popen.</p>
 <p><a name="aea.helpers.async_utils.AwaitableProc.__init__"></a></p>
 <h4 id="__init___4"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1877,7 +1881,7 @@
 </code></pre></div>
 
 
-<p>Start the subprocess</p>
+<p>Start the subprocess.</p>
 <p><a name="aea.helpers.async_utils.ItemGetter"></a></p>
 <h2 id="itemgetter-objects">ItemGetter Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ItemGetter</span><span class="p">()</span>
@@ -1921,6 +1925,84 @@
 <ul>
 <li><code>getters</code>: List of tuples of handler and couroutine to be awaiteed for an item.</li>
 </ul>
+<p><a name="aea.helpers.async_utils.Runnable"></a></p>
+<h2 id="runnable-objects">Runnable Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Runnable</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Abstract Runnable class.</p>
+<p>Use to run async task in same event loop or in dedicated thread.
+Provides: start, stop sync methods to start and stop task
+Use wait_completed to await task was completed.</p>
+<p><a name="aea.helpers.async_utils.Runnable.__init__"></a></p>
+<h4 id="__init___7"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">loop</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">AbstractEventLoop</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">threaded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Init runnable.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>loop</code>: asyncio event loop to use.</li>
+<li><code>threaded</code>: bool. start in thread if True.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None</p>
+<p><a name="aea.helpers.async_utils.Runnable.start"></a></p>
+<h4 id="start_3">start</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+
+
+<p>Start runnable.</p>
+<p><strong>Returns</strong>:</p>
+<p>bool started or not.</p>
+<p><a name="aea.helpers.async_utils.Runnable.is_running"></a></p>
+<h4 id="is_running">is<code>_</code>running</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">is_running</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+
+
+<p>Get running state.</p>
+<p><a name="aea.helpers.async_utils.Runnable.run"></a></p>
+<h4 id="run_1">run</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
+ <span class="o">|</span> <span class="k">async</span> <span class="n">run</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+
+<p>Implement run logic respectfull to CancelError on termination.</p>
+<p><a name="aea.helpers.async_utils.Runnable.wait_completed"></a></p>
+<h4 id="wait_completed">wait<code>_</code>completed</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">wait_completed</span><span class="p">(</span><span class="n">sync</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">force_result</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span>
+</code></pre></div>
+
+
+<p>Wait runnable execution completed.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>sync</code>: bool. blocking wait</li>
+<li><code>timeout</code>: float seconds</li>
+<li><code>force_result</code>: check result even it was waited.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>awaitable if sync is False, otherise None</p>
+<p><a name="aea.helpers.async_utils.Runnable.stop"></a></p>
+<h4 id="stop_2">stop</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop</span><span class="p">(</span><span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Stop runnable.</p>
+<p><a name="aea.helpers.async_utils.Runnable.start_and_wait_completed"></a></p>
+<h4 id="start_and_wait_completed">start<code>_</code>and<code>_</code>wait<code>_</code>completed</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start_and_wait_completed</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span>
+</code></pre></div>
+
+
+<p>Alias for start and wait methods.</p>
 
 
                                 </section>

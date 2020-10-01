@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="./" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1680,14 +1698,14 @@
 <p>Return is disconnected.</p>
 <p><a name="aea.multiplexer.AsyncMultiplexer"></a></p>
 <h2 id="asyncmultiplexer-objects">AsyncMultiplexer Objects</h2>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AsyncMultiplexer</span><span class="p">(</span><span class="n">WithLogger</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AsyncMultiplexer</span><span class="p">(</span><span class="n">Runnable</span><span class="p">,</span>  <span class="n">WithLogger</span><span class="p">)</span>
 </code></pre></div>
 
 
 <p>This class can handle multiple connections at once.</p>
 <p><a name="aea.multiplexer.AsyncMultiplexer.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Connection</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_connection_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exception_policy</span><span class="p">:</span> <span class="n">ExceptionPolicyEnum</span> <span class="o">=</span> <span class="n">ExceptionPolicyEnum</span><span class="o">.</span><span class="n">propagate</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Connection</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_connection_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exception_policy</span><span class="p">:</span> <span class="n">ExceptionPolicyEnum</span> <span class="o">=</span> <span class="n">ExceptionPolicyEnum</span><span class="o">.</span><span class="n">propagate</span><span class="p">,</span> <span class="n">threaded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
 
@@ -1701,6 +1719,13 @@ If connections is None, this parameter is ignored.</li>
 <li><code>loop</code>: the event loop to run the multiplexer. If None, a new event loop is created.</li>
 <li><code>agent_name</code>: the name of the agent that owns the multiplexer, for logging purposes.</li>
 </ul>
+<p><a name="aea.multiplexer.AsyncMultiplexer.run"></a></p>
+<h4 id="run">run</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">run</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Run multiplexer connect and recv/send tasks.</p>
 <p><a name="aea.multiplexer.AsyncMultiplexer.default_connection"></a></p>
 <h4 id="default_connection">default<code>_</code>connection</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -1853,6 +1878,21 @@ running on a different thread than the one used in this function.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
+<p><a name="aea.multiplexer.AsyncMultiplexer.setup"></a></p>
+<h4 id="setup">setup</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">(</span><span class="n">connections</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">default_routing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_connection</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Set up the multiplexer.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>connections</code>: the connections to use. It will replace the other ones.</li>
+<li><code>default_routing</code>: the default routing.</li>
+<li><code>default_connection</code>: the default connection.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>None.</p>
 <p><a name="aea.multiplexer.Multiplexer"></a></p>
 <h2 id="multiplexer-objects">Multiplexer Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Multiplexer</span><span class="p">(</span><span class="n">AsyncMultiplexer</span><span class="p">)</span>
@@ -1919,21 +1959,6 @@ running on a different thread than the one used in this function.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
-<p><a name="aea.multiplexer.Multiplexer.setup"></a></p>
-<h4 id="setup">setup</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">(</span><span class="n">connections</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">default_routing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_connection</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</code></pre></div>
-
-
-<p>Set up the multiplexer.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>connections</code>: the connections to use. It will replace the other ones.</li>
-<li><code>default_routing</code>: the default routing.</li>
-<li><code>default_connection</code>: the default connection.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<p>None.</p>
 <p><a name="aea.multiplexer.InBox"></a></p>
 <h2 id="inbox-objects">InBox Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InBox</span><span class="p">()</span>
@@ -1943,7 +1968,7 @@ running on a different thread than the one used in this function.</p>
 <p>A queue from where you can only consume envelopes.</p>
 <p><a name="aea.multiplexer.InBox.__init__"></a></p>
 <h4 id="__init___3"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">multiplexer</span><span class="p">:</span> <span class="n">Multiplexer</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">multiplexer</span><span class="p">:</span> <span class="n">AsyncMultiplexer</span><span class="p">)</span>
 </code></pre></div>
 
 
@@ -2015,7 +2040,7 @@ running on a different thread than the one used in this function.</p>
 <p>A queue from where you can only enqueue envelopes.</p>
 <p><a name="aea.multiplexer.OutBox.__init__"></a></p>
 <h4 id="__init___4"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">multiplexer</span><span class="p">:</span> <span class="n">Multiplexer</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">multiplexer</span><span class="p">:</span> <span class="n">AsyncMultiplexer</span><span class="p">)</span>
 </code></pre></div>
 
 
@@ -2069,7 +2094,7 @@ running on a different thread than the one used in this function.</p>
 
                             <div class="bottomnav">
                                 
-                                <a href="../launcher/" class="button left"><strong>Previous:</strong></br>Launcher</a>
+                                <a href="../manager/" class="button left"><strong>Previous:</strong></br>Manager</a>
                                 
                                 <a href="../runner/" class="button right"><strong>Next:</strong></br>Runner</a>
                             </div><!-- .bottomnav end -->

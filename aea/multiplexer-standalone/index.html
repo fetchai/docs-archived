@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1643,6 +1661,7 @@
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.multiplexer</span> <span class="kn">import</span> <span class="n">Multiplexer</span>
 
+
 <span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input.txt&quot;</span>
 <span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output.txt&quot;</span>
 </code></pre></div>
@@ -1685,7 +1704,7 @@
 <p>We use the input and output text files to send an envelope to our agent and receive a response</p>
 <div class="highlight"><pre><span></span><code>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1746,11 +1765,14 @@
 <span class="kn">from</span> <span class="nn">aea.mail.base</span> <span class="kn">import</span> <span class="n">Envelope</span>
 <span class="kn">from</span> <span class="nn">aea.multiplexer</span> <span class="kn">import</span> <span class="n">Multiplexer</span>
 
+
 <span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input.txt&quot;</span>
 <span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output.txt&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
+
     <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">)</span>
@@ -1777,7 +1799,7 @@
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="s2">&quot;multiplexer,some_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>

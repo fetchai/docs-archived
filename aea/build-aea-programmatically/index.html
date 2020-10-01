@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1674,7 +1692,7 @@
 
 
 <h2 id="initialise-the-aea">Initialise the AEA</h2>
-<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.5.0</code> protocol, the <code>fetchai/stub:0.9.0</code> connection and the <code>fetchai/error:0.5.0</code> skill.</p>
+<p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:0.6.0</code> protocol, the <code>fetchai/stub:0.10.0</code> connection and the <code>fetchai/error:0.6.0</code> skill.</p>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Instantiate the builder and build the AEA</span>
     <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">AEABuilder</span><span class="p">()</span>
@@ -1746,7 +1764,7 @@
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)</p>
 <div class="highlight"><pre><span></span><code>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_aea,other_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01\x12\x01</span><span class="s2">1*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_aea,other_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01\x12\x01</span><span class="s2">1*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1772,8 +1790,8 @@
 
 <h2 id="running-the-aea">Running the AEA</h2>
 <p>If you now run this python script file, you should see this output:</p>
-<div class="highlight"><pre><span></span><code><span class="err">input message: my_aea,other_agent,fetchai/default:0.5.0,\x08\x01*\x07\n\x05hello</span>
-<span class="err">output message: other_agent,my_aea,fetchai/default:0.5.0,...\x05hello</span>
+<div class="highlight"><pre><span></span><code><span class="err">input message: my_aea,other_agent,fetchai/default:0.6.0,\x08\x01*\x07\n\x05hello</span>
+<span class="err">output message: other_agent,my_aea,fetchai/default:0.6.0,...\x05hello</span>
 </code></pre></div>
 
 
@@ -1793,6 +1811,7 @@
 <span class="kn">from</span> <span class="nn">aea.crypto.helpers</span> <span class="kn">import</span> <span class="n">PRIVATE_KEY_PATH_SCHEMA</span><span class="p">,</span> <span class="n">create_private_key</span>
 <span class="kn">from</span> <span class="nn">aea.skills.base</span> <span class="kn">import</span> <span class="n">Skill</span>
 
+
 <span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
 <span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
 <span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output_file&quot;</span>
@@ -1800,6 +1819,8 @@
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
+
     <span class="c1"># Create a private key</span>
     <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
 
@@ -1860,7 +1881,7 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_aea,other_agent,fetchai/default:0.5.0,</span><span class="se">\x08\x01\x12\x01</span><span class="s2">1*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_aea,other_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01\x12\x01</span><span class="s2">1*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;input message: &quot;</span> <span class="o">+</span> <span class="n">message_text</span><span class="p">)</span>

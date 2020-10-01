@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../api/manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../api/multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../api/configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1715,7 +1733,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.10.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.11.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </code></pre></div>
@@ -1728,12 +1746,12 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
-aea add connection fetchai/p2p_libp2p:0.9.0
-aea add connection fetchai/soef:0.8.0
-aea add connection fetchai/ledger:0.5.0
-aea add skill fetchai/tac_control_contract:0.8.0
+aea add connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/soef:0.9.0
+aea add connection fetchai/ledger:0.6.0
+aea add skill fetchai/tac_control_contract:0.9.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </code></pre></div>
 
@@ -1766,12 +1784,12 @@ aea add-key ethereum ethereum_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.10.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.10.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1793,13 +1811,13 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/p2p_libp2p:0.9.0
-aea add connection fetchai/soef:0.8.0
-aea add connection fetchai/ledger:0.5.0
-aea add skill fetchai/tac_participation:0.8.0
-aea add skill fetchai/tac_negotiation:0.9.0
+aea add connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/soef:0.9.0
+aea add connection fetchai/ledger:0.6.0
+aea add skill fetchai/tac_participation:0.9.0
+aea add skill fetchai/tac_negotiation:0.10.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1810,13 +1828,13 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/p2p_libp2p:0.9.0
-aea add connection fetchai/soef:0.8.0
-aea add connection fetchai/ledger:0.5.0
-aea add skill fetchai/tac_participation:0.8.0
-aea add skill fetchai/tac_negotiation:0.9.0
+aea add connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/soef:0.9.0
+aea add connection fetchai/ledger:0.6.0
+aea add skill fetchai/tac_participation:0.9.0
+aea add skill fetchai/tac_negotiation:0.10.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.9.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1831,8 +1849,8 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 <p>Similar to how you funded the controller, fund both tac participants.</p>
 <h3 id="update-the-game-parameters-in-the-controller">Update the game parameters in the controller</h3>
 <p>Navigate to the tac controller project, then use the command line to get and set the start time (set it to at least five minutes - better 10 - in the future):</p>
-<div class="highlight"><pre><span></span><code>aea config get vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time
-aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
+<div class="highlight"><pre><span></span><code>aea config get vendor.fetchai.skills.tac_control_contract.models.parameters.args.registration_start_time
+aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.registration_start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </code></pre></div>
 
 

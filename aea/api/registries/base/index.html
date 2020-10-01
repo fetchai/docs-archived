@@ -353,6 +353,12 @@
         >Modes of running an AEA</a
     >
 </li>
+ 
+<li>
+    <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
+        >Multi agent manager</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -605,6 +611,12 @@
 </li>
  
 <li>
+    <a href="../../manager/" id="aea-api-manager-"
+        >Manager</a
+    >
+</li>
+ 
+<li>
     <a href="../../multiplexer/" id="aea-api-multiplexer-"
         >Multiplexer</a
     >
@@ -657,6 +669,12 @@
 <li>
     <a href="../../configurations/loader/" id="aea-api-configurations-loader-"
         >Loader</a
+    >
+</li>
+ 
+<li>
+    <a href="../../configurations/project/" id="aea-api-configurations-project-"
+        >Project</a
     >
 </li>
  
@@ -1658,7 +1676,7 @@
 <ul>
 <li><code>item_id</code>: the public id of the item.</li>
 <li><code>item</code>: the item.</li>
-<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
+<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None
@@ -1702,6 +1720,16 @@
 <p>Fetch all the items.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of items.</p>
+<p><a name="aea.registries.base.Registry.ids"></a></p>
+<h4 id="ids">ids</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
+ <span class="o">|</span> <span class="n">ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ItemId</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Return the set of all the used item ids.</p>
+<p><strong>Returns</strong>:</p>
+<p>the set of item ids.</p>
 <p><a name="aea.registries.base.Registry.setup"></a></p>
 <h4 id="setup">setup</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
@@ -1722,6 +1750,77 @@
 <p>Teardown the registry.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
+<p><a name="aea.registries.base.PublicIdRegistry"></a></p>
+<h2 id="publicidregistry-objects">PublicIdRegistry Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PublicIdRegistry</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">Item</span><span class="p">],</span>  <span class="n">Registry</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">Item</span><span class="p">])</span>
+</code></pre></div>
+
+
+<p>This class implement a registry whose keys are public ids.</p>
+<p>In particular, it is able to handle the case when the public id
+points to the 'latest' version of a package.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.__init__"></a></p>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>Initialize the registry.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.register"></a></p>
+<h4 id="register_1">register</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Item</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Register an item.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.unregister"></a></p>
+<h4 id="unregister_1">unregister</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">unregister</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Unregister an item.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.fetch"></a></p>
+<h4 id="fetch_1">fetch</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Item</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Fetch an item associated with a public id.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>public_id</code>: the public id.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>an item, or None if the key is not present.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.fetch_all"></a></p>
+<h4 id="fetch_all_1">fetch<code>_</code>all</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Item</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Fetch all the items.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.ids"></a></p>
+<h4 id="ids_1">ids</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Get all the item ids.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.setup"></a></p>
+<h4 id="setup_1">setup</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Set up the items.</p>
+<p><a name="aea.registries.base.PublicIdRegistry.teardown"></a></p>
+<h4 id="teardown_1">teardown</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>Tear down the items.</p>
 <p><a name="aea.registries.base.AgentComponentRegistry"></a></p>
 <h2 id="agentcomponentregistry-objects">AgentComponentRegistry Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AgentComponentRegistry</span><span class="p">(</span><span class="n">Registry</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">Component</span><span class="p">])</span>
@@ -1730,7 +1829,7 @@
 
 <p>This class implements a simple dictionary-based registry for agent components.</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.__init__"></a></p>
-<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1739,7 +1838,7 @@
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.register"></a></p>
-<h4 id="register_1">register</h4>
+<h4 id="register_2">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1749,10 +1848,10 @@
 <ul>
 <li><code>component_id</code>: the id of the component.</li>
 <li><code>component</code>: the component object.</li>
-<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
+<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
 </ul>
 <p><a name="aea.registries.base.AgentComponentRegistry.unregister"></a></p>
-<h4 id="unregister_1">unregister</h4>
+<h4 id="unregister_2">unregister</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">unregister</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1763,7 +1862,7 @@
 <li><code>component_id</code>: the ComponentId</li>
 </ul>
 <p><a name="aea.registries.base.AgentComponentRegistry.fetch"></a></p>
-<h4 id="fetch_1">fetch</h4>
+<h4 id="fetch_2">fetch</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Component</span><span class="p">]</span>
 </code></pre></div>
 
@@ -1776,7 +1875,7 @@
 <p><strong>Returns</strong>:</p>
 <p>the component or None if the component is not registered</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.fetch_all"></a></p>
-<h4 id="fetch_all_1">fetch<code>_</code>all</h4>
+<h4 id="fetch_all_2">fetch<code>_</code>all</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Component</span><span class="p">]</span>
 </code></pre></div>
 
@@ -1795,8 +1894,15 @@
 <li><code>component_type</code>: a component type
 :return the list of registered components of a given type.</li>
 </ul>
+<p><a name="aea.registries.base.AgentComponentRegistry.ids"></a></p>
+<h4 id="ids_2">ids</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Get the item ids.</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.setup"></a></p>
-<h4 id="setup_1">setup</h4>
+<h4 id="setup_2">setup</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1805,7 +1911,7 @@
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.teardown"></a></p>
-<h4 id="teardown_1">teardown</h4>
+<h4 id="teardown_2">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1822,7 +1928,7 @@
 
 <p>This class implements a generic registry for skill components.</p>
 <p><a name="aea.registries.base.ComponentRegistry.__init__"></a></p>
-<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1831,7 +1937,7 @@
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry.register"></a></p>
-<h4 id="register_2">register</h4>
+<h4 id="register_3">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">SkillComponentType</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1841,13 +1947,13 @@
 <ul>
 <li><code>item_id</code>: a pair (skill id, item name).</li>
 <li><code>item</code>: the item to register.</li>
-<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
+<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None
 :raises: ValueError if an item is already registered with that item id.</p>
 <p><a name="aea.registries.base.ComponentRegistry.unregister"></a></p>
-<h4 id="unregister_2">unregister</h4>
+<h4 id="unregister_3">unregister</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">unregister</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1861,7 +1967,7 @@
 <p>None
 :raises: ValueError if no item registered with that item id.</p>
 <p><a name="aea.registries.base.ComponentRegistry.fetch"></a></p>
-<h4 id="fetch_2">fetch</h4>
+<h4 id="fetch_3">fetch</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SkillComponentType</span><span class="p">]</span>
 </code></pre></div>
 
@@ -1875,13 +1981,13 @@
 <p>the Item</p>
 <p><a name="aea.registries.base.ComponentRegistry.fetch_by_skill"></a></p>
 <h4 id="fetch_by_skill">fetch<code>_</code>by<code>_</code>skill</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_by_skill</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Item</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_by_skill</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SkillComponentType</span><span class="p">]</span>
 </code></pre></div>
 
 
 <p>Fetch all the items of a given skill.</p>
 <p><a name="aea.registries.base.ComponentRegistry.fetch_all"></a></p>
-<h4 id="fetch_all_2">fetch<code>_</code>all</h4>
+<h4 id="fetch_all_3">fetch<code>_</code>all</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SkillComponentType</span><span class="p">]</span>
 </code></pre></div>
 
@@ -1894,8 +2000,15 @@
 
 
 <p>Unregister all the components by skill.</p>
+<p><a name="aea.registries.base.ComponentRegistry.ids"></a></p>
+<h4 id="ids_3">ids</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+</code></pre></div>
+
+
+<p>Get the item ids.</p>
 <p><a name="aea.registries.base.ComponentRegistry.setup"></a></p>
-<h4 id="setup_2">setup</h4>
+<h4 id="setup_3">setup</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1904,7 +2017,7 @@
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry.teardown"></a></p>
-<h4 id="teardown_2">teardown</h4>
+<h4 id="teardown_3">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1920,7 +2033,7 @@
 
 <p>This class implements the handlers registry.</p>
 <p><a name="aea.registries.base.HandlerRegistry.__init__"></a></p>
-<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___4"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1929,7 +2042,7 @@
 <p><strong>Returns</strong>:</p>
 <p>None</p>
 <p><a name="aea.registries.base.HandlerRegistry.register"></a></p>
-<h4 id="register_3">register</h4>
+<h4 id="register_4">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
@@ -1939,7 +2052,7 @@
 <ul>
 <li><code>item_id</code>: the item id.</li>
 <li><code>item</code>: the handler.</li>
-<li><code>is_dynamicall_added</code>: whether or not the item is dynamicall added.</li>
+<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1948,7 +2061,7 @@
 <li><code>ValueError</code>: if the protocol is None, or an item with pair (skill_id, protocol_id_ already exists.</li>
 </ul>
 <p><a name="aea.registries.base.HandlerRegistry.unregister"></a></p>
-<h4 id="unregister_3">unregister</h4>
+<h4 id="unregister_4">unregister</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">unregister</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">SkillId</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
