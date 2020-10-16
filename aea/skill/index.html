@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1670,7 +1699,6 @@
 <div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">reply</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Moreover, you can read/write to the <em>agent context namespace</em> by accessing the attribute <code>SkillContext.namespace</code>.</p>
 <p>Importantly, however, a skill does not have access to the context of another skill or protected AEA components like the <code>DecisionMaker</code>.</p>
 <h2 id="what-to-code">What to code</h2>
@@ -1691,7 +1719,6 @@
 component we can write:</p>
 <div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_handlers</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
 </code></pre></div>
-
 
 <h3 id="behaviourspy"><code>behaviours.py</code></h3>
 <p>Conceptually, a <code>Behaviour</code>  class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
@@ -1734,12 +1761,10 @@ can always subclass the general-purpose <code>Behaviour</code> class.</p>
         <span class="sd">&quot;&quot;&quot;This method is called once, when the behaviour is teared down.&quot;&quot;&quot;</span>
 </code></pre></div>
 
-
 <p>If we want to register this behaviour dynamically, in any part of the skill code
 (i.e. wherever the skill context is available), we can write:</p>
 <div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_behaviours</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">HelloWorldBehaviour</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>Or, equivalently to the previous two code blocks:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
@@ -1747,7 +1772,6 @@ can always subclass the general-purpose <code>Behaviour</code> class.</p>
 
 <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_behaviours</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">OneShotBehaviour</span><span class="p">(</span><span class="n">act</span><span class="o">=</span><span class="n">hello</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello_world&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>The callable passed to the <code>act</code> parameter is equivalent to the implementation
 of the <code>act</code> method described above. </p>
@@ -1802,7 +1826,6 @@ not be updated.</p>
         <span class="k">pass</span>
 </code></pre></div>
 
-
 <p>In <code>behaviours.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 <span class="kn">from</span> <span class="nn">packages.my_author_name.skills.my_skill.tasks</span> <span class="kn">import</span> <span class="n">LongTask</span>
@@ -1828,7 +1851,6 @@ not be updated.</p>
         <span class="k">pass</span>
 </code></pre></div>
 
-
 <h3 id="models">Models</h3>
 <p>The developer might want to add other classes on the context level which are shared equally across the <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> classes. To this end, the developer can subclass an abstract <a href="../api/skills/base#model-objects"><code>Model</code></a>. These models are made available on the context level upon initialization of the AEA.</p>
 <p>Say, the developer has a class called <code>SomeModel</code></p>
@@ -1836,11 +1858,9 @@ not be updated.</p>
     <span class="o">...</span>
 </code></pre></div>
 
-
 <p>Then, an instance of this class is available on the context level like so:</p>
 <div class="highlight"><pre><span></span><code><span class="n">some_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">some_model</span>
 </code></pre></div>
-
 
 <h3 id="skill-config">Skill config</h3>
 <p>Each skill has a <code>skill.yaml</code> configuration file which lists all <code>Behaviour</code>, <code>Handler</code>, and <code>Task</code> objects pertaining to the skill.</p>
@@ -1862,9 +1882,8 @@ not be updated.</p>
 <span class="nt">models</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.6.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.7.0</span>
 </code></pre></div>
-
 
 <h2 id="error-skill">Error skill</h2>
 <p>All AEAs have a default <code>error</code> skill that contains error handling code for a number of scenarios:</p>
@@ -1874,7 +1893,7 @@ not be updated.</p>
 <li>Envelopes with decoding errors</li>
 <li>Invalid messages with respect to the registered protocol</li>
 </ul>
-<p>The error skill relies on the <code>fetchai/default:0.6.0</code> protocol which provides error codes for the above.</p>
+<p>The error skill relies on the <code>fetchai/default:0.7.0</code> protocol which provides error codes for the above.</p>
 <p><br /></p>
 
 

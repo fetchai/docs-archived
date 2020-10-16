@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1698,7 +1727,6 @@
     <span class="n">TestCli</span><span class="p">(</span><span class="n">cpu_burn</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Run it with <code>python ./benchmark/cases/cpu_burn.py --help</code> to get help about usage.</p>
 <div class="highlight"><pre><span></span><code>Usage: cpu_burn.py <span class="o">[</span>OPTIONS<span class="o">]</span> <span class="o">[</span>ARGS<span class="o">]</span>...
 
@@ -1720,7 +1748,6 @@ Options:
   -P, --plot INTEGER            X axis parameter idx
   --help                        Show this message and exit.
 </code></pre></div>
-
 
 <p>Run it with <code>python ./benchmark/cases/cpu_burn.py</code> to start with default parameters.</p>
 <div class="highlight"><pre><span></span><code>Test execution timeout: <span class="m">10</span>.0
@@ -1750,7 +1777,6 @@ mem min <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</
 mem max <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</span>.98828125 ± <span class="m">0</span>
 mem mean <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</span>.98828125 ± <span class="m">0</span>
 </code></pre></div>
-
 
 <p>Here you can see test report for default arguments set.</p>
 <p>Run with multiple arguments set, multiple repeats and draw a chart on resources
@@ -1805,7 +1831,6 @@ mem min <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</
 mem max <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</span>.9078125 ± <span class="m">0</span>.11487297672320501
 mem mean <span class="o">(</span>kb<span class="o">)</span>: <span class="m">53</span>.9078125 ± <span class="m">0</span>.11487297672320501
 </code></pre></div>
-
 
 <p>Chart is drawn for argument 1: sleep:</p>
 <p><img src="../assets/benchmark_chart.png" alt="Char over argument 1 - sleep value" class="center"></p>
@@ -1868,7 +1893,6 @@ Memory usage and execution time can slightly differ per case execution.</p>
     <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">stop_loop</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Create AEA wrapper with specified handler:</p>
 <div class="highlight"><pre><span></span><code><span class="n">skill_definition</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dummy_handler&quot;</span><span class="p">:</span> <span class="n">DummyHandler</span><span class="p">}</span>
@@ -1879,12 +1903,10 @@ Memory usage and execution time can slightly differ per case execution.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>Populate inbox with dummy messages:</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">inbox_amount</span><span class="p">):</span>
     <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">put_inbox</span><span class="p">(</span><span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">dummy_envelope</span><span class="p">())</span>
 </code></pre></div>
-
 
 <p>Set timeout <code>0</code>, for maximum messages processing speed: <code>aea_test_wrapper.set_loop_timeout(0.0)</code></p>
 <p>Start benchmark: <code>benchmark.start()</code></p>
@@ -1893,7 +1915,6 @@ Memory usage and execution time can slightly differ per case execution.</p>
 <span class="o">...</span>
 <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Wait till messages present in inbox:</p>
 <div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="ow">not</span> <span class="n">aea_test_wrapper</span><span class="o">.</span><span class="n">is_inbox_empty</span><span class="p">():</span>

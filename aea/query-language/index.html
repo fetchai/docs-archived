@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1722,7 +1751,6 @@ In the following, we show how to define them.</p>
 <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
 </code></pre></div>
 
-
 <h3 id="set">Set</h3>
 <p>The <em>set</em> is a constraint type that allows you to restrict the values of the attribute in a specific set.</p>
 <p>There are two kind of <em>set</em> constraints:</p>
@@ -1740,7 +1768,6 @@ In the following, we show how to define them.</p>
 <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;not_in&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">1995</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]))</span>
 </code></pre></div>
 
-
 <h2 id="range">Range</h2>
 <p>The <em>range</em> is a constraint type that allows you to restrict the values of the attribute in a given range.</p>
 <p><strong>Examples</strong>:</p>
@@ -1752,7 +1779,6 @@ In the following, we show how to define them.</p>
 <span class="c1"># all the books that have been published between 1960 and 1970</span>
 <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;within&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">)))</span>
 </code></pre></div>
-
 
 <h3 id="distance">Distance</h3>
 <p>The <em>distance</em> is a constraint type that allows you to put a limit on a <a href="../api/helpers/search/models#location-objects"><code>Location</code></a> attribute type. More specifically, you can set a maximum distance from a given location (the <em>center</em>), such that will be considered only the instances whose location attribute value is within a distance from the center.</p>
@@ -1774,7 +1800,6 @@ In the following, we show how to define them.</p>
 <span class="n">close_to_tour_eiffel</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">colosseum</span><span class="p">}))</span>  <span class="c1"># gives `False`</span>
 </code></pre></div>
 
-
 <h2 id="constraint-expressions">Constraint Expressions</h2>
 <p>The constraints above mentioned can be combined with the common logical operators (i.e. and, or and not), yielding more complex expression.</p>
 <p>In particular we can specify any conjunction/disjunction/negations of the previous constraints or composite <a href="../api/helpers/search/models#constraintexpression-objects"><code>ConstraintExpressions</code></a>, e.g.:</p>
@@ -1792,7 +1817,6 @@ In the following, we show how to define them.</p>
 <span class="n">Not</span><span class="p">(</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;within&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))))</span>
 </code></pre></div>
 
-
 <h3 id="and">And</h3>
 <p>The <code>And</code> is a constraint type that allows you to specify a conjunction of constraints over an attribute. That is, the <code>And</code> constraint is satisfied whenever all the subexpressions that constitute the <em>and</em> are satisfied.</p>
 <p>Notice: the number of subexpressions must be <strong>at least</strong> 2.</p>
@@ -1803,7 +1827,6 @@ In the following, we show how to define them.</p>
 <span class="n">And</span><span class="p">([</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;within&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">))),</span> <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;!=&quot;</span><span class="p">,</span> <span class="s2">&quot;It&quot;</span><span class="p">))])</span>
 </code></pre></div>
 
-
 <h3 id="or">Or</h3>
 <p>The class <code>Or</code> is a constraint type that allows you to specify a disjunction of constraints. That is, the <code>Or</code> constraint is satisfied whenever at least one of the constraints that constitute the <em>or</em> is satisfied.</p>
 <p>Notice: the number of subexpressions must be <strong>at least</strong> 2.</p>
@@ -1813,7 +1836,6 @@ In the following, we show how to define them.</p>
 <span class="c1"># all the books that have been published either before the year 1960 or after the year 1970</span>
 <span class="n">Or</span><span class="p">([</span><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="mi">1960</span><span class="p">)),</span> <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="mi">1970</span><span class="p">))])</span>
 </code></pre></div>
-
 
 <h2 id="queries">Queries</h2>
 <p>A <em>query</em> is simply a <em>list of constraint expressions</em>, interpreted as a conjunction (that is, a matching description with the query must satisfy <em>every</em> constraint expression.)</p>
@@ -1827,7 +1849,6 @@ In the following, we show how to define them.</p>
     <span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;ebook_available&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
 <span class="p">],</span> <span class="n">book_model</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Where <em>book_model</em> is the <code>DataModel</code> object. However, the data model is
 an optional parameter, but to avoid ambiguity is recommended to include it.</p>
@@ -1847,7 +1868,6 @@ an optional parameter, but to avoid ambiguity is recommended to include it.</p>
 <span class="n">q</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Stephen King&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1991</span><span class="p">,</span> <span class="s2">&quot;ebook_available&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}))</span>  <span class="c1"># True</span>
 <span class="n">q</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">Description</span><span class="p">({</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;George Orwell&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1948</span><span class="p">,</span> <span class="s2">&quot;ebook_available&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}))</span> <span class="c1"># False</span>
 </code></pre></div>
-
 
 <h3 id="validity">Validity</h3>
 <p>A <code>Query</code> object must satisfy some conditions in order to be instantiated.</p>
@@ -1883,7 +1903,6 @@ an optional parameter, but to avoid ambiguity is recommended to include it.</p>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="n">Constraint</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">ConstraintType</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
 </code></pre></div>
-
 
 <p>Consider a <code>DataModel</code> where there is an <code>Attribute</code> <code>"foo"</code> of type <code>str</code>. Then the constraint is not compatible with the mentioned data model, because the constraint expect an equality comparison with a boolean <code>True</code>, instead of a <code>str</code>.</p>
 

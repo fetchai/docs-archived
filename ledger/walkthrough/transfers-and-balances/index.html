@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../aea/skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../aea/deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../aea/multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../../aea/api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../../aea/api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../aea/api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1654,7 +1683,6 @@
 <div class="highlight"><pre><span></span><code>pocketbook -n &lt;network&gt; transfer &lt;destination-name&gt; &lt;amount&gt; &lt;signer <span class="o">(</span><span class="nb">source</span><span class="o">)</span>&gt;
 </code></pre></div>
 
-
 <p>For our particular example:</p>
 <div class="highlight"><pre><span></span><code>$ pocketbook -n testnet transfer GeneratedTestnetAddress <span class="m">100</span> TestNetAddress
 Network....: testnet
@@ -1671,13 +1699,11 @@ Submitting TX...
 Submitting TX...complete
 </code></pre></div>
 
-
 <p>And now, if we check the balance, we see:</p>
 <div class="highlight"><pre><span></span><code>$ pocketbook -n testnet ls -v
 Name                    Type Balance          Stake Address
 GeneratedTestnetAddress addr <span class="m">100</span>.0            <span class="m">0</span>.0   2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </code></pre></div>
-
 
 <h2 id="using-the-python-ledger-api">Using the Python Ledger API</h2>
 <p>Now let's do the same thing, but this time programmatically.</p>
@@ -1698,12 +1724,10 @@ GeneratedTestnetAddress addr <span class="m">100</span>.0            <span class
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Balance:&quot;</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="s2">&quot;2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000000000</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>And the output when it is executed is:</p>
 <div class="highlight"><pre><span></span><code>$ python3 balance.py
 Balance: <span class="m">100</span>.0
 </code></pre></div>
-
 
 <p>Voila, it is 100 FET, as expected after the transfer in the previous section (although it may not be when you get to that account!).</p>
 <p>Now let's transfer 10 FET out of this account to another one that I have created. Here is the code required to do it:</p>
@@ -1743,7 +1767,6 @@ Balance: <span class="m">100</span>.0
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Target balance after:&quot;</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="n">target_address</span><span class="p">)</span> <span class="o">/</span> <span class="n">units_in_fet</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>And this is the output of the program:</p>
 <div class="highlight"><pre><span></span><code>$ python3 simple_transfer.py
 Source balance before: <span class="m">100</span>.0
@@ -1751,7 +1774,6 @@ Target balance before: <span class="m">0</span>.0
 Source balance after: <span class="m">89</span>.9999999999
 Target balance after: <span class="m">10</span>.0
 </code></pre></div>
-
 
 <div class="admonition warning">
 <p class="admonition-title"><strong>Do not expose private keys in source code</strong></p>

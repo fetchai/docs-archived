@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,32 +1684,26 @@
 <span class="nb">cd</span> my_aea
 </code></pre></div>
 
-
 <p>Add the http server connection package</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.9.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.10.0
 </code></pre></div>
-
 
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.9.0
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.10.0
 </code></pre></div>
-
 
 <p>Modify the <code>api_spec_path</code>:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
 </code></pre></div>
-
 
 <p>Ensure the file exists under the specified path!</p>
 <p>Install the dependencies:</p>
 <div class="highlight"><pre><span></span><code>aea install
 </code></pre></div>
 
-
 <p>Write and add your skill:</p>
 <div class="highlight"><pre><span></span><code>aea scaffold skill http_echo
 </code></pre></div>
-
 
 <p>We will implement a simple http echo skill (modelled after the standard echo skill) which prints out the content of received messages and responds with success.</p>
 <p>First, we delete the <code>my_model.py</code> and <code>behaviour.py</code> (in <code>my_aea/skills/http_echo/</code>). The server will be purely reactive, so we only require the <code>handlers.py</code> file. We update the <code>skill.yaml</code> accordingly, so set <code>models: {}</code> and <code>behaviours: {}</code>.</p>
@@ -1789,7 +1812,6 @@
         <span class="k">pass</span>
 </code></pre></div>
 
-
 <p>We also need to update the <code>skill.yaml</code> accordingly:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">handlers</span><span class="p">:</span>
   <span class="nt">http_handler</span><span class="p">:</span>
@@ -1797,17 +1819,14 @@
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HttpHandler</span>
 </code></pre></div>
 
-
 <p>Finally, we run the fingerprinter:</p>
-<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.7.0
+<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.8.0
 </code></pre></div>
-
 
 <p>Note, you will have to replace the author name with your author handle.</p>
 <p>We can now run the AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>In a separate terminal, we can create a client and communicate with the server:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>

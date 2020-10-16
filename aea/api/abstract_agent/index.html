@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,7 +1684,6 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractAgent</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>This class provides an abstract base  interface for an agent.</p>
 <p><a name="aea.abstract_agent.AbstractAgent.name"></a></p>
 <h4 id="name">name</h4>
@@ -1663,14 +1691,12 @@
  <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get agent's name.</p>
 <p><a name="aea.abstract_agent.AbstractAgent.start"></a></p>
 <h4 id="start">start</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Start the agent.</p>
 <p><strong>Returns</strong>:</p>
@@ -1681,7 +1707,6 @@
  <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Stop the agent.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1690,7 +1715,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Set up the agent.</p>
 <p><strong>Returns</strong>:</p>
@@ -1701,7 +1725,6 @@
  <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Perform actions on period.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1710,7 +1733,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">handle_envelope</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Handle an envelope.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1725,7 +1747,6 @@
  <span class="o">|</span> <span class="n">get_periodic_tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]]]</span>
 </code></pre></div>
 
-
 <p>Get all periodic tasks for agent.</p>
 <p><strong>Returns</strong>:</p>
 <p>dict of callable with period specified</p>
@@ -1734,7 +1755,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">get_message_handlers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span>
 </code></pre></div>
-
 
 <p>Get handlers with message getters.</p>
 <p><strong>Returns</strong>:</p>
@@ -1745,7 +1765,6 @@
  <span class="o">|</span> <span class="n">get_multiplexer_setup_options</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get options to pass to Multiplexer.setup.</p>
 <p><strong>Returns</strong>:</p>
 <p>dict of kwargs</p>
@@ -1755,14 +1774,12 @@
  <span class="o">|</span> <span class="n">connections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Return list of connections.</p>
 <p><a name="aea.abstract_agent.AbstractAgent.exception_handler"></a></p>
 <h4 id="exception_handler">exception<code>_</code>handler</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">exception_handler</span><span class="p">(</span><span class="n">exception</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Handle exception raised during agent main loop execution.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1777,7 +1794,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Tear down the agent.</p>
 <p><strong>Returns</strong>:</p>

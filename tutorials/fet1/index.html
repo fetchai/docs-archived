@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../aea/skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../aea/deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../aea/multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../aea/debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../aea/api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../aea/api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../aea/api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../aea/api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../aea/api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../aea/api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1675,7 +1704,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>The transaction that submits the contract to the ledger is responsible for providing the constructor arguments.</p>
 <p>The above <code>@init</code> function creates a state for the <code>owner</code> issuing <code>supply</code> tokens.</p>
 <p>Furthermore, for this specific contract we have made the total supply programmable so that the contract can be reused and to facilitate testing.</p>
@@ -1690,7 +1718,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>The other two query mechanisms demonstrate two different ways of handling undefined states.</p>
 <p><code>totalSupply</code> queries the state variable <code>total_supply</code> and returns it as a result:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@query</span>
@@ -1702,7 +1729,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>On the other hand, <code>balanceOf</code> uses the sharded state of <code>balance_state</code> and does a dynamic look up based on an <code>address</code>. If the variable does not exist, it returns <code>0</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@query</span>
 <span class="n">function</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="p">:</span> <span class="n">UInt64</span>
@@ -1712,7 +1738,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <h2 id="actions">Actions</h2>
 <p>The FIP-1 contract defines one function annotated with <code>@action</code>. Actions can alter state and return a value. Like with queries, a contract can contain many of these.</p>
@@ -1746,7 +1771,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>You can find the full contract <a href="https://github.com/fetchai/etch-examples/blob/master/Fet-1/contract.etch">here</a>.</p>
 <h2 id="implementing-allowance">Implementing allowance</h2>
 <p>So far, the functions we have seen constitute a basic token contract to create and transfer tokens between participants. A more interesting functionality is the <code>allowance</code> mechanism in the FIP-1 contract, that gives one address the possibility of spending some amount based on the allowance details.</p>
@@ -1762,7 +1786,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>The above builds object addresses by concatenating the <code>spender</code> address with the <code>owner</code> address. However, unlike a normal dictionary, <code>ShardedState</code> does not keep a record of which entries exist or not. Such functionality could be added by simply adding another state variable keeping track of owners. We will see an example on a similar type of functionality in the next part of this guide.</p>
 <p>Finally, implementing a query mechanism is equally straight forward:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@query</span>
@@ -1773,7 +1796,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <p>The contract provided here still needs additional functionality for <code>allowance</code> to be truly useful, as we have not implemented any method to actually spend the allowance.</p>
 <p><br/></p>

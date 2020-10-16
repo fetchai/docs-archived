@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,13 +1684,11 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Location</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Data structure to represent locations (i.e. a pair of latitude and longitude).</p>
 <p><a name="aea.helpers.search.models.Location.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a location.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1675,13 +1702,11 @@
  <span class="o">|</span> <span class="nb">tuple</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the tuple representation of a location.</p>
 <p><a name="aea.helpers.search.models.Location.distance"></a></p>
 <h4 id="distance">distance</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">distance</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Location&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </code></pre></div>
-
 
 <p>Get the distance to another location.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1694,13 +1719,17 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare equality of two locations.</p>
+<p><a name="aea.helpers.search.models.Location.__str__"></a></p>
+<h4 id="__str__"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the data model.</p>
 <p><a name="aea.helpers.search.models.AttributeInconsistencyException"></a></p>
 <h2 id="attributeinconsistencyexception-objects">AttributeInconsistencyException Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AttributeInconsistencyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Raised when the attributes in a Description are inconsistent.</p>
 <p>Inconsistency is defined when values do not meet their respective schema, or if the values
@@ -1710,13 +1739,11 @@ are not of an allowed type.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Attribute</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Implements an attribute for an OEF data model.</p>
 <p><a name="aea.helpers.search.models.Attribute.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">type_</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ATTRIBUTE_TYPES</span><span class="p">],</span> <span class="n">is_required</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize an attribute.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1731,20 +1758,23 @@ are not of an allowed type.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
+<p><a name="aea.helpers.search.models.Attribute.__str__"></a></p>
+<h4 id="__str___1"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the data model.</p>
 <p><a name="aea.helpers.search.models.DataModel"></a></p>
 <h2 id="datamodel-objects">DataModel Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DataModel</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Implements an OEF data model.</p>
 <p><a name="aea.helpers.search.models.DataModel.__init__"></a></p>
 <h4 id="__init___2"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attributes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Attribute</span><span class="p">],</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a data model.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1757,13 +1787,17 @@ are not of an allowed type.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
+<p><a name="aea.helpers.search.models.DataModel.__str__"></a></p>
+<h4 id="__str___2"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the data model.</p>
 <p><a name="aea.helpers.search.models.generate_data_model"></a></p>
 <h4 id="generate_data_model">generate<code>_</code>data<code>_</code>model</h4>
 <div class="highlight"><pre><span></span><code><span class="n">generate_data_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attribute_values</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ATTRIBUTE_TYPES</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataModel</span>
 </code></pre></div>
-
 
 <p>Generate a data model that matches the values stored in this description.</p>
 <p>That is, for each attribute (name, value), generate an Attribute.
@@ -1780,13 +1814,11 @@ It is assumed that each attribute is required.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Description</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Implements an OEF description.</p>
 <p><a name="aea.helpers.search.models.Description.__init__"></a></p>
 <h4 id="__init___3"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ATTRIBUTE_TYPES</span><span class="p">],</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataModel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize the description object.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1801,13 +1833,11 @@ It is assumed that each attribute is required.</p>
  <span class="o">|</span> <span class="n">values</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Get the values.</p>
 <p><a name="aea.helpers.search.models.Description.__eq__"></a></p>
 <h4 id="__eq___3"><code>__</code>eq<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Compare with another object.</p>
 <p><a name="aea.helpers.search.models.Description.__iter__"></a></p>
@@ -1815,14 +1845,18 @@ It is assumed that each attribute is required.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__iter__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Create an iterator.</p>
+<p><a name="aea.helpers.search.models.Description.__str__"></a></p>
+<h4 id="__str___3"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the description.</p>
 <p><a name="aea.helpers.search.models.Description.encode"></a></p>
 <h4 id="encode">encode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">description_protobuf_object</span><span class="p">,</span> <span class="n">description_object</span><span class="p">:</span> <span class="s2">&quot;Description&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Encode an instance of this class into the protocol buffer object.</p>
 <p>The protocol buffer object in the description_protobuf_object argument must be matched with the instance of this class in the 'description_object' argument.</p>
@@ -1839,7 +1873,6 @@ It is assumed that each attribute is required.</p>
  <span class="o">|</span> <span class="n">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">description_protobuf_object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Description&quot;</span>
 </code></pre></div>
 
-
 <p>Decode a protocol buffer object that corresponds with this class into an instance of this class.</p>
 <p>A new instance of this class must be created that matches the protocol buffer object in the 'description_protobuf_object' argument.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1853,20 +1886,17 @@ It is assumed that each attribute is required.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConstraintTypes</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Types of constraint.</p>
 <p><a name="aea.helpers.search.models.ConstraintTypes.__str__"></a></p>
-<h4 id="__str__"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___4"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Get the string representation.</p>
 <p><a name="aea.helpers.search.models.ConstraintType"></a></p>
 <h2 id="constrainttype-objects">ConstraintType Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConstraintType</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Type of constraint.</p>
 <p>Used with the Constraint class, this class allows to specify constraint over attributes.</p>
@@ -1897,7 +1927,6 @@ not_in_a_set = ConstraintType("not_in", {"C", "Java", "Python"})</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">type_</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ConstraintTypes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Initialize a constraint type.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1915,7 +1944,6 @@ not_in_a_set = ConstraintType("not_in", {"C", "Java", "Python"})</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Check the validity of the input provided.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1927,7 +1955,6 @@ not_in_a_set = ConstraintType("not_in", {"C", "Java", "Python"})</p>
 <h4 id="is_valid">is<code>_</code>valid</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">attribute</span><span class="p">:</span> <span class="n">Attribute</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if the constraint type is valid wrt a given attribute.</p>
 <p>A constraint type is valid wrt an attribute if the
@@ -1967,7 +1994,6 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_data_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">ATTRIBUTE_TYPES</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the type of the data used to define the constraint type.</p>
 <p>For instance:</p>
 <blockquote>
@@ -1983,7 +2009,6 @@ c.get_data_type()
 <h4 id="check">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">ATTRIBUTE_TYPES</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if an attribute value satisfies the constraint.</p>
 <p>The implementation depends on the constraint type.</p>
@@ -2002,13 +2027,17 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Check equality with another object.</p>
+<p><a name="aea.helpers.search.models.ConstraintType.__str__"></a></p>
+<h4 id="__str___5"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the constraint type.</p>
 <p><a name="aea.helpers.search.models.ConstraintExpr"></a></p>
 <h2 id="constraintexpr-objects">ConstraintExpr Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConstraintExpr</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Implementation of the constraint language to query the OEF node.</p>
 <p><a name="aea.helpers.search.models.ConstraintExpr.check"></a></p>
@@ -2016,7 +2045,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a description satisfies the constraint expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2030,7 +2058,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check whether a constraint expression is valid wrt a data model.</p>
 <p>Specifically, check the following conditions:
@@ -2046,7 +2073,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Check whether a Constraint Expression satisfies some basic requirements.</p>
 <p>:return <code>None</code></p>
 <p><strong>Raises</strong>:</p>
@@ -2058,13 +2084,11 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">And</span><span class="p">(</span><span class="n">ConstraintExpr</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Implementation of the 'And' constraint expression.</p>
 <p><a name="aea.helpers.search.models.And.__init__"></a></p>
 <h4 id="__init___5"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">constraints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ConstraintExpr</span><span class="p">])</span>
 </code></pre></div>
-
 
 <p>Initialize an 'And' expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2075,7 +2099,6 @@ c.get_data_type()
 <h4 id="check_2">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a value satisfies the 'And' constraint expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2089,7 +2112,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the constraint expression is valid wrt a data model.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2102,7 +2124,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Check whether the Constraint Expression satisfies some basic requirements.</p>
 <p>:return <code>None</code></p>
 <p><strong>Raises</strong>:</p>
@@ -2114,20 +2135,17 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
 <p><a name="aea.helpers.search.models.Or"></a></p>
 <h2 id="or-objects">Or Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Or</span><span class="p">(</span><span class="n">ConstraintExpr</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Implementation of the 'Or' constraint expression.</p>
 <p><a name="aea.helpers.search.models.Or.__init__"></a></p>
 <h4 id="__init___6"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">constraints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ConstraintExpr</span><span class="p">])</span>
 </code></pre></div>
-
 
 <p>Initialize an 'Or' expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2138,7 +2156,6 @@ c.get_data_type()
 <h4 id="check_3">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a value satisfies the 'Or' constraint expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2152,7 +2169,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the constraint expression is valid wrt a data model.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2165,7 +2181,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Check whether the Constraint Expression satisfies some basic requirements.</p>
 <p>:return <code>None</code></p>
 <p><strong>Raises</strong>:</p>
@@ -2177,20 +2192,17 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
 <p><a name="aea.helpers.search.models.Not"></a></p>
 <h2 id="not-objects">Not Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Not</span><span class="p">(</span><span class="n">ConstraintExpr</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Implementation of the 'Not' constraint expression.</p>
 <p><a name="aea.helpers.search.models.Not.__init__"></a></p>
 <h4 id="__init___7"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">constraint</span><span class="p">:</span> <span class="n">ConstraintExpr</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a 'Not' expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2201,7 +2213,6 @@ c.get_data_type()
 <h4 id="check_4">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a value satisfies the 'Not' constraint expression.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2215,7 +2226,6 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the constraint expression is valid wrt a data model.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2228,20 +2238,17 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
 <p><a name="aea.helpers.search.models.Constraint"></a></p>
 <h2 id="constraint-objects">Constraint Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Constraint</span><span class="p">(</span><span class="n">ConstraintExpr</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>The atomic component of a constraint expression.</p>
 <p><a name="aea.helpers.search.models.Constraint.__init__"></a></p>
 <h4 id="__init___8"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constraint_type</span><span class="p">:</span> <span class="n">ConstraintType</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a constraint.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2253,7 +2260,6 @@ c.get_data_type()
 <h4 id="check_5">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a description satisfies the constraint. The implementation depends on the type of the constraint.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2322,7 +2328,6 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the constraint expression is valid wrt a data model.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2335,20 +2340,23 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
+<p><a name="aea.helpers.search.models.Constraint.__str__"></a></p>
+<h4 id="__str___6"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the constraint.</p>
 <p><a name="aea.helpers.search.models.Query"></a></p>
 <h2 id="query-objects">Query Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Query</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>This class lets you build a query for the OEF.</p>
 <p><a name="aea.helpers.search.models.Query.__init__"></a></p>
 <h4 id="__init___9"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">constraints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ConstraintExpr</span><span class="p">],</span> <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataModel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Initialize a query.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2360,7 +2368,6 @@ False</p>
 <h4 id="check_6">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if a description satisfies the constraints of the query.</p>
 <p>The constraints are interpreted as conjunction.</p>
@@ -2375,7 +2382,6 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Given a data model, check whether the query is valid for that data model.</p>
 <p><strong>Returns</strong>:</p>
 <p><code>True</code> if the query is compliant with the data model, <code>False</code> otherwise.</p>
@@ -2383,7 +2389,6 @@ False</p>
 <h4 id="check_validity_4">check<code>_</code>validity</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Check whether the` object is valid.</p>
 <p>:return <code>None</code></p>
@@ -2396,14 +2401,18 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
+<p><a name="aea.helpers.search.models.Query.__str__"></a></p>
+<h4 id="__str___7"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Get the string representation of the constraint.</p>
 <p><a name="aea.helpers.search.models.Query.encode"></a></p>
 <h4 id="encode_1">encode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">encode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query_protobuf_object</span><span class="p">,</span> <span class="n">query_object</span><span class="p">:</span> <span class="s2">&quot;Query&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Encode an instance of this class into the protocol buffer object.</p>
 <p>The protocol buffer object in the query_protobuf_object argument must be matched with the instance of this class in the 'query_object' argument.</p>
@@ -2420,7 +2429,6 @@ False</p>
  <span class="o">|</span> <span class="n">decode</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query_protobuf_object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Query&quot;</span>
 </code></pre></div>
 
-
 <p>Decode a protocol buffer object that corresponds with this class into an instance of this class.</p>
 <p>A new instance of this class must be created that matches the protocol buffer object in the 'query_protobuf_object' argument.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2433,7 +2441,6 @@ False</p>
 <h4 id="haversine">haversine</h4>
 <div class="highlight"><pre><span></span><code><span class="n">haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lat2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </code></pre></div>
-
 
 <p>Compute the Haversine distance between two locations (i.e. two pairs of latitude and longitude).</p>
 <p><strong>Arguments</strong>:</p>
@@ -2455,7 +2462,7 @@ False</p>
                                 
                                 <a href="../generic/" class="button left"><strong>Previous:</strong></br>Generic</a>
                                 
-                                <a href="../../test_cases/" class="button right"><strong>Next:</strong></br>Test Cases</a>
+                                <a href="../../transaction/base/" class="button right"><strong>Next:</strong></br>Base</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1677,7 +1706,6 @@
 <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span> <span class="o">=</span> <span class="s2">&quot;fetchai_private_key_2.txt&quot;</span>
 </code></pre></div>
 
-
 <h2 id="create-a-private-key-and-an-aea">Create a private key and an AEA</h2>
 <p>To have access to the decision-maker, which is responsible for signing transactions, we need to create an AEA. We can create a an AEA with the builder, providing it with a private key we generate first.</p>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Create a private key</span>
@@ -1696,7 +1724,6 @@
     <span class="c1"># Create our AEA</span>
     <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </code></pre></div>
-
 
 <h2 id="add-a-simple-skill">Add a simple skill</h2>
 <p>Add a simple skill with a signing handler and the signing dialogues.</p>
@@ -1721,7 +1748,6 @@
     <span class="n">my_aea</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="n">simple_skill</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2 id="create-a-second-identity">Create a second identity</h2>
 <div class="highlight"><pre><span></span><code>    <span class="n">create_private_key</span><span class="p">(</span>
         <span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span>
@@ -1735,7 +1761,6 @@
         <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div>
-
 
 <h2 id="create-the-signing-message">Create the signing message</h2>
 <p>Next, we are creating the signing message and we send it to the decision-maker.</p>
@@ -1772,7 +1797,6 @@
     <span class="n">my_aea</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">decision_maker_message_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2 id="run-the-agent">Run the agent</h2>
 <p>Finally, we are running the agent and we expect the signed transaction to be printed in the terminal.</p>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Set the AEA running in a different thread</span>
@@ -1789,7 +1813,6 @@
         <span class="n">my_aea</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>After the completion of the signing, we get the signed transaction.</p>
 <h2 id="more-details">More details</h2>
@@ -1924,9 +1947,9 @@
         <span class="p">)</span>
 </code></pre></div>
 
-
 <p>You can find the full code for this example below:</p>
 <details><summary>Transaction via decision-maker full code</summary>
+
 
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -2201,7 +2224,7 @@
                                 
                                 <a href="../standalone-transaction/" class="button left"><strong>Previous:</strong></br>Create Stand-Alone Transaction</a>
                                 
-                                <a href="../deployment/" class="button right"><strong>Next:</strong></br>Deployment</a>
+                                <a href="../skill-testing/" class="button right"><strong>Next:</strong></br>Testing Skills</a>
                             </div><!-- .bottomnav end -->
 
                         </div> <!-- .page-wrapper end -->

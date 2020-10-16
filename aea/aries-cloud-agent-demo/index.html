@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1742,7 +1771,6 @@
 <div class="highlight"><pre><span></span><code>pip install aries-cloudagent
 </code></pre></div>
 
-
 <p>This demo has been successfully tested with aca-py version 0.4.5.</p>
 <p>This demo requires an instance of von network running in docker locally (for more info see <a href="https://github.com/bcgov/von-network#running-the-network-locally" target="_blank">here</a>)</p>
 <p>This demo has been successfully tested with the von-network git repository pulled on 07 Aug 2020 (commit number <code>ad1f84f64d4f4c106a81462f5fbff496c5fbf10e</code>). </p>
@@ -1755,19 +1783,16 @@
 ./manage start --logs
 </code></pre></div>
 
-
 <p>Once the ledger is running, you can see the ledger by going to the web server running on port 9000. On localhost, that means going to <a href="http://localhost:9000" target="_blank">http://localhost:9000</a>.  </p>
 <h2 id="alice-and-faber-acas">Alice and Faber ACAs</h2>
 <p>To learn about the command for starting an ACA and its various options:</p>
 <div class="highlight"><pre><span></span><code>aca-py start --help
 </code></pre></div>
 
-
 <h3 id="faber_aca">Faber_ACA</h3>
 <p>In the first terminal:</p>
 <div class="highlight"><pre><span></span><code>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8021</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8020</span> --outbound-transport http --webhook-url http://127.0.0.1:8022/webhooks
 </code></pre></div>
-
 
 <p>Make sure the ports above are unused.</p>
 <p>Take note of the specific IP addresses and ports you used in the above command. We will refer to them by the following names:</p>
@@ -1783,7 +1808,6 @@
 <div class="highlight"><pre><span></span><code>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8031</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8030</span> --outbound-transp http --webhook-url http://127.0.0.1:8032/webhooks
 </code></pre></div>
 
-
 <p>Again, make sure the above ports are unused and take note of the specific IP addresses and ports. In this case:</p>
 <ul>
 <li><strong>Alice admin IP</strong>: 127.0.0.1</li>
@@ -1794,10 +1818,9 @@
 <p>Now you can create <strong>Alice_AEA</strong> and <strong>Faber_AEA</strong> in terminals 3 and 4 respectively.</p>
 <h3 id="alice_aea">Alice_AEA</h3>
 <p>In the third terminal, fetch <strong>Alice_AEA</strong> and move into its project folder:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/aries_alice:0.11.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/aries_alice:0.12.0
 <span class="nb">cd</span> aries_alice
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1806,11 +1829,11 @@ The following steps create **Alice_AEA** from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create aries_alice
 <span class="nb">cd</span> aries_alice
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/http_client:0.9.0
-aea add connection fetchai/webhook:0.7.0
-aea add skill fetchai/aries_alice:0.8.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/http_client:0.10.0
+aea add connection fetchai/webhook:0.8.0
+aea add skill fetchai/aries_alice:0.9.0
 </code></pre></div>
 
 
@@ -1823,10 +1846,8 @@ aea add skill fetchai/aries_alice:0.8.0
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.models.strategy.args.admin_host <span class="m">127</span>.0.0.1
 </code></pre></div>
 
-
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.models.strategy.args.admin_port <span class="m">8031</span>
 </code></pre></div>
-
 
 <h4 id="configure-the-webhook-connection">Configure the <code>webhook</code> connection:</h4>
 <p>(configuration file: <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code>).</p>
@@ -1834,11 +1855,9 @@ aea add skill fetchai/aries_alice:0.8.0
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
 </code></pre></div>
 
-
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </code></pre></div>
-
 
 <h4 id="configure-the-p2p_libp2p-connection">Configure the <code>p2p_libp2p</code> connection:</h4>
 <p>(configuration file: <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>)</p>
@@ -1851,25 +1870,21 @@ aea add skill fetchai/aries_alice:0.8.0
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:7000</span>
 </code></pre></div>
 
-
 <h3 id="install-the-dependencies-and-run-alice_aea">Install the Dependencies and Run Alice_AEA:</h3>
 <p>Now install all the dependencies:</p>
 <div class="highlight"><pre><span></span><code>aea install
 </code></pre></div>
 
-
 <p>Finally run <strong>Alice_AEA</strong>:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
 
-
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address. We will refer to this as <strong>Alice_AEA's p2p address</strong>.</p>
 <h3 id="faber_aea">Faber_AEA</h3>
 <p>In the fourth terminal, fetch <strong>Faber_AEA</strong> and move into its project folder:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/aries_faber:0.11.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/aries_faber:0.12.0
 <span class="nb">cd</span> aries_faber
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1878,11 +1893,11 @@ The following steps create **Faber_AEA** from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create aries_faber
 <span class="nb">cd</span> aries_faber
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/http_client:0.9.0
-aea add connection fetchai/webhook:0.7.0
-aea add skill fetchai/aries_faber:0.7.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/http_client:0.10.0
+aea add connection fetchai/webhook:0.8.0
+aea add skill fetchai/aries_faber:0.8.0
 </code></pre></div>
 
 
@@ -1895,10 +1910,8 @@ aea add skill fetchai/aries_faber:0.7.0
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.models.strategy.args.admin_host <span class="m">127</span>.0.0.1
 </code></pre></div>
 
-
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.models.strategy.args.admin_port <span class="m">8021</span>
 </code></pre></div>
-
 
 <h4 id="configure-the-webhook-connection_1">Configure the <code>webhook</code> connection:</h4>
 <p>(configuration file: <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code>).</p>
@@ -1906,11 +1919,9 @@ aea add skill fetchai/aries_faber:0.7.0
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
 </code></pre></div>
 
-
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </code></pre></div>
-
 
 <h4 id="configure-the-p2p_libp2p-connection_1">Configure the <code>p2p_libp2p</code> connection:</h4>
 <p>(configuration file: <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>)</p>
@@ -1923,18 +1934,15 @@ aea add skill fetchai/aries_faber:0.7.0
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:7001</span>
 </code></pre></div>
 
-
 <p>where <code>SOME_ADDRESS</code> is <strong>Alice_AEA's p2p address</strong> as displayed in the third terminal.</p>
 <h3 id="install-the-dependencies-and-run-faber_aea">Install the Dependencies and Run Faber_AEA:</h3>
 <p>Now install all the dependencies:</p>
 <div class="highlight"><pre><span></span><code>aea install
 </code></pre></div>
 
-
 <p>Finally run <strong>Faber_AEA</strong>:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>You should see <strong>Faber_AEA</strong> running and showing logs of its activities. For example:</p>
 <p><img src="../assets/aries-demo-faber.png" alt="Aries demo: Faber terminal" class="center"></p>
@@ -1947,7 +1955,6 @@ aea add skill fetchai/aries_faber:0.7.0
 <div class="highlight"><pre><span></span><code>aea delete aries_faber
 aea delete aries_alice
 </code></pre></div>
-
 
 <h2 id="further-developments">Further developments</h2>
 <p>In the next update to this demo, the remaining interactions between AEAs and ACAs must be implemented. This means:</p>

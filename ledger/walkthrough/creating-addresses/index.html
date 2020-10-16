@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../aea/skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../aea/deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../aea/multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../../aea/api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../../aea/api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../aea/api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1658,13 +1687,11 @@
 <div class="highlight"><pre><span></span><code>pip3 install -U pocketbook
 </code></pre></div>
 
-
 <p>The <code>-U</code> option ensures that if you already have it installed, it will upgrade where applicable.</p>
 <p>Pocketbook defaults to access the main network. You can change the network using the <code>-n</code> parameter. E.g.:</p>
 <div class="highlight"><pre><span></span><code>pocketbook -n testnet &lt;command&gt;
 pocketbook -n mainnet &lt;command&gt;
 </code></pre></div>
-
 
 <p>For details of how to use Pocketbook, you can use its help option <code>-h</code>.</p>
 <h2 id="creating-a-new-address">Creating a new address</h2>
@@ -1674,13 +1701,11 @@ pocketbook -n mainnet &lt;command&gt;
 <div class="highlight"><pre><span></span><code>pocketbook create
 </code></pre></div>
 
-
 <p>You will be prompted to enter a name for this key pair, followed by a password for the key. Below is a sample output:</p>
 <div class="highlight"><pre><span></span><code><span class="err">Enter name for key: foo</span>
 <span class="err">Enter password for key...:</span>
 <span class="err">Confirm password for key.:</span>
 </code></pre></div>
-
 
 <p>It is the user's responsibility to store the private key to this securely. Addresses generated inside Pocketbook will have the private keys encrypted and secured, so you don't need to store them manually, but you do need to back them up yourself. </p>
 <p>Pocketbook stores all information in the <code>~/.pocketbook</code> folder on your computer. You can back this folder up entirely to store your encrypted private keys. We <strong>strongly recommend</strong> that you do this regularly and keep the backups in an encrypted safe place in order to provide a mechanism for recovering your accounts.</p>
@@ -1707,7 +1732,6 @@ pocketbook -n mainnet &lt;command&gt;
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;    Address: &quot;</span><span class="p">,</span> <span class="n">Address</span><span class="p">(</span><span class="n">entity</span><span class="p">))</span>
 </code></pre></div>
 
-
 <p>For example, if you save the above file into a program called <code>generate_address.py</code>, you can run it and will get a result like this:</p>
 <div class="highlight"><pre><span></span><code>$ python3 generate_address.py 
 Fetch.ai Address Generator v1.0
@@ -1715,7 +1739,6 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
            :  b<span class="s1">&#39;4\x1f\x00\xf7\x89\x00c\xee\xfd5h\xf2\xf5\xc7\xc3\x10\x80/\xd3+:\x15\xa1\x11\xac\x0f\xbf\xb4\xa6\\\xe0{&#39;</span>
     Address:  2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </code></pre></div>
-
 
 <div class="admonition warning">
 <p class="admonition-title"><strong>Do not use this account</strong></p>
@@ -1726,17 +1749,14 @@ Private key:  341f00f7890063eefd3568f2f5c7c310802fd32b3a15a111ac0fbfb4a65ce07b
 <div class="highlight"><pre><span></span><code>pocketbook -n &lt;network&gt; add &lt;name-for-the-address&gt; &lt;address&gt;
 </code></pre></div>
 
-
 <p>For our particular example:</p>
 <div class="highlight"><pre><span></span><code>pocketbook -n testnet add GeneratedTestnetAddress 2uGQSyM56XfkaFeoyYib2dt4rvFwVZ6if5JREZd54d1sNehEQ5
 </code></pre></div>
-
 
 <h2 id="listing-an-address-balance">Listing an address balance</h2>
 <p>You can query the balance of your accounts and address book entries with a command like the following:</p>
 <div class="highlight"><pre><span></span><code>pocketbook -n &lt;network&gt; list <span class="o">[</span>-v<span class="o">]</span>
 </code></pre></div>
-
 
 <p>Adding the <code>-v</code> option will display the addresses alongside the names and balances.</p>
 <p>For our particular example:</p>

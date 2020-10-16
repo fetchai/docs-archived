@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,22 +1684,26 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Resources</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>This class implements the object that holds the resources of an AEA.</p>
 <p><a name="aea.registries.resources.Resources.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;standalone&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Instantiate the resources.</p>
 <p>:return None</p>
+<p><a name="aea.registries.resources.Resources.agent_name"></a></p>
+<h4 id="agent_name">agent<code>_</code>name</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">agent_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+<p>Get the agent name.</p>
 <p><a name="aea.registries.resources.Resources.component_registry"></a></p>
 <h4 id="component_registry">component<code>_</code>registry</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">component_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AgentComponentRegistry</span>
 </code></pre></div>
-
 
 <p>Get the agent component registry.</p>
 <p><a name="aea.registries.resources.Resources.behaviour_registry"></a></p>
@@ -1679,14 +1712,12 @@
  <span class="o">|</span> <span class="n">behaviour_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentRegistry</span><span class="p">[</span><span class="n">Behaviour</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the behaviour registry.</p>
 <p><a name="aea.registries.resources.Resources.handler_registry"></a></p>
 <h4 id="handler_registry">handler<code>_</code>registry</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">handler_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HandlerRegistry</span>
 </code></pre></div>
-
 
 <p>Get the handler registry.</p>
 <p><a name="aea.registries.resources.Resources.model_registry"></a></p>
@@ -1695,20 +1726,17 @@
  <span class="o">|</span> <span class="n">model_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentRegistry</span><span class="p">[</span><span class="n">Model</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the model registry.</p>
 <p><a name="aea.registries.resources.Resources.add_component"></a></p>
 <h4 id="add_component">add<code>_</code>component</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_component</span><span class="p">(</span><span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Add a component to resources.</p>
 <p><a name="aea.registries.resources.Resources.add_protocol"></a></p>
 <h4 id="add_protocol">add<code>_</code>protocol</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_protocol</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">Protocol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Add a protocol to the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1722,7 +1750,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_protocol</span><span class="p">(</span><span class="n">protocol_id</span><span class="p">:</span> <span class="n">ProtocolId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Protocol</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get protocol for given protocol id.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1735,7 +1762,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_protocols</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Protocol</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the list of all the protocols.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of protocols.</p>
@@ -1743,7 +1769,6 @@
 <h4 id="remove_protocol">remove<code>_</code>protocol</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_protocol</span><span class="p">(</span><span class="n">protocol_id</span><span class="p">:</span> <span class="n">ProtocolId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Remove a protocol from the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1757,7 +1782,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_contract</span><span class="p">(</span><span class="n">contract</span><span class="p">:</span> <span class="n">Contract</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Add a contract to the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1769,7 +1793,6 @@
 <h4 id="get_contract">get<code>_</code>contract</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_contract</span><span class="p">(</span><span class="n">contract_id</span><span class="p">:</span> <span class="n">ContractId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Contract</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get contract for given contract id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1783,7 +1806,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_contracts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Contract</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the list of all the contracts.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of contracts.</p>
@@ -1791,7 +1813,6 @@
 <h4 id="remove_contract">remove<code>_</code>contract</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_contract</span><span class="p">(</span><span class="n">contract_id</span><span class="p">:</span> <span class="n">ContractId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Remove a contract from the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1805,7 +1826,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_connection</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Add a connection to the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1817,7 +1837,6 @@
 <h4 id="get_connection">get<code>_</code>connection</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_connection</span><span class="p">(</span><span class="n">connection_id</span><span class="p">:</span> <span class="n">ConnectionId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get connection for given connection id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1831,7 +1850,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_connections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the list of all the connections.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of connections.</p>
@@ -1839,7 +1857,6 @@
 <h4 id="remove_connection">remove<code>_</code>connection</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_connection</span><span class="p">(</span><span class="n">connection_id</span><span class="p">:</span> <span class="n">ConnectionId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Remove a connection from the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1853,7 +1870,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_skill</span><span class="p">(</span><span class="n">skill</span><span class="p">:</span> <span class="n">Skill</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Add a skill to the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1865,7 +1881,6 @@
 <h4 id="get_skill">get<code>_</code>skill</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_skill</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Skill</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get the skill for a given skill id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1879,7 +1894,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_skills</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Skill</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the list of all the skills.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of skills.</p>
@@ -1887,7 +1901,6 @@
 <h4 id="remove_skill">remove<code>_</code>skill</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_skill</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Remove a skill from the set of resources.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1900,7 +1913,6 @@
 <h4 id="get_handler">get<code>_</code>handler</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_handler</span><span class="p">(</span><span class="n">protocol_id</span><span class="p">:</span> <span class="n">ProtocolId</span><span class="p">,</span> <span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Handler</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get a specific handler.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1915,7 +1927,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_handlers</span><span class="p">(</span><span class="n">protocol_id</span><span class="p">:</span> <span class="n">ProtocolId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Handler</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get all handlers for a given protocol.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1928,7 +1939,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_handlers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Handler</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get all handlers from all skills.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of handlers</p>
@@ -1936,7 +1946,6 @@
 <h4 id="get_behaviour">get<code>_</code>behaviour</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_behaviour</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">,</span> <span class="n">behaviour_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Behaviour</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get a specific behaviours for a given skill.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1951,7 +1960,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_behaviours</span><span class="p">(</span><span class="n">skill_id</span><span class="p">:</span> <span class="n">SkillId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Behaviour</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get all behaviours for a given skill.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1964,7 +1972,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_all_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Behaviour</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get all behaviours from all skills.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of all behaviours</p>
@@ -1972,7 +1979,6 @@
 <h4 id="setup">setup</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Set up the resources.</p>
 <p>Calls setup on all resources.</p>
@@ -1982,7 +1988,6 @@
 <h4 id="teardown">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Teardown the resources.</p>
 <p>Calls teardown on all resources.</p>

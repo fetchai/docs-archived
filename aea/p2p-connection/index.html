@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1647,26 +1676,24 @@
 
                                     
 
-<p>The <code>fetchai/p2p_libp2p:0.10.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+<p>The <code>fetchai/p2p_libp2p:0.11.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <h3 id="create-and-run-the-genesis-aea">Create and run the genesis AEA</h3>
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span><code>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
-aea run --connections fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
+aea run --connections fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
-
 
 <h3 id="create-and-run-another-aea">Create and run another AEA</h3>
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span><code>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
-
 
 <p>Provide the AEA with the information it needs to find the genesis by replacing the following block in <code>vendor/fetchai/connnections/p2p_libp2p/connection.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
@@ -1677,12 +1704,10 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
 <p>Here <code>MULTI_ADDRESSES</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.10.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
-
 
 <p>You can inspect the <code>libp2p_node.log</code> log files of the AEA to see how they discover each other.</p>
 <h2 id="local-demo-with-skills">Local demo with skills</h2>
@@ -1693,7 +1718,6 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <span class="l l-Scalar l-Scalar-Plain">/dns4/agents-p2p-dht.sandbox.fetch-ai.com/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW</span>
 </code></pre></div>
 
-
 <p>In particular, by modifying the configuration such that:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
@@ -1702,9 +1726,8 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
 </code></pre></div>
 
-
 <h2 id="configuring-the-connectionyaml-entries">Configuring the <code>connection.yaml</code> entries:</h2>
-<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.10.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
+<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.11.0</code> connection consult the <code>README.md</code> supplied with the connection package.</p>
 <h2 id="running-go-peer-standalone">Running Go peer standalone</h2>
 <p>You can run the peer node in standalone mode, that is, as a Go process with no dependency to the agents framework. 
 To facilitate the deployment, we provide a script

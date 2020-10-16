@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,20 +1684,17 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConnectionStates</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Connection states enum.</p>
 <p><a name="aea.connections.base.Connection"></a></p>
 <h2 id="connection-objects">Connection Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Connection</span><span class="p">(</span><span class="n">Component</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Abstract definition of a connection.</p>
 <p><a name="aea.connections.base.Connection.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Identity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">crypto_store</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CryptoStore</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restricted_to_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">excluded_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Identity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">crypto_store</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CryptoStore</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restricted_to_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">excluded_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span>
 </code></pre></div>
-
 
 <p>Initialize the connection.</p>
 <p>The configuration must be specified if and only if the following
@@ -1687,14 +1713,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">loop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">AbstractEventLoop</span>
 </code></pre></div>
 
-
 <p>Get the event loop.</p>
 <p><a name="aea.connections.base.Connection.address"></a></p>
 <h4 id="address">address</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">address</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;Address&quot;</span>
 </code></pre></div>
-
 
 <p>Get the address.</p>
 <p><a name="aea.connections.base.Connection.crypto_store"></a></p>
@@ -1703,14 +1727,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">crypto_store</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">CryptoStore</span>
 </code></pre></div>
 
-
 <p>Get the crypto store.</p>
 <p><a name="aea.connections.base.Connection.has_crypto_store"></a></p>
 <h4 id="has_crypto_store">has<code>_</code>crypto<code>_</code>store</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">has_crypto_store</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if the connection has the crypto store.</p>
 <p><a name="aea.connections.base.Connection.component_type"></a></p>
@@ -1719,14 +1741,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">component_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentType</span>
 </code></pre></div>
 
-
 <p>Get the component type.</p>
 <p><a name="aea.connections.base.Connection.configuration"></a></p>
 <h4 id="configuration">configuration</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">configuration</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ConnectionConfig</span>
 </code></pre></div>
-
 
 <p>Get the connection configuration.</p>
 <p><a name="aea.connections.base.Connection.restricted_to_protocols"></a></p>
@@ -1735,14 +1755,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">restricted_to_protocols</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the ids of the protocols this connection is restricted to.</p>
 <p><a name="aea.connections.base.Connection.excluded_protocols"></a></p>
 <h4 id="excluded_protocols">excluded<code>_</code>protocols</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">excluded_protocols</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get the ids of the excluded protocols for this connection.</p>
 <p><a name="aea.connections.base.Connection.state"></a></p>
@@ -1751,14 +1769,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ConnectionStates</span>
 </code></pre></div>
 
-
 <p>Get the connection status.</p>
 <p><a name="aea.connections.base.Connection.connect"></a></p>
 <h4 id="connect">connect</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Set up the connection.</p>
 <p><a name="aea.connections.base.Connection.disconnect"></a></p>
@@ -1767,14 +1783,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="k">async</span> <span class="n">disconnect</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Tear down the connection.</p>
 <p><a name="aea.connections.base.Connection.send"></a></p>
 <h4 id="send">send</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="k">async</span> <span class="n">send</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="s2">&quot;Envelope&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Send an envelope.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1789,7 +1803,6 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="k">async</span> <span class="n">receive</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Envelope&quot;</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Receive an envelope.</p>
 <p><strong>Returns</strong>:</p>
 <p>the received envelope, or None if an error occurred.</p>
@@ -1798,7 +1811,6 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">crypto_store</span><span class="p">:</span> <span class="n">CryptoStore</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Connection&quot;</span>
 </code></pre></div>
-
 
 <p>Load the connection from a directory.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1812,9 +1824,8 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
 <p><a name="aea.connections.base.Connection.from_config"></a></p>
 <h4 id="from_config">from<code>_</code>config</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">crypto_store</span><span class="p">:</span> <span class="n">CryptoStore</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Connection&quot;</span>
+ <span class="o">|</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">ConnectionConfig</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">crypto_store</span><span class="p">:</span> <span class="n">CryptoStore</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Connection&quot;</span>
 </code></pre></div>
-
 
 <p>Load a connection from a configuration.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1831,7 +1842,6 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">is_connected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Return is connected state.</p>
 <p><a name="aea.connections.base.Connection.is_connecting"></a></p>
 <h4 id="is_connecting">is<code>_</code>connecting</h4>
@@ -1839,14 +1849,12 @@ parameters are None: connection_id, excluded_protocols or restricted_to_protocol
  <span class="o">|</span> <span class="n">is_connecting</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Return is connecting state.</p>
 <p><a name="aea.connections.base.Connection.is_disconnected"></a></p>
 <h4 id="is_disconnected">is<code>_</code>disconnected</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_disconnected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Return is disconnected state.</p>
 

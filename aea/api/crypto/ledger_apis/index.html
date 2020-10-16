@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,14 +1684,12 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">LedgerApis</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Store all the ledger apis we initialise.</p>
 <p><a name="aea.crypto.ledger_apis.LedgerApis.has_ledger"></a></p>
 <h4 id="has_ledger">has<code>_</code>ledger</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
  <span class="o">|</span> <span class="n">has_ledger</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if it has the api.</p>
 <p><a name="aea.crypto.ledger_apis.LedgerApis.get_api"></a></p>
@@ -1671,14 +1698,12 @@
  <span class="o">|</span> <span class="n">get_api</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LedgerApi</span>
 </code></pre></div>
 
-
 <p>Get the ledger API.</p>
 <p><a name="aea.crypto.ledger_apis.LedgerApis.get_balance"></a></p>
 <h4 id="get_balance">get<code>_</code>balance</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">get_balance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get the token balance.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1693,7 +1718,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">get_transfer_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sender_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_fee</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="p">,)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get a transaction to transfer from self to destination.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1713,7 +1737,6 @@
  <span class="o">|</span> <span class="n">send_signed_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tx_signed</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Send a signed transaction and wait for confirmation.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1727,7 +1750,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">get_transaction_receipt</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get the transaction receipt for a transaction digest.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1743,7 +1765,6 @@
  <span class="o">|</span> <span class="n">get_transaction</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tx_digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the transaction for a transaction digest.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1758,7 +1779,6 @@
  <span class="o">|</span> <span class="n">is_transaction_settled</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tx_receipt</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the transaction is settled and correct.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1772,7 +1792,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
  <span class="o">|</span> <span class="n">is_transaction_valid</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">tx_nonce</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check whether the transaction is valid.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1792,7 +1811,6 @@
  <span class="o">|</span> <span class="n">generate_tx_nonce</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seller</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Generate a random str message.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1807,7 +1825,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
  <span class="o">|</span> <span class="n">recover_message</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_deprecated_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Address</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Recover the addresses from the hash.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1824,7 +1841,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
  <span class="o">|</span> <span class="n">get_hash</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the hash of a message.</p>
 <p><strong>Arguments</strong>:</p>

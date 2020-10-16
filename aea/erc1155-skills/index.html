@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1666,11 +1695,10 @@ with a one-step atomic swap functionality. That means the trade between the two 
 <h2 id="demo">Demo</h2>
 <h3 id="create-the-deployer-aea">Create the deployer AEA</h3>
 <p>Fetch the AEA that will deploy the contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_deployer:0.14.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_deployer:0.15.0
 <span class="nb">cd</span> erc1155_deployer
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1680,12 +1708,12 @@ Create the AEA that will deploy the contract.
 
 <div class="highlight"><pre><span></span><code>aea create erc1155_deployer
 <span class="nb">cd</span> erc1155_deployer
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/erc1155_deploy:0.14.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/erc1155_deploy:0.15.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
 
 
@@ -1693,9 +1721,9 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 Then update the agent config (`aea-config.yaml`) with the default routing:
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.6.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1715,20 +1743,17 @@ And change the default ledger:
 aea add-key ethereum ethereum_private_key.txt
 </code></pre></div>
 
-
 <p>And one for the P2P connection:</p>
 <div class="highlight"><pre><span></span><code>aea generate-key cosmos
 aea add-key cosmos cosmos_private_key.txt --connection
 </code></pre></div>
 
-
 <h3 id="create-the-client-aea">Create the client AEA</h3>
 <p>In another terminal, fetch the AEA that will get some tokens from the deployer.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_client:0.14.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_client:0.15.0
 <span class="nb">cd</span> erc1155_client
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1738,12 +1763,12 @@ Create the AEA that will get some tokens from the deployer.
 
 <div class="highlight"><pre><span></span><code>aea create erc1155_client
 <span class="nb">cd</span> erc1155_client
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/erc1155_client:0.13.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/erc1155_client:0.14.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
 
 
@@ -1751,9 +1776,9 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 Then update the agent config (`aea-config.yaml`) with the default routing:
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.6.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1773,23 +1798,19 @@ And change the default ledger:
 aea add-key ethereum ethereum_private_key.txt
 </code></pre></div>
 
-
 <p>And one for the P2P connection:</p>
 <div class="highlight"><pre><span></span><code>aea generate-key cosmos
 aea add-key cosmos cosmos_private_key.txt --connection
 </code></pre></div>
-
 
 <h3 id="fund-the-aeas">Fund the AEAs</h3>
 <p>To create some wealth for your AEAs for the Ethereum <code>ropsten</code> network. Note that this needs to be executed from each AEA folder:</p>
 <div class="highlight"><pre><span></span><code>aea generate-wealth ethereum
 </code></pre></div>
 
-
 <p>To check the wealth use (after some time for the wealth creation to be mined on Ropsten):</p>
 <div class="highlight"><pre><span></span><code>aea get-wealth ethereum
 </code></pre></div>
-
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
@@ -1801,12 +1822,10 @@ aea add-key cosmos cosmos_private_key.txt --connection
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.soef.config.chain_identifier ethereum
 </code></pre></div>
 
-
 <h2 id="run-the-aeas">Run the AEAs</h2>
 <p>First, run the deployer AEA.</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <p>It will perform the following steps:
@@ -1817,8 +1836,7 @@ aea add-key cosmos cosmos_private_key.txt --connection
 <div class="highlight"><pre><span></span><code>registering service on SOEF.
 </code></pre></div>
 
-
-<p>Then, update the configuration of the buyer AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<p>Then, update the configuration of the client AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
@@ -1827,12 +1845,10 @@ aea add-key cosmos cosmos_private_key.txt --connection
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
 <p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <p>Then, in the separate terminal run the client AEA.</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>You will see that upon discovery the two AEAs exchange information about the transaction and the client at the end signs and sends the signature to the deployer AEA to send it to the network.</p>
 <div class="admonition note">
@@ -1849,7 +1865,6 @@ aea add-key cosmos cosmos_private_key.txt --connection
 aea delete erc1155_deployer
 aea delete erc1155_client
 </code></pre></div>
-
 
 <h2 id="communication">Communication</h2>
 <p>This diagram shows the communication between the various entities as data is successfully trustless trade. </p>

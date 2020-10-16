@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1649,10 +1678,10 @@
 
 <p>You can use the <a href="../simple-oef">SOEF</a> in the agent framework by using the SOEF connection as a package in your agent project.</p>
 <h2 id="add-the-soef-package">Add the SOEF package</h2>
-<p>Check out the <a href="../cli-commands">CLI guide</a> on details how to add a connection. You will want to add the <code>fetchai/soef:0.9.0</code> connection package. </p>
+<p>Check out the <a href="../cli-commands">CLI guide</a> on details how to add a connection. You will want to add the <code>fetchai/soef:0.10.0</code> connection package. </p>
 <h2 id="register-your-agent-and-its-services">Register your agent and its services</h2>
 <h3 id="register-agent-location">Register agent location</h3>
-<p>To register your agent's location, you have to send a message in the <code>fetchai/oef_search:0.7.0</code> protocol to the SOEF connection.</p>
+<p>To register your agent's location, you have to send a message in the <code>fetchai/oef_search:0.8.0</code> protocol to the SOEF connection.</p>
 <p>First, define a data model for location data:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">Location</span>
 
@@ -1663,14 +1692,12 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>It is important to use this exact data model, as the SOEF connection can only process specific data models.</p>
 <p>Second, create a location object:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Location</span>
 
 <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="mf">52.2057092</span><span class="p">,</span> <span class="mf">2.1183431</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Third, construct a service description instance with location and data model:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
@@ -1681,7 +1708,6 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>Finally, construct a message and send it:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
 
@@ -1690,7 +1716,6 @@
     <span class="n">service_description</span><span class="o">=</span><span class="n">service_description</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <p>In case everything is registered ok, you will not receive any message back.</p>
 <p>If something goes wrong you will receive an error message with performative <code>OefSearchMessage.Performative.OEF_ERROR</code>.</p>
@@ -1708,14 +1733,12 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>An example follows:</p>
 <div class="highlight"><pre><span></span><code><span class="n">service_instance</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;piece&quot;</span><span class="p">:</span> <span class="s2">&quot;genus&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;service&quot;</span><span class="p">}</span>
 <span class="n">service_description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
     <span class="n">service_instance</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">AGENT_PERSONALITY_MODEL</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <h3 id="register-services">Register services</h3>
 <p>To set some service key and value you have to use a specific data model:</p>
@@ -1729,14 +1752,12 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>An example follows:</p>
 <div class="highlight"><pre><span></span><code><span class="n">service_instance</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">}</span>
 <span class="n">service_description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
     <span class="n">service_instance</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">SET_SERVICE_KEY_MODEL</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <h3 id="remove-service-key">Remove service key</h3>
 <p>To remove service key have to use a specific data model:</p>
@@ -1747,14 +1768,12 @@
 <span class="p">)</span>
 </code></pre></div>
 
-
 <p>An example follows:</p>
 <div class="highlight"><pre><span></span><code><span class="n">service_instance</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">}</span>
 <span class="n">service_description</span> <span class="o">=</span> <span class="n">Description</span><span class="p">(</span>
     <span class="n">service_instance</span><span class="p">,</span> <span class="n">data_model</span><span class="o">=</span><span class="n">REMOVE_SERVICE_KEY_MODEL</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <h2 id="perform-a-search">Perform a search</h2>
 <p>To perform a search for services registered you have to define a search query consisting of constraints. The location constraints is required, personality pieces or services keys constraints are optional.</p>
@@ -1790,7 +1809,6 @@
     <span class="n">query</span><span class="o">=</span><span class="n">closeness_query</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <p>In case of error you will received a message with <code>OefSearchMessage.Performative.OEF_ERROR</code>. In case of successful search you will receive a message with performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code> and the list of matched agents addresses.</p>
 <h2 id="generic-command">Generic command</h2>

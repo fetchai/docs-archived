@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1731,11 +1760,10 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.10.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.11.0
 <span class="nb">cd</span> tac_controller
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1744,12 +1772,12 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create tac_controller
 <span class="nb">cd</span> tac_controller
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_control:0.8.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_control:0.9.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 </code></pre></div>
 
@@ -1758,7 +1786,7 @@ aea config <span class="nb">set</span> agent.default_ledger fetchai
 In `tac_controller/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1768,12 +1796,11 @@ In `tac_controller/aea-config.yaml` add
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_one
-aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_two
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.12.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.12.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1789,13 +1816,13 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_participation:0.9.0
-aea add skill fetchai/tac_negotiation:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_participation:0.10.0
+aea add skill fetchai/tac_negotiation:0.11.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 </code></pre></div>
 
@@ -1804,8 +1831,8 @@ aea config <span class="nb">set</span> agent.default_ledger fetchai
 In `tac_participant_one/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1813,13 +1840,13 @@ In `tac_participant_one/aea-config.yaml` add
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_participation:0.9.0
-aea add skill fetchai/tac_negotiation:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_participation:0.10.0
+aea add skill fetchai/tac_negotiation:0.11.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 </code></pre></div>
 
@@ -1828,8 +1855,8 @@ aea config <span class="nb">set</span> agent.default_ledger fetchai
 In `tac_participant_two/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1844,23 +1871,25 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <h3 id="update-the-game-parameters-in-the-controller">Update the game parameters in the controller</h3>
 <p>Navigate to the tac controller project, then use the command line to get and set the start time (set it to at least two minutes in the future):</p>
 <div class="highlight"><pre><span></span><code>aea config get vendor.fetchai.skills.tac_control.models.parameters.args.registration_start_time
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.parameters.args.registration_start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </code></pre></div>
 
-
 <h3 id="update-the-connection-params">Update the connection params</h3>
 <p>Briefly run the controller AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
 
-
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
-<p>Then, update the configuration of the weather client AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
+<p>Then, update the configuration of the weather client AEA's p2p connection (in <code>aea-config.yaml</code>) add the following:</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">p2p_libp2p</span>
+<span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.11.0</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
+<span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
@@ -1868,15 +1897,18 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
-<div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">p2p_libp2p</span>
+<span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.11.0</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
+<span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11002</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
   <span class="nt">local_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9002</span>
   <span class="nt">log_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9002</span>
 </code></pre></div>
-
 
 <p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <h3 id="run-the-aeas">Run the AEAs</h3>
@@ -1886,7 +1918,6 @@ at once.</p>
 can launch all the TAC agents as follows from the root directory:</p>
 <div class="highlight"><pre><span></span><code>aea launch tac_controller tac_participant_one tac_participant_two
 </code></pre></div>
-
 
 <p>You may want to try <code>--multithreaded</code>
 option in order to run the agents

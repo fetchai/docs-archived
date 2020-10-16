@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../aea/skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../aea/deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../aea/multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../../aea/api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../../aea/api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../aea/api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1672,7 +1701,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <h2 id="setting-up-the-model">Setting up the model</h2>
 <p>We then create a <code>Model</code> type and set a flag on it that describes what kind of <code>Model</code> we want. A <code>sequential</code> model allows us to manually add layers specifying:</p>
 <ul>
@@ -1689,24 +1717,20 @@
     <span class="n">model</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;mse&quot;</span><span class="p">,</span> <span class="s">&quot;adam&quot;</span><span class="p">);</span>
 </code></pre></div>
 
-
 <h2 id="training-and-evaluating-the-model">Training and evaluating the model</h2>
 <p>Training the model once set up is easy: we just call <code>fit</code> with the data, labels, and chosen batch size.</p>
 <div class="highlight"><pre><span></span><code>    <span class="n">var</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10u64</span><span class="p">;</span>
     <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">);</span>
 </code></pre></div>
 
-
 <p>Evaluating the model will return the training loss by default, but other metrics may be specified.</p>
 <div class="highlight"><pre><span></span><code>    <span class="n">var</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">();</span>
 </code></pre></div>
-
 
 <h2 id="making-predictions-on-the-model">Making predictions on the model</h2>
 <p>Finally, we make house price predictions by passing in the test data. Since <code>test_data</code> contains input data for multiple houses, the output tensor contains multiple predictions.</p>
 <div class="highlight"><pre><span></span><code>    <span class="n">var</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_data</span><span class="p">);</span>
 </code></pre></div>
-
 
 <h2 id="running-the-script">Running the script</h2>
 <p>The script can be run from the root of the ledger folder, passing the input files as arguments with the following:</p>

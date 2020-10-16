@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,27 +1684,25 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MultiAddr</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Protocol Labs' Multiaddress representation of a network address.</p>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">multihash_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a multiaddress.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>host</code>: ip host of the address</li>
-<li><code>host</code>: port number of the address</li>
-<li><code>host</code>: hex encoded public key. Must conform to Bitcoin EC encoding standard for Secp256k1</li>
+<li><code>port</code>: port number of the address</li>
+<li><code>public_key</code>: hex encoded public key. Must conform to Bitcoin EC encoding standard for Secp256k1</li>
+<li><code>multihash_id</code>: a multihash of the public key</li>
 </ul>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.compute_peerid"></a></p>
 <h4 id="compute_peerid">compute<code>_</code>peerid</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
  <span class="o">|</span> <span class="n">compute_peerid</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Compute the peer id from a public key.</p>
 <p>In particular, compute the base58 representation of
@@ -1686,12 +1713,22 @@ libp2p PeerID from Bitcoin EC encoded Secp256k1 public key.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the peer id.</p>
+<p><a name="aea.helpers.multiaddr.base.MultiAddr.from_string"></a></p>
+<h4 id="from_string">from<code>_</code>string</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">maddr</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAddr&quot;</span>
+</code></pre></div>
+
+<p>Construct a MultiAddr object from its string format</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>maddr</code>: multiaddress string</li>
+</ul>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.public_key"></a></p>
 <h4 id="public_key">public<code>_</code>key</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">public_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the public key.</p>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.peer_id"></a></p>
@@ -1700,20 +1737,31 @@ libp2p PeerID from Bitcoin EC encoded Secp256k1 public key.</p>
  <span class="o">|</span> <span class="n">peer_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the peer id.</p>
+<p><a name="aea.helpers.multiaddr.base.MultiAddr.host"></a></p>
+<h4 id="host">host</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+<p>Get the peer host.</p>
+<p><a name="aea.helpers.multiaddr.base.MultiAddr.port"></a></p>
+<h4 id="port">port</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</code></pre></div>
+
+<p>Get the peer port.</p>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.format"></a></p>
 <h4 id="format">format</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nb">format</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Canonical representation of a multiaddress.</p>
 <p><a name="aea.helpers.multiaddr.base.MultiAddr.__str__"></a></p>
 <h4 id="__str__"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Default string representation of a mutliaddress.</p>
 

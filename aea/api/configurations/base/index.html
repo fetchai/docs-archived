@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1650,34 +1679,154 @@
 <p><a name="aea.configurations.base"></a></p>
 <h1 id="aeaconfigurationsbase">aea.configurations.base</h1>
 <p>Classes to handle AEA configurations.</p>
+<p><a name="aea.configurations.base.PyPIPackageName"></a></p>
+<h2 id="pypipackagename-objects">PyPIPackageName Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PyPIPackageName</span><span class="p">(</span><span class="n">RegexConstrainedString</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A PyPI Package name.</p>
+<p><a name="aea.configurations.base.GitRef"></a></p>
+<h2 id="gitref-objects">GitRef Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GitRef</span><span class="p">(</span><span class="n">RegexConstrainedString</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A Git reference.</p>
+<p>It can be a branch name, a commit hash or a tag.</p>
 <p><a name="aea.configurations.base.Dependency"></a></p>
-<h4 id="dependency">Dependency</h4>
-<p>A dependency is a dictionary with the following (optional) keys:
-    - version: a version specifier(s) (e.g. '==0.1.0').
-    - index: the PyPI index where to download the package from (default: https://pypi.org)
-    - git: the URL to the Git repository (e.g. https://github.com/fetchai/agents-aea.git)
-    - ref: either the branch name, the tag, the commit number or a Git reference (default: 'master'.)
-If the 'git' field is set, the 'version' field will be ignored.
+<h2 id="dependency-objects">Dependency Objects</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dependency</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This class represents a PyPI dependency.</p>
+<p>It contains the following information:
+- version: a version specifier(s) (e.g. '==0.1.0').
+- index: the PyPI index where to download the package from (default: https://pypi.org)
+- git: the URL to the Git repository (e.g. https://github.com/fetchai/agents-aea.git)
+- ref: either the branch name, the tag, the commit number or a Git reference (default: 'master'.)</p>
+<p>If the 'git' field is set, the 'version' field will be ignored.
 These fields will be forwarded to the 'pip' command.</p>
+<p><a name="aea.configurations.base.Dependency.__init__"></a></p>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PyPIPackageName</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SpecifierSet</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Url</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">git</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Url</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">GitRef</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Initialize a PyPI dependency.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>name</code>: the package name.</li>
+<li><code>version</code>: the specifier set object</li>
+<li><code>index</code>: the URL to the PyPI server.</li>
+<li><code>git</code>: the URL to a git repository.</li>
+<li><code>ref</code>: the Git reference (branch/commit/tag).</li>
+</ul>
+<p><a name="aea.configurations.base.Dependency.name"></a></p>
+<h4 id="name">name</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+<p>Get the name.</p>
+<p><a name="aea.configurations.base.Dependency.version"></a></p>
+<h4 id="version">version</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+<p>Get the version.</p>
+<p><a name="aea.configurations.base.Dependency.index"></a></p>
+<h4 id="index">index</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get the index.</p>
+<p><a name="aea.configurations.base.Dependency.git"></a></p>
+<h4 id="git">git</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">git</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get the git.</p>
+<p><a name="aea.configurations.base.Dependency.ref"></a></p>
+<h4 id="ref">ref</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">ref</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get the ref.</p>
+<p><a name="aea.configurations.base.Dependency.from_json"></a></p>
+<h4 id="from_json">from<code>_</code>json</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s2">&quot;Dependency&quot;</span>
+</code></pre></div>
+
+<p>Parse a dependency object from a dictionary.</p>
+<p><a name="aea.configurations.base.Dependency.to_json"></a></p>
+<h4 id="to_json">to<code>_</code>json</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">to_json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Transform the object to JSON.</p>
+<p><a name="aea.configurations.base.Dependency.get_pip_install_args"></a></p>
+<h4 id="get_pip_install_args">get<code>_</code>pip<code>_</code>install<code>_</code>args</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_pip_install_args</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get 'pip install' arguments.</p>
+<p><a name="aea.configurations.base.Dependency.__str__"></a></p>
+<h4 id="__str__"><code>__</code>str<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+<p>Get the string representation.</p>
+<p><a name="aea.configurations.base.Dependency.__eq__"></a></p>
+<h4 id="__eq__"><code>__</code>eq<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Compare with another object.</p>
 <p><a name="aea.configurations.base.Dependencies"></a></p>
 <h4 id="dependencies">Dependencies</h4>
 <p>A dictionary from package name to dependency data structure (see above).
 The package name must satisfy  <a href="https://www.python.org/dev/peps/pep-0426/<code>name</code>">the constraints on Python packages names</a>.</p>
 <p>The main advantage of having a dictionary is that we implicitly filter out dependency duplicates.
 We cannot have two items with the same package name since the keys of a YAML object form a set.</p>
+<p><a name="aea.configurations.base.dependencies_from_json"></a></p>
+<h4 id="dependencies_from_json">dependencies<code>_</code>from<code>_</code>json</h4>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies_from_json</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dependencies</span>
+</code></pre></div>
+
+<p>Parse a JSON object to get an instance of Dependencies.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>obj</code>: a dictionary whose keys are package names and values are dictionary with package specifications.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>a Dependencies object.</p>
+<p><a name="aea.configurations.base.dependencies_to_json"></a></p>
+<h4 id="dependencies_to_json">dependencies<code>_</code>to<code>_</code>json</h4>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies_to_json</span><span class="p">(</span><span class="n">dependencies</span><span class="p">:</span> <span class="n">Dependencies</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Transform a Dependencies object into a JSON object.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>dependencies</code>: an instance of "Dependencies" type.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>a dictionary whose keys are package names and
+values are the JSON version of a Dependency object.</p>
 <p><a name="aea.configurations.base.PackageVersion"></a></p>
 <h2 id="packageversion-objects">PackageVersion Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
 <span class="k">class</span> <span class="nc">PackageVersion</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>A package version.</p>
 <p><a name="aea.configurations.base.PackageVersion.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">version_like</span><span class="p">:</span> <span class="n">PackageVersionLike</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a package version.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1690,20 +1839,17 @@ We cannot have two items with the same package name since the keys of a YAML obj
  <span class="o">|</span> <span class="n">is_latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the version is 'latest'.</p>
 <p><a name="aea.configurations.base.PackageVersion.__str__"></a></p>
-<h4 id="__str__"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___1"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the string representation.</p>
 <p><a name="aea.configurations.base.PackageVersion.__eq__"></a></p>
-<h4 id="__eq__"><code>__</code>eq<code>__</code></h4>
+<h4 id="__eq___1"><code>__</code>eq<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check equality.</p>
 <p><a name="aea.configurations.base.PackageVersion.__lt__"></a></p>
@@ -1711,20 +1857,17 @@ We cannot have two items with the same package name since the keys of a YAML obj
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare with another object.</p>
 <p><a name="aea.configurations.base.PackageType"></a></p>
 <h2 id="packagetype-objects">PackageType Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PackageType</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Package types.</p>
 <p><a name="aea.configurations.base.PackageType.to_plural"></a></p>
 <h4 id="to_plural">to<code>_</code>plural</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">to_plural</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the plural name.</p>
 <blockquote>
@@ -1748,13 +1891,11 @@ PackageType.CONTRACT.to_plural()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">configuration_class</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="s2">&quot;PackageConfiguration&quot;</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the configuration class.</p>
 <p><a name="aea.configurations.base.PackageType.__str__"></a></p>
-<h4 id="__str___1"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___2"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Convert to string.</p>
 <p><a name="aea.configurations.base.ComponentType"></a></p>
@@ -1762,20 +1903,32 @@ PackageType.CONTRACT.to_plural()
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ComponentType</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Enum of component types supported.</p>
 <p><a name="aea.configurations.base.ComponentType.to_configuration_type"></a></p>
 <h4 id="to_configuration_type">to<code>_</code>configuration<code>_</code>type</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">to_configuration_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PackageType</span>
 </code></pre></div>
 
-
 <p>Get package type for component type.</p>
+<p><a name="aea.configurations.base.ComponentType.plurals"></a></p>
+<h4 id="plurals">plurals</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
+ <span class="o">|</span> <span class="n">plurals</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get the collection of type names, plural.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>ComponentType.plurals()
+['protocols', 'connections', 'skills', 'contracts']</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <p><a name="aea.configurations.base.ComponentType.to_plural"></a></p>
 <h4 id="to_plural_1">to<code>_</code>plural</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">to_plural</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the plural version of the component type.</p>
 <blockquote>
@@ -1793,10 +1946,9 @@ ComponentType.CONTRACT.to_plural()
 </blockquote>
 </blockquote>
 <p><a name="aea.configurations.base.ComponentType.__str__"></a></p>
-<h4 id="__str___2"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___3"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the string representation.</p>
 <p><a name="aea.configurations.base.ProtocolSpecificationParseError"></a></p>
@@ -1804,13 +1956,11 @@ ComponentType.CONTRACT.to_plural()
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtocolSpecificationParseError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Exception for parsing a protocol specification file.</p>
 <p><a name="aea.configurations.base.JSONSerializable"></a></p>
 <h2 id="jsonserializable-objects">JSONSerializable Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">JSONSerializable</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Interface for JSON-serializable objects.</p>
 <p><a name="aea.configurations.base.JSONSerializable.json"></a></p>
@@ -1820,14 +1970,12 @@ ComponentType.CONTRACT.to_plural()
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Compute the JSON representation.</p>
 <p><a name="aea.configurations.base.JSONSerializable.from_json"></a></p>
-<h4 id="from_json">from<code>_</code>json</h4>
+<h4 id="from_json_1">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Build from a JSON object.</p>
 <p><a name="aea.configurations.base.Configuration"></a></p>
@@ -1835,21 +1983,18 @@ ComponentType.CONTRACT.to_plural()
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Configuration class.</p>
 <p><a name="aea.configurations.base.Configuration.__init__"></a></p>
-<h4 id="__init___1"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Initialize a configuration object.</p>
 <p><a name="aea.configurations.base.Configuration.from_json"></a></p>
-<h4 id="from_json_1">from<code>_</code>json</h4>
+<h4 id="from_json_2">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Configuration&quot;</span>
 </code></pre></div>
-
 
 <p>Build from a JSON object.</p>
 <p><a name="aea.configurations.base.Configuration.ordered_json"></a></p>
@@ -1857,7 +2002,6 @@ ComponentType.CONTRACT.to_plural()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">ordered_json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OrderedDict</span>
 </code></pre></div>
-
 
 <p>Reorder the dictionary according to a key ordering.</p>
 <p>This method takes all the keys in the key_order list and
@@ -1874,20 +2018,17 @@ alphanumerical sorting.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CRUDCollection</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">])</span>
 </code></pre></div>
 
-
 <p>Interface of a CRUD collection.</p>
 <p><a name="aea.configurations.base.CRUDCollection.__init__"></a></p>
-<h4 id="__init___2"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Instantiate a CRUD collection.</p>
 <p><a name="aea.configurations.base.CRUDCollection.create"></a></p>
 <h4 id="create">create</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">create</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Add an item.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1906,7 +2047,6 @@ alphanumerical sorting.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">read</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get an item by its name.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1918,7 +2058,6 @@ alphanumerical sorting.</p>
 <h4 id="update">update</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Update an existing item.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1933,20 +2072,17 @@ alphanumerical sorting.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">delete</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Delete an item.</p>
 <p><a name="aea.configurations.base.CRUDCollection.read_all"></a></p>
 <h4 id="read_all">read<code>_</code>all</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">read_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">T</span><span class="p">]]</span>
 </code></pre></div>
 
-
 <p>Read all the items.</p>
 <p><a name="aea.configurations.base.PublicId"></a></p>
 <h2 id="publicid-objects">PublicId Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PublicId</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>This class implement a public identifier.</p>
 <p>A public identifier is composed of three elements:
@@ -1956,7 +2092,6 @@ alphanumerical sorting.</p>
 <p>The concatenation of those three elements gives the public identifier:</p>
 <div class="highlight"><pre><span></span><code><span class="err">author/name:version</span>
 </code></pre></div>
-
 
 <blockquote>
 <blockquote>
@@ -1977,10 +2112,9 @@ True</p>
 </blockquote>
 </blockquote>
 <p><a name="aea.configurations.base.PublicId.__init__"></a></p>
-<h4 id="__init___3"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___4"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PackageVersionLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize the public identifier.</p>
 <p><a name="aea.configurations.base.PublicId.author"></a></p>
@@ -1989,22 +2123,19 @@ True</p>
  <span class="o">|</span> <span class="n">author</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the author.</p>
 <p><a name="aea.configurations.base.PublicId.name"></a></p>
-<h4 id="name">name</h4>
+<h4 id="name_1">name</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the name.</p>
 <p><a name="aea.configurations.base.PublicId.version"></a></p>
-<h4 id="version">version</h4>
+<h4 id="version_1">version</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the version string.</p>
 <p><a name="aea.configurations.base.PublicId.package_version"></a></p>
@@ -2013,7 +2144,6 @@ True</p>
  <span class="o">|</span> <span class="n">package_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PackageVersion</span>
 </code></pre></div>
 
-
 <p>Get the package version object.</p>
 <p><a name="aea.configurations.base.PublicId.latest"></a></p>
 <h4 id="latest">latest</h4>
@@ -2021,13 +2151,11 @@ True</p>
  <span class="o">|</span> <span class="n">latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the public id in <code>latest</code> form.</p>
 <p><a name="aea.configurations.base.PublicId.same_prefix"></a></p>
 <h4 id="same_prefix">same<code>_</code>prefix</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">same_prefix</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="s2">&quot;PublicId&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check if the other public id has the same author and name of this.</p>
 <p><a name="aea.configurations.base.PublicId.to_latest"></a></p>
@@ -2035,14 +2163,25 @@ True</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">to_latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;PublicId&quot;</span>
 </code></pre></div>
 
-
 <p>Return the same public id, but with latest version.</p>
+<p><a name="aea.configurations.base.PublicId.is_valid_str"></a></p>
+<h4 id="is_valid_str">is<code>_</code>valid<code>_</code>str</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">is_valid_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">public_id_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</code></pre></div>
+
+<p>Check if a string is a public id.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>public_id_string</code>: the public id in string format.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>bool indicating validity</p>
 <p><a name="aea.configurations.base.PublicId.from_str"></a></p>
 <h4 id="from_str">from<code>_</code>str</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">public_id_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PublicId&quot;</span>
 </code></pre></div>
-
 
 <p>Initialize the public id from the string.</p>
 <blockquote>
@@ -2080,7 +2219,6 @@ ValueError: Input 'bad/formatted:input' is not well formatted.</p>
  <span class="o">|</span> <span class="n">from_uri_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">public_id_uri_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PublicId&quot;</span>
 </code></pre></div>
 
-
 <p>Initialize the public id from the string.</p>
 <blockquote>
 <blockquote>
@@ -2117,7 +2255,6 @@ ValueError: Input 'bad/formatted:input' is not well formatted.</p>
  <span class="o">|</span> <span class="n">to_uri_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Turn the public id into a uri path string.</p>
 <p><strong>Returns</strong>:</p>
 <p>uri path string</p>
@@ -2127,14 +2264,12 @@ ValueError: Input 'bad/formatted:input' is not well formatted.</p>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Compute the JSON representation.</p>
 <p><a name="aea.configurations.base.PublicId.from_json"></a></p>
-<h4 id="from_json_2">from<code>_</code>json</h4>
+<h4 id="from_json_3">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Build from a JSON object.</p>
 <p><a name="aea.configurations.base.PublicId.__hash__"></a></p>
@@ -2142,13 +2277,11 @@ ValueError: Input 'bad/formatted:input' is not well formatted.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__hash__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Get the hash.</p>
 <p><a name="aea.configurations.base.PublicId.__str__"></a></p>
-<h4 id="__str___3"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___4"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>Get the string representation.</p>
 <p><a name="aea.configurations.base.PublicId.__repr__"></a></p>
@@ -2156,20 +2289,17 @@ ValueError: Input 'bad/formatted:input' is not well formatted.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__repr__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Get the representation.</p>
 <p><a name="aea.configurations.base.PublicId.__eq__"></a></p>
-<h4 id="__eq___1"><code>__</code>eq<code>__</code></h4>
+<h4 id="__eq___2"><code>__</code>eq<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Compare with another object.</p>
 <p><a name="aea.configurations.base.PublicId.__lt__"></a></p>
 <h4 id="__lt___1"><code>__</code>lt<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Compare two public ids.</p>
 <blockquote>
@@ -2194,13 +2324,11 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PackageId</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>A package identifier.</p>
 <p><a name="aea.configurations.base.PackageId.__init__"></a></p>
-<h4 id="__init___4"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___5"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">package_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize the package id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2214,14 +2342,12 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
  <span class="o">|</span> <span class="n">package_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PackageType</span>
 </code></pre></div>
 
-
 <p>Get the package type.</p>
 <p><a name="aea.configurations.base.PackageId.public_id"></a></p>
 <h4 id="public_id">public<code>_</code>id</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">public_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PublicId</span>
 </code></pre></div>
-
 
 <p>Get the public id.</p>
 <p><a name="aea.configurations.base.PackageId.author"></a></p>
@@ -2230,22 +2356,19 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
  <span class="o">|</span> <span class="n">author</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the author of the package.</p>
 <p><a name="aea.configurations.base.PackageId.name"></a></p>
-<h4 id="name_1">name</h4>
+<h4 id="name_2">name</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the name of the package.</p>
 <p><a name="aea.configurations.base.PackageId.version"></a></p>
-<h4 id="version_1">version</h4>
+<h4 id="version_2">version</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the version of the package.</p>
 <p><a name="aea.configurations.base.PackageId.package_prefix"></a></p>
@@ -2254,14 +2377,12 @@ ValueError: The public IDs author_1/name_1:0.1.0 and author_1/name_2:0.1.0 canno
  <span class="o">|</span> <span class="n">package_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the package identifier without the version.</p>
 <p><a name="aea.configurations.base.PackageId.from_uri_path"></a></p>
 <h4 id="from_uri_path_1">from<code>_</code>uri<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_uri_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">package_id_uri_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PackageId&quot;</span>
 </code></pre></div>
-
 
 <p>Initialize the public id from the string.</p>
 <blockquote>
@@ -2299,7 +2420,6 @@ ValueError: Input 'very/bad/formatted:input' is not well formatted.</p>
  <span class="o">|</span> <span class="n">to_uri_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Turn the package id into a uri path string.</p>
 <p><strong>Returns</strong>:</p>
 <p>uri path string</p>
@@ -2308,20 +2428,23 @@ ValueError: Input 'very/bad/formatted:input' is not well formatted.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__hash__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Get the hash.</p>
 <p><a name="aea.configurations.base.PackageId.__str__"></a></p>
-<h4 id="__str___4"><code>__</code>str<code>__</code></h4>
+<h4 id="__str___5"><code>__</code>str<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__str__</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Get the string representation.</p>
-<p><a name="aea.configurations.base.PackageId.__eq__"></a></p>
-<h4 id="__eq___2"><code>__</code>eq<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<p><a name="aea.configurations.base.PackageId.__repr__"></a></p>
+<h4 id="__repr___1"><code>__</code>repr<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__repr__</span><span class="p">()</span>
 </code></pre></div>
 
+<p>Get the object representation in string.</p>
+<p><a name="aea.configurations.base.PackageId.__eq__"></a></p>
+<h4 id="__eq___3"><code>__</code>eq<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Compare with another object.</p>
 <p><a name="aea.configurations.base.PackageId.__lt__"></a></p>
@@ -2329,13 +2452,11 @@ ValueError: Input 'very/bad/formatted:input' is not well formatted.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Compare two public ids.</p>
 <p><a name="aea.configurations.base.ComponentId"></a></p>
 <h2 id="componentid-objects">ComponentId Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ComponentId</span><span class="p">(</span><span class="n">PackageId</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Class to represent a component identifier.</p>
 <p>A component id is a package id, but excludes the case when the package is an agent.</p>
@@ -2353,10 +2474,9 @@ False</p>
 </blockquote>
 </blockquote>
 <p><a name="aea.configurations.base.ComponentId.__init__"></a></p>
-<h4 id="__init___5"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___6"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ComponentType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize the component id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2370,14 +2490,12 @@ False</p>
  <span class="o">|</span> <span class="n">component_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentType</span>
 </code></pre></div>
 
-
 <p>Get the component type.</p>
 <p><a name="aea.configurations.base.ComponentId.component_prefix"></a></p>
 <h4 id="component_prefix">component<code>_</code>prefix</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">component_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ComponentType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get the component identifier without the version.</p>
 <p><a name="aea.configurations.base.ComponentId.prefix_import_path"></a></p>
@@ -2386,7 +2504,6 @@ False</p>
  <span class="o">|</span> <span class="n">prefix_import_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the prefix import path for this component.</p>
 <p><a name="aea.configurations.base.ComponentId.json"></a></p>
 <h4 id="json_2">json</h4>
@@ -2394,13 +2511,11 @@ False</p>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Get the JSON representation.</p>
 <p><a name="aea.configurations.base.PackageConfiguration"></a></p>
 <h2 id="packageconfiguration-objects">PackageConfiguration Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PackageConfiguration</span><span class="p">(</span><span class="n">Configuration</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>This class represent a package configuration.</p>
 <p>A package can be one of:
@@ -2410,10 +2525,9 @@ False</p>
 - skills
 - contracts</p>
 <p><a name="aea.configurations.base.PackageConfiguration.__init__"></a></p>
-<h4 id="__init___6"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___7"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a package configuration.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2435,14 +2549,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">directory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the path to the configuration file associated to this file, if any.</p>
 <p><a name="aea.configurations.base.PackageConfiguration.directory"></a></p>
 <h4 id="directory_1">directory</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@directory</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">directory</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Set directory if not already set.</p>
 <p><a name="aea.configurations.base.PackageConfiguration.aea_version_specifiers"></a></p>
@@ -2451,14 +2563,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">aea_version_specifiers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">SpecifierSet</span>
 </code></pre></div>
 
-
 <p>Get the AEA version set specifier.</p>
 <p><a name="aea.configurations.base.PackageConfiguration.public_id"></a></p>
 <h4 id="public_id_1">public<code>_</code>id</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">public_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PublicId</span>
 </code></pre></div>
-
 
 <p>Get the public id.</p>
 <p><a name="aea.configurations.base.PackageConfiguration.package_dependencies"></a></p>
@@ -2467,13 +2577,11 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">package_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the package dependencies.</p>
 <p><a name="aea.configurations.base.PackageConfiguration.update"></a></p>
 <h4 id="update_1">update</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Update configuration with other data.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2487,29 +2595,18 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ComponentConfiguration</span><span class="p">(</span><span class="n">PackageConfiguration</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Class to represent an agent component configuration.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.__init__"></a></p>
-<h4 id="__init___7"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___8"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dependencies</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Set component configuration.</p>
-<p><a name="aea.configurations.base.ComponentConfiguration.pypi_dependencies"></a></p>
-<h4 id="pypi_dependencies">pypi<code>_</code>dependencies</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
- <span class="o">|</span> <span class="n">pypi_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dependencies</span>
-</code></pre></div>
-
-
-<p>Get PyPI dependencies.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.component_type"></a></p>
 <h4 id="component_type_1">component<code>_</code>type</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">component_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentType</span>
 </code></pre></div>
-
 
 <p>Get the component type.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.component_id"></a></p>
@@ -2518,14 +2615,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">component_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ComponentId</span>
 </code></pre></div>
 
-
 <p>Get the component id.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.prefix_import_path"></a></p>
 <h4 id="prefix_import_path_1">prefix<code>_</code>import<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">prefix_import_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Get the prefix import path for this component.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.is_abstract_component"></a></p>
@@ -2534,13 +2629,11 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">is_abstract_component</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Check whether the component is abstract.</p>
 <p><a name="aea.configurations.base.ComponentConfiguration.check_fingerprint"></a></p>
 <h4 id="check_fingerprint">check<code>_</code>fingerprint</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_fingerprint</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Check that the fingerprint are correct against a directory path.</p>
 <p>:raises ValueError if:
@@ -2551,7 +2644,6 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_aea_version</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Check that the AEA version matches the specifier set.</p>
 <p>:raises ValueError if the version of the aea framework falls within a specifier.</p>
 <p><a name="aea.configurations.base.ConnectionConfig"></a></p>
@@ -2559,13 +2651,11 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConnectionConfig</span><span class="p">(</span><span class="n">ComponentConfiguration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Handle connection configuration.</p>
 <p><a name="aea.configurations.base.ConnectionConfig.__init__"></a></p>
-<h4 id="__init___8"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___9"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">restricted_to_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">excluded_protocols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dependencies</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">connection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="p">,)</span>
 </code></pre></div>
-
 
 <p>Initialize a connection configuration object.</p>
 <p><a name="aea.configurations.base.ConnectionConfig.package_dependencies"></a></p>
@@ -2574,7 +2664,6 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">package_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the connection dependencies.</p>
 <p><a name="aea.configurations.base.ConnectionConfig.json"></a></p>
 <h4 id="json_3">json</h4>
@@ -2582,21 +2671,18 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.ConnectionConfig.from_json"></a></p>
-<h4 id="from_json_3">from<code>_</code>json</h4>
+<h4 id="from_json_4">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.ConnectionConfig.update"></a></p>
 <h4 id="update_2">update</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Update configuration with other data.</p>
 <p>This method does side-effect on the configuration object.</p>
@@ -2611,13 +2697,11 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtocolConfig</span><span class="p">(</span><span class="n">ComponentConfiguration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Handle protocol configuration.</p>
 <p><a name="aea.configurations.base.ProtocolConfig.__init__"></a></p>
-<h4 id="__init___9"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___10"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dependencies</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a connection configuration object.</p>
 <p><a name="aea.configurations.base.ProtocolConfig.json"></a></p>
@@ -2626,14 +2710,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.ProtocolConfig.from_json"></a></p>
-<h4 id="from_json_4">from<code>_</code>json</h4>
+<h4 id="from_json_5">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.SkillComponentConfiguration"></a></p>
@@ -2641,13 +2723,11 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SkillComponentConfiguration</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>This class represent a skill component configuration.</p>
 <p><a name="aea.configurations.base.SkillComponentConfiguration.__init__"></a></p>
-<h4 id="__init___10"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___11"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a skill component configuration.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2662,14 +2742,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.SkillComponentConfiguration.from_json"></a></p>
-<h4 id="from_json_5">from<code>_</code>json</h4>
+<h4 id="from_json_6">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.SkillConfig"></a></p>
@@ -2677,13 +2755,11 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SkillConfig</span><span class="p">(</span><span class="n">ComponentConfiguration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Class to represent a skill configuration file.</p>
 <p><a name="aea.configurations.base.SkillConfig.__init__"></a></p>
-<h4 id="__init___11"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___12"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">protocols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contracts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skills</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">PublicId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dependencies</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_abstract</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a skill configuration.</p>
 <p><a name="aea.configurations.base.SkillConfig.package_dependencies"></a></p>
@@ -2692,14 +2768,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">package_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the skill dependencies.</p>
 <p><a name="aea.configurations.base.SkillConfig.is_abstract_component"></a></p>
 <h4 id="is_abstract_component_1">is<code>_</code>abstract<code>_</code>component</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">is_abstract_component</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Check whether the component is abstract.</p>
 <p><a name="aea.configurations.base.SkillConfig.json"></a></p>
@@ -2708,21 +2782,18 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.SkillConfig.from_json"></a></p>
-<h4 id="from_json_6">from<code>_</code>json</h4>
+<h4 id="from_json_7">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.SkillConfig.update"></a></p>
 <h4 id="update_3">update</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Update configuration with other data.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2736,13 +2807,11 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AgentConfig</span><span class="p">(</span><span class="n">PackageConfiguration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Class to represent the agent configuration file.</p>
 <p><a name="aea.configurations.base.AgentConfig.__init__"></a></p>
-<h4 id="__init___12"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___13"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">registry_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REGISTRY_PATH</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">logging_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">execution_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_reactions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">decision_maker_handler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skill_exception_policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">connection_exception_policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">default_routing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">component_configurations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Instantiate the agent configuration object.</p>
 <p><a name="aea.configurations.base.AgentConfig.component_configurations"></a></p>
@@ -2751,14 +2820,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">component_configurations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the custom component configurations.</p>
 <p><a name="aea.configurations.base.AgentConfig.component_configurations"></a></p>
 <h4 id="component_configurations_1">component<code>_</code>configurations</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@component_configurations</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">component_configurations</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">,</span> <span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Set the component configurations.</p>
 <p><a name="aea.configurations.base.AgentConfig.package_dependencies"></a></p>
@@ -2767,14 +2834,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">package_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the package dependencies.</p>
 <p><a name="aea.configurations.base.AgentConfig.private_key_paths_dict"></a></p>
 <h4 id="private_key_paths_dict">private<code>_</code>key<code>_</code>paths<code>_</code>dict</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">private_key_paths_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get dictionary version of private key paths.</p>
 <p><a name="aea.configurations.base.AgentConfig.connection_private_key_paths_dict"></a></p>
@@ -2783,7 +2848,6 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">connection_private_key_paths_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get dictionary version of connection private key paths.</p>
 <p><a name="aea.configurations.base.AgentConfig.default_connection"></a></p>
 <h4 id="default_connection">default<code>_</code>connection</h4>
@@ -2791,14 +2855,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">default_connection</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the default connection.</p>
 <p><a name="aea.configurations.base.AgentConfig.default_connection"></a></p>
 <h4 id="default_connection_1">default<code>_</code>connection</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@default_connection</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">default_connection</span><span class="p">(</span><span class="n">connection_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PublicId</span><span class="p">]])</span>
 </code></pre></div>
-
 
 <p>Set the default connection.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2813,14 +2875,12 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">default_ledger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Get the default ledger.</p>
 <p><a name="aea.configurations.base.AgentConfig.default_ledger"></a></p>
 <h4 id="default_ledger_1">default<code>_</code>ledger</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@default_ledger</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">default_ledger</span><span class="p">(</span><span class="n">ledger_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Set the default ledger.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2834,7 +2894,6 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">component_configurations_json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">OrderedDict</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the component configurations in JSON format.</p>
 <p><a name="aea.configurations.base.AgentConfig.json"></a></p>
 <h4 id="json_7">json</h4>
@@ -2842,21 +2901,18 @@ The fixed version is interpreted with the specifier '=='.</li>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.AgentConfig.from_json"></a></p>
-<h4 id="from_json_7">from<code>_</code>json</h4>
+<h4 id="from_json_8">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.AgentConfig.update"></a></p>
 <h4 id="update_4">update</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Update configuration with other data.</p>
 <p>To update the component parts, populate the field "component_configurations" as a
@@ -2872,13 +2928,11 @@ mapping from ComponentId to configurations.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SpeechActContentConfig</span><span class="p">(</span><span class="n">Configuration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Handle a speech_act content configuration.</p>
 <p><a name="aea.configurations.base.SpeechActContentConfig.__init__"></a></p>
-<h4 id="__init___13"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___14"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a speech_act content configuration.</p>
 <p><a name="aea.configurations.base.SpeechActContentConfig.json"></a></p>
@@ -2887,14 +2941,12 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.SpeechActContentConfig.from_json"></a></p>
-<h4 id="from_json_8">from<code>_</code>json</h4>
+<h4 id="from_json_9">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification"></a></p>
@@ -2902,13 +2954,11 @@ mapping from ComponentId to configurations.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtocolSpecification</span><span class="p">(</span><span class="n">ProtocolConfig</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Handle protocol specification.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.__init__"></a></p>
-<h4 id="__init___14"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___15"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a protocol specification configuration object.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.protobuf_snippets"></a></p>
@@ -2917,14 +2967,12 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">protobuf_snippets</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Get the protobuf snippets.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.protobuf_snippets"></a></p>
 <h4 id="protobuf_snippets_1">protobuf<code>_</code>snippets</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@protobuf_snippets</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">protobuf_snippets</span><span class="p">(</span><span class="n">protobuf_snippets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Set the protobuf snippets.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.dialogue_config"></a></p>
@@ -2933,14 +2981,12 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">dialogue_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Get the dialogue config.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.dialogue_config"></a></p>
 <h4 id="dialogue_config_1">dialogue<code>_</code>config</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@dialogue_config</span><span class="o">.</span><span class="n">setter</span>
  <span class="o">|</span> <span class="n">dialogue_config</span><span class="p">(</span><span class="n">dialogue_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Set the dialogue config.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.json"></a></p>
@@ -2949,14 +2995,12 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.ProtocolSpecification.from_json"></a></p>
-<h4 id="from_json_9">from<code>_</code>json</h4>
+<h4 id="from_json_10">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 <p><a name="aea.configurations.base.ContractConfig"></a></p>
@@ -2964,13 +3008,11 @@ mapping from ComponentId to configurations.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ContractConfig</span><span class="p">(</span><span class="n">ComponentConfiguration</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Handle contract configuration.</p>
 <p><a name="aea.configurations.base.ContractConfig.__init__"></a></p>
-<h4 id="__init___15"><code>__</code>init<code>__</code></h4>
+<h4 id="__init___16"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">aea_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fingerprint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dependencies</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">contract_interface_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a protocol configuration object.</p>
 <p><a name="aea.configurations.base.ContractConfig.contract_interfaces"></a></p>
@@ -2979,7 +3021,6 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">contract_interfaces</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the contract interfaces.</p>
 <p><a name="aea.configurations.base.ContractConfig.json"></a></p>
 <h4 id="json_10">json</h4>
@@ -2987,14 +3028,12 @@ mapping from ComponentId to configurations.</p>
  <span class="o">|</span> <span class="n">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 
-
 <p>Return the JSON representation.</p>
 <p><a name="aea.configurations.base.ContractConfig.from_json"></a></p>
-<h4 id="from_json_10">from<code>_</code>json</h4>
+<h4 id="from_json_11">from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
  <span class="o">|</span> <span class="n">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize from a JSON object.</p>
 

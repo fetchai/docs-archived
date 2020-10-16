@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1666,7 +1695,6 @@
 <span class="kn">from</span> <span class="nn">aea.protocols.default.message</span> <span class="kn">import</span> <span class="n">DefaultMessage</span>
 </code></pre></div>
 
-
 <p>Unlike an <code>AEA</code>, an <code>Agent</code> does not require a <code>Wallet</code>, <code>LedgerApis</code> or <code>Resources</code> module.</p>
 <p>However, we need to implement 4 abstract methods:
 - <code>setup()</code>
@@ -1724,7 +1752,6 @@
         <span class="k">pass</span>
 </code></pre></div>
 
-
 <h2 id="instantiate-an-agent">Instantiate an <code>Agent</code></h2>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Ensure the input and output files do not exist initially</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
@@ -1747,7 +1774,6 @@
     <span class="n">my_agent</span> <span class="o">=</span> <span class="n">MyAgent</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">])</span>
 </code></pre></div>
 
-
 <h2 id="start-the-agent">Start the agent</h2>
 <p>We run the agent from a different thread so that we can still use the main thread to pass it messages.</p>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Set the agent running in a different thread</span>
@@ -1759,12 +1785,11 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div>
 
-
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response</p>
 <div class="highlight"><pre><span></span><code>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.7.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
@@ -1777,7 +1802,6 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
 </code></pre></div>
 
-
 <h2 id="shutdown">Shutdown</h2>
 <p>Finally stop our agent and wait for it to finish</p>
 <div class="highlight"><pre><span></span><code>    <span class="k">finally</span><span class="p">:</span>
@@ -1786,13 +1810,13 @@
         <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div>
 
-
 <h2 id="your-turn">Your turn</h2>
 <p>Now it is your turn to develop a simple agent with the <code>Agent</code> class.</p>
 <h2 id="entire-code-listing">Entire code listing</h2>
 <p>If you just want to copy and paste the entire script in you can find it here:</p>
 <details><summary>Click here to see full listing</summary>
 <p>
+
 
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -1888,7 +1912,7 @@
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.6.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+            <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.7.0,</span><span class="se">\x08\x01</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>

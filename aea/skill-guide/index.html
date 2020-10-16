@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1656,7 +1685,6 @@
 aea scaffold skill my_search
 </code></pre></div>
 
-
 <p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../simple-oef">SOEF search node</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
@@ -1686,7 +1714,7 @@ aea scaffold skill my_search
 
         <span class="n">search_query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_query&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_QUERY</span><span class="p">)</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
-        <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+        <span class="n">agent_location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">])</span>
         <span class="n">radius</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_radius&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_RADIUS</span><span class="p">)</span>
 
         <span class="n">close_to_my_service</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span>
@@ -1745,9 +1773,8 @@ aea scaffold skill my_search
         <span class="p">)</span>
 </code></pre></div>
 
-
 <p>Searches are proactive and, as such, well placed in a <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a>. Specifically, we subclass the <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>TickerBehaviour</code></a> as it allows us to repeatedly search at a defined tick interval.</p>
-<p>We place this code in <code>my_aea/skills/my_search/behaviours.py</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/behaviours.py</code>. Ensure you replace the <code>fetchai</code> author in this line <code>from packages.fetchai.skills.my_search.dialogues import OefSearchDialogues</code> with your author handle (run <code>aea init</code> to set or check the author name).</p>
 <h2 id="step-3-develop-a-handler">Step 3: Develop a Handler</h2>
 <p>So far, we have tasked the AEA with sending search requests to the <a href="../simple-oef">SOEF search node</a>. However, we have no way of handling the responses sent to the AEA by the <a href="../simple-oef">SOEF search node</a> at the moment. The AEA would simply respond to the <a href="../simple-oef">SOEF search node</a> via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
 <p>Let us now implement a <a href="../api/skills/base#handler-objects"><code>Handler</code></a> to deal with the incoming search responses.</p>
@@ -1885,12 +1912,11 @@ aea scaffold skill my_search
         <span class="p">)</span>
 </code></pre></div>
 
-
 <p>We create a handler which is registered for the <code>oef_search</code> protocol. Whenever it receives a search result, we log the number of agents returned in the search - the agents matching the search query - and update the counter of received searches.</p>
 <p>We also implement a trivial check on the difference between the amount of search requests sent and responses received.</p>
 <p>Note, how the handler simply reacts to incoming events (i.e. messages). It could initiate further actions, however, they are still reactions to the upstream search event.</p>
 <p>Also note, how we have access to other objects in the skill via <code>self.context</code>, the <a href="../api/skills/base#skillcontext-objects"><code>SkillContext</code></a>.</p>
-<p>We place this code in <code>my_aea/skills/my_search/handlers.py</code>.</p>
+<p>We place this code in <code>my_aea/skills/my_search/handlers.py</code>. Ensure you replace the <code>fetchai</code> author in this line <code>from packages.fetchai.skills.my_search.dialogues import (</code> with your author handle (run <code>aea init</code> to set or check the author name).</p>
 <h2 id="step-4-add-dialogues-model">Step 4: Add dialogues model</h2>
 <p>We have implemented a behaviour and a handler. We now implement a <a href="../api/skills/base#model-objects"><code>Model</code></a>, in particular we implement the <a href="../api/helpers/dialogue/base#dialogue-objects"><code>Dialogue</code></a> and <a href="../api/helpers/dialogue/base#dialogues-objects"><code>Dialogues</code></a> classes.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
@@ -1938,7 +1964,6 @@ aea scaffold skill my_search
         <span class="p">)</span>
 </code></pre></div>
 
-
 <p>We add this code in the file <code>my_aea/skills/my_search/my_model.py</code>, replacing its original content. We then renamce <code>my_aea/skills/my_search/my_model.py</code> to <code>my_aea/skills/my_search/dialogues.py</code>.</p>
 <h2 id="step-5-create-the-config-file">Step 5: Create the config file</h2>
 <p>Based on our skill components above, we create the following config file.</p>
@@ -1953,7 +1978,7 @@ aea scaffold skill my_search
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">my_search_behaviour</span><span class="p">:</span>
@@ -1979,7 +2004,6 @@ aea scaffold skill my_search
 <span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </code></pre></div>
 
-
 <p>Ensure, you replace the author field with your author name! (Run <code>aea init</code> to set or check the author name.)</p>
 <p>Importantly, the keys <code>my_search_behaviour</code> and <code>my_search_handler</code> are used in the above handler to access these skill components at runtime via the context. We also set the <code>tick_interval</code> of the <code>TickerBehaviour</code> to <code>5</code> seconds.</p>
 <p>We place this code in <code>my_aea/skills/my_search/skill.yaml</code>.</p>
@@ -1988,35 +2012,30 @@ aea scaffold skill my_search
 <div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/my_search:0.1.0
 </code></pre></div>
 
-
 <p>Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
 <h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the oef protocol and connection</h2>
 <p>Our AEA does not have the oef protocol yet so let's add it.</p>
-<div class="highlight"><pre><span></span><code>aea add protocol fetchai/oef_search:0.7.0
+<div class="highlight"><pre><span></span><code>aea add protocol fetchai/oef_search:0.8.0
 </code></pre></div>
-
 
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/p2p_libp2p:0.10.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
-
 
 <p>Finally, in the <code>aea-config.yaml</code> add the following lines:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
-
 
 <p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
-<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.13.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration
+<p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA and install its Python dependencies:</p>
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.14.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration <span class="o">&amp;&amp;</span> aea install
 </code></pre></div>
-
 
 <p>This AEA will simply register a location service on the <a href="../simple-oef">SOEF search node</a> so we can search for it.</p>
 <p>We first create the private key for the service provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
@@ -2025,11 +2044,9 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <p>Then we run the aea:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <details><summary>Click here to see full code</summary>
@@ -2200,7 +2217,7 @@ We create a <a href="../api/skills/base#model-objects">`Model`</a> type strategy
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_agent_location</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">])</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">Location</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">longitude</span><span class="o">=</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">])</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_service_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;service_data&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICE_DATA</span><span class="p">)</span>
         <span class="k">assert</span> <span class="p">(</span>
@@ -2313,7 +2330,7 @@ Finally, we have a handler, placed in `handlers.py`:
     <span class="n">OefSearchDialogues</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.6.0&quot;</span>
+<span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;fetchai/ledger:0.7.0&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">OefSearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
@@ -2425,7 +2442,7 @@ The associated `skill.yaml` is:
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">service</span><span class="p">:</span>
@@ -2463,8 +2480,7 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
-<p>Then, update the configuration of the buyer AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
+<p>Then, update the configuration of the search AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
   <span class="nt">entry_peers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;SOME_ADDRESS&#39;</span><span class="p p-Indicator">]</span>
@@ -2473,12 +2489,10 @@ aea add-key fetchai fetchai_private_key.txt --connection
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
 <p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <p>We can then launch our AEA.</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>We can see that the AEA sends search requests to the <a href="../simple-oef">SOEF search node</a> and receives search responses from the <a href="../simple-oef">SOEF search node</a>. The search response returns one or more agents (the service provider and potentially other agents which match the query).</p>
 <p>We stop the AEA with <code>CTRL + C</code>.</p>

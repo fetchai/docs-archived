@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1657,11 +1686,10 @@ The example decouples the RL agent from the <code>gym.Env</code> allowing them t
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-aea">Create the AEA</h3>
 <p>First, fetch the gym AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/gym_aea:0.11.0 --alias my_gym_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/gym_aea:0.12.0 --alias my_gym_aea
 <span class="nb">cd</span> my_gym_aea
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1677,14 +1705,14 @@ In the root directory, create the gym AEA and enter the project.
 
 ### Add the gym skill
 
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/gym:0.8.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/gym:0.9.0
 </code></pre></div>
 
 
 
 ### Add a gym connection
 
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/gym:0.8.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/gym:0.9.0
 aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.7.0
 </code></pre></div>
 
@@ -1708,16 +1736,13 @@ To install the `gym` package, a dependency of the gym skill, from Pypi run
 cp -a ../examples/gym_ex/gyms/. gyms/
 </code></pre></div>
 
-
 <h4 id="update-the-connection-config">Update the connection config</h4>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </code></pre></div>
 
-
 <h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>You will see the gym training logs.</p>
 <p><img src="../assets/gym-training.png" alt="AEA gym training logs" class="center"></p>
@@ -1726,7 +1751,6 @@ cp -a ../examples/gym_ex/gyms/. gyms/
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ..
 aea delete my_gym_aea
 </code></pre></div>
-
 
 <h2 id="communication">Communication</h2>
 <p>This diagram shows the communication between the AEA and the gym environment</p>

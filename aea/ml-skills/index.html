@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1699,11 +1728,10 @@ The <code>aea install</code> command will install each dependency that the speci
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-data-provider-aea">Create data provider AEA</h3>
 <p>First, fetch the data provider AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_data_provider:0.13.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_data_provider:0.14.0
 <span class="nb">cd</span> ml_data_provider
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1712,11 +1740,11 @@ The following steps create the data provider from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create ml_data_provider
 <span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/ml_data_provider:0.12.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/ml_data_provider:0.13.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea install
 </code></pre></div>
 
@@ -1725,8 +1753,8 @@ aea install
 In `ml_data_provider/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1736,11 +1764,10 @@ In `ml_data_provider/aea-config.yaml` add
 
 <h3 id="create-model-trainer-aea">Create model trainer AEA</h3>
 <p>Then, fetch the model trainer AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_model_trainer:0.13.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_model_trainer:0.14.0
 <span class="nb">cd</span> ml_model_trainer
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1749,11 +1776,11 @@ The following steps create the model trainer from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create ml_model_trainer
 <span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/ml_train:0.12.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/ml_train:0.13.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea install
 </code></pre></div>
 
@@ -1762,8 +1789,8 @@ aea install
 In `ml_model_trainer/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1778,7 +1805,6 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <h3 id="add-keys-and-generate-wealth-for-the-model-trainer-aea">Add keys and generate wealth for the model trainer AEA</h3>
 <p>The model trainer needs to have some wealth to purchase the data from the data provider.</p>
 <p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:</p>
@@ -1787,18 +1813,15 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>AgentLand</code> network:</p>
 <div class="highlight"><pre><span></span><code>aea generate-wealth fetchai
 </code></pre></div>
-
 
 <h3 id="run-both-aeas">Run both AEAs</h3>
 <p>Run both AEAs from their respective terminals.</p>
 <p>First, run the data provider AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <p>Then, update the configuration of the model trainer AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
@@ -1810,12 +1833,10 @@ aea add-key fetchai fetchai_private_key.txt --connection
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
 <p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <p>Then run the model trainer AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>You can see that the AEAs find each other, negotiate and eventually trade.</p>
 <h3 id="cleaning-up">Cleaning up</h3>
@@ -1824,7 +1845,6 @@ aea add-key fetchai fetchai_private_key.txt --connection
 aea delete ml_data_provider
 aea delete ml_model_trainer
 </code></pre></div>
-
 
 <p><br /></p>
 

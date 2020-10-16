@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,14 +1684,12 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">IPCChannelClient</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Multi-platform interprocess communication channel for the client side.</p>
 <p><a name="aea.helpers.pipe.IPCChannelClient.connect"></a></p>
 <h4 id="connect">connect</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Connect to communication channel</p>
 <p><strong>Arguments</strong>:</p>
@@ -1674,7 +1701,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Write <code>data</code> bytes to the other end of the channel</p>
 <p>Will first write the size than the actual data</p>
@@ -1688,7 +1714,6 @@
  <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read bytes from the other end of the channel</p>
 <p>Will first read the size than the actual data</p>
 <p><strong>Returns</strong>:</p>
@@ -1699,7 +1724,6 @@
  <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Close the communication channel.</p>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -1708,7 +1732,6 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">IPCChannel</span><span class="p">(</span><span class="n">IPCChannelClient</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Multi-platform interprocess communication channel.</p>
 <p><a name="aea.helpers.pipe.IPCChannel.in_path"></a></p>
 <h4 id="in_path">in<code>_</code>path</h4>
@@ -1716,7 +1739,6 @@
  <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">in_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Rendezvous point for incoming communication.</p>
 <p><strong>Returns</strong>:</p>
@@ -1728,7 +1750,6 @@
  <span class="o">|</span> <span class="n">out_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Rendezvous point for outgoing communication.</p>
 <p><strong>Returns</strong>:</p>
 <p>path</p>
@@ -1737,13 +1758,11 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PosixNamedPipeProtocol</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>Posix named pipes async wrapper communication protocol.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeProtocol.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">in_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a new posix named pipe.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1755,7 +1774,6 @@
 <h4 id="connect_1">connect</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Connect to the other end of the pipe</p>
 <p><strong>Arguments</strong>:</p>
@@ -1769,7 +1787,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Write to pipe.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1780,7 +1797,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read from pipe.</p>
 <p><strong>Returns</strong>:</p>
 <p>read bytes</p>
@@ -1789,20 +1805,17 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Disconnect pipe.</p>
 <p><a name="aea.helpers.pipe.TCPSocketProtocol"></a></p>
 <h2 id="tcpsocketprotocol-objects">TCPSocketProtocol Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TCPSocketProtocol</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>TCP socket communication protocol.</p>
 <p><a name="aea.helpers.pipe.TCPSocketProtocol.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">reader</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">StreamReader</span><span class="p">,</span> <span class="n">writer</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">StreamWriter</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize the tcp socket protocol.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1815,7 +1828,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Write to socket.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1826,7 +1838,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read from socket.</p>
 <p><strong>Returns</strong>:</p>
 <p>read bytes</p>
@@ -1835,13 +1846,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Disconnect socket.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannel"></a></p>
 <h2 id="tcpsocketchannel-objects">TCPSocketChannel Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TCPSocketChannel</span><span class="p">(</span><span class="n">IPCChannel</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Interprocess communication channel implementation using tcp sockets.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannel.__init__"></a></p>
@@ -1849,13 +1858,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Initialize tcp socket interprocess communication channel.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannel.connect"></a></p>
 <h4 id="connect_2">connect</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Setup communication channel and wait for other end to connect.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1867,7 +1874,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Write to channel.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1877,7 +1883,6 @@
 <h4 id="read_3">read</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Read from channel.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1889,14 +1894,12 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Disconnect from channel and clean it up.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannel.in_path"></a></p>
 <h4 id="in_path_1">in<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">in_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Rendezvous point for incoming communication.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannel.out_path"></a></p>
@@ -1905,13 +1908,11 @@
  <span class="o">|</span> <span class="n">out_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Rendezvous point for outgoing communication.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannel"></a></p>
 <h2 id="posixnamedpipechannel-objects">PosixNamedPipeChannel Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PosixNamedPipeChannel</span><span class="p">(</span><span class="n">IPCChannel</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Interprocess communication channel implementation using Posix named pipes.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannel.__init__"></a></p>
@@ -1919,13 +1920,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Initialize posix named pipe interprocess communication channel.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannel.connect"></a></p>
 <h4 id="connect_3">connect</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-
 
 <p>Setup communication channel and wait for other end to connect.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1939,7 +1938,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Write to the channel.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -1950,7 +1948,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read from the channel.</p>
 <p><strong>Returns</strong>:</p>
 <p>read bytes</p>
@@ -1959,14 +1956,12 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Close the channel and clean it up.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannel.in_path"></a></p>
 <h4 id="in_path_2">in<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
  <span class="o">|</span> <span class="n">in_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-
 
 <p>Rendezvous point for incoming communication.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannel.out_path"></a></p>
@@ -1975,20 +1970,17 @@
  <span class="o">|</span> <span class="n">out_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 
-
 <p>Rendezvous point for outgoing communication.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannelClient"></a></p>
 <h2 id="tcpsocketchannelclient-objects">TCPSocketChannelClient Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TCPSocketChannelClient</span><span class="p">(</span><span class="n">IPCChannelClient</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Interprocess communication channel client using tcp sockets.</p>
 <p><a name="aea.helpers.pipe.TCPSocketChannelClient.__init__"></a></p>
 <h4 id="__init___4"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">in_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a tcp socket communication channel client.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2001,7 +1993,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Connect to the other end of the communication channel.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2011,7 +2002,6 @@
 <h4 id="write_5">write</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Write data to channel.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2023,7 +2013,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read data from channel.</p>
 <p><strong>Returns</strong>:</p>
 <p>read bytes</p>
@@ -2032,20 +2021,17 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Disconnect from communication channel.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannelClient"></a></p>
 <h2 id="posixnamedpipechannelclient-objects">PosixNamedPipeChannelClient Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PosixNamedPipeChannelClient</span><span class="p">(</span><span class="n">IPCChannelClient</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Interprocess communication channel client using Posix named pipes.</p>
 <p><a name="aea.helpers.pipe.PosixNamedPipeChannelClient.__init__"></a></p>
 <h4 id="__init___5"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">in_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Initialize a posix named pipe communication channel client.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2058,7 +2044,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">connect</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PIPE_CONN_TIMEOUT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 
-
 <p>Connect to the other end of the communication channel.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -2068,7 +2053,6 @@
 <h4 id="write_6">write</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Write data to channel.</p>
 <p><strong>Arguments</strong>:</p>
@@ -2080,7 +2064,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Read data from channel.</p>
 <p><strong>Returns</strong>:</p>
 <p>read bytes</p>
@@ -2089,13 +2072,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Disconnect from communication channel.</p>
 <p><a name="aea.helpers.pipe.make_ipc_channel"></a></p>
 <h4 id="make_ipc_channel">make<code>_</code>ipc<code>_</code>channel</h4>
 <div class="highlight"><pre><span></span><code><span class="n">make_ipc_channel</span><span class="p">(</span><span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPCChannel</span>
 </code></pre></div>
-
 
 <p>Build a portable bidirectional InterProcess Communication channel</p>
 <p><strong>Arguments</strong>:</p>
@@ -2109,7 +2090,6 @@
 <h4 id="make_ipc_channel_client">make<code>_</code>ipc<code>_</code>channel<code>_</code>client</h4>
 <div class="highlight"><pre><span></span><code><span class="n">make_ipc_channel_client</span><span class="p">(</span><span class="n">in_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPCChannelClient</span>
 </code></pre></div>
-
 
 <p>Build a portable bidirectional InterProcess Communication client channel</p>
 <p><strong>Arguments</strong>:</p>

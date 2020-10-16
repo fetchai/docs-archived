@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../aea/skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../aea/deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../aea/multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../../aea/api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../../aea/api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../aea/api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../aea/api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1658,11 +1687,9 @@
 <div class="highlight"><pre><span></span><code><span class="n">var</span> <span class="n">myState1</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;simple_state_declaration&quot;</span><span class="p">);</span>
 </code></pre></div>
 
-
 <p>Or even this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">var</span> <span class="n">myState2</span> <span class="o">=</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="p">(</span><span class="s">&quot;nested_array_state_declaration&quot;</span><span class="p">);</span>
 </code></pre></div>
-
 
 <p>A <code>State</code> is not like a normal variable, you have to create a <em>reference</em> to it. For example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
@@ -1673,7 +1700,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <p>The above code creates a variable name <code>contract_amount_state</code> and assigns it to a <code>State&lt;Int32&gt;</code> with a reference <code>contract_amount</code>. It then sets a value on the <code>State</code>. </p>
 <p><code>State</code> references can be <code>Address</code> or <code>String</code> types.</p>
@@ -1687,7 +1713,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>You can get and set values on a <code>State</code> object.</p>
 <div class="highlight"><pre><span></span><code><span class="n">function</span> <span class="nf">main</span><span class="p">()</span>
 
@@ -1700,7 +1725,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <h2 id="default-values">Default values</h2>
 <p>If a value has not yet been set on the <code>State</code> object and the <code>State</code> does not already exist on the ledger, a run-time error is thrown on calling <code>get()</code>. </p>
 <p>To avoid this, use <strong>with care</strong> <code>get(&lt;default value&gt;)</code> with a default value. For example, the following code prints zero if the state doesn't exist and the value that was originally set on it if it does exist.</p>
@@ -1712,7 +1736,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <h2 id="test-a-state-exists">Test a <code>State</code> exists</h2>
 <p>You can test if a state already exists with <code>existed()</code>.</p>
@@ -1730,7 +1753,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>This test is useful for scenarios in which you use states to see who has what, as you might do in a token contract where you need to keep track of token ownership.</p>
 <h2 id="state-references-and-scope">State references and scope</h2>
 <p>In the example below, <code>ownerState</code> and <code>contractState</code> point to the same <code>State</code> object on the ledger.</p>
@@ -1747,7 +1769,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <p>Assuming the referenced <code>State</code> object does not exist on the ledger, attempting to print the value of the second declaration of <code>State</code> generates an error - even though a value was set on it previously. </p>
 <p>This is because the data set in <code>ownerState</code> has not yet been written to the intermediate cache or ledger storage, so when <code>contractState</code> tries to access it, it finds no value and the <code>etch</code> VM generates a runtime error.</p>
@@ -1779,7 +1800,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <p>Once control reaches the end of the function, the data is written to an intermediate ledger cache mechanism and is available throughout the contract.</p>
 <p>Once control has reached the end of the contract, and no errors have arisen, the data is etched upon the ledger.</p>
 <p><center></p>
@@ -1796,7 +1816,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <p>This is useful for <code>ShardedState</code> types which initialise using these immediate write anonymous <code>State</code> types behind the scenes.</p>
 <h2 id="passing-states-around">Passing States around</h2>
@@ -1842,7 +1861,6 @@
 <span class="n">endfunction</span>
 </code></pre></div>
 
-
 <h2 id="verify-an-address">Verify an Address</h2>
 <p>Often, a contract needs to confirm whether an <code>@action</code> or <code>@query</code> comes from a specific address. This can be done with the <code>signedTx()</code> function of the <code>Address</code> type. </p>
 <p>In the example below, an <code>@action</code> establishes if the the signer of the calling transaction is a specific authorised address.</p>
@@ -1873,7 +1891,6 @@
 
 <span class="n">endfunction</span>
 </code></pre></div>
-
 
 <p><br/></p>
 

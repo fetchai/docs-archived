@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1696,11 +1725,10 @@
 <p>A demo to run a scenario with a true ledger transaction on Fetch.ai <code>testnet</code> network or Ethereum <code>ropsten</code> network. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA, which will provide data:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.11.0 --alias my_thermometer_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.12.0 --alias my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1709,12 +1737,12 @@ The following steps create the seller from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/thermometer:0.12.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/thermometer:0.13.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
 
 
@@ -1722,8 +1750,8 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 In `my_thermometer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1733,11 +1761,10 @@ In `my_thermometer_aea/aea-config.yaml` add
 
 <h3 id="create-the-buyer-client">Create the buyer client</h3>
 <p>In another terminal, fetch the AEA that will query the seller AEA.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.11.0 --alias my_thermometer_client
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.12.0 --alias my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1746,12 +1773,12 @@ The following steps create the car data client from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/thermometer_client:0.11.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/thermometer_client:0.12.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 </code></pre></div>
 
 
@@ -1759,8 +1786,8 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 In `my_buyer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.4.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.6.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.5.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.7.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.10.0</span>
 </code></pre></div>
 
 
@@ -1775,7 +1802,6 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <h3 id="add-keys-and-generate-wealth-for-the-thermometer-client-aea">Add keys and generate wealth for the thermometer client AEA</h3>
 <p>The thermometer client needs to have some wealth to purchase the thermometer information.</p>
 <p>First, create the private key for the thermometer client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:</p>
@@ -1784,11 +1810,9 @@ aea add-key fetchai fetchai_private_key.txt
 aea add-key fetchai fetchai_private_key.txt --connection
 </code></pre></div>
 
-
 <p>Then, create some wealth for your thermometer client based on the network you want to transact with. On the Fetch.ai <code>testnet</code> network:</p>
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 </code></pre></div>
-
 
 <h3 id="update-the-seller-and-buyer-aea-skill-configs">Update the seller and buyer AEA skill configs</h3>
 <p>In <code>my_thermometer_aea/vendor/fetchai/skills/thermometer/skill.yaml</code>, replace the <code>data_for_sale</code> with your data:</p>
@@ -1815,7 +1839,6 @@ aea add-key fetchai fetchai_private_key.txt --connection
   <span class="nt">SQLAlchemy</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 </code></pre></div>
 
-
 <p>The <code>data_model</code> and the <code>service_data</code> are used to register the service in the <a href="../simple-oef">SOEF search node</a> and make your agent discoverable. The name of each attribute must be a key in the <code>service_data</code> dictionary.</p>
 <p>In <code>my_thermometer_client/vendor/fetchai/skills/thermometer_client/skill.yaml</code>) ensure you have matching data.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">models</span><span class="p">:</span>
@@ -1840,24 +1863,20 @@ aea add-key fetchai fetchai_private_key.txt --connection
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 </code></pre></div>
 
-
 <p>After changing the skill config files you should run the following command for both agents to install each dependency:</p>
 <div class="highlight"><pre><span></span><code>aea install
 </code></pre></div>
 
-
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.12.0
+<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.13.0
 </code></pre></div>
-
 
 <p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
 <p>Open the <code>strategy.py</code> (in <code>my_thermometer_aea/skills/thermometer/strategy.py</code>) with your IDE and modify the following.</p>
 <p>Import the newly installed library to your strategy.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">db</span>
 </code></pre></div>
-
 
 <p>Then modify your strategy's __init__ function to match the following code:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">):</span>
@@ -1878,7 +1897,6 @@ aea add-key fetchai fetchai_private_key.txt --connection
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>At the end of the file modify the <code>collect_from_data_source</code> function : </p>
 <div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">collect_from_data_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Implement the logic to collect data.&quot;&quot;&quot;</span>
@@ -1888,7 +1906,6 @@ aea add-key fetchai fetchai_private_key.txt --connection
         <span class="n">data_points</span> <span class="o">=</span> <span class="n">result_proxy</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">data_points</span><span class="p">)))}</span>
 </code></pre></div>
-
 
 <p>Also, create two new functions, one that will create a connection with the database, and another one will populate the database with some fake data:</p>
 <div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">create_database_and_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1914,18 +1931,15 @@ aea add-key fetchai fetchai_private_key.txt --connection
             <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>After modifying the skill we need to fingerprint it:</p>
 <div class="highlight"><pre><span></span><code>aea fingerprint skill <span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/thermometer:0.1.0
 </code></pre></div>
-
 
 <h3 id="run-both-aeas">Run both AEAs</h3>
 <p>Run both AEAs from their respective terminals.</p>
 <p>First, run the thermometer AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>Once you see a message of the form <code>My libp2p addresses: ['SOME_ADDRESS']</code> take note of the address.</p>
 <p>Then, update the configuration of the thermometer client AEA's p2p connection (in <code>vendor/fetchai/connections/p2p_libp2p/connection.yaml</code>) replace the following:</p>
@@ -1937,12 +1951,10 @@ aea add-key fetchai fetchai_private_key.txt --connection
   <span class="nt">public_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
-
 <p>where <code>SOME_ADDRESS</code> is replaced accordingly.</p>
 <p>Then run the thermometer client AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-
 
 <p>You will see that the AEAs negotiate and then transact using the configured testnet.</p>
 <h2 id="delete-the-aeas">Delete the AEAs</h2>

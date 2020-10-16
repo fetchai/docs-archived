@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1652,16 +1681,14 @@
 <p>This module contains registries.</p>
 <p><a name="aea.registries.filter.Filter"></a></p>
 <h2 id="filter-objects">Filter Objects</h2>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Filter</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Filter</span><span class="p">(</span><span class="n">WithLogger</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>This class implements the filter of an AEA.</p>
 <p><a name="aea.registries.filter.Filter.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">resources</span><span class="p">:</span> <span class="n">Resources</span><span class="p">,</span> <span class="n">decision_maker_out_queue</span><span class="p">:</span> <span class="n">AsyncFriendlyQueue</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Instantiate the filter.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1675,7 +1702,6 @@
  <span class="o">|</span> <span class="n">resources</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Resources</span>
 </code></pre></div>
 
-
 <p>Get resources.</p>
 <p><a name="aea.registries.filter.Filter.decision_maker_out_queue"></a></p>
 <h4 id="decision_maker_out_queue">decision<code>_</code>maker<code>_</code>out<code>_</code>queue</h4>
@@ -1683,13 +1709,11 @@
  <span class="o">|</span> <span class="n">decision_maker_out_queue</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncFriendlyQueue</span>
 </code></pre></div>
 
-
 <p>Get decision maker (out) queue.</p>
 <p><a name="aea.registries.filter.Filter.get_active_handlers"></a></p>
 <h4 id="get_active_handlers">get<code>_</code>active<code>_</code>handlers</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_active_handlers</span><span class="p">(</span><span class="n">protocol_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">skill_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SkillId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Handler</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Get active handlers based on protocol id and optional skill id.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1704,7 +1728,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_active_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Behaviour</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get the active behaviours.</p>
 <p><strong>Returns</strong>:</p>
 <p>the list of behaviours currently active</p>
@@ -1712,7 +1735,6 @@
 <h4 id="handle_new_handlers_and_behaviours">handle<code>_</code>new<code>_</code>handlers<code>_</code>and<code>_</code>behaviours</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle_new_handlers_and_behaviours</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Handle the messages from the decision maker.</p>
 <p><strong>Returns</strong>:</p>
@@ -1722,13 +1744,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="k">async</span> <span class="n">get_internal_message</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>Get a message from decision_maker_out_queue.</p>
 <p><a name="aea.registries.filter.Filter.handle_internal_message"></a></p>
 <h4 id="handle_internal_message">handle<code>_</code>internal<code>_</code>message</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle_internal_message</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Handlle internal message.</p>
 

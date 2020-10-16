@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../api/helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../api/helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../api/test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1733,11 +1762,10 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.11.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.12.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1746,12 +1774,12 @@ The following steps create the controller from scratch:
 
 <div class="highlight"><pre><span></span><code>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_control_contract:0.9.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_control_contract:0.10.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 </code></pre></div>
 
@@ -1766,16 +1794,13 @@ aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea add-key ethereum ethereum_private_key.txt
 </code></pre></div>
 
-
 <p>To create some wealth for your AEAs for the Ethereum <code>ropsten</code> network. Note that this needs to be executed from each AEA folder:</p>
 <div class="highlight"><pre><span></span><code>aea generate-wealth ethereum
 </code></pre></div>
 
-
 <p>To check the wealth use (after some time for the wealth creation to be mined on Ropsten):</p>
 <div class="highlight"><pre><span></span><code>aea get-wealth ethereum
 </code></pre></div>
-
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
@@ -1784,18 +1809,17 @@ aea add-key ethereum ethereum_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.12.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.11.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.12.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 aea install
 </code></pre></div>
-
 
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
@@ -1811,13 +1835,13 @@ aea create tac_participant_two
 Build participant one:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_participation:0.9.0
-aea add skill fetchai/tac_negotiation:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_participation:0.10.0
+aea add skill fetchai/tac_negotiation:0.11.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1828,13 +1852,13 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 Then, build participant two:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/p2p_libp2p:0.10.0
-aea add connection fetchai/soef:0.9.0
-aea add connection fetchai/ledger:0.6.0
-aea add skill fetchai/tac_participation:0.9.0
-aea add skill fetchai/tac_negotiation:0.10.0
+aea add connection fetchai/p2p_libp2p:0.11.0
+aea add connection fetchai/soef:0.10.0
+aea add connection fetchai/ledger:0.7.0
+aea add skill fetchai/tac_participation:0.10.0
+aea add skill fetchai/tac_negotiation:0.11.0
 aea install
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.10.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.11.0
 aea config <span class="nb">set</span> agent.default_ledger ethereum
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1853,7 +1877,6 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.mod
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control_contract.models.parameters.args.registration_start_time <span class="s1">&#39;01 01 2020  00:01&#39;</span>
 </code></pre></div>
 
-
 <h3 id="run-the-aeas">Run the AEAs</h3>
 <p>The CLI tool supports the launch of several agents
 at once.</p>
@@ -1861,7 +1884,6 @@ at once.</p>
 can launch all the TAC agents as follows from the root directory:</p>
 <div class="highlight"><pre><span></span><code>aea launch tac_controller_contract tac_participant_one tac_participant_two
 </code></pre></div>
-
 
 <p>You may want to try <code>--multithreaded</code>
 option in order to run the agents

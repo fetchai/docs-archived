@@ -313,6 +313,12 @@
 </li>
  
 <li>
+    <a href="../../../../skill-testing/" id="aea-skill-testing-"
+        >Testing Skills</a
+    >
+</li>
+ 
+<li>
     <a href="../../../../deployment/" id="aea-deployment-"
         >Deployment</a
     >
@@ -357,6 +363,12 @@
 <li>
     <a href="../../../../multi-agent-manager/" id="aea-multi-agent-manager-"
         >Multi agent manager</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../../debug/" id="aea-debug-"
+        >Debugging</a
     >
 </li>
 
@@ -914,12 +926,6 @@
     </ul>
 </li> 
 <li>
-    <a href="../../../helpers/test_cases/" id="aea-api-helpers-test_cases-"
-        >Test Cases</a
-    >
-</li>
- 
-<li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
 <li>
@@ -933,6 +939,12 @@
 <li>
     <a href="../../../helpers/win32/" id="aea-api-helpers-win32-"
         >Win32</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../helpers/yaml_utils/" id="aea-api-helpers-yaml_utils-"
+        >YamlUtils</a
     >
 </li>
 
@@ -1124,11 +1136,28 @@
     </ul>
 </li> 
 <li>
+    <span class="head">Test Tools</span>
+    <ul id="header_test_tools"> 
+<li>
     <a href="../../../test_tools/generic/" id="aea-api-test_tools-generic-"
-        >Test Tools</a
+        >Generic</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_cases/" id="aea-api-test_tools-test_cases-"
+        >Test Cases</a
+    >
+</li>
+ 
+<li>
+    <a href="../../../test_tools/test_skill/" id="aea-api-test_tools-test_skill-"
+        >Test Skill</a
     >
 </li>
 
+    </ul>
+</li>
     </ul>
 </li> 
 <li>
@@ -1655,13 +1684,11 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtocolGenerator</span><span class="p">()</span>
 </code></pre></div>
 
-
 <p>This class generates a protocol_verification package from a ProtocolTemplate object.</p>
 <p><a name="aea.protocols.generator.base.ProtocolGenerator.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">path_to_protocol_specification</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">dotted_path_to_protocol_package</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-
 
 <p>Instantiate a protocol generator.</p>
 <p><strong>Arguments</strong>:</p>
@@ -1677,7 +1704,6 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">generate_protobuf_only_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
-
 <p>Run the generator in "protobuf only" mode:</p>
 <p>a) validate the protocol specification.
 b) create the protocol buffer schema file.</p>
@@ -1685,9 +1711,8 @@ b) create the protocol buffer schema file.</p>
 <p>None</p>
 <p><a name="aea.protocols.generator.base.ProtocolGenerator.generate_full_mode"></a></p>
 <h4 id="generate_full_mode">generate<code>_</code>full<code>_</code>mode</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">generate_full_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">generate_full_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Run the generator in "full" mode:</p>
 <p>a) validates the protocol specification.
@@ -1696,12 +1721,11 @@ c) generates python modules.
 d) applies black formatting
 e) applies isort formatting</p>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>optional warning message</p>
 <p><a name="aea.protocols.generator.base.ProtocolGenerator.generate"></a></p>
 <h4 id="generate">generate</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">generate</span><span class="p">(</span><span class="n">protobuf_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">generate</span><span class="p">(</span><span class="n">protobuf_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
-
 
 <p>Run the generator. If in "full" mode (protobuf_only is False), it:</p>
 <p>a) validates the protocol specification.
@@ -1715,7 +1739,7 @@ e) applies isort formatting</p>
 <li><code>protobuf_only</code>: mode of running the generator.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>optional warning message.</p>
 
 
                                 </section>
