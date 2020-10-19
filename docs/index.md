@@ -1,22 +1,36 @@
-<div id="qst" class="grid-container">
+<div id="qst1" class="grid-container">
   <div class="grid-item item1">
     <h4>Welcome to Fetch.ai developer resources. Let's get started.</h4>
   </div>
+</div>
+<div id="qst" class="grid-container">
+  <div class="grid-item item1">
+    <h4>Another box goes here to draw attention to latest running testnet and prizes on offer, colour different!</h4>
+  </div>
 
-    <a id="aea" href="aea/quickstart" class="grid-item item2">
+    <a id="i_nets" href="i_nets" class="grid-item item2">
+      <h3>Incentivized Testnet - Agent World 1</h3>
+      <p>Earn tokens now by running an agent on Agent World</p>
+    </a>
+
+    <a id="aea" href="aea" class="grid-item item3">
       <h3>Developing agents</h3>
       <p>Speed up the development of Autonomous Economic Agents using our framework</p>
     </a>
 
-    <a id="ledg" href="ledger/walkthrough" class="grid-item item3">
-      <h3>Using the ledger</h3>
-      <p>Learn how to make transfers, deploy smart contracts, etc</p>
+    <a id="ledg" href="ledger" class="grid-item item4">
+      <h3>Getting Ready for mainnet v2</h3>
+      <p>Learn how to use our ledger technologies as we prepare for mainnet v2</p>
     </a>
-    
-    <a id="run" href="ledger/installation/installation-ubuntu" class="grid-item item4">
-      <h3>Deploying a node</h3>
-      <p>Run your own local node</p>
-    </a>
+
+  <div class="grid-item item_whole_row no-padding">
+    <h1>Here to build agents?</h1>
+    <ul>
+      <li>Learn about the agent framework's <a href="../aea/diagram">architecture</a>.</li>
+      <li>Learn about the <a href="../aea">concepts</a>.</li>
+      <li><a href="../aea/quickstart">Build</a> your first agent.</li>
+    </ul>
+  </div>
 
   <div class="grid-item item_whole_row no-padding">
     <h1>What is Fetch.ai</h1>
