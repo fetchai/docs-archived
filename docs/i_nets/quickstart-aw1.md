@@ -7,7 +7,7 @@ Agent World 1 (AW-1) is our first incentivized testnet. It allows anyone with FE
 
 You have to complete a few steps as listed below:
 
-1. Join our discord channel [here](https://discord.gg/TdRhuE). This allows you to ask questions throughout AW-1 and engage with the Fetch.ai developers.
+1. Join our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>. This allows you to ask questions throughout AW-1 and engage with the Fetch.ai developers.
 
 2. Download and install the AEA (Autonomous Economic Agent) Framework including its CLI on your own machine. There are two ways to do this:
 
@@ -27,13 +27,14 @@ You have to complete a few steps as listed below:
 
 	- Run `aea fetch fetchai/registration_aea_aw1`
 	- Enter it `cd registration_aea_aw1`
+	- Install dependencies via `aea install`
 
 5. Create a test-net address for the registration agent via CLI:
 
 	- Run `aea generate-key fetchai` and `aea add-key fetchai`
 	- Print your address `aea get-address fetchai`
 
-6. Sign your test-net address you just generated with the private key which is tied to your FET account:
+6. Sign your test-net address you just generated with the private key which is tied to your FET account on Ethereum mainnet which you use for staking FET:
 
 	- We recommend you use MetaMask or a similar Wallet to sign your Fetch.ai test-net address.
 	- In your registration agent's `aea-config.yaml` file update the following lines:
@@ -46,7 +47,7 @@ You have to complete a few steps as listed below:
 
 	- Currently, the whitelisted address is: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`
 
-7.  Configure the registration agent further, to include your developer handle. Optionally, to earn more tokens, also provide a link to a tweet. To qualify, the tweet must reference your developer handle and link to incentivized [testnet landing page](../i_nets/quickstart-aw1/).
+7.  Configure the registration agent further, to include your developer handle. Optionally, to earn more tokens, also provide a link to a tweet. To qualify, the tweet must reference your developer handle and link to incentivized [testnet landing page](../).
 
 	- In your registration agent's `aea-config.yaml` file add the following lines:
 

@@ -5,7 +5,8 @@
 </div>
 <div id="qst" class="grid-container">
   <div class="grid-item item1">
-    <h4>Another box goes here to draw attention to latest running testnet and prizes on offer, colour different!</h4>
+    <h4>Fetch.ai Incentivized testnets are running now</h4>
+    <p>You can learn more about this journey <a href="inets/">here</a>. The current running testnet is Agent themed, and you can get part of a substantial reward pool over the coming weeks. Each themed testnet divides its focus up into different pieces, so there's something for everyone. Get started now <a href="inets/quickstart-aw1">here</a>!</p>
   </div>
 
     <a id="i_nets" href="i_nets" class="grid-item item2">
