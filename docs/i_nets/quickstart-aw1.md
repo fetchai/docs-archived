@@ -17,11 +17,11 @@ You have to complete a few steps as listed below:
 		- ensure you have the latest version `0.7.0` installed by executing `aea --version`
 
 	- Automated:
-		- get [this script for Windows](https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1) or [this script for MacOs/Ubuntu](https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh) and run it on your machine
+		- get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine
 
-3. Create a developer account on the [AEA Registry](https://aea-registry.fetch.ai), the package manager for AEA components.
+3. Create a developer account on the <a href="https://aea-registry.fetch.ai" target="_blank">AEA Registry</a>, the package manager for AEA components.
 
-	- Simply run `aea init` and follow the steps as prompted.
+	- Simply run `aea init` and follow the steps as prompted. In the process you will set an author name; this is your **developer handle**.
 
 4. Fetch the registration agent from AEA Registry via CLI:
 
@@ -39,11 +39,9 @@ You have to complete a few steps as listed below:
 	- We recommend you use MetaMask or a similar Wallet to sign your Fetch.ai test-net address.
 	- In your registration agent's `aea-config.yaml` file update the following lines:
 
-	```
-	ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE
-	signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE
-	whitelist: [PUT_WHITELIST_ADDRESSES_HERE]
-	```
+		- `ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE`
+		- `signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE`
+		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]`
 
 	- Currently, the whitelisted address is: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`
 
@@ -51,10 +49,8 @@ You have to complete a few steps as listed below:
 
 	- In your registration agent's `aea-config.yaml` file add the following lines:
 
-	```
-	developer_handle: PUT_YOUR_DEVELOPER_HANDLE_HERE
-	tweet: PUT_THE_LINK_TO_YOUR_TWEET_HERE
-	```
+		- `developer_handle: PUT_YOUR_DEVELOPER_HANDLE_HERE`
+		- `tweet: PUT_THE_LINK_TO_YOUR_TWEET_HERE`
 
 	- The developer handle needs to be updated in two places!
 
@@ -64,11 +60,15 @@ You have to complete a few steps as listed below:
 
 9. After a while, when you see `received register_msg success`, you can stop the agent.
 
+	- You can look for your transfer on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a>.
+
 10. You can verify that you have received funds on the test-net in AEA's wallet:
 
 	- Execute `aea get-wealth fetchai` to see your test-net wealth
 
-11. Use the CLI to send some funds from your registration agent to the whitelist adddress: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`
+11. Use the CLI to send some funds from your registration agent to the whitelist adddress:
+
+    - `aea transfer fetchai fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel 10`
 
 We would really value your feedback. Please fill in [this]() survey to help us improve.
 
