@@ -2,7 +2,7 @@
 
 ## Agent Land
 
-Agent Land is our stable, public testnet for the Fetch Ledger v2. It is designed primarily as a development environment for agents and agent based systems.
+Agent Land is our stable, public testnet for the Fetch Ledger v2. As such most developers will be interacting with this testnet. This is specifically designed and supported for autonomous economic agent development. There are other testnets, such as those supporting our unique DRB (decentralised random beacon) and other exciting technologies. When we come to the mainnet, all of these testnets will become one: a single network supporting all the new features.
 
 
 | Parameter      | Value                                |
