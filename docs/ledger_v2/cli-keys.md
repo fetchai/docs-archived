@@ -27,6 +27,8 @@ After running the command `wasmcli` will print out a summary of the new key. An 
   pubkeys: []
 ```
 
+This will be followed by a 24-word mnemonic that can be used to re-generate the private key and address for the account (keep this safe, if ever used to control main-net tokens).
+
 ## Looking up an address
 
 A common operation that you will want to do is to lookup the address for a specified key. This can be done quickly using the following command:

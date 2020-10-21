@@ -19,7 +19,7 @@ You can read more detailed information on [Github](https://github.com/fetchai/ne
 
 ## Agent World
 
-Agent World is our first incentivsed test network.
+Agent World is our first incentivsed test network. Check out the [Incentivised Testnets](../../i_nets/) for more information.
 
 
 | Parameter      | Value                                         |

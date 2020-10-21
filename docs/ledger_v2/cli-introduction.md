@@ -1,6 +1,6 @@
 # CLI - Introduction
 
-The command line client is quite powerful for interacting with the ledger. It is therefore a useful tool to learn how to use.
+The command line client provides all of the capabilities for interacting with the fetch ledger such as creating addresses, sending transactions and the governance capabilities.
 
 ## Connecting to a network
 
@@ -16,7 +16,7 @@ wasmcli config trust-node false
 wasmcli config node https://rpc-agent-land.fetch.ai:443
 ```
 
-### Connecting to Agent Land network
+### Connecting to Agent World network
 
 To connect to the agent world network run the following configuration steps:
 

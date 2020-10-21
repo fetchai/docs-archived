@@ -1,4 +1,4 @@
-# CLI - Sending Transfers
+# CLI - Managing Tokens
 
 ## Querying your balance
 

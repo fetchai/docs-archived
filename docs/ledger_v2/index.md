@@ -25,7 +25,6 @@ Understanding building block relationships: https://docs.fetch.ai/aea/oef-ledger
 
 For more detailed information, have a look at our [network](./networks/) information page.
 
-
 ### Other testnets
 
 There are currently three key sequential testnets planned, but more may arise and operate in parallel in order to target the testing and development of specific additional new technologies. The three main incentivised testnet phases are:
@@ -34,27 +33,7 @@ There are currently three key sequential testnets planned, but more may arise an
 2. **Random Beacon**: a stable testnet showcasing the decentralised random beacon, vital for DeFi, gaming and a key part of our on-going unique approach to consensus.
 3. **Oracles**: a stable testnet for demonstrating connecting the outside world to the inside world; enabling agents to communicate reliable, trustworthy information from the environment at large.
 
-## Converting Agents to be ready for Mainnet v2
-
-* Ask David M to fill this in and link to correct place in the AEA docs.
-
-## Ledger support and APIs
-
-There is an API for you to find out from the block explorer a list of transactions associated with a given address. Here is an example:
-
-https://explore-agent-land.fetch.ai/api/transactions?address=fetch193vvag846gz3pt3q0mdjuxn0s5jrt39fsjrays&offset=0&limit=100
-
-This will fetch the last 100 transactions associated with the named address in JSON format.
-
 ## Roadmap for Smart Contracts
 
-Mainnet V2 and the current testnet do not support the same smart contract language as mainnet version 1. When mainnet V2 is released, smart contracts will be developed using Cosmwasm, which will include the ability to develop your contracts in a number of languages depending on your preferences, such as Rust, Go or Javascript. You can get an introduction to this here.
-
-Early incentivised testnet phases will use the EVM to be ethereum compatible, but later ones will fully embrace Cosmwasm and its powerful approach to building smart contracts. For more information on Cosmwasm, and Rust, the primary language in which contract development is currently done, you can go to https://www.cosmwasm.com/ and https://github.com/CosmWasm/cosmwasm-template
-
-
-
-
-
-
+Mainnet V2 and the current testnet do not support the same smart contract language as mainnet version 1. When mainnet V2 is released, smart contracts will be developed using Cosmwasm, which will include the ability to develop your contracts in a number of languages depending on your preferences, such as Rust, Go or Javascript. For more information on Cosmwasm, and Rust, the primary language in which contract development is currently done, you can go to https://www.cosmwasm.com/ and https://github.com/CosmWasm/cosmwasm-template
 
