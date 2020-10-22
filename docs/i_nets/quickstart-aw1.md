@@ -1,7 +1,18 @@
 
 ## Introduction: Agent World 1 (AW-1) - part 1, getting started
 
-Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="h../aea" target="_blank">agent framework</a>.
+Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="../../aea">agent framework</a>.
+
+
+## Rewards
+
+The following table shows the incentive rewards on offer.
+
+Action             | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
+------------------ | -------------------------- | ------------------------- | ----------------------------
+Steps 1 - 11 below | 100                        | 250                       | 150
+Tweet              | 0                          | 50                        | 100
+
 
 ## How to qualify for incentive rewards?
 
@@ -41,7 +52,7 @@ You have to complete a few steps as listed below:
 
 		- `ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE`
 		- `signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE`
-		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (Currently, the whitelisted address is: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`.)
+		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (Currently, the whitelisted address is: `fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf`.)
 
 7.  Configure the registration agent further, to include your developer handle. Optionally, to earn more tokens, also provide a link to a tweet. To qualify, the tweet must reference your developer handle and link to incentivized [testnet landing page](../).
 
@@ -66,7 +77,7 @@ You have to complete a few steps as listed below:
 
 11. Use the CLI to send some funds from your registration agent to the whitelist adddress:
 
-    - `aea transfer fetchai fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel 10`
+    - `aea transfer fetchai fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf 10`
 
-We would really value your feedback. Please fill in [this]() survey to help us improve.
+We would really value your feedback. Survey coming soon!
 
