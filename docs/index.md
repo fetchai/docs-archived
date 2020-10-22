@@ -6,6 +6,7 @@
 <div id="qst" class="grid-container">
   <div class="grid-item item1">
     <h4>Fetch.ai Incentivized testnets are running now</h4>
+    <p><strong>Over a MILLION FET in rewards over the testnet phases!</strong></p>
     <p>You can learn more about this journey <a href="../i_nets/">here</a>. The current running testnet is Agent themed, and you can get part of a substantial reward pool over the coming weeks: <strong>up to a quarter of a MILLION FET in rewards for taking part</strong>. Each themed testnet divides its focus up into different pieces, so there's something for everyone. <a href="../i_nets/quickstart-aw1">Get started now</a>!</p>
   </div>
 
