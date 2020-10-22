@@ -1,9 +1,9 @@
 
-## Intro 
+## Introduction: Agent World 1 (AW-1) - part 1, getting started
 
-Agent World 1 (AW-1) is our first incentivized testnet. It allows anyone with FET tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World 1.
+Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="h../aea" target="_blank">agent framework</a>.
 
-## How to win tokens?
+## How to qualify for incentive rewards?
 
 You have to complete a few steps as listed below:
 
@@ -34,16 +34,14 @@ You have to complete a few steps as listed below:
 	- Run `aea generate-key fetchai` and `aea add-key fetchai`
 	- Print your address `aea get-address fetchai`
 
-6. Sign your test-net address you just generated with the private key which is tied to your FET account on Ethereum mainnet which you use for staking FET:
+6. Sign the test-net address you just generated with the private key tied to your FET account on Ethereum mainnet. This is the account you use for FET staking:
 
-	- We recommend you use MetaMask or a similar Wallet to sign your Fetch.ai test-net address.
-	- In your registration agent's `aea-config.yaml` file update the following lines:
+	- We recommend you use our <a href=https://fetchai.github.io/web-ethereum-signer/ target="_blank">signing app</a> with your <a href="https://docs.metamask.io/guide/signing-data.html#a-brief-history" target="_blank">MetaMask</a> wallet, alternatively use <a href="https://www.myetherwallet.com/interface/sign-message" target="_blank">MEW</a> or a similar wallet to sign your Fetch.ai test-net address.
+	- In your registration agent's `aea-config.yaml` file update the following lines (make sure you put strings in quotes `''`):
 
 		- `ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE`
 		- `signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE`
-		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]`
-
-	- Currently, the whitelisted address is: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`
+		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (Currently, the whitelisted address is: `fetch19unnpas52q0us5lp7e2pmnkrmywjhnau224yel`.)
 
 7.  Configure the registration agent further, to include your developer handle. Optionally, to earn more tokens, also provide a link to a tweet. To qualify, the tweet must reference your developer handle and link to incentivized [testnet landing page](../).
 
@@ -58,7 +56,7 @@ You have to complete a few steps as listed below:
 
 	- Execute `aea run`
 
-9. After a while, when you see `received register_msg success`, you can stop the agent.
+9. After a while, when you see `received register message success`, you can stop (by pressing `Ctrl-C`) the agent.
 
 	- You can look for your transfer on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a>.
 

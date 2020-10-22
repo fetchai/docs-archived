@@ -6,7 +6,7 @@
 <div id="qst" class="grid-container">
   <div class="grid-item item1">
     <h4>Fetch.ai Incentivized testnets are running now</h4>
-    <p>You can learn more about this journey <a href="inets/">here</a>. The current running testnet is Agent themed, and you can get part of a substantial reward pool over the coming weeks. Each themed testnet divides its focus up into different pieces, so there's something for everyone. Get started now <a href="inets/quickstart-aw1">here</a>!</p>
+    <p>You can learn more about this journey <a href="../i_nets/">here</a>. The current running testnet is Agent themed, and you can get part of a substantial reward pool over the coming weeks: <strong>up to a quarter of a MILLION FET in rewards for taking part</strong>. Each themed testnet divides its focus up into different pieces, so there's something for everyone. <a href="../i_nets/quickstart-aw1">Get started now</a>!</p>
   </div>
 
     <a id="i_nets" href="i_nets" class="grid-item item2">
@@ -46,7 +46,7 @@
     </ul>
   </div>
 
-  <div class="grid-item item_whole_row no-padding">
+<!--   <div class="grid-item item_whole_row no-padding">
     <h1>Fetch.ai glossary</h1>
     <p><strong>Collective learning:</strong> The act by which autonomous agents, with competitive or complementary interests, increase their understanding of the state and behavior of the decentralized ecosystem they are connected to. Ideally, this will allow them to improve their solutions to a problem.</p>
     <p><strong>Etch:</strong> Our native language in which smart contracts can be written, with support for ML and AI.</p>
@@ -58,12 +58,12 @@
     <h1>What can you do *now* with Fetch.ai</h1>
     <p>All the components of the Fetch.ai stack and the interfaces to interact with them are open source. Take a look at our SDKs (Python Ledger API, JavaScript Ledger API, Agent Framework and Etch language) so you can start building smart contracts, new agents connected to Fetch.ai, or new ways of interacting with the ledger.</p>
     <p>And if you want to go even further, you can fork and build any components from the Fetch.ai stack!</p>
-  </div>
+  </div> -->
 
   <div class="grid-item item_whole_row no-padding">
     <h1>Versions and release notes</h1>
     <p>As with any software and its documentation, things do change and evolve. We at Fetch.ai try to support backwards compatibility as much as possible, but deprecations will occur. Keep an eye our release notes, as these list all major changes.</p>
-    <p>If you want to view older versions of the documentation, you can select them using the drop down at the bottom of the left hand menu.</p>
+<!--     <p>If you want to view older versions of the documentation, you can select them using the drop down at the bottom of the left hand menu.</p> -->
   </div>
 </div>
 
@@ -72,8 +72,7 @@
 
 <div class="admonition note">
   <p class="admonition-title">Updates!</p>
-  <p><strong>November 29th, 2019</strong>
-  Documentation updated for Fetch.ai ledger v0.10.x. See <a href="summary" target="_blank">summary details here</a>.</p>
+  <p>Documentation last updated on <strong>October 22nd, 2020</strong></p>
 </div>
 
 <br/>
