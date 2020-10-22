@@ -19,9 +19,9 @@ fetch1almpjpf769p23k0v4m5eglvzr4jupsjs66vxf4
 
 ## Key links and information
 
-Block explorer and token tap: https://explore-agent-land.fetch.ai/
+Block explorer and token tap: [https://explore-agent-land.fetch.ai/](https://explore-agent-land.fetch.ai/)
 
-Understanding building block relationships: https://docs.fetch.ai/aea/oef-ledger/
+Understanding building block relationships: [https://docs.fetch.ai/aea/oef-ledger/](https://docs.fetch.ai/aea/oef-ledger/)
 
 For more detailed information, have a look at our [network](./networks/) information page.
 
@@ -29,9 +29,9 @@ For more detailed information, have a look at our [network](./networks/) informa
 
 There are currently three key sequential testnets planned, but more may arise and operate in parallel in order to target the testing and development of specific additional new technologies. The three main incentivised testnet phases are:
 
-1. **Agents**: a stable testnet for autonomous economic agents, featuring the core new mainnet v2 technologies that agent developers need in order to prepare.
-2. **Random Beacon**: a stable testnet showcasing the decentralised random beacon, vital for DeFi, gaming and a key part of our on-going unique approach to consensus.
-3. **Oracles**: a stable testnet for demonstrating connecting the outside world to the inside world; enabling agents to communicate reliable, trustworthy information from the environment at large.
+1. [**Agents**](../i_nets/quickstart-aw1.md): a stable testnet for autonomous economic agents, featuring the core new mainnet v2 technologies that agent developers need in order to prepare.
+2. [**Random Beacon**](../i_nets/quickstart-aw2.md): a stable testnet showcasing the decentralised random beacon, vital for DeFi, gaming and a key part of our on-going unique approach to consensus.
+3. [**Oracles**](../i_nets/quickstart-aw3.md): a stable testnet for demonstrating connecting the outside world to the inside world; enabling agents to communicate reliable, trustworthy information from the environment at large.
 
 ## Roadmap for Smart Contracts
 
