@@ -4,7 +4,7 @@ Each of the [networks](./networks/) has a dedicated block explorer web site asso
 
 ## Logging in with the Ledger Nano
 
-Return to the block explorer landing page and click on the key button in the top right corner. You'll then be prompted to "Sign in With Ledge"r. You must accept this request on your ledger nano device. After completing this process, the key button will be replaced by a person icon with a link to your personal address page, which keeps track of the activity that you have performed on the test-net.
+Return to the block explorer landing page and click on the key button in the top right corner. You'll then be prompted to "Sign in With Ledger". You must accept this request on your ledger nano device. After completing this process, the key button will be replaced by a person icon with a link to your personal address page, which keeps track of the activity that you have performed on the test-net.
 
 
 ## Getting Testnet Tokens from the Faucet
@@ -19,4 +19,3 @@ After receiving tokens, you can send these to another address using the purple T
   <p class="admonition-title"><b>Note:</b></p>
   <p>The transaction format includes a memo field that can be used to check the transaction information on the ledger nano display.</p>
 </div>
-
