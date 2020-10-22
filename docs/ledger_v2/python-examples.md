@@ -1,4 +1,4 @@
-## Simple Python using Agent Land
+## Python examples using Agent Land
 
 In this section, we look at some Python that you can use to create addresses, fund them, and submit transactions to the network. It's super-simple to do:
 
@@ -17,7 +17,7 @@ balance = FetchAIApi().get_balance(address)
 print(f”Our address {address} has a balance of {balance}”)
 ```
 
-As you can see, it’s super-easy to use. The above works in standalone code, and is supported in the agent framework. Here is a code fragment that shows the construction, signing and submission of a transaction:
+As you can see, it’s pretty straightforward. The above works in standalone code, and is supported in the agent framework. Here is a code fragment that shows the construction, signing and submission of a transaction:
 
 ```python3
 from aea.crypto.fetchai import FetchAICrypto, FetchAIApi, FetchAIFaucetApi

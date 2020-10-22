@@ -2,7 +2,7 @@
 
 ## Agent Land
 
-Agent Land is our stable, public testnet for the Fetch Ledger v2. As such most developers will be interacting with this testnet. This is specifically designed and supported for autonomous economic agent development. There are other testnets, such as those supporting our unique DRB (decentralised random beacon) and other exciting technologies. When we come to the mainnet, all of these testnets will become one: a single network supporting all the new features.
+Agent Land is our stable, public testnet for the Fetch Ledger v2. As such most developers will be interacting with this testnet. This is specifically designed and supported for autonomous economic agent development. There are other testnets, such as those supporting our unique DRB (decentralized random beacon) and other exciting technologies. When we come to the mainnet, all of these testnets will become one: a single network supporting all the new features.
 
 
 | Parameter      | Value                                |
@@ -17,9 +17,9 @@ Agent Land is our stable, public testnet for the Fetch Ledger v2. As such most d
 
 You can read more detailed information on [Github](https://github.com/fetchai/networks-agentland). 
 
-## Agent World
+## **Incentivized Testnet Phase 1: Agent World**
 
-Agent World is our first incentivsed test network. Check out the [Incentivised Testnets](../../i_nets/) for more information.
+The Agent World incentivized test network is phase 1 of our journey to Mainnet v2. Check out the [Incentivised Testnets](../../i_nets/) for more information.
 
 
 | Parameter      | Value                                         |
@@ -33,9 +33,9 @@ Agent World is our first incentivsed test network. Check out the [Incentivised T
 | Token Faucet   | n/a                                           |
 
 
-## Beacon World
+## **Incentivized Testnet Phase 2: Beacon World**
 
-Current the Beacon World network is invite only. If you are interested in partipating in the network please reach out to us.
+Currently, Beacon World network is invite only. It will be open to all developers when we reach [phase 2](../i_nets/quickstart-aw2.md) of the incentivized testnet. If you have a specific need to participate in it earlier, please do contact us at [developer@fetch.ai](mailto:developer@fetch.ai).
 
 
 | Parameter      | Value            |
