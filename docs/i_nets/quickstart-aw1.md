@@ -1,7 +1,7 @@
 
 ## Introduction: Agent World 1 (AW-1) - part 1, getting started
 
-Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with <a href="https://fetch.ai/staking/" target="_blank">staked FET</a> tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="../../aea">agent framework</a>.
+Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with <a href="https://fetch.ai/staking/" target="_blank">a non-zero amount of staked FET</a> tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="../../aea">agent framework</a>.
 
 
 ## Rewards
@@ -87,5 +87,4 @@ You have to complete a few steps as listed below:
 
 At this point you are done!
 
-We would really value your feedback. Survey coming soon!
-
+We would really value your feedback. Please <a href="https://research.typeform.com/to/gFWEY0Sk" target="_blank">complete our survey here</a>.
