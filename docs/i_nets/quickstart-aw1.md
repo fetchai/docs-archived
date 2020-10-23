@@ -1,7 +1,7 @@
 
 ## Introduction: Agent World 1 (AW-1) - part 1, getting started
 
-Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="../../aea">agent framework</a>.
+Agent World 1 (AW-1) is the first part of our agent-themed incentivised testnet. It allows anyone with <a href="https://fetch.ai/staking/" target="_blank">staked FET</a> tokens to gain some more FET token rewards by following a few simple steps and launching an agent on Agent World. In this first two week part, we get everyone up and running with the a <a href="../../aea">agent framework</a>.
 
 
 ## Rewards
@@ -23,9 +23,10 @@ You have to complete a few steps as listed below:
 2. Download and install the AEA (Autonomous Economic Agent) Framework including its CLI on your own machine. There are two ways to do this:
 
 	- Manual:
-		- ensure you have Python (3.6, 3.7 or 3.8) installed on your machine
-		- `pip install aea[all]`
+		- ensure you have Python (3.6, 3.7 or 3.8) and Go (>= 1.14.2) installed on your machine
+		- run `pip install aea[all]`
 		- ensure you have the latest version `0.7.0` installed by executing `aea --version`
+		- For more guidance (in particular Windows and Ubuntu related issues) check out the <a href="../../aea/quickstart/#known-issues">AEA quickstart's known issues section</a>
 
 	- Automated:
 		- get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine
@@ -48,11 +49,16 @@ You have to complete a few steps as listed below:
 6. Sign the test-net address you just generated with the private key tied to your FET account on Ethereum mainnet. This is the account you use for FET staking:
 
 	- We recommend you use our <a href=https://fetchai.github.io/web-ethereum-signer/ target="_blank">signing app</a> with your <a href="https://docs.metamask.io/guide/signing-data.html#a-brief-history" target="_blank">MetaMask</a> wallet, alternatively use <a href="https://www.myetherwallet.com/interface/sign-message" target="_blank">MEW</a> or a similar wallet to sign your Fetch.ai test-net address.
-	- In your registration agent's `aea-config.yaml` file update the following lines (make sure you put strings in quotes `''`):
+	- In your registration agent's `aea-config.yaml` file update the following lines:
 
 		- `ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE`
 		- `signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE`
 		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (Currently, the whitelisted address is: `fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf`.)
+
+	<div class="admonition note">
+	  <p class="admonition-title">Note</p>
+	  <p>Make sure you put strings (addresses and signatures) in quotes `''`.</p>
+	</div>
 
 7.  Configure the registration agent further, to include your developer handle. Optionally, to earn more tokens, also provide a link to a tweet. To qualify, the tweet must reference your developer handle and link to incentivized [testnet landing page](../).
 
@@ -63,7 +69,7 @@ You have to complete a few steps as listed below:
 
 	- The developer handle needs to be updated in two places!
 
-8. Now, you can run your registration agent which registers the agent and the provided data on the SOEF:
+8. Now, you can run your registration agent which registers the agent and the provided data on the <a href="../../aea/oef-ledger">SOEF</a> and with the confirmation agent:
 
 	- Execute `aea run`
 
@@ -78,6 +84,8 @@ You have to complete a few steps as listed below:
 11. Use the CLI to send some funds from your registration agent to the whitelist adddress:
 
     - `aea transfer fetchai fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf 10`
+
+At this point you are done!
 
 We would really value your feedback. Survey coming soon!
 
