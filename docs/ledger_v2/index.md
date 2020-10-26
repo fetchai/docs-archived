@@ -35,5 +35,5 @@ There are currently three key sequential testnets planned, but more may arise an
 
 ## Roadmap for Smart Contracts
 
-Mainnet V2 and the current testnet do not support the same smart contract language as mainnet version 1. When mainnet V2 is released, smart contracts will be developed using Cosmwasm, which will include the ability to develop your contracts in a number of languages depending on your preferences, such as Rust, Go or Javascript. For more information on Cosmwasm, and Rust, the primary language in which contract development is currently done, you can go to https://www.cosmwasm.com/ and https://github.com/CosmWasm/cosmwasm-template
+The v2.0 main-net and our test-nets support a webassembly (WASM) virtual machine VM. When mainnet V2 is released, smart contracts will be developed using Cosmwasm, which will include the ability to develop your contracts in a variety of languages depending on your preferences, such as Rust, Go or Javascript. For more information on Cosmwasm, and Rust, which is the first language to be supported by the Cosmwasm VM, you can go to [https://www.cosmwasm.com/](https://www.cosmwasm.com/) and [https://github.com/CosmWasm/cosmwasm-template](https://github.com/CosmWasm/cosmwasm-template).
 
