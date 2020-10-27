@@ -16,6 +16,11 @@ Tweet              | 0                          | 50                        | 10
 
 ## How to qualify for incentive rewards?
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>You must stake ERC20 FET tokens in order to take part and qualify. Go to <a href="https://fetch.ai/staking/" target="_blank">staking</a>, the process is simple and quick!</p>
+</div>
+
 You have to complete a few steps as listed below:
 
 1. Join our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>. This allows you to ask questions throughout AW-1 and engage with the Fetch.ai developers.
@@ -76,6 +81,11 @@ You have to complete a few steps as listed below:
 9. After a while, when you see `received register message success`, you can stop (by pressing `Ctrl-C`) the agent.
 
 	- You can look for your transfer on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a>.
+
+	<div class="admonition note">
+	  <p class="admonition-title">Note</p>
+	  <p>If after some time (>1 min) you get no response or the response is an error, then please make sure you have followed steps 6. and 7. correctly and that you have funds staked!</p>
+	</div>
 
 10. You can verify that you have received funds on the test-net in AEA's wallet:
 
