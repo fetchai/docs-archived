@@ -36,7 +36,7 @@ You have to complete a few steps as listed below:
 	- Automated:
 		- get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine
 
-3. Create a developer account on the <a href="https://aea-registry.fetch.ai" target="_blank">AEA Registry</a>, the package manager for AEA components.
+3. Create a developer account using the command below. This will enable you to download and contribute to the <a href="https://aea-registry.fetch.ai" target="_blank">AEA Registry</a>; the package manager for AEA components.
 
 	- Simply run `aea init` and follow the steps as prompted. In the process you will set an author name; this is your **developer handle**.
 
@@ -58,7 +58,7 @@ You have to complete a few steps as listed below:
 
 		- `ethereum_address: PUT_YOUR_ETHEREUM_ADDRESS_HERE`
 		- `signature_of_fetchai_address: PUT_YOUR_SIGNATURE_HERE`
-		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (Currently, the whitelisted address is: `fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf`.)
+		- `whitelist: [PUT_WHITELIST_ADDRESSES_HERE]` (In this challenge, this variable should be set to: `fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf`.)
 
 	<div class="admonition note">
 	  <p class="admonition-title">Note</p>
@@ -72,7 +72,7 @@ You have to complete a few steps as listed below:
 		- `developer_handle: PUT_YOUR_DEVELOPER_HANDLE_HERE`
 		- `tweet: PUT_THE_LINK_TO_YOUR_TWEET_HERE`
 
-	- The developer handle needs to be updated in two places!
+	- The developer handle needs to be updated in two places!  (You can search the file for the `PUT_YOUR_DEVELOPER_HANDLE_HERE` placeholder).
 
 8. Now, you can run your registration agent which registers the agent and the provided data on the <a href="../../aea/oef-ledger">SOEF</a> and with the confirmation agent:
 
