@@ -1764,14 +1764,46 @@ you can use the Fetch.ai AEA framework.</p>
 <p>This example will take you through the simplest AEA in order to make you familiar with the framework basics.</p>
 <h2 id="system-requirements">System Requirements</h2>
 <p>The AEA framework can be used on <code>Windows</code>, <code>Ubuntu/Debian</code> and <code>MacOS</code>.</p>
-<p>You need <a href="https://www.python.org/downloads/" target="_blank">Python 3.6</a> or higher as well as <a href="https://golang.org/dl/" target="_blank">Go 1.14.2</a> or higher installed.</p>
+<p>You need <a href="https://www.python.org/downloads/" target="_blank">Python 3.6</a> or higher as well as <a href="https://golang.org/dl/" target="_blank">Go 1.14.2</a> or higher installed.
+​</p>
+<h3 id="optional-using-the-docker-image">Optional: using the Docker image.</h3>
+<p>​
+We also provide a Docker image with all the needed dependencies.</p>
+<details><summary>Manual approach</summary>
+
+To use the image you will first have to pull it and than run it with your current local directory mounted as a docker volume. This allows you to keep your agents local while working on them from within the docker container.
+
+To pull:
+
+
+<div class="highlight"><pre><span></span><code>docker pull fetchai/aea-user:latest
+</code></pre></div>
+
+
+
+To run the image
+​
+- Linux and MacOs
+  ```bash
+  docker run -it -v $(pwd):/agents --workdir=/agents fetchai/aea-user:latest 
+  ```
+- Windows
+  ```bash
+  docker run -it -v %cd%:/agents --workdir=/agents fetchai/aea-user:latest 
+  ```
+
+Once successfully logged into the docker container, 
+you can follow the rest of the guide the same way as if not using docker.
+​
+</details>
+
 <h2 id="preliminaries">Preliminaries</h2>
 <p>Create and enter into a new working directory.</p>
 <div class="highlight"><pre><span></span><code>mkdir my_aea_projects/
 <span class="nb">cd</span> my_aea_projects/
 </code></pre></div>
 
-<p>We highly recommend using a virtual environment to ensure consistency across dependencies.</p>
+<p>Unless you are using the docker image, we highly recommend using a virtual environment to ensure consistency across dependencies.</p>
 <p>Check that you have <a href="https://github.com/pypa/pipenv" target="_blank"><code>pipenv</code></a>.</p>
 <div class="highlight"><pre><span></span><code>which pipenv
 </code></pre></div>
@@ -1794,13 +1826,33 @@ you can use the Fetch.ai AEA framework.</p>
 <p>If the installation steps fail, it might be a dependency issue.</p>
 <p>The following hints can help:</p>
 <ul>
-<li>Ubuntu/Debian systems only: install Python 3.7 headers.</li>
+<li>Ubuntu/Debian systems only: install Python headers,
+  depending on the Python version you have installed on your machine.
+  E.g. for Python 3.7: </li>
 </ul>
 <div class="highlight"><pre><span></span><code>sudo apt-get install python3.7-dev
 </code></pre></div>
 
 <ul>
-<li>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target="_blank">tools for Visual Studio</a>.</li>
+<li>
+<p>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target="_blank">tools for Visual Studio</a>.</p>
+</li>
+<li>
+<p>To install Go, follow the
+ official guide, depending on your platform <a href="https://golang.org/doc/install" target="_blank">here</a></p>
+</li>
+<li>
+<p>Python is already included by default on 
+many Linux distributions (e.g. Ubuntu), as well as MacOS.
+To check you have the right version, open a terminal and run: </p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">python3 --version</span>
+</code></pre></div>
+
+<ul>
+<li>To install Python on Windows machines, 
+you can download a specific release <a href="https://www.python.org/downloads/" target="_blank">here</a>.</li>
 </ul>
 <h2 id="setup-author-name">Setup author name</h2>
 <p>AEAs are composed from components. The components can be developed by anyone and are available on the <a href="https://aea-registry.fetch.ai" target="_blank">AEA registry</a>. To use the registry we need to register an author name.</p>
@@ -1823,7 +1875,7 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.7.0
+v0.7.1
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </code></pre></div>
@@ -1836,7 +1888,7 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>The echo skill demo is a simple demo that introduces you to the main business logic components of an AEA. The <a href="https://aea-registry.fetch.ai/details/skill/fetchai/echo/latest" target="_blank">echo skill</a> simply echoes received messages back to the sender.</p>
 <p>The fastest way to create your first AEA is to fetch it!</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.14.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.15.0
 <span class="nb">cd</span> my_first_aea
 </code></pre></div>
 
@@ -1857,11 +1909,11 @@ First, create a new AEA project and enter it.
 <br>
 Second, add the echo skill to the project.
 
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.10.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.11.0
 </code></pre></div>
 
 
-This copies the `fetchai/echo:0.10.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.10.0` consists of the name of the author of the skill, followed by the skill name and its version.
+This copies the `fetchai/echo:0.11.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.11.0` consists of the name of the author of the skill, followed by the skill name and its version.
 </details>
 
 <h2 id="communication-via-envelopes-and-messages">Communication via envelopes and messages</h2>
@@ -1876,7 +1928,7 @@ This copies the `fetchai/echo:0.10.0` skill code containing the "behaviours", an
 </code></pre></div>
 
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:0.8.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
+<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:0.9.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
 </code></pre></div>
 
 <h2 id="run-the-aea">Run the AEA</h2>
@@ -1895,7 +1947,7 @@ This copies the `fetchai/echo:0.10.0` skill code containing the "behaviours", an
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.7.0
+v0.7.1
 
 Starting AEA <span class="s1">&#39;my_first_aea&#39;</span> in <span class="s1">&#39;async&#39;</span> mode ...
 info: Echo Handler: setup method called.
@@ -1926,7 +1978,7 @@ info: Echo Behaviour: act method called.
 Optionally, from a different terminal and same directory (i.e. the `my_first_aea` project), we send the AEA a message wrapped in an envelope via the input file.
 
 
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.8.0,\x08\x01\x12\x011*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.9.0,\x08\x01\x12\x011*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
 </code></pre></div>
 
 

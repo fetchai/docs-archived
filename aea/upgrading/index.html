@@ -1758,42 +1758,20 @@
                                     
 
 <p>This page provides some tipps of how to upgrade between versions.</p>
+<h2 id="v070-to-v071">v0.7.0 to v0.7.1</h2>
+<p>To improve performance, in particular optimize memory usage, we refactored the <code>Message</code> and <code>Dialogue</code> classes. This means all protocols need to be bumped to the latest version or regenerated using the generate command.</p>
 <h2 id="v063-to-v070">v0.6.3 to v0.7.0</h2>
-<p>Multiple breaking changes require action in this order:</p>
-<ul>
-<li>
-<p>Custom configuration overrides in <code>aea-config.yaml</code> are now identified via <code>public_id</code> rather than <code>author</code>, <code>name</code> and <code>version</code> individually. Please replace the three fields with the equivalent <code>public_id</code>.</p>
-</li>
-<li>
-<p>Run <code>aea upgrade</code> command to upgrade your project's dependencies. Note, you still do have to manually update the public ids under <code>default_routing</code> and <code>default_connection</code> in <code>aea-config.yaml</code> as well as the public ids in the non-vendor packages.</p>
-</li>
-<li>
-<p>Previously, connection <code>fetchai/stub</code>, skill <code>fetchai/error</code> and protocols <code>fetchai/default</code>, <code>fetchai/signing</code> and <code>fetchai/state_update</code> where part of the AEA distribution. Now they need to be fetched from registry. If you create a new project with <code>aea create</code> then this happens automatically. For existing projects, add the dependencies explicitly if not already present. You also must update the import paths as follows:</p>
-<ul>
-<li>
-<p><code>aea.connections.stub</code> &gt; <code>packages.fetchai.connections.stub</code></p>
-</li>
-<li>
-<p><code>aea.protocols.default</code> &gt; <code>packages.fetchai.protocols.default</code></p>
-</li>
-<li>
-<p><code>aea.protocols.signing</code> &gt; <code>packages.fetchai.protocols.signing</code></p>
-</li>
-<li>
-<p><code>aea.protocols.state_update</code> &gt; <code>packages.fetchai.protocols.state_update</code></p>
-</li>
-<li>
-<p><code>aea.skills.error</code> &gt; <code>packages.fetchai.skills.error</code></p>
-</li>
-</ul>
-</li>
-<li>
-<p>If you use custom protocols, regenerate them.</p>
-</li>
-<li>
-<p>In your own skills' <code>__init__.py</code> files add the public id (updating the string as appropriate):</p>
-</li>
-</ul>
+<p>Multiple breaking changes require action in this order:
+- Custom configuration overrides in <code>aea-config.yaml</code> are now identified via <code>public_id</code> rather than <code>author</code>, <code>name</code> and <code>version</code> individually. Please replace the three fields with the equivalent <code>public_id</code>.
+- Run <code>aea upgrade</code> command to upgrade your project's dependencies. Note, you still do have to manually update the public ids under <code>default_routing</code> and <code>default_connection</code> in <code>aea-config.yaml</code> as well as the public ids in the non-vendor packages.
+- Previously, connection <code>fetchai/stub</code>, skill <code>fetchai/error</code> and protocols <code>fetchai/default</code>, <code>fetchai/signing</code> and <code>fetchai/state_update</code> where part of the AEA distribution. Now they need to be fetched from registry. If you create a new project with <code>aea create</code> then this happens automatically. For existing projects, add the dependencies explicitly if not already present. You also must update the import paths as follows:
+    - <code>aea.connections.stub</code> &gt; <code>packages.fetchai.connections.stub</code>
+    - <code>aea.protocols.default</code> &gt; <code>packages.fetchai.protocols.default</code>
+    - <code>aea.protocols.signing</code> &gt; <code>packages.fetchai.protocols.signing</code>
+    - <code>aea.protocols.state_update</code> &gt; <code>packages.fetchai.protocols.state_update</code>
+    - <code>aea.skills.error</code> &gt; <code>packages.fetchai.skills.error</code>
+- If you use custom protocols, regenerate them.
+- In your own skills' <code>__init__.py</code> files add the public id (updating the string as appropriate):</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">PublicId</span>
 
 

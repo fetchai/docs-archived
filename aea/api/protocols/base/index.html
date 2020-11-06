@@ -1789,6 +1789,13 @@
 <li><code>body</code>: the dictionary of values to hold.</li>
 <li><code>kwargs</code>: any additional value to add to the body. It will overwrite the body values.</li>
 </ul>
+<p><a name="aea.protocols.base.Message.valid_performatives"></a></p>
+<h4 id="valid_performatives">valid<code>_</code>performatives</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">valid_performatives</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Get valid performatives.</p>
 <p><a name="aea.protocols.base.Message.has_sender"></a></p>
 <h4 id="has_sender">has<code>_</code>sender</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -1960,35 +1967,6 @@
 </code></pre></div>
 
 <p>The implementations of this class defines a serialization layer for a protocol.</p>
-<p><a name="aea.protocols.base.ProtobufSerializer"></a></p>
-<h2 id="protobufserializer-objects">ProtobufSerializer Objects</h2>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtobufSerializer</span><span class="p">(</span><span class="n">Serializer</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Default Protobuf serializer.</p>
-<p>It assumes that the Message contains a JSON-serializable body.</p>
-<p><a name="aea.protocols.base.ProtobufSerializer.encode"></a></p>
-<h4 id="encode_2">encode</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
- <span class="o">|</span> <span class="n">encode</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
-</code></pre></div>
-
-<p>Encode a message into bytes using Protobuf.</p>
-<ul>
-<li>if one of message_id, target and dialogue_reference are not defined,
-  serialize only the message body/</li>
-<li>otherwise, extract those fields from the body and instantiate
-  a Message struct.</li>
-</ul>
-<p><a name="aea.protocols.base.ProtobufSerializer.decode"></a></p>
-<h4 id="decode_1">decode</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@staticmethod</span>
- <span class="o">|</span> <span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span>
-</code></pre></div>
-
-<p>Decode bytes into a message using Protobuf.</p>
-<p>First, try to parse the input as a Protobuf 'Message';
-if it fails, parse the bytes as struct.</p>
 <p><a name="aea.protocols.base.Protocol"></a></p>
 <h2 id="protocol-objects">Protocol Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Protocol</span><span class="p">(</span><span class="n">Component</span><span class="p">)</span>

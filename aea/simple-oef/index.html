@@ -1757,7 +1757,8 @@
 
                                     
 
-<p>This documentation has been produced for the Simple-OEF version <code>0.1.30</code>.</p>
+<h1 id="simple-oef">Simple-OEF</h1>
+<p>This documentation has been produced for the Simple-OEF version <code>0.2.7</code>.</p>
 <h2 id="concepts">Concepts</h2>
 <p>The Simple-OEF, or soef, is a <strong>search and discovery</strong> mechanism for <strong>autonomous economic agents</strong>. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. </p>
 <p>The work-flow is:</p>
@@ -1833,6 +1834,10 @@
 </thead>
 <tbody>
 <tr>
+<td><code>test</code></td>
+<td>Agent is a test agent, and should be generally ignored</td>
+</tr>
+<tr>
 <td><code>vehicle</code></td>
 <td>Moving objects such as trains, planes and automobiles</td>
 </tr>
@@ -1870,7 +1875,7 @@
 </tr>
 </tbody>
 </table>
-<p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY" target="_blank">here</a> for the instructions on joining, or the "Further Information" section below). </p>
+<p>The best way to use genus is to pick the <em>best fit</em> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Slack (see <a href="https://fetch-ai.slack.com" target="_blank">here</a> for the instructions on joining, or the "Further Information" section below). </p>
 <h4 id="architectures">Architectures</h4>
 <p>An architecture is a clue to other agents to describe how the agent is built. The vast majority of agents will be built using the Fetch Agent Framework, but in some cases, such as light-weight IoT devices or test/debugging, agents are built otherwise. Architecture offers a way of describing or filtering, as agents with a similar architecture are more likely to be able to communicate with each other in a meaninful way.</p>
 <table>
@@ -1909,14 +1914,22 @@ buying_classifications
 
 <p>This allows searches to look for potential buyers of classifications, genus or with a compatible architecture. </p>
 <h2 id="finding-agents">Finding Agents</h2>
-<p>The soef is designed for <strong>geographic searches</strong> where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. Future versions of the soef will support searches across nodes, positionless searches and dimensional reduction-based fuzzy searches. Right now, the soef supports the <code>find_around_me</code> operation for agents. This allows searches that:</p>
+<p>The soef is designed for <strong>geographic searches</strong> where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. However, it also allows for <strong>positionless searches</strong> on a single node. Future versions of the soef will support searches across nodes, and dimensional reduction-based fuzzy searches. </p>
+<p>Geographic searches are performed using the  <code>find_around_me</code> operation. This allows searches that:</p>
 <ul>
 <li>Are within a certain range in KM</li>
 <li>That have a specified set of personality pieces (with wildcards where applicable)</li>
 <li>That have a specified set of service keys (with wildcards)</li>
 <li>Where chain identifiers match</li>
 </ul>
-<p>Some limits apply to the maximum number of filters or range. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at:</p>
+<p>Positionless searches are performed using the <code>find_on_this_node</code> operation. This allows searches that:</p>
+<ul>
+<li>That have a specified set of personality pieces (with wildcards where applicable)</li>
+<li>That have a specified set of service keys (with wildcards)</li>
+<li>Where chain identifiers match</li>
+</ul>
+<p><strong>At least one</strong> filter must be supplied in positionless searches. Positionless searches are not boundless, they are capped at a specific number. The tighter the filters, the less likely that you will be capped. </p>
+<p>Some limits apply to the maximum number of filters, range and returned results. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at:</p>
 <p><a href="http://soef.fetch.ai:9002" target="_blank">http://soef.fetch.ai:9002</a></p>
 <p>The soef returns XML that includes information about all found agents. An example of that, unparsed, looks like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;response&gt;</span>
@@ -1976,7 +1989,7 @@ buying_classifications
 <p>Agents register at the <code>/register</code> page on the soef. They are expected to provide four pieces of information:</p>
 <ol>
 <li>An API key</li>
-<li>A chain identifier, which can be either <code>fetchai</code> for the Fetch native network (testnet or mainnet), <code>fetchai_cosmos</code> for the Fetch Cosmos testnet or <code>ethereum</code> for the ethereum network</li>
+<li>A chain identifier, which can be either <code>fetchai_v1</code> for the Fetch native network (testnet or mainnet), <code>fetchai_v2_*</code> for the Fetch version 2 network or <code>ethereum</code> for the ethereum network. See the "Chain identifiers" table below for a complete list of supported chain identifiers. </li>
 <li>An address, which must be a valid address for the specified chain identifier</li>
 <li>A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context. It must not exceed 128 characters. </li>
 </ol>
@@ -2004,6 +2017,38 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 
 <p>At this point, your agent is now fully registered and can then communicate with the soef. </p>
 <p>Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.</p>
+<h4 id="chain-identifiers">Chain identifiers</h4>
+<p>The soef supports a selection of chain identifiers designed to allow agents to distinguish networks in searches, but also to identify the type of address used for verification purposes. </p>
+<table>
+<thead>
+<tr>
+<th>Chain identifier</th>
+<th>Network</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fetchai_v1</code></td>
+<td>Version 1 Fetch.ai network (testnet or mainnet). Versions prior to 0.2 of the soef used <code>fetchai</code> for this, which is retained for compatibility.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_testnet_stable</code></td>
+<td>Version 2 Fetch.ai stable testnet, also known as "Agentland". Versions prior to 0.2 of the soef used <code>fetchai_cosmos</code> which is retained for compatibility, but deprecated.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_testnet_incentivised</code></td>
+<td>Current incentivised testnet. Fetch.ai are running a high-reward sequence of testnets in Q4 2020 and Q1 2021 leading to V2 mainnet.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_misc</code></td>
+<td>Miscellaneous v2 network. These are temporary or transient testnets where there is a desire to separate the chain ID from other v2 networks.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_mainnet</code></td>
+<td>Fetch.ai v2 mainnet. Not yet active.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="commands">Commands</h3>
 <p>The soef has a number of commands that can be used to set or update personality pieces, manage service keys, unregister, find other agents and other operations. These commands are specified using the agent's unique URL and a <code>command=</code> parameter. There may then be other required and optional parameters for that particular command.</p>
 <table>
@@ -2040,7 +2085,11 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </tr>
 <tr>
 <td><code>find_around_me</code></td>
-<td>Find agents around me. This allows various filters, such as personality pieces and service keys, to be specified. See below, as this is more complex.</td>
+<td>Geographic finding of agents around me. This allows various filters, such as personality pieces and service keys, to be specified. See below, as this is more complex.</td>
+</tr>
+<tr>
+<td><code>find_on_this_node</code></td>
+<td>Positionless finding of agents on this node. Various filters such as personality pieces and service keys can narrow the search. See below for more information.</td>
 </tr>
 <tr>
 <td><code>set_position</code></td>
@@ -2052,16 +2101,16 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </tr>
 <tr>
 <td><code>set_user_context</code></td>
-<td>Sets an <strong>optional</strong> user-context for an agent. This can be optionally disclosed in <code>find_around_me</code> if enabled. See <code>set_disclose_user_context</code>, below. The user context must not contain illegal characters and is limited to 160 maximum.</td>
+<td>Sets an <strong>optional</strong> user-context for an agent to what is specified in the <code>value</code> parameter. This can be optionally disclosed in <code>find_around_me</code> if enabled. See <code>set_disclose_user_context</code>, below. The user context must not contain illegal characters and is limited to 160 maximum.</td>
 </tr>
 <tr>
 <td><code>set_disclose_user_context</code></td>
-<td>If set to <code>true</code>, the optional user context is disclosed if set. Default is <code>false</code>.</td>
+<td>If the <code>disclose</code> parameter is set to <code>true</code>, the optional user context is disclosed if it has been set. Default is <code>false</code>.</td>
 </tr>
 </tbody>
 </table>
-<h4 id="find-around-me-in-detail">Find around me in detail</h4>
-<p><code>find_around_me</code> is the big command. Ultimately, it will cost a small amount of tokens to use it, depending on the size of the request as it involves the most computing time. This provides an incentive for soef operators to maintain soef nodes that correspond to subject areas, geographic areas or both. The command has a number of parameters specifying the filtering required. Only one of the parameters is required, which is <code>range_in_km</code>. This cannot exceed a certain range, typically between 50 and 75km. This, and other configuration items, are available on the soef's configuration page. There are other parameters that are optional. They are:</p>
+<h4 id="find-commands-in-detail">Find commands in detail</h4>
+<p><code>find_around_me</code> and <code>find_on_this_node</code> are the big commands. Ultimately, they will cost a small amount of tokens to use, depending on the size of the request, as it involves the most computing time. This provides an incentive for soef operators to maintain soef nodes that correspond to subject areas, geographic areas or both. The command has a number of parameters specifying the filtering required. For <code>find_around_me</code>, the <code>range_in_km</code> is <em>required</em>. This cannot exceed a certain range, typically between 50 and 75km. This, and other configuration items, are available on the soef's configuration page. There are other parameters that are optional, although for <code>find_on_this_node</code> at least one <code>ppfilter</code> or <code>skfilter</code> must be specified. The parameters are:</p>
 <table>
 <thead>
 <tr>
@@ -2084,9 +2133,44 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </tr>
 </tbody>
 </table>
+<h4 id="sk-filters-filter-modes">SK Filters: filter modes</h4>
+<p>The <code>skfilter</code> parameter for <code>find_around_me</code> also supports a <em>mode</em>. Four modes are supported:</p>
+<table>
+<thead>
+<tr>
+<th>Mode string</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PS</td>
+<td>Key must be present, and success is required</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>Key must be present, and failure is required</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Only match if present, and success is required</td>
+</tr>
+<tr>
+<td>OF</td>
+<td>Only match if present, and failure is required</td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="err">command=find_around_me&amp;range_in_km=50&amp;skfilter=type,fruit,PS&amp;skfilter=size,large,OF</span>
+</code></pre></div>
+
+<p>In this example, the key <code>type</code> must be present, and it must match to <code>fruit</code>. If the <code>size</code> key is present, and it is set to <code>large</code>, then do not match. I.e., return everything that's a fruit within 50km except where the size is large. </p>
 <h2 id="further-information">Further information</h2>
-<p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that <a href="https://fetch-ai.slack.com/join/shared_invite/enQtNDI2MDYwMjE3OTQwLWY0ZjAyYjM0NGQzNWRhNDMxMzdjYmVhYTE3NDNhNTAyMTE0YWRkY2VmOWRmMGQ3ODM1N2NjOWUwNDExM2U3YjY" target="_blank">here</a>.</p>
-<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches.  </p>
+<p>You can find further information, or talk to us, in the #s-oef channel on our official developer Slack. You can find that 
+<a href="https://fetch-ai.slack.com/" target="_blank">here</a>. </p>
+<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. </p>
+<p>[Docs: issue 13, 0.2.7, 05-Nov-2020, TWS]</p>
 
 
                                 </section>

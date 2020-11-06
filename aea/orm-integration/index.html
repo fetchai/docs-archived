@@ -1806,7 +1806,7 @@
 <p>A demo to run a scenario with a true ledger transaction on Fetch.ai <code>testnet</code> network or Ethereum <code>ropsten</code> network. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA, which will provide data:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.13.0 --alias my_thermometer_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.14.0 --alias my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
 aea install
 </code></pre></div>
@@ -1819,9 +1819,9 @@ The following steps create the seller from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.11.0
-aea add connection fetchai/ledger:0.8.0
-aea add skill fetchai/thermometer:0.14.0
+aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/ledger:0.9.0
+aea add skill fetchai/thermometer:0.15.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 </code></pre></div>
@@ -1831,8 +1831,8 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 In `my_thermometer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.6.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.8.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.9.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.11.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.12.0</span>
 </code></pre></div>
 
 
@@ -1842,7 +1842,7 @@ In `my_thermometer_aea/aea-config.yaml` add
 
 <h3 id="create-the-buyer-client">Create the buyer client</h3>
 <p>In another terminal, fetch the AEA that will query the seller AEA.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.13.0 --alias my_thermometer_client
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.14.0 --alias my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
 aea install
 </code></pre></div>
@@ -1855,9 +1855,9 @@ The following steps create the car data client from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.11.0
-aea add connection fetchai/ledger:0.8.0
-aea add skill fetchai/thermometer_client:0.13.0
+aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/ledger:0.9.0
+aea add skill fetchai/thermometer_client:0.14.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 </code></pre></div>
@@ -1867,8 +1867,8 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 In `my_buyer_aea/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.6.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.8.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.9.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.11.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.12.0</span>
 </code></pre></div>
 
 
@@ -1950,7 +1950,7 @@ aea add-key fetchai fetchai_private_key.txt --connection
 
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.14.0
+<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.15.0
 </code></pre></div>
 
 <p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
