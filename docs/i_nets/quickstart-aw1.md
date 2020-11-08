@@ -30,7 +30,7 @@ You have to complete a few steps as listed below:
 	- Manual:
 		- ensure you have Python (3.6, 3.7 or 3.8) and Go (>= 1.14.2) installed on your machine
 		- run `pip install aea[all]`
-		- ensure you have the latest version `0.7.0` installed by executing `aea --version`
+		- ensure you have the latest version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a> installed by executing `aea --version`
 		- For more guidance (in particular Windows and Ubuntu related issues) check out the <a href="../../aea/quickstart/#known-issues">AEA quickstart's known issues section</a>
 
 	- Automated:
@@ -42,7 +42,7 @@ You have to complete a few steps as listed below:
 
 4. Fetch the registration agent from AEA Registry via CLI:
 
-	- Run `aea fetch fetchai/registration_aea_aw1`
+	- Run `aea fetch --remote fetchai/registration_aea_aw1`
 	- Enter it `cd registration_aea_aw1`
 	- Install dependencies via `aea install`
 
