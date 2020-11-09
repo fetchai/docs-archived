@@ -25,17 +25,18 @@ You have to complete a few steps as listed below:
 
 1. Join our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>. This allows you to ask questions throughout AW-1 and engage with the Fetch.ai developers.
 
-2. Download and install the AEA (Autonomous Economic Agent) Framework including its CLI on your own machine. There are two ways to do this:
+2. Download and install the AEA (Autonomous Economic Agent) Framework including its CLI on your own machine. There are three ways to do this:
 
-	- Manual:
-		- ensure you have Python (3.6, 3.7 or 3.8) and Go (>= 1.14.2) installed on your machine
-		- run `pip install aea[all]==0.7.0`
-		- ensure you have the latest version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a> installed by executing `aea --version`. To upgrade from an older version use `pip install --upgrade aea[all]`.
+	- Direct:
+
+		- Ensure you have <a href="https://www.python.org/downloads/" target="_blank">Python (3.6, 3.7 or 3.8)</a>  and <a href="https://golang.org/dl/" target="_blank">Go (>= 1.14.2)</a> installed on your machine.
+		- Run `pip install aea[all]` to install the framework.
+		- Ensure you have the latest version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a> installed by executing `aea --version`. To upgrade from an older version use `pip install --upgrade aea[all]`.
 		- For more guidance (in particular Windows and Ubuntu related issues) check out the <a href="../../aea/quickstart/#known-issues">AEA quickstart's known issues section</a>
 
 	- Docker:
 
-		- We also provide a Docker image with all the needed dependencies. To use the image you will first have to pull it and than run it with your current local directory mounted as a Docker volume. This allows you to keep your agents local while working on them from within the Docker container.
+		- We provide a Docker image with all the needed dependencies. To use the image you will first have to pull it and than run it with your current local directory mounted as a Docker volume. This allows you to keep your agents local while working on them from within the Docker container.
 		- To pull `docker pull fetchai/aea-user:latest`
 		- To run the image:
 			- Linux and MacOs: `docker run -it -v $(pwd):/agents --workdir=/agents fetchai/aea-user:latest`
@@ -43,7 +44,8 @@ You have to complete a few steps as listed below:
 		- Once successfully logged into the Docker container, you can follow the rest of the guide the same way as if not using Docker and step Manual above.
 
 	- Automated:
-		- get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine
+
+		- Get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine. The script will install the required dependencies and the framework.
 
 3. Create a developer account using the command below. This will enable you to download and contribute to the <a href="https://aea-registry.fetch.ai" target="_blank">AEA Registry</a>; the package manager for AEA components.
 
