@@ -29,9 +29,19 @@ You have to complete a few steps as listed below:
 
 	- Manual:
 		- ensure you have Python (3.6, 3.7 or 3.8) and Go (>= 1.14.2) installed on your machine
-		- run `pip install aea[all]`
-		- ensure you have the latest version `0.7.0` installed by executing `aea --version`
+		- run `pip install aea[all]==0.7.0`
+		<!-- 		- ensure you have the latest version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a> installed by executing `aea --version` -->
+		- ensure you have the version `0.7.0` installed by executing `aea --version`
 		- For more guidance (in particular Windows and Ubuntu related issues) check out the <a href="../../aea/quickstart/#known-issues">AEA quickstart's known issues section</a>
+
+	- Docker:
+
+		- We also provide a Docker image with all the needed dependencies. To use the image you will first have to pull it and than run it with your current local directory mounted as a Docker volume. This allows you to keep your agents local while working on them from within the Docker container.
+		- To pull `docker pull fetchai/aea-user:latest`
+		- To run the image:
+			- Linux and MacOs: `docker run -it -v $(pwd):/agents --workdir=/agents fetchai/aea-user:latest`
+			- Windows: `docker run -it -v %cd%:/agents --workdir=/agents fetchai/aea-user:latest`
+		- Once successfully logged into the Docker container, you can follow the rest of the guide the same way as if not using Docker and step Manual above.
 
 	- Automated:
 		- get <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.ps1" target="_blank">this script for Windows</a> or <a href="https://github.com/fetchai/agents-aea/tree/master/scripts/install.sh" target="_blank">this script for MacOs/Ubuntu</a> and run it on your machine
@@ -42,7 +52,8 @@ You have to complete a few steps as listed below:
 
 4. Fetch the registration agent from AEA Registry via CLI:
 
-	- Run `aea fetch fetchai/registration_aea_aw1`
+	- Run `aea fetch fetchai/registration_aea_aw1:0.1.0`
+	<!-- 	- Run `aea fetch fetchai/registration_aea_aw1` -->
 	- Enter it `cd registration_aea_aw1`
 	- Install dependencies via `aea install`
 
