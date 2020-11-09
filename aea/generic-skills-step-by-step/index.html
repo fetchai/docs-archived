@@ -1803,9 +1803,9 @@ aea eject skill fetchai/generic_seller:0.16.0
 <span class="nb">cd</span> ..
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.13.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.14.0
 <span class="nb">cd</span> generic_buyer
-aea eject skill fetchai/generic_buyer:0.15.0
+aea eject skill fetchai/generic_buyer:0.16.0
 <span class="nb">cd</span> ..
 </code></pre></div>
 
@@ -3450,6 +3450,8 @@ aea eject skill fetchai/generic_buyer:0.15.0
             <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">dialogue_stats</span><span class="o">.</span><span class="n">add_dialogue_endstate</span><span class="p">(</span>
                 <span class="n">FipaDialogue</span><span class="o">.</span><span class="n">EndState</span><span class="o">.</span><span class="n">SUCCESSFUL</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="o">.</span><span class="n">is_self_initiated</span>
             <span class="p">)</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+            <span class="n">strategy</span><span class="o">.</span><span class="n">successful_trade_with_counterparty</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="s2">&quot;received no data from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -3562,19 +3564,24 @@ aea eject skill fetchai/generic_buyer:0.15.0
                 <span class="sa">f</span><span class="s2">&quot;found no agents in dialogue=</span><span class="si">{</span><span class="n">oef_search_dialogue</span><span class="si">}</span><span class="s2">, continue searching.&quot;</span>
             <span class="p">)</span>
             <span class="k">return</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;found agents=</span><span class="si">{}</span><span class="s2">, stopping search.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)),</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-        <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># stopping search</span>
+        <span class="k">if</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_stop_searching_on_result</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;found agents=</span><span class="si">{}</span><span class="s2">, stopping search.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># stopping search</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;found agents=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_service_query</span><span class="p">()</span>
         <span class="n">fipa_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">FipaDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">fipa_dialogues</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">counterparty</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">max_negotiations</span><span class="p">:</span>
-                <span class="k">continue</span>
+        <span class="n">counterparties</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_acceptable_counterparties</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">counterparty</span> <span class="ow">in</span> <span class="n">counterparties</span><span class="p">:</span>
             <span class="n">cfp_msg</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fipa_dialogues</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
                 <span class="n">counterparty</span><span class="o">=</span><span class="n">counterparty</span><span class="p">,</span>
                 <span class="n">performative</span><span class="o">=</span><span class="n">FipaMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">CFP</span><span class="p">,</span>
@@ -3950,6 +3957,7 @@ aea eject skill fetchai/generic_buyer:0.15.0
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_negotiations</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
             <span class="s2">&quot;max_negotiations&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MAX_NEGOTIATIONS</span>
         <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_stop_searching_on_result</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;stop_searching_on_result&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ledger_id</span> <span class="o">=</span> <span class="p">(</span>
@@ -3976,6 +3984,11 @@ aea eject skill fetchai/generic_buyer:0.15.0
     <span class="k">def</span> <span class="nf">is_ledger_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Check whether or not tx are settled on a ledger.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ledger_tx</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_stop_searching_on_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check if search is stopped on result.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_stop_searching_on_result</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_searching</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -4085,6 +4098,20 @@ aea eject skill fetchai/generic_buyer:0.15.0
             <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="n">result</span>
 
+    <span class="k">def</span> <span class="nf">get_acceptable_counterparties</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">counterparties</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process counterparties and drop unacceptable ones.</span>
+
+<span class="sd">        :return: list of counterparties</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valid_counterparties</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">counterparty</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counterparties</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_negotiations</span><span class="p">:</span>
+                <span class="n">valid_counterparties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counterparty</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">valid_counterparties</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">terms_from_proposal</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">proposal</span><span class="p">:</span> <span class="n">Description</span><span class="p">,</span> <span class="n">counterparty_address</span><span class="p">:</span> <span class="n">Address</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Terms</span><span class="p">:</span>
@@ -4110,6 +4137,18 @@ aea eject skill fetchai/generic_buyer:0.15.0
             <span class="n">fee_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;currency_id&quot;</span><span class="p">]:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_tx_fee</span><span class="p">},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">terms</span>
+
+    <span class="k">def</span> <span class="nf">successful_trade_with_counterparty</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">counterparty</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Do something on successful trade.</span>
+
+<span class="sd">        :param counterparty: the counterparty address</span>
+<span class="sd">        :param data: the data</span>
+<span class="sd">        :return: False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
 </code></pre></div>
 
 <h3 id="step-5-create-the-dialogues_1">Step 5: Create the dialogues</h3>
