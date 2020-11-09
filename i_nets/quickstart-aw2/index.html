@@ -1758,7 +1758,111 @@
                                     
 
 <h2 id="introduction-agent-world-2-aw-2-part-2-my-first-own-agent">Introduction: Agent World 2 (AW-2) - part 2, "My first own agent"</h2>
-<p>Agent World 2 (AW-2) is the second part of our agent-themed incentivised testnet. During this part, It allows anyone with FET tokens to gain additional FET by building agents to represent <strong>mobility</strong> and <strong>climate/weather</strong> related agents in key cities around the world, such as Berlin, London, San Francisco and Shanghai. The world is full of web based APIs for collecting this data, and the Agent Framework supports HTTP connections to these. More documentation and details will follow.</p>
+<p>Agent World 2 (AW-2) is the second part of our agent-themed incentivised testnet. During this part, it allows anyone with FET tokens to gain additional FET by building agents to represent <strong>mobility</strong> and <strong>climate/weather</strong> related agents in key cities around the world, such as Berlin, London, San Francisco and Shanghai. The world is full of web based APIs for collecting this data, and the <a href="../../aea">agent framework</a> supports HTTP connections to these.</p>
+<h2 id="rewards">Rewards</h2>
+<p>The following table shows the incentive rewards on offer.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Test FET (on Agent World)</th>
+<th>FET (on Ethereum mainnet)</th>
+<th>Cap (first come first serve)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steps 1 - 7, 10 below</td>
+<td>variable from trade</td>
+<td>1500</td>
+<td>60</td>
+</tr>
+<tr>
+<td>Step 9</td>
+<td>variable from trade</td>
+<td>500</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch.ai reserve the right to increase the award pool for AW-2 to reward additional agent developers, or to award specific spot rewards to particularly innovative creations.</p>
+<h2 id="how-to-qualify-for-incentive-rewards">How to qualify for incentive rewards?</h2>
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>You must complete <a href="../quickstart-aw2">AW-1</a> before continuing!</p>
+</div>
+
+<p>You have to complete a few steps as listed below:</p>
+<ol>
+<li>
+<p>Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use <code>pip install --upgrade aea[all]</code>. Then upgrade your AEA using <code>aea upgrade</code> from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.</p>
+</li>
+<li>
+<p>Fetch the <code>simple_seller_aw2</code> AEA from the AEA-registry and give it a suitable name:</p>
+<ul>
+<li>Run <code>aea fetch fetchai/simple_seller_aw2 --alias YOUR_AEA_NAME</code>, where <code>YOUR_AEA_NAME</code> is replaced with a name of your choice.</li>
+<li>After fetching it, enter the project: <code>cd YOUR_AEA_NAME</code></li>
+</ul>
+</li>
+<li>
+<p>Eject the <code>simple_seller</code> and <code>simple_data_request</code> skills to edit them:</p>
+<ul>
+<li>Run <code>aea skill eject fetchai/template_seller</code> and <code>aea skill eject fetchai/simple_data_request</code></li>
+</ul>
+</li>
+<li>
+<p>Ensure you use the private key from AW1.</p>
+<ul>
+<li>Generate a new key and add it to the AEA: <code>aea generate-key fetchai</code> and <code>aea add-key fetchai</code></li>
+<li>Manually replace the private key you just generated in <code>fetchai_private_key.txt</code> with the one from AW-1.</li>
+<li>Check everything works by running <code>aea get-address fetchai</code> and confirming that the address matches the one you hold Agent World funds on.</li>
+</ul>
+</li>
+<li>
+<p>Customize the <code>simple_seller</code> skill (in <code>YOUR_AGENT_NAME/skills/simple_seller</code>) and the <code>simple_data_request</code> skill (in <code>YOUR_AGENT_NAME/skills/simple_data_request</code>) to satisfy the following requirements (you may optionally customize other components of the AEA as well):</p>
+<ul>
+<li>The AEA must sell data offered by a public API which provides data on mobility or weather in the vicinity of either one of Berlin (Germany) [<code>latitude: 52.5200, longitude: -13.4050</code>], London (UK) [<code>latitude: 51.5074, longitude: 0.1278</code>], San Francisco (USA) [<code>latitude: 37.7749, longitude: 122.4194</code>] or Shanghai (China) [<code>latitude: 31.2304, longitude: -121.4737</code>]. Your AEA must be located in a radius no further than <code>50 km</code> from the geo locations specified. You can customize the <code>simple_data_request</code> skill to satisfy this requirement.</li>
+<li>The AEA must request data from a public API. You can customize the <code>simple_data_request</code> skill to satisfy this requirement.</li>
+<li>The AEA must negotiate the terms using the fipa protocol (<code>fetchai/fipa</code>) and advertise it using oef search protocol (<code>fetchai/oef_search</code>) on the SOEF. You can customize the <code>simple_seller</code> skill to satisfy this requirment (by default it is already satisfied).</li>
+<li>The advertisement must include the correct service key (<code>seller_service</code>) and value (one of <code>weather_data</code> or <code>mobility_data</code>, depending on the data your agent is offering). You can customize the <code>simple_seller</code> skill to satisfy this requirement.</li>
+<li>Payment must be via a simple transfer on the incentivized testnet. You can customize the <code>simple_seller</code> skill to satisfy this requirment (by default this is already the case).</li>
+</ul>
+</li>
+<li>
+<p>Run the AEA for several hours and sell data at least twice successfully.</p>
+<ul>
+<li>A set of buyer AEAs is continuously checking the SOEF for data to purchase. The buyer AEAs will purchase once immediately and then again after several hours.</li>
+<li>If the initial sale does not go through your AEA is incorrectly implemented. Stop it, fix it and try again.</li>
+<li>If the initial sale does go through let the AEA run until the second sale has concluded.</li>
+<li>The buyer AEA only purchases from AEAs which implement all the requirements listed under 4.</li>
+</ul>
+</li>
+<li>
+<p>Once your AEA has successfully sold data twice, stop it and upload it to the AEA-registry:</p>
+<ul>
+<li>Change the author in the <code>aea-config.yaml</code> to your author handle (run <code>aea init</code> to see what it is).</li>
+<li>Run <code>aea publish</code> from within the AEA project. You might first have to push the skills you have developed with <code>aea push skill PUBLIC_ID</code>.</li>
+</ul>
+</li>
+<li>
+<p>Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.</p>
+<ul>
+<li>Please <a href="https://research.typeform.com/to/vPqWIzcw" target="_blank">complete our survey here</a>.</li>
+</ul>
+</li>
+<li>
+<p>Extra: create a buyer AEA yourself!</p>
+<ul>
+<li>Fetch the <code>simple_buyer_aw2</code> AEA (<code>aea fetch fetchai/simple_buyer_aw2</code>) from the AEA-registry and extend it to be a buyer for the above use-case. Then push it to the AEA-registry. (There is no need to run it at this point.)</li>
+</ul>
+</li>
+<li>
+<p>Fill in the following form, providing your developer handle and uploaded AEAs:</p>
+<ul>
+<li>Complete <a href="https://forms.gle/NDWECUsBRvr8zuL27" target="_blank">this form</a>.</li>
+</ul>
+</li>
+</ol>
 
 
                                 </section>
