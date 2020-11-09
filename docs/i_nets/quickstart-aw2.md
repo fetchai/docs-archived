@@ -61,7 +61,7 @@ You have to complete a few steps as listed below:
 
 8. Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.
 
-	- Please <a href="https://research.typeform.com/to/gFWEY0Sk" target="_blank">complete our survey here</a>.
+	- Please <a href="https://research.typeform.com/to/vPqWIzcw" target="_blank">complete our survey here</a>.
 
 9. Extra: create a buyer AEA yourself!
 
@@ -69,4 +69,4 @@ You have to complete a few steps as listed below:
 
 10. Fill in the following form, providing your developer handle and uploaded AEAs:
 
-	- Complete this form: 
+	- Complete <a href="https://forms.gle/NDWECUsBRvr8zuL27" target="_blank">this form</a>.
