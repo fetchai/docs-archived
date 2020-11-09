@@ -29,9 +29,15 @@ You have to complete a few steps as listed below:
 	- Run `aea fetch fetchai/simple_seller_aw2 --alias YOUR_AEA_NAME`, where `YOUR_AEA_NAME` is replaced with a name of your choice.
 	- After fetching it, enter the project: `cd YOUR_AEA_NAME`
 
-3. Eject the `simple_seller` and `simple_data_request` skills to edit them:
+3. Manually copy the two skills for editing:
 
-	- Run `aea skill eject fetchai/template_seller` and `aea skill eject fetchai/simple_data_request`
+	<div class="admonition note">
+	  <p class="admonition-title">Note</p>
+	  <p>This step is temporarily adjusted to take account of a bug in the CLI.</p>
+	</div>
+
+	- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller`. Search for the occurences of `fetchai/simple_seller:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
+	- Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request`. Search for the occurences of `fetchai/simple_data_request:0.1.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
 
 4. Ensure you use the private key from AW1.
 
@@ -46,6 +52,11 @@ You have to complete a few steps as listed below:
 	- The AEA must negotiate the terms using the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF. You can customize the `simple_seller` skill to satisfy this requirment (by default it is already satisfied).
 	- The advertisement must include the correct service key (`seller_service`) and value (one of `weather_data` or `mobility_data`, depending on the data your agent is offering). You can customize the `simple_seller` skill to satisfy this requirement.
 	- Payment must be via a simple transfer on the incentivized testnet. You can customize the `simple_seller` skill to satisfy this requirment (by default this is already the case).
+
+	<div class="admonition note">
+	  <p class="admonition-title">Note</p>
+	  <p>To succeed, please consult the documentation on the <a href="../../aea">agent framework</a> and discuss in Discord.</p>
+	</div>
 
 6. Run the AEA for several hours and sell data at least twice successfully.
 
