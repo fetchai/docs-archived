@@ -1877,8 +1877,8 @@ In `tac_controller/aea-config.yaml` add
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.14.0 --alias tac_participant_one
-aea fetch fetchai/tac_participant:0.14.0 --alias tac_participant_two
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.15.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.15.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea install
 </code></pre></div>
@@ -1900,8 +1900,8 @@ Build participant one:
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea add connection fetchai/soef:0.12.0
 aea add connection fetchai/ledger:0.9.0
-aea add skill fetchai/tac_participation:0.12.0
-aea add skill fetchai/tac_negotiation:0.13.0
+aea add skill fetchai/tac_participation:0.13.0
+aea add skill fetchai/tac_negotiation:0.14.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
@@ -1924,8 +1924,8 @@ Then, build participant two:
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea add connection fetchai/soef:0.12.0
 aea add connection fetchai/ledger:0.9.0
-aea add skill fetchai/tac_participation:0.12.0
-aea add skill fetchai/tac_negotiation:0.13.0
+aea add skill fetchai/tac_participation:0.13.0
+aea add skill fetchai/tac_negotiation:0.14.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
@@ -1966,9 +1966,7 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
 <p>Then, update the configuration of the weather client AEA's p2p connection (in <code>aea-config.yaml</code>) add the following:</p>
 <div class="highlight"><pre><span></span><code><span class="nn">---</span>
-<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">p2p_libp2p</span>
-<span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.12.0</span>
+<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.12.0</span>
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
 <span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
@@ -1979,9 +1977,7 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.
 </code></pre></div>
 
 <div class="highlight"><pre><span></span><code><span class="nn">---</span>
-<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">p2p_libp2p</span>
-<span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.12.0</span>
+<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.12.0</span>
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
 <span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11002</span>
