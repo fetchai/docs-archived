@@ -17,7 +17,7 @@ Fetch.ai reserve the right to increase the award pool for AW-2 to reward additio
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>You must complete <a href="../quickstart-aw2">AW-1</a> before continuing!</p>
+  <p>You must complete <a href="../quickstart-aw1">AW-1</a> before continuing!</p>
 </div>
 
 You have to complete a few steps as listed below:
@@ -36,8 +36,8 @@ You have to complete a few steps as listed below:
 	  <p>This step is temporarily adjusted to take account of a bug in the CLI.</p>
 	</div>
 
-	- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller`. Search for the occurences of `fetchai/simple_seller:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
-	- Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request`. Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
+	- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller`. Search for the occurences of `fetchai/simple_seller:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`. Also update the import paths `packages.fetchai.skills.simple_seller` with `packages.AUTHOR_NAME.skills.simple_seller`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
+	- Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request`. Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`. Also update the import paths `packages.fetchai.skills.simple_data_request` with `packages.AUTHOR_NAME.skills.simple_data_request`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
 
 4. Ensure you use the private key from AW1.
 
@@ -47,7 +47,7 @@ You have to complete a few steps as listed below:
 
 5. Customize the `simple_seller` skill (in `YOUR_AGENT_NAME/skills/simple_seller`) and the `simple_data_request` skill (in `YOUR_AGENT_NAME/skills/simple_data_request`) to satisfy the following requirements (you may optionally customize other components of the AEA as well):
 
-	- The AEA must sell data offered by a public API which provides data on mobility or weather in the vicinity of either one of Berlin (Germany) [`latitude: 52.5200, longitude: 13.4050`], London (UK) [`latitude: 51.5074, longitude: -0.1278`], San Francisco (USA) [`latitude: 37.7749, longitude: -122.4194`] or Shanghai (China) [`latitude: 31.2304, longitude: 121.4737`]. Your AEA must be located in a radius no further than `50 km` from the geo locations specified. You can customize the `simple_data_request` skill to satisfy this requirement.
+	- The AEA must sell data offered by a public API which provides data on mobility or weather in the vicinity of either one of Berlin (Germany) [`latitude: 52.5200, longitude: 13.4050`], London (UK) [`latitude: 51.5074, longitude: -0.1278`], San Francisco (USA) [`latitude: 37.7749, longitude: -122.4194`] or Shanghai (China) [`latitude: 31.2304, longitude: 121.4737`]. Your AEA must be located in a radius no further than `50 km` from the geo locations specified. You can customize the `simple_data_request` and `simple_seller` skills to satisfy this requirement.
 	- The AEA must request data from a public API. You can customize the `simple_data_request` skill to satisfy this requirement.
 	- The AEA must negotiate the terms using the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF. You can customize the `simple_seller` skill to satisfy this requirment (by default it is already satisfied).
 	- The advertisement must include the correct service key (`seller_service`) and value (one of `weather_data` or `mobility_data`, depending on the data your agent is offering). You can customize the `simple_seller` skill to satisfy this requirement.
@@ -67,9 +67,9 @@ You have to complete a few steps as listed below:
 6. Run the AEA for several hours and sell data at least twice successfully.
 
 	- A set of buyer AEAs is continuously checking the SOEF for data to purchase. The buyer AEAs will purchase once immediately and then again after several hours.
-	- If the initial sale does not go through your AEA is incorrectly implemented. Stop it, fix it and try again.
+	- If the initial sale does not go through, your AEA is incorrectly implemented. Stop it, fix it and try again.
 	- If the initial sale does go through let the AEA run until the second sale has concluded.
-	- The buyer AEA only purchases from AEAs which implement all the requirements listed under 4.
+	- The buyer AEA only purchases from AEAs which implement all the requirements listed under 5.
 
 7. Once your AEA has successfully sold data twice, stop it and upload it to the AEA-registry:
 
