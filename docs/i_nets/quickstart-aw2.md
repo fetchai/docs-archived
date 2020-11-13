@@ -74,7 +74,7 @@ You have to complete a few steps as listed below:
 7. Once your AEA has successfully sold data twice, stop it and upload it to the AEA-registry:
 
 	- Change the author in the `aea-config.yaml` to your author handle (run `aea init` to see what it is).
-	- Run `aea publish` from within the AEA project. You might first have to push the skills you have developed with `aea push skill PUBLIC_ID`.
+	- Run `aea publish --remote` from within the AEA project. You might first have to push the skills you have developed with `aea push skill PUBLIC_ID`.
 
 8. Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.
 
