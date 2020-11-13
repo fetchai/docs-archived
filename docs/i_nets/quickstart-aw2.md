@@ -36,7 +36,7 @@ You have to complete a few steps as listed below:
 	  <p>This step is temporarily adjusted to take account of a bug in the CLI.</p>
 	</div>
 
-	- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller`. Search for the occurences of `fetchai/simple_seller:0.3.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
+	- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller`. Search for the occurences of `fetchai/simple_seller:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
 	- Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request`. Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`. Also update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`. Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
 
 4. Ensure you use the private key from AW1.
