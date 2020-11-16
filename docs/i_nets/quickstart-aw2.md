@@ -28,6 +28,7 @@ You have to complete a few steps as listed below:
 
 	- Run `aea fetch fetchai/simple_seller_aw2 --alias YOUR_AEA_NAME`, where `YOUR_AEA_NAME` is replaced with a name of your choice.
 	- After fetching it, enter the project: `cd YOUR_AEA_NAME`
+	- Then install its third-party dependencies: `aea install`
 
 3. Manually copy the two skills for editing:
 
