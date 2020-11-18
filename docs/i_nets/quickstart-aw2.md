@@ -30,24 +30,35 @@ You have to complete a few steps as listed below:
 	- After fetching it, enter the project: `cd YOUR_AEA_NAME`
 	- Then install its third-party dependencies: `aea install`
 
-3. Manually copy the two skills for editing:
+3. Eject the `simple_seller` and `simple_data_request` skills so you can edit them:
 
-	<div class="admonition note">
-	  <p class="admonition-title">Note</p>
-	  <p>This step is temporarily adjusted to take account of a bug in the CLI `eject` command.</p>
-	</div>
+	- Run `aea eject skill fetchai/simple_seller`, which will eject the skill from the `vendor` folder to the `skills` folder where you can edit it.
+	- Then, run `aea eject skill fetchai/simple_data_request`, which will eject this skill too.
 
-	- Move the `simple_seller`  skill:
-		- Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller` (From `YOUR_AGENT_NAME` dir first run `mkdir skills`, then run `mv vendor/fetchai/skills/simple_seller skills/simple_seller`).
-		- Search for the occurences of `fetchai/simple_seller:0.2.0` in the project `YOUR_AGENT_NAME` and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
-		- Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.
-		- Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
-	- Move the `simple_data_request` skill:
-		- Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request` (From `YOUR_AGENT_NAME` dir run `mv vendor/fetchai/skills/simple_data_request skills/simple_data_request`).
-		- Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
-		- Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.
-		- Update the import paths `packages.fetchai.skills.simple_data_request` with `packages.AUTHOR_NAME.skills.simple_data_request`.
-		- Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.
+<details><summary>Optional manual eject approach</summary>
+Manually copy the two skills for editing ONLY if you don't want to use `eject`. The automated approach is recommended:
+
+<ul>
+<li>Move the `simple_seller`  skill:
+<ul>
+<li>Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller` (From `YOUR_AGENT_NAME` dir first run `mkdir skills`, then run `mv vendor/fetchai/skills/simple_seller skills/simple_seller`).</li>
+<li>Search for the occurences of `fetchai/simple_seller:0.2.0` in the project `YOUR_AGENT_NAME` and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.</li>
+<li>Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.</li>
+<li>Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
+</li>
+</ul>
+</li>
+<li>Move the `simple_data_request` skill:
+<ul>
+<li>Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request` (From `YOUR_AGENT_NAME` dir run `mv vendor/fetchai/skills/simple_data_request skills/simple_data_request`).</li>
+<li>Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.</li>
+<li>Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.</li>
+<li>Update the import paths `packages.fetchai.skills.simple_data_request` with `packages.AUTHOR_NAME.skills.simple_data_request`.</li>
+<li>Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.</li>
+</ul>
+</li>
+</ul>
+</details>
 
 4. Ensure you use the private key from AW1.
 
