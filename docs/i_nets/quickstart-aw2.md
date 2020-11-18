@@ -35,31 +35,6 @@ You have to complete a few steps as listed below:
 	- Run `aea eject skill fetchai/simple_seller`, which will eject the skill from the `vendor` folder to the `skills` folder where you can edit it.
 	- Then, run `aea eject skill fetchai/simple_data_request`, which will eject this skill too.
 
-<details><summary>Optional manual eject approach</summary>
-Manually copy the two skills for editing ONLY if you don't want to use `eject`. The automated approach is recommended:
-
-<ul>
-<li>Move the `simple_seller`  skill:
-<ul>
-<li>Move the `simple_seller` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_seller` to `YOUR_AGENT_NAME/skills/simple_seller` (From `YOUR_AGENT_NAME` dir first run `mkdir skills`, then run `mv vendor/fetchai/skills/simple_seller skills/simple_seller`).</li>
-<li>Search for the occurences of `fetchai/simple_seller:0.2.0` in the project `YOUR_AGENT_NAME` and replace with `YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.</li>
-<li>Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_seller/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.</li>
-<li>Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_seller:0.1.0`.
-</li>
-</ul>
-</li>
-<li>Move the `simple_data_request` skill:
-<ul>
-<li>Move the `simple_data_request` folder from `YOUR_AGENT_NAME/vendor/fetchai/skills/simple_data_request` to `YOUR_AGENT_NAME/skills/simple_data_request` (From `YOUR_AGENT_NAME` dir run `mv vendor/fetchai/skills/simple_data_request skills/simple_data_request`).</li>
-<li>Search for the occurences of `fetchai/simple_data_request:0.2.0` in the project and replace with `YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.</li>
-<li>Update the author and version fields in `YOUR_AGENT_NAME/skills/simple_data_request/skill.yaml`, in particular `author: YOUR_AUTHOR_HANDLE` and `version: 0.1.0`.</li>
-<li>Update the import paths `packages.fetchai.skills.simple_data_request` with `packages.AUTHOR_NAME.skills.simple_data_request`.</li>
-<li>Then run `aea fingerprint skill YOUR_AUTHOR_HANDLE/simple_data_request:0.1.0`.</li>
-</ul>
-</li>
-</ul>
-</details>
-
 4. Ensure you use the private key from AW1.
 
 	- Generate a new key and add it to the AEA: `aea generate-key fetchai` and `aea add-key fetchai`
