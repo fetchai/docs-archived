@@ -701,6 +701,12 @@
         >Pypi</a
     >
 </li>
+ 
+<li>
+    <a href="../api/configurations/utils/" id="aea-api-configurations-utils-"
+        >Utils</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -858,8 +864,20 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_io/" id="aea-api-helpers-file_io-"
+        >File IO</a
+    >
+</li>
+ 
+<li>
     <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
         >File Lock</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/install_dependency/" id="aea-api-helpers-install_dependency-"
+        >Install Dependencies</a
     >
 </li>
  
@@ -915,6 +933,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/profiling/" id="aea-api-helpers-profiling-"
+        >Profiling</a
+    >
+</li>
+ 
+<li>
     <span class="head">Search</span>
     <ul id="header_search"> 
 <li>
@@ -931,6 +955,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/sym_link/" id="aea-api-helpers-sym_link-"
+        >Sym Link</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/temp_error_handler/" id="aea-api-helpers-temp_error_handler-"
+        >Temp Error Handler</a
+    >
+</li>
+ 
 <li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
@@ -2136,7 +2172,7 @@ aea scaffold skill my_search
 
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>We also need to add the soef and p2p connections and install the AEA's dependencies:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.12.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
@@ -2144,13 +2180,13 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 
 <p>Finally, in the <code>aea-config.yaml</code> add the following lines:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.12.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.13.0</span>
 </code></pre></div>
 
 <p>This will ensure that search requests are processed by the correct connection.</p>
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
 <p>In order to be able to find another AEA when searching, from a different terminal window, we fetch another finished AEA and install its Python dependencies:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.16.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration <span class="o">&amp;&amp;</span> aea install
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/simple_service_registration:0.17.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration <span class="o">&amp;&amp;</span> aea install
 </code></pre></div>
 
 <p>This AEA will simply register a location service on the <a href="../simple-oef">SOEF search node</a> so we can search for it.</p>

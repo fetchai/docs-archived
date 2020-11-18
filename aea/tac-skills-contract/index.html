@@ -701,6 +701,12 @@
         >Pypi</a
     >
 </li>
+ 
+<li>
+    <a href="../api/configurations/utils/" id="aea-api-configurations-utils-"
+        >Utils</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -858,8 +864,20 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_io/" id="aea-api-helpers-file_io-"
+        >File IO</a
+    >
+</li>
+ 
+<li>
     <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
         >File Lock</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/install_dependency/" id="aea-api-helpers-install_dependency-"
+        >Install Dependencies</a
     >
 </li>
  
@@ -915,6 +933,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/profiling/" id="aea-api-helpers-profiling-"
+        >Profiling</a
+    >
+</li>
+ 
+<li>
     <span class="head">Search</span>
     <ul id="header_search"> 
 <li>
@@ -931,6 +955,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/sym_link/" id="aea-api-helpers-sym_link-"
+        >Sym Link</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/temp_error_handler/" id="aea-api-helpers-temp_error_handler-"
+        >Temp Error Handler</a
+    >
+</li>
+ 
 <li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
@@ -1849,7 +1885,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.15.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller_contract:0.16.0
 <span class="nb">cd</span> tac_controller_contract
 aea install
 </code></pre></div>
@@ -1862,7 +1898,7 @@ The following steps create the controller from scratch:
 <div class="highlight"><pre><span></span><code>aea create tac_controller_contract
 <span class="nb">cd</span> tac_controller_contract
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/ledger:0.9.0
 aea add skill fetchai/tac_control_contract:0.13.0
 aea install
@@ -1896,12 +1932,12 @@ aea add-key ethereum ethereum_private_key.txt
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.15.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.16.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.15.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.16.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_participation.models.game.args.is_using_contract <span class="s1">&#39;True&#39;</span> --type bool
 aea config <span class="nb">set</span> vendor.fetchai.skills.tac_negotiation.models.strategy.args.is_contract_tx <span class="s1">&#39;True&#39;</span> --type bool
@@ -1923,7 +1959,7 @@ Build participant one:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/ledger:0.9.0
 aea add skill fetchai/tac_participation:0.13.0
 aea add skill fetchai/tac_negotiation:0.14.0
@@ -1940,7 +1976,7 @@ Then, build participant two:
 
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/ledger:0.9.0
 aea add skill fetchai/tac_participation:0.13.0
 aea add skill fetchai/tac_negotiation:0.14.0

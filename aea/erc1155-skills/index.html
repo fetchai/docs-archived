@@ -701,6 +701,12 @@
         >Pypi</a
     >
 </li>
+ 
+<li>
+    <a href="../api/configurations/utils/" id="aea-api-configurations-utils-"
+        >Utils</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -858,8 +864,20 @@
 </li>
  
 <li>
+    <a href="../api/helpers/file_io/" id="aea-api-helpers-file_io-"
+        >File IO</a
+    >
+</li>
+ 
+<li>
     <a href="../api/helpers/file_lock/" id="aea-api-helpers-file_lock-"
         >File Lock</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/install_dependency/" id="aea-api-helpers-install_dependency-"
+        >Install Dependencies</a
     >
 </li>
  
@@ -915,6 +933,12 @@
     </ul>
 </li> 
 <li>
+    <a href="../api/helpers/profiling/" id="aea-api-helpers-profiling-"
+        >Profiling</a
+    >
+</li>
+ 
+<li>
     <span class="head">Search</span>
     <ul id="header_search"> 
 <li>
@@ -931,6 +955,18 @@
 
     </ul>
 </li> 
+<li>
+    <a href="../api/helpers/sym_link/" id="aea-api-helpers-sym_link-"
+        >Sym Link</a
+    >
+</li>
+ 
+<li>
+    <a href="../api/helpers/temp_error_handler/" id="aea-api-helpers-temp_error_handler-"
+        >Temp Error Handler</a
+    >
+</li>
+ 
 <li>
     <span class="head">Transaction</span>
     <ul id="header_transaction"> 
@@ -1782,7 +1818,7 @@ with a one-step atomic swap functionality. That means the trade between the two 
 <h2 id="demo">Demo</h2>
 <h3 id="create-the-deployer-aea">Create the deployer AEA</h3>
 <p>Fetch the AEA that will deploy the contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_deployer:0.17.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_deployer:0.18.0
 <span class="nb">cd</span> erc1155_deployer
 aea install
 </code></pre></div>
@@ -1796,7 +1832,7 @@ Create the AEA that will deploy the contract.
 <div class="highlight"><pre><span></span><code>aea create erc1155_deployer
 <span class="nb">cd</span> erc1155_deployer
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/ledger:0.9.0
 aea add skill fetchai/erc1155_deploy:0.17.0
 aea install
@@ -1810,7 +1846,7 @@ Then update the agent config (`aea-config.yaml`) with the default routing:
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.12.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.13.0</span>
 </code></pre></div>
 
 
@@ -1837,7 +1873,7 @@ aea add-key cosmos cosmos_private_key.txt --connection
 
 <h3 id="create-the-client-aea">Create the client AEA</h3>
 <p>In another terminal, fetch the AEA that will get some tokens from the deployer.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_client:0.17.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/erc1155_client:0.18.0
 <span class="nb">cd</span> erc1155_client
 aea install
 </code></pre></div>
@@ -1851,7 +1887,7 @@ Create the AEA that will get some tokens from the deployer.
 <div class="highlight"><pre><span></span><code>aea create erc1155_client
 <span class="nb">cd</span> erc1155_client
 aea add connection fetchai/p2p_libp2p:0.12.0
-aea add connection fetchai/soef:0.12.0
+aea add connection fetchai/soef:0.13.0
 aea add connection fetchai/ledger:0.9.0
 aea add skill fetchai/erc1155_client:0.16.0
 aea install
@@ -1865,7 +1901,7 @@ Then update the agent config (`aea-config.yaml`) with the default routing:
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/contract_api:0.8.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.12.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.13.0</span>
 </code></pre></div>
 
 
