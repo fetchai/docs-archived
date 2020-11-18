@@ -41,7 +41,7 @@ You have to complete a few steps as listed below:
 		- To run the image:
 			- Linux and MacOs: `docker run -it -v $(pwd):/agents --workdir=/agents fetchai/aea-user:latest`
 			- Windows: `docker run -it -v %cd%:/agents --workdir=/agents fetchai/aea-user:latest`
-		- Once successfully logged into the Docker container, you can follow the rest of the guide the same way as if not using Docker and step Manual above.
+		- Once successfully logged into the Docker container, you can follow the rest of the guide the same way as if not using Docker and step Direct above.
 
 	- Automated:
 
