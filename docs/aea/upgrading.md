@@ -1,4 +1,4 @@
-This page provides some tipps of how to upgrade between versions.
+This page provides some tips of how to upgrade between versions.
 
 ## v0.7.3 to v0.7.4
 
