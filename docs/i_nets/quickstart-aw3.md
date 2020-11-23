@@ -34,14 +34,14 @@ Fetch.ai reserve the right to increase the award pool for AW-3 to reward additio
 You have to complete a few steps as listed below:
 
 <ol>
-<li> Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use `pip install --upgrade aea[all]`. Then upgrade your AEA using `aea upgrade` from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.</li>
+<li> Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use <code>pip install --upgrade aea[all]</code>. Then upgrade your AEA using <code>aea upgrade</code> from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.</li>
 
 <li> Fetch a seller AEA built during AW-2 from the AEA-registry and give it a suitable name:
 
 <ul>
-<li> Run `aea fetch PUBLIC_ID --alias YOUR_AEA_NAME`, where `YOUR_AEA_NAME` is replaced with a name of your choice.</li>
-<li> After fetching it, enter the project: `cd YOUR_AEA_NAME`</li>
-<li> Then install its third-party dependencies: `aea install`</li>
+<li> Run <code>aea fetch PUBLIC_ID --alias YOUR_AEA_NAME</code>, where <code>YOUR_AEA_NAME</code> is replaced with a name of your choice.</li>
+<li> After fetching it, enter the project: <code>cd YOUR_AEA_NAME</code></li>
+<li> Then install its third-party dependencies: <code>aea install</code></li>
 </ul>
 
 You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
@@ -50,7 +50,7 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 
 <ul>
 <li>Agent must sell data offered by some public API. The data must be related to mobility or weather.</li>
-<li>Agent must sell data following the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF (advertisement must include correct classification and public id of agent)</li>
+<li>Agent must sell data following the fipa protocol (<code>fetchai/fipa</code>) and advertise it using oef search protocol (<code>fetchai/oef_search</code>) on the SOEF (advertisement must include correct classification and public id of agent)</li>
 <li>Payment must be via a simple transfer on the incentivized testnet</li>
 </ul>
 
@@ -61,7 +61,7 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 <ul>
 <li>Fetch.ai's buyer agents occur randomly in one of the following locations and at random times throughout the competition.
 
-<table style="width:100%;margin:0px;">
+<table style="width:100%;table-layout:fixed;overflow-wrap:break-word;display:inline-table;">
   <tr>
     <th>City</th>
     <th>Latitude</th>
