@@ -9,16 +9,17 @@ The following table shows the incentive rewards on offer.
 
 Leaderboard Rank | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
 ---------------------- | -------------------------- | ------------------------- | ----------------------------
-1  | variable from trade        | 1500                      | n/a
-2                 | variable from trade        | 500                       | n/a
-3                 | variable from trade        | 500                       | n/a
-4.-10.            | variable from trade        | 500                       | n/a
-
+1st  | variable from trade        | 15,000                      | n/a
+2nd                 | variable from trade        | 10,000                       | n/a
+3rd                 | variable from trade        | 8,000                       | n/a
+4th, 5th, 6th       | variable from trade        | 5,000                       | n/a
+7th to 10th         | variable from trade        | 2,500                       | n/a
+11th to 20th        | variable from trade        | 1,000                       | n/a
 
 Special category | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
 ---------------------- | -------------------------- | ------------------------- | ----------------------------
 Most descriptive AEA registration on SOEF  | variable from trade        | 500                       | 10
-Most individual agents trading  | variable from trade        | 500                       | 10
+Most individual agents trading  | variable from trade        | 1,000                       | 10
 
 
 Fetch.ai reserve the right to increase the award pool for AW-3 to reward additional agent developers, or to award specific spot rewards to particularly innovative creations.
@@ -32,55 +33,117 @@ Fetch.ai reserve the right to increase the award pool for AW-3 to reward additio
 
 You have to complete a few steps as listed below:
 
-1. Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use `pip install --upgrade aea[all]`. Then upgrade your AEA using `aea upgrade` from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.
+<ol>
+<li> Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use `pip install --upgrade aea[all]`. Then upgrade your AEA using `aea upgrade` from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.</li>
 
-2. Fetch a seller AEA built during AW-2 from the AEA-registry and give it a suitable name:
+<li> Fetch a seller AEA built during AW-2 from the AEA-registry and give it a suitable name:
 
-	- Run `aea fetch PUBLIC_ID --alias YOUR_AEA_NAME`, where `YOUR_AEA_NAME` is replaced with a name of your choice.
-	- After fetching it, enter the project: `cd YOUR_AEA_NAME`
-	- Then install its third-party dependencies: `aea install`
+<ul>
+<li> Run `aea fetch PUBLIC_ID --alias YOUR_AEA_NAME`, where `YOUR_AEA_NAME` is replaced with a name of your choice.</li>
+<li> After fetching it, enter the project: `cd YOUR_AEA_NAME`</li>
+<li> Then install its third-party dependencies: `aea install`</li>
+</ul>
 
-	You can take any PUBLIC_ID from the following list. We did not verify the individual projects and take no responsibility for them working. (You have the option to complete your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
+You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
 
-	Public ID             |
-	----------------------|
-	TBD on Monday 23rd Nov|
+<li> Configure or customize the AEA. The following requirements must be satisfied (same as AW-2) for the seller AEA:
+
+<ul>
+<li>Agent must sell data offered by some public API. The data must be related to mobility or weather.</li>
+<li>Agent must sell data following the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF (advertisement must include correct classification and public id of agent)</li>
+<li>Payment must be via a simple transfer on the incentivized testnet</li>
+</ul>
+
+</li>
+
+<li> Run agent and sell as much data to one of our buyer agents as possible.
+
+<ul>
+<li>Fetch.ai's buyer agents occur randomly in one of the following locations and at random times throughout the competition.
+
+<table style="width:100%;margin:0px;">
+  <tr>
+    <th>City</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+  </tr>
+  <tr>
+    <td>Berlin</td>
+    <td>52.5200</td>
+    <td>13.4050</td>
+  </tr>
+  <tr>
+    <td>London</td>
+    <td>51.5074</td>
+    <td>-0.1278</td>
+  </tr>
+  <tr>
+    <td>San Francisco</td>
+    <td>37.7749</td>
+    <td>-122.4194</td>
+  </tr>
+  <tr>
+    <td>Shanghai</td>
+    <td>31.2304</td>
+    <td>121.4737</td>
+  </tr>
+  <tr>
+    <td>Rome</td>
+    <td>41.9028</td>
+    <td>12.4964</td>
+  </tr>
+  <tr>
+    <td>Rio De Janeiro</td>
+    <td>-22.9068</td>
+    <td>-43.1729</td>
+  </tr>
+  <tr>
+    <td>Sydney</td>
+    <td>-33.8688</td>
+    <td>151.2093</td>
+  </tr>
+  <tr>
+    <td>Delhi</td>
+    <td>28.7041</td>
+    <td>77.1025</td>
+  </tr>
+  <tr>
+    <td>Tokyo</td>
+    <td>35.6762</td>
+    <td>139.6503</td>
+  </tr>
+  <tr>
+    <td>Mexico City</td>
+    <td>19.4326</td>
+    <td>-99.1332</td>
+  </tr>
+  <tr>
+    <td>Cairo</td>
+    <td>30.0444</td>
+    <td>31.2357</td>
+  </tr>
+  <tr>
+    <td>Kinshasa</td>
+    <td>-4.4419</td>
+    <td>15.2663</td>
+  </tr>
+</table>
+</li>
+<li>The buyer agents only purchase from registered agents (see <a href="../quickstart-aw1">AW-1</a>). The buyer agents only purchase from agents which follow the requirements in step 3.
+</li>
+<li>The buyer agents update the <a href="" target="_blank">leaderboard (not open yet)</a> regularly. The leaderboard determines the winning developer (see table above).
+</li>
+</li>
+</ul>
+
+<li> Submit prize claim form <a href="" target="_blank">here (not open yet)</a>.</li>
 
 
-3. Configure or customize the AEA. The following requirements must be satisfied (same as AW-2) for the seller AEA:
+<li> Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.
 
-	- Agent must sell data offered by some public API. The data must be related to mobility or weather.
-	- Agent must sell data following the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF (advertisement must include correct classification and public id of agent)
-	- Payment must be via a simple transfer on the incentivized testnet
-
-4. Run agent and sell as much data to one of our buyer agents as possible.
-
-	- Fetch.ai's buyer agents occur randomly in one of the following locations and at random times throughout the competition.
-
-	City                 | Latitude  | Longitude
-	---------------------- | -------------------------- | -------------------------
-	Berlin  | 52.5200     | 13.4050
-	London  | 51.5074     | -0.1278
-	San Francisco  | 37.7749     | -122.4194
-	Shanghai  | 31.2304     | 121.4737
-	Rome | 41.9028 | 12.4964
-	Rio De Janeiro | -22.9068 | -43.1729
-	Sydney | -33.8688 | 151.2093
-	Delhi | 28.7041 | 77.1025
-	Tokyo | 35.6762 | 139.6503
-	Mexico City | 19.4326 | -99.1332
-	Cairo | 30.0444 | 31.2357
-	Kinshasa | - 4.4419 | 15.2663
-
-	- The buyer agents only purchase from registered agents (see <a href="../quickstart-aw1">AW-1</a>). The buyer agents only purchase from agents which follow the requirements in step 3.
-
-	- The buyer agents update the <a href="" target="_blank">leaderboard (not open yet)</a> regularly. The leaderboard determines the winning developer (see table above).
-
-
-5. Submit prize claim form <a href="" target="_blank">here (not open yet)</a>.
-
-
-6. Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.
-
-	- Please <a href="" target="_blank">complete our survey here (not open yet)</a>.
-
+<ul>
+<li>Please <a href="https://research.typeform.com/to/tm264MRH" target="_blank">complete our survey here</a>.
+</li>
+</ul>
+</li>
+</ol>
