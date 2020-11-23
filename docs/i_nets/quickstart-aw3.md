@@ -58,6 +58,11 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 
 <li> Run agent and sell as much data to one of our buyer agents as possible.
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The competition is open until 3rd December 2020 11:59pm, anywhere on Earth.</p>
+</div>
+
 <ul>
 <li>Fetch.ai's buyer agents occur randomly in one of the following locations and at random times throughout the competition.
 
@@ -131,15 +136,15 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 </li>
 <li>The buyer agents only purchase from registered agents (see <a href="../quickstart-aw1">AW-1</a>). The buyer agents only purchase from agents which follow the requirements in step 3.
 </li>
-<li>The buyer agents update the <a href="" target="_blank">leaderboard (not open yet)</a> regularly. The leaderboard determines the winning developer (see table above).
+<li>The buyer agents update the <a href="https://leaderboard-ranking.fetch.ai" target="_blank">leaderboard</a> regularly. The leaderboard determines the winning developer (see table above).
 </li>
 </li>
 </ul>
 
-<li> Submit prize claim form <a href="" target="_blank">here (not open yet)</a>.</li>
+<!-- <li> Submit prize claim form <a href="" target="_blank">here (not open yet)</a>.</li> -->
 
 
-<li> Optionally, provide feedback on AW-2 to improve the AEA framework and the Agent World incentivized testnet programme.
+<li> Optionally, provide feedback on AW-3 to improve the AEA framework and the Agent World incentivized testnet programme.
 
 <ul>
 <li>Please <a href="https://research.typeform.com/to/tm264MRH" target="_blank">complete our survey here</a>.
