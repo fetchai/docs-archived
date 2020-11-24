@@ -49,9 +49,9 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 <li> Configure or customize the AEA. The following requirements must be satisfied (same as AW-2) for the seller AEA:
 
 <ul>
-<li>Agent must sell data offered by some public API. The data must be related to mobility or weather.</li>
+<li>Agent must sell data offered by some public API. The data must be related to mobility or weather. The advertisement must include the correct service key (`seller_service`) and value (one of `weather_data` or `mobility_data`, depending on the data your agent is offering).</li>
 <li>Agent must sell data following the fipa protocol (<code>fetchai/fipa</code>) and advertise it using oef search protocol (<code>fetchai/oef_search</code>) on the SOEF (advertisement must include correct classification and public id of agent)</li>
-<li>Payment must be via a simple transfer on the incentivized testnet</li>
+<li>Payment must be via a simple transfer on the incentivized testnet.</li>
 </ul>
 
 </li>
@@ -145,10 +145,14 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 
 
 <li> Optionally, provide feedback on AW-3 to improve the AEA framework and the Agent World incentivized testnet programme.
-
 <ul>
 <li>Please <a href="https://research.typeform.com/to/tm264MRH" target="_blank">complete our survey here</a>.
 </li>
 </ul>
 </li>
+
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>You can maximize your chances of winning by running many agents (each agent must have its own private key and registered for AW-1) and ensuring that each agent offers both data services.</p>
+</div>
 </ol>
