@@ -377,6 +377,12 @@
         >Debugging</a
     >
 </li>
+ 
+<li>
+    <a href="../runtime-cost/" id="aea-runtime-cost-"
+        >Profiling</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -1894,7 +1900,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.14.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.15.0
 <span class="nb">cd</span> tac_controller
 aea install
 </code></pre></div>
@@ -1908,8 +1914,8 @@ The following steps create the controller from scratch:
 <span class="nb">cd</span> tac_controller
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea add connection fetchai/soef:0.13.0
-aea add connection fetchai/ledger:0.9.0
-aea add skill fetchai/tac_control:0.11.0
+aea add connection fetchai/ledger:0.10.0
+aea add skill fetchai/tac_control:0.12.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
@@ -1930,8 +1936,8 @@ In `tac_controller/aea-config.yaml` add
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.16.0 --alias tac_participant_one
-aea fetch fetchai/tac_participant:0.16.0 --alias tac_participant_two
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.17.0 --alias tac_participant_one
+aea fetch fetchai/tac_participant:0.17.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea install
 </code></pre></div>
@@ -1952,9 +1958,9 @@ Build participant one:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea add connection fetchai/soef:0.13.0
-aea add connection fetchai/ledger:0.9.0
+aea add connection fetchai/ledger:0.10.0
 aea add skill fetchai/tac_participation:0.13.0
-aea add skill fetchai/tac_negotiation:0.14.0
+aea add skill fetchai/tac_negotiation:0.15.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
@@ -1965,7 +1971,7 @@ aea config <span class="nb">set</span> agent.default_ledger fetchai
 In `tac_participant_one/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.10.0</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.13.0</span>
 </code></pre></div>
 
@@ -1976,9 +1982,9 @@ Then, build participant two:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
 aea add connection fetchai/p2p_libp2p:0.12.0
 aea add connection fetchai/soef:0.13.0
-aea add connection fetchai/ledger:0.9.0
+aea add connection fetchai/ledger:0.10.0
 aea add skill fetchai/tac_participation:0.13.0
-aea add skill fetchai/tac_negotiation:0.14.0
+aea add skill fetchai/tac_negotiation:0.15.0
 aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.12.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
@@ -1989,7 +1995,7 @@ aea config <span class="nb">set</span> agent.default_ledger fetchai
 In `tac_participant_two/aea-config.yaml` add 
 
 <div class="highlight"><pre><span></span><code><span class="nt">default_routing</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.9.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.7.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.10.0</span>
   <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.10.0</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/soef:0.13.0</span>
 </code></pre></div>
 

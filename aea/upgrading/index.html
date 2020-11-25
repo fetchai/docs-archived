@@ -377,6 +377,12 @@
         >Debugging</a
     >
 </li>
+ 
+<li>
+    <a href="../runtime-cost/" id="aea-runtime-cost-"
+        >Profiling</a
+    >
+</li>
 
     </ul>
 </li> 
@@ -1810,7 +1816,9 @@
 
                                     
 
-<p>This page provides some tipps of how to upgrade between versions.</p>
+<p>This page provides some tips of how to upgrade between versions.</p>
+<h2 id="v074-to-v075">v0.7.4 to v0.7.5</h2>
+<p>No backwards incompatible changes for skill and connection development.</p>
 <h2 id="v073-to-v074">v0.7.3 to v0.7.4</h2>
 <p>No backwards incompatible changes for skill and connection development.</p>
 <h2 id="v072-to-v073">v0.7.2 to v0.7.3</h2>
@@ -1820,17 +1828,31 @@
 <h2 id="v070-to-v071">v0.7.0 to v0.7.1</h2>
 <p>To improve performance, in particular optimize memory usage, we refactored the <code>Message</code> and <code>Dialogue</code> classes. This means all protocols need to be bumped to the latest version or regenerated using the generate command.</p>
 <h2 id="v063-to-v070">v0.6.3 to v0.7.0</h2>
-<p>Multiple breaking changes require action in this order:
-- Custom configuration overrides in <code>aea-config.yaml</code> are now identified via <code>public_id</code> rather than <code>author</code>, <code>name</code> and <code>version</code> individually. Please replace the three fields with the equivalent <code>public_id</code>.
-- Run <code>aea upgrade</code> command to upgrade your project's dependencies. Note, you still do have to manually update the public ids under <code>default_routing</code> and <code>default_connection</code> in <code>aea-config.yaml</code> as well as the public ids in the non-vendor packages.
-- Previously, connection <code>fetchai/stub</code>, skill <code>fetchai/error</code> and protocols <code>fetchai/default</code>, <code>fetchai/signing</code> and <code>fetchai/state_update</code> where part of the AEA distribution. Now they need to be fetched from registry. If you create a new project with <code>aea create</code> then this happens automatically. For existing projects, add the dependencies explicitly if not already present. You also must update the import paths as follows:
-    - <code>aea.connections.stub</code> &gt; <code>packages.fetchai.connections.stub</code>
-    - <code>aea.protocols.default</code> &gt; <code>packages.fetchai.protocols.default</code>
-    - <code>aea.protocols.signing</code> &gt; <code>packages.fetchai.protocols.signing</code>
-    - <code>aea.protocols.state_update</code> &gt; <code>packages.fetchai.protocols.state_update</code>
-    - <code>aea.skills.error</code> &gt; <code>packages.fetchai.skills.error</code>
-- If you use custom protocols, regenerate them.
-- In your own skills' <code>__init__.py</code> files add the public id (updating the string as appropriate):</p>
+<p>Multiple breaking changes require action in this order:</p>
+<ul>
+<li>
+<p>Custom configuration overrides in <code>aea-config.yaml</code> are now identified via <code>public_id</code> rather than <code>author</code>, <code>name</code> and <code>version</code> individually. Please replace the three fields with the equivalent <code>public_id</code>.</p>
+</li>
+<li>
+<p>Run <code>aea upgrade</code> command to upgrade your project's dependencies. Note, you still do have to manually update the public ids under <code>default_routing</code> and <code>default_connection</code> in <code>aea-config.yaml</code> as well as the public ids in the non-vendor packages.</p>
+</li>
+<li>
+<p>Previously, connection <code>fetchai/stub</code>, skill <code>fetchai/error</code> and protocols <code>fetchai/default</code>, <code>fetchai/signing</code> and <code>fetchai/state_update</code> where part of the AEA distribution. Now they need to be fetched from registry. If you create a new project with <code>aea create</code> then this happens automatically. For existing projects, add the dependencies explicitly if not already present. You also must update the import paths as follows:</p>
+<ul>
+<li><code>aea.connections.stub</code> &gt; <code>packages.fetchai.connections.stub</code></li>
+<li><code>aea.protocols.default</code> &gt; <code>packages.fetchai.protocols.default</code></li>
+<li><code>aea.protocols.signing</code> &gt; <code>packages.fetchai.protocols.signing</code></li>
+<li><code>aea.protocols.state_update</code> &gt; <code>packages.fetchai.protocols.state_update</code></li>
+<li><code>aea.skills.error</code> &gt; <code>packages.fetchai.skills.error</code></li>
+</ul>
+</li>
+<li>
+<p>If you use custom protocols, regenerate them.</p>
+</li>
+<li>
+<p>In your own skills' <code>__init__.py</code> files add the public id (updating the string as appropriate):</p>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">PublicId</span>
 
 
@@ -1838,7 +1860,12 @@
 </code></pre></div>
 
 <ul>
-<li>The <code>fetchai/http</code> protocol's <code>bodyy</code> field has been renamed to <code>body</code>.</li>
+<li>
+<p>The <code>fetchai/http</code> protocol's <code>bodyy</code> field has been renamed to <code>body</code>.</p>
+</li>
+<li>
+<p>Skills can now specify <code>connections</code> as dependencies in the config yaml.</p>
+</li>
 </ul>
 <h2 id="v062-to-v063">v0.6.2 to v0.6.3</h2>
 <p>A new <code>upgrade</code> command is introduced to upgrade agent projects and components to their latest versions on the registry. To use the command first upgrade the AEA PyPI package to the latest version, then enter your project and run <code>aea upgrade</code>. The project's vendor dependencies will be updated where possible.</p>
