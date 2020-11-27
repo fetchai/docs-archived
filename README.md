@@ -1,7 +1,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors-anon/fetchai/docs)
 ![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/fetchai/docs)
 <a href="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests">
-<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master">
+<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master"></a>
 
 ## Instructions for building the documentation locally
 
