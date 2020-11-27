@@ -1,36 +1,11 @@
-<a href="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests">
-<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master">
-</a>
+## Instructions for building the documentation locally
 
-# Fetch.ai Developer Documentation
+To compile and build the documentation site locally, download and install mkdocs. Instructions are <a href="https://www.mkdocs.org/#installation" target=_blank>here</a>.
 
-This repo contains documentation for public Fetch.ai products.
+You will need the PymDown extensions. Install with `pip install pymdown-extensions`. For more information on the PymDown extensions, go <a href="https://squidfunk.github.io/mkdocs-material/extensions/pymdown/" target=_blank>here</a>.
 
-## Get started (building the documentation locally)
-
-1. Create and launch a clean virtual environment with Python 3.7 (any Python `>=` 3.6 works):
-
-       pipenv --python 3.7 && pipenv shell
-
-2. Install dependencies:
-
-       pipenv install --skip-lock
-
-3. Run:
-
-       mkdocs serve
-
-Then navigate to `http://127.0.0.1:8000` in your browser.
+Then, clone the version of the docs you are interested in, `cd` to the `docs` root, and run `mkdocs build`, then `mkdocs serve`. 
 
 If you run in `--strict` mode, you will receive warnings about any broken links.
 
 Have fun.
-
-
-## Extras:
-
-For building CSS run:
-
-`python3 setup.py install`
-
-`python3 setup.py build_sass`
