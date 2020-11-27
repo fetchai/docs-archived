@@ -1,3 +1,8 @@
+![GitHub contributors](https://img.shields.io/github/contributors-anon/fetchai/docs)
+![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/fetchai/docs)
+<a href="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests">
+<img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master">
+</a>
 <div class="parent">
 <div class="div1 grid_item"><h2>Welcome to Fetch.ai developer resources. Let's get started.</h2> </div>
 <div class="div2 grid_item"><h3>Fetch.ai Incentivized testnets are running now</h3>
