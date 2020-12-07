@@ -1,8 +1,8 @@
-site_name: Fetch.ai Developer Documentation
+site_name: Developer Documentation
 site_url: https://docs.fetch.ai/
 site_description: Everything you need to know about Fetch.ai. 
 google_analytics: ['UA-150926604-1', 'mkdocs.org']
-#repo_url: https://github.com/fetchai/docs // commented out to remove edit option
+repo_url: https://github.com/fetchai/docs
 #repo_name: 'GitHub'
 site_author: developer@fetch.ai
 
@@ -10,14 +10,12 @@ google_analytics: ['UA-118969813-3', 'auto']
 
 
 theme:
-  name: null
-  logo:
-    icon: 'assets/images/logo.png'
-  custom_dir: theme/custom_theme
-  favicon: '/assets/images/favicon.ico'
+  name: material
+  logo: images/logo.png
+  favicon: assets/images/favicon.ico
   feature:
-    tabs: true  
-
+    tabs: true 
+  custom_dir: custom_theme
 
 nav:
   - Home : "index.md"
@@ -78,6 +76,7 @@ nav:
         - Modes of running an AEA: 'aea/modes.md'
         - Multi agent manager: 'aea/multi-agent-manager.md'
         - Debugging: 'aea/debug.md'
+        - Profiling: 'aea/runtime-cost.md'
       - Use case components:
         - Generic skills: 'aea/generic-skills.md'
         - Front-end intergration: 'aea/connect-a-frontend.md'
@@ -134,6 +133,7 @@ nav:
           - Loader: 'aea/api/configurations/loader.md'
           - Project: 'aea/api/configurations/project.md'
           - Pypi: 'aea/api/configurations/pypi.md'
+          - Utils: 'aea/api/configurations/utils.md'
         - Connections:
           - Base: 'aea/api/connections/base.md'
           - Stub Connection: 'aea/api/connections/stub/connection.md'
@@ -161,7 +161,9 @@ nav:
             - Base: 'aea/api/helpers/dialogue/base.md'
           - Exception Policy: 'aea/api/helpers/exception_policy.md'
           - Exec Timeout: 'aea/api/helpers/exec_timeout.md'
+          - File IO: 'aea/api/helpers/file_io.md'
           - File Lock: 'aea/api/helpers/file_lock.md'
+          - Install Dependencies: 'aea/api/helpers/install_dependency.md'
           - IPFS:
             - Base: 'aea/api/helpers/ipfs/base.md'
           - Logging: 'aea/api/helpers/logging.md'
@@ -171,9 +173,12 @@ nav:
           - Pipe: 'aea/api/helpers/pipe.md'
           - Preferences:
             - Base: 'aea/api/helpers/preference_representations/base.md'
+          - Profiling: 'aea/api/helpers/profiling.md'
           - Search:
             - Generic: 'aea/api/helpers/search/generic.md'
             - Models: 'aea/api/helpers/search/models.md'
+          - Sym Link: 'aea/api/helpers/sym_link.md'
+          - Temp Error Handler: 'aea/api/helpers/temp_error_handler.md'
           - Transaction:
             - Base: 'aea/api/helpers/transaction/base.md'
           - Win32: 'aea/api/helpers/win32.md'
@@ -327,22 +332,19 @@ nav:
     - Agent World 2: 'i_nets/quickstart-aw2.md'
     - Agent World 3: 'i_nets/quickstart-aw3.md'
 
-# Options
-extra:
-  logo: 'assets/images/favicon.ico'
- # disqus: 'fetch-ai-developer-documentation'
+  - Bounty:
+    - AEA Docs: 'bounty/aea-docs-bounty.md'
 
+
+extra_css:
+  - css/style.css
 
 markdown_extensions:
   - admonition
-  - codehilite:
-      css_class: "highlight"
+  - pymdownx.superfences
+  - pymdownx.highlight
 
-extra_css:
-    - css/my-styles.css
-    - css/default.css
-    - css/dropdown-style.css
 
 extra_javascript:
-    - js/menu.js
     - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+
