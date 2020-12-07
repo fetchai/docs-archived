@@ -50,6 +50,7 @@ You have to complete a few steps as listed below:
 3. Create a developer account using the command below. This will enable you to download and contribute to the <a href="https://aea-registry.fetch.ai" target="_blank">AEA Registry</a>; the package manager for AEA components.
 
 	- Simply run `aea init` and follow the steps as prompted. In the process you will set an author name; this is your **developer handle**.
+	- Typing `aea` at the command prompt will give you a list of commands that are available.
 
 4. Fetch the registration agent from AEA Registry via CLI:
 

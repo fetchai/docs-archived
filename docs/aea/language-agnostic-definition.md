@@ -99,8 +99,8 @@ message DefaultMessage{
 </li>
 <li> It MUST implement the following principles when handling messages:
 <ul>
-<li> It MUST ALWAYS handle incoming envelopes/messages and NEVER raise. This ensures another AEA cannot take it down by sending an incompatible envelope/message.</li>
-<li> It MUST NEVER handle outgoing messages and ALWAYS raise. This implies own business logic mistakes are not handled by business logic.</li>
+<li> It MUST ALWAYS handle incoming envelopes/messages and NEVER raise an exception. This ensures another AEA cannot cause the agent to fail by sending a malicious envelope/message.</li>
+<li> It MUST NEVER handle outgoing messages and ALWAYS raise an exception if this rule is violated, as this would imply that the handler is resolving a bug in the implementation.</li>
 </ul>
 </li>
 </ul>
