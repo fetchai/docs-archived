@@ -40,6 +40,7 @@ You have to complete a few steps as listed below:
 	- Generate a new key and add it to the AEA: `aea generate-key fetchai` and `aea add-key fetchai`
 	- Manually replace the private key you just generated in `fetchai_private_key.txt` with the one from AW-1.
 	- Check everything works by running `aea get-address fetchai` and confirming that the address matches the one you hold Agent World funds on.
+	- (This can be done by viewing the address on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> or by typing `aea get-wealth fetchai`).
 
 5. Customize the `simple_seller` skill (in `YOUR_AGENT_NAME/skills/simple_seller`) and the `simple_data_request` skill (in `YOUR_AGENT_NAME/skills/simple_data_request`) to satisfy the following requirements (you may optionally customize other components of the AEA as well):
 
