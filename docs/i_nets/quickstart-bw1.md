@@ -6,10 +6,10 @@ Beacon-world 1 (BW-1) is the second stage of our program for testing the Fetch.a
 
 The following table shows the incentive rewards on offer.
 
-Action             | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
+Action             | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first served)
 ------------------ | -------------------------- | ------------------------- | ----------------------------
-Steps 1 - x below  | 100                        | 100                       | 500
-Tweet              | 0                          | 50                        | 500
+Steps 1 - x below  | 100                        | 100                       | 300
+Tweet              | 0                          | 50                        | 300
 
 
 A key responsibility of validators, developers and users is that they take part in decisions on the future directions of the project. The way that these decisions are made is known as governance and is a key element of decentralised networks. The Fetch.ai ledger uses a simple governance mechanism that was first used by [Bitcoin](https://www.coindesk.com/bitcoin-coders-confront-an-old-quandary-how-to-upgrade-an-entire-network), where a majority of miners have to make a decision on whether to perform a specific software upgrade to the network. 
@@ -34,7 +34,7 @@ To earn rewards, users must complete the following tasks, which are designed to 
 
 4. Vote on at least one governance proposal.  
  
-We recommend that everyone joins our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>, as this is the quickest way to answer any questions that you might have, and also gain support from the team and the Fetch community. 
+We recommend that everyone joins our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>, as this is the quickest way to answer any questions and receive support from the team and the rest of the community. 
 
 There are technical and "casual" tracks for interacting with the BW-1 test-net. We recommend that developers or anyone who is interested in running a validator node follow the technical track while non-technical users should follow the casual track. Please note that a [Ledger](https://www.ledger.com) nano hardware wallet is required for the casual track. It's possible to follow the steps in both tracks but only one reward is available for each Ethereum staking address that is registered.
  
@@ -44,17 +44,17 @@ Non-technical users should follow these steps:
 
 1. Install the [Cosmos](https://cosmos.network/) app on your Ledger nano by following these [instructions](../ledger_v2/cli-keys.md). 
 
-2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](../ledger_v2/block-explorer.md)
+2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](../ledger_v2/block-explorer.md).
 
 3. Request tokens to your Ledger nano address using the [token faucet](../ledger_v2/faucet.md).
 
-4. Sign the test-net address where you requested tokens with the private key tied to your FET account on the Ethereum mainnet. This is the account you use for FET staking:
+4. Sign the test-net address where you requested tokens in step 2 with the private key tied to your FET account on the Ethereum mainnet. This is the account you use for FET staking:
 
 	- We recommend you use our <a href=https://fetchai.github.io/web-ethereum-signer/ target="_blank">signing app</a> with your <a href="https://docs.metamask.io/guide/signing-data.html#a-brief-history" target="_blank">MetaMask</a> wallet, alternatively use <a href="https://www.myetherwallet.com/interface/sign-message" target="_blank">MEW</a> or a similar wallet to sign your Fetch.ai test-net address.
 
 5. To complete registration, send a transaction of 0.01 FET to this address: `fetch1a3ecdm538yt4xlz6kc39xf0h3syge0mlrr0jgf` but make sure that you add the Ethereum address you used for staking tokens in the "memo" field. 
 
-6. Send a second transaction of 0.01 FET to the same address but this time add the signature in the "memo" field that you generated in step 3. 
+6. Send a second transaction of 0.01 FET to the same address but this time add the signature in the "memo" field that you generated in step 4. 
 
 7. Delegate Stake to any of the validators using the instructions [here](../ledger_v2/block-explorer.md).
 
@@ -68,9 +68,10 @@ Anyone interested in developing agents or operating a validator node should foll
 
 2. Import a private key from [AW-1](./quickstart-aw1.md) into the `fetchcli` following these [instructions](/ledger_v2/cli-keys/#importing-a-private-key-generated-from-the-agent-framework).
 
-3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation)
+3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators) but the table at the bottom of this page shows these for convenience. 
 
-The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators). For convience the operator addresses are summarised below:
+4. Vote on at least one governance proposal following these [instructions](/ledger_v2/governance/#voting-on-a-proposal).
+
 
 | Validator | Operator Address |
 | --------- | --------------------------------------------------- |
@@ -78,5 +79,3 @@ The full list of validators can be found [on the block explorer](https://explore
 | Bourne    | fetchvaloper12xd8rgp2u0cwp8lnj2ndulpzad3y9m9f2r8lsx |
 | Hunt      | fetchvaloper1vf5wsxjkmjk4uv3nm2zjplw0y2f96rsjw8k7gv |
 | Powers    | fetchvaloper108hhutnylgz09acca2ljde8dp6huhsu67hn8v7 |
-
-4. Vote on at least one governance proposal following these [instructions](/ledger_v2/governance/#voting-on-a-proposal)
