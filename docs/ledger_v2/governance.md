@@ -73,3 +73,19 @@ For example:
   <p class="admonition-title">Note</p>
   <p>When using CLI commands make sure that your CLI is pointing at the correct network. See the <a href="../cli-introduction/">CLI introduction documentation</a> for more details</p>
 </div>
+
+## Stake Delegation
+
+In order to be able to take part in the goverance you either need to be running a full validator node or you need to have have delegated stake to an existing validator.
+
+In order to delegate stake to a validator the following command should be used:
+
+```bash
+fetchcli tx staking delegate <valoper address> <amount> --from <key name>
+```
+
+For example:
+
+```bash
+fetchcli tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
+```
