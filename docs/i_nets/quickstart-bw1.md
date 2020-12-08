@@ -23,7 +23,7 @@ A key responsibility of validators, developers and consumers is that they take p
 
 To earn the reward, users must complete the following tasks, which are designed to familiarise them with the tools used for sending transactions, delegating stake and voting on governance proposals:
 
-1. Obtain a working copy of the ledger v0.2.x software either by using one of the provided [docker images](/#) or by [checking out and building](#/) one from source.
+1. Obtain a working copy of the ledger v0.2.x software either by using one of the provided [docker images](/docker-images/) or by [checking out and building](/ledger_v2/building/) one from source.
 
 2. Import your AW-1 private key from into the `fetchcli` following these [instructions](/ledger_v2/cli-keys/#importing-a-private-key-generated-from-the-agent-framework))
 
