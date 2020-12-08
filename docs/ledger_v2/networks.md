@@ -10,6 +10,7 @@ Agent Land is our stable, public testnet for the Fetch Ledger v2. As such most d
 | Chain ID       | agent-land                                                   |
 | Denomination   | atestfet                                                     |
 | Decimals       | 18                                                           |
+| Version        | v0.2.x                                                       |
 | RPC Endpoint   | https://rpc-agent-land.fetch.ai:443                          |
 | REST Endpoint  | https://rest-agent-land.fetch.ai:443                         |
 | Block Explorer | [https://explore-agent-land.fetch.ai](https://explore-agent-land.fetch.ai) |
@@ -27,6 +28,7 @@ The Agent World incentivized test network is phase 1 of our journey to Mainnet v
 | Chain ID       | agentworld-1                                                 |
 | Denomination   | atestfet                                                     |
 | Decimals       | 18                                                           |
+| Version        | v0.2.x                                                       |
 | RPC Endpoint   | https://rpc-agentworld.prod.fetch-ai.com:443                 |
 | REST Endpoint  | https://rest-agentworld.prod.fetch-ai.com:443                |
 | Block Explorer | [https://explore-agentworld.prod.fetch-ai.com](https://explore-agentworld.prod.fetch-ai.com) |
@@ -43,6 +45,7 @@ Currently, Beacon World network is invite only. It will be open to all developer
 | Chain ID       | beaconworld-1    |
 | Denomination   | atestfet         |
 | Decimals       | 18               |
+| Version        | v0.3.x           |
 | RPC Endpoint   | n/a              |
 | REST Endpoint  | n/a              |
 | Block Explorer | n/a              |
