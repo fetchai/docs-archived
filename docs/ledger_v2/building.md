@@ -14,8 +14,8 @@ Download the latest released version from github and build the project using the
 
 This will generate the following binaries:
 
-- `./build/wasmcli` - This is the command line client that is useful for interacting with the network
-- `./build/wasmd` - This is the block chain node daemon and can be configured to join the network
+- `./build/fetchcli` - This is the command line client that is useful for interacting with the network
+- `./build/fetchd` - This is the block chain node daemon and can be configured to join the network
 
 For non developer users we recommend that the user installs the binaries into their system. This can be done with the following command:
 

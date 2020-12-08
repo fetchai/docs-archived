@@ -11,9 +11,9 @@ While some users will want to connect a node to the network and sync the entire 
 To connect to the agent land network run the following configuration steps:
 
 ```bash
-wasmcli config chain-id agent-land
-wasmcli config trust-node false
-wasmcli config node https://rpc-agent-land.fetch.ai:443
+fetchcli config chain-id agent-land
+fetchcli config trust-node false
+fetchcli config node https://rpc-agent-land.fetch.ai:443
 ```
 
 ### Connecting to Agent World network
@@ -21,9 +21,9 @@ wasmcli config node https://rpc-agent-land.fetch.ai:443
 To connect to the agent world network run the following configuration steps:
 
 ```bash
-wasmcli config chain-id agentworld-1
-wasmcli config trust-node false
-wasmcli config node https://rpc-agentworld.prod.fetch-ai.com:443
+fetchcli config chain-id agentworld-1
+fetchcli config trust-node false
+fetchcli config node https://rpc-agentworld.prod.fetch-ai.com:443
 ```
 
 Checkout the [Network Information](../networks/) page for more detailed information on the available test networks.
