@@ -5,7 +5,7 @@
 Once the wasm is configured for the desired [network](../cli-introduction/). The user can query there balance using the following command:
 
 ```bash
-wasmcli query account fetch1akvyhle79nts4rwn075t85xrwmp5ysuqynxcn4
+fetchcli query account fetch1akvyhle79nts4rwn075t85xrwmp5ysuqynxcn4
 ```
 
 If the address exists on the network then the user will expect to see an output in the following form:
@@ -26,13 +26,13 @@ If the address exists on the network then the user will expect to see an output 
 To send funds from one address to another address then you would use the `tx send` subcommand. As shown below:
 
 ```bash
-./build/wasmcli tx send <from address or key name> <target address> <amount>
+./build/fetchcli tx send <from address or key name> <target address> <amount>
 ```
 
 In a more concrete example if the user wanted to send `100atestfet` from `main` key/address to `fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp` then the following command would be used.
 
 ```bash
-./build/wasmcli tx send main fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp 100atestfet
+./build/fetchcli tx send main fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp 100atestfet
 ```
 
 When you run the command you will get a similar output and prompt. The user can check the details of the transfer and then press 'y' to confirm the transfer.
