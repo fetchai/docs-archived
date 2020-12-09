@@ -43,7 +43,7 @@ Non-technical users should follow these steps:
 
 1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these [instructions](/ledger_v2/cli-keys/#hardware-wallets)</a>.
 
-2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](/ledger_v2/block-explorer/).
+2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](/ledger_v2/block-explorer/#logging-in-with-the-ledger-nano).
 
 3. Request tokens to your Ledger nano address using the [token faucet](/ledger_v2/block-explorer/#getting-testnet-tokens-from-the-faucet).
 
