@@ -14,7 +14,7 @@ Tweet              | 0                          | 50                        | 30
 
 A key responsibility of validators, developers and users is that they take part in decisions on the future directions of the project. The way that these decisions are made is known as governance and is a key element of decentralised networks. The Fetch.ai ledger uses a simple governance mechanism that was first used by [Bitcoin](https://www.coindesk.com/bitcoin-coders-confront-an-old-quandary-how-to-upgrade-an-entire-network), where a majority of miners have to make a decision on whether to perform a specific software upgrade to the network. 
 
-## How to qualify for incentive rewards?
+## How To Qualify for Rewards?
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
@@ -36,13 +36,13 @@ To earn rewards, users must complete the following tasks, which are designed to 
  
 We recommend that everyone joins our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>, as this is the quickest way to answer any questions and receive support from the team and the rest of the community. 
 
-There are technical and community tracks for interacting with the BW-1 test-net. We recommend that developers or anyone who is interested in running a validator node follow the technical track while non-technical users should follow the community track. Please note that a [Ledger](https://www.ledger.com) nano hardware wallet is required for the community track. It's possible to follow the steps in both tracks but only one reward is available for each Ethereum staking address that is registered.
+There are technical and community tracks for interacting with the BW-1 test-net. We recommend that developers or anyone who is interested in running a validator node follow the technical track while non-technical users should follow the community track. Please note that a <a href="https://www.ledger.com" target="_blank">ledger</a> nano hardware wallet is required for the community track. It's possible to follow the steps in both tracks but only one reward is available for each Ethereum staking address that is registered.
  
 ## Community (Non-Technical) Track 
 
 Non-technical users should follow these steps: 
 
-1. Install the [Cosmos](https://cosmos.network/) app on your Ledger nano by following these [instructions](../ledger_v2/cli-keys.md). 
+1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these  <a href="../../ledger_v2/cli-keys/" target="_blank">instructions</a>. 
 
 2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](../ledger_v2/block-explorer.md).
 
