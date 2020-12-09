@@ -7,10 +7,10 @@
 <div class="div1 grid_item"><h2>Welcome to Fetch.ai developer resources. Let's get started.</h2> </div>
 <div class="div2 grid_item"><h3>Fetch.ai Incentivized testnets are running now</h3>
     <p><strong>Over a MILLION FET in rewards over the testnet phases!</strong></p>
-    <p>You can learn more about this journey <a href="../i_nets/">here</a>. The current running testnet is Agent themed, and you can get part of a substantial reward pool over the coming weeks: <strong>up to a quarter of a MILLION FET in rewards for taking part</strong>. Each themed testnet divides its focus up into different pieces, so there's something for everyone. <a href="../i_nets/quickstart-aw1">Get started now</a>!</p> </div>
-<a href ="https://docs.fetch.ai/aea" class="black-link"><div class="div3 grid_item">       <h3>Incentivized Testnet - Agent World 1</h3>
-      <p>Earn tokens now by running an agent on Agent World</p></div></a>
-<a href="https://docs.fetch.ai/ledger" class="black-link"><div class="div4 grid_item">       <h3>Developing agents</h3>
+    <p>You can learn more about this journey <a href="../i_nets/">here</a>. The current running testnet is Security themed, and you can get part of a substantial reward pool over the coming weeks: <strong>up to a quarter of a MILLION FET in rewards for taking part</strong>. Each themed testnet divides its focus up into different pieces, so there's something for everyone. <a href="../i_nets/quickstart-bw1">Get started now</a>!</p> </div>
+<a href ="https://docs.fetch.ai/i_nets/quickstart-bw1" class="black-link"><div class="div3 grid_item">       <h3>Incentivized Testnet - Beacon World 1</h3>
+      <p>Earn tokens while contributing to the governance and security of our network</p></div></a>
+<a href="https://docs.fetch.ai/aea" class="black-link"><div class="div4 grid_item">       <h3>Developing agents</h3>
       <p>Speed up the development of Autonomous Economic Agents using our framework</p></div></a>
 <a href="https://docs.fetch.ai/i_nets" class="black-link"><div class="div5 grid_item">       <h3>Getting Ready for mainnet v2</h3>
       <p>Learn how to use our ledger technologies as we prepare for mainnet v2</p></div></a>
@@ -44,7 +44,7 @@
 
 <div class="admonition note">
   <p class="admonition-title">Updates!</p>
-  <p>Documentation last updated on <strong>November 27th, 2020</strong></p>
+  <p>Documentation last updated on <strong>December 9th, 2020</strong></p>
 </div>
 
 <br/>

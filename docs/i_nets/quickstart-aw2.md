@@ -1,5 +1,10 @@
 ## Introduction: Agent World 2 (AW-2) - part 2, "My first own agent"
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>AW-2 has finished now!</p>
+</div>
+
 Agent World 2 (AW-2) is the second part of our agent-themed incentivised testnet. During this part, it allows anyone with FET tokens to gain additional FET by building agents to represent **mobility** and **climate/weather** related agents in key cities around the world, such as Berlin, London, San Francisco and Shanghai. The world is full of web based APIs for collecting this data, and the <a href="../../aea">agent framework</a> supports HTTP connections to these.
 
 ## Rewards
