@@ -8,7 +8,7 @@ The following table shows the incentive rewards on offer.
 
 Action             | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first served)
 ------------------ | -------------------------- | ------------------------- | ----------------------------
-Steps 1 - x below  | 100                        | 100                       | 300
+Steps 1 - 4 below  | 100                        | 100                       | 300
 Tweet              | 0                          | 50                        | 300
 
 
@@ -36,9 +36,9 @@ To earn rewards, users must complete the following tasks, which are designed to 
  
 We recommend that everyone joins our discord channel <a href="https://discord.gg/UDzpBFa" target="_blank">here</a>, as this is the quickest way to answer any questions and receive support from the team and the rest of the community. 
 
-There are technical and "casual" tracks for interacting with the BW-1 test-net. We recommend that developers or anyone who is interested in running a validator node follow the technical track while non-technical users should follow the casual track. Please note that a [Ledger](https://www.ledger.com) nano hardware wallet is required for the casual track. It's possible to follow the steps in both tracks but only one reward is available for each Ethereum staking address that is registered.
+There are technical and community tracks for interacting with the BW-1 test-net. We recommend that developers or anyone who is interested in running a validator node follow the technical track while non-technical users should follow the community track. Please note that a [Ledger](https://www.ledger.com) nano hardware wallet is required for the community track. It's possible to follow the steps in both tracks but only one reward is available for each Ethereum staking address that is registered.
  
-**Casual** 
+## Community (Non-Technical) Track 
 
 Non-technical users should follow these steps: 
 
@@ -48,7 +48,7 @@ Non-technical users should follow these steps:
 
 3. Request tokens to your Ledger nano address using the [token faucet](../ledger_v2/faucet.md).
 
-4. Sign the test-net address where you requested tokens in step 2 with the private key tied to your FET account on the Ethereum mainnet. This is the account you use for FET staking:
+4. Sign the test-net address where you requested tokens in step 3 with the private key tied to your FET account on the Ethereum mainnet (this is the account you use for FET staking):
 
 	- We recommend you use our <a href=https://fetchai.github.io/web-ethereum-signer/ target="_blank">signing app</a> with your <a href="https://docs.metamask.io/guide/signing-data.html#a-brief-history" target="_blank">MetaMask</a> wallet, alternatively use <a href="https://www.myetherwallet.com/interface/sign-message" target="_blank">MEW</a> or a similar wallet to sign your Fetch.ai test-net address.
 
@@ -60,7 +60,7 @@ Non-technical users should follow these steps:
 
 8. Vote on at least one governance proposal.  
 
-**Technical**
+## Technical Track
 
 Anyone interested in developing agents or operating a validator node should follow these steps:
 

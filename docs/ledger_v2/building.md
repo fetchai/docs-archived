@@ -1,6 +1,6 @@
 # Building the Ledger
 
-## Prerequists
+## Prerequisites
 
 - Go 1.14+ (installation instructions available [here](https://golang.org/dl/]))
 
