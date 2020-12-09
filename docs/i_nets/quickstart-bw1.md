@@ -43,9 +43,9 @@ Non-technical users should follow these steps:
 
 1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these  <a href="../../ledger_v2/cli-keys/" target="_blank">instructions</a>. 
 
-2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](../ledger_v2/block-explorer.md).
+2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions <a href="../../ledger_v2/block-explorer/#logging-in-with-the-ledger-nano" target="_blank">here</a>.
 
-3. Request tokens to your Ledger nano address using the [token faucet](../ledger_v2/faucet.md).
+3. Request tokens to your Ledger nano address using the block explorer's <a href="../../ledger_v2/block-explorer/#getting-testnet-tokens-from-the-faucet" target="_blank">token faucet</a>.
 
 4. Sign the test-net address where you requested tokens in step 3 with the private key tied to your FET account on the Ethereum mainnet (this is the account you use for FET staking):
 
@@ -55,7 +55,7 @@ Non-technical users should follow these steps:
 
 6. Send a second transaction of 0.01 FET to the same address but this time add the signature in the "memo" field that you generated in step 4. 
 
-7. Delegate Stake to any of the validators using the instructions [here](../ledger_v2/block-explorer.md).
+7. Delegate Stake to any of the validators using the instructions <a href="../../ledger_v2/block-explorer/#delegating-stake-to-a-validator" target="_blank">here</a>.
 
 8. Vote on at least one governance proposal.  
 
