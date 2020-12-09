@@ -1,5 +1,10 @@
 ## Introduction: Beacon World 1 (BW-1) - part 1, Getting started with Staking and Governance
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>BW-1 is live now!</p>
+</div>
+
 Beacon-world 1 (BW-1) is the second stage of our program for testing the Fetch.ai blockchain and for preparing our community for the launch of our v2.0 main-net. The goal of BW-1 is to reward users and potential validators for gaining experience with the software ecosystem around the main-network. These tasks don't require any technical knowledge or programming experience; all you need is an interest in Fetch.ai and a willingness to help shape its future direction.
 
 ## Rewards
