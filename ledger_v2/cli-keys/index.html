@@ -3095,18 +3095,54 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../building/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../versions/" class="md-nav__link">
+      Versions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../networks/" class="md-nav__link">
+      Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2-2" type="checkbox" id="nav-3-2-2" checked>
-    <label class="md-nav__link" for="nav-3-2-2">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2-5" type="checkbox" id="nav-3-2-5" checked>
+    <label class="md-nav__link" for="nav-3-2-5">
       Commandline Client
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Commandline Client" data-md-level="3">
-      <label class="md-nav__title" for="nav-3-2-2">
+      <label class="md-nav__title" for="nav-3-2-5">
         <span class="md-nav__icon md-icon"></span>
         Commandline Client
       </label>
@@ -3204,6 +3240,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#importing-a-private-key-generated-from-the-agent-framework" class="md-nav__link">
+    Importing a private key generated from the Agent Framework
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3251,8 +3294,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../building/" class="md-nav__link">
-      Installation
+    <a href="../governance/" class="md-nav__link">
+      Governance
     </a>
   </li>
 
@@ -3263,8 +3306,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../networks/" class="md-nav__link">
-      Networks
+    <a href="../docker-images/" class="md-nav__link">
+      Docker Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../faucet/" class="md-nav__link">
+      Faucet
     </a>
   </li>
 
@@ -4553,6 +4608,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-bw1/" class="md-nav__link">
+      Beacon World 1
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4661,6 +4728,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#importing-a-private-key-generated-from-the-agent-framework" class="md-nav__link">
+    Importing a private key generated from the Agent Framework
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4683,14 +4757,14 @@
 <p>Managing your keys is an essential part of working with the Ledger, since all interactions are authenticated with these keys.</p>
 <h2 id="adding-keys">Adding keys</h2>
 <p>To create a new local key you need run the following command:</p>
-<div class="highlight"><pre><span></span><code>wasmcli keys add &lt;your_key_name&gt;
+<div class="highlight"><pre><span></span><code>fetchcli keys add &lt;your_key_name&gt;
 </code></pre></div>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>These keys are stored locally on your system. By default, these keys will be stored in the OS level keychain, however, in general these keys are considered less secure than using a hardware device</p>
 </div>
 
-<p>After running the command <code>wasmcli</code> will print out a summary of the new key. An example of this output is shown below:</p>
+<p>After running the command <code>fetchcli</code> will print out a summary of the new key. An example of this output is shown below:</p>
 <div class="highlight"><pre><span></span><code>- name: test
   type: local
   address: fetch142tawq2rj397mctc3jtw9dfzf03ns0ze4swat0
@@ -4702,20 +4776,20 @@
 <p>This will be followed by a 24-word mnemonic that can be used to re-generate the private key and address for the account (keep this safe, if ever used to control main-net tokens).</p>
 <h2 id="looking-up-an-address">Looking up an address</h2>
 <p>A common operation that you will want to do is to lookup the address for a specified key. This can be done quickly using the following command:</p>
-<div class="highlight"><pre><span></span><code>wasmcli keys show -a &lt;name of key&gt;
+<div class="highlight"><pre><span></span><code>fetchcli keys show -a &lt;name of key&gt;
 </code></pre></div>
 <p>An example of the expected output is shown below:</p>
 <div class="highlight"><pre><span></span><code>fetch142tawq2rj397mctc3jtw9dfzf03ns0ze4swat0
 </code></pre></div>
 <p>A less common operation, but still useful, would be to lookup the public key for a specified key. The can be achieved with the following command:</p>
-<div class="highlight"><pre><span></span><code>wasmcli keys show -p &lt;name of the key&gt;
+<div class="highlight"><pre><span></span><code>fetchcli keys show -p &lt;name of the key&gt;
 </code></pre></div>
 <p>An example of the expected output is shown below:</p>
 <div class="highlight"><pre><span></span><code>fetchpub1addwnpepqvtmze0ekffynnjx9n85g6sexzl49ze2vpgc2f52fteyyghjtvvqw682nkx
 </code></pre></div>
 <h2 id="listing-keys">Listing keys</h2>
 <p>To lookup more detailed information for all keys on your system use the following command:</p>
-<div class="highlight"><pre><span></span><code>wasmcli keys list
+<div class="highlight"><pre><span></span><code>fetchcli keys list
 </code></pre></div>
 <p>This will output all of your keys information in a yaml format that is similar to the one generated when you first created the key.</p>
 <div class="highlight"><pre><span></span><code>- name: <span class="nb">test</span>
@@ -4735,10 +4809,10 @@
 <li>Install the Cosmos application using the software manager (Manager &gt; Cosmos &gt; Install).</li>
 </ol>
 <h3 id="adding-a-new-key">Adding a new key</h3>
-<p>In order to use the hardware wallet address with the cli, the user must first add it via <code>wasmcli</code>. This process only records the public information about the key.</p>
+<p>In order to use the hardware wallet address with the cli, the user must first add it via <code>fetchcli</code>. This process only records the public information about the key.</p>
 <p>To import the key first plug in the device and enter the device pin. Once you have unlocked the device navigate to the Cosmos app on the device and open it.</p>
 <p>To add the key use the following command:</p>
-<div class="highlight"><pre><span></span><code>wasmcli keys add &lt;name <span class="k">for</span> the key&gt; --ledger --index <span class="m">0</span>
+<div class="highlight"><pre><span></span><code>fetchcli keys add &lt;name <span class="k">for</span> the key&gt; --ledger --index <span class="m">0</span>
 </code></pre></div>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
@@ -4754,6 +4828,18 @@
   threshold: <span class="m">0</span>
   pubkeys: <span class="o">[]</span>
 </code></pre></div>
+<h3 id="importing-a-private-key-generated-from-the-agent-framework">Importing a private key generated from the Agent Framework</h3>
+<p>It is also possible to import private keys from the agent framework. For example the private key that you generated for your agent as part of the AW-1 challenge.</p>
+<p>To import this key into the local keychain simply run the following command:</p>
+<div class="highlight"><pre><span></span><code>fetchcli keys import --agent-raw-key &lt;name of the new key&gt; &lt;path to the key file&gt;
+</code></pre></div>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>fetchcli keys import --agent-raw-key agent /home/user/fetchai_private_key.txt
+</code></pre></div>
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>The <code>--agent-raw-key</code> flag is very important here. Also note that this flag only allows the user to import scep265k1 private keys</p>
+</div>
                 
               
               
