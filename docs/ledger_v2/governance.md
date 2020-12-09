@@ -1,5 +1,21 @@
 # Governance
 
+In order to be able to take part in the governance you either need to be running a full validator node or you need to have have delegated stake to an existing validator
+
+## Stake Delegation
+
+In order to delegate stake to a validator the following command should be used:
+
+```bash
+fetchcli tx staking delegate <VALOPER_ADDRESS> <AMOUNT> --from <KEY_NAME>
+```
+
+Where the `<VALOPER_ADDRESS>` begins with the prefix `fetchvaloper1...` and the `<AMOUNT>` field contains the currency denomination. For example:
+
+```bash
+fetchcli tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
+```
+
 ## Proposals Overview
 
 There are three types of proposal:
@@ -8,7 +24,7 @@ There are three types of proposal:
 - **Parameter Proposals**: These proposals are used to update the value of an existing software parameter of the network.
 - **Software Upgrade Proposals**: These are used to propose an upgrade of the `fetchd` software, particularly in cases where the software changes might not necessary be backwards compatible or in some way present a major update to the network.
 
-## The Proposal process
+## The Proposal Process
 
 Any FET holder can submit a proposal. In order for the proposal to be open for voting, it needs to come with a deposit that is greater than a parameter called *minDeposit*. The deposit need not be provided in its entirety by the submitter. If the initial proposer's deposit is not sufficient, the proposal enters the **deposit period** status. Then, any FET holder can increase the deposit by sending a *depositTx* transaction to the network.
 
@@ -73,19 +89,3 @@ For example:
   <p class="admonition-title">Note</p>
   <p>When using CLI commands make sure that your CLI is pointing at the correct network. See the <a href="../cli-introduction/">CLI introduction documentation</a> for more details</p>
 </div>
-
-## Stake Delegation
-
-In order to be able to take part in the goverance you either need to be running a full validator node or you need to have have delegated stake to an existing validator.
-
-In order to delegate stake to a validator the following command should be used:
-
-```bash
-fetchcli tx staking delegate <valoper address> <amount> --from <key name>
-```
-
-For example:
-
-```bash
-fetchcli tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
-```

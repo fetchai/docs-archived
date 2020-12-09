@@ -12,21 +12,20 @@ Steps 1 - 4 below  | 100                        | 100                       | 30
 Tweet              | 0                          | 50                        | 300
 
 
-A key responsibility of validators, developers and users is that they take part in decisions on the future directions of the project. The way that these decisions are made is known as governance and is a key element of decentralised networks. The Fetch.ai ledger uses a simple governance mechanism that was first used by [Bitcoin](https://www.coindesk.com/bitcoin-coders-confront-an-old-quandary-how-to-upgrade-an-entire-network), where a majority of miners have to make a decision on whether to perform a specific software upgrade to the network. 
-
-## How To Qualify for Rewards?
+A key responsibility of validators, developers and users is that they take part in decisions on the future directions of the project. The way that these decisions are made is known as governance and is a key element of decentralised networks. The Fetch.ai ledger uses a simple governance mechanism that was first used by <a href="https://www.coindesk.com/bitcoin-coders-confront-an-old-quandary-how-to-upgrade-an-entire-network" target="_blank">Bitcoin</a>, where a majority of miners have to make a decision on whether to perform a specific software upgrade to the network. 
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p> To earn rewards, users must first <a href="https://fetch.ai/staking/">stake</a> FET ERC20 tokens on Ethereum. 
+  <p> To qualify for rewards, users must first <a href="https://fetch.ai/staking/" target="_blank">stake</a> FET ERC20 tokens on Ethereum. 
   
-  While not strictly necessary we also encourage people who have not already done so to try out the other <a href="./quickstart-aw1.md">AW-1</a> challenges</p>
+  While not strictly necessary we also encourage people who have not already done so to try out the other <a href="./quickstart-aw1.md">AW-1</a> challenges.</p>
 </div>
 
+## How To Earn Rewards
  
 To earn rewards, users must complete the following tasks, which are designed to familiarise them with the tools used for sending transactions, delegating stake and voting on governance proposals. The general flow is as follows: 
 
-1. Create a test-net address and link this to their Ethereum staking address (anyone who has completed the [AW-1](./quickstart-aw1.md) task can skip this step). 
+1. Create a test-net address and link this to their Ethereum staking address (anyone who has completed the <a href="../quickstart-aw1/" target="_blank">AW-1</a> task can skip this step). 
 
 2. Send a transaction on the test-net. 
 
@@ -67,6 +66,8 @@ Anyone interested in developing agents or operating a validator node should foll
 1. Obtain a working copy of the ledger v0.2.x software either by using one of the provided [docker images](/docker-images/) or by [checking out and building](/ledger_v2/building/) one from source.
 
 2. Import a private key from [AW-1](./quickstart-aw1.md) into the `fetchcli` following these [instructions](/ledger_v2/cli-keys/#importing-a-private-key-generated-from-the-agent-framework).
+    
+    - You can check the balance of your account by typing `fetchcli query account <YOUR_ACCOUNT_ADDRESS>` where `<YOUR_ACCOUNT_ADDRESS>` is in bech32 format and contains a `fetch1...` prefix. 
 
 3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators) but the table at the bottom of this page shows these for convenience. 
 
