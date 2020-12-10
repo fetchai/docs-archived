@@ -68,7 +68,7 @@ Non-technical users should follow these steps:
 
 Anyone interested in developing agents or operating a validator node should follow these steps:
 
-1. Obtain a working copy of the ledger v0.2.x software either by using one of the provided [docker images](/docker-images/) or by [checking out and building](/ledger_v2/building/) one from source.
+1. Obtain a working copy of the ledger v0.2.x software by [checking out and building](/ledger_v2/building/) it from source.
 
 2. Import a private key from [AW-1](./quickstart-aw1.md) into the `fetchcli` following these [instructions](/ledger_v2/cli-keys/#importing-a-private-key-generated-from-the-agent-framework).
 
