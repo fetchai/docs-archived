@@ -1,11 +1,11 @@
-## Introduction: Agent World 4 (AW-3) - part 3, "Many agents interacting"
+## Introduction: Agent World 4 (AW-4) - part 4, "Many agents interacting"
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>AW-4 is live now! It closes on January 31st 2021!</p>
+  <p>AW-4 is live now! It closes on 28th February 2021 11:59pm, anywhere on Earth</p>
 </div>
 
-Agent World 4 (AW-4) is the fourth part of our agent-themed incentivised testnet. During this part, It allows anyone with FET tokens to gain additional FET by re-using and adapting agents from AW-2/3 in order to continuously have a large population of agents live.
+Agent World 4 (AW-4) is the fourth part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain additional FET by re-using and adapting agents from AW-2/3 in order to continuously have a large population of agents live and engage in exchange.
 
 
 ## Rewards
@@ -14,17 +14,15 @@ The following table shows the incentive rewards on offer.
 
 Leaderboard Rank | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
 ---------------------- | -------------------------- | ------------------------- | ----------------------------
-1st  | variable from trade        | 15,000                      | n/a
-2nd                 | variable from trade        | 10,000                       | n/a
-3rd                 | variable from trade        | 8,000                       | n/a
-4th, 5th, 6th       | variable from trade        | 5,000                       | n/a
-7th to 10th         | variable from trade        | 2,500                       | n/a
-11th to 20th        | variable from trade        | 1,000                       | n/a
+1st  | variable from trade        | 3,000                     | n/a
+2nd                 | variable from trade        | 2,000                       | n/a
+3rd                 | variable from trade        | 1,000                       | n/a
+4th to 10th       | variable from trade        | 500                       | n/a
 
-Special category | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
+Activity Reward | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
 ---------------------- | -------------------------- | ------------------------- | ----------------------------
-Most descriptive AEA registration on SOEF  | variable from trade        | 500                       | 10
-Most individual agents trading  | variable from trade        | 1,000                       | 10
+Keep one agent online for one day  | variable from trade        | 0.1                    | 5000 per day
+Per one transaction of an active agent  | variable from trade        | 0.1                      | 5000 per day
 
 
 Fetch.ai reserve the right to increase the award pool for AW-4 to reward additional agent developers, or to award specific spot rewards to particularly innovative creations.
@@ -41,7 +39,7 @@ You have to complete a few steps as listed below:
 <ol>
 <li> Make sure you use the latest AEA framework version <a href="https://img.shields.io/pypi/v/aea" target="_blank"><img alt="PyPI" src="https://img.shields.io/pypi/v/aea" /></a>. To upgrade from an older version use <code>pip install --upgrade aea[all]</code>. Then upgrade your AEA using <code>aea upgrade</code> from within the project or follow the instructions <a href="../../aea/upgrading" target="_blank">here</a>.</li>
 
-<li> Fetch a seller AEA built during AW-2 from the AEA-registry and give it a suitable name:
+<li> Fetch a seller AEA built during AW-2/3 from the AEA-registry and give it a suitable name:
 
 <ul>
 <li> Run <code>aea fetch PUBLIC_ID --alias YOUR_AEA_NAME</code>, where <code>YOUR_AEA_NAME</code> is replaced with a name of your choice.</li>
@@ -51,10 +49,10 @@ You have to complete a few steps as listed below:
 
 You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
 
-<li> Configure or customize the AEA. The following requirements must be satisfied (same as AW-2) for the seller AEA:
+<li> Configure or customize the AEA. The following requirements must be satisfied for the seller AEA (look at <a href="https://aea-registry.fetch.ai/details/agent/fetchai/simple_seller_aw2/0.7.0" target="_blank">fetchai/simple_seller_aw2</a> for an example):
 
 <ul>
-<li>Agent must sell data offered by some public API. The data must be related to mobility or weather. The advertisement must include the correct service key (<code>seller_service</code>) and value (one of <code>weather_data</code> or <code>mobility_data</code>, depending on the data your agent is offering).</li>
+<li>Agent must sell data offered by some public API. The data must be related to mobility or weather. The advertisement must include the correct service key (<code>seller_service</code>) and value (one of <code>weather_data</code> or <code>mobility_data</code>, depending on the data your agent is offering). The agent must have a <code>classification</code> with piece <code>classification</code> and value <code>seller</code> and a <code>personality_data</code> with piece <code>genus</code> and value <code>data</code>. </li>
 <li>Agent must sell data following the fipa protocol (<code>fetchai/fipa</code>) and advertise it using oef search protocol (<code>fetchai/oef_search</code>) on the SOEF (advertisement must include correct classification and public id of agent)</li>
 <li>Payment must be via a simple transfer on the incentivized testnet.</li>
 </ul>
@@ -65,7 +63,7 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>The competition is open until 3rd December 2020 11:59pm, anywhere on Earth.</p>
+  <p>The competition is open until 28th February 2021 11:59pm, anywhere on Earth.</p>
 </div>
 
 <ul>
@@ -149,9 +147,9 @@ You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-regist
 <!-- <li> Submit prize claim form <a href="" target="_blank">here (not open yet)</a>.</li> -->
 
 
-<li> Optionally, provide feedback on AW-3 to improve the AEA framework and the Agent World incentivized testnet programme.
+<li> Optionally, provide feedback on AW-4 to improve the AEA framework and the Agent World incentivized testnet programme.
 <ul>
-<li>Please <a href="https://research.typeform.com/to/tm264MRH" target="_blank">complete our survey here</a>.
+<li>Please <a href="https://research.typeform.com/to/JqddP2QP" target="_blank">complete our survey here</a>.
 </li>
 </ul>
 </li>
