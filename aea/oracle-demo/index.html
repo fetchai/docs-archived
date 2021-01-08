@@ -4985,6 +4985,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw4/" class="md-nav__link">
+      Agent World 4
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5155,13 +5167,15 @@ aea install
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.14.0
 </code></pre></div>
 
-Then update the agent configuration with the default routing:
+Then update the agent configuration with the default routing and cert requests:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">&quot;fetchai/contract_api:0.10.0&quot;: &quot;fetchai/ledger:0.12.0&quot;,</span>
 <span class="s1">&quot;fetchai/http:0.11.0&quot;: &quot;fetchai/http_client:0.16.0&quot;,</span>
 <span class="s1">&quot;fetchai/ledger_api:0.9.0&quot;: &quot;fetchai/ledger:0.12.0&quot;</span>
 <span class="s1">}&#39;</span>
+aea config <span class="nb">set</span> --type list vendor.fetchai.connections.p2p_libp2p.cert_requests <span class="se">\</span>
+<span class="s1">&#39;[{&quot;identifier&quot;: &quot;acn&quot;, &quot;ledger_id&quot;: &quot;ethereum&quot;, &quot;not_after&quot;: &quot;2022-01-01&quot;, &quot;not_before&quot;: &quot;2021-01-01&quot;, &quot;public_key&quot;: &quot;fetchai&quot;, &quot;save_path&quot;: &quot;.certs/conn_cert.txt&quot;}]&#39;</span>
 </code></pre></div>
 
 And change the default ledger:
@@ -5178,6 +5192,8 @@ aea add-key ethereum ethereum_private_key.txt
 <p>Next, create a private key used to secure the AEA's communications:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai fetchai_connection_private_key.txt
 aea add-key fetchai fetchai_connection_private_key.txt --connection
+aea config <span class="nb">set</span> --type list vendor.fetchai.connections.p2p_libp2p.cert_requests <span class="se">\</span>
+<span class="s1">&#39;[{&quot;identifier&quot;: &quot;acn&quot;, &quot;ledger_id&quot;: &quot;ethereum&quot;, &quot;not_after&quot;: &quot;2022-01-01&quot;, &quot;not_before&quot;: &quot;2021-01-01&quot;, &quot;public_key&quot;: &quot;fetchai&quot;, &quot;save_path&quot;: &quot;.certs/conn_cert.txt&quot;}]&#39;</span>
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code>aea issue-certificates
