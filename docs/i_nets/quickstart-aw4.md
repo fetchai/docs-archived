@@ -21,8 +21,8 @@ Leaderboard Rank | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap 
 
 Activity Reward | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first serve)
 ---------------------- | -------------------------- | ------------------------- | ----------------------------
-Keep one agent online for one day  | variable from trade        | 0.1                    | 5000 per day
-Per one transaction of an active agent  | variable from trade        | 0.1                      | 5000 per day
+Keep one agent online for one day  | variable from trade        | 0.1                    | 5000 rewarded activities per day
+Per one transaction of an active agent  | variable from trade        | 0.1                      | 5000 rewarded activities per day
 
 
 Fetch.ai reserve the right to increase the award pool for AW-4 to reward additional agent developers, or to award specific spot rewards to particularly innovative creations.
@@ -48,6 +48,22 @@ You have to complete a few steps as listed below:
 </ul>
 
 You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
+
+<li>Ensure you use the private key from AW1.
+<ul>
+<li> Generate a new key and add it to the AEA: <code>aea generate-key fetchai</code> and <code>aea add-key fetchai</code></li>
+<li> Manually replace the private key you just generated in <code>fetchai_private_key.txt</code> with the one from AW-1.</li>
+<li> Check everything works by running <code>aea get-address fetchai</code> and confirming that the address matches the one you hold Agent World funds on.</li>
+<li> (This can be done by viewing the address on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> or by typing <code>aea get-wealth fetchai</code>).</li>
+</li>
+</ul>
+
+<li>Create a proof of representation for communication on the <a href="../../aea/acn">ACN</a>:
+<ul>
+<li> Run <code>aea generate-key fetchai fetchai_connnection_private_key.txt</code> and <code>aea add-key fetchai fetchai_connnection_private_key.txt --connection</code> to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing <code>aea issue-certificates</code>.
+</li>
+</ul>
+</li>
 
 <li> Configure or customize the AEA. The following requirements must be satisfied for the seller AEA (look at <a href="https://aea-registry.fetch.ai/details/agent/fetchai/simple_seller_aw2/0.7.0" target="_blank">fetchai/simple_seller_aw2</a> for an example):
 

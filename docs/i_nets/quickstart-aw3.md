@@ -51,6 +51,22 @@ You have to complete a few steps as listed below:
 
 You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
 
+<li>Ensure you use the private key from AW1.
+<ul>
+<li> Generate a new key and add it to the AEA: <code>aea generate-key fetchai</code> and <code>aea add-key fetchai</code></li>
+<li> Manually replace the private key you just generated in <code>fetchai_private_key.txt</code> with the one from AW-1.</li>
+<li> Check everything works by running <code>aea get-address fetchai</code> and confirming that the address matches the one you hold Agent World funds on.</li>
+<li> (This can be done by viewing the address on the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> or by typing <code>aea get-wealth fetchai</code>).</li>
+</li>
+</ul>
+
+<li>Create a proof of representation for communication on the <a href="../../aea/acn">ACN</a>:
+<ul>
+<li> Run <code>aea generate-key fetchai fetchai_connnection_private_key.txt</code> and <code>aea add-key fetchai fetchai_connnection_private_key.txt --connection</code> to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing <code>aea issue-certificates</code>.
+</li>
+</ul>
+</li>
+
 <li> Configure or customize the AEA. The following requirements must be satisfied (same as AW-2) for the seller AEA:
 
 <ul>
