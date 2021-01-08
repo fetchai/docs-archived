@@ -14,8 +14,6 @@ The following table shows the incentive rewards on offer.
 Action             | Test FET (on Agent World)  | FET (on Ethereum mainnet) | Cap (first come first served)
 ------------------ | -------------------------- | ------------------------- | ----------------------------
 Steps 1 - 4 below  | 100                        | 100                       | 300
-Tweet              | 0                          | 50                        | 300
-
 
 A key responsibility of validators, developers and users is that they take part in decisions on the future directions of the project. The way that these decisions are made is known as governance and is a key element of decentralised networks. The Fetch.ai ledger uses a simple governance mechanism that was first used by <a href="https://www.coindesk.com/bitcoin-coders-confront-an-old-quandary-how-to-upgrade-an-entire-network" target="_blank">Bitcoin</a>, where a majority of miners have to make a decision on whether to perform a specific software upgrade to the network.
 

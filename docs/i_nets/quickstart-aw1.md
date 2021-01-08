@@ -65,8 +65,8 @@ You have to complete a few steps as listed below:
 
 5. Create a test-net address for the registration agent via CLI:
 
-	- Run `aea generate-key fetchai` and `aea add-key fetchai`
-	- Print your address `aea get-address fetchai`
+	- Run `aea generate-key fetchai` and `aea add-key fetchai` to generate and add a key pair for your AEA to transact with. Then run `aea generate-key fetchai fetchai_connnection_private_key.txt` and `aea add-key fetchai fetchai_connnection_private_key.txt --connection` to add a key pair for your AEA to secure its communications with. Now associate both with `aea issue-certificates`.
+	- Print your address for transacting `aea get-address fetchai`
 
 6. Sign the test-net address you just generated with the private key tied to your FET account on Ethereum mainnet. This is the account you use for FET staking:
 
