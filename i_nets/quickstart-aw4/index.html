@@ -5144,6 +5144,18 @@
 
 You can take any of your own PUBLIC_IDs or one from  <a href="https://aea-registry.fetch.ai/list">this list</a> which is compatible with Agent World 2. We did not verify the individual projects and take no responsibility for them working. (You have the option to create your own following the <a href="../quickstart-aw1">AW-2 guide</a>.)
 
+<div class="admonition note">
+  <p class="admonition-title">Note</p>
+  <p>If you're using an AEA which has been developed for a version of the AEA framework lower than `0.9.0` then please follow these steps:
+  <ol>
+  <li> Run <code>aea -s upgrade</code> from within your AEA project. If you have any errors during this step then please reach out on Discord.</li>
+  <li> Update the configuration of the p2p connection by running <code>aea config set --type dict vendor.fetchai.connections.p2p_libp2p.config '{"delegate_uri": null, "entry_peers": ["/dns4/acn.fetch.ai/tcp/9001/p2p/16Uiu2HAmVWnopQAqq4pniYLw44VRvYxBUoRHqjz1Hh2SoCyjbyRW"], "public_uri": null}'</code> from within your AEA project.</li>
+  <li> Run <code>aea build</code> from within your AEA project.</li>
+  </ol>
+  </p>
+</div>
+
+
 <li>Ensure you use the private key from AW1.
 <ul>
 <li> Generate a new key and add it to the AEA: <code>aea generate-key fetchai</code> and <code>aea add-key fetchai</code></li>
