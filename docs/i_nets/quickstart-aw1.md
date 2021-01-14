@@ -62,6 +62,7 @@ You have to complete a few steps as listed below:
 	- Run `aea fetch fetchai/registration_aea_aw1`
 	- Enter it `cd registration_aea_aw1`
 	- Install dependencies via `aea install`
+	- Build its components via `aea build`
 
 5. Create a test-net address for the registration agent via CLI:
 
