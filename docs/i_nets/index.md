@@ -21,7 +21,7 @@ The three phases are:
 
 Each phase lasts about six weeks and is sub-divided up to provide the broadest opportunities for all members of the community, as well as ensuring we focus testing efforts in the areas that ensure an on-time delivery of mainnet v2.
 
-* [Phase 1](./quickstart-aw1.md)'s agent-focussed sub-sections are referred to as AW1, AW2 and AW3.
+* [Phase 1](./quickstart-aw1.md)'s agent-focussed sub-sections are referred to as AW1, AW2, AW3 and AW4.
 
 * [Phase 2](./quickstart-bw1.md)'s node and DRB sub-sections are referred to as BW1 to BW6.
 
