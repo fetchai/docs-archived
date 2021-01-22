@@ -821,6 +821,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-guidelines" class="md-nav__link">
+    Design Guidelines
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Guidelines">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
     Notes
@@ -5118,6 +5131,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-guidelines" class="md-nav__link">
+    Design Guidelines
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Guidelines">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
     Notes
@@ -5179,32 +5205,35 @@
 <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">two_party_negotiation</span>
 <span class="nt">author</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">An example of a protocol specification that describes a protocol for bilateral negotiation.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
 <span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.9.0,</span><span class="nv"> </span><span class="s">&lt;0.10.0&#39;</span>
-<span class="nt">description</span><span class="p">:</span> <span class="s">&#39;A</span><span class="nv"> </span><span class="s">protocol</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">negotiation</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">fixed</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">resources</span><span class="nv"> </span><span class="s">involving</span><span class="nv"> </span><span class="s">two</span><span class="nv"> </span><span class="s">parties.&#39;</span>
 <span class="nt">speech_acts</span><span class="p">:</span>
   <span class="nt">cfp</span><span class="p">:</span>
-    <span class="nt">query</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ct:DataModel</span>
+    <span class="nt">query</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ct:Query</span>
   <span class="nt">propose</span><span class="p">:</span>
-    <span class="nt">offer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ct:DataModel</span>
     <span class="nt">price</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pt:float</span>
+    <span class="nt">proposal</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pt:dict[pt:str, pt:str]</span>
+    <span class="nt">conditions</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pt:optional[pt:union[pt:str, pt:dict[pt:str,pt:str], pt:set[pt:str]]]</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pt:list[pt:bytes]</span>
   <span class="nt">accept</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
   <span class="nt">decline</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-  <span class="nt">match_accept</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
 <span class="nn">...</span>
 <span class="nn">---</span>
-<span class="l l-Scalar l-Scalar-Plain">ct:DataModel</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
-  <span class="no">bytes data_model = 1;</span>
+<span class="l l-Scalar l-Scalar-Plain">ct:Query</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+  <span class="no">bytes query_bytes = 1;</span>
 <span class="nn">...</span>
 <span class="nn">---</span>
+<span class="nt">initiation</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">cfp</span><span class="p p-Indicator">]</span>
 <span class="nt">reply</span><span class="p">:</span>
   <span class="nt">cfp</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">propose</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
-  <span class="nt">propose</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">accept</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
-  <span class="nt">accept</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">decline</span><span class="p p-Indicator">,</span> <span class="nv">match_accept</span><span class="p p-Indicator">]</span>
+  <span class="nt">propose</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">propose</span><span class="p p-Indicator">,</span> <span class="nv">accept</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
+  <span class="nt">accept</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
   <span class="nt">decline</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
-  <span class="nt">match_accept</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+<span class="nt">termination</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">accept</span><span class="p p-Indicator">,</span> <span class="nv">decline</span><span class="p p-Indicator">]</span>
 <span class="nt">roles</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">buyer</span><span class="p p-Indicator">,</span> <span class="nv">seller</span><span class="p p-Indicator">}</span>
-<span class="nt">end_states</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">successful</span><span class="p p-Indicator">,</span> <span class="nv">failed</span><span class="p p-Indicator">]</span>
+<span class="nt">end_states</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">agreement_reached</span><span class="p p-Indicator">,</span> <span class="nv">agreement_unreached</span><span class="p p-Indicator">]</span>
+<span class="nt">keep_terminal_state_dialogues</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nn">...</span>
 </code></pre></div>
 <p>Each protocol specification YAML file must have a minimum of one, and a maximum of three YAML documents (each YAML document is enclosed within --- and ...). </p>
@@ -5220,23 +5249,23 @@
 <li><code>description</code>: A short description of the protocol</li>
 </ul>
 <p>All of the above fields are mandatory and each is a key/value pair, where both key and value are YAML strings. </p>
-<p>In addition, the first YAML document in a protocol specification must describe the syntax of valid messages according to this protocol. Therefore, there is another mandatory field: <code>speech-acts</code>, which defines the set of <em>performatives</em> valid under this protocol, and a set of <em>contents</em> for each performative.</p>
+<p>Additionally, the first YAML document of a protocol specification must describe the syntax of valid messages according to this protocol. Therefore, it must contain another mandatory <code>speech-acts</code> field which defines the set of <em>performatives</em> valid under this protocol, and a set of <em>contents</em> for each performative.</p>
 <p>A <em>performative</em> defines the type of a message (e.g. propose, accept) and has a set of <em>contents</em> (or parameters) of varying types.</p>
-<p>The format of the <code>speech-act</code> is as follows: <code>speech-act</code> is a dictionary, where each key is a <strong>unique</strong> <em>performative</em> (YAML string), and the value is a <em>content</em> dictionary. If a performative does not have any content, then its content dictionary is empty, e.g. <code>accept</code>, <code>decline</code> and <code>match_accept</code> in the above specification.</p>
-<p>A content dictionary in turn is composed of key/value pairs, where each key is the name of a content (YAML string) and the value is its <a href="../protocol-generator/#types">type</a> (YAML string). For example, the <code>cfp</code> (short for 'call for proposal') performative has one content whose name is <code>query</code> and whose type is <code>ct:DataModel</code>.</p>
+<p>The format of the <code>speech-act</code> is as follows: <code>speech-act</code> is a dictionary, where each key is a <strong>unique</strong> <em>performative</em> (YAML string), and the value is a <em>content</em> dictionary. If a performative does not have any content, then its content dictionary is empty, for instance <code>accept</code> and <code>decline</code> in the specification above.</p>
+<p>A content dictionary in turn has key/value pairs, where each key is the name of a content (YAML string) and the value is its <a href="../protocol-generator/#types">type</a> (YAML string). For example, the <code>cfp</code> (short for 'call for proposal') performative has one content whose name is <code>query</code> and whose type is <code>ct:Query</code>.</p>
 <h4 id="types">Types</h4>
 <p>The specific types which could be assigned to contents in a protocol specification are described in the table below.</p>
 <p>Types are either user defined (i.e. custom types) or primitive: </p>
 <ul>
 <li>Custom types are prepended with <code>ct:</code> and their format is described using regular expression in the table below. </li>
-<li>Primitive types are prepended with <code>pt:</code>. There are different categories of primitive types, e.g. <code>&lt;PT&gt;</code> such as integers and booleans, <code>&lt;PCT&gt;</code> such as sets and lists, and so on. Primitive types are compositional: <ul>
+<li>Primitive types are prepended with <code>pt:</code>. There are different categories of primitive types. For example, <code>&lt;PT&gt;</code> such as integers and booleans, <code>&lt;PCT&gt;</code> such as sets and lists, and so on. Primitive types are compositional: <ul>
 <li>For example, consider <code>pt:set[...]</code> under <code>&lt;PCT&gt;</code>, i.e. an unordered collection of elements without duplicates. A <code>pt:set[...]</code> describes the type of its elements (called "sub-type") in square brackets. The sub-type of a <code>pt:set[...]</code> must be a <code>&lt;PT&gt;</code> (e.g. <code>pt:int</code>, <code>pt:bool</code>). </li>
-<li>In describing the format of types, <code>/</code> between two sub-types should be treated as "or". For example, the sub-type of a <code>pt:optional[...]</code> is either a <code>&lt;PT&gt;</code>, <code>&lt;CT&gt;</code>, <code>&lt;PCT&gt;</code>, <code>&lt;PMT&gt;</code> or an <code>&lt;MT&gt;</code>.</li>
+<li>In describing the format of types, <code>/</code> between two sub-types should be treated as "or". For example, the sub-type of a <code>pt:optional[...]</code> is either a <code>&lt;PT&gt;</code>, <code>&lt;CT&gt;</code>, <code>&lt;PCT&gt;</code>, <code>&lt;PMT&gt;</code> or <code>&lt;MT&gt;</code>.</li>
 </ul>
 </li>
 </ul>
-<p>A multi type denotes an "or" separated set of sub-types, e.g. <code>pt:union[pt:str, pt:int]</code> as the type of a <code>content</code> means <code>content</code> should either be a <code>pt:int</code> or a <code>pt:float</code>.</p>
-<p>An optional type for a content denotes that the content's existence is optional, but if it is present, its type must match <code>pt:optional[...]</code>'s sub-type. </p>
+<p>A multi type denotes an "or" separated set of sub-types. For example, a content whose type is specified as <code>pt:union[pt:str, pt:int]</code> should either be <code>pt:int</code> or <code>pt:float</code>.</p>
+<p>An optional type <code>pt:optional[...]</code> assigned to a content means the content's existence is optional, but if it is present, its type must match <code>pt:optional[...]</code>'s sub-type. </p>
 <table>
 <thead>
 <tr>
@@ -5329,27 +5358,44 @@
 </table>
 <p>&#42; This is how variable length tuples containing elements of the same type are declared in Python; see <a href="https://docs.python.org/3/library/typing.html#typing.Tuple" target="_blank">here</a>.</p>
 <h3 id="protocol-buffer-schema">Protocol Buffer Schema</h3>
-<p>Currently, there is no official method provided by the AEA framework for describing custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required implementations must be provided manually. </p>
-<p>Therefore, if any of the contents declared in <code>speech-acts</code> is of a custom type, the specification must then have a second YAML document, containing the protocol buffer schema code for every custom type.</p>
+<p>Currently, the AEA framework does not officially support describing custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required serialisation logic must be provided manually.</p>
+<p>Therefore, if any of the contents declared in <code>speech-acts</code> is of a custom type, the specification must then have a second YAML document, containing the protocol buffer schema code for each custom type.</p>
 <p>You can see an example of the second YAML document in the above protocol specification.</p>
 <h3 id="dialogues">Dialogues</h3>
-<p>You can optionally describe some of the structural details of dialogues conforming to your protocol in a third YAML document in the protocol specification.</p>
+<p>You can optionally specify the structure of dialogues conforming to your protocol in a third YAML document in the specification.</p>
 <p>The allowed fields and what they represent are:</p>
 <ul>
+<li><code>initiation</code>: The list of initial performatives</li>
 <li><code>reply</code>: The reply structure of speech-acts</li>
-<li><code>roles</code>: The roles of agents participating in dialogues</li>
-<li><code>end_states</code>: The final states a dialogue could end up in.</li>
+<li><code>termination</code>: The list of terminal performatives</li>
+<li><code>roles</code>: The roles of players participating in a dialogue</li>
+<li><code>end_states</code>: The possible outcomes a terminated dialogue.</li>
+<li><code>keep_terminal_state_dialogues</code>: whether to keep or dismiss a terminated dialogue.</li>
 </ul>
 <p>All of the above fields are mandatory. </p>
+<p><code>initiation</code> is a YAML list, containing the performatives which can be used to start a dialogue. </p>
 <p><code>reply</code> specifies for every performative, what its valid replies are. If a performative <code>per_1</code> is a valid reply to another <code>per_2</code>, this means a message with performative <code>per_1</code> can target a message whose performative is <code>per_2</code>.      </p>
-<p><code>reply</code> is a dictionary, where the keys are the performatives (YAML string) defined in <code>speech-acts</code>. For each performative key, its value is a list of performatives which are defined to be a valid reply. 
+<p><code>reply</code> is a YAML dictionary, where the keys are the performatives (YAML string) defined in <code>speech-acts</code>. For each performative key, its value is a list of performatives which are defined to be a valid reply. 
 For example, valid replies to <code>cfp</code> are <code>propose</code> and <code>decline</code>.</p>
-<p><code>roles</code> lists the roles are agents which participate in dialogues conforming with your protocol. 
-<code>roles</code> takes a set, which may contain two or one roles, each role being a YAML string. </p>
-<p>If there are two roles, each agent has a distinguished role in the dialogue (e.g. buyer and seller in the above specification).
-If there is one role, then the two agents in a dialogue take the same role.</p>
-<p><code>end_states</code> lists the final states a dialogue based on your protocol may terminate in. 
-<code>end_states</code> is a list of YAML strings. </p>
+<p><code>termination</code> is a YAML list, containing the performatives which terminate a dialogue. Once any of these performatives are used in a dialogue, the dialogue is terminated and no other messages may be added to it.</p>
+<p><code>roles</code> is a YAML set, containing the roles  players participating in dialogues can take. <code>roles</code> may contain one or two roles, each role being a YAML string. If there are two roles, each participant has a distinguished role in the dialogue (e.g. buyer and seller in the above specification). If there is only one role, then both participants in a dialogue have this same role.</p>
+<p><code>end_states</code> lists the final states a terminated dialogue may have. <code>end_states</code> is a YAML list of strings. </p>
+<p><code>keep_terminal_state_dialogues</code> has a boolean value and specifies whether the terminated dialogues of this protocol are to be kept or discarded. </p>
+<h2 id="design-guidelines">Design Guidelines</h2>
+<ol>
+<li>
+<p><code>initiation</code> and <code>termination</code> cannot be empty.</p>
+</li>
+<li>
+<p>Make sure that when defining <code>reply</code>, you include every speech-act you specified under <code>speech_acts</code>. If any of the speech-acts does not have a reply, indicate that with an empty list <code>[]</code> similar to <code>accept</code> and <code>decline</code> in the specification above.</p>
+</li>
+<li>
+<p>If a speech-act is listed in <code>termination</code>, it must not have any replies in <code>reply</code>. The reason is simple: a terminal speech-act terminates a dialogue and so its reply can never be used.</p>
+</li>
+<li>
+<p>If a speech-act replies to no other speech-acts, it should be listed in <code>initiation</code> otherwise it could never be used in a dialogue (neither to a start a dialogue with, nor as a reply to another speech-act). </p>
+</li>
+</ol>
 <h3 id="notes">Notes</h3>
 <ol>
 <li>Currently, there is no way to describe custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required implementations must be provided manually.<ul>

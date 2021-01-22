@@ -5699,9 +5699,19 @@
 <p>Add error callback to call on error raised.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.start_manager"></a></p>
 <h4 id="start_manager">start<code>_</code>manager</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start_manager</span><span class="p">(</span><span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start_manager</span><span class="p">(</span><span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Start manager.</p>
+<p>If local = False and remote = False, then the packages
+are fetched in mixed mode (i.e. first try from local
+registry, and then from remote registry in case of failure).</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>local</code>: whether or not to fetch from local registry.</li>
+<li><code>remote</code>: whether or not to fetch from remote registry.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the MultiAgentManager instance.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.stop_manager"></a></p>
 <h4 id="stop_manager">stop<code>_</code>manager</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop_manager</span><span class="p">(</span><span class="n">cleanup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
@@ -5717,13 +5727,17 @@
 <p>None</p>
 <p><a name="aea.manager.manager.MultiAgentManager.add_project"></a></p>
 <h4 id="add_project">add<code>_</code>project</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_project</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">restore</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_project</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">restore</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Fetch agent project and all dependencies to working_dir.</p>
+<p>If local = False and remote = False, then the packages
+are fetched in mixed mode (i.e. first try from local
+registry, and then from remote registry in case of failure).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>public_id</code>: the public if of the agent project.</li>
 <li><code>local</code>: whether or not to fetch from local registry.</li>
+<li><code>remote</code>: whether or not to fetch from remote registry.</li>
 <li><code>restore</code>: bool flag for restoring already fetched agent.</li>
 </ul>
 <p><a name="aea.manager.manager.MultiAgentManager.remove_project"></a></p>

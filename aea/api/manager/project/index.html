@@ -5403,14 +5403,18 @@
 <p><a name="aea.manager.project.Project.load"></a></p>
 <h4 id="load">load</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">is_local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">is_restore</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">registry_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REGISTRY_NAME</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Project&quot;</span>
+ <span class="o">|</span> <span class="n">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">is_local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">is_remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">is_restore</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">registry_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REGISTRY_NAME</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Project&quot;</span>
 </code></pre></div>
 <p>Load project with given public_id to working_dir.</p>
+<p>If local = False and remote = False, then the packages
+are fetched in mixed mode (i.e. first try from local
+registry, and then from remote registry in case of failure).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>working_dir</code>: the working directory</li>
 <li><code>public_id</code>: the public id</li>
-<li><code>is_local</code>: whether to fetch from local or remote</li>
+<li><code>is_local</code>: whether to fetch from local
+:param is_remote whether to fetch from remote</li>
 <li><code>registry_path</code>: the path to the registry locally</li>
 <li><code>skip_consistency_check</code>: consistency checks flag</li>
 </ul>
