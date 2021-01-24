@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Go 1.14+ (installation instructions available [here](https://golang.org/dl/]))
+- Go 1.14+ (installation instructions available [here](https://golang.org/dl/))
 
 ## Building the code
 
