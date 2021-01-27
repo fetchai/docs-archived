@@ -18,13 +18,13 @@
 
 <div class="div6 grid_item"> <h1>Here to build agents?</h1>
     <ul>
-      <li>Learn about the agent framework's <a href="../aea/diagram">architecture</a>.</li>
       <li>Learn about the <a href="../aea">concepts</a>.</li>
       <li><a href="../aea/quickstart">Build</a> your first agent.</li>
       <li>Once you’ve built your agent, you’ll want to use the SOEF to perform search and discovery to find other agents to trade with.
       <ul>
         <li>Learn about the <a href="https://docs.fetch.ai/aea/simple-oef/">SOEF</a> and <a href="https://docs.fetch.ai/aea/simple-oef-usage/">how to use it in your agents</a>.</li>
         <li>Learn about how to <a href="https://docs.fetch.ai/aea/generic-skills-step-by-step/">trade with other agents</a>. Proceed to the beginner or advanced guides to learn more.</li>
+        <li>Learn about the agent framework's <a href="../aea/diagram">architecture</a>.</li>
       </ul>
       </li>
     </ul></div>
