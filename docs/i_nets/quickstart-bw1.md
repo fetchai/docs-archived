@@ -44,11 +44,11 @@ There are technical and community tracks for interacting with the BW-1 test-net.
 
 Non-technical users should follow these steps:
 
-1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these [instructions](/ledger_v2/cli-keys/#hardware-wallets)</a>.
+1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these [instructions](/Ledger/cli-keys/#hardware-wallets)</a>.
 
-2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](/ledger_v2/block-explorer/#logging-in-with-the-ledger-nano).
+2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](/Ledger/block-explorer/#logging-in-with-the-ledger-nano).
 
-3. Request tokens to your Ledger nano address using the [token faucet](/ledger_v2/block-explorer/#getting-testnet-tokens-from-the-faucet).
+3. Request tokens to your Ledger nano address using the [token faucet](/Ledger/block-explorer/#getting-testnet-tokens-from-the-faucet).
 
 4. Sign the test-net address where you requested tokens in step 3 with the private key tied to your FET account on the Ethereum mainnet (this is the account you use for FET staking):
 
@@ -58,7 +58,7 @@ Non-technical users should follow these steps:
 
 6. Send a second transaction of 0.01 FET to the same address but this time add the signature in the "memo" field that you generated in step 4.
 
-7. Delegate Stake to any of the validators using the instructions [here](/ledger_v2/block-explorer/#delegating-stake-to-a-validator).
+7. Delegate Stake to any of the validators using the instructions [here](/Ledger/block-explorer/#delegating-stake-to-a-validator).
 
 8. Vote on at least one governance proposal.
 
@@ -66,15 +66,15 @@ Non-technical users should follow these steps:
 
 Anyone interested in developing agents or operating a validator node should follow these steps:
 
-1. Obtain a working copy of the ledger v0.2.x software by [checking out and building](/ledger_v2/building/) it from source.
+1. Obtain a working copy of the ledger v0.2.x software by [checking out and building](/Ledger/building/) it from source.
 
-2. Import a private key from [AW-1](./quickstart-aw1.md) into the `fetchcli` following these [instructions](/ledger_v2/cli-keys/#importing-a-private-key-generated-from-the-agent-framework).
+2. Import a private key from [AW-1](./quickstart-aw1.md) into the `fetchcli` following these [instructions](/Ledger/cli-keys/#importing-a-private-key-generated-from-the-agent-framework).
 
-    - You can check the balance of your account by typing `fetchcli query account <YOUR_ACCOUNT_ADDRESS>` where `<YOUR_ACCOUNT_ADDRESS>` is in bech32 format and contains a `fetch1...` prefix. Check out the [documentation](/ledger_v2/cli-keys/) for extra information
+    - You can check the balance of your account by typing `fetchcli query account <YOUR_ACCOUNT_ADDRESS>` where `<YOUR_ACCOUNT_ADDRESS>` is in bech32 format and contains a `fetch1...` prefix. Check out the [documentation](/Ledger/cli-keys/) for extra information
 
-3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators) but the table at the bottom of this page shows these for convenience.
+3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/Ledger/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators) but the table at the bottom of this page shows these for convenience.
 
-4. Vote on at least one governance proposal following these [instructions](/ledger_v2/governance/#voting-on-a-proposal).
+4. Vote on at least one governance proposal following these [instructions](/Ledger/governance/#voting-on-a-proposal).
 
 
 | Validator | Operator Address |
