@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://docs.fetch.ai/Ledger/python-examples/">
+        <link rel="canonical" href="https://docs.fetch.ai/ledger_v2/cli-tokens/">
       
       
         <meta name="author" content="developer@fetch.ai">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Python Examples - Developer Documentation</title>
+        <title>Tokens - Developer Documentation</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#python-examples-using-agent-land" class="md-skip">
+        <a href="#cli-managing-tokens" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Python Examples
+              Tokens
             
           </span>
         </div>
@@ -3462,10 +3462,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" checked>
     <label class="md-nav__link" for="nav-3-5">
       Commandline Client
       <span class="md-nav__icon md-icon"></span>
@@ -3506,11 +3508,56 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../cli-tokens/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Tokens
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Tokens
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#querying-your-balance" class="md-nav__link">
+    Querying your balance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-funds" class="md-nav__link">
+    Sending funds
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3620,45 +3667,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Python Examples
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../python-examples/" class="md-nav__link">
       Python Examples
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#python-examples-using-agent-land" class="md-nav__link">
-    Python examples using Agent Land
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3815,6 +3828,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3823,8 +3838,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#python-examples-using-agent-land" class="md-nav__link">
-    Python examples using Agent Land
+  <a href="#querying-your-balance" class="md-nav__link">
+    Querying your balance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-funds" class="md-nav__link">
+    Sending funds
   </a>
   
 </li>
@@ -3842,75 +3864,45 @@
               
                 
                 
-                  <h1>Python Examples</h1>
-                
-                <h2 id="python-examples-using-agent-land">Python examples using Agent Land</h2>
-<p>In this section, we look at some Python that you can use to create addresses, fund them, and submit transactions to the network. It's super-simple to do:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span><span class="p">,</span> <span class="n">FetchAIApi</span><span class="p">,</span> <span class="n">FetchAIFaucetApi</span>
-
-<span class="c1"># Get a new address:</span>
-<span class="n">fetch_crypto</span> <span class="o">=</span> <span class="n">FetchAICrypto</span><span class="p">()</span>
-<span class="n">address</span> <span class="o">=</span> <span class="n">fetch_crypto</span>
-
-<span class="c1"># This is relatively slow, so if you need to stock up a number of</span>
-<span class="c1"># addresses, it’s best to get it ONCE, then distribute yourself:</span>
-<span class="c1"># for rapid tests:</span>
-<span class="n">FetchAIFaucetApi</span><span class="p">()</span><span class="o">.</span><span class="n">get_wealth</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
-<span class="n">balance</span> <span class="o">=</span> <span class="n">FetchAIApi</span><span class="p">()</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="err">”</span><span class="n">Our</span> <span class="n">address</span> <span class="p">{</span><span class="n">address</span><span class="p">}</span> <span class="n">has</span> <span class="n">a</span> <span class="n">balance</span> <span class="n">of</span> <span class="p">{</span><span class="n">balance</span><span class="p">}</span><span class="err">”</span><span class="p">)</span>
+                <h1 id="cli-managing-tokens">CLI - Managing Tokens</h1>
+<h2 id="querying-your-balance">Querying your balance</h2>
+<p>Once the wasm is configured for the desired <a href="../cli-introduction/">network</a>. The user can query there balance using the following command:</p>
+<div class="highlight"><pre><span></span><code>fetchcli query account fetch1akvyhle79nts4rwn075t85xrwmp5ysuqynxcn4
 </code></pre></div>
-<p>As you can see, it’s pretty straightforward. The above works in standalone code, and is supported in the agent framework. Here is a code fragment that shows the construction, signing and submission of a transaction:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.crypto.fetchai</span> <span class="kn">import</span> <span class="n">FetchAICrypto</span><span class="p">,</span> <span class="n">FetchAIApi</span><span class="p">,</span> <span class="n">FetchAIFaucetApi</span>
+<p>If the address exists on the network then the user will expect to see an output in the following form:</p>
+<div class="highlight"><pre><span></span><code>  address: fetch1akvyhle79nts4rwn075t85xrwmp5ysuqynxcn4
+  coins:
+  - denom: atestfet
+    amount: &quot;1000000000000000000&quot;
+  public_key: &quot;&quot;
+  account_number: 20472
+  sequence: 0
+</code></pre></div>
+<h2 id="sending-funds">Sending funds</h2>
+<p>To send funds from one address to another address then you would use the <code>tx send</code> subcommand. As shown below:</p>
+<div class="highlight"><pre><span></span><code>./build/fetchcli tx send &lt;from address or key name&gt; &lt;target address&gt; &lt;amount&gt;
+</code></pre></div>
+<p>In a more concrete example if the user wanted to send <code>100atestfet</code> from <code>main</code> key/address to <code>fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp</code> then the following command would be used.</p>
+<div class="highlight"><pre><span></span><code>./build/fetchcli tx send main fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp 100atestfet
+</code></pre></div>
+<p>When you run the command you will get a similar output and prompt. The user can check the details of the transfer and then press 'y' to confirm the transfer.</p>
+<div class="highlight"><pre><span></span><code>{&quot;chain_id&quot;:&quot;agent-land&quot;,&quot;account_number&quot;:&quot;20472&quot;,&quot;sequence&quot;:&quot;0&quot;,&quot;fee&quot;:{&quot;amount&quot;:[],&quot;gas&quot;:&quot;200000&quot;},&quot;msgs&quot;:[{&quot;type&quot;:&quot;cosmos-sdk/MsgSend&quot;,&quot;value&quot;:{&quot;from_address&quot;:&quot;fetch1akvyhle79nts4rwn075t85xrwmp5ysuqynxcn4&quot;,&quot;to_address&quot;:&quot;fetch106vm9q6ezu9va7v7e0cvq0nedc54egjm692fcp&quot;,&quot;amount&quot;:[{&quot;denom&quot;:&quot;atestfet&quot;,&quot;amount&quot;:&quot;100&quot;}]}}],&quot;memo&quot;:&quot;&quot;}
 
-<span class="c1"># ... code, etc...</span>
-
-<span class="k">def</span> <span class="nf">test_construct_sign_and_submit_transfer_transaction</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Test the construction, signing and submitting of a transfer transaction.&quot;&quot;&quot;</span>
-    <span class="n">account</span> <span class="o">=</span> <span class="n">FetchAICrypto</span><span class="p">()</span>
-    <span class="n">balance</span> <span class="o">=</span> <span class="n">get_wealth</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Failed to fund account.&quot;</span>
-    <span class="n">fc2</span> <span class="o">=</span> <span class="n">FetchAICrypto</span><span class="p">()</span>
-    <span class="n">fetchai_api</span> <span class="o">=</span> <span class="n">FetchAIApi</span><span class="p">(</span><span class="o">**</span><span class="n">FETCHAI_TESTNET_CONFIG</span><span class="p">)</span>
-    <span class="n">amount</span> <span class="o">=</span> <span class="mi">10000</span>
-    <span class="k">assert</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="n">balance</span><span class="p">,</span> <span class="s2">&quot;Not enough funds.&quot;</span>
-    <span class="n">transfer_transaction</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
-        <span class="n">sender_address</span><span class="o">=</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">destination_address</span><span class="o">=</span><span class="n">fc2</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
-        <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
-        <span class="n">tx_fee</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-        <span class="n">tx_nonce</span><span class="o">=</span><span class="s2">&quot;something&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">transfer_transaction</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">transfer_transaction</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
-    <span class="p">),</span> <span class="s2">&quot;Incorrect transfer_transaction constructed.&quot;</span>
-    <span class="n">signed_transaction</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">transfer_transaction</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">signed_transaction</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
-        <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">signed_transaction</span><span class="p">[</span><span class="s2">&quot;tx&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">4</span>
-        <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">signed_transaction</span><span class="p">[</span><span class="s2">&quot;tx&quot;</span><span class="p">][</span><span class="s2">&quot;signatures&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span>
-    <span class="p">),</span> <span class="s2">&quot;Incorrect signed_transaction constructed.&quot;</span>
-    <span class="n">transaction_digest</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">send_signed_transaction</span><span class="p">(</span><span class="n">signed_transaction</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">transaction_digest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Failed to submit transfer transaction!&quot;</span>
-
-        <span class="c1"># Now let&#39;s wait around for a while for this transaction to go through&quot;</span>
-    <span class="n">not_settled</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">elapsed_time</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">not_settled</span> <span class="ow">and</span> <span class="n">elapsed_time</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
-        <span class="n">elapsed_time</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">transaction_receipt</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">get_transaction_receipt</span><span class="p">(</span><span class="n">transaction_digest</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">transaction_receipt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="n">is_settled</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">is_transaction_settled</span><span class="p">(</span><span class="n">transaction_receipt</span><span class="p">)</span>
-        <span class="n">not_settled</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">is_settled</span>
-    <span class="k">assert</span> <span class="n">transaction_receipt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Failed to retrieve transaction receipt.&quot;</span>
-    <span class="k">assert</span> <span class="n">is_settled</span><span class="p">,</span> <span class="s2">&quot;Failed to verify tx!&quot;</span>
-    <span class="n">tx</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">get_transaction</span><span class="p">(</span><span class="n">transaction_digest</span><span class="p">)</span>
-    <span class="n">is_valid</span> <span class="o">=</span> <span class="n">fetchai_api</span><span class="o">.</span><span class="n">is_transaction_valid</span><span class="p">(</span>
-        <span class="n">tx</span><span class="p">,</span> <span class="n">fc2</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">amount</span>
-    <span class="p">)</span>
-    <span class="k">assert</span> <span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;Failed to settle tx correctly!&quot;</span>
-    <span class="k">assert</span> <span class="n">tx</span> <span class="o">==</span> <span class="n">transaction_receipt</span><span class="p">,</span> <span class="s2">&quot;Should be same!&quot;</span>
+confirm transaction before signing and broadcasting [y/N]: y
+</code></pre></div>
+<p>Once the transfer has been made a summary is presented to the user. An example is shown below:</p>
+<div class="highlight"><pre><span></span><code>height: 0
+txhash: CA7C2C842F8F577E9621C2B23A016D93B979AC1A45015807799C5AD959503FA4
+codespace: &quot;&quot;
+code: 0
+data: &quot;&quot;
+rawlog: &#39;[]&#39;
+logs: []
+info: &quot;&quot;
+gaswanted: 0
+gasused: 0
+tx: null
+timestamp: &quot;&quot;
 </code></pre></div>
                 
               
@@ -3929,7 +3921,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../faucet/" title="Faucet" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../cli-keys/" title="Keys" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3938,19 +3930,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Faucet
+                Keys
               </span>
             </div>
           </a>
         
         
-          <a href="../../i_nets/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../validators/overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Introduction
+                Overview
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

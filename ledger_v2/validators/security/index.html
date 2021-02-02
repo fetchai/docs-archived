@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://docs.fetch.ai/Ledger/validators/overview/">
+        <link rel="canonical" href="https://docs.fetch.ai/ledger_v2/validators/security/">
       
       
         <meta name="author" content="developer@fetch.ai">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Overview - Developer Documentation</title>
+        <title>Security - Developer Documentation</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#validators-overview" class="md-skip">
+        <a href="#validator-security" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Overview
+              Security
             
           </span>
         </div>
@@ -3545,6 +3545,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../overview/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -3552,23 +3564,19 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-      
-    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Overview
+        Security
         <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Overview
+      Security
     </a>
     
       
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -3578,36 +3586,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#validator-security" class="md-nav__link">
+    Validator Security
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#hardware" class="md-nav__link">
-    Hardware
+  <a href="#key-management-hsm" class="md-nav__link">
+    Key Management - HSM
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#set-up-a-website" class="md-nav__link">
-    Set Up a Website
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#seek-legal-advice" class="md-nav__link">
-    Seek Legal Advice
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#community" class="md-nav__link">
-    Community
+  <a href="#sentry-nodes-ddos-protection" class="md-nav__link">
+    Sentry Nodes (DDOS Protection)
   </a>
   
 </li>
@@ -3616,18 +3610,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/" class="md-nav__link">
-      Security
-    </a>
   </li>
 
         
@@ -3849,8 +3831,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3859,36 +3839,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#validator-security" class="md-nav__link">
+    Validator Security
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#hardware" class="md-nav__link">
-    Hardware
+  <a href="#key-management-hsm" class="md-nav__link">
+    Key Management - HSM
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#set-up-a-website" class="md-nav__link">
-    Set Up a Website
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#seek-legal-advice" class="md-nav__link">
-    Seek Legal Advice
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#community" class="md-nav__link">
-    Community
+  <a href="#sentry-nodes-ddos-protection" class="md-nav__link">
+    Sentry Nodes (DDOS Protection)
   </a>
   
 </li>
@@ -3906,31 +3872,32 @@
               
                 
                 
-                <h1 id="validators-overview">Validators Overview</h1>
-<h2 id="introduction">Introduction</h2>
-<p>The Fetch.ai Ledger relies on a set of validators that are responsible for committing new blocks in the blockchain. These validators participate in the consensus protocol by broadcasting votes which contain cryptographic signatures signed by each validator's private key.</p>
-<p>Validator candidates can bond their own FET and have FET <a href="../delegator-guide-cli.md">"delegated"</a>, or staked, to them by token holders. The validators are determined by who has the most stake delegated to them — the top N validator candidates with the most stake will become validators.</p>
-<p>Validators and their delegators will earn Atoms as block provisions and tokens as transaction fees through execution of the consensus protocol. Transaction fees will be paid in FET.</p>
-<p>If validators double sign, are frequently offline or do not participate in governance, their staked FET (including FET of users that delegated to them) can be slashed. The penalty depends on the severity of the violation.</p>
-<h2 id="hardware">Hardware</h2>
-<p>The hardware resources for running a validator node largely depend on the network load. As a recommended configuration we sugest the following requirements</p>
-<ul>
-<li>2 x CPU, either Intel or AMD, with the SSE4.1 and SSE4.2 flags (use lscpu to verify)</li>
-<li>4 GB RAM</li>
-<li>500 GB SSD</li>
-<li>100 Mbit/s always-on internet connection</li>
-<li>Linux OS (Ubuntu 18.04 or 20.04 recommended) / MacOS</li>
-</ul>
-<p>Uptime in incredibly important for being a validator. It is expected that validators will have appriopriate redundancies for compute, power, connectivity etc. While the blockchain itself it highly replicated it is also expected that validators will perform local storage backups in order to minimise validator down time.</p>
-<h2 id="set-up-a-website">Set Up a Website</h2>
-<p>Set up a dedicated validator's website and signal your intention to become a validator on our <a href="https://discord.gg/UDzpBFa">Discord</a> server. This is important since delegators will want to have information about the entity they are delegating their FET to.</p>
-<h2 id="seek-legal-advice">Seek Legal Advice</h2>
-<p>Seek legal advice if you intend to run a Validator.</p>
-<h2 id="community">Community</h2>
-<p>We highly recommdend to check out the validator community on the discord channel for more information and to see that latest announcements about becoming a validator.</p>
-<ul>
-<li><a href="https://discord.gg/UDzpBFa">Discord</a></li>
-</ul>
+                  <h1>Security</h1>
+                
+                <h2 id="validator-security">Validator Security</h2>
+<p>Each validator candidate is encouraged to run its operations independently, as diverse setups increase the resilience of the network. Validator candidates should commence their setup phase now in order to be on time for launch.</p>
+<h2 id="key-management-hsm">Key Management - HSM</h2>
+<p>It is mission critical that an attacker cannot steal a validator's key. If this is possible, it puts the entire stake delegated to the compromised validator at risk. Hardware security modules are an important strategy for mitigating this risk. HSM modules must support <code>ed25519</code> signatures.</p>
+<h2 id="sentry-nodes-ddos-protection">Sentry Nodes (DDOS Protection)</h2>
+<p>Validators are responsible for ensuring that the network can sustain denial of service attacks.</p>
+<p>One recommended way to mitigate these risks is for validators is to carefully structure their network topology in a so-called sentry node architecture.</p>
+<p>Validator nodes should only connect to full-nodes they trust because they operate them themselves or are run by other validators they know socially. This architecture shifts the burden of denial-of-service from the validator's node directly to its sentry nodes, and may require new sentry nodes be spun up or activated to mitigate attacks on existing ones.</p>
+<p>Sentry nodes can be quickly spun up or change their IP addresses. Because the links to the sentry nodes are in private IP space, an internet based attacked cannot disturb them directly. This will ensure validator block proposals and votes always make it to the rest of the network.</p>
+<p>To setup your sentry node architecture you can follow the instructions below:</p>
+<p>Validators nodes should edit their config.toml:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comma separated list of nodes to keep persistent connections to</span>
+<span class="c1"># Do not add private peers to this list if you don&#39;t want them advertised</span>
+<span class="nv">persistent_peers</span> <span class="o">=[</span>list of sentry nodes<span class="o">]</span>
+
+<span class="c1"># Set true to enable the peer-exchange reactor</span>
+<span class="nv">pex</span> <span class="o">=</span> <span class="nb">false</span>
+</code></pre></div>
+<p>Sentry Nodes should edit their config.toml:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comma separated list of peer IDs to keep private (will not be gossiped to other peers)</span>
+<span class="c1"># Example ID: 3e16af0cead27979e1fc3dac57d03df3c7a77acc@3.87.179.235:26656</span>
+
+<span class="nv">private_peer_ids</span> <span class="o">=</span> <span class="s2">&quot;node_ids_of_private_peers&quot;</span>
+</code></pre></div>
                 
               
               
@@ -3948,7 +3915,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../cli-tokens/" title="Tokens" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3957,19 +3924,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Tokens
+                Overview
               </span>
             </div>
           </a>
         
         
-          <a href="../security/" title="Security" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../block-explorer/" title="Block Explorer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Security
+                Block Explorer
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
