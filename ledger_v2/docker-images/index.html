@@ -3563,8 +3563,32 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../validators/setup/" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../joining-a-testnet/" class="md-nav__link">
+      Joining a Testnet
+    </a>
   </li>
 
         
@@ -3807,6 +3831,42 @@
                 <h1 id="docker-images">Docker Images</h1>
 <p>For every Fetchd release a corresponding docker images is released. The full list of images and tags can be found at:</p>
 <p><a href="https://hub.docker.com/r/fetchai/fetchd">https://hub.docker.com/r/fetchai/fetchd</a></p>
+<h1 id="supported-tags-dockerfiles">Supported Tags &amp; Dockerfiles</h1>
+<p>Current Versions:</p>
+<ul>
+<li><a href="https://github.com/fetchai/fetchd/blob/v0.5.2/Dockerfile">0.5.2, 0.5</a> (used for beaconworld test networks)</li>
+<li><a href="https://github.com/fetchai/fetchd/blob/v0.2.7/Dockerfile">0.2.7, 0.2</a> (used for agentworld test networks)</li>
+</ul>
+<h1 id="quick-reference">Quick Reference</h1>
+<ul>
+<li>
+<p>Support documentation available at the <a href="https://docs.fetch.ai/">Fetch.ai Documenation</a></p>
+</li>
+<li>
+<p>Where to file issues: <a href="https://github.com/fetchai/fetchd/issues">https://github.com/fetchai/fetchd/issues</a></p>
+</li>
+<li>
+<p>Maintained by: <a href="https://github.com/fetchai/fetchd">The Fetch.ai Ledger Team</a></p>
+</li>
+<li>
+<p>Supported architectures: amd64</p>
+</li>
+</ul>
+<h1 id="how-to-use-this-image">How to use this image</h1>
+<h2 id="connecting-to-a-test-network">Connecting to a test network</h2>
+<p>Connecting a node to the test network is easy. In its simpliest configuration the docker container can be run with just a couple of environment variables as shown below:</p>
+<div class="highlight"><pre><span></span><code>docker run -e MONIKER=&lt;insert node name here&gt; -e NETWORK=&lt;network name&gt; fetchai/fetchd:0.5
+</code></pre></div>
+<p>However, users will almost certainly want to mount a storage volume into the container so that the node does not need to resync from genesis everytime. This can be done by adding the following volume path:</p>
+<div class="highlight"><pre><span></span><code>docker run -e MONIKER=&lt;insert node name here&gt; -e NETWORK=&lt;network name&gt; -v /path/for/data:/root/.fetchd fetchai/fetchd:0.5
+</code></pre></div>
+<p>For example connecting a node to the beaconworld testnet can be done with the following command:</p>
+<div class="highlight"><pre><span></span><code>docker run -e MONIKER=my-first-fetch-node -e NETWORK=beaconworld -v $(pwd)/my-first-fetch-node-data:/root/.fetchd fetchai/fetchd:0.5
+</code></pre></div>
+<h1 id="license">License</h1>
+<p>View <a href="https://github.com/fetchai/fetchd/blob/master/LICENSE">license information</a> for the software contained in this image.</p>
+<p>As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).</p>
+<p>As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.</p>
                 
               
               
