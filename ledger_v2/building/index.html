@@ -3467,8 +3467,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ubuntu" class="md-nav__link">
-    Ubuntu
+  <a href="#ubuntu-2004-debian-10" class="md-nav__link">
+    Ubuntu 20.04 / Debian 10
   </a>
   
 </li>
@@ -3489,6 +3489,19 @@
   <a href="#building-the-code" class="md-nav__link">
     Building the code
   </a>
+  
+    <nav class="md-nav" aria-label="Building the code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boost-dependencies" class="md-nav__link">
+    Boost Dependencies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3888,8 +3901,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ubuntu" class="md-nav__link">
-    Ubuntu
+  <a href="#ubuntu-2004-debian-10" class="md-nav__link">
+    Ubuntu 20.04 / Debian 10
   </a>
   
 </li>
@@ -3911,6 +3924,19 @@
     Building the code
   </a>
   
+    <nav class="md-nav" aria-label="Building the code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boost-dependencies" class="md-nav__link">
+    Boost Dependencies
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -3931,9 +3957,9 @@
 <ul>
 <li>Go 1.14+ (installation instructions available <a href="https://golang.org/dl/]">here</a>)</li>
 </ul>
-<h3 id="ubuntu">Ubuntu</h3>
+<h3 id="ubuntu-2004-debian-10">Ubuntu 20.04 / Debian 10</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Run the following command if using Ubuntu</span>
-sudo apt-get install libgmp-dev swig libboost-all-dev
+sudo apt-get install libgmp-dev swig libboost-serialization1.67-dev
 
 <span class="c1"># Download and install the MCL libraries</span>
 <span class="nb">cd</span> ~
@@ -3971,6 +3997,15 @@ sudo ldconfig
 <div class="highlight"><pre><span></span><code>sudo make install
 </code></pre></div>
 <p>This will install the binaries in the directory specified by your <code>$GOBIN</code> environment variable.</p>
+<h3 id="boost-dependencies">Boost Dependencies</h3>
+<p>Currently the code requires that the user compiles the code with at least version 1.67 of Boost Serialisation library. Failure to do so will mean that users will not be able to sync with the blockchain. This limitation will be resolved in the near future (with the Boost dependency being removed completely).</p>
+<p>To verify which libraries you have linked against use the following commands</p>
+<p><strong>Ubuntu 20.04 / Debian 10</strong></p>
+<div class="highlight"><pre><span></span><code>ldd ./build/fetchd
+</code></pre></div>
+<p><strong>MacOS</strong></p>
+<div class="highlight"><pre><span></span><code>otool -L ./build/fetchd
+</code></pre></div>
                 
               
               
