@@ -49,7 +49,7 @@ You have to complete a few steps as listed below:
 
 5. Create a proof of representation for communication on the <a href="../../aea/acn">ACN</a>:
 
-	- Run `aea generate-key fetchai fetchai_connnection_private_key.txt` and `aea add-key fetchai fetchai_connnection_private_key.txt --connection` to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing `aea issue-certificates`.
+	- Run `aea generate-key fetchai fetchai_connection_private_key.txt` and `aea add-key fetchai fetchai_connection_private_key.txt --connection` to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing `aea issue-certificates`.
 
 6. Customize the `simple_seller` skill (in `YOUR_AGENT_NAME/skills/simple_seller`) and the `simple_data_request` skill (in `YOUR_AGENT_NAME/skills/simple_data_request`) to satisfy the following requirements (you may optionally customize other components of the AEA as well):
 
