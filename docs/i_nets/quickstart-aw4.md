@@ -72,7 +72,7 @@ You have to complete a few steps as listed below:
 
 <li>Create a proof of representation for communication on the <a href="../../aea/acn">ACN</a>:
 <ul>
-<li> Run <code>aea generate-key fetchai fetchai_connnection_private_key.txt</code> and <code>aea add-key fetchai fetchai_connnection_private_key.txt --connection</code> to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing <code>aea issue-certificates</code>.
+<li> Run <code>aea generate-key fetchai fetchai_connection_private_key.txt</code> and <code>aea add-key fetchai fetchai_connection_private_key.txt --connection</code> to add a key pair for your AEA to secure its communications with. Now associate this key pair with the one you use for transacting by executing <code>aea issue-certificates</code>.
 </li>
 </ul>
 </li>
