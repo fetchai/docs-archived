@@ -1,0 +1,4664 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Everything you need to know about Fetch.ai.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.fetch.ai/colearn/tasks/">
+      
+      
+        <meta name="author" content="developer@fetch.ai">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
+    
+    
+      
+        <title>1. CIFAR10 dataset - Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-118969813-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-cifar10-dataset" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-header-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Developer Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              1. CIFAR10 dataset
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      Agent Framework
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Framework" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Framework
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/version/" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/upgrading/" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" >
+    <label class="md-nav__link" for="nav-2-4">
+      Concepts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Concepts" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/language-agnostic-definition/" class="md-nav__link">
+      Language Agnostic Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/agent-oriented-development/" class="md-nav__link">
+      Agent-oriented development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/vision/" class="md-nav__link">
+      Vision
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/app-areas/" class="md-nav__link">
+      Application areas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/oef-ledger/" class="md-nav__link">
+      Relation to OEF and Ledger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/identity/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/trust/" class="md-nav__link">
+      Trust minimisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" >
+    <label class="md-nav__link" for="nav-2-5">
+      Demos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Demos" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        Demos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/demos/" class="md-nav__link">
+      Demos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/aries-cloud-agent-demo/" class="md-nav__link">
+      Aries Cloud Agents Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/car-park-skills/" class="md-nav__link">
+      Car park skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/gym-example/" class="md-nav__link">
+      Gym example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/gym-skill/" class="md-nav__link">
+      Gym skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/ml-skills/" class="md-nav__link">
+      ML skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/oracle-demo/" class="md-nav__link">
+      Oracle skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac-skills/" class="md-nav__link">
+      TAC skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac-skills-contract/" class="md-nav__link">
+      TAC skills ledger-based
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac/" class="md-nav__link">
+      TAC external app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/thermometer-skills/" class="md-nav__link">
+      Thermometer skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/weather-skills/" class="md-nav__link">
+      Weather skills
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" >
+    <label class="md-nav__link" for="nav-2-6">
+      Development - Beginner
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Beginner" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Beginner
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/quickstart/" class="md-nav__link">
+      AEA quick start
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/core-components-1/" class="md-nav__link">
+      Core components - Part 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/aea-vs-mvc/" class="md-nav__link">
+      AEA and web frameworks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill-guide/" class="md-nav__link">
+      Build your first skill - search & discovery
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/core-components-2/" class="md-nav__link">
+      Core components - Part 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/interaction-protocol/" class="md-nav__link">
+      How AEAs talk to each other - interaction protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-skills-step-by-step/" class="md-nav__link">
+      Trade between two AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/development-setup/" class="md-nav__link">
+      Development setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" >
+    <label class="md-nav__link" for="nav-2-7">
+      Development - Advanced
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Advanced" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-1" type="checkbox" id="nav-2-7-1" >
+    <label class="md-nav__link" for="nav-2-7-1">
+      Topic guides
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Topic guides" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-1">
+        <span class="md-nav__icon md-icon"></span>
+        Topic guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/step-one/" class="md-nav__link">
+      Ways to build an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/build-aea-step-by-step/" class="md-nav__link">
+      Build an AEA with the CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/scaffolding/" class="md-nav__link">
+      Scaffolding packages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/protocol-generator/" class="md-nav__link">
+      Generating protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/multiplexer-standalone/" class="md-nav__link">
+      Use multiplexer stand-alone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/standalone-transaction/" class="md-nav__link">
+      Create stand-alone transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/decision-maker-transaction/" class="md-nav__link">
+      Create decision-maker transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill-testing/" class="md-nav__link">
+      Testing Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/deployment/" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/prometheus/" class="md-nav__link">
+      Prometheus monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/known-limits/" class="md-nav__link">
+      Known limitations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/build-aea-programmatically/" class="md-nav__link">
+      Build an AEA programmatically
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-vs-programmatic-aeas/" class="md-nav__link">
+      CLI vs programmatic AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/agent-vs-aea/" class="md-nav__link">
+      AEAs vs agents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/modes/" class="md-nav__link">
+      Modes of running an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-storage/" class="md-nav__link">
+      Generic Storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/multi-agent-manager/" class="md-nav__link">
+      Multi agent manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/debug/" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/runtime-cost/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/por/" class="md-nav__link">
+      Proof of Representation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-2" type="checkbox" id="nav-2-7-2" >
+    <label class="md-nav__link" for="nav-2-7-2">
+      Architecture & component deep-dives
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Architecture & component deep-dives" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-2">
+        <span class="md-nav__icon md-icon"></span>
+        Architecture & component deep-dives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/design-principles/" class="md-nav__link">
+      Design principles
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/diagram/" class="md-nav__link">
+      Architectural diagram
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/connection/" class="md-nav__link">
+      Connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/protocol/" class="md-nav__link">
+      Protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill/" class="md-nav__link">
+      Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/contract/" class="md-nav__link">
+      Contracts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/decision-maker/" class="md-nav__link">
+      Decision Maker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/ledger-integration/" class="md-nav__link">
+      Ledger & Crypto APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/message-routing/" class="md-nav__link">
+      Message routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/config/" class="md-nav__link">
+      Configurations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-3" type="checkbox" id="nav-2-7-3" >
+    <label class="md-nav__link" for="nav-2-7-3">
+      Agent Communication
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Communication" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-3">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Communication
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/acn/" class="md-nav__link">
+      Agent Communication Network
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-4" type="checkbox" id="nav-2-7-4" >
+    <label class="md-nav__link" for="nav-2-7-4">
+      Search & Discovery
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search & Discovery" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-4">
+        <span class="md-nav__icon md-icon"></span>
+        Search & Discovery
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/simple-oef/" class="md-nav__link">
+      Simple OEF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/defining-data-models/" class="md-nav__link">
+      Defining Data Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/query-language/" class="md-nav__link">
+      The Query Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5" type="checkbox" id="nav-2-7-5" >
+    <label class="md-nav__link" for="nav-2-7-5">
+      Developer Interfaces
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Interfaces" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-5">
+        <span class="md-nav__icon md-icon"></span>
+        Developer Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5-1" type="checkbox" id="nav-2-7-5-1" >
+    <label class="md-nav__link" for="nav-2-7-5-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-how-to/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-commands/" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/package-imports/" class="md-nav__link">
+      File structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/wealth/" class="md-nav__link">
+      Generating wealth
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-gui/" class="md-nav__link">
+      GUI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-6" type="checkbox" id="nav-2-7-6" >
+    <label class="md-nav__link" for="nav-2-7-6">
+      Benchmarks
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Benchmarks" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-6">
+        <span class="md-nav__icon md-icon"></span>
+        Benchmarks
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/performance-benchmark/" class="md-nav__link">
+      Performance benchmark
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7" type="checkbox" id="nav-2-7-7" >
+    <label class="md-nav__link" for="nav-2-7-7">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-7">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/abstract_agent/" class="md-nav__link">
+      AbstractAgent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/aea/" class="md-nav__link">
+      AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/aea_builder/" class="md-nav__link">
+      AEA Builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/agent/" class="md-nav__link">
+      Agent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/agent_loop/" class="md-nav__link">
+      Agent Loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/launcher/" class="md-nav__link">
+      Launcher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/multiplexer/" class="md-nav__link">
+      Multiplexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/runner/" class="md-nav__link">
+      Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/runtime/" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-12" type="checkbox" id="nav-2-7-7-12" >
+    <label class="md-nav__link" for="nav-2-7-7-12">
+      Components
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Components" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-12">
+        <span class="md-nav__icon md-icon"></span>
+        Components
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/components/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/components/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-13" type="checkbox" id="nav-2-7-7-13" >
+    <label class="md-nav__link" for="nav-2-7-7-13">
+      Configurations
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configurations" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-13">
+        <span class="md-nav__icon md-icon"></span>
+        Configurations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/data_types/" class="md-nav__link">
+      Data Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/pypi/" class="md-nav__link">
+      Pypi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/validation/" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-14" type="checkbox" id="nav-2-7-7-14" >
+    <label class="md-nav__link" for="nav-2-7-7-14">
+      Connections
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Connections" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-14">
+        <span class="md-nav__icon md-icon"></span>
+        Connections
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/connections/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/context/base/" class="md-nav__link">
+      Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-16" type="checkbox" id="nav-2-7-7-16" >
+    <label class="md-nav__link" for="nav-2-7-7-16">
+      Contracts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Contracts" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-16">
+        <span class="md-nav__icon md-icon"></span>
+        Contracts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/contracts/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17" type="checkbox" id="nav-2-7-7-17" >
+    <label class="md-nav__link" for="nav-2-7-7-17">
+      Crypto
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Crypto" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-17">
+        <span class="md-nav__icon md-icon"></span>
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/cosmos/" class="md-nav__link">
+      Cosmos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/ethereum/" class="md-nav__link">
+      Ethereum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/fetchai/" class="md-nav__link">
+      Fetchai
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/helpers/" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/ledger_apis/" class="md-nav__link">
+      LedgerApis
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/wallet/" class="md-nav__link">
+      Wallet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17-8" type="checkbox" id="nav-2-7-7-17-8" >
+    <label class="md-nav__link" for="nav-2-7-7-17-8">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-17-8">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-18" type="checkbox" id="nav-2-7-7-18" >
+    <label class="md-nav__link" for="nav-2-7-7-18">
+      Decision Maker
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Decision Maker" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-18">
+        <span class="md-nav__icon md-icon"></span>
+        Decision Maker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/gop/" class="md-nav__link">
+      GOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-19" type="checkbox" id="nav-2-7-7-19" >
+    <label class="md-nav__link" for="nav-2-7-7-19">
+      Error Handler
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Error Handler" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-19">
+        <span class="md-nav__icon md-icon"></span>
+        Error Handler
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/error_handler/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/error_handler/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20" type="checkbox" id="nav-2-7-7-20" >
+    <label class="md-nav__link" for="nav-2-7-7-20">
+      Helpers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Helpers" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-20">
+        <span class="md-nav__icon md-icon"></span>
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-1" type="checkbox" id="nav-2-7-7-20-1" >
+    <label class="md-nav__link" for="nav-2-7-7-20-1">
+      ACN
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="ACN" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-1">
+        <span class="md-nav__icon md-icon"></span>
+        ACN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/acn/agent_record/" class="md-nav__link">
+      Agent Record
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/acn/uri/" class="md-nav__link">
+      URI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/async_friendly_queue/" class="md-nav__link">
+      Async Friendly Queue
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/async_utils/" class="md-nav__link">
+      Async Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/env_vars/" class="md-nav__link">
+      Env Vars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/exception_policy/" class="md-nav__link">
+      Exception Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/exec_timeout/" class="md-nav__link">
+      Exec Timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/file_io/" class="md-nav__link">
+      File IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/file_lock/" class="md-nav__link">
+      File Lock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/http_requests/" class="md-nav__link">
+      HttpRequests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/install_dependency/" class="md-nav__link">
+      Install Dependency
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/io/" class="md-nav__link">
+      IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-14" type="checkbox" id="nav-2-7-7-20-14" >
+    <label class="md-nav__link" for="nav-2-7-7-20-14">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-14">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/ipfs/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-16" type="checkbox" id="nav-2-7-7-20-16" >
+    <label class="md-nav__link" for="nav-2-7-7-20-16">
+      MultiAddress
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MultiAddress" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-16">
+        <span class="md-nav__icon md-icon"></span>
+        MultiAddress
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/multiaddr/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/multiple_executor/" class="md-nav__link">
+      MultipleExecutor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/pipe/" class="md-nav__link">
+      Pipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-19" type="checkbox" id="nav-2-7-7-20-19" >
+    <label class="md-nav__link" for="nav-2-7-7-20-19">
+      Preferences
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Preferences" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-19">
+        <span class="md-nav__icon md-icon"></span>
+        Preferences
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/preference_representations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/profiling/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-21" type="checkbox" id="nav-2-7-7-20-21" >
+    <label class="md-nav__link" for="nav-2-7-7-20-21">
+      Search
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-21">
+        <span class="md-nav__icon md-icon"></span>
+        Search
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/search/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/search/models/" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/serializers/" class="md-nav__link">
+      Serializers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23" type="checkbox" id="nav-2-7-7-20-23" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23">
+      Storage
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Storage" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-23">
+        <span class="md-nav__icon md-icon"></span>
+        Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/generic_storage/" class="md-nav__link">
+      GenericStorage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23-2" type="checkbox" id="nav-2-7-7-20-23-2" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23-2">
+      Backends
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Backends" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-20-23-2">
+        <span class="md-nav__icon md-icon"></span>
+        Backends
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/backends/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/backends/sqlite/" class="md-nav__link">
+      Sqlite
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/sym_link/" class="md-nav__link">
+      Sym Link
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-25" type="checkbox" id="nav-2-7-7-20-25" >
+    <label class="md-nav__link" for="nav-2-7-7-20-25">
+      Transaction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Transaction" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-25">
+        <span class="md-nav__icon md-icon"></span>
+        Transaction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/transaction/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/win32/" class="md-nav__link">
+      Win32
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/yaml_utils/" class="md-nav__link">
+      YamlUtils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/identity/base/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/mail/base/" class="md-nav__link">
+      Mail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-23" type="checkbox" id="nav-2-7-7-23" >
+    <label class="md-nav__link" for="nav-2-7-7-23">
+      Manager
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Manager" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-23">
+        <span class="md-nav__icon md-icon"></span>
+        Manager
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/manager/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/manager/project/" class="md-nav__link">
+      Project
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24" type="checkbox" id="nav-2-7-7-24" >
+    <label class="md-nav__link" for="nav-2-7-7-24">
+      Protocols
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Protocols" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-24">
+        <span class="md-nav__icon md-icon"></span>
+        Protocols
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-2" type="checkbox" id="nav-2-7-7-24-2" >
+    <label class="md-nav__link" for="nav-2-7-7-24-2">
+      Dialogue
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dialogue" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-2">
+        <span class="md-nav__icon md-icon"></span>
+        Dialogue
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/dialogue/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-3" type="checkbox" id="nav-2-7-7-24-3" >
+    <label class="md-nav__link" for="nav-2-7-7-24-3">
+      Generator
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Generator" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-3">
+        <span class="md-nav__icon md-icon"></span>
+        Generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/extract_specification/" class="md-nav__link">
+      Extract Specification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/validate/" class="md-nav__link">
+      Validate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-4" type="checkbox" id="nav-2-7-7-24-4" >
+    <label class="md-nav__link" for="nav-2-7-7-24-4">
+      Default Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Default Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-4">
+        <span class="md-nav__icon md-icon"></span>
+        Default Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-5" type="checkbox" id="nav-2-7-7-24-5" >
+    <label class="md-nav__link" for="nav-2-7-7-24-5">
+      Signing Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Signing Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-5">
+        <span class="md-nav__icon md-icon"></span>
+        Signing Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-6" type="checkbox" id="nav-2-7-7-24-6" >
+    <label class="md-nav__link" for="nav-2-7-7-24-6">
+      State Update Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="State Update Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-6">
+        <span class="md-nav__icon md-icon"></span>
+        State Update Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-25" type="checkbox" id="nav-2-7-7-25" >
+    <label class="md-nav__link" for="nav-2-7-7-25">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-25">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/filter/" class="md-nav__link">
+      Filter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/resources/" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-26" type="checkbox" id="nav-2-7-7-26" >
+    <label class="md-nav__link" for="nav-2-7-7-26">
+      Skills
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Skills" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-26">
+        <span class="md-nav__icon md-icon"></span>
+        Skills
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/behaviours/" class="md-nav__link">
+      Behaviors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/tasks/" class="md-nav__link">
+      Task
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-27" type="checkbox" id="nav-2-7-7-27" >
+    <label class="md-nav__link" for="nav-2-7-7-27">
+      Test Tools
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Test Tools" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-27">
+        <span class="md-nav__icon md-icon"></span>
+        Test Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/test_cases/" class="md-nav__link">
+      Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/test_skill/" class="md-nav__link">
+      Test Skill
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8" >
+    <label class="md-nav__link" for="nav-2-8">
+      Development - Use Case
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Use Case" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Use Case
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-skills/" class="md-nav__link">
+      Generic skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/connect-a-frontend/" class="md-nav__link">
+      Front-end intergration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/http-connection-and-skill/" class="md-nav__link">
+      HTTP Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/orm-integration/" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/erc1155-skills/" class="md-nav__link">
+      Contract deploy and interact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/p2p-connection/" class="md-nav__link">
+      P2P Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/raspberry-set-up/" class="md-nav__link">
+      Build an AEA on a Raspberry Pi
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/glossary/" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/questions-and-answers/" class="md-nav__link">
+      Q&A
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/building/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/versions/" class="md-nav__link">
+      Versions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/networks/" class="md-nav__link">
+      Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
+    <label class="md-nav__link" for="nav-3-5">
+      Commandline Client
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commandline Client" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commandline Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-introduction/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-keys/" class="md-nav__link">
+      Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-tokens/" class="md-nav__link">
+      Tokens
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6" >
+    <label class="md-nav__link" for="nav-3-6">
+      Validators
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Validators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Validators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/overview/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/setup/" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
+      Joining a Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/block-explorer/" class="md-nav__link">
+      Block Explorer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/governance/" class="md-nav__link">
+      Governance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/docker-images/" class="md-nav__link">
+      Docker Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/faucet/" class="md-nav__link">
+      Faucet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/python-examples/" class="md-nav__link">
+      Python Examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Incentivized Testnets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Incentivized Testnets" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Incentivized Testnets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw1/" class="md-nav__link">
+      Agent World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw2/" class="md-nav__link">
+      Agent World 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw3/" class="md-nav__link">
+      Agent World 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-bw1/" class="md-nav__link">
+      Beacon World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw4/" class="md-nav__link">
+      Agent World 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Bounty
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Bounty" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Bounty
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../bounty/aea-docs-bounty/" class="md-nav__link">
+      AEA Docs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Collective Learning
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Collective Learning" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Collective Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      Colearn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/" class="md-nav__link">
+      Collective Learning Protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3" >
+    <label class="md-nav__link" for="nav-6-3">
+      Getting Started
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        <span class="md-nav__icon md-icon"></span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro_tutorial_keras/" class="md-nav__link">
+      Keras
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro_tutorial_pytorch/" class="md-nav__link">
+      PyTorch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro_tutorial_mli/" class="md-nav__link">
+      The MachineLearningInterface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../differential_privacy/" class="md-nav__link">
+      Differential Privacy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" >
+    <label class="md-nav__link" for="nav-6-4">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" class="md-nav__link">
+      Standalone examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-information-and-installation" class="md-nav__link">
+    1.1. Information and installation
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Information and installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-information-about-the-dataset" class="md-nav__link">
+    1.1.1. Information about the dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-requirements" class="md-nav__link">
+    1.1.2. Requirements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-models" class="md-nav__link">
+    1.2. Models
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-cifar10conv-keras-model" class="md-nav__link">
+    1.2.1. CIFAR10Conv Keras model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-cifar10conv2-keras-model" class="md-nav__link">
+    1.2.2. CIFAR10Conv2 Keras model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-cifar10resnet50-keras-model" class="md-nav__link">
+    1.2.3. CIFAR10Resnet50 Keras model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="1-cifar10-dataset">1. CIFAR10 dataset</h1>
+<h2 id="11-information-and-installation">1.1. Information and installation</h2>
+<h3 id="111-information-about-the-dataset">1.1.1. Information about the dataset</h3>
+<ul>
+<li>The CIFAR-10 dataset consists of 60000 32x32x3 colour images in 10 classes, with 6000 images per class. </li>
+<li>The 10 different classes represent airplanes, cars, birds, cats, deer, dogs, frogs, horses, ships, and trucks</li>
+<li>Input for NN are raw 32x32 3 channels GRB images</li>
+<li>
+<p>NN output is distribution of probabilities for each class i.e. 10 values that sums up to 1</p>
+</li>
+<li>
+<p>Code folder: <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/cifar10">here</a></p>
+</li>
+<li>Invoke parameter: -t CIFAR10</li>
+</ul>
+<h3 id="112-requirements">1.1.2. Requirements</h3>
+<ul>
+<li>Cifar dataset is loaded from tensorflow.keras.datasets.cifar10 and no stored data are required</li>
+</ul>
+<h2 id="12-models">1.2. Models</h2>
+<h3 id="121-cifar10conv-keras-model">1.2.1. CIFAR10Conv Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                    Output Shape        Param #   
+=================================================================
+Input (InputLayer)              (32, 32, 3)         0             
+_________________________________________________________________
+Conv1_1 (Conv2D)                (32, 32, 64)        1792          
+bn1_1 (BatchNormalization)      (32, 32, 64)        256           
+Conv1_2 (Conv2D)                (32, 32, 64)        36928         
+bn1_2 (BatchNormalization)      (32, 32, 64)        256           
+pool1 (MaxPooling2D)            (16, 16, 64)        0             
+_________________________________________________________________
+Conv2_1 (Conv2D)                (16, 16, 128        73856         
+bn2_1 (BatchNormalization)      (16, 16, 128        512           
+Conv2_2 (Conv2D)                (16, 16, 128        147584    
+bn2_2 (BatchNormalization)      (16, 16, 128        512           
+pool2 (MaxPooling2D)            (8, 8, 128)         0             
+_________________________________________________________________
+Conv3_1 (Conv2D)                (8, 8, 256)         295168    
+bn3_1 (BatchNormalization)      (8, 8, 256)         1024          
+Conv3_2 (Conv2D)                (8, 8, 256)         590080    
+bn3_2 (BatchNormalization)      (8, 8, 256)         1024          
+Conv3_3 (Conv2D)                (8, 8, 256)         590080    
+bn3_3 (BatchNormalization)      (8, 8, 256)         1024          
+_________________________________________________________________
+flatten (Flatten)               (16384)             0             
+fc1 (Dense)                     (100)               1638500   
+fc2 (Dense)                     (10)                1010          
+=================================================================
+Total params: 3,379,606
+Trainable params: 3,377,302
+Non-trainable params: 2,304
+_________________________________________________________________
+</code></pre></div>
+<h3 id="122-cifar10conv2-keras-model">1.2.2. CIFAR10Conv2 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________
+Layer (type)                Output Shape        Param #   
+=========================================================
+Input (InputLayer)          (32, 32, 3)         0             
+_________________________________________________________
+Conv1_1 (Conv2D)            (32, 32, 32)        896           
+Conv1_2 (Conv2D)            (32, 32, 32)        9248          
+pool1 (MaxPooling2D)        (16, 16, 32)        0             
+_________________________________________________________
+Conv2_1 (Conv2D)            (16, 16, 64)        18496         
+Conv2_2 (Conv2D)            (16, 16, 64)        36928         
+pool2 (MaxPooling2D)        (8, 8, 64)          0             
+_________________________________________________________
+Conv3_1 (Conv2D)            (8, 8, 128)         73856         
+Conv3_2 (Conv2D)            (8, 8, 128)         147584    
+pool3 (MaxPooling2D)        (4, 4, 128)         0             
+_________________________________________________________
+flatten (Flatten)           (2048)              0             
+fc1 (Dense)                 (128)               262272    
+fc2 (Dense)                 (10)                1290          
+=========================================================
+Total params: 550,570
+Trainable params: 550,570
+Non-trainable params: 0
+_________________________________________________________
+</code></pre></div>
+<h3 id="123-cifar10resnet50-keras-model">1.2.3. CIFAR10Resnet50 Keras model</h3>
+<div class="highlight"><pre><span></span><code>________________________________________________________
+Layer (type)                 Output Shape     Param #   
+========================================================
+Input (InputLayer)           (32, 32, 3)]     0             
+________________________________________________________
+resnet50 (Model)             (1, 1, 2048)     23587712  
+________________________________________________________
+Global_average_pooling2d     (2048)           0             
+flatten (Flatten)            (2048)           0             
+fc1 (Dense)                  (10)             20490         
+========================================================
+Total params: 23,608,202
+Trainable params: 23,555,082
+Non-trainable params: 53,120
+________________________________________________________
+</code></pre></div>
+<h1 id="2-covid-x-ray-dataset">2. Covid X-RAY dataset</h1>
+<h2 id="21-information-and-installation">2.1. Information and installation</h2>
+<h3 id="211-information-about-the-dataset">2.1.1. Information about the dataset</h3>
+<ul>
+<li>The Covid X-Ray dataset consists of grayscale images, there are 478 covid images and 203 normal images. </li>
+<li>To increase the number of images normal/pneumonia dataset is added</li>
+<li>Final dataset, which is a combination of two previously mentioned datasets, contains 1434 images, 478 images for each class.</li>
+<li>Images are cropped and resized to 512x512 pixel and spatial domain (Texture, GLDM, GLCM) and frequency domain (FFT and Wavelet) features are used to create 256 dimensional vector representation of each image. PCA is applied after to reduce dimensionality to 64 values which represents the first 64 highest eigenvalues of the covariance matrix. </li>
+<li>Input for NN are 64 values for each image</li>
+<li>NN output is distribution of probabilities for each class i.e. 3 values</li>
+<li>Code folder: <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/covid_xray">here</a></li>
+<li>Invoke parameter: -t COVID</li>
+</ul>
+<h3 id="212-requirements">2.1.2 Requirements</h3>
+<ul>
+<li>Download Covid dataset: <a href="https://github.com/ieee8023/COVID-chestxray-dataset">here</a></li>
+<li>Download pneumonia dataset: <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">here</a></li>
+</ul>
+<h2 id="22-models">2.2. Models</h2>
+<h3 id="221-covid-xray-keras-model">2.2.1. Covid XRAY Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________
+Layer (type)              Output Shape        Param #   
+=========================================================
+input_1 (InputLayer)      (64)                0             
+_________________________________________________________
+dense (Dense)             (128)               8320          
+dropout (Dropout)         (128)               0             
+_________________________________________________________
+dense_1 (Dense)           (16)                2064          
+dropout_1 (Dropout)       (16)                0             
+_________________________________________________________
+dense_2 (Dense)           (3)                 51            
+=========================================================
+Total params: 10,435
+Trainable params: 10,435
+Non-trainable params: 0
+_________________________________________________________
+</code></pre></div>
+<h1 id="3-fraud-dataset">3. FRAUD dataset</h1>
+<h2 id="31-information-and-installation">3.1. Information and installation</h2>
+<h3 id="311-information-about-the-dataset">3.1.1. Information about the dataset</h3>
+<ul>
+<li>EEE-CIS Fraud Detection, contains multiple files with credit card transactions</li>
+<li>Raw dataset files are automatically merged and pre-processed and input files for neural network are created</li>
+<li>X.csv with data - has 431 values for each transaction</li>
+<li>
+<p>Y.csv with labels - v has 1 value for each transaction</p>
+<ul>
+<li>0 = not a fraud</li>
+<li>1 = fraud </li>
+</ul>
+</li>
+<li>
+<p>Code folder: <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/fraud">here</a></p>
+</li>
+<li>Invoke parameter: -t FRAUD</li>
+</ul>
+<h3 id="312-requirements">3.1.2. Requirements</h3>
+<ul>
+<li>Download dataset: <a href="https://www.kaggle.com/c/ieee-fraud-detection">here</a></li>
+</ul>
+<h2 id="32-models">3.2. Models</h2>
+<h3 id="321-frauddense1-keras-model">3.2.1. FraudDense1 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________
+Layer (type)             Output Shape          Param #   
+=========================================================
+Input (InputLayer)       (431)                 0             
+_________________________________________________________
+dense (Dense)            (512)                 221184    
+Batch_normalization      (512)                 2048          
+_________________________________________________________
+dense_1 (Dense)          (512)                 262656    
+Batch_normalization_1    (512)                 2048          
+_________________________________________________________
+dense_2 (Dense)          (512)                 262656    
+Batch_normalization_2    (512)                 2048          
+_________________________________________________________
+fc1 (Dense)              (1)                   513           
+=========================================================
+Total params: 753,153
+Trainable params: 750,081
+Non-trainable params: 3,072
+_________________________________________________________
+</code></pre></div>
+<h3 id="322-fraudsvm-scikit-learn-model">3.2.2. FraudSVM Scikit-learn model</h3>
+<ul>
+<li>Model is defined as SGDClassifier(max_iter=1, verbose=0, loss="modified_huber")</li>
+<li>Which is support vector machine linear classifier</li>
+</ul>
+<h1 id="4-mnist">4. MNIST</h1>
+<h2 id="41-information-and-installation">4.1. Information and installation</h2>
+<h3 id="411-information-about-the-dataset">4.1.1. Information about the dataset</h3>
+<ul>
+<li>This is a dataset of 70,000 28x28x1 grayscale images of the 10 digits</li>
+<li>Input for NN are raw 28x28 1 channel images</li>
+<li>
+<p>NN output is distribution of probabilities for each class i.e. 10 values that sums up to 1</p>
+</li>
+<li>
+<p>Code folder: <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/mnist">here</a></p>
+</li>
+<li>Invoke parameter: -t MNIST</li>
+</ul>
+<h3 id="412-requirements">4.1.2 Requirements</h3>
+<ul>
+<li>MNIST dataset is loaded from tensorflow.keras.datasets.cifar10 and no stored data are required</li>
+</ul>
+<h2 id="42-models">4.2. Models</h2>
+<h3 id="421-mnistconv-keras-model">4.2.1. MNISTConv Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________
+Layer (type)                   Output Shape       Param #   
+=========================================================
+Input (InputLayer)             (28, 28, 1)        0             
+_________________________________________________________
+Conv1_1 (Conv2D)               (28, 28, 64)       640           
+bn1 (BatchNormalization)       (28, 28, 64)       256           
+pool1 (MaxPooling2D)           (14, 14, 64)       0             
+_________________________________________________________
+Conv2_1 (Conv2D)               (14, 14, 128)      73856         
+bn4 (BatchNormalization)       (14, 14, 128)      512           
+pool2 (MaxPooling2D)           (7, 7, 128)        0             
+_________________________________________________________
+flatten (Flatten)              (6272)             0             
+fc1 (Dense)                    (10)               62730         
+=========================================================
+Total params: 137,994
+Trainable params: 137,610
+Non-trainable params: 384
+_________________________________________________________
+</code></pre></div>
+<h3 id="422-mnist-pytorch-model">4.2.2. MNIST Pytorch model</h3>
+<div class="highlight"><pre><span></span><code>---------------------------------------------------------
+Layer (type)           Output Shape             Param #
+=========================================================
+Input                  [28,28,1]                0
+Conv2d-1               [20, 24, 24]             520
+Conv2d-2               [50, 8, 8]               25,050
+Linear-3               [500]                    400,500
+Linear-4               [10]                     5,010
+=========================================================
+Total params: 431,080
+Trainable params: 431,080
+Non-trainable params: 0
+---------------------------------------------------------
+</code></pre></div>
+<h3 id="423-mnistsupermini-keras-model">4.2.3. MNISTSupermini Keras model</h3>
+<div class="highlight"><pre><span></span><code>________________________________________________________________________________________
+Layer (type)                Output Shape    Param #      Connected to                         
+========================================================================================
+input_1 (InputLayer)        (28, 28, 1)     0                                                
+________________________________________________________________________________________
+conv2d (Conv2D)             (26, 26, 8)     80           input_1[0][0]                        
+Batch_normalization         (26, 26, 8)     32           conv2d[0][0]                         
+Max_pooling2d               (13, 13, 8)     0            batch_normalization[0][0]            
+dropout (Dropout)           (13, 13, 8)     0            max_pooling2d[0][0]                  
+________________________________________________________________________________________
+Separable_conv2d            (11, 11, 26)    306          dropout[0][0]                        
+batch_normalization_1       (11, 11, 26)    104          separable_conv2d[0][0]               
+dropout_1 (Dropout)         (11, 11, 26)    0            batch_normalization_1[0][0]          
+________________________________________________________________________________________
+Separable_conv2d_1          (11, 11, 26)    936          dropout_1[0][0]                      
+                                                         dropout_2[0][0]                      
+                                                         dropout_3[0][0]                      
+________________________________________________________________________________________
+Batch_normalization_2        (11, 11, 26)   104          separable_conv2d_1[0][0]             
+dropout_2 (Dropout)          (11, 11, 26)   0            batch_normalization_2[0][0]          
+________________________________________________________________________________________
+Batch_normalization_3        (11, 11, 26)   104          separable_conv2d_1[1][0]             
+dropout_3 (Dropout)          (11, 11, 26)   0            batch_normalization_3[0][0]          
+________________________________________________________________________________________
+Batch_normalization_4        (11, 11, 26)   104          separable_conv2d_1[2][0]             
+dropout_4 (Dropout)          (11, 11, 26)   0            batch_normalization_4[0][0]          
+________________________________________________________________________________________
+Global_average_pooling2d     (26)           0            dropout_4[0][0]                      
+dense (Dense)                (16)           432          global_average_pooling2d[0][0]   
+Batch_normalization_5        (16)           64           dense[0][0]                          
+dropout_5 (Dropout)          (16)           0            batch_normalization_5[0][0]          
+dense_1 (Dense)              (10)           170          dropout_5[0][0]                      
+========================================================================================
+Total params: 2,436
+Trainable params: 2,180
+Non-trainable params: 256
+________________________________________________________________________________________
+</code></pre></div>
+<h1 id="5-pneumonia-xray">5. Pneumonia XRAY</h1>
+<h2 id="51-information-and-installation">5.1. Information and installation</h2>
+<h3 id="511-information-about-the-dataset">5.1.1. Information about the dataset</h3>
+<ul>
+<li>The Chest X-Ray Images (Pneumonia) dataset consists of 5856 grayscale images of various sizes in 2 classes (normal/pneumonia). </li>
+<li>Labels are determined by folder name - NORMAL or PNEUMONIA</li>
+<li>Input for NN are raw resized 128x128 1 channel images</li>
+<li>
+<p>NN output is distribution of probabilities for each class i.e. 2 values</p>
+</li>
+<li>
+<p>Code folder: <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/xray">here</a></p>
+</li>
+<li>Invoke parameter: -t XRAY</li>
+</ul>
+<h3 id="512-requirements">5.1.2 Requirements</h3>
+<ul>
+<li>Download dataset: <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">here</a></li>
+</ul>
+<h2 id="52-models">5.2. Models</h2>
+<h3 id="521-xraysupermini-keras-model">5.2.1. XraySupermini Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                     Output Shape            Param #   
+=================================================================
+Input (InputLayer)               [(128, 128, 1)]         0             
+_________________________________________________________________
+Conv1_1 (Conv2D)                 (128, 128, 32)          320           
+_________________________________________________________________
+bn1 (BatchNormalization)         (128, 128, 32)          128           
+_________________________________________________________________
+pool1 (MaxPooling2D)             (32, 32, 32)            0             
+_________________________________________________________________
+Conv2_1 (Conv2D)                 (32, 32, 64)            18496         
+_________________________________________________________________
+bn2 (BatchNormalization)         (32, 32, 64)            256           
+_________________________________________________________________
+Global_max_pooling2d             (64)                    0             
+_________________________________________________________________
+fc1 (Dense)                      (1)                     65            
+=================================================================
+Total params: 19,265
+Trainable params: 19,073
+Non-trainable params: 192
+_________________________________________________________________
+</code></pre></div>
+<h3 id="522-xrayresnet50-keras-model">5.2.2. XrayResnet50 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                     Output Shape            Param #   
+=================================================================
+Input (InputLayer)               [(128, 128, 1)]         0             
+_________________________________________________________________
+resnet50 (Model)                 (4, 4, 2048)            23581440  
+_________________________________________________________________
+global_average_pooling2d         (2048)                  0             
+_________________________________________________________________
+flatten (Flatten)                (2048)                  0             
+_________________________________________________________________
+fc1 (Dense)                      (1)                     2049          
+=================================================================
+Total params: 23,583,489
+Trainable params: 23,530,369
+Non-trainable params: 53,120
+_________________________________________________________________
+</code></pre></div>
+<h3 id="523-xraypretrainedresnet50-keras-model">5.2.3. XrayPretrainedResnet50 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_____________________________________________________________________________________
+Layer (type)                Output Shape    Param #   Connected to                
+=====================================================================================
+Input (InputLayer)          (128, 128, 1)   0                                       
+_____________________________________________________________________________________
+concatenate (Concatenate)   (128, 128, 3)   0         Input[0][0]                                                                                     Input[0][0]                                                                                    Input[0][0]                 
+_____________________________________________________________________________________
+tf_op_layer_mul             (128, 128, 3)  0          concatenate[0][0]           
+tf_op_layer_strided_slice   (128, 128, 3)  0          tf_op_layer_mul[0][0]       
+tf_op_layer_BiasAdd         (128, 128, 3)  0          tf_op_layer_strided_slice[0][0]  
+_____________________________________________________________________________________
+resnet50 (Model)            (4, 4, 2048)   23587712   tf_op_layer_BiasAdd[0][0]            
+_____________________________________________________________________________________
+global_average_pooling2d    (2048)         0          resnet50[1][0]              
+flatten (Flatten)           (2048)         0          global_average_pooling2d[0][0]   
+_____________________________________________________________________________________
+fc1 (Dense)                 (1)            2049       flatten[0][0]              
+=====================================================================================
+Total params: 23,589,761
+Trainable params: 23,536,641
+Non-trainable params: 53,120
+_____________________________________________________________________________________
+</code></pre></div>
+<h3 id="524-xraydropout-keras-model">5.2.4. XrayDropout Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                     Output Shape            Param #   
+=================================================================
+Input (InputLayer)               [(128, 128, 1)]         0             
+_________________________________________________________________
+Conv1_1 (Conv2D)                 (128, 128, 128)         1280          
+bn1 (BatchNormalization)         (128, 128, 128)         512           
+pool1 (MaxPooling2D)             (32, 32, 128)           0             
+_________________________________________________________________
+Conv2_1 (Conv2D)                 (32, 32, 256)           295168    
+bn2 (BatchNormalization)         (32, 32, 256)           1024          
+pool2 (MaxPooling2D)             (8, 8, 256)             0             
+_________________________________________________________________
+flatten (Flatten)                (16384)                 0             
+fc1 (Dense)                      (128)                   2097280   
+bn3 (BatchNormalization)         (128)                   512           
+dropout (Dropout)                (128)                   0             
+_________________________________________________________________
+fc2 (Dense)                      (64)                    8256          
+bn4 (BatchNormalization)         (64)                    256           
+dropout_1 (Dropout)              (64)                    0             
+_________________________________________________________________
+fc3 (Dense)                      (1)                     65            
+=================================================================
+Total params: 2,404,353
+Trainable params: 2,403,201
+Non-trainable params: 1,152
+_________________________________________________________________
+</code></pre></div>
+<h3 id="525-xraydropout2-keras-model">5.2.5. XrayDropout2 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                     Output Shape            Param #   
+=================================================================
+Input (InputLayer)               (128, 128, 1)           0             
+_________________________________________________________________
+Conv1_1 (Conv2D)                 (128, 128, 64)          640           
+bn1 (BatchNormalization)         (128, 128, 64)          256           
+pool1 (MaxPooling2D)             (64, 64, 64)            0             
+_________________________________________________________________
+Conv2_1 (Conv2D)                 (64, 64, 128)           73856         
+bn2 (BatchNormalization)         (64, 64, 128)           512           
+pool2 (MaxPooling2D)             (32, 32, 128)           0             
+_________________________________________________________________
+Conv3_1 (Conv2D)                 (32, 32, 256)           295168    
+bn3 (BatchNormalization)         (32, 32, 256)           1024          
+pool3 (MaxPooling2D)             (16, 16, 256)           0             
+_________________________________________________________________
+Conv4_1 (Conv2D)                 (16, 16, 512)           1180160   
+bn4 (BatchNormalization)         (16, 16, 512)           2048          
+pool4 (MaxPooling2D)             (8, 8, 512)             0             
+_________________________________________________________________
+Conv5_1 (Conv2D)                 (8, 8, 512)             2359808   
+bn5 (BatchNormalization)         (8, 8, 512)             2048          
+pool5 (MaxPooling2D)             (4, 4, 512)             0             
+_________________________________________________________________
+flatten (Flatten)                (8192)                  0             
+fc1 (Dense)                      (256)                   2097408   
+bn6 (BatchNormalization)         (256)                   1024          
+dropout (Dropout)                (256)                   0             
+_________________________________________________________________
+fc2 (Dense)                      (128)                   32896         
+bn7 (BatchNormalization)         (128)                   512           
+dropout_1 (Dropout)              (128)                   0             
+_________________________________________________________________
+fc3 (Dense)                      (64)                    8256          
+bn8 (BatchNormalization)         (64)                    256           
+dropout_2 (Dropout)              (64)                    0             
+_________________________________________________________________
+fc4 (Dense)                      (1)                     65            
+=================================================================
+Total params: 6,055,937
+Trainable params: 6,052,097
+Non-trainable params: 3,840
+_________________________________________________________________
+</code></pre></div>
+<h3 id="526-xrayvgg16-keras-model">5.2.6. XrayVGG16 Keras model</h3>
+<div class="highlight"><pre><span></span><code>_____________________________________________________________________________________
+Layer (type)                 Output Shape     Param #    Connected to                
+=====================================================================================
+Input (InputLayer)           (128, 128, 1)    0                  
+_____________________________________________________________________________________
+concatenate (Concatenate)    (128, 128, 3)    0          Input[0][0]                 
+                                                         Input[0][0]                 
+                                                         Input[0][0]                 
+_____________________________________________________________________________________
+tf_op_layer_mul               (128, 128, 3)    0         concatenate[0][0]           
+Tf_op_layer_strided_slice     (28, 128, 3)     0         tf_op_layer_mul[0][0]       
+tf_op_layer_BiasAdd           (128, 128, 3)    0         tf_op_layer_strided_slice[0][0]  
+_____________________________________________________________________________________
+vgg16 (Model)                 (4, 4, 512)      14714688  tf_op_layer_BiasAdd[0][0]            
+_____________________________________________________________________________________
+flatten (Flatten)             (8192)           0         vgg16[1][0]                  
+fc1 (Dense)                   (1)              8193      flatten[0][0]                
+=====================================================================================
+Total params: 14,722,881
+Trainable params: 14,722,881
+Non-trainable params: 0
+_____________________________________________________________________________________
+</code></pre></div>
+<h3 id="527-xraymini-keras-model">5.2.7. XrayMini Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                     Output Shape            Param #   
+=================================================================
+Input (InputLayer)               [(128, 128, 1)]         0             
+_________________________________________________________________
+Conv1_1 (Conv2D)                 (128, 128, 128)         1280          
+bn1 (BatchNormalization)         (128, 128, 128)         512           
+pool1 (MaxPooling2D)             (32, 32, 128)           0             
+_________________________________________________________________
+Conv2_1 (Conv2D)                 (32, 32, 256)           295168    
+bn2 (BatchNormalization)         (32, 32, 256)           1024          
+pool2 (MaxPooling2D)             (8, 8, 256)             0             
+_________________________________________________________________
+flatten (Flatten)                (16384)                 0             
+fc1 (Dense)                      (1)                     16385         
+=================================================================
+Total params: 314,369
+Trainable params: 313,601
+Non-trainable params: 768
+_________________________________________________________________
+</code></pre></div>
+<h3 id="527-xrayonemb-keras-model">5.2.7. XrayOneMB Keras model</h3>
+<div class="highlight"><pre><span></span><code>_________________________________________________________________
+Layer (type)                   Output Shape            Param #   
+=================================================================
+Input (InputLayer)             (128, 128, 1)           0             
+_________________________________________________________________
+Conv1_1 (Conv2D)               (128, 128, 64)          640           
+bn1_1 (BatchNormalization)     (128, 128, 64)          256           
+Conv1_2 (Conv2D)               (128, 128, 64)          36928         
+bn1_2 (BatchNormalization)     (128, 128, 64)          256           
+pool1 (MaxPooling2D)           (64, 64, 64)            0             
+_________________________________________________________________
+Conv2_1 (Conv2D)               (64, 64, 64)            36928         
+bn2_1 (BatchNormalization)     (64, 64, 64)            256           
+Conv2_2 (Conv2D)               (64, 64, 64)            36928         
+bn2_2 (BatchNormalization)     (64, 64, 64)            256           
+pool2 (MaxPooling2D)           (32, 32, 64)            0             
+_________________________________________________________________
+Conv3_1 (Conv2D)               (32, 32, 128)           73856         
+bn3_1 (BatchNormalization)     (32, 32, 128)           512           
+Conv3_2 (SeparableConv2D)      (32, 32, 128)           17664         
+bn3_2 (BatchNormalization)     (32, 32, 128)           512           
+pool3 (MaxPooling2D)           (16, 16, 128)           0             
+_________________________________________________________________
+Conv4_1 (SeparableConv2D)      (16, 16, 128)           17664         
+bn4_1 (BatchNormalization)     (16, 16, 128)           512           
+_________________________________________________________________
+Conv4_2 (SeparableConv2D)      (16, 16, 128)           17664         
+bn4_2 (BatchNormalization)     (16, 16, 128)           512           
+_________________________________________________________________
+pool4 (AveragePooling2D)       (4, 4, 128)             0             
+flatten (Flatten)              (2048)                  0             
+_________________________________________________________________
+fc1 (Dense)                    (1)                     2049          
+=================================================================
+Total params: 243,393
+Trainable params: 241,857
+Non-trainable params: 1,536
+_________________________________________________________________
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        and the
+        <a href="https://github.com/fetchai/docs/" target=_blank>
+          Fetch.AI Documentation Suite</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
