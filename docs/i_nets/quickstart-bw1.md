@@ -21,7 +21,7 @@ A key responsibility of validators, developers and users is that they take part 
   <p class="admonition-title">Note</p>
   <p> To qualify for rewards, users must first <a href="https://fetch.ai/staking/" target="_blank">stake</a> FET ERC20 tokens on Ethereum.
 
-  While not strictly necessary we also encourage people who have not already done so to try out at least the [AW-1](./quickstart-aw1/) challenge.</p>
+  While not strictly necessary we also encourage people who have not already done so to try out at least the <a href="../quickstart-aw1/" target="_blank">AW-1</a> challenge.</p>
 </div>
 
 ## How To Earn Rewards
