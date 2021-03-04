@@ -46,7 +46,7 @@ Non-technical users should follow these steps:
 
 1. Install the <a href="https://cosmos.network/" target="_blank">Cosmos</a> app on your Ledger nano by following these [instructions](/ledger_v2/cli-keys/#hardware-wallets)</a>.
 
-2. Connect your Ledger nano to the <a href="https://explore-agentworld.prod.fetch-ai.com" target="_blank">block explorer</a> using the instructions [here](/ledger_v2/block-explorer/#logging-in-with-the-ledger-nano).
+2. Connect your Ledger nano to the <a href="https://explore-beaconworld.fetch.ai" target="_blank">block explorer</a> using the instructions [here](/ledger_v2/block-explorer/#logging-in-with-the-ledger-nano).
 
 3. Request tokens to your Ledger nano address using the [token faucet](/ledger_v2/block-explorer/#getting-testnet-tokens-from-the-faucet).
 
@@ -72,14 +72,16 @@ Anyone interested in developing agents or operating a validator node should foll
 
     - You can check the balance of your account by typing `fetchcli query account <YOUR_ACCOUNT_ADDRESS>` where `<YOUR_ACCOUNT_ADDRESS>` is in bech32 format and contains a `fetch1...` prefix. Check out the [documentation](/ledger_v2/cli-keys/) for extra information
 
-3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-agentworld.prod.fetch-ai.com/validators) but the table at the bottom of this page shows these for convenience.
+3. Delegate some of your stake to the one of the existing validators that are running following these [instructions](/ledger_v2/governance/#stake-delegation). The full list of validators can be found [on the block explorer](https://explore-beaconworld.fetch.ai/validators) but the table at the bottom of this page shows these for convenience.
 
 4. Vote on at least one governance proposal following these [instructions](/ledger_v2/governance/#voting-on-a-proposal).
 
 
-| Validator | Operator Address |
-| --------- | --------------------------------------------------- |
-| Bond      | fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 |
-| Bourne    | fetchvaloper12xd8rgp2u0cwp8lnj2ndulpzad3y9m9f2r8lsx |
-| Hunt      | fetchvaloper1vf5wsxjkmjk4uv3nm2zjplw0y2f96rsjw8k7gv |
-| Powers    | fetchvaloper108hhutnylgz09acca2ljde8dp6huhsu67hn8v7 |
+| Validator  | Operator Address |
+| ---------- | --------------------------------------------------- |
+| validator0 | fetchvaloper1hdlc9qyvpf68m0upvn6hp48ecz4yfhxe5spfml |
+| validator1 | fetchvaloper1acgus8lakmq7j3fj2qzwhfacj7jadqm2s9tfwe |
+| validator2 | fetchvaloper1gdsk2f8rx277lfucda6guhnc8kvhuyfr8rf0g6 |
+| validator3 | fetchvaloper1revh37knput0zx3s4fgcr0mj3jmhz8hthzk80t |
+| validator4 | fetchvaloper13ldxu90ekzxqgt25lat6rrhhdj8s53vvr629a6 |
+| validator5 | fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w |
