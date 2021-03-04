@@ -2,7 +2,7 @@
 
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>AW-4 is live now! It closes on 28th February 2021 11:59pm, anywhere on Earth</p>
+  <p>AW-4 is live now! It closes on 5th March 2021 11:59pm, anywhere on Earth</p>
 </div>
 
 Agent World 4 (AW-4) is the fourth part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain additional FET by re-using and adapting agents from AW-2/3 in order to continuously have a large population of agents live and engage in exchange.
