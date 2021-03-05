@@ -21,7 +21,7 @@ Ensure you have the latest submodules by running:
 
 To compile and build the documentation site locally, download and install pipenv. Instructions are <a href="https://github.com/pypa/pipenv#installation" target=_blank>here</a>.
 
-Then run `pipenv --python 3.7 && pipenv shell`, followed by `pipenv install --skip-lock`.
+Then run `pipenv install && pipenv shell`.
 
 Then run `mkdocs serve` and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
