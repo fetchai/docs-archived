@@ -3669,18 +3669,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ledger_v2/delegator-guide-cli/" class="md-nav__link">
-      Delegator Guide
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -3755,18 +3743,6 @@
   <li class="md-nav__item">
     <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
       Joining a Testnet
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ledger_v2/single-node-network/" class="md-nav__link">
-      Single Node Testnet
     </a>
   </li>
 
@@ -4170,7 +4146,7 @@
                 
                 <p>AEAs can create and update prometheus metrics for remote monitoring by sending messages to the prometheus connection <code>fetchai/prometheus:0.4.0</code>.</p>
 <p>To see this working in an agent, fetch and run the <code>coin_price_feed</code> agent and check <code>localhost:9090/metrics</code> to see the latest values of the metrics <code>num_retrievals</code> and <code>num_requests</code>:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_feed:0.7.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_feed:0.8.0
 <span class="nb">cd</span> coin_price_feed
 aea install
 aea build
@@ -4215,7 +4191,7 @@ You can then instruct a prometheus server running on the same computing cluster 
 </code></pre></div>
 </details>
 
-<p>Then configure your metrics in the <code>skill.yaml</code> file. For example (from the <code>coin_price</code> skill):
+<p>Then configure your metrics in the <code>skill.yaml</code> file. For example (from the <code>advanced_data_request</code> skill):
 <div class="highlight"><pre><span></span><code><span class="nt">models</span><span class="p">:</span>
   <span class="nt">prometheus_dialogues</span><span class="p">:</span>
     <span class="nt">args</span><span class="p">:</span>
@@ -4312,9 +4288,9 @@ where <code>PROM_CONNECTION_ID</code> should be imported to your skill as follow
                 <span class="n">metric</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">metric</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">metric</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">(</span><span class="n">metric</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]),</span>
 </code></pre></div></p>
 <p>Then call the <code>update_prometheus_metric</code> function from the appropriate places.
-For example, the following code in <code>handlers.py</code> for the <code>coin_price</code> skill updates the number of http requests served:
+For example, the following code in <code>handlers.py</code> for the <code>advanced_data_request</code> skill updates the number of http requests served:
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">prometheus_dialogues</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">coin_price_behaviour</span><span class="o">.</span><span class="n">update_prometheus_metric</span><span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">advanced_data_request_behaviour</span><span class="o">.</span><span class="n">update_prometheus_metric</span><span class="p">(</span>
         <span class="s2">&quot;num_requests&quot;</span><span class="p">,</span> <span class="s2">&quot;inc&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="p">{}</span>
     <span class="p">)</span>
 </code></pre></div></p>

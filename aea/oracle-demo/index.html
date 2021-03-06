@@ -3781,18 +3781,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ledger_v2/delegator-guide-cli/" class="md-nav__link">
-      Delegator Guide
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -3867,18 +3855,6 @@
   <li class="md-nav__item">
     <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
       Joining a Testnet
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ledger_v2/single-node-network/" class="md-nav__link">
-      Single Node Testnet
     </a>
   </li>
 
@@ -4400,7 +4376,7 @@
 <h2 id="demo">Demo</h2>
 <h3 id="create-the-oracle-aea">Create the oracle AEA</h3>
 <p>Fetch the AEA that will deploy and update the oracle contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle:0.7.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle:0.8.0
 <span class="nb">cd</span> coin_price_oracle
 aea install
 aea build
@@ -4412,11 +4388,11 @@ Create the AEA that will deploy the contract.
 
 <div class="highlight"><pre><span></span><code>aea create coin_price_oracle
 <span class="nb">cd</span> coin_price_oracle
-aea add connection fetchai/http_client:0.18.0
+aea add connection fetchai/http_client:0.19.0
 aea add connection fetchai/ledger:0.14.0
 aea add connection fetchai/p2p_libp2p:0.17.0
-aea add skill fetchai/coin_price:0.6.0
-aea add skill fetchai/simple_oracle:0.6.0
+aea add skill fetchai/advanced_data_request:0.1.0
+aea add skill fetchai/simple_oracle:0.7.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;0.2.0,&gt;=0.1.0&quot;},</span>
@@ -4424,13 +4400,22 @@ aea config <span class="nb">set</span> --type dict agent.dependencies <span clas
 <span class="s1">}&#39;</span>
 aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.17.0
 aea install
+aea build
+</code></pre></div>
+
+Set the URL for the data request skill:
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type str vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.url <span class="s2">&quot;https://api.coingecko.com/api/v3/simple/price?ids=fetch-ai&amp;vs_currencies=usd&quot;</span>
+</code></pre></div>
+
+Specify the name and JSON path of the data to fetch from the API:
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type list vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.outputs <span class="s1">&#39;[{&quot;name&quot;: &quot;price&quot;, &quot;json_path&quot;: &quot;fetch-ai.usd&quot;}]&#39;</span>
 </code></pre></div>
 
 Then update the agent configuration with the default routing and cert requests:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">&quot;fetchai/contract_api:0.12.0&quot;: &quot;fetchai/ledger:0.14.0&quot;,</span>
-<span class="s1">&quot;fetchai/http:0.13.0&quot;: &quot;fetchai/http_client:0.18.0&quot;,</span>
+<span class="s1">&quot;fetchai/http:0.13.0&quot;: &quot;fetchai/http_client:0.19.0&quot;,</span>
 <span class="s1">&quot;fetchai/ledger_api:0.11.0&quot;: &quot;fetchai/ledger:0.14.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea config <span class="nb">set</span> --type list vendor.fetchai.connections.p2p_libp2p.cert_requests <span class="se">\</span>
@@ -4457,7 +4442,7 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div></p>
 <h3 id="create-the-oracle-client-aea">Create the oracle client AEA</h3>
 <p>From a new terminal (in the same top-level directory), fetch the AEA that will deploy the oracle client contract and call the function that requests the coin price from the oracle contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle_client:0.4.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle_client:0.5.0
 <span class="nb">cd</span> coin_price_oracle_client
 aea install
 </code></pre></div>
@@ -4468,7 +4453,7 @@ Create the AEA that will deploy the contract.
 
 <div class="highlight"><pre><span></span><code>aea create coin_price_oracle_client
 <span class="nb">cd</span> coin_price_oracle_client
-aea add connection fetchai/http_client:0.18.0
+aea add connection fetchai/http_client:0.19.0
 aea add connection fetchai/ledger:0.14.0
 aea add skill fetchai/simple_oracle_client:0.5.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
@@ -4478,13 +4463,14 @@ aea config <span class="nb">set</span> --type dict agent.dependencies <span clas
 <span class="s1">}&#39;</span>
 aea config <span class="nb">set</span> agent.default_connection fetchai/ledger:0.14.0
 aea install
+aea build
 </code></pre></div>
 
 Then update the agent configuration with the default routing:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">&quot;fetchai/contract_api:0.12.0&quot;: &quot;fetchai/ledger:0.14.0&quot;,</span>
-<span class="s1">&quot;fetchai/http:0.13.0&quot;: &quot;fetchai/http_client:0.18.0&quot;,</span>
+<span class="s1">&quot;fetchai/http:0.13.0&quot;: &quot;fetchai/http_client:0.19.0&quot;,</span>
 <span class="s1">&quot;fetchai/ledger_api:0.11.0&quot;: &quot;fetchai/ledger:0.14.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div>
