@@ -3770,8 +3770,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#editting-a-validator" class="md-nav__link">
-    Editting a validator
+  <a href="#editing-a-validator" class="md-nav__link">
+    Editing a validator
   </a>
   
 </li>
@@ -4232,8 +4232,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#editting-a-validator" class="md-nav__link">
-    Editting a validator
+  <a href="#editing-a-validator" class="md-nav__link">
+    Editing a validator
   </a>
   
 </li>
@@ -4264,7 +4264,7 @@
 <p>To create a validator on the network you will need to send a transaction to the network bonding / staking your FET tokens. This process registers you as a validator and if you are one of the chosen validators you will start to produce blocks.</p>
 <div class="highlight"><pre><span></span><code>fetchcli tx staking create-validator <span class="se">\</span>
   --amount<span class="o">=</span>&lt;the amount to bond&gt; <span class="se">\</span>
-  --pubkey<span class="o">=</span><span class="k">$(</span>fetchcli tendermint show-validator<span class="k">)</span> <span class="se">\</span>
+  --pubkey<span class="o">=</span><span class="k">$(</span>fetchd tendermint show-validator<span class="k">)</span> <span class="se">\</span>
   --moniker<span class="o">=</span><span class="s2">&quot;choose a moniker&quot;</span> <span class="se">\</span>
   --chain-id<span class="o">=</span>&lt;chain_id&gt; <span class="se">\</span>
   --commission-rate<span class="o">=</span><span class="s2">&quot;0.10&quot;</span> <span class="se">\</span>
@@ -4274,23 +4274,23 @@
   --from<span class="o">=</span>&lt;key_name&gt;
 </code></pre></div>
 <p><strong> Beacon World Example </strong></p>
-<p>In the case of Beaconworld the minimum self delegation amount (the amount of fet that the validator themselves must stake) is 1000TESTFET (i.e. 1000000000000000000000atestfet).</p>
-<p>Before trying to create a validator you should verify that you have this required minimum number of tokens available beforehand. The easiest way to do this is via the <a href="../../cli-tokens/">CLI</a></p>
+<p>In the case of Beaconworld the minimum self delegation amount (the amount of FET that the validator themselves must stake) is 1000TESTFET (i.e. 1000000000000000000000atestfet).</p>
+<p>Before trying to create a validator you should verify that you have this required minimum number of tokens available beforehand. The easiest way to do this is via the <a href="../../cli-tokens/">CLI</a>.</p>
 <p>Here is an sample of a typical command line command that will register the node as running the validator.</p>
 <div class="highlight"><pre><span></span><code>fetchcli tx staking create-validator <span class="se">\</span>
   --amount<span class="o">=</span>1000000000000000000000atestfet <span class="se">\</span>
   --pubkey<span class="o">=</span>fetchvalconspub1zcjduepqa8ldmfnt6avct9x5h7269jjfmv2l22pnejezz37vh7syajfyku6stlj0s9 <span class="se">\</span>
   --moniker<span class="o">=</span><span class="s2">&quot;my-test-validator&quot;</span> <span class="se">\</span>
-  --chain-id<span class="o">=</span>beaconworld-1 <span class="se">\</span>
+  --chain-id<span class="o">=</span>beaconworld-2 <span class="se">\</span>
   --commission-rate<span class="o">=</span><span class="s2">&quot;0.10&quot;</span> <span class="se">\</span>
   --commission-max-rate<span class="o">=</span><span class="s2">&quot;0.20&quot;</span> <span class="se">\</span>
   --commission-max-change-rate<span class="o">=</span><span class="s2">&quot;0.01&quot;</span> <span class="se">\</span>
   --min-self-delegation<span class="o">=</span><span class="s2">&quot;1000000000000000000000&quot;</span> <span class="se">\</span>
   --from<span class="o">=</span>beaonworld-test-key
 </code></pre></div>
-<h2 id="editting-a-validator">Editting a validator</h2>
-<p>Over time it is possible that validators will want to adjust various settings about there nodes. This can simple things like the associated website for a validator or more consequential actions like altering the commision rate.</p>
-<p>In either case, should a validator choose to make this update they would send a "edit-validator" transaction to the network. These can be created in a similar way to the "create-validator" transactions as shown below:</p>
+<h2 id="editing-a-validator">Editing a validator</h2>
+<p>Over time it is possible that validators will want to adjust various settings about their nodes. This can be simple things like the associated website for a validator or more consequential actions like altering the commission rate.</p>
+<p>In either case, should a validator choose to make this update they would send an "edit-validator" transaction to the network. These can be created in a similar way to the "create-validator" transactions as shown below:</p>
 <div class="highlight"><pre><span></span><code>fetchcli tx staking edit-validator
   --moniker<span class="o">=</span><span class="s2">&quot;choose a moniker&quot;</span> <span class="se">\</span>
   --website<span class="o">=</span><span class="s2">&quot;https://fetch.ai&quot;</span> <span class="se">\</span>
@@ -4306,14 +4306,14 @@
   &lt;amount to remove&gt; <span class="se">\</span>
   --from &lt;key name&gt;
 </code></pre></div>
-<p>An example of the is command is given in the following example:</p>
+<p>An example of the command is given in the following example:</p>
 <div class="highlight"><pre><span></span><code>./build/fetchcli tx staking unbond <span class="se">\</span>
   fetchvaloper1jqqwdch3jmzlmj4tjfn67s3sqm9elkd3wrpspf <span class="se">\</span>
   1000000000000000000000atestfet <span class="se">\</span>
   --from beaonworld-test-key
 </code></pre></div>
 <p><strong> Note </strong></p>
-<p>Validators obligations continue until the end of the aeon (which is typically 100 blocks or ~8 minutes depending on the configuration). It is therefore important that after a validator unbonds there stakes they must leave there node up and running for 2 complete aeons before switching off. Failure to do so is treated as malicious behaviour and will result it stake being slashed.</p>
+<p>Validators' obligations continue until the end of the aeon (which is typically 100 blocks or ~8 minutes depending on the configuration). It is therefore important that after a validator unbonds their stake they must leave their node up and running for 2 complete aeons before switching off. Failure to do so is treated as malicious behaviour and will result in stake being slashed.</p>
                 
               
               
