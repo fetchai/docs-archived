@@ -1,8 +1,8 @@
 ## Introduction: Agent World 3 (AW-3) - part 3, "Many agents interacting"
 
-<div class="admonition note">
+<div class="admonition error">
   <p class="admonition-title">Note</p>
-  <p>AW-3 has finished now!</p>
+  <p>AW-3 has finished now! You won't be able to complete the guide or earn rewards.</p>
 </div>
 
 Agent World 3 (AW-3) is the third part of our agent-themed incentivised testnet. It allows anyone with FET tokens to gain additional FET by re-using and adapting agents from AW-2 in order to further grow the useful population of agents. This is open to a broader range of developers, including those just starting out: it's __always__ easier to modify an existing agent than create a new one, and AW-3 makes available all the agents from AW-2 for all to work with via the agent registry.
