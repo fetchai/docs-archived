@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4515,13 +4551,14 @@
 <p>Utility class to store and retrieve crypto objects.</p>
 <p><a name="aea.crypto.wallet.CryptoStore.__init__"></a></p>
 <h4 id="__init__"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">crypto_id_to_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">crypto_id_to_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize the crypto store.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>crypto_id_to_path</code>: dictionary from crypto id to an (optional) path
 to the private key.</li>
+<li><code>password</code>: the password to encrypt/decrypt the private key.</li>
 </ul>
 <p><a name="aea.crypto.wallet.CryptoStore.public_keys"></a></p>
 <h4 id="public_keys">public<code>_</code>keys</h4>
@@ -4559,13 +4596,14 @@ to the private key.</li>
 </ul>
 <p><a name="aea.crypto.wallet.Wallet.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">private_key_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">connection_private_key_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">private_key_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">connection_private_key_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 <p>Instantiate a wallet object.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>private_key_paths</code>: the private key paths</li>
 <li><code>connection_private_key_paths</code>: the private key paths for the connections.</li>
+<li><code>password</code>: the password to encrypt/decrypt the private key.</li>
 </ul>
 <p><a name="aea.crypto.wallet.Wallet.public_keys"></a></p>
 <h4 id="public_keys_1">public<code>_</code>keys</h4>

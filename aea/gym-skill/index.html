@@ -536,6 +536,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#create-and-add-a-private-key" class="md-nav__link">
+    Create and add a private key
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -957,6 +964,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1079,6 +1098,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1224,6 +1255,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4400,6 +4443,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#create-and-add-a-private-key" class="md-nav__link">
+    Create and add a private key
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4463,7 +4513,7 @@ The example decouples the RL agent from the <code>gym.Env</code> allowing them t
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-aea">Create the AEA</h3>
 <p>First, fetch the gym AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/gym_aea:0.21.0 --alias my_gym_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/gym_aea:0.22.0 --alias my_gym_aea
 <span class="nb">cd</span> my_gym_aea
 aea install
 </code></pre></div></p>
@@ -4477,11 +4527,11 @@ In the root directory, create the gym AEA and enter the project.
 </code></pre></div>
 
 ### Add the gym skill
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/gym:0.16.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/gym:0.17.0
 </code></pre></div>
 
 ### Set gym connection as default
-<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.13.0
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/gym:0.14.0
 </code></pre></div>
 
 ### Install the skill dependencies
@@ -4500,6 +4550,10 @@ cp -a ../examples/gym_ex/gyms/. gyms/
 </code></pre></div>
 <h4 id="update-the-connection-configuration">Update the connection configuration</h4>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
+</code></pre></div>
+<h4 id="create-and-add-a-private-key">Create and add a private key</h4>
+<div class="highlight"><pre><span></span><code>aea generate-key fetchai
+aea add-key fetchai
 </code></pre></div>
 <h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
 <div class="highlight"><pre><span></span><code>aea run

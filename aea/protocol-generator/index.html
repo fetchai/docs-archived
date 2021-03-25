@@ -951,6 +951,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1073,6 +1085,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1218,6 +1242,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4489,7 +4525,7 @@
 <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">An example of a protocol specification that describes a protocol for bilateral negotiation.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
-<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.11.0,</span><span class="nv"> </span><span class="s">&lt;0.12.0&#39;</span>
+<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=1.0.0rc1,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span>
 <span class="nt">speech_acts</span><span class="p">:</span>
   <span class="nt">cfp</span><span class="p">:</span>
     <span class="nt">query</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ct:Query</span>
@@ -4529,6 +4565,7 @@
 <li><code>license</code>: Licensing information</li>
 <li><code>aea_version</code>: The version(s) of the framework that support this protocol. The format is described <a href="https://www.python.org/dev/peps/pep-0440/" target="_blank">here</a>.</li>
 <li><code>description</code>: A short description of the protocol</li>
+<li><code>protocol_specification_id</code>: The id which identifies the protocol for over-the-wire transport. This id is decoupled from the <code>protocol_id</code> (<code>{author}/{name}:{version}</code>) which is tied to the Python implementation.</li>
 </ul>
 <p>All of the above fields are mandatory and each is a key/value pair, where both key and value are YAML strings. </p>
 <p>Additionally, the first YAML document of a protocol specification must describe the syntax of valid messages according to this protocol. Therefore, it must contain another mandatory <code>speech-acts</code> field which defines the set of <em>performatives</em> valid under this protocol, and a set of <em>contents</em> for each performative.</p>
@@ -4652,7 +4689,7 @@
 <li><code>termination</code>: The list of terminal performatives</li>
 <li><code>roles</code>: The roles of players participating in a dialogue</li>
 <li><code>end_states</code>: The possible outcomes a terminated dialogue.</li>
-<li><code>keep_terminal_state_dialogues</code>: whether to keep or dismiss a terminated dialogue.</li>
+<li><code>keep_terminal_state_dialogues</code>: whether to keep or drop a terminated dialogue. When a storage backend is configured, the dialogues will be persisted in storage when kept.</li>
 </ul>
 <p>All of the above fields are mandatory. </p>
 <p><code>initiation</code> is a YAML list, containing the performatives which can be used to start a dialogue. </p>

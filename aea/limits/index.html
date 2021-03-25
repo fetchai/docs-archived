@@ -1,0 +1,4955 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Everything you need to know about Fetch.ai.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.fetch.ai/aea/limits/">
+      
+      
+        <meta name="author" content="developer@fetch.ai">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
+    
+    
+      
+        <title>Limitations of v1 - Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-118969813-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rejected-ideas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-header-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Developer Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Limitations of v1
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    <label class="md-nav__link" for="nav-2">
+      Agent Framework
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Framework" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Framework
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrading/" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" >
+    <label class="md-nav__link" for="nav-2-4">
+      Concepts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Concepts" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../language-agnostic-definition/" class="md-nav__link">
+      Language Agnostic Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../agent-oriented-development/" class="md-nav__link">
+      Agent-oriented development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vision/" class="md-nav__link">
+      Vision
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../app-areas/" class="md-nav__link">
+      Application areas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../oef-ledger/" class="md-nav__link">
+      Relation to OEF and Ledger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../identity/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../trust/" class="md-nav__link">
+      Trust minimisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" >
+    <label class="md-nav__link" for="nav-2-5">
+      Demos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Demos" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        Demos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../demos/" class="md-nav__link">
+      Demos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aries-cloud-agent-demo/" class="md-nav__link">
+      Aries Cloud Agents Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../car-park-skills/" class="md-nav__link">
+      Car park skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gym-example/" class="md-nav__link">
+      Gym example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gym-skill/" class="md-nav__link">
+      Gym skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ml-skills/" class="md-nav__link">
+      ML skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../oracle-demo/" class="md-nav__link">
+      Oracle skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac-skills/" class="md-nav__link">
+      TAC skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac-skills-contract/" class="md-nav__link">
+      TAC skills ledger-based
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac/" class="md-nav__link">
+      TAC external app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thermometer-skills/" class="md-nav__link">
+      Thermometer skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../weather-skills/" class="md-nav__link">
+      Weather skills
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" >
+    <label class="md-nav__link" for="nav-2-6">
+      Development - Beginner
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Beginner" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Beginner
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" class="md-nav__link">
+      AEA quick start
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core-components-1/" class="md-nav__link">
+      Core components - Part 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aea-vs-mvc/" class="md-nav__link">
+      AEA and web frameworks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill-guide/" class="md-nav__link">
+      Build your first skill - search & discovery
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core-components-2/" class="md-nav__link">
+      Core components - Part 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interaction-protocol/" class="md-nav__link">
+      How AEAs talk to each other - interaction protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-skills-step-by-step/" class="md-nav__link">
+      Trade between two AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../development-setup/" class="md-nav__link">
+      Development setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" checked>
+    <label class="md-nav__link" for="nav-2-7">
+      Development - Advanced
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Advanced" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-1" type="checkbox" id="nav-2-7-1" >
+    <label class="md-nav__link" for="nav-2-7-1">
+      Topic guides
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Topic guides" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-1">
+        <span class="md-nav__icon md-icon"></span>
+        Topic guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../step-one/" class="md-nav__link">
+      Ways to build an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-aea-step-by-step/" class="md-nav__link">
+      Build an AEA with the CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scaffolding/" class="md-nav__link">
+      Scaffolding packages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocol-generator/" class="md-nav__link">
+      Generating protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multiplexer-standalone/" class="md-nav__link">
+      Use multiplexer stand-alone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../standalone-transaction/" class="md-nav__link">
+      Create stand-alone transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../decision-maker-transaction/" class="md-nav__link">
+      Create decision-maker transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill-testing/" class="md-nav__link">
+      Testing Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prometheus/" class="md-nav__link">
+      Prometheus monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../known-limits/" class="md-nav__link">
+      Known limitations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-aea-programmatically/" class="md-nav__link">
+      Build an AEA programmatically
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-vs-programmatic-aeas/" class="md-nav__link">
+      CLI vs programmatic AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../agent-vs-aea/" class="md-nav__link">
+      AEAs vs agents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../modes/" class="md-nav__link">
+      Modes of running an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-storage/" class="md-nav__link">
+      Generic Storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multi-agent-manager/" class="md-nav__link">
+      Multi agent manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../debug/" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime-cost/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../por/" class="md-nav__link">
+      Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-2" type="checkbox" id="nav-2-7-2" checked>
+    <label class="md-nav__link" for="nav-2-7-2">
+      Architecture & component deep-dives
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Architecture & component deep-dives" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-2">
+        <span class="md-nav__icon md-icon"></span>
+        Architecture & component deep-dives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../design-principles/" class="md-nav__link">
+      Design principles
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../diagram/" class="md-nav__link">
+      Architectural diagram
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connection/" class="md-nav__link">
+      Connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocol/" class="md-nav__link">
+      Protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill/" class="md-nav__link">
+      Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contract/" class="md-nav__link">
+      Contracts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../decision-maker/" class="md-nav__link">
+      Decision Maker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ledger-integration/" class="md-nav__link">
+      Ledger & Crypto APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../message-routing/" class="md-nav__link">
+      Message routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config/" class="md-nav__link">
+      Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Limitations of v1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Limitations of v1
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rejected-ideas" class="md-nav__link">
+    Rejected ideas:
+  </a>
+  
+    <nav class="md-nav" aria-label="Rejected ideas:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handlers-implemented-as-behaviours" class="md-nav__link">
+    Handlers implemented as behaviours:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-versions-of-the-same-package" class="md-nav__link">
+    Multiple versions of the same package
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-extensions-considered-yet-not-decided" class="md-nav__link">
+    Potential extensions, considered yet not decided:
+  </a>
+  
+    <nav class="md-nav" aria-label="Potential extensions, considered yet not decided:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-skill-design" class="md-nav__link">
+    Alternative skill design
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-modularity-for-skill-level-code" class="md-nav__link">
+    Further modularity for skill level code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise-pattern" class="md-nav__link">
+    "promise" pattern:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-using-standard-lib" class="md-nav__link">
+    CLI using standard lib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-data-vs-configurations" class="md-nav__link">
+    Meta data vs configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-agent-goal-setup" class="md-nav__link">
+    Configuring agent goal setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-status-monitoring" class="md-nav__link">
+    Connection status monitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-snapshots-on-teardown-or-error" class="md-nav__link">
+    Agent snapshots on teardown or error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dialogues-management" class="md-nav__link">
+    Dialogues management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instantiate-multiple-instances-of-the-same-class-of-skillcomponent" class="md-nav__link">
+    Instantiate multiple instances of the same class of SkillComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containerized-agents" class="md-nav__link">
+    Containerized Agents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-light-version-of-the-aea-framework" class="md-nav__link">
+    Dependency light version of the AEA framework
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiled-aea" class="md-nav__link">
+    Compiled AEA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-integration" class="md-nav__link">
+    DID integration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimise-protocol-schemas-and-messages" class="md-nav__link">
+    Optimise protocol schemas and messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraints-on-primitive-types-in-protocols" class="md-nav__link">
+    Constraints on primitive types in protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subprotocols-multi-party-interactions" class="md-nav__link">
+    Subprotocols &amp; multi-party interactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeouts-in-protocols" class="md-nav__link">
+    Timeouts in protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-internal-messages" class="md-nav__link">
+    Framework internal messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ledger-transaction-management" class="md-nav__link">
+    Ledger transaction management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsolved-problems-in-multiplexer-agentloop-interplay" class="md-nav__link">
+    Unsolved problems in Multiplexer - AgentLoop interplay
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn" class="md-nav__link">
+    ACN
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-mobility-on-acn" class="md-nav__link">
+    Agent mobility on ACN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mailbox-connection" class="md-nav__link">
+    Mailbox connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-3" type="checkbox" id="nav-2-7-3" >
+    <label class="md-nav__link" for="nav-2-7-3">
+      Agent Communication
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Communication" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-3">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Communication
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn/" class="md-nav__link">
+      Agent Communication Network
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-4" type="checkbox" id="nav-2-7-4" >
+    <label class="md-nav__link" for="nav-2-7-4">
+      Search & Discovery
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search & Discovery" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-4">
+        <span class="md-nav__icon md-icon"></span>
+        Search & Discovery
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simple-oef/" class="md-nav__link">
+      Simple OEF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../defining-data-models/" class="md-nav__link">
+      Defining Data Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../query-language/" class="md-nav__link">
+      The Query Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5" type="checkbox" id="nav-2-7-5" >
+    <label class="md-nav__link" for="nav-2-7-5">
+      Developer Interfaces
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Interfaces" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-5">
+        <span class="md-nav__icon md-icon"></span>
+        Developer Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5-1" type="checkbox" id="nav-2-7-5-1" >
+    <label class="md-nav__link" for="nav-2-7-5-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-how-to/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-commands/" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../package-imports/" class="md-nav__link">
+      File structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wealth/" class="md-nav__link">
+      Generating wealth
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-6" type="checkbox" id="nav-2-7-6" >
+    <label class="md-nav__link" for="nav-2-7-6">
+      Benchmarks
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Benchmarks" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-6">
+        <span class="md-nav__icon md-icon"></span>
+        Benchmarks
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../performance-benchmark/" class="md-nav__link">
+      Performance benchmark
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7" type="checkbox" id="nav-2-7-7" >
+    <label class="md-nav__link" for="nav-2-7-7">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-7">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/abstract_agent/" class="md-nav__link">
+      AbstractAgent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/aea/" class="md-nav__link">
+      AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/aea_builder/" class="md-nav__link">
+      AEA Builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/agent/" class="md-nav__link">
+      Agent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/agent_loop/" class="md-nav__link">
+      Agent Loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/launcher/" class="md-nav__link">
+      Launcher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/multiplexer/" class="md-nav__link">
+      Multiplexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/runner/" class="md-nav__link">
+      Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/runtime/" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-12" type="checkbox" id="nav-2-7-7-12" >
+    <label class="md-nav__link" for="nav-2-7-7-12">
+      Components
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Components" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-12">
+        <span class="md-nav__icon md-icon"></span>
+        Components
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-13" type="checkbox" id="nav-2-7-7-13" >
+    <label class="md-nav__link" for="nav-2-7-7-13">
+      Configurations
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configurations" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-13">
+        <span class="md-nav__icon md-icon"></span>
+        Configurations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/data_types/" class="md-nav__link">
+      Data Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/pypi/" class="md-nav__link">
+      Pypi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/validation/" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-14" type="checkbox" id="nav-2-7-7-14" >
+    <label class="md-nav__link" for="nav-2-7-7-14">
+      Connections
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Connections" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-14">
+        <span class="md-nav__icon md-icon"></span>
+        Connections
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/connections/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/context/base/" class="md-nav__link">
+      Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-16" type="checkbox" id="nav-2-7-7-16" >
+    <label class="md-nav__link" for="nav-2-7-7-16">
+      Contracts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Contracts" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-16">
+        <span class="md-nav__icon md-icon"></span>
+        Contracts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/contracts/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17" type="checkbox" id="nav-2-7-7-17" >
+    <label class="md-nav__link" for="nav-2-7-7-17">
+      Crypto
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Crypto" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-17">
+        <span class="md-nav__icon md-icon"></span>
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/helpers/" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/ledger_apis/" class="md-nav__link">
+      LedgerApis
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/plugin/" class="md-nav__link">
+      Plugin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/wallet/" class="md-nav__link">
+      Wallet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17-6" type="checkbox" id="nav-2-7-7-17-6" >
+    <label class="md-nav__link" for="nav-2-7-7-17-6">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-17-6">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-18" type="checkbox" id="nav-2-7-7-18" >
+    <label class="md-nav__link" for="nav-2-7-7-18">
+      Decision Maker
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Decision Maker" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-18">
+        <span class="md-nav__icon md-icon"></span>
+        Decision Maker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/gop/" class="md-nav__link">
+      GOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-19" type="checkbox" id="nav-2-7-7-19" >
+    <label class="md-nav__link" for="nav-2-7-7-19">
+      Error Handler
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Error Handler" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-19">
+        <span class="md-nav__icon md-icon"></span>
+        Error Handler
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/error_handler/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/error_handler/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20" type="checkbox" id="nav-2-7-7-20" >
+    <label class="md-nav__link" for="nav-2-7-7-20">
+      Helpers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Helpers" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-20">
+        <span class="md-nav__icon md-icon"></span>
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-1" type="checkbox" id="nav-2-7-7-20-1" >
+    <label class="md-nav__link" for="nav-2-7-7-20-1">
+      ACN
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="ACN" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-1">
+        <span class="md-nav__icon md-icon"></span>
+        ACN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/acn/agent_record/" class="md-nav__link">
+      Agent Record
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/acn/uri/" class="md-nav__link">
+      URI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/async_friendly_queue/" class="md-nav__link">
+      Async Friendly Queue
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/async_utils/" class="md-nav__link">
+      Async Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/env_vars/" class="md-nav__link">
+      Env Vars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/exception_policy/" class="md-nav__link">
+      Exception Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/exec_timeout/" class="md-nav__link">
+      Exec Timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/file_io/" class="md-nav__link">
+      File IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/file_lock/" class="md-nav__link">
+      File Lock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/http_requests/" class="md-nav__link">
+      HttpRequests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/install_dependency/" class="md-nav__link">
+      Install Dependency
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/io/" class="md-nav__link">
+      IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-14" type="checkbox" id="nav-2-7-7-20-14" >
+    <label class="md-nav__link" for="nav-2-7-7-20-14">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-14">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-16" type="checkbox" id="nav-2-7-7-20-16" >
+    <label class="md-nav__link" for="nav-2-7-7-20-16">
+      MultiAddress
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MultiAddress" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-16">
+        <span class="md-nav__icon md-icon"></span>
+        MultiAddress
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/multiaddr/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/multiple_executor/" class="md-nav__link">
+      MultipleExecutor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/pipe/" class="md-nav__link">
+      Pipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-19" type="checkbox" id="nav-2-7-7-20-19" >
+    <label class="md-nav__link" for="nav-2-7-7-20-19">
+      Preferences
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Preferences" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-19">
+        <span class="md-nav__icon md-icon"></span>
+        Preferences
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/preference_representations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/profiling/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-21" type="checkbox" id="nav-2-7-7-20-21" >
+    <label class="md-nav__link" for="nav-2-7-7-20-21">
+      Search
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-21">
+        <span class="md-nav__icon md-icon"></span>
+        Search
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/search/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/search/models/" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/serializers/" class="md-nav__link">
+      Serializers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23" type="checkbox" id="nav-2-7-7-20-23" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23">
+      Storage
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Storage" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-23">
+        <span class="md-nav__icon md-icon"></span>
+        Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/generic_storage/" class="md-nav__link">
+      GenericStorage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23-2" type="checkbox" id="nav-2-7-7-20-23-2" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23-2">
+      Backends
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Backends" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-20-23-2">
+        <span class="md-nav__icon md-icon"></span>
+        Backends
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/backends/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/backends/sqlite/" class="md-nav__link">
+      Sqlite
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/sym_link/" class="md-nav__link">
+      Sym Link
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-25" type="checkbox" id="nav-2-7-7-20-25" >
+    <label class="md-nav__link" for="nav-2-7-7-20-25">
+      Transaction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Transaction" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-25">
+        <span class="md-nav__icon md-icon"></span>
+        Transaction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/transaction/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/win32/" class="md-nav__link">
+      Win32
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/yaml_utils/" class="md-nav__link">
+      YamlUtils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/identity/base/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/mail/base/" class="md-nav__link">
+      Mail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-23" type="checkbox" id="nav-2-7-7-23" >
+    <label class="md-nav__link" for="nav-2-7-7-23">
+      Manager
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Manager" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-23">
+        <span class="md-nav__icon md-icon"></span>
+        Manager
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/project/" class="md-nav__link">
+      Project
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24" type="checkbox" id="nav-2-7-7-24" >
+    <label class="md-nav__link" for="nav-2-7-7-24">
+      Protocols
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Protocols" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-24">
+        <span class="md-nav__icon md-icon"></span>
+        Protocols
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-2" type="checkbox" id="nav-2-7-7-24-2" >
+    <label class="md-nav__link" for="nav-2-7-7-24-2">
+      Dialogue
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dialogue" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-2">
+        <span class="md-nav__icon md-icon"></span>
+        Dialogue
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/dialogue/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-3" type="checkbox" id="nav-2-7-7-24-3" >
+    <label class="md-nav__link" for="nav-2-7-7-24-3">
+      Generator
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Generator" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-3">
+        <span class="md-nav__icon md-icon"></span>
+        Generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/extract_specification/" class="md-nav__link">
+      Extract Specification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/validate/" class="md-nav__link">
+      Validate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-4" type="checkbox" id="nav-2-7-7-24-4" >
+    <label class="md-nav__link" for="nav-2-7-7-24-4">
+      Default Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Default Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-4">
+        <span class="md-nav__icon md-icon"></span>
+        Default Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-5" type="checkbox" id="nav-2-7-7-24-5" >
+    <label class="md-nav__link" for="nav-2-7-7-24-5">
+      Signing Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Signing Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-5">
+        <span class="md-nav__icon md-icon"></span>
+        Signing Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-6" type="checkbox" id="nav-2-7-7-24-6" >
+    <label class="md-nav__link" for="nav-2-7-7-24-6">
+      State Update Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="State Update Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-6">
+        <span class="md-nav__icon md-icon"></span>
+        State Update Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-25" type="checkbox" id="nav-2-7-7-25" >
+    <label class="md-nav__link" for="nav-2-7-7-25">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-25">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/filter/" class="md-nav__link">
+      Filter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/resources/" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-26" type="checkbox" id="nav-2-7-7-26" >
+    <label class="md-nav__link" for="nav-2-7-7-26">
+      Skills
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Skills" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-26">
+        <span class="md-nav__icon md-icon"></span>
+        Skills
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/behaviours/" class="md-nav__link">
+      Behaviors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/tasks/" class="md-nav__link">
+      Task
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-27" type="checkbox" id="nav-2-7-7-27" >
+    <label class="md-nav__link" for="nav-2-7-7-27">
+      Test Tools
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Test Tools" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-27">
+        <span class="md-nav__icon md-icon"></span>
+        Test Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_cases/" class="md-nav__link">
+      Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_skill/" class="md-nav__link">
+      Test Skill
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28" type="checkbox" id="nav-2-7-7-28" >
+    <label class="md-nav__link" for="nav-2-7-7-28">
+      Plugins
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Plugins" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-28">
+        <span class="md-nav__icon md-icon"></span>
+        Plugins
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1" type="checkbox" id="nav-2-7-7-28-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1-1" type="checkbox" id="nav-2-7-7-28-1-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1-1">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-1-1">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_cli_ipfs/core/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_cli_ipfs/ipfs_utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2" type="checkbox" id="nav-2-7-7-28-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-1" type="checkbox" id="nav-2-7-7-28-2-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-1">
+      Cosmos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Cosmos" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-1">
+        <span class="md-nav__icon md-icon"></span>
+        Cosmos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_cosmos/cosmos/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-2" type="checkbox" id="nav-2-7-7-28-2-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-2">
+      Ethereum
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ethereum" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ethereum
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_ethereum/ethereum/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-3" type="checkbox" id="nav-2-7-7-28-2-3" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-3">
+      Fetchai
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Fetchai" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        Fetchai
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_fetchai/fetchai/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_fetchai/_cosmos/" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8" >
+    <label class="md-nav__link" for="nav-2-8">
+      Development - Use Case
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Use Case" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Use Case
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-skills/" class="md-nav__link">
+      Generic skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connect-a-frontend/" class="md-nav__link">
+      Front-end intergration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http-connection-and-skill/" class="md-nav__link">
+      HTTP Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orm-integration/" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../erc1155-skills/" class="md-nav__link">
+      Contract deploy and interact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../p2p-connection/" class="md-nav__link">
+      P2P Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../raspberry-set-up/" class="md-nav__link">
+      Build an AEA on a Raspberry Pi
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../glossary/" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../questions-and-answers/" class="md-nav__link">
+      Q&A
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/building/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/versions/" class="md-nav__link">
+      Versions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/networks/" class="md-nav__link">
+      Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
+    <label class="md-nav__link" for="nav-3-5">
+      Commandline Client
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commandline Client" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commandline Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-introduction/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-keys/" class="md-nav__link">
+      Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-tokens/" class="md-nav__link">
+      Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/delegator-guide-cli/" class="md-nav__link">
+      Delegator Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6" >
+    <label class="md-nav__link" for="nav-3-6">
+      Validators
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Validators" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Validators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/overview/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/setup/" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
+      Joining a Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/single-node-network/" class="md-nav__link">
+      Single Node Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/block-explorer/" class="md-nav__link">
+      Block Explorer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/governance/" class="md-nav__link">
+      Governance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/docker-images/" class="md-nav__link">
+      Docker Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/faucet/" class="md-nav__link">
+      Faucet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/python-examples/" class="md-nav__link">
+      Python Examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Incentivized Testnets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Incentivized Testnets" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Incentivized Testnets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw1/" class="md-nav__link">
+      Agent World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw2/" class="md-nav__link">
+      Agent World 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw3/" class="md-nav__link">
+      Agent World 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-bw1/" class="md-nav__link">
+      Beacon World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw4/" class="md-nav__link">
+      Agent World 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Collective Learning
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Collective Learning" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Collective Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/" class="md-nav__link">
+      Colearn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/about/" class="md-nav__link">
+      Collective Learning Protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3" >
+    <label class="md-nav__link" for="nav-5-3">
+      Getting Started
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        <span class="md-nav__icon md-icon"></span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_keras/" class="md-nav__link">
+      Keras
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_pytorch/" class="md-nav__link">
+      PyTorch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_mli/" class="md-nav__link">
+      The MachineLearningInterface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/differential_privacy/" class="md-nav__link">
+      Differential Privacy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" >
+    <label class="md-nav__link" for="nav-5-4">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/examples/" class="md-nav__link">
+      Standalone examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rejected-ideas" class="md-nav__link">
+    Rejected ideas:
+  </a>
+  
+    <nav class="md-nav" aria-label="Rejected ideas:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handlers-implemented-as-behaviours" class="md-nav__link">
+    Handlers implemented as behaviours:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-versions-of-the-same-package" class="md-nav__link">
+    Multiple versions of the same package
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-extensions-considered-yet-not-decided" class="md-nav__link">
+    Potential extensions, considered yet not decided:
+  </a>
+  
+    <nav class="md-nav" aria-label="Potential extensions, considered yet not decided:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-skill-design" class="md-nav__link">
+    Alternative skill design
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-modularity-for-skill-level-code" class="md-nav__link">
+    Further modularity for skill level code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise-pattern" class="md-nav__link">
+    "promise" pattern:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-using-standard-lib" class="md-nav__link">
+    CLI using standard lib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-data-vs-configurations" class="md-nav__link">
+    Meta data vs configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-agent-goal-setup" class="md-nav__link">
+    Configuring agent goal setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-status-monitoring" class="md-nav__link">
+    Connection status monitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-snapshots-on-teardown-or-error" class="md-nav__link">
+    Agent snapshots on teardown or error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dialogues-management" class="md-nav__link">
+    Dialogues management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instantiate-multiple-instances-of-the-same-class-of-skillcomponent" class="md-nav__link">
+    Instantiate multiple instances of the same class of SkillComponent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containerized-agents" class="md-nav__link">
+    Containerized Agents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-light-version-of-the-aea-framework" class="md-nav__link">
+    Dependency light version of the AEA framework
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiled-aea" class="md-nav__link">
+    Compiled AEA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-integration" class="md-nav__link">
+    DID integration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimise-protocol-schemas-and-messages" class="md-nav__link">
+    Optimise protocol schemas and messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraints-on-primitive-types-in-protocols" class="md-nav__link">
+    Constraints on primitive types in protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subprotocols-multi-party-interactions" class="md-nav__link">
+    Subprotocols &amp; multi-party interactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeouts-in-protocols" class="md-nav__link">
+    Timeouts in protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-internal-messages" class="md-nav__link">
+    Framework internal messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ledger-transaction-management" class="md-nav__link">
+    Ledger transaction management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsolved-problems-in-multiplexer-agentloop-interplay" class="md-nav__link">
+    Unsolved problems in Multiplexer - AgentLoop interplay
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn" class="md-nav__link">
+    ACN
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-mobility-on-acn" class="md-nav__link">
+    Agent mobility on ACN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mailbox-connection" class="md-nav__link">
+    Mailbox connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Limitations of v1</h1>
+                
+                <p>This document describes some of the limitations of <code>v1</code> of the AEA framework and tradeoffs made in its design.</p>
+<h3 id="rejected-ideas">Rejected ideas:</h3>
+<h4 id="handlers-implemented-as-behaviours">Handlers implemented as behaviours:</h4>
+<p>Handlers can be considered a special cases of a "behaviour that listens for specific events to happen".</p>
+<p>One could implement <code>Handler</code> classes in terms of <code>Behaviours</code>, after having implemented the feature that behaviours can be activated after an event happens (e.g. receiving a message of a certain protocol).</p>
+<p>This was rejected in favour of a clear separation of concerns, and to avoid purely reactive (handlers) and proactive (behaviours) components to be conflated into one concept. The proposal would also add complexity to behaviour development.</p>
+<h4 id="multiple-versions-of-the-same-package">Multiple versions of the same package</h4>
+<p>The framework does not allow for the usage of multiple versions of the same package in a given project.</p>
+<p>Although one could re-engineer the project to allow for this, it does introduce significant additional complexities. Furthermore, Python modules are by design only allowed to exist as one version in a given process. Hence, it seems sensible to maintain this approach in the AEA.</p>
+<h3 id="potential-extensions-considered-yet-not-decided">Potential extensions, considered yet not decided:</h3>
+<h4 id="alternative-skill-design">Alternative skill design</h4>
+<p>For very simple skills, the splitting of skills into <code>Behaviour</code>, <code>Handler</code>, <code>Model</code> and <code>Task</code> classes can add unnecessary complexity to the framework and a counter-intuitive responsibility split. The splitting also implies the framework needs to introduce the <code>SkillContext</code> object to allow for access to data across the skill. Furthermore, the framework requires implementing all functionality in <code>SkillComponent</code> classes <code>Handler</code>, <code>Behaviour</code> or <code>Model</code>. This approach is consistent and transparent, however it creates a lot of boiler plate code for simple skills.</p>
+<p>Hence, for some use cases it would be useful to have a single <code>Skill</code> class with abstract methods <code>setup</code>, <code>act</code>, <code>handle</code> and <code>teardown</code>. Then the developer can decide how to split up their code.</p>
+<div class="highlight"><pre><span></span><code>class SkillTemplate(SimpleSkill):
+
+    protocol_ids: Optional[List[PublicId]] = None
+
+    def setup():
+        # setup skill
+
+    def handle(message: Message):
+        # handle messages
+
+    def act():
+        for b in behaviours:
+            b.act()
+
+    def teardown():
+        # teardown skill
+</code></pre></div>
+<p>Alternatively, we could use decorators to let a developer define whether a function is part of a handler or behaviour. That way, a single file with a number of functions could implement a skill. (Behind the scenes this would utilise a number of virtual <code>Behaviour</code> and <code>Handler</code> classes provided by the framework).</p>
+<p>The downside of this approach is that it does not advocate for much modularity on the skill level. Part of the role of a framework is to propose a common way to do things. The above approach can cause for a larger degree of heterogeneity in the skill design which makes it harder for developers to understand each others' code.</p>
+<p>The separation between all four base classes does exist both in convention <em>and</em> at the code level. Handlers deal with skill-external events (messages), behaviours deal with scheduled events (ticks), models represent data and tasks are used to manage long-running business logic.</p>
+<p>By adopting strong convention around skill development we allow for the framework to take a more active role in providing guarantees. E.g. handlers' and behaviours' execution can be limited to avoid them being blocking, models can be persisted and recreated, tasks can be executed with different task backends. The opinionated approach is thought to allow for better scaling.</p>
+<h4 id="further-modularity-for-skill-level-code">Further modularity for skill level code</h4>
+<p>Currently we have three levels of modularity:</p>
+<ul>
+<li>PyPI packages</li>
+<li>framework packages: protocols, contracts, connections and skills</li>
+<li>framework plugins: CLI, ledger</li>
+</ul>
+<p>We could consider having a fourth level: common behaviours, handlers, models exposed as modules which can then speed up skill development.</p>
+<h4 id="promise-pattern">"promise" pattern:</h4>
+<p>Given the asynchronous nature of the framework, it is often hard to implement reactions to specific messages, without making a "fat" handler. Take the example of a handler for a certain type of message <code>A</code> for a certain protocol <code>p</code>. The handler for protocol <code>p</code> would look something like this:
+<div class="highlight"><pre><span></span><code>class PHandler:
+...
+def handle(msg):
+    if message type is A:
+        self._handle_a(msg)
+</code></pre></div></p>
+<p>However, it could be helpful to overwrite this handler reaction with another callback (e.g. consider <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">this in context</a>):
+<div class="highlight"><pre><span></span><code># callable that handles the reply
+def my_callback(msg):
+    # handle reply
+
+self.context.outbox.put_message(message, handler_func=my_callback, failure_func=...)
+</code></pre></div></p>
+<p>This feature would introduce additional complexity for the framework to correctly wire up the callbacks and messages with the dialogues.</p>
+<h4 id="cli-using-standard-lib">CLI using standard lib</h4>
+<p>Removing the click dependency from the CLI would further reduce the dependencies in the AEA framework which is overall desirable.</p>
+<h4 id="meta-data-vs-configurations">Meta data vs configurations</h4>
+<p>The current approach uses <code>yaml</code> files to specify both meta data and component configuration. It would be desirable to introduce the following separation:</p>
+<ul>
+<li>package metadata</li>
+<li>package default developer configuration</li>
+<li>package default user configuration</li>
+</ul>
+<p>A user can only configure a subset of the configuration. The developer should be able to define these constraints for the user. Similarly, a developer cannot modify all fields in a package, some of them are determined by the framework.</p>
+<h4 id="configuring-agent-goal-setup">Configuring agent goal setup</h4>
+<p>By default, the agent's goals are implicitly defined by its skills and the configurations thereof. This is because the default decision maker signs every message and transaction presented to it.</p>
+<p>It is already possible to design a custom decision maker. However, more work needs to be done to understand how to improve the usability and configuration of the decision maker. In this context different types of decision makers can be implemented for the developer/user.</p>
+<h4 id="connection-status-monitoring">Connection status monitoring</h4>
+<p>Currently, connections are responsible for managing their own status after they have been "connected" by the <code>Multiplexer</code>. Developers writing connections must take care to properly set its connection status at all times and manage any disconnection. It would potentially be desirable to offer different policies to deal with connection problems on the multiplexer level:</p>
+<ul>
+<li>disconnect one, keep others alive</li>
+<li>disconnect all</li>
+<li>try reconnect indefinitely</li>
+</ul>
+<h4 id="agent-snapshots-on-teardown-or-error">Agent snapshots on teardown or error</h4>
+<p>Currently, the developer must implement snapshots on the component level. It would be desirable if the framework offered more help to persist the agent state on teardown or error.</p>
+<h4 id="dialogues-management">Dialogues management</h4>
+<p>The current implementation of Dialogues is verbose. Developers often need to subclass <code>Dialogues</code> and <code>Dialogue</code> classes. More effort can be made to simplify and streamline dialogues management.</p>
+<h4 id="instantiate-multiple-instances-of-the-same-class-of-skillcomponent">Instantiate multiple instances of the same class of <code>SkillComponent</code></h4>
+<p>Currently, configuration and metadata of a package are conflated making it not straightforward to run one package component with multiple sets of configuration. It could be desirable to configure an agent to run a given package with multiple different configurations.</p>
+<p>This feature could be problematic with respect to component to component messaging which currently relies on component ids, which are bound to the package and not its instance.</p>
+<h4 id="containerized-agents">Containerized Agents</h4>
+<p>Agent management, especially when many of them live on the same host, can be cumbersome. The framework should provide more utilities for these large-scale use cases. But a proper isolation of the agent environment is something that helps also simple use cases.</p>
+<p>A new software architecture, somehow inspired to the Docker system. The CLI only involves the initialization of the building of the agent (think of it as the specification of the <code>Dockerfile</code>: the <code>Agentfile</code>), but the actual build and run are done by the AEA engine, a daemon process analogous of the Docker Engine, which exposes APIs for these operations.</p>
+<p>Users and developers would potentially like to run many AEAs of different versions and with differences in the versions of their dependencies. It is not possible to import different versions of the same Python (PyPI) package in the same process in a clean way. However, in different processes this is trivial with virtual environments. It would be desirable to consider this in the context of a container solution for agents.</p>
+<h4 id="dependency-light-version-of-the-aea-framework">Dependency light version of the AEA framework</h4>
+<p>The <code>v1</code> of the Python AEA implementation makes every effort to minimise the amount of third-party dependencies. However, some dependencies remain to lower development time.</p>
+<p>It would be desirable to further reduce the dependencies, and potentially have an implementation that only relies on the Python standard library.</p>
+<p>This could be taken further, and a reduced spec version for <a href="https://micropython.org" target="_blank">micropython</a> could be designed.</p>
+<h4 id="compiled-aea">Compiled AEA</h4>
+<p>Python is not a compiled language. However, various projects attempt this, e.g. <a href="https://nuitka.net/doc/user-manual.html" target="_blank">Nuitka</a> and it would be desirable to explore how useful and practical this would be in the context of AEA.</p>
+<h4 id="did-integration">DID integration</h4>
+<p>It would be great to integrate <a href="https://www.w3.org/TR/did-core/" target="_blank">DID</a> in the framework design, specifically identification of packages (most urgently protocols). Other projects and standards worth reviewing in the context (in particular with respect to identity):</p>
+<ul>
+<li><a href="https://docs.ethhub.io/built-on-ethereum/identity/ERC725/" target="_blank">ERC 725: Ethereum Identity Standard</a> and <a href="https://erc725alliance.org" target="_blank">here</a>.</li>
+<li><a href="https://github.com/ethereum/eips/issues/735" target="_blank">ERC 735: Claim Holder</a></li>
+</ul>
+<h4 id="optimise-protocol-schemas-and-messages">Optimise protocol schemas and messages</h4>
+<p>The focus of protocol development was on extensibility and compatibility, not on optimisation. For instance, the dialogue references use inefficient string representations.</p>
+<h4 id="constraints-on-primitive-types-in-protocols">Constraints on primitive types in protocols</h4>
+<p>The protocol generator currently does not support custom constraints. The framework could add support for custom constraints for the protocol generator and specification.</p>
+<p>There are many types of constraints that could be supported in specification and generator. One could perhaps add support based on the popularity of specific constraints from users/developers.</p>
+<p>Example constraints:</p>
+<ul>
+<li>strings following specific regular expression format (e.g. all lower case, any arbitrary regex format)</li>
+<li>max number of elements on lists/sets</li>
+<li>keys in one <code>dict</code> type be equal to keys in another <code>dict</code> type</li>
+<li>other logical constraints, e.g. as supported in ontological languages</li>
+<li>support for bounds (i.e. min, max) for numerical types (i.e. <code>int</code> and <code>float</code>) in protocol specification.</li>
+</ul>
+<p>Example syntax:</p>
+<ul>
+<li><code>pt:int[0, ]</code></li>
+<li><code>pt:float[1.0, 10.0]</code></li>
+<li><code>pt:int[-1000, 1000]</code></li>
+<li><code>pt:float[, 0]</code></li>
+</ul>
+<p>This would automatically enable support for signed/unsigned <code>int</code> and <code>float</code>. This syntax would allow for unbounded positive/negative/both, or arbitrary bounds to be placed on numerical types.</p>
+<p>Currently, the developer has to specify a custom type to implement any constraints on primitive types.</p>
+<h4 id="subprotocols-multi-party-interactions">Subprotocols &amp; multi-party interactions</h4>
+<p>Protocols can be allowed to depend on each other. Similarly, protocols might have multiple parties.</p>
+<p>Furthermore, a turn-taking function that specifies who's turn it is at any given point in the dialogue could be added.</p>
+<p>Then the current <code>fipa</code> setup is a specific case of turn-taking where the turn shifts after a player sends a single move (unique-reply). But generally, it does not have to be like this. Players could be allowed to send multiple messages until the turn shifts, or until they send specific speech-acts (multiple-replies).</p>
+<h4 id="timeouts-in-protocols">Timeouts in protocols</h4>
+<p>Protocols currently do not implement the concept of timeouts. We leave it to the skill developer to implement any time-specific protocol rules.</p>
+<h4 id="framework-internal-messages">Framework internal messages</h4>
+<p>The activation/deactivation of skills and addition/removal of components is implemented in a "passive" way - the skill posts a request in its skill context queue (in the case of new behaviours), or it just sets a flag (in case of activation/deactivation of skills).</p>
+<p>One could consider that a skill can send requests to the framework, via the internal protocol, to modify its resources or its status. The <code>DecisionMaker</code> or the <code>Filter</code> can be the components that take such actions.</p>
+<p>This is a further small but meaningful step toward an actor-based model for agent internals.</p>
+<h4 id="ledger-transaction-management">Ledger transaction management</h4>
+<p>Currently, the framework does not manage any aspect of submitting multiple transactions to the ledgers. This responsibility is left to skills. Additionally, the ledger APIs/contract APIs take the ledger as a reference to determine the nonce for a transaction. If a new transaction is sent before a previous transaction has been processed then the nonce will not be incremented correctly for the second transaction. This can lead to submissions of multiple transactions with the same nonce, and therefore failure of subsequent transactions.</p>
+<p>A naive approach would involve manually incrementing the nonce and then submitting transactions into the pool with the correct nonce for eventual inclusion. The problem with this approach is that any failure of a transaction will cause non of the subsequent transactions to be processed for some ledgers (https://ethereum.stackexchange.com/questions/2808/what-happens-when-a-transaction-nonce-is-too-high). To recover from a transaction failure not only the failed transaction would need to be handled, but potentially also all subsequent transactions. It is easy to see that logic required to recover from a transaction failure early in a sequence can be arbitrarily complex (involving potentially new negotiations between agents, new signatures having to be generated etc.).</p>
+<p>A further problem with the naive approach is that it (imperfectly) replicates the ledger state (with respect to (subset of state of) a specific account).</p>
+<p>A simple solution looks as follows: each time a transaction is constructed (requiring a new nonce) the transaction construction is queued until all previous transactions have been included in the ledger or failed. This way, at any one time the agent has only at most one transaction pending with the ledger. Benefits: simple to understand and maintain, transaction only enter the mempool when they are ready for inclusion which has privacy benefits over submitting a whole sequence of transaction at once. Downside: at most one transaction per block.</p>
+<p>This approach is currently used and implemented across all the reference skills.</p>
+<p>Related, the topic of latency in transactions. State channels provide a solution. E.g. <a href="https://github.com/perun-network/go-perun" target="_blank">Perun</a>. There could also be an interesting overlap with our protocols here.</p>
+<h4 id="unsolved-problems-in-multiplexer-agentloop-interplay">Unsolved problems in <code>Multiplexer</code> - <code>AgentLoop</code> interplay</h4>
+<p>Problem 1: connection generates too many messages in a short amount of time, that are not consumed by the multiplexer
+Solution: Can be solved by slowing down connections receive method called, controlled by the inbox messages amount
+Side effects: Most of the connections should have an internal queue because there is no synchronization between internal logic and multiplexer connection <code>receive</code> calls.</p>
+<p>Problem 2: the send method can take a long time (because send retries logic in connection)
+Solution: Currently, we apply timeouts on send. Other solutions could be considered, like parallelisation.</p>
+<p>Problem 3: too many messages are produced by a skill.
+Solution: Raise an exception on outbox is full or slow down agent loop?</p>
+<h2 id="acn">ACN</h2>
+<h3 id="agent-mobility-on-acn">Agent mobility on ACN</h3>
+<p>If a peer-client or full client switches peer, then the DHT is not updated properly at the moment under certain conditions.</p>
+<h3 id="mailbox-connection">Mailbox connection</h3>
+<p>The two available connections <code>p2p_libp2p</code> and <code>p2p_libp2p_client</code> imply that the agent is continuously connected and therefore must have uninterrupted network access and the resources to maintain a connection.</p>
+<p>For more lightweight implementations, a mailbox connection is desirable, as outlined in the ACN documentation.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../config/" title="Configurations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Configurations
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../acn/" title="Agent Communication Network" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Agent Communication Network
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        and the
+        <a href="https://github.com/fetchai/docs/" target=_blank>
+          Fetch.AI Documentation Suite</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

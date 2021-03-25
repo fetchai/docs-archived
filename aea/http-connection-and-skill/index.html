@@ -826,6 +826,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -948,6 +960,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1093,6 +1117,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4285,15 +4321,19 @@
 <span class="nb">cd</span> my_aea
 </code></pre></div>
 <p>Add the http server connection package:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.18.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.19.0
 </code></pre></div>
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.18.0
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.19.0
 </code></pre></div>
 <p>Modify the <code>api_spec_path</code>:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
 </code></pre></div>
 <p>Ensure the file exists under the specified path!</p>
+<p>Create and add a private key:</p>
+<div class="highlight"><pre><span></span><code>aea generate-key fetchai
+aea add-key fetchai
+</code></pre></div>
 <p>Install the dependencies:</p>
 <div class="highlight"><pre><span></span><code>aea install
 </code></pre></div>
@@ -4323,7 +4363,6 @@
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4404,7 +4443,6 @@
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 </code></pre></div>
 <p>And update the <code>skill.yaml</code> accordingly:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">handlers</span><span class="p">:</span>
@@ -4413,7 +4451,7 @@
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HttpHandler</span>
 </code></pre></div>
 <p>Finally, run the fingerprinter (note, you will have to replace the author name with your author handle):
-<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.16.0
+<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.17.0
 </code></pre></div></p>
 <p>You can now run the AEA:
 <div class="highlight"><pre><span></span><code>aea run

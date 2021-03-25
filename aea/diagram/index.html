@@ -823,6 +823,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -945,6 +957,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1099,6 +1123,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4212,9 +4248,9 @@
 </ul>
 <p>Currently, the framework supports four types of packages which can be added to the core as modules:</p>
 <ul>
-<li><a href="../skill">Skills</a> are the core focus of the framework's extensibility as they implement business logic to deliver economic value for the AEA.</li>
-<li><a href="../protocol">Protocols</a> define agent-to-agent as well as component-to-component interactions (messages and dialogues) within agents.</li>
-<li><a href="../connection">Connections</a> wrap SDKs or APIs and provide an interface to network, ledgers and other services.</li>
+<li><a href="../skill">Skills</a> encapsulate logic that deliver economic value to the AEA. Skills are the main focus of the framework's extensibility. </li>
+<li><a href="../protocol">Protocols</a> define the structure of agent-to-agent and component-to-component interactions (messages and dialogues) for agents.</li>
+<li><a href="../connection">Connections</a> provide interfaces for the agent to connect with the outside world. They wrap SDKs or APIs and provide interfaces to networks, ledgers and other services.</li>
 <li><a href="../contract">Contracts</a> wrap smart contracts for Fetch.ai and third-party decentralized ledgers.</li>
 </ul>
 <p>The following figure illustrates the framework's architecture:</p>
@@ -4223,20 +4259,20 @@
 <p><img src="../assets/execution.jpg" alt="Execution of an AEA" class="center" style="display: block; margin-left: auto; margin-right: auto;width:100%;"></p>
 <p>The agent operation breaks down into three parts:</p>
 <ul>
-<li>Setup: calls the <code>setup()</code> method of all registered resources</li>
-<li>Operation:<ul>
-<li>Main loop (Thread 1 - Synchronous):<ul>
-<li><code>react()</code>: this function grabs all Envelopes waiting in the <code>InBox</code> queue and calls the <code>handle()</code> function on the Handler(s) responsible for them. As such it consumes and potentially produces <code>Messages</code>.</li>
-<li><code>act()</code>: this function calls the <code>act()</code> function of all registered Behaviours. As such it potentially produces <code>Messages</code>.</li>
+<li><strong>Setup</strong>: calls the <code>setup()</code> method of all registered resources</li>
+<li><strong>Operation</strong>:<ul>
+<li>Agent loop (Thread 1 - Asynchronous agent loop):<ul>
+<li><code>react()</code>: this function grabs all Envelopes waiting in the <code>InBox</code> queue and calls the <code>handle()</code> method on the Handler(s) responsible for them. </li>
+<li><code>act()</code>: this function calls the <code>act()</code> method of all registered Behaviours. </li>
 <li><code>update()</code>: this function enqueues scheduled tasks for execution with the <code>TaskManager</code> and executes the decision maker.</li>
 </ul>
 </li>
 <li>Task loop (Thread 2- Synchronous): executes available tasks</li>
 <li>Decision maker loop (Thread 3- Synchronous): processes internal messages</li>
-<li>Multiplexer (Thread 4 - Asynchronous event loop): the multiplexer has an event loop which processes incoming and outgoing messages across several connections asynchronously.</li>
+<li>Multiplexer (Thread 4 - Asynchronous event loop): processes incoming and outgoing messages across several connections asynchronously.</li>
 </ul>
 </li>
-<li>Teardown: calls the <code>teardown()</code> method of all registered resources</li>
+<li><strong>Teardown</strong>: calls the <code>teardown()</code> method of all registered resources</li>
 </ul>
 <p>To prevent a developer from blocking the main loop with custom skill code, an execution time limit is  applied to every <code>Behaviour.act</code> and <code>Handler.handle</code> call.</p>
 <p>By default, the execution limit is set to <code>0</code> seconds, which disables the feature. You can set the limit to a strictly positive value (e.g. <code>0.1</code> seconds) to test your AEA for production readiness. If the <code>act</code> or <code>handle</code> time exceed this limit, the call will be terminated.</p>

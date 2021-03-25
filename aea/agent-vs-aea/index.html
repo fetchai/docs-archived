@@ -830,6 +830,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1032,6 +1044,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1173,6 +1197,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4392,7 +4428,6 @@
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Setup the agent.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Act implementation.&quot;&quot;&quot;</span>
@@ -4427,7 +4462,6 @@
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Teardown the agent.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 </code></pre></div></p>
 <h2 id="instantiate-an-agent">Instantiate an <code>Agent</code></h2>
 <div class="highlight"><pre><span></span><code>    <span class="c1"># Ensure the input and output files do not exist initially</span>
@@ -4465,7 +4499,7 @@
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response
 <div class="highlight"><pre><span></span><code>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.1.0,</span><span class="se">\x12\r\x08\x01</span><span class="s2">*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:1.0.0,</span><span class="se">\x12\r\x08\x01</span><span class="s2">*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
@@ -4520,7 +4554,6 @@
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Setup the agent.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Act implementation.&quot;&quot;&quot;</span>
@@ -4555,7 +4588,6 @@
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Teardown the agent.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
 
 <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
@@ -4592,7 +4624,7 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
-        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:0.1.0,</span><span class="se">\x12\r\x08\x01</span><span class="s2">*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
+        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:1.0.0,</span><span class="se">\x12\r\x08\x01</span><span class="s2">*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>

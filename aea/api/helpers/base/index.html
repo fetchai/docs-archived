@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -2393,6 +2429,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#message_format" class="md-nav__link">
+    message_format
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_path" class="md-nav__link">
     save_path
   </a>
@@ -2416,6 +2459,13 @@
           <li class="md-nav__item">
   <a href="#get_message" class="md-nav__link">
     get_message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#construct_message" class="md-nav__link">
+    construct_message
   </a>
   
 </li>
@@ -4874,6 +4924,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#message_format" class="md-nav__link">
+    message_format
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_path" class="md-nav__link">
     save_path
   </a>
@@ -4897,6 +4954,13 @@
           <li class="md-nav__item">
   <a href="#get_message" class="md-nav__link">
     get_message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#construct_message" class="md-nav__link">
+    construct_message
   </a>
   
 </li>
@@ -5038,7 +5102,7 @@ Return empty dict if platform is not win32</p>
 <h4 id="send_control_c">send<code>_</code>control<code>_</code>c</h4>
 <div class="highlight"><pre><span></span><code><span class="n">send_control_c</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">,</span> <span class="n">kill_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-<p>Send ctrl-C crossplatform to terminate a subprocess.</p>
+<p>Send ctrl-C cross-platform to terminate a subprocess.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>process</code>: the process to send the signal to.</li>
@@ -5085,6 +5149,10 @@ attribute to implement a different behaviour.</p>
 Traceback (most recent call last):
 ...
 ValueError: Value 0an_identifier does not match the regular expression re.compile('[a-zA-Z_][a-zA-Z0-9_]{0,127}')</p>
+<p>SimpleId("an identifier")
+Traceback (most recent call last):
+...
+ValueError: Value an identifier does not match the regular expression re.compile('[a-zA-Z_][a-zA-Z0-9_]{0,127}')</p>
 <p>SimpleId("")
 Traceback (most recent call last):
 ...
@@ -5103,7 +5171,7 @@ ValueError: Value  does not match the regular expression re.compile('[a-zA-Z_][a
 <div class="highlight"><pre><span></span><code><span class="n">get_logger_method</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">logger_method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span>
 </code></pre></div>
 <p>Get logger method for function.</p>
-<p>Get logger in <code>fn</code> definion module or creates logger is module.<strong>name</strong>.
+<p>Get logger in <code>fn</code> definition module or creates logger is module.<strong>name</strong>.
 Or return logger_method if it's callable.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
@@ -5139,7 +5207,7 @@ Or return logger_method if it's callable.</p>
 <ul>
 <li><code>number_of_retries</code>: amount of attempts</li>
 <li><code>error_message</code>: message template with one <code>{}</code> for exception</li>
-<li><code>delay</code>: num of seconds to sleep between retries. default 0</li>
+<li><code>delay</code>: number of seconds to sleep between retries. default 0</li>
 <li><code>logger_method</code>: name of the logger method or callable to print logs</li>
 </ul>
 <p><a name="aea.helpers.base.exception_log_and_reraise"></a></p>
@@ -5246,19 +5314,21 @@ to_update
 <p>Certificate request for proof of representation.</p>
 <p><a name="aea.helpers.base.CertRequest.__init__"></a></p>
 <h4 id="__init___2"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="n">SimpleIdOrStr</span><span class="p">,</span> <span class="n">ledger_id</span><span class="p">:</span> <span class="n">SimpleIdOrStr</span><span class="p">,</span> <span class="n">not_before</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">not_after</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="n">SimpleIdOrStr</span><span class="p">,</span> <span class="n">ledger_id</span><span class="p">:</span> <span class="n">SimpleIdOrStr</span><span class="p">,</span> <span class="n">not_before</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">not_after</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize the certificate request.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>public_key</code>: the public key, or the key id.</li>
 <li><code>identifier</code>: certificate identifier.</li>
+<li><code>ledger_id</code>: ledger identifier the request is referring to.</li>
 <li><code>not_before</code>: specify the lower bound for certificate validity.
 If it is a string, it must follow the format: 'YYYY-MM-DD'. It
-will be interpreted as timezone UTC.</li>
+will be interpreted as timezone UTC-0.</li>
 <li><code>not_before</code>: specify the lower bound for certificate validity.
 if it is a string, it must follow the format: 'YYYY-MM-DD' It
 will be interpreted as timezone UTC-0.</li>
+<li><code>message_format</code>: message format used for signing</li>
 <li><code>save_path</code>: the save_path where to save the certificate.</li>
 </ul>
 <p><a name="aea.helpers.base.CertRequest.public_key"></a></p>
@@ -5309,6 +5379,12 @@ will be interpreted as timezone UTC-0.</li>
  <span class="o">|</span> <span class="n">not_after</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span>
 </code></pre></div>
 <p>Get the not_after field.</p>
+<p><a name="aea.helpers.base.CertRequest.message_format"></a></p>
+<h4 id="message_format">message<code>_</code>format</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">message_format</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Get the message format.</p>
 <p><a name="aea.helpers.base.CertRequest.save_path"></a></p>
 <h4 id="save_path">save<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5341,6 +5417,20 @@ Otherwise, the path prefix is prepended.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_message</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
 </code></pre></div>
 <p>Get the message to sign.</p>
+<p><a name="aea.helpers.base.CertRequest.construct_message"></a></p>
+<h4 id="construct_message">construct<code>_</code>message</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
+ <span class="o">|</span> <span class="n">construct_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="n">SimpleIdOrStr</span><span class="p">,</span> <span class="n">not_before_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">not_after_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</code></pre></div>
+<p>Construct message for singning.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>public_key</code>: the public key</li>
+<li><code>identifier</code>: identifier to be signed</li>
+<li><code>not_before_string</code>: signature not valid before</li>
+<li><code>not_after_string</code>: signature not valid after</li>
+<li><code>message_format</code>: message format used for signing</li>
+</ul>
 <p><a name="aea.helpers.base.CertRequest.get_signature"></a></p>
 <h4 id="get_signature">get<code>_</code>signature</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_signature</span><span class="p">(</span><span class="n">path_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PathLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
@@ -5348,7 +5438,7 @@ Otherwise, the path prefix is prepended.</p>
 <p>Get signature from save_path.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>path_prefix</code>: the path prefix to be prependend to save_path. Defaults to cwd.</li>
+<li><code>path_prefix</code>: the path prefix to be prepended to save_path. Defaults to cwd.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the signature.</p>
@@ -5374,8 +5464,8 @@ Otherwise, the path prefix is prepended.</p>
 <div class="highlight"><pre><span></span><code><span class="n">compute_specifier_from_version</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="n">Version</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 <p>Compute the specifier set from a version, by varying only on the patch number.</p>
-<p>I.e. from "{major}.{minor}.{patch}", return</p>
-<p>"&gt;={major}.{minor}.0, &lt;{major}.{minor + 1}.0"</p>
+<p>I.e. from "{major}.{minor}.{patch}.{extra}", return</p>
+<p>"&gt;=min({major}.{minor}.0, {major}.{minor}.{patch}.{extra}), &lt;{major}.{minor + 1}.0"</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>version</code>: the version</li>

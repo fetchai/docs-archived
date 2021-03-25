@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -5659,6 +5695,12 @@ start_at: optional datetime, when to start periodical calls.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Behaviour</span><span class="p">(</span><span class="n">AbstractBehaviour</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 <p>This class implements an abstract behaviour.</p>
+<p>In a subclass of Behaviour, the flag 'is_programmatically_defined'
+ can be used by the developer to signal to the framework that the class
+ is meant to be used programmatically; hence, in case the class is
+ not declared in the configuration file but it is present in a skill
+ module, the framework will just ignore this class instead of printing
+ a warning message.</p>
 <p><a name="aea.skills.base.Behaviour.act"></a></p>
 <h4 id="act">act</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
@@ -5696,6 +5738,16 @@ start_at: optional datetime, when to start periodical calls.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Handler</span><span class="p">(</span><span class="n">SkillComponent</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 <p>This class implements an abstract behaviour.</p>
+<p>In a subclass of Handler, the flag 'is_programmatically_defined'
+ can be used by the developer to signal to the framework that the component
+ is meant to be used programmatically; hence, in case the class is
+ not declared in the configuration file but it is present in a skill
+ module, the framework will just ignore this class instead of printing
+ a warning message.</p>
+<p>SUPPORTED_PROTOCOL is read by the framework when the handlers are loaded
+ to register them as 'listeners' to the protocol identified by the specified
+ public id. Whenever a message of protocol 'SUPPORTED_PROTOCOL' is sent
+ to the agent, the framework will call the 'handle' method.</p>
 <p><a name="aea.skills.base.Handler.handle"></a></p>
 <h4 id="handle">handle</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>

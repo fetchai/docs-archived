@@ -971,6 +971,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1093,6 +1105,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1238,6 +1262,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4565,7 +4601,7 @@
 <h2 id="demo-instructions">Demo instructions:</h2>
 <h3 id="create-tac-controller-aea">Create TAC controller AEA</h3>
 <p>In the root directory, fetch the controller AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.22.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_controller:0.23.0
 <span class="nb">cd</span> tac_controller
 aea install
 aea build
@@ -4576,19 +4612,19 @@ aea build
 The following steps create the controller from scratch:
 <div class="highlight"><pre><span></span><code>aea create tac_controller
 <span class="nb">cd</span> tac_controller
-aea add connection fetchai/p2p_libp2p:0.18.0
-aea add connection fetchai/soef:0.19.0
-aea add connection fetchai/ledger:0.15.0
-aea add skill fetchai/tac_control:0.18.0
+aea add connection fetchai/p2p_libp2p:0.19.0
+aea add connection fetchai/soef:0.20.0
+aea add connection fetchai/ledger:0.16.0
+aea add skill fetchai/tac_control:0.19.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;0.3.0,&gt;=0.2.0&quot;}</span>
+<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0rc1&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.19.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/oef_search:0.14.0&quot;: &quot;fetchai/soef:0.19.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:0.15.0&quot;: &quot;fetchai/soef:0.20.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4599,12 +4635,12 @@ aea build
 
 <h3 id="create-the-tac-participant-aeas">Create the TAC participant AEAs</h3>
 <p>In a separate terminal, in the root directory, fetch at least two participants:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.24.0 --alias tac_participant_one
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/tac_participant:0.25.0 --alias tac_participant_one
 <span class="nb">cd</span> tac_participant_one
 aea install
 aea build
 <span class="nb">cd</span> ..
-aea fetch fetchai/tac_participant:0.24.0 --alias tac_participant_two
+aea fetch fetchai/tac_participant:0.25.0 --alias tac_participant_two
 <span class="nb">cd</span> tac_participant_two
 aea build
 </code></pre></div></p>
@@ -4618,21 +4654,21 @@ aea create tac_participant_two
 
 Build participant one:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_one
-aea add connection fetchai/p2p_libp2p:0.18.0
-aea add connection fetchai/soef:0.19.0
-aea add connection fetchai/ledger:0.15.0
-aea add skill fetchai/tac_participation:0.19.0
-aea add skill fetchai/tac_negotiation:0.22.0
+aea add connection fetchai/p2p_libp2p:0.19.0
+aea add connection fetchai/soef:0.20.0
+aea add connection fetchai/ledger:0.16.0
+aea add skill fetchai/tac_participation:0.20.0
+aea add skill fetchai/tac_negotiation:0.23.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;0.3.0,&gt;=0.2.0&quot;}</span>
+<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0rc1&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.19.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:0.11.0&quot;: &quot;fetchai/ledger:0.15.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:0.14.0&quot;: &quot;fetchai/soef:0.19.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:0.12.0&quot;: &quot;fetchai/ledger:0.16.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:0.15.0&quot;: &quot;fetchai/soef:0.20.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea config <span class="nb">set</span> --type dict agent.decision_maker_handler <span class="se">\</span>
 <span class="s1">&#39;{</span>
@@ -4645,21 +4681,21 @@ aea build
 
 Then, build participant two:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> tac_participant_two
-aea add connection fetchai/p2p_libp2p:0.18.0
-aea add connection fetchai/soef:0.19.0
-aea add connection fetchai/ledger:0.15.0
-aea add skill fetchai/tac_participation:0.19.0
-aea add skill fetchai/tac_negotiation:0.22.0
+aea add connection fetchai/p2p_libp2p:0.19.0
+aea add connection fetchai/soef:0.20.0
+aea add connection fetchai/ledger:0.16.0
+aea add skill fetchai/tac_participation:0.20.0
+aea add skill fetchai/tac_negotiation:0.23.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;0.3.0,&gt;=0.2.0&quot;}</span>
+<span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0rc1&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.19.0
 aea config <span class="nb">set</span> agent.default_ledger fetchai
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:0.11.0&quot;: &quot;fetchai/ledger:0.15.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:0.14.0&quot;: &quot;fetchai/soef:0.19.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:0.12.0&quot;: &quot;fetchai/ledger:0.16.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:0.15.0&quot;: &quot;fetchai/soef:0.20.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea config <span class="nb">set</span> --type dict agent.decision_maker_handler <span class="se">\</span>
 <span class="s1">&#39;{</span>
@@ -4697,7 +4733,7 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.tac_control.models.
 <p>Briefly run the controller AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.18.0 -u public_uri</code> to retrieve the address.)</p>
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.19.0 -u public_uri</code> to retrieve the address.)</p>
 <p>Then, in the participant one, run this command (replace <code>SOME_ADDRESS</code> with the correct value as described above):
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
 <span class="s1">&#39;{</span>

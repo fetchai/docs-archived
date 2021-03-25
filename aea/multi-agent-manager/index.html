@@ -830,6 +830,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1025,6 +1037,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1166,6 +1190,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4351,8 +4387,8 @@
 <p>We first add a couple of finished AEA project:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">aea.configurations.base</span> <span class="kn">import</span> <span class="n">PublicId</span>
 
-<span class="n">weather_station_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/weather_station:0.24.0&quot;</span><span class="p">)</span>
-<span class="n">weather_client_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/weather_client:0.25.0&quot;</span><span class="p">)</span>
+<span class="n">weather_station_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/weather_station:0.25.0&quot;</span><span class="p">)</span>
+<span class="n">weather_client_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/weather_client:0.26.0&quot;</span><span class="p">)</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">add_project</span><span class="p">(</span><span class="n">weather_station_id</span><span class="p">)</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">add_project</span><span class="p">(</span><span class="n">weather_client_id</span><span class="p">)</span>
 <span class="n">weather_station_name</span> <span class="o">=</span> <span class="n">weather_station_id</span><span class="o">.</span><span class="n">name</span>
@@ -4365,8 +4401,8 @@
     <span class="s2">&quot;connection_private_key_paths&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fetchai&quot;</span><span class="p">:</span> <span class="s2">&quot;fetchai_connection_private_key.txt&quot;</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">p2p_public_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/p2p_libp2p:0.18.0&quot;</span><span class="p">)</span>
-<span class="n">soef_public_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/soef:0.19.0&quot;</span><span class="p">)</span>
+<span class="n">p2p_public_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/p2p_libp2p:0.19.0&quot;</span><span class="p">)</span>
+<span class="n">soef_public_id</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/soef:0.20.0&quot;</span><span class="p">)</span>
 
 <span class="n">component_overrides</span> <span class="o">=</span> <span class="p">[{</span>
     <span class="o">**</span><span class="n">p2p_public_id</span><span class="o">.</span><span class="n">json</span><span class="p">,</span>
@@ -4377,6 +4413,7 @@
       <span class="s2">&quot;not_after&quot;</span><span class="p">:</span> <span class="s1">&#39;2022-01-01&#39;</span><span class="p">,</span>
       <span class="s2">&quot;not_before&quot;</span><span class="p">:</span> <span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span>
       <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;message_format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{public_key}</span><span class="s2">&quot;</span><span class="p">,</span>
       <span class="s2">&quot;save_path&quot;</span><span class="p">:</span> <span class="s2">&quot;conn_cert.txt&quot;</span>
     <span class="p">}]</span>
 <span class="p">},</span> <span class="p">{</span>
@@ -4407,6 +4444,7 @@
       <span class="s2">&quot;not_after&quot;</span><span class="p">:</span> <span class="s1">&#39;2022-01-01&#39;</span><span class="p">,</span>
       <span class="s2">&quot;not_before&quot;</span><span class="p">:</span> <span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span>
       <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="s2">&quot;fetchai&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;message_format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{public_key}</span><span class="s2">&quot;</span><span class="p">,</span>
       <span class="s2">&quot;save_path&quot;</span><span class="p">:</span> <span class="s2">&quot;conn_cert.txt&quot;</span>
     <span class="p">}]</span>
 <span class="p">},</span> <span class="p">{</span>

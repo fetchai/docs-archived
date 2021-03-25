@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -2007,6 +2043,20 @@
   
     <nav class="md-nav" aria-label="AbstractErrorHandler Objects">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#__init__" class="md-nav__link">
+    __init__
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#send_unsupported_protocol" class="md-nav__link">
@@ -4287,6 +4337,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#__init__" class="md-nav__link">
+    __init__
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#send_unsupported_protocol" class="md-nav__link">
     send_unsupported_protocol
   </a>
@@ -4333,11 +4397,21 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractErrorHandler</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
 </code></pre></div>
 <p>Error handler class for handling problematic envelopes.</p>
+<p><a name="aea.error_handler.base.AbstractErrorHandler.__init__"></a></p>
+<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span>
+</code></pre></div>
+<p>Instantiate error handler.</p>
+<p><a name="aea.error_handler.base.AbstractErrorHandler.config"></a></p>
+<h4 id="config">config</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+<p>Get handler config.</p>
 <p><a name="aea.error_handler.base.AbstractErrorHandler.send_unsupported_protocol"></a></p>
 <h4 id="send_unsupported_protocol">send<code>_</code>unsupported<code>_</code>protocol</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">send_unsupported_protocol</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
+ <span class="o">|</span> <span class="n">send_unsupported_protocol</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Handle the received envelope in case the protocol is not supported.</p>
 <p><strong>Arguments</strong>:</p>
@@ -4349,9 +4423,8 @@
 <p>None</p>
 <p><a name="aea.error_handler.base.AbstractErrorHandler.send_decoding_error"></a></p>
 <h4 id="send_decoding_error">send<code>_</code>decoding<code>_</code>error</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">send_decoding_error</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">exception</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
+ <span class="o">|</span> <span class="n">send_decoding_error</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">exception</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Handle a decoding error.</p>
 <p><strong>Arguments</strong>:</p>
@@ -4364,9 +4437,8 @@
 <p>None</p>
 <p><a name="aea.error_handler.base.AbstractErrorHandler.send_no_active_handler"></a></p>
 <h4 id="send_no_active_handler">send<code>_</code>no<code>_</code>active<code>_</code>handler</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="nd">@abstractmethod</span>
- <span class="o">|</span> <span class="n">send_no_active_handler</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
+ <span class="o">|</span> <span class="n">send_no_active_handler</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Handle the received envelope in case the handler is not supported.</p>
 <p><strong>Arguments</strong>:</p>

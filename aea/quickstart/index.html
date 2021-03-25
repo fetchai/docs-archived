@@ -685,6 +685,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-and-create-a-private-key" class="md-nav__link">
+    Add and create a private key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#run-the-aea" class="md-nav__link">
     Run the AEA
   </a>
@@ -999,6 +1006,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1121,6 +1140,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1266,6 +1297,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4470,6 +4513,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-and-create-a-private-key" class="md-nav__link">
+    Add and create a private key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#run-the-aea" class="md-nav__link">
     Run the AEA
   </a>
@@ -4654,19 +4704,19 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.11.2
+v1.0.0rc1
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </code></pre></div></p>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
-  <p>If you would rather not create an account on the registry at this point, then run `aea init --local` instead.</p>
+  <p>If you would rather not create an account on the registry at this point, then run <code>aea init --local</code> instead.</p>
 </div>
 
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>This is a simple demo that introduces you to the main components of an AEA. </p>
 <p>The fastest way to have your first AEA is to fetch one that already exists!</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.23.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.24.0
 <span class="nb">cd</span> my_first_aea
 </code></pre></div>
 <p>To learn more about the folder structure of an AEA project read on <a href="../package-imports/">here</a>.</p>
@@ -4682,15 +4732,15 @@ First, create a new AEA project and enter it.
 <b>Add the stub connection</b>
 <br>
 Second, add the stub connection to the project.
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/stub:0.18.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/stub:0.19.0
 </code></pre></div>
 <br>
 <b>Add the echo skill</b>
 <br>
 Third, add the echo skill to the project.
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.15.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.16.0
 </code></pre></div>
-This copies the `fetchai/echo:0.15.0` skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill `fetchai/echo:0.15.0` consists of the name of the author of the skill, followed by the skill name and its version.
+This copies the <code>fetchai/echo:0.16.0</code> skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill <code>fetchai/echo:0.16.0</code> consists of the name of the author of the skill, followed by the skill name and its version.
 </details>
 
 <h3 id="echo-skill">Echo skill</h3>
@@ -4707,10 +4757,15 @@ This copies the `fetchai/echo:0.15.0` skill code containing the "behaviours", an
 <div class="highlight"><pre><span></span><code>TO,SENDER,PROTOCOL_ID,ENCODED_MESSAGE,
 </code></pre></div>
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:0.1.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
+<div class="highlight"><pre><span></span><code>recipient_aea,sender_aea,fetchai/default:1.0.0,<span class="se">\x</span><span class="m">08</span><span class="se">\x</span><span class="m">01</span><span class="se">\x</span><span class="m">12</span><span class="se">\x</span><span class="m">011</span>*<span class="se">\x</span><span class="m">07</span><span class="se">\n\x</span>05hello,
 </code></pre></div>
 <h3 id="install-aea-dependencies">Install AEA dependencies</h3>
 <div class="highlight"><pre><span></span><code>aea install
+</code></pre></div>
+<h3 id="add-and-create-a-private-key">Add and create a private key</h3>
+<p>All AEAs need a private key to run. Add one now:</p>
+<div class="highlight"><pre><span></span><code>aea generate-key fetchai
+aea add-key fetchai
 </code></pre></div>
 <h3 id="run-the-aea">Run the AEA</h3>
 <p>Run the AEA.</p>
@@ -4723,7 +4778,7 @@ This copies the `fetchai/echo:0.15.0` skill code containing the "behaviours", an
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v0.11.2
+v1.0.0rc1
 
 Starting AEA <span class="s1">&#39;my_first_aea&#39;</span> <span class="k">in</span> <span class="s1">&#39;async&#39;</span> mode ...
 info: Echo Handler: setup method called.
@@ -4749,12 +4804,12 @@ info: Echo Behaviour: act method called.
 </code></pre></div>
 <details><summary>Manual approach</summary>
 
-Optionally, from a different terminal and same directory (i.e. the `my_first_aea` project), you can send the AEA a message wrapped in an envelope via the input file.
+Optionally, from a different terminal and same directory (i.e. the <code>my_first_aea</code> project), you can send the AEA a message wrapped in an envelope via the input file.
 
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:0.1.0,\x12\x10\x08\x01\x12\x011*\t*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;my_first_aea,sender_aea,fetchai/default:1.0.0,\x12\x10\x08\x01\x12\x011*\t*\x07\n\x05hello,&#39;</span> &gt;&gt; input_file
 </code></pre></div>
 
-You will see the `Echo Handler` dealing with the envelope and responding with the same message to the `output_file`, and also decoding the Base64 encrypted message in this case.
+You will see the <code>Echo Handler</code> dealing with the envelope and responding with the same message to the <code>output_file</code>, and also decoding the Base64 encrypted message in this case.
 
 <div class="highlight"><pre><span></span><code>info: Echo Behaviour: act method called.
 Echo Handler: <span class="nv">message</span><span class="o">=</span>Message<span class="o">(</span><span class="nv">sender</span><span class="o">=</span>sender_aea,to<span class="o">=</span>my_first_aea,content<span class="o">=</span>b<span class="s1">&#39;hello&#39;</span>,dialogue_reference<span class="o">=(</span><span class="s1">&#39;1&#39;</span>, <span class="s1">&#39;&#39;</span><span class="o">)</span>,message_id<span class="o">=</span><span class="m">1</span>,performative<span class="o">=</span>bytes,target<span class="o">=</span><span class="m">0</span><span class="o">)</span>, <span class="nv">sender</span><span class="o">=</span>sender_aea
@@ -4762,7 +4817,7 @@ info: Echo Behaviour: act method called.
 info: Echo Behaviour: act method called.
 </code></pre></div>
 
-Note, due to the dialogue reference having to be incremented, you can only send the above envelope once! This approach does not work in conjunction with the `aea interact` command.
+Note, due to the dialogue reference having to be incremented, you can only send the above envelope once! This approach does not work in conjunction with the <code>aea interact</code> command.
 
 </details>
 
@@ -4780,9 +4835,9 @@ info: Echo Behaviour: teardown method called.
 <p>We can write an end-to-end test for the AEA utilising helper classes provided by the framework.</p>
 <details><summary>Writing tests</summary>
 
-The following test class replicates the preceding demo and tests it's correct behaviour. The `AEATestCase` classes are a tool for AEA developers to write useful end-to-end tests of their AEAs.
+The following test class replicates the preceding demo and tests it's correct behaviour. The <code>AEATestCase</code> classes are a tool for AEA developers to write useful end-to-end tests of their AEAs.
 
-First, get the packages directory from the AEA repository (execute from the working directory which contains the `my_first_aea` folder):
+First, get the packages directory from the AEA repository (execute from the working directory which contains the <code>my_first_aea</code> folder):
 
 <div class="highlight"><pre><span></span><code>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
 </code></pre></div>
@@ -4859,7 +4914,7 @@ Then write the test:
         <span class="p">),</span> <span class="s2">&quot;Echo agent wasn&#39;t successfully terminated.&quot;</span>
 </code></pre></div>
 
-Place the above code into a file `test.py` in your AEA project directory (the same level as the `aea-config.yaml` file).
+Place the above code into a file <code>test.py</code> in your AEA project directory (the same level as the <code>aea-config.yaml</code> file).
 
 To run, execute the following:
 

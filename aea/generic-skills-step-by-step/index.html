@@ -1067,6 +1067,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1189,6 +1201,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1334,6 +1358,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4679,14 +4715,14 @@
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="reference-code-optional">Reference code (Optional)</h2>
 <p>This step-by-step guide goes through the creation of two AEAs which are already developed by Fetch.ai. You can get the finished AEAs, and compare your code against them, by following the next steps:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.21.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.22.0
 <span class="nb">cd</span> generic_seller
-aea eject skill fetchai/generic_seller:0.22.0
+aea eject skill fetchai/generic_seller:0.23.0
 <span class="nb">cd</span> ..
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.22.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.23.0
 <span class="nb">cd</span> generic_buyer
-aea eject skill fetchai/generic_buyer:0.22.0
+aea eject skill fetchai/generic_buyer:0.23.0
 <span class="nb">cd</span> ..
 </code></pre></div>
 <h2 id="simplification-step">Simplification step</h2>
@@ -4771,7 +4807,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4947,7 +4982,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4983,7 +5017,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 </code></pre></div>
 The code above contains the logic for handling <code>FipaMessages</code> received by the <code>my_generic_seller</code> AEA. We use <code>FipaDialogues</code> (more on this <a href="../generic-skills-step-by-step/#step-5-create-the-dialogues">below</a>) to keep track of the progress of the negotiation dialogue between the <code>my_generic_seller</code> AEA and the <code>my_generic_buyer</code> AEA.</p>
 <p>In the above <code>handle</code> method, we first check if a received message belongs to an existing dialogue or if we have to create a new dialogue (the <code>recover dialogue</code> part). Once this is done, we break down the AEA's response to each type of negotiation message, as indicated by the message's performative (the <code>handle message</code> part). Therefore, we implement the AEA's response to each negotiation message type in a different handler function.</p>
@@ -5197,7 +5230,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -5238,7 +5270,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">:</span> <span class="n">LedgerApiMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -5351,7 +5382,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Call to setup the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -5385,7 +5415,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -5634,7 +5663,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="sd">        Check if the query matches the supply.</span>
 
 <span class="sd">        :param query: the query</span>
-<span class="sd">        :return: bool indiciating whether matches or not</span>
+<span class="sd">        :return: bool indicating whether matches or not</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">query</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_service_description</span><span class="p">())</span>
 
@@ -5947,7 +5976,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The weather station skill implements the functionality to sell weather</span>
   <span class="l l-Scalar l-Scalar-Plain">data.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
-<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.11.0,</span><span class="nv"> </span><span class="s">&lt;0.12.0&#39;</span>
+<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=1.0.0rc1,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span>
   <span class="nt">README.md</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmPb5kHYZyhUN87EKmuahyGqDGgqVdGPyfC1KpGC3xfmcP</span>
   <span class="nt">__init__.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmTSEedzQySy2nzRCY3F66CBSX52f8s3pWHZTejX4hKC9h</span>
@@ -5957,13 +5986,13 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
   <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYTUsfv64eRQDevCfMUDQPx2GCtiMLFdacN4sS1E4Fdfx</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">connections</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.15.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.16.0</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.13.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/fipa:0.14.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.11.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.14.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.14.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/fipa:0.15.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.12.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.15.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">service_registration</span><span class="p">:</span>
@@ -6124,7 +6153,6 @@ aea install
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
 
 <span class="k">class</span> <span class="nc">GenericTransactionBehaviour</span><span class="p">(</span><span class="n">TickerBehaviour</span><span class="p">):</span>
@@ -6146,7 +6174,6 @@ aea install
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Setup behaviour.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6190,7 +6217,6 @@ aea install
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Teardown behaviour.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_timeout_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Timeout processing.&quot;&quot;&quot;</span>
@@ -6281,7 +6307,6 @@ aea install
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6317,7 +6342,6 @@ aea install
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 </code></pre></div>
 You will see that we are following similar logic to the <code>generic_seller</code> when we develop the <code>generic_buyer</code>’s side of the negotiation. First, we create a new dialogue and store it in the dialogues class. Then we are checking what kind of message we received by checking its performative. So lets start creating our handlers:</p>
 <p><div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="p">:</span> <span class="n">FipaMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -6510,7 +6534,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Call to setup the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6546,7 +6569,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6643,7 +6665,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6677,7 +6698,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6767,7 +6787,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6817,7 +6836,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">:</span> <span class="n">LedgerApiMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -7244,7 +7262,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        :param data: the data</span>
 <span class="sd">        :return: False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">update_search_query_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -7252,7 +7269,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
 </code></pre></div>
 <h3 id="step-5-create-the-dialogues_1">Step 5: Create the dialogues</h3>
 <p>As mentioned during the creation of the seller AEA, we should keep track of the various interactions an AEA has with others and this is done via dialogues. Create a new file and name it <code>dialogues.py</code> (in <code>my_generic_buyer/skills/generic_buyer/</code>). Inside this file add the following code:</p>
@@ -7601,7 +7617,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">skill</span>
 <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The weather client skill implements the skill to purchase weather data.</span>
 <span class="nt">license</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
-<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=0.11.0,</span><span class="nv"> </span><span class="s">&lt;0.12.0&#39;</span>
+<span class="nt">aea_version</span><span class="p">:</span> <span class="s">&#39;&gt;=1.0.0rc1,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span>
 <span class="nt">fingerprint</span><span class="p">:</span>
   <span class="nt">README.md</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmTR91jm7WfJpmabisy74NR5mc35YXjDU1zQAUKZeHRw8L</span>
   <span class="nt">__init__.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmU5vrC8FipyjfS5biNa6qDWdp4aeH5h4YTtbFDmCg8Chj</span>
@@ -7611,14 +7627,14 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
   <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmcrwaEWvKHDCNti8QjRhB4utJBJn5L8GpD27Uy9zHwKhY</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">connections</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.15.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.16.0</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.13.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/fipa:0.14.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.11.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.14.0</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/signing:0.11.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:0.14.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/fipa:0.15.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger_api:0.12.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:0.15.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/signing:0.12.0</span>
 <span class="nt">skills</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">behaviours</span><span class="p">:</span>
   <span class="nt">search</span><span class="p">:</span>
@@ -7702,8 +7718,8 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>In both AEAs run:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:0.11.0&quot;: &quot;fetchai/ledger:0.15.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:0.14.0&quot;: &quot;fetchai/soef:0.19.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:0.12.0&quot;: &quot;fetchai/ledger:0.16.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:0.15.0&quot;: &quot;fetchai/soef:0.20.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div></p>
 <h3 id="fund-the-buyer-aea">Fund the buyer AEA</h3>
@@ -7712,26 +7728,26 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div>
 <h3 id="run-seller-aea">Run seller AEA</h3>
 <p>Add the remaining packages for the seller AEA, then run it:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.18.0
-aea add connection fetchai/soef:0.19.0
-aea add connection fetchai/ledger:0.15.0
-aea add protocol fetchai/fipa:0.14.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.19.0
+aea add connection fetchai/soef:0.20.0
+aea add connection fetchai/ledger:0.16.0
+aea add protocol fetchai/fipa:0.15.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.19.0
 aea run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
 <h4 id="run-buyer-aea">Run buyer AEA</h4>
 <p>Add the remaining packages for the buyer AEA:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.18.0
-aea add connection fetchai/soef:0.19.0
-aea add connection fetchai/ledger:0.15.0
-aea add protocol fetchai/fipa:0.14.0
-aea add protocol fetchai/signing:0.11.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.19.0
+aea add connection fetchai/soef:0.20.0
+aea add connection fetchai/ledger:0.16.0
+aea add protocol fetchai/fipa:0.15.0
+aea add protocol fetchai/signing:0.12.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.19.0
 </code></pre></div>
 <p>Then, update the configuration of the buyer AEA's P2P connection:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

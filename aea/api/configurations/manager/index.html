@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -1764,8 +1800,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verify_or_create_private_keys" class="md-nav__link">
-    verify_or_create_private_keys
+  <a href="#verify_private_keys" class="md-nav__link">
+    verify_private_keys
   </a>
   
 </li>
@@ -4474,8 +4510,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verify_or_create_private_keys" class="md-nav__link">
-    verify_or_create_private_keys
+  <a href="#verify_private_keys" class="md-nav__link">
+    verify_private_keys
   </a>
   
 </li>
@@ -4613,7 +4649,7 @@ we will filter with only the component prefix (i.e. the triple type, author and 
 Does not save it on the disc!</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>overrides</code>: overrided values dictionary</li>
+<li><code>overrides</code>: overridden values dictionary</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -4633,18 +4669,19 @@ Does not save it on the disc!</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">dump_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Save agent config on the disc.</p>
-<p><a name="aea.configurations.manager.AgentConfigManager.verify_or_create_private_keys"></a></p>
-<h4 id="verify_or_create_private_keys">verify<code>_</code>or<code>_</code>create<code>_</code>private<code>_</code>keys</h4>
+<p><a name="aea.configurations.manager.AgentConfigManager.verify_private_keys"></a></p>
+<h4 id="verify_private_keys">verify<code>_</code>private<code>_</code>keys</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">verify_or_create_private_keys</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">private_key_helper</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">AgentConfig</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span> <span class="n">substitude_env_vars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">create_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AgentConfigManager&quot;</span>
+ <span class="o">|</span> <span class="n">verify_private_keys</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">private_key_helper</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">AgentConfig</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="kc">None</span><span class="p">],</span> <span class="n">substitude_env_vars</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AgentConfigManager&quot;</span>
 </code></pre></div>
-<p>Verify or create private keys.</p>
+<p>Verify private keys.</p>
 <p>Does not saves the config! Use AgentConfigManager.dump_config()</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>aea_project_path</code>: path to an AEA project.</li>
 <li><code>private_key_helper</code>: private_key_helper is a function that use agent config to check the keys</li>
 <li><code>substitude_env_vars</code>: replace env vars with values, does not dump config</li>
+<li><code>password</code>: the password to encrypt/decrypt the private key.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the agent configuration manager.</p>

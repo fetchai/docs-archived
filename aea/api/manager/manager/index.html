@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -950,6 +962,18 @@
   <li class="md-nav__item">
     <a href="../../../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1095,6 +1119,18 @@
   <li class="md-nav__item">
     <a href="../../../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -2839,6 +2875,13 @@
           <li class="md-nav__item">
   <a href="#dict_state" class="md-nav__link">
     dict_state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#projects" class="md-nav__link">
+    projects
   </a>
   
 </li>
@@ -4743,6 +4786,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#projects" class="md-nav__link">
+    projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add_error_callback" class="md-nav__link">
     add_error_callback
   </a>
@@ -4998,7 +5048,7 @@
 <p>Multi agents manager.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.__init__"></a></p>
 <h4 id="__init___3"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">working_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;async&quot;</span><span class="p">,</span> <span class="n">registry_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REGISTRY_NAME</span><span class="p">,</span> <span class="n">auto_add_remove_project</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">working_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;async&quot;</span><span class="p">,</span> <span class="n">registry_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_REGISTRY_NAME</span><span class="p">,</span> <span class="n">auto_add_remove_project</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize manager.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5007,6 +5057,7 @@
 <li><code>mode</code>: str. async or threaded</li>
 <li><code>registry_path</code>: str. path to the local packages registry</li>
 <li><code>auto_add_remove_project</code>: bool. add/remove project on the first agent add/last agent remove</li>
+<li><code>password</code>: the password to encrypt/decrypt the private key.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>None</p>
@@ -5033,6 +5084,12 @@
  <span class="o">|</span> <span class="n">dict_state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </code></pre></div>
 <p>Create MultiAgentManager dist state.</p>
+<p><a name="aea.manager.manager.MultiAgentManager.projects"></a></p>
+<h4 id="projects">projects</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
+ <span class="o">|</span> <span class="n">projects</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="n">Project</span><span class="p">]</span>
+</code></pre></div>
+<p>Get all projects.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.add_error_callback"></a></p>
 <h4 id="add_error_callback">add<code>_</code>error<code>_</code>callback</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_error_callback</span><span class="p">(</span><span class="n">error_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>

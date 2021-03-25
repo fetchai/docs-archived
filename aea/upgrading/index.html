@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#v0110-to-v0111" class="md-skip">
+        <a href="#v0111-to-v100rc1" class="md-skip">
           Skip to content
         </a>
       
@@ -280,6 +280,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v0111-to-v100rc1" class="md-nav__link">
+    v0.11.1 to v1.0.0rc1
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v0110-to-v0111" class="md-nav__link">
@@ -1096,6 +1103,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../prometheus/" class="md-nav__link">
       Prometheus monitoring
     </a>
@@ -1218,6 +1237,18 @@
   <li class="md-nav__item">
     <a href="../por/" class="md-nav__link">
       Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -1363,6 +1394,18 @@
   <li class="md-nav__item">
     <a href="../config/" class="md-nav__link">
       Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
     </a>
   </li>
 
@@ -4476,6 +4519,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0111-to-v100rc1" class="md-nav__link">
+    v0.11.1 to v1.0.0rc1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0110-to-v0111" class="md-nav__link">
     v0.11.0 to v0.11.1
   </a>
@@ -4733,9 +4783,14 @@
                 
                   <h1>Upgrading</h1>
                 
-                <p>This page provides some tips on how to upgrade AEA projects between different versions of the AEA framework.</p>
+                <p>This page provides some tips on how to upgrade AEA projects between different versions of the AEA framework. For full release notes check the <a href="https://github.com/fetchai/agents-aea/tags" target="_blank">AEA repo</a>.</p>
 <p>The primary tool for upgrading AEA projects is the <code>aea upgrade</code> command in the <a href="../cli-commands/">CLI</a>.</p>
 <p>Below we describe the additional manual steps required to upgrade between different versions:</p>
+<h2 id="v0111-to-v100rc1"><code>v0.11.1</code> to <code>v1.0.0rc1</code></h2>
+<p>No backwards incompatible changes to component development.</p>
+<p>The <code>aea-config.yaml</code> now requires the field <code>required_ledgers</code> which must specify all ledgers for which private keys are required to run the agent. Please add it to your project.</p>
+<p>The <code>registry_path</code> field has been removed from the <code>aea-config.yaml</code>. Please remove it from your project.</p>
+<p>All packages provided by author <code>fetchai</code> must be upgraded.</p>
 <h2 id="v0110-to-v0111"><code>v0.11.0</code> to <code>v0.11.1</code></h2>
 <p>No backwards incompatible changes.</p>
 <h2 id="v0101-to-v0110"><code>v0.10.1</code> to <code>v0.11.0</code></h2>
@@ -4764,11 +4819,11 @@
 <p>If an AEA project, or an AEA package, makes use of crypto functionalities, it will be needed to add the above packages as PyPI dependencies with version specifiers ranging from the latest minor and the latest minor + 1 (excluded). E.g. if the latest version if <code>0.1.0</code>, the version specifier should be <code>&lt;0.2.0,&gt;=0.1.0</code>:
 <div class="highlight"><pre><span></span><code><span class="nt">dependencies</span><span class="p">:</span>
   <span class="nt">aea-ledger-cosmos</span><span class="p">:</span>
-    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;0.3.0,&gt;=0.2.0</span>
+    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;2.0.0,&gt;=1.0.0rc1</span>
   <span class="nt">aea-ledger-ethereum</span><span class="p">:</span>
-    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;0.3.0,&gt;=0.2.0</span>
+    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;2.0.0,&gt;=1.0.0rc1</span>
   <span class="nt">aea-ledger-fetchai</span><span class="p">:</span>
-    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;0.3.0,&gt;=0.2.0</span>
+    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;2.0.0,&gt;=1.0.0rc1</span>
 </code></pre></div>
 The version specifier sets are important, as these plug-ins, at version <code>0.1.0</code>, depend on a specific range of the <code>aea</code> package.</p>
 <p>Then, running <code>aea install</code> inside the AEA project should install them in the current Python environment.</p>
