@@ -1,0 +1,5122 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Everything you need to know about Fetch.ai.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.fetch.ai/soef/simple-oef/">
+      
+      
+        <meta name="author" content="developer@fetch.ai">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
+    
+    
+      
+        <title>Simple OEF - Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-118969813-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simple-oef-agent-search-and-discovery" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-header-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Developer Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Simple OEF
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      Agent Framework
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Framework" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Framework
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/version/" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/upgrading/" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" >
+    <label class="md-nav__link" for="nav-2-4">
+      Concepts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Concepts" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/language-agnostic-definition/" class="md-nav__link">
+      Language Agnostic Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/agent-oriented-development/" class="md-nav__link">
+      Agent-oriented development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/vision/" class="md-nav__link">
+      Vision
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/app-areas/" class="md-nav__link">
+      Application areas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/oef-ledger/" class="md-nav__link">
+      Relation to OEF and Ledger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/identity/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/trust/" class="md-nav__link">
+      Trust minimisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" >
+    <label class="md-nav__link" for="nav-2-5">
+      Demos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Demos" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        Demos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/demos/" class="md-nav__link">
+      Demos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/aries-cloud-agent-demo/" class="md-nav__link">
+      Aries Cloud Agents Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/car-park-skills/" class="md-nav__link">
+      Car park skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/gym-example/" class="md-nav__link">
+      Gym example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/gym-skill/" class="md-nav__link">
+      Gym skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/ml-skills/" class="md-nav__link">
+      ML skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/oracle-demo/" class="md-nav__link">
+      Oracle skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac-skills/" class="md-nav__link">
+      TAC skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac-skills-contract/" class="md-nav__link">
+      TAC skills ledger-based
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/tac/" class="md-nav__link">
+      TAC external app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/thermometer-skills/" class="md-nav__link">
+      Thermometer skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/weather-skills/" class="md-nav__link">
+      Weather skills
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" >
+    <label class="md-nav__link" for="nav-2-6">
+      Development - Beginner
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Beginner" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Beginner
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/quickstart/" class="md-nav__link">
+      AEA quick start
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/core-components-1/" class="md-nav__link">
+      Core components - Part 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/aea-vs-mvc/" class="md-nav__link">
+      AEA and web frameworks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill-guide/" class="md-nav__link">
+      Build your first skill - search & discovery
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/core-components-2/" class="md-nav__link">
+      Core components - Part 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/interaction-protocol/" class="md-nav__link">
+      How AEAs talk to each other - interaction protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-skills-step-by-step/" class="md-nav__link">
+      Trade between two AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/development-setup/" class="md-nav__link">
+      Development setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" >
+    <label class="md-nav__link" for="nav-2-7">
+      Development - Advanced
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Advanced" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-1" type="checkbox" id="nav-2-7-1" >
+    <label class="md-nav__link" for="nav-2-7-1">
+      Topic guides
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Topic guides" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-1">
+        <span class="md-nav__icon md-icon"></span>
+        Topic guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/step-one/" class="md-nav__link">
+      Ways to build an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/build-aea-step-by-step/" class="md-nav__link">
+      Build an AEA with the CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/scaffolding/" class="md-nav__link">
+      Scaffolding packages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/protocol-generator/" class="md-nav__link">
+      Generating protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/multiplexer-standalone/" class="md-nav__link">
+      Use multiplexer stand-alone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/standalone-transaction/" class="md-nav__link">
+      Create stand-alone transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/decision-maker-transaction/" class="md-nav__link">
+      Create decision-maker transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill-testing/" class="md-nav__link">
+      Testing Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/deployment/" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/prometheus/" class="md-nav__link">
+      Prometheus monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/known-limits/" class="md-nav__link">
+      Known limitations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/build-aea-programmatically/" class="md-nav__link">
+      Build an AEA programmatically
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-vs-programmatic-aeas/" class="md-nav__link">
+      CLI vs programmatic AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/agent-vs-aea/" class="md-nav__link">
+      AEAs vs agents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/modes/" class="md-nav__link">
+      Modes of running an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-storage/" class="md-nav__link">
+      Generic Storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/multi-agent-manager/" class="md-nav__link">
+      Multi agent manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/debug/" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/runtime-cost/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/por/" class="md-nav__link">
+      Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-2" type="checkbox" id="nav-2-7-2" >
+    <label class="md-nav__link" for="nav-2-7-2">
+      Architecture & component deep-dives
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Architecture & component deep-dives" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-2">
+        <span class="md-nav__icon md-icon"></span>
+        Architecture & component deep-dives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/design-principles/" class="md-nav__link">
+      Design principles
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/diagram/" class="md-nav__link">
+      Architectural diagram
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/connection/" class="md-nav__link">
+      Connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/protocol/" class="md-nav__link">
+      Protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/skill/" class="md-nav__link">
+      Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/contract/" class="md-nav__link">
+      Contracts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/decision-maker/" class="md-nav__link">
+      Decision Maker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/ledger-integration/" class="md-nav__link">
+      Ledger & Crypto APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/message-routing/" class="md-nav__link">
+      Message routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/config/" class="md-nav__link">
+      Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/limits/" class="md-nav__link">
+      Limitations of v1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-3" type="checkbox" id="nav-2-7-3" >
+    <label class="md-nav__link" for="nav-2-7-3">
+      Agent Communication
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Communication" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-3">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Communication
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/acn/" class="md-nav__link">
+      Agent Communication Network
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-4" type="checkbox" id="nav-2-7-4" >
+    <label class="md-nav__link" for="nav-2-7-4">
+      Search & Discovery
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search & Discovery" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-4">
+        <span class="md-nav__icon md-icon"></span>
+        Search & Discovery
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/simple-oef/" class="md-nav__link">
+      Simple OEF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/defining-data-models/" class="md-nav__link">
+      Defining Data Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/query-language/" class="md-nav__link">
+      The Query Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5" type="checkbox" id="nav-2-7-5" >
+    <label class="md-nav__link" for="nav-2-7-5">
+      Developer Interfaces
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Interfaces" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-5">
+        <span class="md-nav__icon md-icon"></span>
+        Developer Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5-1" type="checkbox" id="nav-2-7-5-1" >
+    <label class="md-nav__link" for="nav-2-7-5-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-how-to/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/cli-commands/" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/package-imports/" class="md-nav__link">
+      File structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/wealth/" class="md-nav__link">
+      Generating wealth
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-6" type="checkbox" id="nav-2-7-6" >
+    <label class="md-nav__link" for="nav-2-7-6">
+      Benchmarks
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Benchmarks" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-6">
+        <span class="md-nav__icon md-icon"></span>
+        Benchmarks
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/performance-benchmark/" class="md-nav__link">
+      Performance benchmark
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7" type="checkbox" id="nav-2-7-7" >
+    <label class="md-nav__link" for="nav-2-7-7">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-7">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/abstract_agent/" class="md-nav__link">
+      AbstractAgent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/aea/" class="md-nav__link">
+      AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/aea_builder/" class="md-nav__link">
+      AEA Builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/agent/" class="md-nav__link">
+      Agent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/agent_loop/" class="md-nav__link">
+      Agent Loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/launcher/" class="md-nav__link">
+      Launcher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/multiplexer/" class="md-nav__link">
+      Multiplexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/runner/" class="md-nav__link">
+      Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/runtime/" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-12" type="checkbox" id="nav-2-7-7-12" >
+    <label class="md-nav__link" for="nav-2-7-7-12">
+      Components
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Components" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-12">
+        <span class="md-nav__icon md-icon"></span>
+        Components
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/components/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/components/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-13" type="checkbox" id="nav-2-7-7-13" >
+    <label class="md-nav__link" for="nav-2-7-7-13">
+      Configurations
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configurations" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-13">
+        <span class="md-nav__icon md-icon"></span>
+        Configurations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/data_types/" class="md-nav__link">
+      Data Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/pypi/" class="md-nav__link">
+      Pypi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/configurations/validation/" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-14" type="checkbox" id="nav-2-7-7-14" >
+    <label class="md-nav__link" for="nav-2-7-7-14">
+      Connections
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Connections" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-14">
+        <span class="md-nav__icon md-icon"></span>
+        Connections
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/connections/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/context/base/" class="md-nav__link">
+      Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-16" type="checkbox" id="nav-2-7-7-16" >
+    <label class="md-nav__link" for="nav-2-7-7-16">
+      Contracts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Contracts" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-16">
+        <span class="md-nav__icon md-icon"></span>
+        Contracts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/contracts/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17" type="checkbox" id="nav-2-7-7-17" >
+    <label class="md-nav__link" for="nav-2-7-7-17">
+      Crypto
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Crypto" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-17">
+        <span class="md-nav__icon md-icon"></span>
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/helpers/" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/ledger_apis/" class="md-nav__link">
+      LedgerApis
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/plugin/" class="md-nav__link">
+      Plugin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/wallet/" class="md-nav__link">
+      Wallet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17-6" type="checkbox" id="nav-2-7-7-17-6" >
+    <label class="md-nav__link" for="nav-2-7-7-17-6">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-17-6">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/crypto/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-18" type="checkbox" id="nav-2-7-7-18" >
+    <label class="md-nav__link" for="nav-2-7-7-18">
+      Decision Maker
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Decision Maker" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-18">
+        <span class="md-nav__icon md-icon"></span>
+        Decision Maker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/decision_maker/gop/" class="md-nav__link">
+      GOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-19" type="checkbox" id="nav-2-7-7-19" >
+    <label class="md-nav__link" for="nav-2-7-7-19">
+      Error Handler
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Error Handler" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-19">
+        <span class="md-nav__icon md-icon"></span>
+        Error Handler
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/error_handler/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/error_handler/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20" type="checkbox" id="nav-2-7-7-20" >
+    <label class="md-nav__link" for="nav-2-7-7-20">
+      Helpers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Helpers" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-20">
+        <span class="md-nav__icon md-icon"></span>
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-1" type="checkbox" id="nav-2-7-7-20-1" >
+    <label class="md-nav__link" for="nav-2-7-7-20-1">
+      ACN
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="ACN" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-1">
+        <span class="md-nav__icon md-icon"></span>
+        ACN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/acn/agent_record/" class="md-nav__link">
+      Agent Record
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/acn/uri/" class="md-nav__link">
+      URI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/async_friendly_queue/" class="md-nav__link">
+      Async Friendly Queue
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/async_utils/" class="md-nav__link">
+      Async Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/env_vars/" class="md-nav__link">
+      Env Vars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/exception_policy/" class="md-nav__link">
+      Exception Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/exec_timeout/" class="md-nav__link">
+      Exec Timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/file_io/" class="md-nav__link">
+      File IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/file_lock/" class="md-nav__link">
+      File Lock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/http_requests/" class="md-nav__link">
+      HttpRequests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/install_dependency/" class="md-nav__link">
+      Install Dependency
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/io/" class="md-nav__link">
+      IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-14" type="checkbox" id="nav-2-7-7-20-14" >
+    <label class="md-nav__link" for="nav-2-7-7-20-14">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-14">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/ipfs/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-16" type="checkbox" id="nav-2-7-7-20-16" >
+    <label class="md-nav__link" for="nav-2-7-7-20-16">
+      MultiAddress
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MultiAddress" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-16">
+        <span class="md-nav__icon md-icon"></span>
+        MultiAddress
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/multiaddr/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/multiple_executor/" class="md-nav__link">
+      MultipleExecutor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/pipe/" class="md-nav__link">
+      Pipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-19" type="checkbox" id="nav-2-7-7-20-19" >
+    <label class="md-nav__link" for="nav-2-7-7-20-19">
+      Preferences
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Preferences" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-19">
+        <span class="md-nav__icon md-icon"></span>
+        Preferences
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/preference_representations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/profiling/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-21" type="checkbox" id="nav-2-7-7-20-21" >
+    <label class="md-nav__link" for="nav-2-7-7-20-21">
+      Search
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-21">
+        <span class="md-nav__icon md-icon"></span>
+        Search
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/search/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/search/models/" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/serializers/" class="md-nav__link">
+      Serializers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23" type="checkbox" id="nav-2-7-7-20-23" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23">
+      Storage
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Storage" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-23">
+        <span class="md-nav__icon md-icon"></span>
+        Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/generic_storage/" class="md-nav__link">
+      GenericStorage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23-2" type="checkbox" id="nav-2-7-7-20-23-2" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23-2">
+      Backends
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Backends" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-20-23-2">
+        <span class="md-nav__icon md-icon"></span>
+        Backends
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/backends/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/storage/backends/sqlite/" class="md-nav__link">
+      Sqlite
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/sym_link/" class="md-nav__link">
+      Sym Link
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-25" type="checkbox" id="nav-2-7-7-20-25" >
+    <label class="md-nav__link" for="nav-2-7-7-20-25">
+      Transaction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Transaction" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-25">
+        <span class="md-nav__icon md-icon"></span>
+        Transaction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/transaction/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/win32/" class="md-nav__link">
+      Win32
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/helpers/yaml_utils/" class="md-nav__link">
+      YamlUtils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/identity/base/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/mail/base/" class="md-nav__link">
+      Mail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-23" type="checkbox" id="nav-2-7-7-23" >
+    <label class="md-nav__link" for="nav-2-7-7-23">
+      Manager
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Manager" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-23">
+        <span class="md-nav__icon md-icon"></span>
+        Manager
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/manager/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/manager/project/" class="md-nav__link">
+      Project
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24" type="checkbox" id="nav-2-7-7-24" >
+    <label class="md-nav__link" for="nav-2-7-7-24">
+      Protocols
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Protocols" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-24">
+        <span class="md-nav__icon md-icon"></span>
+        Protocols
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-2" type="checkbox" id="nav-2-7-7-24-2" >
+    <label class="md-nav__link" for="nav-2-7-7-24-2">
+      Dialogue
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dialogue" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-2">
+        <span class="md-nav__icon md-icon"></span>
+        Dialogue
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/dialogue/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-3" type="checkbox" id="nav-2-7-7-24-3" >
+    <label class="md-nav__link" for="nav-2-7-7-24-3">
+      Generator
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Generator" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-3">
+        <span class="md-nav__icon md-icon"></span>
+        Generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/extract_specification/" class="md-nav__link">
+      Extract Specification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/generator/validate/" class="md-nav__link">
+      Validate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-4" type="checkbox" id="nav-2-7-7-24-4" >
+    <label class="md-nav__link" for="nav-2-7-7-24-4">
+      Default Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Default Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-4">
+        <span class="md-nav__icon md-icon"></span>
+        Default Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/default/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-5" type="checkbox" id="nav-2-7-7-24-5" >
+    <label class="md-nav__link" for="nav-2-7-7-24-5">
+      Signing Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Signing Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-5">
+        <span class="md-nav__icon md-icon"></span>
+        Signing Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/signing/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-6" type="checkbox" id="nav-2-7-7-24-6" >
+    <label class="md-nav__link" for="nav-2-7-7-24-6">
+      State Update Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="State Update Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-6">
+        <span class="md-nav__icon md-icon"></span>
+        State Update Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/protocols/state_update/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-25" type="checkbox" id="nav-2-7-7-25" >
+    <label class="md-nav__link" for="nav-2-7-7-25">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-25">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/filter/" class="md-nav__link">
+      Filter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/registries/resources/" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-26" type="checkbox" id="nav-2-7-7-26" >
+    <label class="md-nav__link" for="nav-2-7-7-26">
+      Skills
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Skills" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-26">
+        <span class="md-nav__icon md-icon"></span>
+        Skills
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/behaviours/" class="md-nav__link">
+      Behaviors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/skills/tasks/" class="md-nav__link">
+      Task
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-27" type="checkbox" id="nav-2-7-7-27" >
+    <label class="md-nav__link" for="nav-2-7-7-27">
+      Test Tools
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Test Tools" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-27">
+        <span class="md-nav__icon md-icon"></span>
+        Test Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/test_cases/" class="md-nav__link">
+      Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/test_tools/test_skill/" class="md-nav__link">
+      Test Skill
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28" type="checkbox" id="nav-2-7-7-28" >
+    <label class="md-nav__link" for="nav-2-7-7-28">
+      Plugins
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Plugins" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-28">
+        <span class="md-nav__icon md-icon"></span>
+        Plugins
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1" type="checkbox" id="nav-2-7-7-28-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1-1" type="checkbox" id="nav-2-7-7-28-1-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1-1">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-1-1">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_cli_ipfs/core/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_cli_ipfs/ipfs_utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2" type="checkbox" id="nav-2-7-7-28-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-1" type="checkbox" id="nav-2-7-7-28-2-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-1">
+      Cosmos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Cosmos" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-1">
+        <span class="md-nav__icon md-icon"></span>
+        Cosmos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_ledger_cosmos/cosmos/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-2" type="checkbox" id="nav-2-7-7-28-2-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-2">
+      Ethereum
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ethereum" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ethereum
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_ledger_ethereum/ethereum/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-3" type="checkbox" id="nav-2-7-7-28-2-3" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-3">
+      Fetchai
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Fetchai" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        Fetchai
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_ledger_fetchai/fetchai/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/api/plugins/aea_ledger_fetchai/_cosmos/" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8" >
+    <label class="md-nav__link" for="nav-2-8">
+      Development - Use Case
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Use Case" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Use Case
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/generic-skills/" class="md-nav__link">
+      Generic skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/connect-a-frontend/" class="md-nav__link">
+      Front-end intergration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/http-connection-and-skill/" class="md-nav__link">
+      HTTP Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/orm-integration/" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/erc1155-skills/" class="md-nav__link">
+      Contract deploy and interact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/p2p-connection/" class="md-nav__link">
+      P2P Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/raspberry-set-up/" class="md-nav__link">
+      Build an AEA on a Raspberry Pi
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/glossary/" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../aea/questions-and-answers/" class="md-nav__link">
+      Q&A
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    <label class="md-nav__link" for="nav-3">
+      Search and Discovery (SOEF)
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search and Discovery (SOEF)" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Search and Discovery (SOEF)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Simple OEF
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Simple OEF
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-an-agent" class="md-nav__link">
+    Describing an Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Describing an Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personality-pieces" class="md-nav__link">
+    Personality Pieces
+  </a>
+  
+    <nav class="md-nav" aria-label="Personality Pieces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#genus-list" class="md-nav__link">
+    Genus list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectures" class="md-nav__link">
+    Architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-note-on-classifications" class="md-nav__link">
+    A note on classifications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-keys" class="md-nav__link">
+    Service Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-agents" class="md-nav__link">
+    Finding Agents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    Technical Details
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    Registration
+  </a>
+  
+    <nav class="md-nav" aria-label="Registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-identifiers" class="md-nav__link">
+    Chain identifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-commands-in-detail" class="md-nav__link">
+    Find commands in detail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sk-filters-filter-modes" class="md-nav__link">
+    SK Filters: filter modes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-information" class="md-nav__link">
+    Further information
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/building/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/versions/" class="md-nav__link">
+      Versions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/networks/" class="md-nav__link">
+      Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" >
+    <label class="md-nav__link" for="nav-4-5">
+      Commandline Client
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commandline Client" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commandline Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-introduction/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-keys/" class="md-nav__link">
+      Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-tokens/" class="md-nav__link">
+      Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/delegator-guide-cli/" class="md-nav__link">
+      Delegator Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" >
+    <label class="md-nav__link" for="nav-4-6">
+      Validators
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Validators" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-6">
+        <span class="md-nav__icon md-icon"></span>
+        Validators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/overview/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/setup/" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
+      Joining a Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/single-node-network/" class="md-nav__link">
+      Single Node Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/block-explorer/" class="md-nav__link">
+      Block Explorer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/governance/" class="md-nav__link">
+      Governance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/docker-images/" class="md-nav__link">
+      Docker Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/faucet/" class="md-nav__link">
+      Faucet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/python-examples/" class="md-nav__link">
+      Python Examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Incentivized Testnets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Incentivized Testnets" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Incentivized Testnets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw1/" class="md-nav__link">
+      Agent World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw2/" class="md-nav__link">
+      Agent World 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw3/" class="md-nav__link">
+      Agent World 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-bw1/" class="md-nav__link">
+      Beacon World 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i_nets/quickstart-aw4/" class="md-nav__link">
+      Agent World 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Collective Learning
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Collective Learning" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Collective Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/" class="md-nav__link">
+      Colearn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/about/" class="md-nav__link">
+      Collective Learning Protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3" >
+    <label class="md-nav__link" for="nav-6-3">
+      Getting Started
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        <span class="md-nav__icon md-icon"></span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_keras/" class="md-nav__link">
+      Keras
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_pytorch/" class="md-nav__link">
+      PyTorch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_mli/" class="md-nav__link">
+      The MachineLearningInterface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/differential_privacy/" class="md-nav__link">
+      Differential Privacy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" >
+    <label class="md-nav__link" for="nav-6-4">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/examples/" class="md-nav__link">
+      Standalone examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-an-agent" class="md-nav__link">
+    Describing an Agent
+  </a>
+  
+    <nav class="md-nav" aria-label="Describing an Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personality-pieces" class="md-nav__link">
+    Personality Pieces
+  </a>
+  
+    <nav class="md-nav" aria-label="Personality Pieces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#genus-list" class="md-nav__link">
+    Genus list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectures" class="md-nav__link">
+    Architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-note-on-classifications" class="md-nav__link">
+    A note on classifications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-keys" class="md-nav__link">
+    Service Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-agents" class="md-nav__link">
+    Finding Agents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    Technical Details
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    Registration
+  </a>
+  
+    <nav class="md-nav" aria-label="Registration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-identifiers" class="md-nav__link">
+    Chain identifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-commands-in-detail" class="md-nav__link">
+    Find commands in detail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sk-filters-filter-modes" class="md-nav__link">
+    SK Filters: filter modes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-information" class="md-nav__link">
+    Further information
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="simple-oef-agent-search-and-discovery">Simple-OEF: Agent Search and Discovery</h1>
+<p>This documentation has been produced for the Simple-OEF version <code>0.3.4</code>.</p>
+<h2 id="concepts">Concepts</h2>
+<p>The Simple-OEF, or soef, is a <strong>search and discovery</strong> mechanism for <strong>autonomous economic agents</strong>. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. </p>
+<p>The work-flow is:</p>
+<ul>
+<li><em>Find</em> relevant agents on the soef,</li>
+<li><em>Communicate</em> using the Agent Framework's peer-to-peer network,</li>
+<li><em>Negotiate</em> and then transact on the ledger in order to exchange value for tokens</li>
+</ul>
+<p>When an agent registers with the soef, it is issued with a <em>unique reference</em> which is quoted in all subsequent transactions. This way, the soef knows who its talking to. The soef is transaction based, so it does not need a permanent connection to be maintained in order to work with it. If it does not hear from an agent for a period of time, that agent will be timed out and automatically unregistered. This period of time is typically about one hour, but you can see the soef's configuration at:</p>
+<p><a href="https://s-oef.fetch.ai:443" target="_blank">https://s-oef.fetch.ai:443</a></p>
+<p>Agents identify themselves in a number of ways. These include their address, their given name, their classification and their genus. They can also describe how they "look" in other ways, and specify the services that they provide. </p>
+<p>In order to register, agents <em>must</em> provide a valid address and a given name. The address can be for the Fetch.ai native ledger, the Fetch.ai Cosmos ledger or the Ethereum ledger. It is this that uniquely identifies them, and addresses cannot be duplicated or shared. The given name can be anything and it is not used for search filtering. Typically, it can be thought of as a debugging aid or a context. Names could be Alice, Bob or Jim, as well as they could be a flight number, train identity or reference code. They <em>appear</em> in find results, but are not used to find by.</p>
+<h2 id="describing-an-agent">Describing an Agent</h2>
+<p>Agents describe themselves in three ways:</p>
+<ol>
+<li><strong>Identity</strong>: their address and ledger type along with their given name</li>
+<li><strong>Personality pieces</strong>: how they <em>look</em></li>
+<li><strong>Service keys</strong>: what they <em>do</em>, <em>sell</em> or <em>want</em>. </li>
+</ol>
+<p>We cover all of these in this next section. It's important to understand the difference between personality pieces and service keys, as agents only have one appearance, but they can provide many services. Search results can be filtered by a number of both, and wildcards are permitted where relevant.</p>
+<h3 id="personality-pieces">Personality Pieces</h3>
+<p>Agents can have a number of personality pieces. These describe how an agent appears, where it is, and other properties such as heading, supported protocols and types of transactions. All personality pieces are optional, but <strong>the more you set, the easier it is for searchers to narrow you down accurately</strong>. </p>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>genus</code></td>
+<td>Coarse type of agent, includes things such as <code>vehicle</code>, <code>building</code>, <code>iot</code>. See the genus table below.</td>
+</tr>
+<tr>
+<td><code>classification</code></td>
+<td>An agent's classification, typically in the form <code>mobility.railway.train</code>. See note below on classifications. No fixed classifications are specified. Classifications can contain alphanumeric characters, the period, underscore and colon (<code>_.:</code>).</td>
+</tr>
+<tr>
+<td><code>architecture</code></td>
+<td>Agent's architecture. See the architecture table below. Introduced in version <code>0.1.20</code>. The vast majority of agents should set this to <code>agentframework</code>.</td>
+</tr>
+<tr>
+<td><code>dynamics.moving</code></td>
+<td>Boolean, indicates if the agent is moving or not.</td>
+</tr>
+<tr>
+<td><code>dynamics.heading</code></td>
+<td>Indicates the heading of the agent, in radians, with 0.0 pointing due north.</td>
+</tr>
+<tr>
+<td><code>dynamics.altitude</code></td>
+<td>Altitude of the agent in metres from MSL</td>
+</tr>
+<tr>
+<td><code>dynamics.position</code></td>
+<td>Indicates the GPS co-ordinates of the agent as latitude and longitude.</td>
+</tr>
+<tr>
+<td><code>action.buyer</code></td>
+<td>Boolean, indicates whether the agent wishes to buy information, i.e., is an agent that requires value from another agent.</td>
+</tr>
+<tr>
+<td><code>action.seller</code></td>
+<td>Boolean, indicates whether the agent sells information, i.e., provides value. Value provided can be zero-cost.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="genus-list">Genus list</h4>
+<p>A genus is a coarse agent class. It is the roughest description of what an agent is, and an easy way of filtering large groups of agents out of searches. The supported genus list is:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code></td>
+<td>Agent is a test agent, and should be generally ignored.</td>
+</tr>
+<tr>
+<td><code>vehicle</code></td>
+<td>Moving objects such as trains, planes and automobiles</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>An agent that <em>represents</em> a human being</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>An agent that provides a service</td>
+</tr>
+<tr>
+<td><code>iot</code></td>
+<td>An agent that represents an Internet of Things device</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>An agent that represents data</td>
+</tr>
+<tr>
+<td><code>furniture</code></td>
+<td>Small fixed location items such as signs, mobile masts</td>
+</tr>
+<tr>
+<td><code>building</code></td>
+<td>Large fixed location item such as house, railway station, school</td>
+</tr>
+<tr>
+<td><code>buyer</code></td>
+<td>Indicates the agent is a buyer <em>only</em> and does not have value to deliver</td>
+</tr>
+<tr>
+<td><code>viewer</code></td>
+<td>The agent is a view in the world, acting as a "camera" to view content</td>
+</tr>
+<tr>
+<td><code>financial</code></td>
+<td>Financial agent: service, exchange, autonomous market maker,  etc.</td>
+</tr>
+</tbody>
+</table>
+<p>The best way to use genus is to pick the <strong>best fit</strong> choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Discord (see <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>). </p>
+<h4 id="architectures">Architectures</h4>
+<p>An architecture is a clue to other agents to describe how the agent is built. The vast majority of agents will be built using the Fetch Agent Framework, but in some cases, such as light-weight IoT devices or test/debugging, agents are built otherwise. Architecture offers a way of describing or filtering, as agents with a similar architecture are more likely to be able to communicate with each other in a meaningful way.</p>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>custom</code></td>
+<td>Custom agent architecture</td>
+</tr>
+<tr>
+<td><code>agentframework</code></td>
+<td>Built using the Fetch Agent Framework</td>
+</tr>
+</tbody>
+</table>
+<h4 id="a-note-on-classifications">A note on classifications</h4>
+<p>There is currently no fixed set of guidelines as to how classifications are used. It is expected that agent builders will converge on a set of standards, and as those become clearer, they will be documented as "by convention" classification uses. Here are some examples of classifications in use:</p>
+<div class="highlight"><pre><span></span><code>mobility.railway.station
+mobility.railway.train
+mobility.road.taxi
+infrastructure.road.sign
+</code></pre></div>
+<p>When filtering by classifications, the <code>*</code> wildcard can be used to, for example, capture all mobility related agents with a wildcard of <code>mobility.*</code>. </p>
+<h3 id="service-keys">Service Keys</h3>
+<p>Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent <em>looks</em>, service keys are what an agent <em>has</em> or <em>does</em>. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's discretion. As this changes, the documentation will be updated. However, for <em>buyer</em> agents, three suggested keys are:</p>
+<div class="highlight"><pre><span></span><code>buying_genus
+buying_architecture
+buying_classifications
+data_type
+si_unit
+</code></pre></div>
+<p>This allows searches to look for potential buyers of classifications, genus or with a compatible architecture. </p>
+<h2 id="finding-agents">Finding Agents</h2>
+<p>The soef is designed for <strong>geographic searches</strong> where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. However, it also allows for <strong>positionless searches</strong> on a single node. Future versions of the soef will support searches across nodes, and dimensional reduction-based fuzzy searches. </p>
+<p>Geographic searches are performed using the  <code>find_around_me</code> operation. This allows searches that:</p>
+<ul>
+<li>Are within a certain range in KM</li>
+<li>Optionally must be positioned within an angle of a heading</li>
+<li>That have a specified set of personality pieces (with wildcards where applicable)</li>
+<li>That have a specified set of service keys (with wildcards)</li>
+<li>Where chain identifiers match</li>
+</ul>
+<p>Positionless searches are performed using the <code>find_on_this_node</code> operation. This allows searches that:</p>
+<ul>
+<li>That have a specified set of personality pieces (with wildcards where applicable)</li>
+<li>That have a specified set of service keys (with wildcards)</li>
+<li>Where chain identifiers match</li>
+</ul>
+<p><strong>At least one</strong> filter must be supplied in positionless searches. Positionless searches are not boundless, they are capped at a specific number. The tighter the filters, the less likely that you will be capped. </p>
+<p>Some limits apply to the maximum number of filters, range and returned results. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at:</p>
+<p><a href="https://s-oef.fetch.ai:443" target="_blank">https://s-oef.fetch.ai:443</a></p>
+<p>The soef returns XML that includes information about all found agents. An example of that, unparsed, looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;response&gt;</span>
+  <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
+  <span class="nt">&lt;total&gt;</span>1<span class="nt">&lt;/total&gt;</span>
+  <span class="nt">&lt;capped&gt;</span>0<span class="nt">&lt;/capped&gt;</span>
+  <span class="nt">&lt;results&gt;</span>
+    <span class="nt">&lt;agent</span> <span class="na">name=</span><span class="s">&quot;TrainNumber1234&quot;</span> <span class="na">genus=</span><span class="s">&quot;vehicle&quot;</span> <span class="na">classification=</span><span class="s">&quot;mobility.railway.train&quot;</span> <span class="na">user_context=</span><span class="s">&quot;18:00 to Berlin&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;identities&gt;</span>
+        <span class="nt">&lt;identity</span> <span class="na">chain_identifier=</span><span class="s">&quot;fetchai&quot;</span><span class="nt">&gt;</span>2h6fi8oCkMz9GCpL7EUYMHjzgdRFGmDP5V4Ls97jZpzjg523yY<span class="nt">&lt;/identity&gt;</span>
+      <span class="nt">&lt;/identities&gt;</span>
+      <span class="nt">&lt;range_in_km&gt;</span>55.7363<span class="nt">&lt;/range_in_km&gt;</span>
+      <span class="nt">&lt;location</span> <span class="na">accuracy=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;latitude&gt;</span>52.5<span class="nt">&lt;/latitude&gt;</span>
+        <span class="nt">&lt;longitude&gt;</span>0.2<span class="nt">&lt;/longitude&gt;</span>
+      <span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;/agent&gt;</span>
+  <span class="nt">&lt;/results&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
+</code></pre></div>
+<p><strong>The <code>&lt;location&gt;</code> block is only returned if the agent has set itself to disclose its position in a find.</strong> Likewise, <strong>the <code>user_context=""</code> is only returned if enabled</strong>. Normally, the default is not to, and agents will then only return the <code>&lt;range_in_km&gt;</code> item. This is because agents may deliver their precise location as part of the value that they deliver, and therefore it would need to be negotiated and potentially paid for. However, sometimes, it is desirable for agents to always deliver their position when found but specify the accuracy. Because of this, the soef supports four levels of accuracy:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td><strong>Default</strong> do <em>not</em> disclose position, range only.</td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td>Rounded to nearest 11km</td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td>Rounded to nearest 1.1km</td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td>Rounded to nearest 110 metres</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td>No rounding: supplied in maximum available detail</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-details">Technical Details</h2>
+<p>For the majority of use cases, the soef will be used from the Agent Framework. As a result, talking to it directly will not be needed. There are some occasions where interacting with the soef directly may be required, and this section documents the API functionality. </p>
+<p>Until version 1.0 and main-net version 2 (expected in early 2021), some of the security and paid-for-services are not implemented and where they are, they generally not enforced. Digital signatures for the sign-on process and unique identity recovery will be implemented, as will encryption on sensitive data transport, for example. Thus the API is likely to change substantially in the coming months, particularly the initial registration process. It is not recommended that you invest in substantial code that talks to the soef directly until after 1.0, and it is always preferred to go through the Agent Framework.</p>
+<h3 id="registration">Registration</h3>
+<p>Agents register at the <code>/register</code> page on the soef. They are expected to provide four pieces of information:</p>
+<ol>
+<li>An API key</li>
+<li>A chain identifier, which can be either <code>fetchai_v1</code> for the Fetch native network (testnet or mainnet), <code>fetchai_v2_*</code> for the Fetch version 2 network or <code>ethereum</code> for the Ethereum network. See the "Chain identifiers" table below for a complete list of supported chain identifiers. </li>
+<li>An address, which must be a valid address for the specified chain identifier</li>
+<li>A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context. It must not exceed 128 characters. </li>
+</ol>
+<p>If registration is successful, the soef will return a result like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;response&gt;</span>
+  <span class="nt">&lt;encrypted&gt;</span>0<span class="nt">&lt;/encrypted&gt;</span>
+  <span class="nt">&lt;token&gt;</span>0A709D1ED170A3E96C4AC9D014BCAE30<span class="nt">&lt;/token&gt;</span>
+  <span class="nt">&lt;page_address&gt;</span>
+oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
+  <span class="nt">&lt;/page_address&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
+</code></pre></div>
+<p>This indicates success and that the agent is now in the <strong>Lobby</strong>. The lobby is a temporary holding pen where newly registered agents wait until the negotiation is complete. If an agent does not respond and complete its registration within 60 seconds, it is removed from the lobby and registration is cancelled. </p>
+<p>The <code>&lt;page_address&gt;</code> is the <strong>unique URL</strong> for the new agent. This must be quoted in all subsequent interactions and is how the soef identifies that specific agent. To complete registration, use the unique URL and specify the parameters:</p>
+<ul>
+<li><code>token=</code> with the token that was returned above and</li>
+<li><code>command=acknowledge</code></li>
+</ul>
+<p>If this works, you will receive a success response:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;response&gt;</span>
+  <span class="nt">&lt;success&gt;</span>1<span class="nt">&lt;/success&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
+</code></pre></div>
+<p>At this point, your agent is now fully registered and can then communicate with the soef. </p>
+<p>Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.</p>
+<h4 id="chain-identifiers">Chain identifiers</h4>
+<p>The soef supports a selection of chain identifiers designed to allow agents to distinguish networks in searches, but also to identify the type of address used for verification purposes. </p>
+<table>
+<thead>
+<tr>
+<th>Chain identifier</th>
+<th>Network</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fetchai_v1</code></td>
+<td>Version 1 Fetch.ai network (testnet or mainnet). Versions prior to 0.2 of the soef used <code>fetchai</code> for this, which is retained for compatibility.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_testnet_stable</code></td>
+<td>Version 2 Fetch.ai stable testnet, also known as "Agentland". Versions prior to 0.2 of the soef used <code>fetchai_cosmos</code> which is retained for compatibility, but deprecated.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_testnet_incentivised</code></td>
+<td>Current incentivised testnet. Fetch.ai are running a high-reward sequence of testnets in Q4 2020 and Q1 2021 leading to V2 mainnet.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_misc</code></td>
+<td>Miscellaneous v2 network. These are temporary or transient testnets where there is a desire to separate the chain ID from other v2 networks.</td>
+</tr>
+<tr>
+<td><code>fetchai_v2_mainnet</code></td>
+<td>Fetch.ai v2 mainnet. Not yet active.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="commands">Commands</h3>
+<p>The soef has a number of commands that can be used to set or update personality pieces, manage service keys, unregister, find other agents and other operations. These commands are specified using the agent's unique URL and a <code>command=</code> parameter. There may then be other required and optional parameters for that particular command.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unregister</code></td>
+<td>Unregisters the agent from the soef. The unique URL is invalidated and the agent will no longer appear in searches. No parameters.</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>Say hello. This is for agents that have been idle for a long period of time and wish to maintain their connection. No parameters.</td>
+</tr>
+<tr>
+<td><code>set_personality_piece</code></td>
+<td>Sets or updates a personality piece. Specify the <code>piece</code> (see personality piece table above) and the <code>value</code>. For personality pieces with multiple values, such as <code>dynamics.position</code>, separate them with the pipe character <code>|</code>.</td>
+</tr>
+<tr>
+<td><code>set_service_key</code></td>
+<td>Sets or updates a service key. Specify the <code>key</code> and the <code>value</code> to assign to it.</td>
+</tr>
+<tr>
+<td><code>remove_service_key</code></td>
+<td>Removes an existing service key. Specify the <code>key</code>.</td>
+</tr>
+<tr>
+<td><code>set_find_position_disclosure_accuracy</code></td>
+<td>Sets the find disclosure accuracy. See the table in "Finding Agents", above, for the accepted values for the parameter <code>accuracy</code>.</td>
+</tr>
+<tr>
+<td><code>find_around_me</code></td>
+<td>Geographic finding of agents around me. This allows various filters, such as personality pieces and service keys, to be specified. See below, as this is more complex.</td>
+</tr>
+<tr>
+<td><code>find_on_this_node</code></td>
+<td>Positionless finding of agents on this node. Various filters such as personality pieces and service keys can narrow the search. See below for more information.</td>
+</tr>
+<tr>
+<td><code>set_position</code></td>
+<td>This is a direct internal mapping to <code>set_personality_piece</code> with a piece of <code>dynamics.position</code>. It existed in the earliest versions of the soef and remains as a short-cut. It expects <code>longitude</code> and <code>latitude</code> as parameters.</td>
+</tr>
+<tr>
+<td><code>set_declared_name</code></td>
+<td>This allows an agent's declared name to be changed after registration. It takes one parameter, <code>name</code>, to specify the replacement name. Names cannot exceed 128 characters and must not contain illegal characters.</td>
+</tr>
+<tr>
+<td><code>set_user_context</code></td>
+<td>Sets an <strong>optional</strong> user-context for an agent to what is specified in the <code>value</code> parameter. This can be optionally disclosed in <code>find_around_me</code> if enabled. See <code>set_disclose_user_context</code>, below. The user context must not contain illegal characters and is limited to 160 maximum.</td>
+</tr>
+<tr>
+<td><code>set_disclose_user_context</code></td>
+<td>If the <code>disclose</code> parameter is set to <code>true</code>, the optional user context is disclosed if it has been set. Default is <code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="find-commands-in-detail">Find commands in detail</h4>
+<p><code>find_around_me</code> and <code>find_on_this_node</code> are the big commands. Ultimately, they will cost a small amount of tokens to use, depending on the size of the request, as it involves the most computing time. This provides an incentive for soef operators to maintain soef nodes that correspond to subject areas, geographic areas or both. The command has a number of parameters specifying the filtering required. For <code>find_around_me</code>, the <code>range_in_km</code> is <em>required</em>, whereas narrowing down agents to be within a certain angle of a direction is optional. This cannot exceed a certain range, typically between 50 and 75km. This, and other configuration items, are available on the soef's configuration page. There are other parameters that are optional, although for <code>find_on_this_node</code> at least one <code>ppfilter</code> or <code>skfilter</code> must be specified. The parameters are:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>range_in_km</code></td>
+<td>Range in kilometres to include agents in results.</td>
+</tr>
+<tr>
+<td><code>of_heading</code></td>
+<td>Optional: if a pizza-slice type search is required, this is the direction, in degrees, with 0.0 being north.</td>
+</tr>
+<tr>
+<td><code>within</code></td>
+<td>Optional: if a pizza-slice search, this is the angle in degrees from the <code>of_heading</code> that is allowed. If either <code>of_heading</code> or <code>within</code> are specified, <strong>both</strong> must be specified. Example: <code>of_heading</code> set to 90.0 and <code>within</code> set to 30 would exclude any agents that are not within 30 degrees of direct east of the me agent.</td>
+</tr>
+<tr>
+<td><code>chains_must_match</code></td>
+<td>Boolean. Must be <code>true</code> or <code>false</code>. Default is <code>false</code>. If specified, this ensures that any agents returned in the search will have the same chain identifier as you.</td>
+</tr>
+<tr>
+<td><code>ppfilter</code></td>
+<td>Specify a personality piece filter. Multiple <code>ppfilter</code>s can be specified. Example use is: <code>ppfilter=dynamics.moving,true</code>. Wildcards can be used where relevant, e.g.: <code>ppfilter=classification,mobility*</code> will match all classifications that <em>start</em> with <code>mobility</code>, whereas <code>ppfilter=classification,*mobility*</code> will match all classifications with <code>mobility</code> anywhere in it.</td>
+</tr>
+<tr>
+<td><code>skfilter</code></td>
+<td>Specify a service key filter. Multiple <code>skfilter</code>s can be specified. Example use is: <code>skfilter=fruit,peach</code> which will require any returned results to have a service key of <code>fruit</code> and a value of <code>peach</code>. Wildcards can be specified, so <code>skfilter=fruit,pea*</code> will match any agent with a service key of <code>fruit</code> that starts <code>pea</code>, so <code>pear</code> and <code>peach</code> would match.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sk-filters-filter-modes">SK Filters: filter modes</h4>
+<p>The <code>skfilter</code> parameter for <code>find_around_me</code> also supports a <em>mode</em>. Four modes are supported:</p>
+<table>
+<thead>
+<tr>
+<th>Mode string</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PS</td>
+<td>Key must be present, and success is required</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>Key must be present, and failure is required</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Only match if present, and success is required</td>
+</tr>
+<tr>
+<td>OF</td>
+<td>Only match if present, and failure is required</td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>command=find_around_me&amp;range_in_km=50&amp;skfilter=type,fruit,PS&amp;skfilter=size,large,OF
+</code></pre></div>
+<p>In this example, the key <code>type</code> must be present, and it must match to <code>fruit</code>. If the <code>size</code> key is present, and it is set to <code>large</code>, then do not match. I.e., return everything that's a fruit within 50km except where the size is large. </p>
+<h2 id="further-information">Further information</h2>
+<p>You can find further information, or talk to us, in the #agents channel on our official developer Discord server, which you can access <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>.</p>
+<p>We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without <code>find_around_me</code> being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. </p>
+<p>[Docs: issue 15, <code>0.3.4</code>, <code>28-Dec-2020</code>, TWS]</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../aea/questions-and-answers/" title="Q&A" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Q&A
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../simple-oef-usage/" title="SOEF Connection" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                SOEF Connection
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        and the
+        <a href="https://github.com/fetchai/docs/" target=_blank>
+          Fetch.AI Documentation Suite</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
