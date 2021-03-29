@@ -5512,9 +5512,13 @@ Otherwise, the path prefix is prepended.</p>
 <h4 id="compute_specifier_from_version">compute<code>_</code>specifier<code>_</code>from<code>_</code>version</h4>
 <div class="highlight"><pre><span></span><code><span class="n">compute_specifier_from_version</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="n">Version</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
-<p>Compute the specifier set from a version, by varying only on the patch number.</p>
+<p>Compute the specifier set from a version.</p>
+<p>Varying only on the patch number for versions with major 0.</p>
 <p>I.e. from "{major}.{minor}.{patch}.{extra}", return</p>
 <p>"&gt;=min({major}.{minor}.0, {major}.{minor}.{patch}.{extra}), &lt;{major}.{minor + 1}.0"</p>
+<p>Varying on the patch and minor number for versions with major &gt;= 1.</p>
+<p>I.e. from "{major}.{minor}.{patch}.{extra}", return</p>
+<p>"&gt;=min({major}.0.0, {major}.{minor}.{patch}.{extra}), &lt;{major+1}.0.0"</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>version</code>: the version</li>
@@ -5606,7 +5610,7 @@ def myfunction():
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2021</a>
         and the
         <a href="https://github.com/fetchai/docs/" target=_blank>
           Fetch.AI Documentation Suite</a>

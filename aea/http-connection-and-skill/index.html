@@ -3597,8 +3597,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    Steps
+  <a href="#http-client" class="md-nav__link">
+    HTTP Client
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-server" class="md-nav__link">
+    HTTP Server
   </a>
   
 </li>
@@ -4341,8 +4348,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    Steps
+  <a href="#http-client" class="md-nav__link">
+    HTTP Client
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-server" class="md-nav__link">
+    HTTP Server
   </a>
   
 </li>
@@ -4363,17 +4377,23 @@
                   <h1>HTTP Connection</h1>
                 
                 <h2 id="description">Description</h2>
-<p>The HTTP server connection allows you to run a server inside a connection which accepts requests from clients. The HTTP server connection validates requests it receives against a provided OpenAPI file. It translates each valid request into an envelope and sends it to the agent. If it receives a valid response envelope from the agent within a timeout window, the connection translates the response envelope into an HTTP response and serves it to the client.</p>
-<h2 id="steps">Steps</h2>
+<p>The HTTP client and HTTP server connections enable an AEA to communicate with external servers, respectively clients, via HTTP. </p>
+<p>The HTTP client connection receives request envelops from an agent's skill, translates each into an HTTP request and sends it to a server external to the agent. If it receives an HTTP response from the server within a timeout window, it translates it into a response envelope, and sends this back to the relevant skill inside the agent.</p>
+<p>The HTTP server connection allows you to run a server inside the connection itself which accepts requests from clients external to the agent. The HTTP server connection validates requests it receives against a provided OpenAPI file. It translates each valid request into an envelope and sends it to the skill specified in the connections configuration. If it receives a valid response envelope from the skill within a timeout window, the connection translates the response envelope into an HTTP response and serves it to the client.</p>
+<h2 id="http-client">HTTP Client</h2>
+<p>The <code>fetchai/simple_data_request:0.10.0</code> skill demonstrates a simple use case of the HTTP Client connection.</p>
+<p>The <code>HttpRequestBehaviour</code> in <code>behaviours.py</code> periodically sends HTTP envelops to the HTTP client connection. Its <code>act()</code> method, periodically called, simply calls <code>_generate_http_request</code> which contains the logic for enqueueing an HTTP request envelop.</p>
+<p>The <code>HttpHandler</code> in <code>handler.py</code> is a basic handler for dealing with HTTP response envelops received from the HTTP client connection. In the <code>handle()</code> method, the responses are dealt with by the private <code>_handle_response</code> method which essentially logs the response and adds the body of the response into the skill's shared state. </p>
+<h2 id="http-server">HTTP Server</h2>
 <p>Create a new AEA:</p>
 <div class="highlight"><pre><span></span><code>aea create my_aea
 <span class="nb">cd</span> my_aea
 </code></pre></div>
 <p>Add the http server connection package:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.19.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/http_server:0.20.0
 </code></pre></div>
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.19.0
+<div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.20.0
 </code></pre></div>
 <p>Modify the <code>api_spec_path</code>:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
@@ -4500,7 +4520,7 @@ aea add-key fetchai
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HttpHandler</span>
 </code></pre></div>
 <p>Finally, run the fingerprinter (note, you will have to replace the author name with your author handle):
-<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.17.0
+<div class="highlight"><pre><span></span><code>aea fingerprint skill fetchai/http_echo:0.18.0
 </code></pre></div></p>
 <p>You can now run the AEA:
 <div class="highlight"><pre><span></span><code>aea run
@@ -4579,7 +4599,7 @@ aea add-key fetchai
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2021</a>
         and the
         <a href="https://github.com/fetchai/docs/" target=_blank>
           Fetch.AI Documentation Suite</a>

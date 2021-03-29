@@ -1109,25 +1109,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaidefault0140-protocol" class="md-nav__link">
-    fetchai/default:0.14.0 protocol
+  <a href="#fetchaidefault0150-protocol" class="md-nav__link">
+    fetchai/default:0.15.0 protocol
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaioef_search0150-protocol" class="md-nav__link">
-    fetchai/oef_search:0.15.0 protocol
+  <a href="#fetchaioef_search0160-protocol" class="md-nav__link">
+    fetchai/oef_search:0.16.0 protocol
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaifipa0150-protocol" class="md-nav__link">
-    fetchai/fipa:0.15.0 protocol
+  <a href="#fetchaifipa0160-protocol" class="md-nav__link">
+    fetchai/fipa:0.16.0 protocol
   </a>
   
-    <nav class="md-nav" aria-label="fetchai/fipa:0.15.0 protocol">
+    <nav class="md-nav" aria-label="fetchai/fipa:0.16.0 protocol">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4426,25 +4426,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaidefault0140-protocol" class="md-nav__link">
-    fetchai/default:0.14.0 protocol
+  <a href="#fetchaidefault0150-protocol" class="md-nav__link">
+    fetchai/default:0.15.0 protocol
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaioef_search0150-protocol" class="md-nav__link">
-    fetchai/oef_search:0.15.0 protocol
+  <a href="#fetchaioef_search0160-protocol" class="md-nav__link">
+    fetchai/oef_search:0.16.0 protocol
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fetchaifipa0150-protocol" class="md-nav__link">
-    fetchai/fipa:0.15.0 protocol
+  <a href="#fetchaifipa0160-protocol" class="md-nav__link">
+    fetchai/fipa:0.16.0 protocol
   </a>
   
-    <nav class="md-nav" aria-label="fetchai/fipa:0.15.0 protocol">
+    <nav class="md-nav" aria-label="fetchai/fipa:0.16.0 protocol">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4533,8 +4533,8 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 <h2 id="custom-protocol">Custom protocol</h2>
 <p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech-acts as well as optionally the dialogue structure (e.g. roles of agents participating in a dialogue, the states a dialogue may end in, and the reply structure of the speech-acts in a dialogue).</p>
 <p>We highly recommend you <strong>do not</strong> attempt to write your own protocol code; always use existing packages or the protocol generator!</p>
-<h2 id="fetchaidefault0140-protocol"><code>fetchai/default:0.14.0</code> protocol</h2>
-<p>The <code>fetchai/default:0.14.0</code> protocol is meant to be implemented by every AEA. It serves AEA to AEA interaction and includes three message performatives:</p>
+<h2 id="fetchaidefault0150-protocol"><code>fetchai/default:0.15.0</code> protocol</h2>
+<p>The <code>fetchai/default:0.15.0</code> protocol is meant to be implemented by every AEA. It serves AEA to AEA interaction and includes three message performatives:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -4589,10 +4589,10 @@ An example is:
 </code></pre></div></p>
 </li>
 </ul>
-<p>Each AEA's <code>fetchai/error:0.14.0</code> skill utilises the <code>fetchai/default:0.14.0</code> protocol for error handling.</p>
-<h2 id="fetchaioef_search0150-protocol"><code>fetchai/oef_search:0.15.0</code> protocol</h2>
-<p>The <code>fetchai/oef_search:0.15.0</code> protocol is used by AEAs to interact with an <a href="../simple-oef">SOEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
-<p>The <code>fetchai/oef_search:0.15.0</code> protocol definition includes an <code>OefSearchMessage</code> with the following message types:</p>
+<p>Each AEA's <code>fetchai/error:0.15.0</code> skill utilises the <code>fetchai/default:0.15.0</code> protocol for error handling.</p>
+<h2 id="fetchaioef_search0160-protocol"><code>fetchai/oef_search:0.16.0</code> protocol</h2>
+<p>The <code>fetchai/oef_search:0.16.0</code> protocol is used by AEAs to interact with an <a href="../simple-oef">SOEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
+<p>The <code>fetchai/oef_search:0.16.0</code> protocol definition includes an <code>OefSearchMessage</code> with the following message types:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Performatives for the oef_search protocol.&quot;&quot;&quot;</span>
@@ -4691,7 +4691,7 @@ We can then create the message to search these services:
 </code></pre></div></p>
 </li>
 <li>
-<p>The <a href="../simple-oef">SOEF search node</a> will respond with a message <code>msg</code> of type <code>OefSearchMessage</code> with performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code>. To access the tuple of agents which match the query, simply use <code>msg.agents</code>. In particular, this will return the agent addresses matching the query. The <a href="../identity">agent address</a> can then be used to send a message to the agent utilising the <a href="../oef-ledger">P2P agent communication network</a> and any protocol other than <code>fetchai/oef_search:0.15.0</code>.</p>
+<p>The <a href="../simple-oef">SOEF search node</a> will respond with a message <code>msg</code> of type <code>OefSearchMessage</code> with performative <code>OefSearchMessage.Performative.SEARCH_RESULT</code>. To access the tuple of agents which match the query, simply use <code>msg.agents</code>. In particular, this will return the agent addresses matching the query. The <a href="../identity">agent address</a> can then be used to send a message to the agent utilising the <a href="../oef-ledger">P2P agent communication network</a> and any protocol other than <code>fetchai/oef_search:0.16.0</code>.</p>
 </li>
 <li>
 <p>If the <a href="../simple-oef">SOEF search node</a> encounters any errors with the messages you send, it will return an <code>OefSearchMessage</code> of performative <code>OefSearchMessage.Performative.OEF_ERROR</code> and indicate the error operation encountered:
@@ -4707,9 +4707,9 @@ We can then create the message to search these services:
 </code></pre></div></p>
 </li>
 </ul>
-<h2 id="fetchaifipa0150-protocol"><code>fetchai/fipa:0.15.0</code> protocol</h2>
+<h2 id="fetchaifipa0160-protocol"><code>fetchai/fipa:0.16.0</code> protocol</h2>
 <p>This protocol provides classes and functions necessary for communication between AEAs via a variant of the <a href="https://en.wikipedia.org/wiki/Foundation_for_Intelligent_Physical_Agents" target="_blank">FIPA</a> Agent Communication Language.</p>
-<p>The <code>fetchai/fipa:0.15.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
+<p>The <code>fetchai/fipa:0.16.0</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Performatives for the fipa protocol.&quot;&quot;&quot;</span>
 
@@ -4737,8 +4737,8 @@ We can then create the message to search these services:
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>The <code>fetchai/fipa:0.15.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
-<p>For examples of the usage of the <code>fetchai/fipa:0.15.0</code> protocol check out the <a href="../generic-skills-step-by-step" target="_blank"> generic skills step by step guide</a>.</p>
+<p>The <code>fetchai/fipa:0.16.0</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
+<p>For examples of the usage of the <code>fetchai/fipa:0.16.0</code> protocol check out the <a href="../generic-skills-step-by-step" target="_blank"> generic skills step by step guide</a>.</p>
 <h3 id="fipa-dialogue">Fipa dialogue</h3>
 <p>Below, we give an example of a dialogue between two agents. In practice; both dialogues would be maintained in the respective agent.</p>
 <p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:
@@ -4980,7 +4980,7 @@ In the skill, the above two lines will be done by the framework; you can simply 
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2020</a>
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2021</a>
         and the
         <a href="https://github.com/fetchai/docs/" target=_blank>
           Fetch.AI Documentation Suite</a>
