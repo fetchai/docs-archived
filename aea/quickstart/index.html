@@ -609,8 +609,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-automated-install-script" class="md-nav__link">
-    Option 2: Automated install script
+  <a href="#option-2-using-an-automated-install-script" class="md-nav__link">
+    Option 2: Using an automated install script
   </a>
   
 </li>
@@ -4486,8 +4486,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-automated-install-script" class="md-nav__link">
-    Option 2: Automated install script
+  <a href="#option-2-using-an-automated-install-script" class="md-nav__link">
+    Option 2: Using an automated install script
   </a>
   
 </li>
@@ -4639,50 +4639,56 @@
                 <p>If you want to create Autonomous Economic Agents (AEAs) that can act independently of constant user input and autonomously execute actions to achieve their objective, you can use the AEA framework.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mwkAUh-_uxA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<p>This example will take you through a simple AEA to familiarise you with the framework's basics.</p>
+<p>This example will take you through a simple AEA to familiarise you with the basics of the framework.</p>
 <h2 id="system-requirements">System Requirements</h2>
 <p>The AEA framework can be used on <code>Windows</code>, <code>Ubuntu/Debian</code> and <code>MacOS</code>.</p>
 <p>You need <a href="https://www.python.org/downloads/" target="_blank">Python 3.6</a> or higher as well as <a href="https://golang.org/dl/" target="_blank">Go 1.14.2</a> or higher installed.
 ​</p>
 <h3 id="option-1-manual-system-preparation">Option 1: Manual system preparation</h3>
 <p>Install a compatible Python and Go version on your system (see <a href="https://realpython.com/installing-python/" target="_blank">this external resource</a> for a comprehensive guide).</p>
-<p>The following hints can help:</p>
+<details><summary>Manual approach</summary>
+
+The following hints can help:
+
 <ul>
-<li>
-<p>To install Go, follow the
- official guide, depending on your platform <a href="https://golang.org/doc/install" target="_blank">here</a></p>
-</li>
-<li>
-<p>Python is already included by default on 
+<li>To install Go, follow the official guide, depending on your platform <a href="https://golang.org/doc/install" target="_blank">here</a></li>
+
+<li>Python is already included by default on 
 many Linux distributions (e.g. Ubuntu), as well as MacOS.
 To check you have the right version, open a terminal and run: 
 <div class="highlight"><pre><span></span><code>python3 --version
-</code></pre></div></p>
+</code></pre></div>
 </li>
-<li>
-<p>To install Python on Windows machines, 
-you can download a specific release <a href="https://www.python.org/downloads/" target="_blank">here</a>.</p>
-</li>
-<li>
-<p>Ubuntu/Debian systems only: install Python headers,
+
+<li>To install Python on Windows machines, you can download a specific release <a href="https://www.python.org/downloads/" target="_blank">here</a>.</li>
+
+<li>Ubuntu/Debian systems only: install Python headers,
   depending on the Python version you have installed on your machine.
   E.g. for Python 3.7: 
 <div class="highlight"><pre><span></span><code>sudo apt-get install python3.7-dev
-</code></pre></div></p>
+</code></pre></div>
 </li>
-<li>
-<p>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target="_blank">tools for Visual Studio</a>.</p>
-</li>
+
+<li>Windows users: install <a href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019" target="_blank">tools for Visual Studio</a>.</li>
 </ul>
-<h3 id="option-2-automated-install-script">Option 2: Automated install script</h3>
-<p>We provide a script to automatically install all framework dependencies and the framework itself. This means that if you follow this option, you can skip the <code>installation</code> step below.</p>
-<p>On MacOS or Ubuntu run:</p>
+
+</details>
+
+<h3 id="option-2-using-an-automated-install-script">Option 2: Using an automated install script</h3>
+<p>We provide a script to automatically install all framework dependencies and the framework itself. This means that if you follow this option, you can skip the <a href="../quickstart#installation">installation step</a> that comes later on this page.</p>
+<details><summary>Automated install script approach</summary>
+
+On MacOS or Ubuntu run the following commands to download and install:
+
 <div class="highlight"><pre><span></span><code>curl https://raw.githubusercontent.com/fetchai/agents-aea/main/scripts/install.sh --output install.sh
 chmod +x install.sh
 ./install.sh
 </code></pre></div>
-<p>On Windows:</p>
-<p>Download <code>https://raw.githubusercontent.com/fetchai/agents-aea/main/scripts/install.ps1</code>, then run <code>install.ps1</code> with the PowerShell terminal.</p>
+
+On Windows: download <a href="https://raw.githubusercontent.com/fetchai/agents-aea/main/scripts/install.ps1" target="_blank">https://raw.githubusercontent.com/fetchai/agents-aea/main/scripts/install.ps1</a>, then run <code>install.ps1</code> with the PowerShell terminal.
+
+</details>
+
 <h3 id="option-3-using-docker">Option 3: Using Docker</h3>
 <p>​
 We also provide a Docker image with all the needed dependencies.</p>
@@ -4711,11 +4717,16 @@ you can follow the rest of the guide the same way as if not using docker.
 </details>
 
 <h2 id="preliminaries">Preliminaries</h2>
-<p>We have created a  <a href="https://github.com/fetchai/agents-template" target="_blank">template repo for AEA development</a> here which you can optionally fork and use immediately.</p>
-<p>Alternatively, create and enter into a new working directory:</p>
-<div class="highlight"><pre><span></span><code>mkdir my_aea_projects/
-<span class="nb">cd</span> my_aea_projects/
-</code></pre></div>
+<p>Ensure, you are in a clean working directory:</p>
+<ul>
+<li>
+<p>either you create it manually <code>mkdir my_aea_projects/ &amp;&amp; cd my_aea_projects/</code>, then add an empty directory called <code>packages</code> with the following command <code>mkdir packages/</code>,</p>
+</li>
+<li>
+<p>or you clone the template repo as described in <code>Approach 1</code> in the <a href="../development-setup#approach-1">development setup</a> guide.</p>
+</li>
+</ul>
+<p>At this point, when typing <code>ls</code> you should see a single folder called <code>packages</code> in your working environment. This will act as your local registry for AEA components.</p>
 <p>Unless you are using the docker image, we highly recommend using a virtual environment to ensure consistency across dependencies.</p>
 <p>Check that you have <a href="https://github.com/pypa/pipenv" target="_blank"><code>pipenv</code></a>.</p>
 <div class="highlight"><pre><span></span><code>which pipenv
@@ -4724,9 +4735,8 @@ you can follow the rest of the guide the same way as if not using docker.
 <p>Once installed, create a new environment and open it (here we use Python 3.7 but the AEA framework supports any Python &gt;= 3.6).</p>
 <div class="highlight"><pre><span></span><code>touch Pipfile <span class="o">&amp;&amp;</span> pipenv --python <span class="m">3</span>.7 <span class="o">&amp;&amp;</span> pipenv shell
 </code></pre></div>
-<p>For more guidance on setting up a development environment check out <a href="../development-setup">this guide</a>.</p>
 <h2 id="installation">Installation</h2>
-<p>The following installs the entire AEA package which also includes a <a href="../cli-commands">command-line interface (CLI)</a>.</p>
+<p>The following installs the entire AEA package which also includes a <a href="../cli-commands">command-line interface (CLI)</a>. (You can skip this step if you used the install script above: <a href="../quickstart#option-2-using-an-automated-install-script">Option 2 </a>.)</p>
 <div class="highlight"><pre><span></span><code>pip install aea<span class="o">[</span>all<span class="o">]</span>
 </code></pre></div>
 <p>If you are using <code>zsh</code> rather than <code>bash</code> type
@@ -4734,11 +4744,11 @@ you can follow the rest of the guide the same way as if not using docker.
 </code></pre></div></p>
 <p>If the installation steps fail, it might be a dependency issue. Make sure you have followed all the relevant system specific steps above under <code>System Requirements</code>.</p>
 <h2 id="setup-author-name">Setup author name</h2>
-<p>AEAs are composed from components. The components can be developed by anyone and are available on the <a href="https://aea-registry.fetch.ai" target="_blank">AEA registry</a>. To use the registry we need to register an author name.</p>
-<p>You can setup your author name using the <code>init</code> command:
+<p>AEAs are composed from components. AEAs and AEA components can be developed by anyone and pushed to the <a href="https://aea-registry.fetch.ai" target="_blank">AEA registry</a> for others to use. To use the registry, we need to register an author name.</p>
+<p>You can set up your author name using the <code>init</code> command:
 <div class="highlight"><pre><span></span><code>aea init
 </code></pre></div></p>
-<p>This is your unique author name in the Fetch.ai ecosystem.</p>
+<p>This is your unique author (or developer) name in the AEA ecosystem.</p>
 <p>You should see a similar output (with your input instead of the sample username and email):
 <div class="highlight"><pre><span></span><code>Do you have a Registry account? <span class="o">[</span>y/N<span class="o">]</span>: n
 Create a new account on the Registry now:
@@ -4753,7 +4763,7 @@ Confirm password:
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v1.0.0rc2
+v1.0.0
 
 AEA configurations successfully initialized: <span class="o">{</span><span class="s1">&#39;author&#39;</span>: <span class="s1">&#39;fetchai&#39;</span><span class="o">}</span>
 </code></pre></div></p>
@@ -4765,7 +4775,7 @@ AEA configurations successfully initialized: <span class="o">{</span><span class
 <h2 id="echo-skill-demo">Echo skill demo</h2>
 <p>This is a simple demo that introduces you to the main components of an AEA. </p>
 <p>The fastest way to have your first AEA is to fetch one that already exists!</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.25.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/my_first_aea:0.26.0
 <span class="nb">cd</span> my_first_aea
 </code></pre></div>
 <p>To learn more about the folder structure of an AEA project read on <a href="../package-imports/">here</a>.</p>
@@ -4781,15 +4791,15 @@ First, create a new AEA project and enter it.
 <b>Add the stub connection</b>
 <br>
 Second, add the stub connection to the project.
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/stub:0.19.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/stub:0.20.0
 </code></pre></div>
 <br>
 <b>Add the echo skill</b>
 <br>
 Third, add the echo skill to the project.
-<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.17.0
+<div class="highlight"><pre><span></span><code>aea add skill fetchai/echo:0.18.0
 </code></pre></div>
-This copies the <code>fetchai/echo:0.17.0</code> skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill <code>fetchai/echo:0.17.0</code> consists of the name of the author of the skill, followed by the skill name and its version.
+This copies the <code>fetchai/echo:0.18.0</code> skill code containing the "behaviours", and "handlers" into the project, ready to run. The identifier of the skill <code>fetchai/echo:0.18.0</code> consists of the name of the author of the skill, followed by the skill name and its version.
 </details>
 
 <h3 id="echo-skill">Echo skill</h3>
@@ -4799,7 +4809,7 @@ This copies the <code>fetchai/echo:0.17.0</code> skill code containing the "beha
 <p>AEAs use envelopes containing messages for communication. To learn more, check out the <a href="../core-components-1/">next section</a>.</p>
 <h3 id="stub-connection">Stub connection</h3>
 <p>Besides skills, AEAs may have one or more <em>connections</em> enabling them to interface with entities in the outside world. For example, an HTTP client connection allows an AEA to communicate with HTTP servers. To read more about connections see <a href="../connection/">this page</a>.</p>
-<p>In this demo we use a stub connection (<code>fetchai/stub0.15.0</code>) to send envelopes to and receive envelopes from the AEA.</p>
+<p>In this demo, we use the stub connection (<code>fetchai/stub0.15.0</code>) to send envelopes to and receive envelopes from the AEA.</p>
 <p>A stub connection provides an I/O reader and writer. It uses two files for communication: one for incoming envelopes and the other for outgoing envelopes.</p>
 <p>The AEA waits for a new envelope posted to the file <code>my_first_aea/input_file</code>, and adds a response to the file <code>my_first_aea/output_file</code>.</p>
 <p>The format of each envelope is the following:</p>
@@ -4827,7 +4837,7 @@ aea add-key fetchai
  / ___ <span class="se">\ </span><span class="p">|</span> <span class="p">|</span>___  / ___ <span class="se">\</span>
 /_/   <span class="se">\_\|</span>_____<span class="p">|</span>/_/   <span class="se">\_\</span>
 
-v1.0.0rc2
+v1.0.0
 
 Starting AEA <span class="s1">&#39;my_first_aea&#39;</span> <span class="k">in</span> <span class="s1">&#39;async&#39;</span> mode ...
 info: Echo Handler: setup method called.
@@ -4840,7 +4850,8 @@ info: Echo Behaviour: act method called.
 </code></pre></div>
 <p>The framework first calls the <code>setup</code> methods in the skill's <code>Handler</code> and <code>Behaviour</code> classes in that order; after which it repeatedly calls the <code>act</code> method of <code>Behaviour</code> class. This is the main agent loop in action.</p>
 <h4 id="add-a-message-to-the-input-file">Add a message to the input file</h4>
-<p>From a different terminal and same directory, you can send the AEA a message wrapped in an envelop using the CLI's <code>interact</code> command:</p>
+<p>You can send the AEA a message wrapped in an envelope using the CLI's <code>interact</code> command.</p>
+<p>From a different terminal and same directory (ensure you are in the same virtual environment: <code>pipenv shell</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> my_first_aea
 aea interact
 </code></pre></div>

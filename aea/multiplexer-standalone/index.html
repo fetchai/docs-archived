@@ -4470,7 +4470,12 @@
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
         <span class="c1"># Wait for everything to start up</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Not connected&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response
@@ -4482,7 +4487,12 @@
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
 
         <span class="c1"># Wait for the envelope to get processed</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">in_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No message!&quot;</span><span class="p">)</span>
 
         <span class="c1"># get the envelope</span>
         <span class="n">envelope</span> <span class="o">=</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>  <span class="c1"># type: Optional[Envelope]</span>
@@ -4571,7 +4581,12 @@
         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
         <span class="c1"># Wait for everything to start up</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">is_connected</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Not connected&quot;</span><span class="p">)</span>
 
         <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
         <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
@@ -4581,7 +4596,12 @@
             <span class="n">write_with_lock</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">message_text</span><span class="p">)</span>
 
         <span class="c1"># Wait for the envelope to get processed</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">in_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No message!&quot;</span><span class="p">)</span>
 
         <span class="c1"># get the envelope</span>
         <span class="n">envelope</span> <span class="o">=</span> <span class="n">multiplexer</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>  <span class="c1"># type: Optional[Envelope]</span>
