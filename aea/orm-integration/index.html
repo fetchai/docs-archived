@@ -480,6 +480,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../aggregation-demo/" class="md-nav__link">
+      Aggegation skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tac-skills/" class="md-nav__link">
       TAC skills
     </a>
@@ -4589,7 +4601,7 @@
 <p>This demo involves a true ledger transaction on Fetch.ai's <code>testnet</code> network or Ethereum's <code>ropsten</code>. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA which provides thermometer data:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.25.0 --alias my_thermometer_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_aea:0.26.0 --alias my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
 aea install
 aea build
@@ -4600,19 +4612,19 @@ aea build
 The following steps create the seller from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_aea
 <span class="nb">cd</span> my_thermometer_aea
-aea add connection fetchai/p2p_libp2p:0.21.0
-aea add connection fetchai/soef:0.22.0
+aea add connection fetchai/p2p_libp2p:0.22.0
+aea add connection fetchai/soef:0.23.0
 aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/thermometer:0.24.0
+aea add skill fetchai/thermometer:0.25.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.21.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.22.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4623,7 +4635,7 @@ aea build
 
 <h3 id="create-the-buyer-client">Create the buyer client</h3>
 <p>In another terminal, fetch the buyer AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.26.0 --alias my_thermometer_client
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/thermometer_client:0.27.0 --alias my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
 aea install
 aea build
@@ -4634,19 +4646,19 @@ aea build
 The following steps create the car data client from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_thermometer_client
 <span class="nb">cd</span> my_thermometer_client
-aea add connection fetchai/p2p_libp2p:0.21.0
-aea add connection fetchai/soef:0.22.0
+aea add connection fetchai/p2p_libp2p:0.22.0
+aea add connection fetchai/soef:0.23.0
 aea add connection fetchai/ledger:0.18.0
 aea add skill fetchai/thermometer_client:0.24.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.21.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.22.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4735,7 +4747,7 @@ The <code>service_data</code> is used to register the service in the <a href="..
 </code></pre></div></p>
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy</h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.24.0
+<div class="highlight"><pre><span></span><code>aea eject skill fetchai/thermometer:0.25.0
 </code></pre></div>
 <p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
 <p>Open <code>strategy.py</code> (in <code>my_thermometer_aea/skills/thermometer/strategy.py</code>) and make the following modifications:</p>
@@ -4799,7 +4811,7 @@ Also, create two new functions, one that creates a connection with the database,
 <p>First, run the thermometer (seller) AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.21.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.22.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the thermometer AEA.</p>
 <p>Then, configure the thermometer client (buyer) to connect to this same local ACN by running the following command in the buyer terminal, replacing <code>SOME_ADDRESS</code> with the value you noted above:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

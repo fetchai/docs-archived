@@ -480,6 +480,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../aggregation-demo/" class="md-nav__link">
+      Aggegation skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tac-skills/" class="md-nav__link">
       TAC skills
     </a>
@@ -4764,12 +4776,12 @@
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="reference-code-optional">Reference code (Optional)</h2>
 <p>This step-by-step guide goes through the creation of two AEAs which are already developed by Fetch.ai. You can get the finished AEAs, and compare your code against them, by following the next steps:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.24.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.25.0
 <span class="nb">cd</span> generic_seller
-aea eject skill fetchai/generic_seller:0.25.0
+aea eject skill fetchai/generic_seller:0.26.0
 <span class="nb">cd</span> ..
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.25.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.26.0
 <span class="nb">cd</span> generic_buyer
 aea eject skill fetchai/generic_buyer:0.25.0
 <span class="nb">cd</span> ..
@@ -4799,8 +4811,9 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 <h3 id="step-2-create-the-behaviour">Step 2: Create the behaviour</h3>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to actions initiated by the AEA, rather than reactions to other events.</p>
 <p>Open the <code>behaviours.py</code> file (<code>my_generic_seller/skills/generic_seller/behaviours.py</code>) and replace the stub code with the following:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cast</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
 
+<span class="kn">from</span> <span class="nn">aea.helpers.search.models</span> <span class="kn">import</span> <span class="n">Description</span>
 <span class="kn">from</span> <span class="nn">aea.skills.behaviours</span> <span class="kn">import</span> <span class="n">TickerBehaviour</span>
 
 <span class="kn">from</span> <span class="nn">packages.fetchai.connections.ledger.base</span> <span class="kn">import</span> <span class="p">(</span>
@@ -4816,6 +4829,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
 
 <span class="n">DEFAULT_SERVICES_INTERVAL</span> <span class="o">=</span> <span class="mf">60.0</span>
+<span class="n">DEFAULT_MAX_SOEF_REGISTRATION_RETRIES</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">LEDGER_API_ADDRESS</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">LEDGER_CONNECTION_PUBLIC_ID</span><span class="p">)</span>
 
 
@@ -4827,7 +4841,13 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="n">services_interval</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
             <span class="s2">&quot;services_interval&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICES_INTERVAL</span>
         <span class="p">)</span>  <span class="c1"># type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_soef_registration_retries</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+            <span class="s2">&quot;max_soef_registration_retries&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MAX_SOEF_REGISTRATION_RETRIES</span>
+        <span class="p">)</span>  <span class="c1"># type: int</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tick_interval</span><span class="o">=</span><span class="n">services_interval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[OefSearchMessage]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4848,7 +4868,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">ledger_api_msg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_agent</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_register_service_personality_classification</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4856,6 +4875,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_retry_failed_registration</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4866,14 +4886,42 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_agent</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_retry_failed_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s location.</span>
+<span class="sd">        Retry a failed registration.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_soef_registration_retries</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">return</span>
+
+            <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+                <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+            <span class="p">)</span>
+            <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">counterparty</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span><span class="o">.</span><span class="n">to</span><span class="p">,</span>
+                <span class="n">performative</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span><span class="o">.</span><span class="n">performative</span><span class="p">,</span>
+                <span class="n">service_description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span><span class="o">.</span><span class="n">service_description</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Retrying registration on SOEF. Retry </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_soef_registration_retries</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">,</span> <span class="n">logger_msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register something on the SOEF.</span>
+
+<span class="sd">        :param description: the description of what is being registered</span>
+<span class="sd">        :param logger_msg: the logger message to print after the registration</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
             <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
         <span class="p">)</span>
@@ -4883,31 +4931,51 @@ Our newly created AEA is inside the current working directory. Let’s create ou
             <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">logger_msg</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_register_service_personality_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s service, personality and classification.</span>
+<span class="sd">        Register the agent&#39;s location.</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
-        <span class="n">descriptions</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_service_description</span><span class="p">(),</span>
-            <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_personality_description</span><span class="p">(),</span>
-            <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_classification_description</span><span class="p">(),</span>
-        <span class="p">]</span>
-        <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
-            <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register the agent&#39;s service.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_service_description</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent&#39;s service on the SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_genus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register the agent&#39;s personality genus.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_personality_description</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span>
+            <span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent&#39;s personality genus on the SOEF.&quot;</span>
         <span class="p">)</span>
-        <span class="k">for</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">:</span>
-            <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">oef_search_dialogues</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-                <span class="n">counterparty</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">search_service_address</span><span class="p">,</span>
-                <span class="n">performative</span><span class="o">=</span><span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span><span class="p">,</span>
-                <span class="n">service_description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;registering service on SOEF.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register the agent&#39;s personality classification.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_classification_description</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span>
+            <span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent&#39;s personality classification on the SOEF.&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -5009,6 +5077,9 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.fipa.message</span> <span class="kn">import</span> <span class="n">FipaMessage</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.ledger_api.message</span> <span class="kn">import</span> <span class="n">LedgerApiMessage</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.oef_search.message</span> <span class="kn">import</span> <span class="n">OefSearchMessage</span>
+<span class="kn">from</span> <span class="nn">packages.fetchai.skills.generic_seller.behaviours</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GenericServiceRegistrationBehaviour</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.skills.generic_seller.dialogues</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">DefaultDialogues</span><span class="p">,</span>
     <span class="n">FipaDialogue</span><span class="p">,</span>
@@ -5453,7 +5524,9 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
             <span class="k">return</span>
 
         <span class="c1"># handle message</span>
-        <span class="k">if</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="ow">is</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">OEF_ERROR</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="o">==</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_success</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">oef_search_msg</span><span class="o">.</span><span class="n">performative</span> <span class="o">==</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">OEF_ERROR</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_error</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
@@ -5477,21 +5550,88 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
+    <span class="k">def</span> <span class="nf">_handle_success</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">oef_search_success_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span>
+        <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an oef search message.</span>
 
-<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_success_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;received oef_search success message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">oef_search_success_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">target_message</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchMessage</span><span class="p">,</span>
+            <span class="n">oef_search_dialogue</span><span class="o">.</span><span class="n">get_message_by_id</span><span class="p">(</span><span class="n">oef_search_success_msg</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">target_message</span><span class="o">.</span><span class="n">performative</span>
+            <span class="o">==</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span>
+        <span class="p">):</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="n">target_message</span><span class="o">.</span><span class="n">service_description</span>
+            <span class="n">data_model_name</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">data_model</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">registration_behaviour</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+                <span class="n">GenericServiceRegistrationBehaviour</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">service_registration</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;location_agent&quot;</span> <span class="ow">in</span> <span class="n">data_model_name</span><span class="p">:</span>
+                <span class="n">registration_behaviour</span><span class="o">.</span><span class="n">register_service</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="s2">&quot;set_service_key&quot;</span> <span class="ow">in</span> <span class="n">data_model_name</span><span class="p">:</span>
+                <span class="n">registration_behaviour</span><span class="o">.</span><span class="n">register_genus</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="p">(</span>
+                <span class="s2">&quot;personality_agent&quot;</span> <span class="ow">in</span> <span class="n">data_model_name</span>
+                <span class="ow">and</span> <span class="n">description</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;piece&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;genus&quot;</span>
+            <span class="p">):</span>
+                <span class="n">registration_behaviour</span><span class="o">.</span><span class="n">register_classification</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="p">(</span>
+                <span class="s2">&quot;personality_agent&quot;</span> <span class="ow">in</span> <span class="n">data_model_name</span>
+                <span class="ow">and</span> <span class="n">description</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;piece&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span>
+            <span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;the agent, with its genus and classification, and its service are successfully registered on the SOEF.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;received soef SUCCESS message as a reply to the following unexpected message: </span><span class="si">{</span><span class="n">target_message</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">oef_search_error_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span>
+        <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle an oef search message.</span>
+
+<span class="sd">        :param oef_search_error_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
+                <span class="n">oef_search_error_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span>
             <span class="p">)</span>
         <span class="p">)</span>
+        <span class="n">target_message</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="n">OefSearchMessage</span><span class="p">,</span>
+            <span class="n">oef_search_dialogue</span><span class="o">.</span><span class="n">get_message_by_id</span><span class="p">(</span><span class="n">oef_search_error_msg</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">target_message</span><span class="o">.</span><span class="n">performative</span>
+            <span class="o">==</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">REGISTER_SERVICE</span>
+        <span class="p">):</span>
+            <span class="n">registration_behaviour</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+                <span class="n">GenericServiceRegistrationBehaviour</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">behaviours</span><span class="o">.</span><span class="n">service_registration</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">registration_behaviour</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="o">=</span> <span class="n">target_message</span>
 
     <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
@@ -7768,7 +7908,7 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.22.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div></p>
 <h3 id="fund-the-buyer-aea">Fund the buyer AEA</h3>
@@ -7777,26 +7917,26 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div>
 <h3 id="run-seller-aea">Run seller AEA</h3>
 <p>Add the remaining packages for the seller AEA, then run it:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.21.0
-aea add connection fetchai/soef:0.22.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.22.0
+aea add connection fetchai/soef:0.23.0
 aea add connection fetchai/ledger:0.18.0
 aea add protocol fetchai/fipa:1.0.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.21.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
 aea run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
 <h4 id="run-buyer-aea">Run buyer AEA</h4>
 <p>Add the remaining packages for the buyer AEA:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.21.0
-aea add connection fetchai/soef:0.22.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.22.0
+aea add connection fetchai/soef:0.23.0
 aea add connection fetchai/ledger:0.18.0
 aea add protocol fetchai/fipa:1.0.0
 aea add protocol fetchai/signing:1.0.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.21.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
 </code></pre></div>
 <p>Then, update the configuration of the buyer AEA's P2P connection:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

@@ -480,6 +480,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../aggregation-demo/" class="md-nav__link">
+      Aggegation skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tac-skills/" class="md-nav__link">
       TAC skills
     </a>
@@ -4430,7 +4442,7 @@
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:1.0.0</span>
 <span class="nt">skills</span><span class="p">:</span>                                         <span class="c1"># The list of skill public ids the AEA project depends on (each public id must satisfy PUBLIC_ID_REGEX).</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/error:0.16.0</span>
-<span class="nt">default_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.21.0</span>   <span class="c1"># The default connection used for envelopes sent by the AEA (must satisfy PUBLIC_ID_REGEX).</span>
+<span class="nt">default_connection</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.22.0</span>   <span class="c1"># The default connection used for envelopes sent by the AEA (must satisfy PUBLIC_ID_REGEX).</span>
 <span class="nt">default_ledger</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai</span>                         <span class="c1"># The default ledger identifier the AEA project uses (must satisfy LEDGER_ID_REGEX)</span>
 <span class="nt">required_ledgers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">fetchai</span><span class="p p-Indicator">]</span>                            <span class="c1"># the list of identifiers of ledgers that the AEA project requires key pairs for (each item must satisfy LEDGER_ID_REGEX)</span>
 <span class="nt">default_routing</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                             <span class="c1"># The default routing scheme applied to envelopes sent by the AEA, it maps from protocol public ids to connection public ids (both keys and values must satisfy PUBLIC_ID_REGEX)</span>
@@ -4441,7 +4453,7 @@
 <span class="nt">logging_config</span><span class="p">:</span>                                 <span class="c1"># The logging configurations the AEA project uses</span>
   <span class="nt">disable_existing_loggers</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
   <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the AEA relies on (e.g. plugins).</span>
+<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the AEA relies on (e.g. plugins). They will be installed when `aea install` is run.</span>
 </code></pre></div></p>
 <p>The <code>aea-config.yaml</code> can be extended with a number of optional fields:
 <div class="highlight"><pre><span></span><code><span class="nt">period</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>                                    <span class="c1"># The period to call agent&#39;s act</span>
@@ -4499,7 +4511,7 @@
   <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
 <span class="nt">excluded_protocols</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                          <span class="c1"># The list of protocol public ids the package does not permit (each public id must satisfy PUBLIC_ID_REGEX).</span>
 <span class="nt">restricted_to_protocols</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                     <span class="c1"># The list of protocol public ids the package is limited to (each public id must satisfy PUBLIC_ID_REGEX).</span>
-<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
+<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on. They will be installed when `aea install` is run.</span>
 <span class="nt">is_abstract</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>                              <span class="c1"># An optional boolean that if `true` makes the connection</span>
 </code></pre></div></p>
 <h2 id="contract-configuration-yaml">Contract configuration YAML</h2>
@@ -4519,7 +4531,7 @@
 <span class="nt">contract_interface_paths</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                    <span class="c1"># The paths to the contract interfaces (one for each ledger identifier).</span>
 <span class="nt">config</span><span class="p">:</span>                                         <span class="c1"># A dictionary containing the kwargs for the contract instantiation.</span>
   <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
-<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
+<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on. They will be installed when `aea install` is run.</span>
 </code></pre></div></p>
 <h2 id="protocol-configuration-yaml">Protocol configuration YAML</h2>
 <p>The <code>protocol.yaml</code>, which is present in each protocol package, has the following required fields:
@@ -4535,7 +4547,7 @@
   <span class="nt">message.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmdvAdYSHNdZyUMrK3ue7quHAuSNwgZZSHqxYXyvh8Nie4</span>
   <span class="nt">serialization.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmVUzwaSMErJgNFYQZkzsDhuuT2Ht4EdbGJ443usHmPxVv</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>                 <span class="c1"># Ignore pattern for the fingerprinting tool.</span>
-<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
+<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on. They will be installed when `aea install` is run.</span>
 </code></pre></div></p>
 <h2 id="skill-configuration-yaml">Skill configuration YAML</h2>
 <p>The <code>skill.yaml</code>, which is present in each protocol package, has the following required fields:
@@ -4571,7 +4583,7 @@
     <span class="nt">args</span><span class="p">:</span>                                       <span class="c1"># Keyword arguments provided to the skill component on instantiation.</span>
       <span class="nt">foo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
     <span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MyModel</span>                         <span class="c1"># The class name of the class implementing the model interface.</span>
-<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on.</span>
+<span class="nt">dependencies</span><span class="p">:</span> <span class="p p-Indicator">{}</span>                                <span class="c1"># The python dependencies the package relies on. They will be installed when `aea install` is run.</span>
 </code></pre></div></p>
                 
               

@@ -480,6 +480,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../aggregation-demo/" class="md-nav__link">
+      Aggegation skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tac-skills/" class="md-nav__link">
       TAC skills
     </a>
@@ -4453,7 +4465,7 @@
                 <p>An agent that is generated using the AEA framework is a modular system with different connections, contracts, protocols and skills.</p>
 <h2 id="file-structure">File structure</h2>
 <p>The file structure of an AEA is fixed.</p>
-<p>The top level directory has the AEA's name. Below is a <code>aea-config.yaml</code> configuration file, then directories containing the connections, contracts, protocols, and skills developed by the developer as part of the given project. The connections, contracts, protocols and skills used from the registry are located in <code>vendor</code> and sorted by author. Finally, there are files containing the private keys of the AEA.</p>
+<p>The top level directory has the AEA's name. Below is a <code>aea-config.yaml</code> configuration file, then directories containing the connections, contracts, protocols, and skills developed by the developer as part of the given project. The connections, contracts, protocols and skills used from the registry (local or remote - added via <code>aea fetch</code> or <code>aea add</code>) are located in <code>vendor</code> and sorted by author. Build artefacts are placed in the <code>.build/</code> directory and certificates are placed in the <code>.certs/</code> directory. Finally, there are files containing the private keys of the AEA.</p>
 <p>When we create a new agent with the command <code>aea create my_aea</code> we create the file structure that looks like the following:</p>
 <div class="highlight"><pre><span></span><code>aea_name/
   aea-config.yaml       YAML configuration of the AEA
@@ -4492,7 +4504,7 @@
 </code></pre></div></p>
 <p>The above shows a part of the <code>aea-config.yaml</code>. If you see the connections, you will see that we follow a pattern of <code>author/name_package:version</code> to identify each package, also referred to as <code>public_id</code>. Here the <code>author</code> is the author of the package.</p>
 <h2 id="vendor-and-package-directories">Vendor and package directories</h2>
-<p>The <code>vendor</code> folder contains the packages from the registry which have been developed by ourselves, other authors or Fetch.ai and are namespaced by author name.</p>
+<p>The <code>vendor</code> folder contains the packages from the registry (local or remote) which have been developed by ourselves, other authors or Fetch.ai and are namespaced by author name.</p>
 <p>The packages we develop as part of the given AEA project are in the respective <code>connections/</code>, <code>contracts/</code>, <code>protocols/</code>, and <code>skills/</code> folders.</p>
 <p>In the above configuration example, the package is authored by Fetch.ai and is located inside the <code>vendor/fetchai/connections</code> folder.</p>
 <h2 id="importing-modules-from-packages">Importing modules from packages</h2>
@@ -4500,7 +4512,7 @@
 <p>The framework loads the modules from the local agent project and adds them to Python's <code>sys.modules</code> under the respective path.</p>
 <p>We use a custom package management approach for the AEAs rather than the default Python one as it provides us with more flexibility, especially when it comes to extension beyond the Python ecosystem.</p>
 <h2 id="python-dependencies-of-packages">Python dependencies of packages</h2>
-<p>Python dependencies of packages are specified in their respective configuration files under <code>dependencies</code>.</p>
+<p>Python dependencies of packages are specified in their respective configuration files under <code>dependencies</code>. They will be installed when <code>aea install</code> is run on an agent project.</p>
 <h2 id="create-a-package">Create a package</h2>
 <p>If you want to create a package, you can use the <a href="../scaffolding/">CLI command</a> <code>aea scaffold connection/contract/protocol/skill [name]</code> and this will create the package and put it inside the respective folder based on the command for example if we <code>scaffold</code> skill with the name <code>my_skill</code>
 it will be located inside the folder skills in the root directory of the agent (<code>my_aea/skills/my_skill</code>).</p>
@@ -4510,6 +4522,7 @@ it will be located inside the folder skills in the root directory of the agent (
 <p>You can use the CLI to interact with the registry. By default the CLI points to the remote registry. You can point it to the local registry via the flag <code>--local</code>.</p>
 <h2 id="package-versioning">Package versioning</h2>
 <p>By default, the AEA can only handle one version per package. That is, a project should never use both <code>some_author/some_package_name:0.1.0</code> and <code>some_author/some_package_name:0.2.0</code>.</p>
+<p>If two AEA packages with the same author and name but different versions are used in the same Python process, then only the code from one of the packages (generally not deterministic) will be available in <code>sys.modules</code>. This can lead to inconsistencies and exceptions at runtime.</p>
                 
               
               
