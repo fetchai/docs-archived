@@ -47,7 +47,7 @@
 
 <div class="admonition note">
   <p class="admonition-title">Updates!</p>
-  <p>Documentation last updated on <strong>January 27th, 2021</strong></p>
+  <p>Documentation last updated on <strong>May 1st, 2021</strong></p>
 </div>
 
 <br/>

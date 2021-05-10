@@ -1,8 +1,8 @@
 ## Introduction: Agent World 2 (AW-2) - part 2, "My first own agent"
 
-<div class="admonition note">
+<div class="admonition error">
   <p class="admonition-title">Note</p>
-  <p>AW-2 has finished now!</p>
+  <p>AW-2 has finished now! You won't be able to complete the guide or earn rewards.</p>
 </div>
 
 Agent World 2 (AW-2) is the second part of our agent-themed incentivised testnet. During this part, it allows anyone with FET tokens to gain additional FET by building agents to represent **mobility** and **climate/weather** related agents in key cities around the world, such as Berlin, London, San Francisco and Shanghai. The world is full of web based APIs for collecting this data, and the <a href="../../aea">agent framework</a> supports HTTP connections to these.
@@ -54,10 +54,11 @@ You have to complete a few steps as listed below:
 6. Customize the `simple_seller` skill (in `YOUR_AGENT_NAME/skills/simple_seller`) and the `simple_data_request` skill (in `YOUR_AGENT_NAME/skills/simple_data_request`) to satisfy the following requirements (you may optionally customize other components of the AEA as well):
 
 	- The AEA must sell data offered by a public API which provides data on mobility or weather in the vicinity of either one of Berlin (Germany) [`latitude: 52.5200, longitude: 13.4050`], London (UK) [`latitude: 51.5074, longitude: -0.1278`], San Francisco (USA) [`latitude: 37.7749, longitude: -122.4194`] or Shanghai (China) [`latitude: 31.2304, longitude: 121.4737`]. Your AEA must be located in a radius no further than `50 km` from the geo locations specified. You can customize the `simple_data_request` and `simple_seller` skills to satisfy this requirement.
-	- The AEA must request data from a public API. You can customize the `simple_data_request` skill to satisfy this requirement.
+	- The AEA must request data from a public API. You can customize the `simple_data_request` skill to satisfy this requirement. You must configure the fields `method`, `url` and potentially `body` in the behaviours section and the field `shared_state_key` in the handlers section of the `fetchai/simple_data_request` skill on `aea-config.yaml`.
 	- The AEA must negotiate the terms using the fipa protocol (`fetchai/fipa`) and advertise it using oef search protocol (`fetchai/oef_search`) on the SOEF. You can customize the `simple_seller` skill to satisfy this requirment (by default it is already satisfied).
 	- The advertisement must include the correct service key (`seller_service`) and value (one of `weather_data` or `mobility_data`, depending on the data your agent is offering). You can customize the `simple_seller` skill to satisfy this requirement.
 	- Payment must be via a simple transfer on the incentivized testnet. You can customize the `simple_seller` skill to satisfy this requirment (by default this is already the case).
+	- The `shared_state_key` specified for the `fetchai/simple_seller` skill in `aea-config.yaml` must match the one specified for the `fetchai/simple_data_request` and not be `null`.
 
 	<div class="admonition note">
 	  <p class="admonition-title">Note</p>
