@@ -4174,6 +4174,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#learning-algorithms-that-work-for-collective-learning" class="md-nav__link">
+    Learning algorithms that work for collective learning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-driver" class="md-nav__link">
     The driver
   </a>
@@ -4274,6 +4281,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../grpc_tutorial/" class="md-nav__link">
+      gRPC server
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4305,6 +4324,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../examples/" class="md-nav__link">
       Standalone examples
     </a>
@@ -4317,8 +4348,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../demo/" class="md-nav__link">
-      Demo
+    <a href="../grpc_examples/" class="md-nav__link">
+      gRPC example
     </a>
   </li>
 
@@ -4364,6 +4395,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#learning-algorithms-that-work-for-collective-learning" class="md-nav__link">
+    Learning algorithms that work for collective learning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-driver" class="md-nav__link">
     The driver
   </a>
@@ -4391,27 +4429,46 @@
                 
                 
                 <h1 id="how-collective-learning-works">How collective learning works</h1>
-<p>A Colearn experiment begins when a group of entities, referred to as  <em>learners</em>, decide on a model architecture and begin learning. Together they will train a single global model. The goal is to train a model that performs better than any of the learners can produce by training on their private data set. </p>
+<p>A Colearn experiment begins when a group of entities, referred to as  <em>learners</em>, decide on a model architecture and 
+begin learning. Together they will train a single global model. The goal is to train a model that performs better 
+than any of the learners can produce by training on their private data set. </p>
 <h3 id="how-training-works">How Training Works</h3>
-<p>Training occurs in rounds; during each round the learners attempt to improve the performance of the global shared model. 
+<p>Training occurs in rounds; during each round the learners attempt to improve the performance of the global shared 
+model. 
 To do so each round an <strong>update</strong> of the global model (for example new set of weights in a neural network) is proposed. 
 The learners then <strong>validate</strong> the update and decide if the new model is better than the current global model.<br />
-If enough learners <em>approve</em> the update then the global model is updated. After an update is approved or rejected a new round begins. </p>
+If enough learners <em>approve</em> the update then the global model is updated. After an update is approved or rejected a 
+new round begins. </p>
 <p>The detailed steps of a round updating a global model <em>M</em> are as follows:</p>
 <ol>
 <li>One of the learners is selected and proposes a new updated model <em>M'</em></li>
 <li>The rest of the learners <strong>validate</strong> <em>M'</em></li>
 <li>If <em>M'</em> has better performance than <em>M</em> against their private data set then the learner votes to approve</li>
-<li>If not the learner votes to reject</li>
+<li>If not, the learner votes to reject</li>
 <li>The total votes are tallied</li>
-<li>If more than some threshold (typically 50%) of learners approve then <em>M'</em> becomes the new global model. If not, <em>M</em> continues to be global model</li>
+<li>If more than some threshold (typically 50%) of learners approve then <em>M'</em> becomes the new global model. If not, 
+     <em>M</em> continues to be the global model</li>
 <li>A new round begins.</li>
 </ol>
-<p>By using a decentralized ledger (a blockchain) this learning process can be run in a completely decentralized, secure and auditable way. Further security can be provided by using <a href="https://en.wikipedia.org/wiki/Differential_privacy">differential privacy</a> to avoid exposing your private data set when generating an update.</p>
+<p>By using a decentralized ledger (a blockchain) this learning process can be run in a completely decentralized, 
+secure and auditable way. Further security can be provided by using 
+<a href="https://en.wikipedia.org/wiki/Differential_privacy">differential privacy</a> to avoid exposing your private data 
+set when generating an update.</p>
+<h2 id="learning-algorithms-that-work-for-collective-learning">Learning algorithms that work for collective learning</h2>
+<p>Collective learning is not just for neural networks; any learning algorithm that can be trained on subsets of the 
+data and which can use the results of previous training rounds as the basis for subsequent rounds can be used.
+Neural networks fit both these constraints: training can be done on mini-batches of data and each training step uses 
+the weights of the previous training step as its starting point.
+More generally, any model that is trained using mini-batch stochastic gradient descent is fine.
+Other algorithms can be made to work with collective learning as well.
+For example, a random forest can be trained iteratively by having each learner add new trees 
+(see example in <a href="https://github.com/fetchai/colearn/tree/master//examples/mli_random_forest_iris.py">mli_random_forest_iris.py</a>).
+For more discussion, see <a href="../intro_tutorial_mli/">here</a>.</p>
 <h2 id="the-driver">The driver</h2>
 <p>The driver implements the voting protocol, so it handles selecting a learner to train, 
 sending the update out for voting, calculating the vote and accepting or declining the update. 
-Here we have a very minimal driver that doesn't use networking or a blockchain. Eventually the driver will be a smart contract. 
+Here we have a very minimal driver that doesn't use networking or a blockchain. Eventually the driver will be a 
+smart contract. 
 This is the code that implements one round of voting:</p>
 <p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_one_round</span><span class="p">(</span><span class="n">round_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">learners</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">MachineLearningInterface</span><span class="p">],</span>
                   <span class="n">vote_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
@@ -4431,8 +4488,10 @@ This is the code that implements one round of voting:</p>
 </code></pre></div>
 The driver has a list of learners, and each round it selects one learner to be the proposer.
 The proposer does some training and proposes an updated set of weights.
-The driver then sends the proposed weights to each of the learners and they each vote on whether this is an improvement.
-If the number of approving votes is greater than the vote threshold the proposed weights are accepted, and if not they're rejected.</p>
+The driver then sends the proposed weights to each of the learners, and they each vote on whether this is 
+an improvement.
+If the number of approving votes is greater than the vote threshold the proposed weights are accepted, and if not 
+they're rejected.</p>
 <h2 id="the-machine-learning-interface">The Machine Learning Interface</h2>
 <p><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="err">!</span><span class="o">../</span><span class="n">colearn</span><span class="o">/</span><span class="n">ml_interface</span><span class="o">.</span><span class="n">py</span><span class="err">!</span><span class="p">}</span> 
 </code></pre></div>

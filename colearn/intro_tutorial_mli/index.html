@@ -4244,6 +4244,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#algorithms-that-work-with-colearn" class="md-nav__link">
+    Algorithms that work with colearn:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#implementation-for-fraud-detection-task" class="md-nav__link">
     Implementation for fraud detection task
   </a>
@@ -4272,6 +4279,18 @@
   <li class="md-nav__item">
     <a href="../differential_privacy/" class="md-nav__link">
       Differential Privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../grpc_tutorial/" class="md-nav__link">
+      gRPC server
     </a>
   </li>
 
@@ -4307,6 +4326,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../examples/" class="md-nav__link">
       Standalone examples
     </a>
@@ -4319,8 +4350,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../demo/" class="md-nav__link">
-      Demo
+    <a href="../grpc_examples/" class="md-nav__link">
+      gRPC example
     </a>
   </li>
 
@@ -4361,6 +4392,13 @@
         <li class="md-nav__item">
   <a href="#the-machinelearninginterface" class="md-nav__link">
     The MachineLearningInterface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms-that-work-with-colearn" class="md-nav__link">
+    Algorithms that work with colearn:
   </a>
   
 </li>
@@ -4413,10 +4451,44 @@ There are four methods that need to be implemented:</p>
 <li><code>test_weights</code> - the models takes some new weights and returns a vote on whether the new weights are an improvement. 
    As in propose_weights, this shouldn't change the current weights of the model - 
    that only happens when <code>accept_weights</code> is called.</li>
-<li><code>accept_weights</code> - the models accepts some weights that have been voted on and approved by the set of learners. 
+<li><code>accept_weights</code> - the model accepts some weights that have been voted on and approved by the set of learners. 
     The old weighs of the model are discarded and replaced by the new weights.</li>
 <li><code>current_weights</code> should return the current weights of the model.</li>
 </ol>
+<h2 id="algorithms-that-work-with-colearn">Algorithms that work with colearn:</h2>
+<p>These conditions need to be fulfilled for algorithms to work with collective learning:</p>
+<ul>
+<li>
+<p>Model fitting must be incremental so that the previous model is used as the starting point for training. 
+  This is easy to achieve for neural networks because neural network training is always iterative, but for other 
+  learning algorithms more care must be taken. Some examples of getting this wrong:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># it would be okay with warm_start=True</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+  None of the training methods here use the previous result when fit is called for a second time; 
+  instead they start again from scratch. 
+  Good examples of incremental training can be seen in the <a href="../examples/">examples</a>. 
+  Many sklearn models have a <code>warm_start</code> parameter which can be set to <code>True</code> to use the previous training result. 
+  XGBoost has an <code>xgb_model</code> parameter for passing in the previous training results.</p>
+</li>
+<li>
+<p>The model mustn't overfit when propose_weights() is called. 
+  You should limit training so that a learner will not overfit their training data in one round.
+  For example, if a learner overfits their own training data then the other learners will reject the 
+  proposed update because it is not a good fit for their data. 
+  For a neural network a good approach is to restrict the number of batches that are used each round; 
+  for  random forest, restrict the trees that are added each round.</p>
+</li>
+</ul>
 <h2 id="implementation-for-fraud-detection-task">Implementation for fraud detection task</h2>
 <p>Here is the class that implements the <code>MachineLearningInterface</code> for the task of detecting fraud in bank transactions.
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">FraudSklearnLearner</span><span class="p">(</span><span class="n">MachineLearningInterface</span><span class="p">):</span>
