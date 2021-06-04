@@ -5507,8 +5507,11 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">agent_context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Skill&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize a skill context.</p>
-<p>:agent_context: the agent context.
-:skill: the skill.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_context</code>: the agent context.</li>
+<li><code>skill</code>: the skill.</li>
+</ul>
 <p><a name="aea.skills.base.SkillContext.logger"></a></p>
 <h4 id="logger">logger</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5564,7 +5567,8 @@
 <p>Queue for the new behaviours.</p>
 <p>This queue can be used to send messages to the framework
 to request the registration of a behaviour.</p>
-<p>:return the queue of new behaviours.</p>
+<p><strong>Returns</strong>:</p>
+<p>the queue of new behaviours.</p>
 <p><a name="aea.skills.base.SkillContext.new_handlers"></a></p>
 <h4 id="new_handlers">new<code>_</code>handlers</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5573,7 +5577,8 @@ to request the registration of a behaviour.</p>
 <p>Queue for the new handlers.</p>
 <p>This queue can be used to send messages to the framework
 to request the registration of a handler.</p>
-<p>:return the queue of new handlers.</p>
+<p><strong>Returns</strong>:</p>
+<p>the queue of new handlers.</p>
 <p><a name="aea.skills.base.SkillContext.agent_addresses"></a></p>
 <h4 id="agent_addresses">agent<code>_</code>addresses</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5680,13 +5685,12 @@ to request the registration of a handler.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">send_to_skill</span><span class="p">(</span><span class="n">message_or_envelope</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Message</span><span class="p">,</span> <span class="n">Envelope</span><span class="p">],</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">EnvelopeContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Send message or envelope to another skill.</p>
+<p>If message passed it will be wrapped into envelope with optional envelope context.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>message_or_envelope</code>: envelope to send to another skill.
-if message passed it will be wrapped into envelope with optional envelope context.</li>
+<li><code>message_or_envelope</code>: envelope to send to another skill.</li>
+<li><code>context</code>: the optional envelope context</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.base.SkillComponent"></a></p>
 <h2 id="skillcomponent-objects">SkillComponent Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SkillComponent</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span>
@@ -5702,6 +5706,7 @@ if message passed it will be wrapped into envelope with optional envelope contex
 <li><code>name</code>: the name of the component.</li>
 <li><code>configuration</code>: the configuration for the component.</li>
 <li><code>skill_context</code>: the skill context.</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
 <p><a name="aea.skills.base.SkillComponent.name"></a></p>
 <h4 id="name">name</h4>
@@ -5739,16 +5744,12 @@ if message passed it will be wrapped into envelope with optional envelope contex
  <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Implement the setup.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.base.SkillComponent.teardown"></a></p>
 <h4 id="teardown">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Implement the teardown.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.base.SkillComponent.parse_module"></a></p>
 <h4 id="parse_module">parse<code>_</code>module</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5880,9 +5881,8 @@ start_at: optional datetime, when to start periodical calls.</p>
 <li><code>configuration</code>: the configuration for the component.</li>
 <li><code>skill_context</code>: the skill context.</li>
 <li><code>keep_terminal_state_dialogues</code>: specify do dialogues in terminal state should stay or not</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.base.Model.setup"></a></p>
 <h4 id="setup_1">setup</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5924,6 +5924,7 @@ start_at: optional datetime, when to start periodical calls.</p>
 <li><code>handlers</code>: dictionary of handlers.</li>
 <li><code>behaviours</code>: dictionary of behaviours.</li>
 <li><code>models</code>: dictionary of models.</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
 <p><a name="aea.skills.base.Skill.skill_context"></a></p>
 <h4 id="skill_context">skill<code>_</code>context</h4>
@@ -5958,7 +5959,8 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>directory</code>: the directory to the skill package.</li>
-<li><code>agent_context</code>: the skill context</li>
+<li><code>agent_context</code>: the skill context.</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the skill object.</p>
@@ -5970,6 +5972,8 @@ start_at: optional datetime, when to start periodical calls.</p>
 <p>Get the logger.</p>
 <p>In the case of a skill, return the
 logger provided by the skill context.</p>
+<p><strong>Returns</strong>:</p>
+<p>the logger</p>
 <p><a name="aea.skills.base.Skill.logger"></a></p>
 <h4 id="logger_3">logger</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@logger</span><span class="o">.</span><span class="n">setter</span>
@@ -5986,6 +5990,7 @@ logger provided by the skill context.</p>
 <ul>
 <li><code>configuration</code>: a skill configuration. Must be associated with a directory.</li>
 <li><code>agent_context</code>: the agent context.</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the skill.</p>

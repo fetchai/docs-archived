@@ -4624,7 +4624,7 @@
 <h2 id="demo-instructions">Demo instructions</h2>
 <h3 id="create-the-seller-aea">Create the seller AEA</h3>
 <p>First, fetch the seller AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.25.0 --alias my_seller_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.27.0 --alias my_seller_aea
 <span class="nb">cd</span> my_seller_aea
 aea install
 aea build
@@ -4635,19 +4635,19 @@ aea build
 The following steps create the seller from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_seller_aea
 <span class="nb">cd</span> my_seller_aea
-aea add connection fetchai/p2p_libp2p:0.22.0
-aea add connection fetchai/soef:0.23.0
+aea add connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/soef:0.25.0
 aea add connection fetchai/ledger:0.18.0
 aea add skill fetchai/generic_seller:0.26.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4658,7 +4658,7 @@ aea build
 
 <h3 id="create-the-buyer-aea">Create the buyer AEA</h3>
 <p>Then, in another terminal fetch the buyer AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.26.0 --alias my_buyer_aea
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.28.0 --alias my_buyer_aea
 <span class="nb">cd</span> my_buyer_aea
 aea install
 aea build
@@ -4669,19 +4669,19 @@ aea build
 The following steps create the buyer from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_buyer_aea
 <span class="nb">cd</span> my_buyer_aea
-aea add connection fetchai/p2p_libp2p:0.22.0
-aea add connection fetchai/soef:0.23.0
+aea add connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/soef:0.25.0
 aea add connection fetchai/ledger:0.18.0
 aea add skill fetchai/generic_buyer:0.25.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4776,7 +4776,7 @@ aea config <span class="nb">set</span> vendor.fetchai.skills.generic_buyer.is_ab
 <p>First, run the seller AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.22.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.24.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the seller.</p>
 <p>Then, configure the buyer to connect to this same local ACN by running the following command in the buyer terminal, replacing <code>SOME_ADDRESS</code> with the value you noted above:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

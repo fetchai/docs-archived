@@ -4718,13 +4718,14 @@
 <li><code>decision_maker_handler_context</code>: the decision maker's name space</li>
 <li><code>task_manager</code>: the task manager</li>
 <li><code>default_ledger_id</code>: the default ledger id</li>
-<li><code>ledger_it_to_currency_denom</code>: mapping from ledger ids to currency denominations</li>
+<li><code>currency_denominations</code>: mapping from ledger ids to currency denominations</li>
 <li><code>default_connection</code>: the default connection</li>
 <li><code>default_routing</code>: the default routing</li>
 <li><code>search_service_address</code>: the address of the search service</li>
 <li><code>decision_maker_address</code>: the address of the decision maker</li>
 <li><code>data_dir</code>: directory where to put local files.</li>
 <li><code>storage_callable</code>: function that returns optional storage attached to agent.</li>
+<li><code>send_to_skill</code>: callable for sending envelopes to skills.</li>
 <li><code>kwargs</code>: keyword arguments to be attached in the agent context namespace.</li>
 </ul>
 <p><a name="aea.context.base.AgentContext.send_to_skill"></a></p>
@@ -4732,13 +4733,12 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">send_to_skill</span><span class="p">(</span><span class="n">message_or_envelope</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Message</span><span class="p">,</span> <span class="n">Envelope</span><span class="p">],</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">EnvelopeContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Send message or envelope to another skill.</p>
+<p>If message passed it will be wrapped into envelope with optional envelope context.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>message_or_envelope</code>: envelope to send to another skill.
-if message passed it will be wrapped into envelope with optional envelope context.</li>
+<li><code>message_or_envelope</code>: envelope to send to another skill.</li>
+<li><code>context</code>: the optional envelope context</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.context.base.AgentContext.storage"></a></p>
 <h4 id="storage">storage</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -4760,6 +4760,8 @@ if message passed it will be wrapped into envelope with optional envelope contex
 <p>The shared state is the only object which skills can use
 to exchange state directly. It is accessible (read and write) from
 all skills.</p>
+<p><strong>Returns</strong>:</p>
+<p>dictionary of the shared state.</p>
 <p><a name="aea.context.base.AgentContext.identity"></a></p>
 <h4 id="identity">identity</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>

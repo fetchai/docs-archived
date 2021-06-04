@@ -5829,8 +5829,6 @@
 <li><code>raw_transaction_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>raw_transaction_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.RawTransaction.decode"></a></p>
 <h4 id="decode">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5894,8 +5892,6 @@
 <li><code>raw_message_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>raw_message_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.RawMessage.decode"></a></p>
 <h4 id="decode_1">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5953,8 +5949,6 @@
 <li><code>signed_transaction_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>signed_transaction_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.SignedTransaction.decode"></a></p>
 <h4 id="decode_2">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6018,8 +6012,6 @@
 <li><code>signed_message_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>signed_message_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.SignedMessage.decode"></a></p>
 <h4 id="decode_3">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6077,8 +6069,6 @@
 <li><code>state_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>state_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.State.decode"></a></p>
 <h4 id="decode_4">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6119,10 +6109,11 @@
 <li><code>counterparty_address</code>: the counterparty address of the transaction.</li>
 <li><code>amount_by_currency_id</code>: the amount by the currency of the transaction.</li>
 <li><code>quantities_by_good_id</code>: a map from good id to the quantity of that good involved in the transaction.</li>
-<li><code>is_sender_payable_tx_fee</code>: whether the sender or counterparty pays the tx fee.</li>
 <li><code>nonce</code>: nonce to be included in transaction to discriminate otherwise identical transactions.</li>
+<li><code>is_sender_payable_tx_fee</code>: whether the sender or counterparty pays the tx fee.</li>
 <li><code>fee_by_currency_id</code>: the fee associated with the transaction.</li>
 <li><code>is_strict</code>: whether or not terms must have quantities and amounts of opposite signs.</li>
+<li><code>kwargs</code>: keyword arguments</li>
 </ul>
 <p><a name="aea.helpers.transaction.base.Terms.id"></a></p>
 <h4 id="id">id</h4>
@@ -6300,14 +6291,15 @@
 <p>Generate a hash from transaction information.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>sender_addr</code>: the sender address</li>
-<li><code>counterparty_addr</code>: the counterparty address</li>
+<li><code>ledger_id</code>: the ledger id</li>
+<li><code>sender_address</code>: the sender address</li>
+<li><code>counterparty_address</code>: the counterparty address</li>
 <li><code>good_ids</code>: the list of good ids</li>
 <li><code>sender_supplied_quantities</code>: the quantities supplied by the sender (must all be positive)</li>
 <li><code>counterparty_supplied_quantities</code>: the quantities supplied by the counterparty (must all be positive)</li>
 <li><code>sender_payable_amount</code>: the amount payable by the sender</li>
 <li><code>counterparty_payable_amount</code>: the amount payable by the counterparty</li>
-<li><code>tx_nonce</code>: the nonce of the transaction</li>
+<li><code>nonce</code>: the nonce of the transaction</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the hash</p>
@@ -6323,8 +6315,6 @@
 <li><code>terms_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>terms_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.Terms.decode"></a></p>
 <h4 id="decode_5">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6382,8 +6372,6 @@
 <li><code>transaction_digest_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>transaction_digest_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.TransactionDigest.decode"></a></p>
 <h4 id="decode_6">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6447,8 +6435,6 @@
 <li><code>transaction_receipt_protobuf_object</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>transaction_receipt_object</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.transaction.base.TransactionReceipt.decode"></a></p>
 <h4 id="decode_7">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>

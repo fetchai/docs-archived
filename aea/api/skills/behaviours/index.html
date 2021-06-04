@@ -5185,6 +5185,8 @@
 </code></pre></div>
 <p>Return True if the behaviour is terminated, False otherwise.</p>
 <p>The user should implement it properly to determine the stopping condition.</p>
+<p><strong>Returns</strong>:</p>
+<p>bool indicating status</p>
 <p><a name="aea.skills.behaviours.OneShotBehaviour"></a></p>
 <h2 id="oneshotbehaviour-objects">OneShotBehaviour Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OneShotBehaviour</span><span class="p">(</span><span class="n">SimpleBehaviour</span><span class="p">,</span>  <span class="n">ABC</span><span class="p">)</span>
@@ -5219,6 +5221,7 @@
 <ul>
 <li><code>tick_interval</code>: interval of the behaviour in seconds.</li>
 <li><code>start_at</code>: whether to start the behaviour with an offset.</li>
+<li><code>kwargs</code>: the keyword arguments.</li>
 </ul>
 <p><a name="aea.skills.behaviours.TickerBehaviour.tick_interval"></a></p>
 <h4 id="tick_interval">tick<code>_</code>interval</h4>
@@ -5263,7 +5266,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>behaviour_sequence</code>: the sequence of behaviour.</li>
-<li><code>kwargs</code>: </li>
+<li><code>kwargs</code>: the keyword arguments</li>
 </ul>
 <p><a name="aea.skills.behaviours.SequenceBehaviour.current_behaviour"></a></p>
 <h4 id="current_behaviour">current<code>_</code>behaviour</h4>
@@ -5272,6 +5275,8 @@
 </code></pre></div>
 <p>Get the current behaviour.</p>
 <p>If None, the sequence behaviour can be considered done.</p>
+<p><strong>Returns</strong>:</p>
+<p>current behaviour or None</p>
 <p><a name="aea.skills.behaviours.SequenceBehaviour.act"></a></p>
 <h4 id="act_1">act</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5341,8 +5346,6 @@ transition to trigger.</p>
 <li><code>state</code>: the behaviour in that state.</li>
 <li><code>initial</code>: whether the state is an initial state.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if a state with the provided name already exists.</li>
@@ -5357,8 +5360,6 @@ transition to trigger.</p>
 <li><code>name</code>: the name of the state.</li>
 <li><code>state</code>: the state.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if a state with the provided name already exists.</li>
@@ -5372,8 +5373,6 @@ transition to trigger.</p>
 <ul>
 <li><code>name</code>: the state name to unregister.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if the state is not registered.</li>
@@ -5429,8 +5428,6 @@ transition to trigger.</p>
 <li><code>destination</code>: the destination state name.</li>
 <li><code>event</code>: the event.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if a transition from source with event is already present.</li>
@@ -5446,8 +5443,6 @@ transition to trigger.</p>
 <li><code>destination</code>: the destination state name.</li>
 <li><code>event</code>: the event.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if a transition from source with event is not present.</li>

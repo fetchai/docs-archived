@@ -4642,19 +4642,20 @@
 <h4 id="add_component">add<code>_</code>component</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_component</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">ComponentConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
-<p>Add a component to the dependency manager..</p>
+<p>Add a component to the dependency manager.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>configuration</code>: the component configuration to add.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea_builder._DependenciesManager.remove_component"></a></p>
 <h4 id="remove_component">remove<code>_</code>component</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_component</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Remove a component.</p>
-<p>:return None</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>component_id</code>: the component id</li>
+</ul>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if some component depends on this package.</li>
@@ -4719,6 +4720,8 @@ builder.add_component_instance(...)
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>with_default_packages</code>: add the default packages.</li>
+<li><code>registry_dir</code>: the registry directory.</li>
+<li><code>build_dir_root</code>: the root of the build directory.</li>
 </ul>
 <p><a name="aea.aea_builder.AEABuilder.reset"></a></p>
 <h4 id="reset">reset</h4>
@@ -4727,15 +4730,13 @@ builder.add_component_instance(...)
 <p>Reset the builder.</p>
 <p>A full reset causes a reset of all data on the builder. A partial reset
 only resets:
-- name,
-- private keys, and
-- component instances</p>
+    - name,
+    - private keys, and
+    - component instances</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>is_full_reset</code>: whether it is a full reset or not.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea_builder.AEABuilder.set_period"></a></p>
 <h4 id="set_period">set<code>_</code>period</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_period</span><span class="p">(</span><span class="n">period</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
@@ -4810,10 +4811,10 @@ only resets:
 <h4 id="set_connection_exception_policy">set<code>_</code>connection<code>_</code>exception<code>_</code>policy</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_connection_exception_policy</span><span class="p">(</span><span class="n">connection_exception_policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExceptionPolicyEnum</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </code></pre></div>
-<p>Set skill exception policy.</p>
+<p>Set connection exception policy.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>skill_exception_policy</code>: the policy</li>
+<li><code>connection_exception_policy</code>: the policy</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>self</p>
@@ -4867,7 +4868,10 @@ only resets:
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_storage_uri</span><span class="p">(</span><span class="n">storage_uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </code></pre></div>
 <p>Set the storage uri.</p>
-<p>:param storage uri:  storage uri</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>storage_uri</code>: storage uri</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <p>self</p>
 <p><a name="aea.aea_builder.AEABuilder.set_data_dir"></a></p>
@@ -4936,7 +4940,7 @@ only resets:
 <ul>
 <li><code>identifier</code>: the identifier for that private key path.</li>
 <li><code>private_key_path</code>: an (optional) path to the private key file.
-If None, the key will be created at build time.</li>
+    If None, the key will be created at build time.</li>
 <li><code>is_connection</code>: if the pair is for the connection cryptos</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -5023,8 +5027,8 @@ If None, the key will be created at build time.</li>
 </ul>
 <p><strong>Raises</strong>:</p>
 <ul>
-<li><code>AEAException</code>: if a component is already registered with the same component id.
-| or if there's a missing dependency.</li>
+<li><code>AEAException</code>: if a component is already registered with the same component id.   # noqa: DAR402
+                    | or if there's a missing dependency.  # noqa: DAR402</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the AEABuilder</p>
@@ -5040,6 +5044,8 @@ You will have to <code>reset()</code> the builder before calling <code>build()</
 <ul>
 <li><code>component</code>: Component instance already initialized.</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>self</p>
 <p><a name="aea.aea_builder.AEABuilder.set_context_namespace"></a></p>
 <h4 id="set_context_namespace">set<code>_</code>context<code>_</code>namespace</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_context_namespace</span><span class="p">(</span><span class="n">context_namespace</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
@@ -5194,10 +5200,6 @@ via 'add_component_instance' and the private keys.</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the AEA object.</p>
-<p><strong>Raises</strong>:</p>
-<ul>
-<li><code>ValueError</code>: if we cannot</li>
-</ul>
 <p><a name="aea.aea_builder.AEABuilder.get_default_ledger"></a></p>
 <h4 id="get_default_ledger">get<code>_</code>default<code>_</code>ledger</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_default_ledger</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
@@ -5230,12 +5232,10 @@ via 'add_component_instance' and the private keys.</p>
 <li><code>aea_project_path</code>: PathLike root directory of the agent project.</li>
 <li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea_builder.AEABuilder.from_aea_project"></a></p>
 <h4 id="from_aea_project">from<code>_</code>aea<code>_</code>project</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_aea_project</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
+ <span class="o">|</span> <span class="n">from_aea_project</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">aea_project_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AEABuilder&quot;</span>
 </code></pre></div>
 <p>Construct the builder from an AEA project.</p>
 <ul>
@@ -5250,6 +5250,7 @@ via 'add_component_instance' and the private keys.</p>
 <ul>
 <li><code>aea_project_path</code>: path to the AEA project.</li>
 <li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
+<li><code>password</code>: the password to encrypt/decrypt private keys.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>an AEABuilder.</p>

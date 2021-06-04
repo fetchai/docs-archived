@@ -4661,9 +4661,10 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>args</code>: positional arguments forwarded to the 'execute' method.</li>
-<li><code>kwargs</code>: keyword arguments forwarded to the 'execute' method.
-:return the task instance</li>
+<li><code>kwargs</code>: keyword arguments forwarded to the 'execute' method.</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the task instance</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if the task has already been executed.</li>
@@ -4680,7 +4681,8 @@
  <span class="o">|</span> <span class="n">result</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 <p>Get the result.</p>
-<p>:return the result from the execute method.</p>
+<p><strong>Returns</strong>:</p>
+<p>the result from the execute method.</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if the task has not been executed yet.</li>
@@ -4690,23 +4692,24 @@
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Implement the task setup.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.tasks.Task.execute"></a></p>
 <h4 id="execute">execute</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
  <span class="o">|</span> <span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 <p>Run the task logic.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>args</code>: the positional arguments</li>
+<li><code>kwargs</code>: the keyword arguments</li>
+</ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>any</p>
 <p><a name="aea.skills.tasks.Task.teardown"></a></p>
 <h4 id="teardown">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Implement the task teardown.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.tasks.init_worker"></a></p>
 <h4 id="init_worker">init<code>_</code>worker</h4>
 <div class="highlight"><pre><span></span><code><span class="n">init_worker</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -4714,8 +4717,6 @@
 <p>Initialize a worker.</p>
 <p>Disable the SIGINT handler of process pool is using.
 Related to a well-known bug: https://bugs.python.org/issue8296</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.tasks.TaskManager"></a></p>
 <h2 id="taskmanager-objects">TaskManager Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TaskManager</span><span class="p">(</span><span class="n">WithLogger</span><span class="p">)</span>
@@ -4730,6 +4731,7 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 <ul>
 <li><code>nb_workers</code>: the number of worker processes.</li>
 <li><code>is_lazy_pool_start</code>: option to postpone pool creation till the first enqueue_task called.</li>
+<li><code>logger</code>: the logger.</li>
 <li><code>pool_mode</code>: str. multithread or multiprocess</li>
 </ul>
 <p><a name="aea.skills.tasks.TaskManager.is_started"></a></p>
@@ -4757,9 +4759,10 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 <ul>
 <li><code>func</code>: the callable instance to be enqueued</li>
 <li><code>args</code>: the positional arguments to be passed to the function.</li>
-<li><code>kwargs</code>: the keyword arguments to be passed to the function.
-:return the task id to get the the result.</li>
+<li><code>kwargs</code>: the keyword arguments to be passed to the function.</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the task id to get the the result.</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if the task manager is not running.</li>
@@ -4769,6 +4772,10 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_task_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncResult</span>
 </code></pre></div>
 <p>Get the result from a task.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>task_id</code>: the task id</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <p>async result for task_id</p>
 <p><a name="aea.skills.tasks.TaskManager.start"></a></p>
@@ -4776,15 +4783,11 @@ Related to a well-known bug: https://bugs.python.org/issue8296</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Start the task manager.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.skills.tasks.TaskManager.stop"></a></p>
 <h4 id="stop">stop</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Stop the task manager.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
                 
               
               

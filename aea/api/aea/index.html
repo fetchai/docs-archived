@@ -4649,8 +4649,12 @@
 <li><code>period</code>: period to call agent's act</li>
 <li><code>execution_timeout</code>: amount of time to limit single act/handle to execute.</li>
 <li><code>max_reactions</code>: the processing rate of envelopes per tick (i.e. single loop).</li>
+<li><code>error_handler_class</code>: the class implementing the error handler</li>
+<li><code>error_handler_config</code>: the configuration of the error handler</li>
 <li><code>decision_maker_handler_class</code>: the class implementing the decision maker handler to be used.</li>
+<li><code>decision_maker_handler_config</code>: the configuration of the decision maker handler</li>
 <li><code>skill_exception_policy</code>: the skill exception policy enum</li>
+<li><code>connection_exception_policy</code>: the connection exception policy enum</li>
 <li><code>loop_mode</code>: loop_mode to choose agent run loop.</li>
 <li><code>runtime_mode</code>: runtime mode (async, threaded) to run AEA in.</li>
 <li><code>default_ledger</code>: default ledger id</li>
@@ -4663,8 +4667,6 @@
 <li><code>task_manager_mode</code>: task manager mode (threaded) to run tasks with.</li>
 <li><code>kwargs</code>: keyword arguments to be attached in the agent context namespace.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea.AEA.get_build_dir"></a></p>
 <h4 id="get_build_dir">get<code>_</code>build<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -4707,16 +4709,12 @@
 </code></pre></div>
 <p>Set up the agent.</p>
 <p>Calls setup() on the resources.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea.AEA.act"></a></p>
 <h4 id="act">act</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Perform actions.</p>
 <p>Adds new handlers and behaviours for use/execution by the runtime.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea.AEA.handle_envelope"></a></p>
 <h4 id="handle_envelope">handle<code>_</code>envelope</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle_envelope</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -4771,13 +4769,15 @@
 <ul>
 <li>tears down the resources.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.aea.AEA.get_task_result"></a></p>
 <h4 id="get_task_result">get<code>_</code>task<code>_</code>result</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_task_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncResult</span>
 </code></pre></div>
 <p>Get the result from a task.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>task_id</code>: the id of the task</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <p>async result for task_id</p>
 <p><a name="aea.aea.AEA.enqueue_task"></a></p>
@@ -4789,13 +4789,10 @@
 <ul>
 <li><code>func</code>: the callable instance to be enqueued</li>
 <li><code>args</code>: the positional arguments to be passed to the function.</li>
-<li><code>kwargs</code>: the keyword arguments to be passed to the function.
-:return the task id to get the the result.</li>
+<li><code>kwargs</code>: the keyword arguments to be passed to the function.</li>
 </ul>
-<p><strong>Raises</strong>:</p>
-<ul>
-<li><code>ValueError</code>: if the task manager is not running.</li>
-</ul>
+<p><strong>Returns</strong>:</p>
+<p>the task id to get the the result.</p>
                 
               
               

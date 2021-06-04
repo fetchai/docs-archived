@@ -5002,8 +5002,6 @@
 <ul>
 <li><code>kwargs</code>: the relevant keyword arguments</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.OwnershipState.apply_delta"></a></p>
 <h4 id="apply_delta">apply<code>_</code>delta</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@abstractmethod</span>
@@ -5015,8 +5013,6 @@
 <ul>
 <li><code>kwargs</code>: the relevant keyword arguments</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.OwnershipState.is_initialized"></a></p>
 <h4 id="is_initialized">is<code>_</code>initialized</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5137,11 +5133,11 @@ is immediately available, else raise the Full exception (timeout is
 ignored in that case).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>internal_message</code>: the internal message to put on the queue
+<li><code>internal_message</code>: the internal message to put on the queue</li>
+<li><code>block</code>: whether to block or not</li>
+<li><code>timeout</code>: timeout on block
 :raises: ValueError, if the item is not an internal message</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.ProtectedQueue.put_nowait"></a></p>
 <h4 id="put_nowait">put<code>_</code>nowait</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">put_nowait</span><span class="p">(</span><span class="n">internal_message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5153,24 +5149,23 @@ ignored in that case).</p>
 <li><code>internal_message</code>: the internal message to put on the queue
 :raises: ValueError, if the item is not an internal message</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.ProtectedQueue.get"></a></p>
 <h4 id="get">get</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Inaccessible get method.</p>
-<p>:raises: ValueError, access not permitted.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>block</code>: whether to block or not</li>
+<li><code>timeout</code>: timeout on block
+:raises: ValueError, access not permitted.</li>
+</ul>
 <p><a name="aea.decision_maker.base.ProtectedQueue.get_nowait"></a></p>
 <h4 id="get_nowait">get<code>_</code>nowait</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_nowait</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Inaccessible get_nowait method.</p>
 <p>:raises: ValueError, access not permitted.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.ProtectedQueue.protected_get"></a></p>
 <h4 id="protected_get">protected<code>_</code>get</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">protected_get</span><span class="p">(</span><span class="n">access_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Message</span><span class="p">]</span>
@@ -5248,8 +5243,6 @@ ignored in that case).</p>
 <ul>
 <li><code>message</code>: the internal message</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.DecisionMaker"></a></p>
 <h2 id="decisionmaker-objects">DecisionMaker Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DecisionMaker</span><span class="p">(</span><span class="n">WithLogger</span><span class="p">)</span>
@@ -5262,7 +5255,6 @@ ignored in that case).</p>
 <p>Initialize the decision maker.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>agent_name</code>: the agent name</li>
 <li><code>decision_maker_handler</code>: the decision maker handler</li>
 </ul>
 <p><a name="aea.decision_maker.base.DecisionMaker.agent_name"></a></p>
@@ -5308,8 +5300,6 @@ ignored in that case).</p>
 <ul>
 <li>gets internal messages from the in queue and calls handle() on them</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.decision_maker.base.DecisionMaker.handle"></a></p>
 <h4 id="handle_1">handle</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5319,8 +5309,6 @@ ignored in that case).</p>
 <ul>
 <li><code>message</code>: the internal message</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
                 
               
               

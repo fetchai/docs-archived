@@ -583,7 +583,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#option-1-aea-manager-approach" class="md-nav__link">
+    Option 1: AEA Manager approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: AEA Manager approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#preparation-instructions" class="md-nav__link">
+    Preparation instructions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo-instructions" class="md-nav__link">
+    Demo instructions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-cli-approach" class="md-nav__link">
+    Option 2: CLI approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: CLI approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-instructions_1" class="md-nav__link">
     Preparation instructions
   </a>
   
@@ -601,9 +636,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#demo-instructions" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#demo-instructions_1" class="md-nav__link">
     Demo instructions:
   </a>
   
@@ -646,9 +681,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-the-aeas" class="md-nav__link">
-    Delete the AEAs
+  <a href="#cleaning-up" class="md-nav__link">
+    Cleaning up
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4459,7 +4499,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#option-1-aea-manager-approach" class="md-nav__link">
+    Option 1: AEA Manager approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: AEA Manager approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#preparation-instructions" class="md-nav__link">
+    Preparation instructions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo-instructions" class="md-nav__link">
+    Demo instructions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-cli-approach" class="md-nav__link">
+    Option 2: CLI approach
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: CLI approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-instructions_1" class="md-nav__link">
     Preparation instructions
   </a>
   
@@ -4477,9 +4552,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#demo-instructions" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#demo-instructions_1" class="md-nav__link">
     Demo instructions:
   </a>
   
@@ -4522,9 +4597,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-the-aeas" class="md-nav__link">
-    Delete the AEAs
+  <a href="#cleaning-up" class="md-nav__link">
+    Cleaning up
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4590,16 +4670,54 @@ This demo does not utilize a smart contract. As a result, we interact with a led
         deactivate Blockchain
 
 </div>
-
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<p><br></p>
+<h2 id="option-1-aea-manager-approach">Option 1: AEA Manager approach</h2>
+<p>Follow this approach when using the AEA Manager Desktop app. Otherwise, skip and follow the CLI approach below. </p>
+<h3 id="preparation-instructions">Preparation instructions</h3>
+<p>Install the <a href="https://aea-manager.fetch.ai" target="_blank">AEA Manager</a>.</p>
+<h3 id="demo-instructions">Demo instructions</h3>
+<p>The following steps assume you have launched the AEA Manager Desktop app.</p>
+<ol>
+<li>
+<p>Add a new AEA called <code>my_weather_station</code> with public id <code>fetchai/weather_station:0.30.0</code>.</p>
+</li>
+<li>
+<p>Add another new AEA called <code>my_weather_client</code> with public id <code>fetchai/weather_client:0.31.0</code>.</p>
+</li>
+<li>
+<p>Copy the address from the <code>my_weather_client</code> into your clip board. Then go to the <a href="https://explore-agent-land.fetch.ai" target="_blank">AgentLand block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
+</li>
+<li>
+<p>Run the <code>my_weather_station</code> AEA. Navigate to its logs and copy the multiaddress displayed.</p>
+</li>
+<li>
+<p>Navigate to the settings of the <code>my_weather_client</code> and under <code>components &gt; connection &gt;</code> <code>fetchai/p2p_libp2p:0.22.0</code> update as follows (make sure to replace the placeholder with the multiaddress):
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+  <span class="s2">&quot;delegate_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:11001&quot;</span>,
+  <span class="s2">&quot;entry_peers&quot;</span>: <span class="o">[</span><span class="s2">&quot;REPLACE_WITH_MULTI_ADDRESS_HERE&quot;</span><span class="o">]</span>,
+  <span class="s2">&quot;local_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:9001&quot;</span>,
+  <span class="s2">&quot;log_file&quot;</span>: <span class="s2">&quot;libp2p_node.log&quot;</span>,
+  <span class="s2">&quot;public_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:9001&quot;</span>
+<span class="o">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Run the <code>my_weather_client</code>.</p>
+</li>
+</ol>
+<p>In the AEA's logs, you should see the agent trading successfully.
+<br></p>
+<h2 id="option-2-cli-approach">Option 2: CLI approach</h2>
+<p>Follow this approach when using the <code>aea</code> CLI.</p>
+<h3 id="preparation-instructions_1">Preparation instructions</h3>
+<h4 id="dependencies">Dependencies</h4>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="demo-instructions">Demo instructions:</h2>
+<h3 id="demo-instructions_1">Demo instructions:</h3>
 <p>A demo to run the same scenario but with a true ledger transaction on Fetch.ai <code>testnet</code> or Ethereum <code>ropsten</code> network. This demo assumes the buyer
 trusts the seller AEA to send the data upon successful payment.</p>
-<h3 id="create-the-weather-station">Create the weather station</h3>
+<h4 id="create-the-weather-station">Create the weather station</h4>
 <p>First, fetch the AEA that will provide weather measurements:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_station:0.28.0 --alias my_weather_station
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_station:0.30.0 --alias my_weather_station
 <span class="nb">cd</span> my_weather_station
 aea install
 aea build
@@ -4610,19 +4728,19 @@ aea build
 The following steps create the weather station from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_weather_station
 <span class="nb">cd</span> my_weather_station
-aea add connection fetchai/p2p_libp2p:0.22.0
-aea add connection fetchai/soef:0.23.0
+aea add connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/soef:0.25.0
 aea add connection fetchai/ledger:0.18.0
 aea add skill fetchai/weather_station:0.25.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4631,9 +4749,9 @@ aea build
 </p>
 </details>
 
-<h3 id="create-the-weather-client">Create the weather client</h3>
+<h4 id="create-the-weather-client">Create the weather client</h4>
 <p>In another terminal, fetch the AEA that will query the weather station:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_client:0.29.0 --alias my_weather_client
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/weather_client:0.31.0 --alias my_weather_client
 <span class="nb">cd</span> my_weather_client
 aea install
 aea build
@@ -4644,19 +4762,19 @@ aea build
 The following steps create the weather client from scratch:
 <div class="highlight"><pre><span></span><code>aea create my_weather_client
 <span class="nb">cd</span> my_weather_client
-aea add connection fetchai/p2p_libp2p:0.22.0
-aea add connection fetchai/soef:0.23.0
+aea add connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/soef:0.25.0
 aea add connection fetchai/ledger:0.18.0
 aea add skill fetchai/weather_client:0.24.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.22.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.23.0&quot;</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4665,7 +4783,7 @@ aea build
 </p>
 </details>
 
-<h3 id="add-keys-for-the-weather-station-aea">Add keys for the weather station AEA</h3>
+<h4 id="add-keys-for-the-weather-station-aea">Add keys for the weather station AEA</h4>
 <p>First, create the private key for the weather station AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 aea add-key fetchai fetchai_private_key.txt
@@ -4677,7 +4795,7 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code>aea issue-certificates
 </code></pre></div></p>
-<h3 id="add-keys-and-generate-wealth-for-the-weather-client-aea">Add keys and generate wealth for the weather client AEA</h3>
+<h4 id="add-keys-and-generate-wealth-for-the-weather-client-aea">Add keys and generate wealth for the weather client AEA</h4>
 <p>The weather client needs to have some wealth to purchase the service from the weather station.</p>
 <p>First, create the private key for the weather client AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
@@ -4693,12 +4811,12 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code>aea issue-certificates
 </code></pre></div></p>
-<h3 id="run-the-aeas">Run the AEAs</h3>
+<h4 id="run-the-aeas">Run the AEAs</h4>
 <p>Run both AEAs from their respective terminals.</p>
 <p>First, run the weather station AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.22.0 -u public_uri</code> to retrieve the address.) This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the weather station.</p>
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.24.0 -u public_uri</code> to retrieve the address.) This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the weather station.</p>
 <p>Then, in the weather client, run this command (replace <code>SOME_ADDRESS</code> with the correct value as described above):
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
 <span class="s1">&#39;{</span>
@@ -4714,12 +4832,13 @@ This allows the weather client to connect to the same local agent communication 
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div></p>
 <p>You will see that the AEAs negotiate and then transact using the selected ledger.</p>
-<h3 id="delete-the-aeas">Delete the AEAs</h3>
+<h4 id="cleaning-up">Cleaning up</h4>
 <p>When you're done, go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ..
 aea delete my_weather_station
 aea delete my_weather_client
 </code></pre></div>
+<p><br /></p>
                 
               
               

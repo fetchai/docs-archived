@@ -5887,6 +5887,7 @@ are not of an allowed type.</p>
 <ul>
 <li><code>name</code>: the name of the data model.</li>
 <li><code>attributes</code>: the attributes of the data model.</li>
+<li><code>description</code>: the data model description.</li>
 </ul>
 <p><a name="aea.helpers.search.models.DataModel.attributes_by_name"></a></p>
 <h4 id="attributes_by_name">attributes<code>_</code>by<code>_</code>name</h4>
@@ -5950,8 +5951,8 @@ It is assumed that each attribute is required.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>values</code>: the values in the description.</li>
-<li><code>data_model</code>: the data model (optional)
-:pram data_model_name: the data model name if a datamodel is created on the fly.</li>
+<li><code>data_model</code>: the data model (optional)</li>
+<li><code>data_model_name</code>: the data model name if a datamodel is created on the fly.</li>
 </ul>
 <p><a name="aea.helpers.search.models.Description.values"></a></p>
 <h4 id="values">values</h4>
@@ -5987,8 +5988,6 @@ with the instance of this class in the 'description_object' argument.</p>
 <li><code>description_pb</code>: the protocol buffer object whose type corresponds with this class.</li>
 <li><code>description</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.search.models.Description.decode"></a></p>
 <h4 id="decode_3">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -6049,13 +6048,13 @@ not_in_a_set = ConstraintType("not_in", ("C", "Java", "Python"))</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>type_</code>: the type of the constraint.
-| Either an instance of the ConstraintTypes enum,
-| or a string representation associated with the type.</li>
+           | Either an instance of the ConstraintTypes enum,
+           | or a string representation associated with the type.</li>
 <li><code>value</code>: the value that defines the constraint.</li>
 </ul>
 <p><strong>Raises</strong>:</p>
 <ul>
-<li><code>ValueError</code>: if the type of the constraint is not</li>
+<li><code>AEAEnforceError</code>: if the type of the constraint is not  # noqa: DAR402</li>
 </ul>
 <p><a name="aea.helpers.search.models.ConstraintType.check_validity"></a></p>
 <h4 id="check_validity">check<code>_</code>validity</h4>
@@ -6063,10 +6062,10 @@ not_in_a_set = ConstraintType("not_in", ("C", "Java", "Python"))</p>
 </code></pre></div>
 <p>Check the validity of the input provided.</p>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>boolean to indicate validity</p>
 <p><strong>Raises</strong>:</p>
 <ul>
-<li><code>ValueError</code>: if the value is not valid wrt the constraint type.</li>
+<li><code>AEAEnforceError</code>: if the value is not valid wrt the constraint type.  # noqa: DAR402</li>
 </ul>
 <p><a name="aea.helpers.search.models.ConstraintType.is_valid"></a></p>
 <h4 id="is_valid">is<code>_</code>valid</h4>
@@ -6120,6 +6119,8 @@ c.get_data_type()
 </blockquote>
 </blockquote>
 </blockquote>
+<p><strong>Returns</strong>:</p>
+<p>data type</p>
 <p><a name="aea.helpers.search.models.ConstraintType.check"></a></p>
 <h4 id="check">check</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">ATTRIBUTE_TYPES</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -6202,10 +6203,9 @@ c.get_data_type()
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_validity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Check whether a Constraint Expression satisfies some basic requirements.</p>
-<p>:return <code>None</code></p>
 <p><strong>Raises</strong>:</p>
 <ul>
-<li><code>ValueError</code>: if the object does not satisfy some requirements.</li>
+<li><code>AEAEnforceError</code>: if the object does not satisfy some requirements.  # noqa: DAR402</li>
 </ul>
 <p><a name="aea.helpers.search.models.And"></a></p>
 <h2 id="and-objects">And Objects</h2>
@@ -6433,61 +6433,40 @@ c.get_data_type()
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>True if the description satisfies the constraint, False otherwise.</p>
-<p>Examples:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>attr_author = Attribute("author" , str, True, "The author of the book.")
-attr_year   = Attribute("year",    int, True, "The year of publication of the book.")
-attr_genre   = Attribute("genre",  str, True, "The genre of the book.")
-c1 = Constraint("author", ConstraintType("==", "Stephen King"))
-c2 = Constraint("year", ConstraintType("&gt;", 1990))
-c3 = Constraint("genre", ConstraintType("in", ("horror", "science_fiction")))
-book_1 = Description({"author": "Stephen King",  "year": 1991, "genre": "horror"})
-book_2 = Description({"author": "George Orwell", "year": 1948, "genre": "horror"})</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>The "author" attribute instantiation satisfies the constraint, so the result is True.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c1.check(book_1)
-True</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>Here, the "author" does not satisfy the constraints. Hence, the result is False.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c1.check(book_2)
-False</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>In this case, there is a missing field specified by the query, that is "year"
-So the result is False, even in the case it is not required by the schema:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c2.check(Description({"author": "Stephen King"}))
-False</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>If the type of some attribute of the description is not correct, the result is False.
-In this case, the field "year" has a string instead of an integer:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>c2.check(Description({"author": "Stephen King", "year": "1991"}))
-False</p>
-<p>c3.check(Description({"author": "Stephen King", "genre": False}))
-False</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Examples:
+    &gt;&gt;&gt; attr_author = Attribute("author" , str, True, "The author of the book.")
+    &gt;&gt;&gt; attr_year   = Attribute("year",    int, True, "The year of publication of the book.")
+    &gt;&gt;&gt; attr_genre   = Attribute("genre",  str, True, "The genre of the book.")
+    &gt;&gt;&gt; c1 = Constraint("author", ConstraintType("==", "Stephen King"))
+    &gt;&gt;&gt; c2 = Constraint("year", ConstraintType("&gt;", 1990))
+    &gt;&gt;&gt; c3 = Constraint("genre", ConstraintType("in", ("horror", "science_fiction")))
+    &gt;&gt;&gt; book_1 = Description({"author": "Stephen King",  "year": 1991, "genre": "horror"})
+    &gt;&gt;&gt; book_2 = Description({"author": "George Orwell", "year": 1948, "genre": "horror"})</p>
+<div class="highlight"><pre><span></span><code>The &quot;author&quot; attribute instantiation satisfies the constraint, so the result is True.
+
+&gt;&gt;&gt; c1.check(book_1)
+True
+
+Here, the &quot;author&quot; does not satisfy the constraints. Hence, the result is False.
+
+&gt;&gt;&gt; c1.check(book_2)
+False
+
+In this case, there is a missing field specified by the query, that is &quot;year&quot;
+So the result is False, even in the case it is not required by the schema:
+
+&gt;&gt;&gt; c2.check(Description({&quot;author&quot;: &quot;Stephen King&quot;}))
+False
+
+If the type of some attribute of the description is not correct, the result is False.
+In this case, the field &quot;year&quot; has a string instead of an integer:
+
+&gt;&gt;&gt; c2.check(Description({&quot;author&quot;: &quot;Stephen King&quot;, &quot;year&quot;: &quot;1991&quot;}))
+False
+
+&gt;&gt;&gt; c3.check(Description({&quot;author&quot;: &quot;Stephen King&quot;, &quot;genre&quot;: False}))
+False
+</code></pre></div>
 <p><a name="aea.helpers.search.models.Constraint.is_valid"></a></p>
 <h4 id="is_valid_5">is<code>_</code>valid</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -6560,6 +6539,10 @@ False</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataModel</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 <p>Given a data model, check whether the query is valid for that data model.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>data_model</code>: optional datamodel</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <p><code>True</code> if the query is compliant with the data model, <code>False</code> otherwise.</p>
 <p><a name="aea.helpers.search.models.Query.check_validity"></a></p>
@@ -6595,8 +6578,6 @@ with the instance of this class in the 'query_object' argument.</p>
 <li><code>query_pb</code>: the protocol buffer object wrapping an object that corresponds with this class.</li>
 <li><code>query</code>: an instance of this class to be encoded in the protocol buffer object.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.search.models.Query.decode"></a></p>
 <h4 id="decode_9">decode</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>

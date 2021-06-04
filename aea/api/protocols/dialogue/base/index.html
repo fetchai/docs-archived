@@ -5915,8 +5915,6 @@
 <li><code>dialogue_opponent_addr</code>: the addr of the agent with which the dialogue is kept.</li>
 <li><code>dialogue_starter_addr</code>: the addr of the agent which started the dialogue.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.DialogueLabel.dialogue_reference"></a></p>
 <h4 id="dialogue_reference">dialogue<code>_</code>reference</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -6017,8 +6015,6 @@
 <li><code>terminal_performatives</code>: the set of all terminal performatives.</li>
 <li><code>valid_replies</code>: the reply structure of speech-acts.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.Dialogue.Rules.initial_performatives"></a></p>
 <h4 id="initial_performatives">initial<code>_</code>performatives</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -6082,11 +6078,10 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>dialogue_label</code>: the identifier of the dialogue</li>
+<li><code>message_class</code>: the message class used</li>
 <li><code>self_address</code>: the address of the entity for whom this dialogue is maintained</li>
 <li><code>role</code>: the role of the agent this dialogue is maintained for</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.Dialogue.add_terminal_state_callback"></a></p>
 <h4 id="add_terminal_state_callback">add<code>_</code>terminal<code>_</code>state<code>_</code>callback</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_terminal_state_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">&quot;Dialogue&quot;</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -6096,8 +6091,6 @@
 <ul>
 <li><code>fn</code>: callable to be called with one argument: Dialogue</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.Dialogue.__eq__"></a></p>
 <h4 id="__eq___1"><code>__</code>eq<code>__</code></h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
@@ -6290,8 +6283,6 @@
 <li><code>end_state</code>: the end state of the dialogue</li>
 <li><code>is_self_initiated</code>: whether the dialogue is initiated by the agent or the opponent</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.find_caller_object"></a></p>
 <h4 id="find_caller_object">find<code>_</code>caller<code>_</code>object</h4>
 <div class="highlight"><pre><span></span><code><span class="n">find_caller_object</span><span class="p">(</span><span class="n">object_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
@@ -6349,8 +6340,6 @@
 <ul>
 <li><code>dialogue</code>: dialogue to add.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.BasicDialoguesStorage.remove"></a></p>
 <h4 id="remove">remove</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -6360,8 +6349,6 @@
 <ul>
 <li><code>dialogue_label</code>: label of the dialogue to remove</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.BasicDialoguesStorage.get"></a></p>
 <h4 id="get">get</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get</span><span class="p">(</span><span class="n">dialogue_label</span><span class="p">:</span> <span class="n">DialogueLabel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dialogue</span><span class="p">]</span>
@@ -6482,10 +6469,11 @@
 <ul>
 <li><code>self_address</code>: the address of the entity for whom dialogues are maintained</li>
 <li><code>end_states</code>: the list of dialogue endstates</li>
+<li><code>message_class</code>: the message class used</li>
+<li><code>dialogue_class</code>: the dialogue class used</li>
+<li><code>role_from_first_message</code>: the callable determining role from first message</li>
 <li><code>keep_terminal_state_dialogues</code>: specify do dialogues in terminal state should stay or not</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.protocols.dialogue.base.Dialogues.is_keep_dialogues_in_terminal_state"></a></p>
 <h4 id="is_keep_dialogues_in_terminal_state">is<code>_</code>keep<code>_</code>dialogues<code>_</code>in<code>_</code>terminal<code>_</code>state</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>

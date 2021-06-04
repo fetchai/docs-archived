@@ -5238,8 +5238,6 @@ points to the 'latest' version of a package.</p>
 <ul>
 <li><code>kwargs</code>: kwargs</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.register"></a></p>
 <h4 id="register_2">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">component_id</span><span class="p">:</span> <span class="n">ComponentId</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Component</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5278,7 +5276,8 @@ points to the 'latest' version of a package.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Component</span><span class="p">]</span>
 </code></pre></div>
 <p>Fetch all the components.</p>
-<p>:return the list of registered components.</p>
+<p><strong>Returns</strong>:</p>
+<p>the list of registered components.</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.fetch_by_type"></a></p>
 <h4 id="fetch_by_type">fetch<code>_</code>by<code>_</code>type</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">fetch_by_type</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Component</span><span class="p">]</span>
@@ -5286,9 +5285,10 @@ points to the 'latest' version of a package.</p>
 <p>Fetch all the components by a given type..</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>component_type</code>: a component type
-:return the list of registered components of a given type.</li>
+<li><code>component_type</code>: a component type</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the list of registered components of a given type.</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.ids"></a></p>
 <h4 id="ids_2">ids</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">ComponentId</span><span class="p">]</span>
@@ -5299,15 +5299,11 @@ points to the 'latest' version of a package.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Set up the registry.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.AgentComponentRegistry.teardown"></a></p>
 <h4 id="teardown_2">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Teardown the registry.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry"></a></p>
 <h2 id="componentregistry-objects">ComponentRegistry Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ComponentRegistry</span><span class="p">(</span>
@@ -5323,8 +5319,6 @@ points to the 'latest' version of a package.</p>
 <ul>
 <li><code>kwargs</code>: kwargs</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry.register"></a></p>
 <h4 id="register_3">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">SkillComponentType</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5334,11 +5328,9 @@ points to the 'latest' version of a package.</p>
 <ul>
 <li><code>item_id</code>: a pair (skill id, item name).</li>
 <li><code>item</code>: the item to register.</li>
-<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
+<li><code>is_dynamically_added</code>: whether or not the item is dynamically added.
+:raises: ValueError if an item is already registered with that item id.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None
-:raises: ValueError if an item is already registered with that item id.</p>
 <p><a name="aea.registries.base.ComponentRegistry.unregister"></a></p>
 <h4 id="unregister_3">unregister</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">unregister</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SkillComponentType</span><span class="p">]</span>
@@ -5387,15 +5379,11 @@ points to the 'latest' version of a package.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Set up the items in the registry.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.ComponentRegistry.teardown"></a></p>
 <h4 id="teardown_3">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Teardown the registry.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.HandlerRegistry"></a></p>
 <h2 id="handlerregistry-objects">HandlerRegistry Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HandlerRegistry</span><span class="p">(</span><span class="n">ComponentRegistry</span><span class="p">[</span><span class="n">Handler</span><span class="p">])</span>
@@ -5410,8 +5398,6 @@ points to the 'latest' version of a package.</p>
 <ul>
 <li><code>kwargs</code>: kwargs</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.registries.base.HandlerRegistry.register"></a></p>
 <h4 id="register_4">register</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">register</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PublicId</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">item</span><span class="p">:</span> <span class="n">Handler</span><span class="p">,</span> <span class="n">is_dynamically_added</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5423,8 +5409,6 @@ points to the 'latest' version of a package.</p>
 <li><code>item</code>: the handler.</li>
 <li><code>is_dynamically_added</code>: whether or not the item is dynamically added.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><strong>Raises</strong>:</p>
 <ul>
 <li><code>ValueError</code>: if the protocol is None, or an item with pair (skill_id, protocol_id_ already exists.</li>
@@ -5439,7 +5423,7 @@ points to the 'latest' version of a package.</p>
 <li><code>item_id</code>: a pair (skill id, item name).</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None
+<p>the unregistered handler
 :raises: ValueError if no item is registered with that item id.</p>
 <p><a name="aea.registries.base.HandlerRegistry.unregister_by_skill"></a></p>
 <h4 id="unregister_by_skill_1">unregister<code>_</code>by<code>_</code>skill</h4>

@@ -5709,7 +5709,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>a dictionary whose keys are package names and
-values are the JSON version of a Dependency object.</p>
+         values are the JSON version of a Dependency object.</p>
 <p><a name="aea.configurations.base.ProtocolSpecificationParseError"></a></p>
 <h2 id="protocolspecificationparseerror-objects">ProtocolSpecificationParseError Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProtocolSpecificationParseError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
@@ -5768,10 +5768,7 @@ alphanumerical sorting.</p>
 <li><code>author</code>: the author of the package.</li>
 <li><code>version</code>: the version of the package (SemVer format).</li>
 <li><code>license_</code>: the license.</li>
-<li><code>aea_version</code>: either a fixed version, or a set of specifiers
-describing the AEA versions allowed.
-(default: empty string - no constraint).
-The fixed version is interpreted with the specifier '=='.</li>
+<li><code>aea_version</code>: either a fixed version, or a set of specifiers describing the AEA versions allowed. (default: empty string - no constraint). The fixed version is interpreted with the specifier '=='.</li>
 <li><code>fingerprint</code>: the fingerprint.</li>
 <li><code>fingerprint_ignore_patterns</code>: a list of file patterns to ignore files to fingerprint.</li>
 <li><code>build_entrypoint</code>: path to a script to execute at build time.</li>
@@ -5862,9 +5859,8 @@ The fixed version is interpreted with the specifier '=='.</li>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>data</code>: the data to replace.</li>
+<li><code>env_vars_friendly</code>: whether or not it is env vars friendly.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.configurations.base.PackageConfiguration.validate_config_data"></a></p>
 <h4 id="validate_config_data">validate<code>_</code>config<code>_</code>data</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5882,7 +5878,13 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">make_resulting_config_data</span><span class="p">(</span><span class="n">overrides</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span>
 </code></pre></div>
 <p>Make config data with overrides applied.</p>
-<p>Does not update config, just creates json representation</p>
+<p>Does not update config, just creates json representation.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>overrides</code>: the overrides</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>config with overrides applied</p>
 <p><a name="aea.configurations.base.PackageConfiguration.check_overrides_valid"></a></p>
 <h4 id="check_overrides_valid">check<code>_</code>overrides<code>_</code>valid</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_overrides_valid</span><span class="p">(</span><span class="n">overrides</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">env_vars_friendly</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5944,17 +5946,35 @@ The fixed version is interpreted with the specifier '=='.</li>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_fingerprint</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Check that the fingerprint are correct against a directory path.</p>
-<p>:raises ValueError if:
-- the argument is not a valid package directory
-- the fingerprints do not match.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>directory</code>: the directory path.</li>
+</ul>
+<p><strong>Raises</strong>:</p>
+<ul>
+<li><code>ValueError</code>: if<ul>
+<li>the argument is not a valid package directory</li>
+<li>the fingerprints do not match.</li>
+</ul>
+</li>
+</ul>
 <p><a name="aea.configurations.base.ComponentConfiguration.check_public_id_consistency"></a></p>
 <h4 id="check_public_id_consistency">check<code>_</code>public<code>_</code>id<code>_</code>consistency</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">check_public_id_consistency</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Check that the public ids in the init file match the config.</p>
-<p>:raises ValueError if:
-- the argument is not a valid package directory
-- the public ids do not match.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>directory</code>: the directory path.</li>
+</ul>
+<p><strong>Raises</strong>:</p>
+<ul>
+<li><code>ValueError</code>: if<ul>
+<li>the argument is not a valid package directory</li>
+<li>the public ids do not match.</li>
+</ul>
+</li>
+</ul>
 <p><a name="aea.configurations.base.ConnectionConfig"></a></p>
 <h2 id="connectionconfig-objects">ConnectionConfig Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ConnectionConfig</span><span class="p">(</span><span class="n">ComponentConfiguration</span><span class="p">)</span>
@@ -6011,8 +6031,8 @@ The fixed version is interpreted with the specifier '=='.</li>
 <p>Initialize a skill component configuration.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li><code>skill_component_type</code>: the skill component type.</li>
 <li><code>class_name</code>: the class name of the component.</li>
+<li><code>file_path</code>: the file path.</li>
 <li><code>args</code>: keyword arguments.</li>
 </ul>
 <p><a name="aea.configurations.base.SkillComponentConfiguration.json"></a></p>
@@ -6127,9 +6147,8 @@ mapping from ComponentId to configurations.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>data</code>: the data to replace.</li>
+<li><code>env_vars_friendly</code>: whether or not it is env vars friendly.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.configurations.base.SpeechActContentConfig"></a></p>
 <h2 id="speechactcontentconfig-objects">SpeechActContentConfig Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SpeechActContentConfig</span><span class="p">(</span><span class="n">Configuration</span><span class="p">)</span>

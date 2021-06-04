@@ -4719,9 +4719,9 @@
 <li><code>runtime_mode</code>: runtime mode to up agent.</li>
 <li><code>storage_uri</code>: optional uri to set generic storage</li>
 <li><code>task_manager_mode</code>: task manager mode.</li>
+<li><code>logger</code>: the logger.</li>
+<li><code>task_manager_mode</code>: mode of the task manager.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.storage_uri"></a></p>
 <h4 id="storage_uri">storage<code>_</code>uri</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -4779,6 +4779,8 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 </code></pre></div>
 <p>Get the tick or agent loop count.</p>
 <p>Each agent loop (one call to each one of act(), react(), update()) increments the tick.</p>
+<p><strong>Returns</strong>:</p>
+<p>tick count</p>
 <p><a name="aea.agent.Agent.state"></a></p>
 <h4 id="state">state</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -4804,8 +4806,6 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Set up the agent.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.start"></a></p>
 <h4 id="start">start</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -4816,8 +4816,6 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li>calls start() on runtime.</li>
 <li>waits for runtime to complete running (blocking)</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.handle_envelope"></a></p>
 <h4 id="handle_envelope">handle<code>_</code>envelope</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">handle_envelope</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -4827,15 +4825,11 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <ul>
 <li><code>envelope</code>: the envelope to handle.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.act"></a></p>
 <h4 id="act">act</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Perform actions on period.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.stop"></a></p>
 <h4 id="stop">stop</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -4846,15 +4840,11 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li>calls stop() on runtime</li>
 <li>waits for runtime to stop (blocking)</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.teardown"></a></p>
 <h4 id="teardown">teardown</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Tear down the agent.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.agent.Agent.get_periodic_tasks"></a></p>
 <h4 id="get_periodic_tasks">get<code>_</code>periodic<code>_</code>tasks</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_periodic_tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]]]</span>

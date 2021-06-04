@@ -5143,11 +5143,11 @@
 <li><code>filepath</code>: the file to the package/module.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>module type</p>
 <p><strong>Raises</strong>:</p>
 <ul>
-<li><code>ValueError</code>: if the filepath provided is not a module.</li>
-<li><code>Exception</code>: if the execution of the module raises exception.</li>
+<li><code>ValueError</code>: if the filepath provided is not a module.  # noqa: DAR402</li>
+<li><code>Exception</code>: if the execution of the module raises exception.  # noqa: DAR402</li>
 </ul>
 <p><a name="aea.helpers.base.load_env_file"></a></p>
 <h4 id="load_env_file">load<code>_</code>env<code>_</code>file</h4>
@@ -5158,8 +5158,6 @@
 <ul>
 <li><code>env_file</code>: save_path to the env file.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None.</p>
 <p><a name="aea.helpers.base.sigint_crossplatform"></a></p>
 <h4 id="sigint_crossplatform">sigint<code>_</code>crossplatform</h4>
 <div class="highlight"><pre><span></span><code><span class="n">sigint_crossplatform</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5174,8 +5172,6 @@ both on Posix and Windows with a single method.</p>
 <ul>
 <li><code>process</code>: the process to send the signal to.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.base.win_popen_kwargs"></a></p>
 <h4 id="win_popen_kwargs">win<code>_</code>popen<code>_</code>kwargs</h4>
 <div class="highlight"><pre><span></span><code><span class="n">win_popen_kwargs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
@@ -5183,6 +5179,8 @@ both on Posix and Windows with a single method.</p>
 <p>Return kwargs to start a process in windows with new process group.</p>
 <p>Help to handle ctrl c properly.
 Return empty dict if platform is not win32</p>
+<p><strong>Returns</strong>:</p>
+<p>windows popen kwargs</p>
 <p><a name="aea.helpers.base.send_control_c"></a></p>
 <h4 id="send_control_c">send<code>_</code>control<code>_</code>c</h4>
 <div class="highlight"><pre><span></span><code><span class="n">send_control_c</span><span class="p">(</span><span class="n">process</span><span class="p">:</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">,</span> <span class="n">kill_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -5191,9 +5189,8 @@ Return empty dict if platform is not win32</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>process</code>: the process to send the signal to.</li>
+<li><code>kill_group</code>: whether or not to kill group</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.base.RegexConstrainedString"></a></p>
 <h2 id="regexconstrainedstring-objects">RegexConstrainedString Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexConstrainedString</span><span class="p">(</span><span class="n">UserString</span><span class="p">)</span>
@@ -5277,6 +5274,8 @@ Or return logger_method if it's callable.</p>
 <li><code>default_return</code>: value to return on exception, by default None</li>
 <li><code>logger_method</code>: name of the logger method or callable to print logs</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the callable</p>
 <p><a name="aea.helpers.base.MaxRetriesError"></a></p>
 <h2 id="maxretrieserror-objects">MaxRetriesError Objects</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MaxRetriesError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
@@ -5295,6 +5294,8 @@ Or return logger_method if it's callable.</p>
 <li><code>delay</code>: number of seconds to sleep between retries. default 0</li>
 <li><code>logger_method</code>: name of the logger method or callable to print logs</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the callable</p>
 <p><a name="aea.helpers.base.exception_log_and_reraise"></a></p>
 <h4 id="exception_log_and_reraise">exception<code>_</code>log<code>_</code>and<code>_</code>reraise</h4>
 <div class="highlight"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
@@ -5304,7 +5305,8 @@ Or return logger_method if it's callable.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>log_method</code>: function to print log</li>
-<li><code>message</code>: message template to add error text.</li>
+<li><code>message</code>: message template to add error text.
+:yield: the generator</li>
 </ul>
 <p><a name="aea.helpers.base.recursive_update"></a></p>
 <h4 id="recursive_update">recursive<code>_</code>update</h4>
@@ -5327,9 +5329,8 @@ to_update
 <ul>
 <li><code>to_update</code>: the dictionary to update.</li>
 <li><code>new_values</code>: the dictionary of new values to replace.</li>
+<li><code>allow_new_values</code>: whether or not to allow new values.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.helpers.base.find_topological_order"></a></p>
 <h4 id="find_topological_order">find<code>_</code>topological<code>_</code>order</h4>
 <div class="highlight"><pre><span></span><code><span class="n">find_topological_order</span><span class="p">(</span><span class="n">adjacency_list</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Set</span><span class="p">[</span><span class="n">T</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
@@ -5407,12 +5408,8 @@ to_update
 <li><code>public_key</code>: the public key, or the key id.</li>
 <li><code>identifier</code>: certificate identifier.</li>
 <li><code>ledger_id</code>: ledger identifier the request is referring to.</li>
-<li><code>not_before</code>: specify the lower bound for certificate validity.
-If it is a string, it must follow the format: 'YYYY-MM-DD'. It
-will be interpreted as timezone UTC-0.</li>
-<li><code>not_before</code>: specify the lower bound for certificate validity.
-if it is a string, it must follow the format: 'YYYY-MM-DD' It
-will be interpreted as timezone UTC-0.</li>
+<li><code>not_before</code>: specify the lower bound for certificate validity. If it is a string, it must follow the format: 'YYYY-MM-DD'. It will be interpreted as timezone UTC-0.</li>
+<li><code>not_after</code>: specify the lower bound for certificate validity. If it is a string, it must follow the format: 'YYYY-MM-DD'. It will be interpreted as timezone UTC-0.</li>
 <li><code>message_format</code>: message format used for signing</li>
 <li><code>save_path</code>: the save_path where to save the certificate.</li>
 </ul>
@@ -5478,6 +5475,8 @@ will be interpreted as timezone UTC-0.</li>
 <p>Get the save path for the certificate.</p>
 <p>Note: if the path is <em>not</em> absolute, then
 the actual save path might depend on the context.</p>
+<p><strong>Returns</strong>:</p>
+<p>the save path</p>
 <p><a name="aea.helpers.base.CertRequest.get_absolute_save_path"></a></p>
 <h4 id="get_absolute_save_path">get<code>_</code>absolute<code>_</code>save<code>_</code>path</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_absolute_save_path</span><span class="p">(</span><span class="n">path_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PathLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span>
@@ -5516,6 +5515,8 @@ Otherwise, the path prefix is prepended.</p>
 <li><code>not_after_string</code>: signature not valid after</li>
 <li><code>message_format</code>: message format used for signing</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>the message</p>
 <p><a name="aea.helpers.base.CertRequest.get_signature"></a></p>
 <h4 id="get_signature">get<code>_</code>signature</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_signature</span><span class="p">(</span><span class="n">path_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PathLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
@@ -5575,6 +5576,12 @@ def myfunction():
 <p>@mydecorator(arg1, kwarg1="value")
 def myfunction():
     ...</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>decorator</code>: a decorator callable</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>a decorator callable</p>
 <p><a name="aea.helpers.base.delete_directory_contents"></a></p>
 <h4 id="delete_directory_contents">delete<code>_</code>directory<code>_</code>contents</h4>
 <div class="highlight"><pre><span></span><code><span class="n">delete_directory_contents</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>

@@ -5144,8 +5144,6 @@
 <li><code>auto_add_remove_project</code>: bool. add/remove project on the first agent add/last agent remove</li>
 <li><code>password</code>: the password to encrypt/decrypt the private key.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.manager.manager.MultiAgentManager.data_dir"></a></p>
 <h4 id="data_dir">data<code>_</code>dir</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@property</span>
@@ -5177,7 +5175,7 @@
 <p>Get all projects.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.add_error_callback"></a></p>
 <h4 id="add_error_callback">add<code>_</code>error<code>_</code>callback</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_error_callback</span><span class="p">(</span><span class="n">error_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_error_callback</span><span class="p">(</span><span class="n">error_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Add error callback to call on error raised.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.start_manager"></a></p>
@@ -5226,15 +5224,13 @@ are fetched in mixed mode (i.e. first try from local
 registry, and then from remote registry in case of failure).</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
-<li>
-<p><code>public_id</code>: the public if of the agent project.</p>
-</li>
-<li>
-<p><code>local</code>: whether or not to fetch from local registry.</p>
-</li>
+<li><code>public_id</code>: the public if of the agent project.</li>
+<li><code>local</code>: whether or not to fetch from local registry.</li>
 <li><code>remote</code>: whether or not to fetch from remote registry.</li>
 <li><code>restore</code>: bool flag for restoring already fetched agent.</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.remove_project"></a></p>
 <h4 id="remove_project">remove<code>_</code>project</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">remove_project</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">keep_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
@@ -5259,17 +5255,12 @@ registry, and then from remote registry in case of failure).</p>
 <li><code>agent_name</code>: unique name for the agent</li>
 <li><code>agent_overrides</code>: overrides for agent config.</li>
 <li><code>component_overrides</code>: overrides for component section.</li>
-<li>
-<p><code>config</code>: agent config (used for agent re-creation).</p>
-</li>
-<li>
-<p><code>local</code>: whether or not to fetch from local registry.</p>
-</li>
+<li><code>local</code>: whether or not to fetch from local registry.</li>
 <li><code>remote</code>: whether or not to fetch from remote registry.</li>
 <li><code>restore</code>: bool flag for restoring already fetched agent.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>manager</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.add_agent_with_config"></a></p>
 <h4 id="add_agent_with_config">add<code>_</code>agent<code>_</code>with<code>_</code>config</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">add_agent_with_config</span><span class="p">(</span><span class="n">public_id</span><span class="p">:</span> <span class="n">PublicId</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">agent_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
@@ -5297,7 +5288,7 @@ registry, and then from remote registry in case of failure).</p>
 <p>Tuple of agent overridables dict and  and list of component overridables dict.</p>
 <p><a name="aea.manager.manager.MultiAgentManager.set_agent_overrides"></a></p>
 <h4 id="set_agent_overrides">set<code>_</code>agent<code>_</code>overrides</h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_agent_overrides</span><span class="p">(</span><span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agent_overides</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span> <span class="n">components_overrides</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">set_agent_overrides</span><span class="p">(</span><span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">agent_overides</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span> <span class="n">components_overrides</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Set agent overrides.</p>
 <p><strong>Arguments</strong>:</p>
@@ -5307,7 +5298,7 @@ registry, and then from remote registry in case of failure).</p>
 <li><code>components_overrides</code>: optional list of dict of components overrides</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.list_agents_info"></a></p>
 <h4 id="list_agents_info">list<code>_</code>agents<code>_</code>info</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">list_agents_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
@@ -5366,33 +5357,45 @@ registry, and then from remote registry in case of failure).</p>
 <li><code>agent_name</code>: agent name to stop</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.stop_all_agents"></a></p>
 <h4 id="stop_all_agents">stop<code>_</code>all<code>_</code>agents</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop_all_agents</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Stop all agents running.</p>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.stop_agents"></a></p>
 <h4 id="stop_agents">stop<code>_</code>agents</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">stop_agents</span><span class="p">(</span><span class="n">agent_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Stop specified agents.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_names</code>: names of agents</li>
+</ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.start_agents"></a></p>
 <h4 id="start_agents">start<code>_</code>agents</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">start_agents</span><span class="p">(</span><span class="n">agent_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;MultiAgentManager&quot;</span>
 </code></pre></div>
 <p>Stop specified agents.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_names</code>: names of agents</li>
+</ul>
 <p><strong>Returns</strong>:</p>
-<p>None</p>
+<p>self</p>
 <p><a name="aea.manager.manager.MultiAgentManager.get_agent_alias"></a></p>
 <h4 id="get_agent_alias">get<code>_</code>agent<code>_</code>alias</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">get_agent_alias</span><span class="p">(</span><span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentAlias</span>
 </code></pre></div>
 <p>Return details about agent alias definition.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>agent_name</code>: name of agent</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <p>AgentAlias</p>
                 

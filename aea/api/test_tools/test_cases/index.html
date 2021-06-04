@@ -5268,8 +5268,6 @@
 </code></pre></div>
 <p>Disable AEA logging of specific agent.</p>
 <p>Run from agent's directory.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.run_cli_command"></a></p>
 <h4 id="run_cli_command">run<code>_</code>cli<code>_</code>command</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5297,6 +5295,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>args</code>: CLI args</li>
+<li><code>cwd</code>: the current working directory</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>subprocess object.</p>
@@ -5309,10 +5308,10 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>target</code>: target method.</li>
-<li><code>process</code>: subprocess passed to thread args.</li>
+<li><code>kwargs</code>: thread keyword arguments</li>
 </ul>
 <p><strong>Returns</strong>:</p>
-<p>None.</p>
+<p>thread</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.create_agents"></a></p>
 <h4 id="create_agents">create<code>_</code>agents</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5323,10 +5322,8 @@
 <ul>
 <li><code>agents_names</code>: str agent names.</li>
 <li><code>is_local</code>: a flag for local folder add True by default.</li>
-<li><code>empty</code>: optional boolean flag for skip adding default dependencies.</li>
+<li><code>is_empty</code>: optional boolean flag for skip adding default dependencies.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.fetch_agent"></a></p>
 <h4 id="fetch_agent">fetch<code>_</code>agent</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5336,11 +5333,9 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>public_id</code>: str public id</li>
-<li><code>agents_name</code>: str agent name.</li>
+<li><code>agent_name</code>: str agent name.</li>
 <li><code>is_local</code>: a flag for local folder add True by default.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.difference_to_fetched_agent"></a></p>
 <h4 id="difference_to_fetched_agent">difference<code>_</code>to<code>_</code>fetched<code>_</code>agent</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5350,7 +5345,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>public_id</code>: str public id</li>
-<li><code>agents_name</code>: str agent name.</li>
+<li><code>agent_name</code>: str agent name.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>list of files differing in the projects</p>
@@ -5364,8 +5359,6 @@
 <ul>
 <li><code>agents_names</code>: str agent names.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.run_agent"></a></p>
 <h4 id="run_agent">run<code>_</code>agent</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5386,10 +5379,6 @@
 </code></pre></div>
 <p>Run interaction as subprocess.</p>
 <p>Run from agent's directory.</p>
-<p><strong>Arguments</strong>:</p>
-<ul>
-<li><code>args</code>: CLI args</li>
-</ul>
 <p><strong>Returns</strong>:</p>
 <p>subprocess object.</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.terminate_agents"></a></p>
@@ -5416,8 +5405,6 @@
  <span class="o">|</span> <span class="n">initialize_aea</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize AEA locally with author name.</p>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.add_item"></a></p>
 <h4 id="add_item">add<code>_</code>item</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5472,7 +5459,7 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>item_type</code>: str item type.</li>
-<li><code>name</code>: public id of the item.</li>
+<li><code>public_id</code>: public id of the item.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>Result</p>
@@ -5502,7 +5489,7 @@
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.generate_private_key"></a></p>
 <h4 id="generate_private_key">generate<code>_</code>private<code>_</code>key</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">generate_private_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">private_key_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
+ <span class="o">|</span> <span class="n">generate_private_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">private_key_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
 </code></pre></div>
 <p>Generate AEA private key with CLI command.</p>
 <p>Run from agent's directory.</p>
@@ -5510,13 +5497,14 @@
 <ul>
 <li><code>ledger_api_id</code>: ledger API ID.</li>
 <li><code>private_key_file</code>: the private key file.</li>
+<li><code>password</code>: the password.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>Result</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.add_private_key"></a></p>
 <h4 id="add_private_key">add<code>_</code>private<code>_</code>key</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">add_private_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">private_key_filepath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
+ <span class="o">|</span> <span class="n">add_private_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">private_key_filepath</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_PRIVATE_KEY_FILE</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
 </code></pre></div>
 <p>Add private key with CLI command.</p>
 <p>Run from agent's directory.</p>
@@ -5525,6 +5513,7 @@
 <li><code>ledger_api_id</code>: ledger API ID.</li>
 <li><code>private_key_filepath</code>: private key filepath.</li>
 <li><code>connection</code>: whether or not the private key filepath is for a connection.</li>
+<li><code>password</code>: the password to encrypt private keys.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>Result</p>
@@ -5551,34 +5540,34 @@
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>private_key</code>: the private key</li>
-<li><code>private_key_filepath</code>: the filepath to the private key file</li>
+<li><code>private_key_filepath</code>: the filepath to the private key file
+:raises: exception if file does not exist</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None
-:raises: exception if file does not exist</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.generate_wealth"></a></p>
 <h4 id="generate_wealth">generate<code>_</code>wealth</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">generate_wealth</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
+ <span class="o">|</span> <span class="n">generate_wealth</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span>
 </code></pre></div>
 <p>Generate wealth with CLI command.</p>
 <p>Run from agent's directory.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ledger_api_id</code>: ledger API ID.</li>
+<li><code>password</code>: the password.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>Result</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.get_wealth"></a></p>
 <h4 id="get_wealth">get<code>_</code>wealth</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">get_wealth</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+ <span class="o">|</span> <span class="n">get_wealth</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ledger_api_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_LEDGER</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 <p>Get wealth with CLI command.</p>
 <p>Run from agent's directory.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>ledger_api_id</code>: ledger API ID.</li>
+<li><code>password</code>: the password to encrypt/decrypt private keys.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>command line output</p>
@@ -5593,8 +5582,6 @@
 <li><code>src</code>: the source file.</li>
 <li><code>dest</code>: the destination file.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.change_directory"></a></p>
 <h4 id="change_directory">change<code>_</code>directory</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5605,8 +5592,6 @@
 <ul>
 <li><code>path</code>: path to the new working directory.</li>
 </ul>
-<p><strong>Returns</strong>:</p>
-<p>None</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.send_envelope_to_agent"></a></p>
 <h4 id="send_envelope_to_agent">send<code>_</code>envelope<code>_</code>to<code>_</code>agent</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
@@ -5648,6 +5633,8 @@ or timeout expired.</p>
 <li><code>process</code>: agent subprocess.</li>
 <li><code>timeout</code>: the timeout to wait for launch to complete</li>
 </ul>
+<p><strong>Returns</strong>:</p>
+<p>bool indicating status</p>
 <p><a name="aea.test_tools.test_cases.BaseAEATestCase.invoke"></a></p>
 <h4 id="invoke">invoke</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
