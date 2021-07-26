@@ -54,6 +54,8 @@ It uses Cosmos’ IBC protocol to enable token and agents interoperability with 
 
 The primary purpose of the Fetch blockchain is to be particularly well-suited to serve as a “home” for agent applications and services, thanks to all these features and more.
 
+As an additional layer of security against potential attackers, our blockchain also uses Fetch.ai’s random beacon process. 
+
 
 
 2. Smart contracts
