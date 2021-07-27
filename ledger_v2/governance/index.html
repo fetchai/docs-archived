@@ -3828,6 +3828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../cli-multisig/" class="md-nav__link">
+      Multisig Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../cli-tokens/" class="md-nav__link">
       Tokens
     </a>
@@ -4060,18 +4072,6 @@
   <li class="md-nav__item">
     <a href="../faucet/" class="md-nav__link">
       Faucet
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../python-examples/" class="md-nav__link">
-      Python Examples
     </a>
   </li>
 
@@ -4474,10 +4474,10 @@
 <p>In order to be able to take part in the governance you either need to be running a full validator node or you need to have have delegated stake to an existing validator</p>
 <h2 id="stake-delegation">Stake Delegation</h2>
 <p>In order to delegate stake to a validator the following command should be used:</p>
-<div class="highlight"><pre><span></span><code>fetchcli tx staking delegate &lt;VALOPER_ADDRESS&gt; &lt;AMOUNT&gt; --from &lt;KEY_NAME&gt;
+<div class="highlight"><pre><span></span><code>fetchd tx staking delegate &lt;VALOPER_ADDRESS&gt; &lt;AMOUNT&gt; --from &lt;KEY_NAME&gt;
 </code></pre></div>
 <p>Where the <code>&lt;VALOPER_ADDRESS&gt;</code> begins with the prefix <code>fetchvaloper1...</code> and the <code>&lt;AMOUNT&gt;</code> field contains the currency denomination. For example:</p>
-<div class="highlight"><pre><span></span><code>fetchcli tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
+<div class="highlight"><pre><span></span><code>fetchd tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
 </code></pre></div>
 <h2 id="proposals-overview">Proposals Overview</h2>
 <p>There are three types of proposal:</p>
@@ -4507,21 +4507,21 @@
 </code></pre></div>
 <p>It is always recommended that the description of a text proposal has a link to a Github issue with the full proposal text along with the discussions about it.</p>
 <p>Once the user has created the JSON file, to generate the text propsal on chain run the following command:</p>
-<p><code>fetchcli tx gov submit-proposal --proposal proposal.json --from &lt;name of signing key&gt;</code></p>
+<p><code>fetchd tx gov submit-proposal --proposal proposal.json --from &lt;name of signing key&gt;</code></p>
 <h2 id="increasing-the-deposit-for-a-proposal">Increasing the deposit for a proposal</h2>
 <p>If a user wants to increase the deposit of a proposal they would run the following command:</p>
-<p><code>fetchcli tx gov deposit &lt;proposalID&gt; 100atestfet --from &lt;key name&gt;</code></p>
+<p><code>fetchd tx gov deposit &lt;proposalID&gt; 100atestfet --from &lt;key name&gt;</code></p>
 <p>For example:</p>
-<p><code>fetchcli tx gov deposit 2 100atestfet --from validator</code></p>
+<p><code>fetchd tx gov deposit 2 100atestfet --from validator</code></p>
 <h2 id="listing-current-proposals">Listing current proposals</h2>
 <p>Current proposals are visible from the block explorer and using the CLI.</p>
 <p>To get the list of current proposals and their corresponding <em>proposal-ids</em> the run the following command:</p>
-<p><code>fetchcli query gov proposals</code></p>
+<p><code>fetchd query gov proposals</code></p>
 <h2 id="voting-on-a-proposal">Voting on a proposal</h2>
 <p>To vote for a proposal run the following command</p>
-<p><code>fetchcli tx gov vote &lt;proposalID&gt; &lt;option&gt; --from &lt;delegatorKeyName&gt;</code></p>
+<p><code>fetchd tx gov vote &lt;proposalID&gt; &lt;option&gt; --from &lt;delegatorKeyName&gt;</code></p>
 <p>For example:</p>
-<p><code>fetchcli tx gov vote 5 yes --from validator</code></p>
+<p><code>fetchd tx gov vote 5 yes --from validator</code></p>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>When using CLI commands make sure that your CLI is pointing at the correct network. See the <a href="../cli-introduction/">CLI introduction documentation</a> for more details</p>

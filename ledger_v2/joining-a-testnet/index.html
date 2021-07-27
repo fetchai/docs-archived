@@ -3828,6 +3828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../cli-multisig/" class="md-nav__link">
+      Multisig Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../cli-tokens/" class="md-nav__link">
       Tokens
     </a>
@@ -3949,13 +3961,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#using-the-docker-image" class="md-nav__link">
-    Using the docker image
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#using-a-local-version" class="md-nav__link">
     Using a local version
   </a>
@@ -3964,8 +3969,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-the-client-fetchcli" class="md-nav__link">
-    Configuring the client fetchcli
+  <a href="#configuring-the-client-fetchd" class="md-nav__link">
+    Configuring the client fetchd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stargate-example" class="md-nav__link">
+    Stargate example
   </a>
   
 </li>
@@ -4045,18 +4057,6 @@
   <li class="md-nav__item">
     <a href="../faucet/" class="md-nav__link">
       Faucet
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../python-examples/" class="md-nav__link">
-      Python Examples
     </a>
   </li>
 
@@ -4394,13 +4394,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#using-the-docker-image" class="md-nav__link">
-    Using the docker image
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#using-a-local-version" class="md-nav__link">
     Using a local version
   </a>
@@ -4409,8 +4402,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuring-the-client-fetchcli" class="md-nav__link">
-    Configuring the client fetchcli
+  <a href="#configuring-the-client-fetchd" class="md-nav__link">
+    Configuring the client fetchd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stargate-example" class="md-nav__link">
+    Stargate example
   </a>
   
 </li>
@@ -4441,58 +4441,50 @@
                 
                 
                 <h1 id="joining-a-testnet">Joining a testnet</h1>
-<p>In order to join the test network you will need to have the correct version of the fetchd ledger available on your system. For users who just want to connect to the network we recommend that you use the docker images. A number of
-the setup steps have been automated to it is very quick to get started.</p>
-<p>Alternatively if you plan to run a validator node then it will make more sense in the long term for you are familiar with operating a local version of the software.</p>
-<h2 id="using-the-docker-image">Using the docker image</h2>
-<p>Much more information is available from the <a href="../docker-images/">Docker Images</a> pages however, to join a desired network you can simply run the docker images with the following command:</p>
-<div class="highlight"><pre><span></span><code>docker run -e MONIKER=&lt;insert node name here&gt; -e NETWORK=&lt;network name&gt; fetchai/fetchd:0.5
-</code></pre></div>
-<p><strong>Beacon World Example</strong></p>
-<p>To connect to the beacon world testnet users would simply need to run the following command</p>
-<div class="highlight"><pre><span></span><code>docker run -e MONIKER=my-first-fetch-node -e NETWORK=beaconworld fetchai/fetchd:0.5
-</code></pre></div>
+<p>In order to join the test network you will need to have the correct version of the fetchd ledger available on your system. </p>
 <h2 id="using-a-local-version">Using a local version</h2>
-<p>Assuming that you have following the <a href="../building/">installation guide</a>. You should now have <code>fetchd</code> and <code>fetchcli</code> successfully installed in your path. You can check this with the following command:</p>
-<div class="highlight"><pre><span></span><code>which fetchd
-which fetchcli
-</code></pre></div>
-<p>You can also verify that you are running the correct version for the <a href="../networks/">network</a>.</p>
+<p>Assuming that you have followed the <a href="../building/">installation guide</a>. You should now have <code>fetchd</code> successfully installed in your path. You can check this with the following command:</p>
 <div class="highlight"><pre><span></span><code>fetchd version
-fetchcli version
 </code></pre></div>
-<h3 id="configuring-the-client-fetchcli">Configuring the client <code>fetchcli</code></h3>
+<p>This should print a version number that must be compatible with the network you're connecting to (see the <a href="../networks/">network page</a> for the list of supported versions per network).</p>
+<h3 id="configuring-the-client-fetchd">Configuring the client fetchd</h3>
 <p>In general to configure the CLI to point at a given network it needs as a minimum the following configuration values</p>
-<div class="highlight"><pre><span></span><code>fetchcli config chain-id &lt;chain-id&gt;
-fetchcli config trust-node <span class="nb">false</span>
-fetchcli config node &lt;rpc url&gt;
+<div class="highlight"><pre><span></span><code>fetchd config chain-id &lt;chain-id&gt;
+fetchd config node &lt;rpc url&gt;
 </code></pre></div>
-<p><strong>Beacon World Example</strong></p>
-<p>In the case of the beacon world network this would be as follows:</p>
-<div class="highlight"><pre><span></span><code>fetchcli config chain-id beaconworld-3
-fetchcli config trust-node <span class="nb">false</span>
-fetchcli config node https://rpc-beaconworld.fetch.ai:443
+<h3 id="stargate-example">Stargate example</h3>
+<p>In the case of the Stargate network this would be as follows:</p>
+<div class="highlight"><pre><span></span><code>fetchd config chain-id stargateworld-1
+fetchd config node https://rpc-stargateworld.fetch.ai:443
 </code></pre></div>
 <h3 id="configuring-the-server-fetchd">Configuring the server <code>fetchd</code></h3>
 <p>Initialize fetchd by running command. This setups a default / empty genesis configuration.</p>
-<div class="highlight"><pre><span></span><code>fetchd init &lt;Moniker-name&gt; --chain-id &lt;chain id&gt;
+<div class="highlight"><pre><span></span><code>fetchd init &lt;moniker-name&gt; --chain-id &lt;chain id&gt;
 </code></pre></div>
-<p>Execute the following command to download the latest the genesis file:</p>
-<div class="highlight"><pre><span></span><code>curl &lt;rpc url&gt;/genesis <span class="p">|</span> jq .result.genesis &gt; ~/.fetchd/config/genesis.json<span class="sb">`</span>
+<blockquote>
+<p>This will initialize default configuration files under the <code>FETCHD_HOME</code> folder, which default to <code>~/.fetchd/</code>. </p>
+</blockquote>
+<p>Execute the following command to download the latest genesis file:</p>
+<div class="highlight"><pre><span></span><code>curl &lt;rpc url&gt;/genesis <span class="p">|</span> jq <span class="s1">&#39;.result.genesis&#39;</span> &gt; ~/.fetchd/config/genesis.json
 </code></pre></div>
 <p>Finally connect fetchd to the network by getting it to connect to a seed node for the given network.</p>
 <div class="highlight"><pre><span></span><code>fetchd start --p2p.seeds<span class="o">=</span>&lt;network seed peers&gt;
 </code></pre></div>
-<p><strong>Beacon World Example</strong></p>
-<p>Less abstractly then, if a user wants to connect to the beacon world test net for example. You would need to run the following steps:</p>
+<p><strong>Stargate Example</strong></p>
+<p>Less abstractly then, if you wants to connect to the Stargate test net for example, you would need to run the following steps:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># init</span>
-fetchd init my-first-fetch-node --chain-id beaconworld-3
+fetchd init my-first-fetch-node --chain-id stargateworld-1
 
 <span class="c1"># genesis</span>
-curl https://rpc-beaconworld.fetch.ai/genesis? <span class="p">|</span> jq .result.genesis &gt; ~/.fetchd/config/genesis.json
+curl https://rpc-stargateworld.fetch.ai/genesis <span class="p">|</span> jq <span class="s1">&#39;.result.genesis&#39;</span> &gt; ~/.fetchd/config/genesis.json
 
 <span class="c1"># start</span>
-fetchd start --p2p.seeds<span class="o">=</span>08edefb35e6f4f7baeb27303d438ee3daa2e9ace@connect-beaconworld.fetch.ai:36656
+fetchd start --p2p.seeds<span class="o">=</span>0831c7f4cb4b12fe02b35cc682c7edb03f6df36c@connect-stargateworld.t-v2-london-c.fetch-ai.com:36656
+</code></pre></div>
+<p>Your local node will then start to synchronise itself with the network, replaying all blocks and transactions up to the current block. Depending on the age of the network and your hard disk speed, this could take a while. </p>
+<p>To know when your node as finished syncing, you can query it's status from its RPC API:</p>
+<div class="highlight"><pre><span></span><code>curl -s <span class="m">127</span>.0.01:26657/status <span class="p">|</span>  jq <span class="s1">&#39;.result.sync_info.catching_up&#39;</span>
+<span class="nb">true</span> <span class="c1"># this will print &quot;false&quot; once your node is up to date</span>
 </code></pre></div>
                 
               

@@ -3828,6 +3828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../cli-multisig/" class="md-nav__link">
+      Multisig Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../cli-tokens/" class="md-nav__link">
       Tokens
     </a>
@@ -3986,92 +3998,10 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Faucet
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
     <a href="./" class="md-nav__link md-nav__link--active">
       Faucet
     </a>
     
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#making-a-token-claim-request" class="md-nav__link">
-    Making a token claim request
-  </a>
-  
-    <nav class="md-nav" aria-label="Making a token claim request">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-encoded" class="md-nav__link">
-    URL Encoded
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-encoded" class="md-nav__link">
-    JSON Encoded
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response" class="md-nav__link">
-    Response
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#querying-the-status-of-a-token-claim-request" class="md-nav__link">
-    Querying the status of a token claim request
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rate-limiting" class="md-nav__link">
-    Rate limiting
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../python-examples/" class="md-nav__link">
-      Python Examples
-    </a>
   </li>
 
         
@@ -4401,62 +4331,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#making-a-token-claim-request" class="md-nav__link">
-    Making a token claim request
-  </a>
-  
-    <nav class="md-nav" aria-label="Making a token claim request">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-encoded" class="md-nav__link">
-    URL Encoded
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-encoded" class="md-nav__link">
-    JSON Encoded
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#response" class="md-nav__link">
-    Response
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#querying-the-status-of-a-token-claim-request" class="md-nav__link">
-    Querying the status of a token claim request
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rate-limiting" class="md-nav__link">
-    Rate limiting
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -4469,50 +4343,10 @@
                 
                 
                 <h1 id="token-faucet">Token Faucet</h1>
-<p>For the main agent land network we have a simple token faucet implemented to allow users of the network to get started quickly.</p>
+<p>For our test networks, we have a simple token faucet implemented to allow users of the network to get started quickly. You can send it an account address, and it will transfer some test token on it.</p>
 <p>Token Faucets are network specific, depending on the network type they may or may not be deployed. Please check the <a href="../networks/">networks</a> page for specific details.</p>
-<p>The Token Faucet itself is a HTTP REST API and interaction is shown below:</p>
-<h2 id="making-a-token-claim-request">Making a token claim request</h2>
-<p>A user must first submit a token claim request to the faucet. This request can be either URL encoded or JSON encoded. Both examples are shown below:</p>
-<p>URL: <code>POST /claim/requests</code></p>
-<h3 id="url-encoded">URL Encoded</h3>
-<p><strong>Headers</strong></p>
-<p>The request must include the following headers:</p>
-<div class="highlight"><pre><span></span><code>&#39;Content-Type: application/x-www-form-urlencoded
-</code></pre></div>
-<p><strong>cURL example</strong></p>
-<div class="highlight"><pre><span></span><code>curl -d <span class="s1">&#39;Address=fetch1xqqftqp8ranv2taxsx8h594xprfw3qxl7j3ra2&#39;</span> -H <span class="s2">&quot;Content-Type: application/x-www-form-urlencoded&quot;</span> -X POST http://127.0.0.1:5000/claim/requests
-</code></pre></div>
-<h3 id="json-encoded">JSON Encoded</h3>
-<p><strong>Headers</strong></p>
-<p>The request must include the following headers:</p>
-<div class="highlight"><pre><span></span><code>&#39;Content-Type: application/json
-</code></pre></div>
-<p><strong>cURL example</strong></p>
-<div class="highlight"><pre><span></span><code>curl -d <span class="s1">&#39;{&quot;Address&quot;:&quot;fetch1xqqftqp8ranv2taxsx8h594xprfw3qxl7j3ra2&quot;}&#39;</span> -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -X POST http://127.0.0.1:5000/claim/requests
-</code></pre></div>
-<h3 id="response">Response</h3>
-<p>In either submission case, upon successful register the API will respond with the request UID</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="querying-the-status-of-a-token-claim-request">Querying the status of a token claim request</h2>
-<p>To query the status of the your token claim request the following API can be used</p>
-<p>URL: <code>GET /claim/requests/&lt;uid&gt;</code></p>
-<p><strong>cURL example</strong></p>
-<div class="highlight"><pre><span></span><code>curl http://127.0.0.1:5000/claim/requests/1a472a27-7225-4409-92be-4efd3beed995
-</code></pre></div>
-<p>This will respond with the status of the request claim. If the claim was successful then JSON response will resemble the following:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;txDigest&quot;</span><span class="p">:</span> <span class="s2">&quot;9CA3A7D3614A37C1BB2EA6B746B402CF68D3E5A4CEBFFE1D7ADF212876DAE70B&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;completed&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="nt">&quot;lastUpdated&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-11T09:48:04.596522&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="rate-limiting">Rate limiting</h2>
-<p>To prevent malicious actors, this API is rate limited and will block requests if the limits are passed. In this case the user must wait and then try again.</p>
+<p>The Token Faucet itself is available from the network block explorer (<code>GET FUNDS</code> button on the homepage).</p>
+<p>Enter your <code>fetch...</code> address in the popup and click <em>Add funds</em> button. Wait a few blocks for the transaction to be processed, and you should see it appear along with some funds on your account.</p>
                 
               
               
@@ -4545,13 +4379,13 @@
           </a>
         
         
-          <a href="../python-examples/" title="Python Examples" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../i_nets/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Python Examples
+                Introduction
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

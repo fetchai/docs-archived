@@ -3783,26 +3783,6 @@
     Prerequisites
   </a>
   
-    <nav class="md-nav" aria-label="Prerequisites">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ubuntu-2004-debian-10" class="md-nav__link">
-    Ubuntu 20.04 / Debian 10
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos" class="md-nav__link">
-    MacOS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3810,18 +3790,12 @@
     Building the code
   </a>
   
-    <nav class="md-nav" aria-label="Building the code">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#boost-dependencies-only-for-beaconworld-versions-v05x-and-v06x" class="md-nav__link">
-    Boost Dependencies (Only for beaconworld versions v0.5x and v0.6.x)
-  </a>
-  
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    FAQ
+  </a>
   
 </li>
       
@@ -3896,6 +3870,18 @@
   <li class="md-nav__item">
     <a href="../cli-keys/" class="md-nav__link">
       Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-multisig/" class="md-nav__link">
+      Multisig Keys
     </a>
   </li>
 
@@ -4058,18 +4044,6 @@
   <li class="md-nav__item">
     <a href="../faucet/" class="md-nav__link">
       Faucet
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../python-examples/" class="md-nav__link">
-      Python Examples
     </a>
   </li>
 
@@ -4411,26 +4385,6 @@
     Prerequisites
   </a>
   
-    <nav class="md-nav" aria-label="Prerequisites">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ubuntu-2004-debian-10" class="md-nav__link">
-    Ubuntu 20.04 / Debian 10
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos" class="md-nav__link">
-    MacOS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -4438,18 +4392,12 @@
     Building the code
   </a>
   
-    <nav class="md-nav" aria-label="Building the code">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#boost-dependencies-only-for-beaconworld-versions-v05x-and-v06x" class="md-nav__link">
-    Boost Dependencies (Only for beaconworld versions v0.5x and v0.6.x)
-  </a>
-  
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    FAQ
+  </a>
   
 </li>
       
@@ -4469,56 +4417,46 @@
                 <h1 id="building-the-ledger">Building the Ledger</h1>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>Go 1.14+ (installation instructions available <a href="https://golang.org/dl/">here</a>)</li>
+<li>Go 1.16+ (installation instructions available <a href="https://golang.org/dl/">here</a>)</li>
+<li>Packages: <code>make</code>, <code>gcc</code> (on ubunty, install them with <code>sudo apt-get update &amp;&amp; sudo apt-get install -y make gcc</code>)</li>
 </ul>
-<h3 id="ubuntu-2004-debian-10">Ubuntu 20.04 / Debian 10</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command if using Ubuntu</span>
-sudo apt-get install libgmp-dev swig
-
-<span class="c1"># Download and install the MCL libraries</span>
-<span class="nb">cd</span> ~
-wget https://github.com/herumi/mcl/archive/v1.05.tar.gz
-tar xvf v1.05.tar.gz
-<span class="nb">cd</span> mcl-1.05
-sudo make install
-sudo ldconfig
-</code></pre></div>
-<h3 id="macos">MacOS</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command if using OS X</span>
-brew install swig gmp
-
-<span class="c1"># Download and install the MCL libraries</span>
-<span class="nb">cd</span> ~
-wget https://github.com/herumi/mcl/archive/v1.05.tar.gz
-tar xvf v1.05.tar.gz
-<span class="nb">cd</span> mcl-1.05
-sudo make install
-sudo ldconfig
-</code></pre></div>
 <h2 id="building-the-code">Building the code</h2>
 <p>Download the latest released version from github and build the project using the following commands:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/fetchai/fetchd.git &amp;&amp; cd fetchd
 </code></pre></div>
+<p>Then select the particular tag version you want to build, ie:</p>
+<div class="highlight"><pre><span></span><code>git checkout v0.8.1
+</code></pre></div>
 <p>Then build the code with the command:</p>
 <div class="highlight"><pre><span></span><code>make build
 </code></pre></div>
-<p>This will generate the following binaries:</p>
-<ul>
-<li><code>./build/fetchcli</code> - This is the command line client that is useful for interacting with the network</li>
-<li><code>./build/fetchd</code> - This is the block chain node daemon and can be configured to join the network</li>
-</ul>
+<p>This will generate the <code>./build/fetchd</code> binary.</p>
 <p>For non-developer users we recommend that the user installs the binaries into their system. This can be done with the following command:</p>
-<div class="highlight"><pre><span></span><code>sudo make install
+<div class="highlight"><pre><span></span><code>make install
 </code></pre></div>
-<p>This will install the binaries in the directory specified by your <code>$GOBIN</code> environment variable.</p>
-<h3 id="boost-dependencies-only-for-beaconworld-versions-v05x-and-v06x">Boost Dependencies (Only for beaconworld versions <code>v0.5x</code> and <code>v0.6.x</code>)</h3>
-<p>Currently the code requires that the user compiles the code with at least version 1.67 of Boost Serialisation library. Failure to do so will mean that users will not be able to sync with the blockchain. This limitation will be resolved in the near future (with the Boost dependency being removed completely).</p>
-<p>To verify which libraries you have linked against use the following commands</p>
-<p><strong>Ubuntu 20.04 / Debian 10</strong></p>
-<div class="highlight"><pre><span></span><code>ldd ./build/fetchd
+<p>This will install the binaries in the directory specified by your <code>$GOBIN</code> environment variable (default to <code>~/go/bin</code>).</p>
+<div class="highlight"><pre><span></span><code>which fetchd
 </code></pre></div>
-<p><strong>MacOS</strong></p>
-<div class="highlight"><pre><span></span><code>otool -L ./build/fetchd
+<p>This should return a path such as <code>~/go/bin/fetchd</code> (might be different depending on your actual go installation).</p>
+<blockquote>
+<p>If you get no output, or an error such as <code>which: no fetchd in ...</code>, possible cause can either be that <code>make install</code> failed with some errors or that your go binary folder (default: ~/go/bin) is not in your <code>PATH</code>.</p>
+<p>To add the ~/go/bin folder to your PATH, add this line at the end of your ~/.bashrc:
+<div class="highlight"><pre><span></span><code>export PATH=$PATH:~/go/bin
+</code></pre></div></p>
+<p>and reload it with:</p>
+<div class="highlight"><pre><span></span><code>source ~/.bashrc
+</code></pre></div>
+</blockquote>
+<p>You can also verify that you are running the correct version </p>
+<div class="highlight"><pre><span></span><code>fetchd version
+</code></pre></div>
+<p>This should print a version number that must be compatible with the network you're connecting to (see the <a href="../networks/">network page</a> for the list of supported versions per network).</p>
+<h2 id="faq">FAQ</h2>
+<ul>
+<li><strong>Error: failed to parse log level (main:info,state:info,:error): Unknown Level String: 'main:info,state:info,:error', defaulting to NoLevel</strong></li>
+</ul>
+<p>This means you had a  pre-stargate version of fetchd (&lt;= v0.7.x), and just installed a stargate version (&gt;= v0.8.x), you'll need to remove the previous configuration files with:</p>
+<div class="highlight"><pre><span></span><code>rm ~/.fetchd/config/app.toml ~/.fetchd/config/config.toml
 </code></pre></div>
                 
               
