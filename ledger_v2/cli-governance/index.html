@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://docs.fetch.ai/ledger_v2/versions/">
+        <link rel="canonical" href="https://docs.fetch.ai/ledger_v2/cli-governance/">
       
       
         <meta name="author" content="developer@fetch.ai">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Versions - Developer Documentation</title>
+        <title>Governance Proposals - Developer Documentation</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#versions" class="md-skip">
+        <a href="#governance-proposals" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Versions
+              Governance Proposals
             
           </span>
         </div>
@@ -3758,20 +3758,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../versions/" class="md-nav__link">
       Versions
     </a>
-    
   </li>
 
         
@@ -3791,10 +3782,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" >
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" checked>
     <label class="md-nav__link" for="nav-4-5">
       Commandline Client
       <span class="md-nav__icon md-icon"></span>
@@ -3871,11 +3864,83 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../cli-governance/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Governance Proposals
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Governance Proposals
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameter-change" class="md-nav__link">
+    Parameter change
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal-deposit-phase" class="md-nav__link">
+    Proposal deposit phase
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal-voting-and-querying" class="md-nav__link">
+    Proposal voting and querying
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposal voting and querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-output" class="md-nav__link">
+    Example output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voting-outcome" class="md-nav__link">
+    Voting outcome
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4343,6 +4408,55 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameter-change" class="md-nav__link">
+    Parameter change
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal-deposit-phase" class="md-nav__link">
+    Proposal deposit phase
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposal-voting-and-querying" class="md-nav__link">
+    Proposal voting and querying
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposal voting and querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-output" class="md-nav__link">
+    Example output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voting-outcome" class="md-nav__link">
+    Voting outcome
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -4354,54 +4468,98 @@
               
                 
                 
-                <h1 id="versions">Versions</h1>
-<p>There are multiple versions of the fetchd software with differing levels of features and maturity. The following table outlines the rough overview of these versions</p>
-<table>
-<thead>
-<tr>
-<th>Version</th>
-<th>Maturity</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>v0.2.x</td>
-<td>Stable</td>
-<td>This is a stable version of the network to support agent development</td>
-</tr>
-<tr>
-<td>v0.3.x</td>
-<td>Beta</td>
-<td>Builds upon our stable release and adds support for the random beacon consensus module</td>
-</tr>
-<tr>
-<td>v0.4.x</td>
-<td>Alpha</td>
-<td>Builds upon the random beacon consensus and adds support for aggregated signatures</td>
-</tr>
-<tr>
-<td>v0.5.x</td>
-<td>Release Candidate</td>
-<td>Extension of v0.4.x</td>
-</tr>
-<tr>
-<td>v0.6.x</td>
-<td>Release Candidate</td>
-<td>Extension of v0.5.x</td>
-</tr>
-<tr>
-<td>v0.7.x</td>
-<td>Stable</td>
-<td>Pre stargate fetchhub mainnet version</td>
-</tr>
-<tr>
-<td>v0.8.x</td>
-<td>Stable</td>
-<td>Mainline version of the network used for <strong>Stargate</strong> fetchhub mainnet</td>
-</tr>
-</tbody>
-</table>
+                <h1 id="governance-proposals">Governance Proposals</h1>
+<p>In order to change any attribute of a network, a governance proposal must be submitted. This could be a simple poll, a software update or a governing parameter change. </p>
+<h3 id="parameter-change">Parameter change</h3>
+<p>This is an example of the process in which network parameters may be changed through the use of a governance proposal.</p>
+<p>The values within this code can be changed in order to alter the minimum deposited fund threshold for a proposal to enter the voting phase, and the length of the deposit stage in which the minimum deposit threshold must be met.
+<div class="highlight"><pre><span></span><code># A JSON file containing the following code should be created to instantiate the proposal.
+# The two variables of interest are the &quot;amount&quot; which is set from 10000000stake to 1000stake
+# and the &quot;max_deposit_period&quot; which is changed from the default value to 7200000000000
+# equal to 2 hours, instead of the standard 2 days (in nanoseconds).
+
+{
+  &quot;title&quot;: &quot;Deposit Value Proposal&quot;,
+  &quot;description&quot;: &quot;Update min proposal threshold and deposit period&quot;,
+  &quot;changes&quot;: [
+    {
+      &quot;subspace&quot;: &quot;deposit_params&quot;,
+      &quot;key&quot;: &quot;min_deposit&quot;,
+      &quot;value&quot;: [
+        {
+          &quot;denom&quot;:&quot;stake&quot;,
+          &quot;amount&quot;:&quot;1000&quot;
+        }
+      ]
+    },
+    {
+      &quot;subspace&quot;: &quot;deposit_params&quot;,
+      &quot;key&quot;: &quot;max_deposit_period&quot;,
+      &quot;value&quot;: &quot;7200000000000&quot;
+    }
+  ]
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># Create initial proposal by uploading the JSON file
+# this is signed by a key &#39;proposer&#39; that provides a portion of the current threshold deposit
+fetchd tx gov submit-proposal --proposal ~/json_path/proposal.json --deposit &lt;deposit_value&gt; --from proposer
+
+# In order to later refer to this proposal, the proposal_id can be determined
+fetchd query gov proposals
+</code></pre></div></p>
+<h3 id="proposal-deposit-phase">Proposal deposit phase</h3>
+<p>The characteristics of the deposit phase are described by a set of network governance parameters, where the deposit period is two days from the initial proposal deposit until expiration, and a minimum threshold of 10000000denom as default. The minimum threshold must be met during this deposit period in order to proceed to the voting phase. The proposer may provide all of this threshold, or just some. In which case, supporters of the proposal may donate additional funding towards the goal of meeting the threshold.</p>
+<p>At any point of the deposit stage, the deposit pot can be queried.</p>
+<div class="highlight"><pre><span></span><code># This command returns a text representation of the current total deposit value of a proposal
+fetchd query gov deposits &lt;proposal_id&gt;
+
+# Other users may contribute to funding the proposal using
+fetchd tx gov deposit &lt;proposal_id&gt; &lt;deposit_amount&gt; --from contributer
+</code></pre></div>
+<p><a href="https://docs.cosmos.network/master/modules/gov/01_concepts.html#proposal-submission">This</a> documentation provides a more detailed explanation of the deposit funding period.</p>
+<h3 id="proposal-voting-and-querying">Proposal voting and querying</h3>
+<p>After the deposit period has passed, there are two outcomes: either the current minimum threshold is met, or the value is not met and the funds are returned. In the first case this proposal is submitted and to be voted on, returning a tally at the end of the voting period. </p>
+<p>In order to submit a vote on a proposal that has passed into the voting phase, all staked users except the proposer may do so using this command.
+<div class="highlight"><pre><span></span><code># Submit a vote from a key &#39;voter&#39; with the desired outcome of the voter
+fetchd tx gov vote &lt;proposal_id&gt; &lt;yes|no|no_with_veto|abstain&gt; --from voter
+</code></pre></div></p>
+<p>The current voting turnout and tally can be queried, which displays a list of all voters and their choice.
+<div class="highlight"><pre><span></span><code># The current voting statistics can be printed using
+fetchd query gov votes &lt;proposal_id&gt;
+</code></pre></div></p>
+<h4 id="example-output">Example output</h4>
+<div class="highlight"><pre><span></span><code>votes:
+- option: VOTE_OPTION_YES
+  proposal_id: &quot;1&quot;
+  voter: fetch1dmehhhvul8y7slqs3zu2z3fede9kzlnyupd9rr
+- option: VOTE_OPTION_NO
+  proposal_id: &quot;1&quot;
+  voter: fetch1064endj5ne5e868asnf0encctwlga4y2jf3h28
+- option: VOTE_OPTION_YES
+  proposal_id: &quot;1&quot;
+  voter: fetch1k3ee923osju93jm03fkfmewnal39fjdbakje1x
+</code></pre></div>
+<h3 id="voting-outcome">Voting outcome</h3>
+<p>After the voting period has ended, the results are used to determine the next step of the proposal. The potential outcomes include:</p>
+<ul>
+<li><strong>Majority <em>yes</em> vote</strong><ul>
+<li>The proposal passes through and the users act according to the proposal type - e.g. A Software update proposal passes, and users begin uptake of the new version</li>
+</ul>
+</li>
+<li>
+<p><strong>Majority <em>no</em> vote</strong></p>
+<ul>
+<li>The funds deposited to pass into the voting stage are returned, and there is no governance change</li>
+</ul>
+</li>
+<li>
+<p><strong>Majority <em>no_with_veto</em> vote</strong></p>
+<ul>
+<li>This outcome is indicative of a proposal which may undermine the current governance system, e.g. a proposal to set the deposit threshold or voting period to an absurd value</li>
+<li>All funds deposited in the proposal are to be burned subject to this outcome, and there is no governance change</li>
+</ul>
+</li>
+</ul>
                 
               
               
@@ -4419,7 +4577,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../building/" title="Installation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../delegator-guide-cli/" title="Delegator Guide" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4428,19 +4586,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Installation
+                Delegator Guide
               </span>
             </div>
           </a>
         
         
-          <a href="../networks/" title="Networks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../validators/overview/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Networks
+                Overview
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
