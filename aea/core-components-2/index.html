@@ -1299,6 +1299,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1704,6 +1716,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2397,6 +2421,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2813,6 +2849,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3362,6 +3410,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4458,6 +4518,13 @@
 <p>You can learn more about the decision maker <a href="../decision-maker">here</a>. In its simplest form, the decision maker acts like a <code>Wallet</code> with <code>Handler</code> to react to messages it receives from the skills.</p>
 <h3 id="wallet">Wallet</h3>
 <p>The <a href="../api/crypto/wallet#wallet-objects"><code>Wallet</code></a> contains the private-public key pairs used by the AEA. Skills do not have access to the wallet, only the decision maker does.</p>
+<p>The agent has two sets of private keys, as configured in the <code>aea-config.yaml</code>:</p>
+<ul>
+<li><code>private_key_paths</code>: This is a dictionary mapping identifiers to the file paths of private keys used in the AEA. For each identifier, e.g. <code>fetchai</code>, the AEA can have one private key. The private keys listed here are available in the <code>Decision Maker</code> and the associated public keys and addresses are available in all skills. The AEA uses these keys to sign transactions and messages. These keys usually hold the AEAs funds.</li>
+<li><code>connection_private_key_paths</code>: This is a dictionary mapping identifiers to the file paths of private keys used in connections. For each identifier, e.g. <code>fetchai</code>, the <code>Multiplexer</code> can have one private key. The private keys listed here are available in the connections. The connections use these keys to secure message transport, for instance.</li>
+</ul>
+<p>It is the responsibility of the AEA's user to safe-guard the keys used and ensure that keys are only used in a single AEA. Using the same key across different AEAs will lead to various failure modes.</p>
+<p>Private keys can be encrypted at rest. The CLI commands used for interacting with the wallet allow specifying a password for encryption/decryption. </p>
 <h3 id="identity">Identity</h3>
 <p>The <a href="../api/identity/base#identity-objects"><code>Identity</code></a> is an abstraction that represents the identity of an AEA in the Open Economic Framework, backed by public-key cryptography. It contains the AEA's addresses as well as its name.</p>
 <p>The identity can be accessed in a <code>Skill</code> via the <a href="../api/context/base#agentcontext-objects"><code>AgentContext</code></a>.</p>

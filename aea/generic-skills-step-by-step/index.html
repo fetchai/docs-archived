@@ -1423,6 +1423,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1828,6 +1840,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2521,6 +2545,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2937,6 +2973,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3486,6 +3534,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4703,14 +4763,14 @@
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="reference-code-optional">Reference code (Optional)</h2>
 <p>This step-by-step guide goes through the creation of two AEAs which are already developed by Fetch.ai. You can get the finished AEAs, and compare your code against them, by following the next steps:</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.27.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_seller:0.28.0
 <span class="nb">cd</span> generic_seller
-aea eject skill fetchai/generic_seller:0.26.0
+aea eject skill fetchai/generic_seller:0.27.0
 <span class="nb">cd</span> ..
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.28.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/generic_buyer:0.29.0
 <span class="nb">cd</span> generic_buyer
-aea eject skill fetchai/generic_buyer:0.25.0
+aea eject skill fetchai/generic_buyer:0.26.0
 <span class="nb">cd</span> ..
 </code></pre></div>
 <h2 id="simplification-step">Simplification step</h2>
@@ -4777,11 +4837,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the setup.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the setup.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_ledger_tx</span><span class="p">:</span>
             <span class="n">ledger_api_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
@@ -4797,28 +4853,16 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_agent</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the act.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the act.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_retry_failed_registration</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the task teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the task teardown.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_service</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_agent</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_retry_failed_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retry a failed registration.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Retry a failed registration.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_soef_registration_retries</span><span class="p">:</span>
@@ -4846,8 +4890,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 
 <span class="sd">        :param description: the description of what is being registered</span>
 <span class="sd">        :param logger_msg: the logger message to print after the registration</span>
-
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
             <span class="n">OefSearchDialogues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">oef_search_dialogues</span>
@@ -4861,31 +4903,19 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">logger_msg</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s location.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Register the agent&#39;s location.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s service.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Register the agent&#39;s service.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_service_description</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent&#39;s service on the SOEF.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">register_genus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s personality genus.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Register the agent&#39;s personality genus.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_personality_description</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span>
@@ -4893,11 +4923,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">register_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register the agent&#39;s personality classification.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Register the agent&#39;s personality classification.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_register_classification_description</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span>
@@ -4905,11 +4931,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Unregister service from the SOEF.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Unregister service from the SOEF.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_unregister_service_description</span><span class="p">()</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
@@ -4924,11 +4946,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering service from SOEF.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_unregister_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Unregister agent from the SOEF.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Unregister agent from the SOEF.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_location_description</span><span class="p">()</span>
         <span class="n">oef_search_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
@@ -5035,7 +5053,6 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fipa_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">FipaMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -5059,11 +5076,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">fipa_msg</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 </code></pre></div>
 The code above contains the logic for handling <code>FipaMessages</code> received by the <code>my_generic_seller</code> AEA. We use <code>FipaDialogues</code> (more on this <a href="../generic-skills-step-by-step/#step-5-create-the-dialogues">below</a>) to keep track of the progress of the negotiation dialogue between the <code>my_generic_seller</code> AEA and the <code>my_generic_buyer</code> AEA.</p>
 <p>In the above <code>handle</code> method, we first check if a received message belongs to an existing dialogue or if we have to create a new dialogue (the <code>recover dialogue</code> part). Once this is done, we break down the AEA's response to each type of negotiation message, as indicated by the message's performative (the <code>handle message</code> part). Therefore, we implement the AEA's response to each negotiation message type in a different handler function.</p>
@@ -5097,7 +5110,6 @@ The code above contains the logic for handling <code>FipaMessages</code> receive
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received CFP from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -5144,7 +5156,7 @@ The code above contains the logic for handling <code>FipaMessages</code> receive
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :param fipa_dialogues: the dialogues object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -5165,7 +5177,6 @@ If we receive a decline message from the buyer we close the dialogue and termina
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received ACCEPT from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -5196,7 +5207,6 @@ When <code>my_generic_buyer</code> accepts the <code>Proposal</code> we send it 
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -5261,7 +5271,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="s2">&quot;cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5283,7 +5292,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ledger_api_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">LedgerApiMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -5312,17 +5320,13 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">:</span> <span class="n">LedgerApiMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an unidentified dialogue.</span>
 
-<span class="sd">        :param msg: the message</span>
+<span class="sd">        :param ledger_api_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5334,7 +5338,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of balance performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;starting balance on </span><span class="si">{}</span><span class="s2"> ledger=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5348,7 +5352,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of balance performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">associated_fipa_dialogue</span>
@@ -5397,7 +5401,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of error performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
@@ -5412,7 +5416,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of invalid performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
@@ -5435,7 +5439,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -5459,17 +5462,13 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an unidentified dialogue.</span>
 
-<span class="sd">        :param msg: the message</span>
+<span class="sd">        :param oef_search_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5487,7 +5486,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :param oef_search_success_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received oef_search success message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5539,7 +5537,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :param oef_search_error_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5568,7 +5565,6 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 
 <span class="sd">        :param oef_search_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -5620,10 +5616,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the strategy of the agent.</span>
 
-<span class="sd">        :param register_as: determines whether the agent registers as seller, buyer or both</span>
-<span class="sd">        :param search_for: determines whether the agent searches for sellers, buyers or both</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ledger_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ledger_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">currency_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;currency_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -5878,7 +5871,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -5918,8 +5911,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
 <span class="sd">        :param self_address: the address of the entity for whom this dialogue is maintained</span>
 <span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param message_class: the message class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseFipaDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -5952,7 +5944,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -5993,8 +5985,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
 <span class="sd">        :param self_address: the address of the entity for whom this dialogue is maintained</span>
 <span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param message_class: the message class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseLedgerApiDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -6026,7 +6017,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -6059,8 +6050,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -6102,7 +6092,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
   <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmYTUsfv64eRQDevCfMUDQPx2GCtiMLFdacN4sS1E4Fdfx</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">connections</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.18.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.19.0</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:1.0.0</span>
@@ -6234,11 +6224,7 @@ aea install
             <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the act.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the act.&quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">strategy</span><span class="o">.</span><span class="n">is_searching</span><span class="p">:</span>
             <span class="k">return</span>
@@ -6264,11 +6250,7 @@ aea install
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">oef_search_msg</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the task teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the task teardown.&quot;&quot;&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">GenericTransactionBehaviour</span><span class="p">(</span><span class="n">TickerBehaviour</span><span class="p">):</span>
@@ -6292,11 +6274,7 @@ aea install
         <span class="sd">&quot;&quot;&quot;Setup behaviour.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the act.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the act.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">processing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">processing_time</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_processing</span><span class="p">:</span>
                 <span class="c1"># already processing</span>
@@ -6418,18 +6396,13 @@ aea install
     <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">FipaMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[PublicId]</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the setup.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the setup.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fipa_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">FipaMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -6453,11 +6426,7 @@ aea install
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">fipa_msg</span><span class="p">,</span> <span class="n">fipa_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 </code></pre></div>
 You will see that we are following similar logic to the <code>generic_seller</code> when we develop the <code>generic_buyer</code>’s side of the negotiation. First, we create a new dialogue and store it in the dialogues class. Then we are checking what kind of message we received by checking its performative. So lets start creating our handlers:</p>
 <p><div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fipa_msg</span><span class="p">:</span> <span class="n">FipaMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -6488,7 +6457,6 @@ The above code handles messages referencing unidentified dialogues and responds 
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received proposal=</span><span class="si">{}</span><span class="s2"> from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6531,7 +6499,6 @@ When we receive a proposal, we have to check if we have the funds to complete th
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the fipa dialogue</span>
 <span class="sd">        :param fipa_dialogues: the fipa dialogues</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received DECLINE from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -6562,7 +6529,6 @@ The above code terminates each dialogue with the specific AEA and stores the sta
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the dialogue object</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received MATCH_ACCEPT_W_INFORM from sender=</span><span class="si">{}</span><span class="s2"> with info=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6606,7 +6572,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the fipa dialogue</span>
 <span class="sd">        :param fipa_dialogues: the fipa dialogues</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received INFORM from sender=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fipa_msg</span><span class="o">.</span><span class="n">sender</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
@@ -6633,7 +6598,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 
 <span class="sd">        :param fipa_msg: the message</span>
 <span class="sd">        :param fipa_dialogue: the fipa dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="s2">&quot;cannot handle fipa message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6656,7 +6620,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">oef_search_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -6680,17 +6643,13 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an unidentified dialogue.</span>
 
-<span class="sd">        :param msg: the message</span>
+<span class="sd">        :param oef_search_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received invalid oef_search message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6706,7 +6665,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 
 <span class="sd">        :param oef_search_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received oef_search error message=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6720,8 +6678,8 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle the search response.</span>
 
-<span class="sd">        :param agents: the agents returned by the search</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :param oef_search_msg: the oef search message</span>
+<span class="sd">        :param oef_search_dialogue: the dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
@@ -6764,7 +6722,6 @@ The first thing we are checking is if we enabled our AEA to transact with a ledg
 
 <span class="sd">        :param oef_search_msg: the oef search message</span>
 <span class="sd">        :param oef_search_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="s2">&quot;cannot handle oef_search message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6787,7 +6744,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">signing_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -6809,17 +6765,13 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an unidentified dialogue.</span>
 
-<span class="sd">        :param msg: the message</span>
+<span class="sd">        :param signing_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received invalid signing message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6835,7 +6787,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :param signing_msg: the signing message</span>
 <span class="sd">        :param signing_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;transaction signing was successful.&quot;</span><span class="p">)</span>
         <span class="n">ledger_api_dialogue</span> <span class="o">=</span> <span class="n">signing_dialogue</span><span class="o">.</span><span class="n">associated_ledger_api_dialogue</span>
@@ -6858,7 +6809,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :param signing_msg: the signing message</span>
 <span class="sd">        :param signing_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;transaction signing was not successful. Error_code=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6887,7 +6837,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :param signing_msg: the signing message</span>
 <span class="sd">        :param signing_dialogue: the dialogue</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="s2">&quot;cannot handle signing message of performative=</span><span class="si">{}</span><span class="s2"> in dialogue=</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6909,7 +6858,6 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        Implement the reaction to a message.</span>
 
 <span class="sd">        :param message: the message</span>
-<span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ledger_api_msg</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">LedgerApiMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
@@ -6947,17 +6895,13 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
             <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">,</span> <span class="n">ledger_api_dialogue</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implement the handler teardown.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Implement the handler teardown.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ledger_api_msg</span><span class="p">:</span> <span class="n">LedgerApiMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle an unidentified dialogue.</span>
 
-<span class="sd">        :param msg: the message</span>
+<span class="sd">        :param ledger_api_msg: the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;received invalid ledger_api message=</span><span class="si">{}</span><span class="s2">, unidentified dialogue.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -6969,7 +6913,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of balance performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">strategy</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ledger_api_msg</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -6992,7 +6936,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of raw_transaction performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;received raw transaction=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ledger_api_msg</span><span class="p">))</span>
@@ -7016,7 +6960,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of transaction_digest performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
@@ -7038,7 +6982,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of balance performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fipa_dialogue</span> <span class="o">=</span> <span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">associated_fipa_dialogue</span>
@@ -7085,7 +7029,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of error performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
@@ -7112,7 +7056,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle a message of invalid performative.</span>
 
-<span class="sd">        :param ledger_api_message: the ledger api message</span>
+<span class="sd">        :param ledger_api_msg: the ledger api message</span>
 <span class="sd">        :param ledger_api_dialogue: the ledger api dialogue</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
@@ -7165,7 +7109,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the strategy of the agent.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ledger_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ledger_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">currency_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;currency_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -7285,6 +7229,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether it is an acceptable proposal.</span>
 
+<span class="sd">        :param proposal: a description</span>
 <span class="sd">        :return: whether it is acceptable</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
@@ -7319,6 +7264,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether it is an affordable proposal.</span>
 
+<span class="sd">        :param proposal: a description</span>
 <span class="sd">        :return: whether it is affordable</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ledger_tx</span><span class="p">:</span>
@@ -7334,6 +7280,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process counterparties and drop unacceptable ones.</span>
 
+<span class="sd">        :param counterparties: a tuple of counterparties</span>
 <span class="sd">        :return: list of counterparties</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">valid_counterparties</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -7349,6 +7296,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        Get the terms from a proposal.</span>
 
 <span class="sd">        :param proposal: the proposal</span>
+<span class="sd">        :param counterparty_address: the counterparty</span>
 <span class="sd">        :return: terms</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">buyer_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">agent_addresses</span><span class="p">[</span><span class="n">proposal</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;ledger_id&quot;</span><span class="p">]]</span>
@@ -7376,15 +7324,10 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 
 <span class="sd">        :param counterparty: the counterparty address</span>
 <span class="sd">        :param data: the data</span>
-<span class="sd">        :return: False</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">update_search_query_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update agent location and query for search.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Update agent location and query for search.&quot;&quot;&quot;</span>
 </code></pre></div>
 <h3 id="step-5-create-the-dialogues_1">Step 5: Create the dialogues</h3>
 <p>As mentioned during the creation of the seller AEA, we should keep track of the various interactions an AEA has with others and this is done via dialogues. Create a new file and name it <code>dialogues.py</code> (in <code>my_generic_buyer/skills/generic_buyer/</code>). Inside this file add the following code:</p>
@@ -7439,7 +7382,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -7482,8 +7425,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
 <span class="sd">        :param self_address: the address of the entity for whom this dialogue is maintained</span>
 <span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param message_class: the message class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseFipaDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -7515,7 +7457,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -7556,8 +7498,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
 <span class="sd">        :param self_address: the address of the entity for whom this dialogue is maintained</span>
 <span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param message_class: the message class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseLedgerApiDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -7589,7 +7530,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -7622,8 +7563,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -7663,8 +7603,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <span class="sd">        :param dialogue_label: the identifier of the dialogue</span>
 <span class="sd">        :param self_address: the address of the entity for whom this dialogue is maintained</span>
 <span class="sd">        :param role: the role of the agent this dialogue is maintained for</span>
-
-<span class="sd">        :return: None</span>
+<span class="sd">        :param message_class: the message class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseSigningDialogue</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -7701,8 +7640,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize dialogues.</span>
 
-<span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        :param kwargs: keyword arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Model</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -7743,7 +7681,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
   <span class="nt">strategy.py</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">QmcrwaEWvKHDCNti8QjRhB4utJBJn5L8GpD27Uy9zHwKhY</span>
 <span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">connections</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.18.0</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/ledger:0.19.0</span>
 <span class="nt">contracts</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 <span class="nt">protocols</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/default:1.0.0</span>
@@ -7834,8 +7772,8 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>In both AEAs run:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div></p>
 <h3 id="fund-the-buyer-aea">Fund the buyer AEA</h3>
@@ -7844,26 +7782,26 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div>
 <h3 id="run-seller-aea">Run seller AEA</h3>
 <p>Add the remaining packages for the seller AEA, then run it:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
 aea add protocol fetchai/fipa:1.0.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
 <h4 id="run-buyer-aea">Run buyer AEA</h4>
 <p>Add the remaining packages for the buyer AEA:</p>
-<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
+<div class="highlight"><pre><span></span><code>aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
 aea add protocol fetchai/fipa:1.0.0
 aea add protocol fetchai/signing:1.0.0
 aea install
 aea build
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 </code></pre></div>
 <p>Then, update the configuration of the buyer AEA's P2P connection:</p>
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
@@ -7879,7 +7817,7 @@ aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp
 <p>Then run the buyer AEA:
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div></p>
-<p>You will see that the AEAs negotiate and then transact using the Agentland testnet.</p>
+<p>You will see that the AEAs negotiate and then transact using the StargateWorld testnet.</p>
 <h2 id="delete-the-aeas">Delete the AEAs</h2>
 <p>When you are done, go up a level and delete the AEAs.
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ..

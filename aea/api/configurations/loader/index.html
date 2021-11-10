@@ -1184,6 +1184,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1595,6 +1607,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../components/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1753,6 +1777,13 @@
           <li class="md-nav__item">
   <a href="#configuration_class" class="md-nav__link">
     configuration_class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_1" class="md-nav__link">
+    validate
   </a>
   
 </li>
@@ -2454,6 +2485,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2870,6 +2913,18 @@
   <li class="md-nav__item">
     <a href="../../manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3419,6 +3474,18 @@
   <li class="md-nav__item">
     <a href="../../test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4469,6 +4536,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#validate_1" class="md-nav__link">
+    validate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load_protocol_specification" class="md-nav__link">
     load_protocol_specification
   </a>
@@ -4602,13 +4676,14 @@
 <p>Parsing, serialization and validation for package configuration files.</p>
 <p><a name="aea.configurations.loader.ConfigLoader.__init__"></a></p>
 <h4 id="__init___1"><code>__</code>init<code>__</code></h4>
-<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">schema_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configuration_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">schema_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configuration_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">skip_aea_validation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Initialize the parser for configuration files.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>schema_filename</code>: the path to the JSON-schema file in 'aea/configurations/schemas'.</li>
 <li><code>configuration_class</code>: the configuration class (e.g. AgentConfig, SkillConfig etc.)</li>
+<li><code>skip_aea_validation</code>: if True, the validation of the AEA version is skipped.</li>
 </ul>
 <p><a name="aea.configurations.loader.ConfigLoader.configuration_class"></a></p>
 <h4 id="configuration_class">configuration<code>_</code>class</h4>
@@ -4616,6 +4691,17 @@
  <span class="o">|</span> <span class="n">configuration_class</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
 </code></pre></div>
 <p>Get the configuration class of the loader.</p>
+<p><a name="aea.configurations.loader.ConfigLoader.validate"></a></p>
+<h4 id="validate_1">validate</h4>
+<div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">validate</span><span class="p">(</span><span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Validate a JSON representation of an AEA package.</p>
+<p>First, checks whether the AEA version is compatible with the configuration file.
+Then, validates the JSON object against the specific schema.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>json_data</code>: the JSON data.</li>
+</ul>
 <p><a name="aea.configurations.loader.ConfigLoader.load_protocol_specification"></a></p>
 <h4 id="load_protocol_specification">load<code>_</code>protocol<code>_</code>specification</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">load_protocol_specification</span><span class="p">(</span><span class="n">file_pointer</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProtocolSpecification</span>
@@ -4652,9 +4738,16 @@
 <p><a name="aea.configurations.loader.ConfigLoader.from_configuration_type"></a></p>
 <h4 id="from_configuration_type">from<code>_</code>configuration<code>_</code>type</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_configuration_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;ConfigLoader&quot;</span>
+ <span class="o">|</span> <span class="n">from_configuration_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ConfigLoader&quot;</span>
 </code></pre></div>
 <p>Get the configuration loader from the type.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><code>configuration_type</code>: the type of configuration</li>
+<li><code>kwargs</code>: keyword arguments to the configuration loader constructor.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>the configuration loader</p>
 <p><a name="aea.configurations.loader.ConfigLoader.load_agent_config_from_json"></a></p>
 <h4 id="load_agent_config_from_json">load<code>_</code>agent<code>_</code>config<code>_</code>from<code>_</code>json</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="n">load_agent_config_from_json</span><span class="p">(</span><span class="n">configuration_json</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentConfig</span>
@@ -4675,18 +4768,19 @@
 <p><a name="aea.configurations.loader.ConfigLoaders.from_package_type"></a></p>
 <h4 id="from_package_type">from<code>_</code>package<code>_</code>type</h4>
 <div class="highlight"><pre><span></span><code> <span class="o">|</span> <span class="nd">@classmethod</span>
- <span class="o">|</span> <span class="n">from_package_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;ConfigLoader&quot;</span>
+ <span class="o">|</span> <span class="n">from_package_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PackageType</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ConfigLoader&quot;</span>
 </code></pre></div>
 <p>Get a config loader from the configuration type.</p>
 <p><strong>Arguments</strong>:</p>
 <ul>
 <li><code>configuration_type</code>: the configuration type.</li>
+<li><code>kwargs</code>: keyword arguments to the configuration loader constructor.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>configuration loader</p>
 <p><a name="aea.configurations.loader.load_component_configuration"></a></p>
 <h4 id="load_component_configuration">load<code>_</code>component<code>_</code>configuration</h4>
-<div class="highlight"><pre><span></span><code><span class="n">load_component_configuration</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ComponentConfiguration</span>
+<div class="highlight"><pre><span></span><code><span class="n">load_component_configuration</span><span class="p">(</span><span class="n">component_type</span><span class="p">:</span> <span class="n">ComponentType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">skip_aea_validation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ComponentConfiguration</span>
 </code></pre></div>
 <p>Load configuration and check that it is consistent against the directory.</p>
 <p><strong>Arguments</strong>:</p>
@@ -4694,12 +4788,13 @@
 <li><code>component_type</code>: the component type.</li>
 <li><code>directory</code>: the root of the package</li>
 <li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
+<li><code>skip_aea_validation</code>: if True, the validation of the AEA version is skipped.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the configuration object.</p>
 <p><a name="aea.configurations.loader.load_package_configuration"></a></p>
 <h4 id="load_package_configuration">load<code>_</code>package<code>_</code>configuration</h4>
-<div class="highlight"><pre><span></span><code><span class="n">load_package_configuration</span><span class="p">(</span><span class="n">package_type</span><span class="p">:</span> <span class="n">PackageType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PackageConfiguration</span>
+<div class="highlight"><pre><span></span><code><span class="n">load_package_configuration</span><span class="p">(</span><span class="n">package_type</span><span class="p">:</span> <span class="n">PackageType</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip_consistency_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">skip_aea_validation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PackageConfiguration</span>
 </code></pre></div>
 <p>Load configuration and check that it is consistent against the directory.</p>
 <p><strong>Arguments</strong>:</p>
@@ -4707,6 +4802,7 @@
 <li><code>package_type</code>: the package type.</li>
 <li><code>directory</code>: the root of the package</li>
 <li><code>skip_consistency_check</code>: if True, the consistency check are skipped.</li>
+<li><code>skip_aea_validation</code>: if True, the validation of the AEA version is skipped.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <p>the configuration object.</p>

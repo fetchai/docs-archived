@@ -1300,6 +1300,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1705,6 +1717,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2398,6 +2422,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2814,6 +2850,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3363,6 +3411,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4461,7 +4521,7 @@
 <h2 id="demo">Demo</h2>
 <h3 id="create-the-oracle-aea">Create the oracle AEA</h3>
 <p>Fetch the AEA that will deploy and update the oracle contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle:0.15.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle:0.16.0
 <span class="nb">cd</span> coin_price_oracle
 aea install
 aea build
@@ -4473,17 +4533,17 @@ Create the AEA that will deploy the contract.
 
 <div class="highlight"><pre><span></span><code>aea create coin_price_oracle
 <span class="nb">cd</span> coin_price_oracle
-aea add connection fetchai/http_client:0.22.0
-aea add connection fetchai/ledger:0.18.0
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea add skill fetchai/advanced_data_request:0.5.0
-aea add skill fetchai/simple_oracle:0.13.0
+aea add connection fetchai/http_client:0.23.0
+aea add connection fetchai/ledger:0.19.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea add skill fetchai/advanced_data_request:0.6.0
+aea add skill fetchai/simple_oracle:0.14.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea install
 aea build
 </code></pre></div>
@@ -4503,9 +4563,9 @@ Set the name of the oracle value in the simple oracle skill:
 Then update the agent configuration with the default routing:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">&quot;fetchai/contract_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">&quot;fetchai/http:1.0.0&quot;: &quot;fetchai/http_client:0.22.0&quot;,</span>
-<span class="s1">&quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;</span>
+<span class="s1">&quot;fetchai/contract_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">&quot;fetchai/http:1.0.0&quot;: &quot;fetchai/http_client:0.23.0&quot;,</span>
+<span class="s1">&quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
@@ -4549,7 +4609,7 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div></p>
 <h3 id="create-the-oracle-client-aea">Create the oracle client AEA</h3>
 <p>From a new terminal (in the same top-level directory), fetch the AEA that will deploy the oracle client contract and call the function that requests the coin price from the oracle contract.</p>
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle_client:0.10.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/coin_price_oracle_client:0.11.0
 <span class="nb">cd</span> coin_price_oracle_client
 aea install
 </code></pre></div>
@@ -4560,15 +4620,15 @@ Create the AEA that will deploy the contract.
 
 <div class="highlight"><pre><span></span><code>aea create coin_price_oracle_client
 <span class="nb">cd</span> coin_price_oracle_client
-aea add connection fetchai/http_client:0.22.0
-aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/simple_oracle_client:0.10.0
+aea add connection fetchai/http_client:0.23.0
+aea add connection fetchai/ledger:0.19.0
+aea add skill fetchai/simple_oracle_client:0.11.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/ledger:0.18.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/ledger:0.19.0
 aea install
 aea build
 </code></pre></div>
@@ -4576,9 +4636,9 @@ aea build
 Then update the agent configuration with the default routing:
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">&quot;fetchai/contract_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">&quot;fetchai/http:1.0.0&quot;: &quot;fetchai/http_client:0.22.0&quot;,</span>
-<span class="s1">&quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;</span>
+<span class="s1">&quot;fetchai/contract_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">&quot;fetchai/http:1.0.0&quot;: &quot;fetchai/http_client:0.23.0&quot;,</span>
+<span class="s1">&quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;</span>
 <span class="s1">}&#39;</span>
 </code></pre></div>
 

@@ -1346,6 +1346,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1751,6 +1763,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2444,6 +2468,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2860,6 +2896,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3409,6 +3457,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4561,8 +4621,8 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
         participant Car_Park_AEA
         participant Blockchain
 
-        activate Car_Data_Buyer_AEA
         activate Search
+        activate Car_Data_Buyer_AEA
         activate Car_Park_AEA
         activate Blockchain
 
@@ -4578,8 +4638,8 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
         Car_Park_AEA->>Blockchain: check_transaction_status
         Car_Park_AEA->>Car_Data_Buyer_AEA: send_data
 
-        deactivate Client_AEA
         deactivate Search
+        deactivate Car_Data_Buyer_AEA
         deactivate Car_Park_AEA
         deactivate Blockchain
 </div>
@@ -4592,13 +4652,13 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
 <p>The following steps assume you have launched the AEA Manager Desktop app.</p>
 <ol>
 <li>
-<p>Add a new AEA called <code>car_detector</code> with public id <code>fetchai/car_detector:0.30.0</code>.</p>
+<p>Add a new AEA called <code>car_detector</code> with public id <code>fetchai/car_detector:0.31.0</code>.</p>
 </li>
 <li>
-<p>Add another new AEA called <code>car_data_buyer</code> with public id <code>fetchai/car_data_buyer:0.31.0</code>.</p>
+<p>Add another new AEA called <code>car_data_buyer</code> with public id <code>fetchai/car_data_buyer:0.32.0</code>.</p>
 </li>
 <li>
-<p>Copy the address from the <code>car_data_buyer</code> into your clip board. Then go to the <a href="https://explore-agent-land.fetch.ai" target="_blank">AgentLand block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
+<p>Copy the address from the <code>car_data_buyer</code> into your clip board. Then go to the <a href="https://explore-stargateworld.fetch.ai" target="_blank">StargateWorld block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
 </li>
 <li>
 <p>Run the <code>car_detector</code> AEA. Navigate to its logs and copy the multiaddress displayed.</p>
@@ -4628,7 +4688,7 @@ This demo allows you to test the AEA functionality of the car park AEA demo with
 <h3 id="demo-instructions_1">Demo instructions</h3>
 <h4 id="create-car-detector-aea">Create car detector AEA</h4>
 <p>First, fetch the car detector AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/car_detector:0.30.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/car_detector:0.31.0
 <span class="nb">cd</span> car_detector
 aea install
 aea build
@@ -4639,19 +4699,19 @@ aea build
 The following steps create the car detector from scratch:
 <div class="highlight"><pre><span></span><code>aea create car_detector
 <span class="nb">cd</span> car_detector
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/carpark_detection:0.25.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
+aea add skill fetchai/carpark_detection:0.26.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4662,7 +4722,7 @@ aea build
 
 <h4 id="create-car-data-buyer-aea">Create car data buyer AEA</h4>
 <p>Then, fetch the car data client AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/car_data_buyer:0.31.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/car_data_buyer:0.32.0
 <span class="nb">cd</span> car_data_buyer
 aea install
 aea build
@@ -4673,19 +4733,19 @@ aea build
 The following steps create the car data client from scratch:
 <div class="highlight"><pre><span></span><code>aea create car_data_buyer
 <span class="nb">cd</span> car_data_buyer
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/carpark_client:0.25.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
+aea add skill fetchai/carpark_client:0.26.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4696,7 +4756,7 @@ aea build
 </details>
 
 <h4 id="add-keys-for-the-car-data-seller-aea">Add keys for the car data seller AEA</h4>
-<p>First, create the private key for the car data seller AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
+<p>First, create the private key for the car data seller AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
@@ -4709,11 +4769,11 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div></p>
 <h4 id="add-keys-and-generate-wealth-for-the-car-data-buyer-aea">Add keys and generate wealth for the car data buyer AEA</h4>
 <p>The buyer needs to have some wealth to purchase the service from the seller.</p>
-<p>First, create the private key for the car data buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
+<p>First, create the private key for the car data buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
-<p>Then, create some wealth for your car data buyer based on the network you want to transact with. On the Fetch.ai <code>AgentLand</code> network:
+<p>Then, create some wealth for your car data buyer based on the network you want to transact with. On the Fetch.ai <code>StargateWorld</code> network:
 <div class="highlight"><pre><span></span><code>aea generate-wealth fetchai
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
@@ -4728,7 +4788,7 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>First, run the car data seller AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.24.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.25.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the car data seller.</p>
 <p>Then, in the car data buyer, run this command (replace <code>SOME_ADDRESS</code> with the correct value as described above):
 <div class="highlight"><pre><span></span><code>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

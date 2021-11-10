@@ -1340,6 +1340,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1745,6 +1757,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2438,6 +2462,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2854,6 +2890,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3403,6 +3451,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4591,7 +4651,7 @@ The <code>aea install</code> command installs all dependencies an AEA needs that
 <p>Add another new AEA called <code>ml_model_trainer</code> with public id <code>fetchai/ml_model_trainer:0.29.0</code>.</p>
 </li>
 <li>
-<p>Copy the address from the <code>ml_model_trainer</code> into your clip board. Then go to the <a href="https://explore-agent-land.fetch.ai" target="_blank">AgentLand block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
+<p>Copy the address from the <code>ml_model_trainer</code> into your clip board. Then go to the <a href="https://explore-stargateworld.fetch.ai" target="_blank">StargateWorld block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
 </li>
 <li>
 <p>Run the <code>ml_data_provider</code> AEA. Navigate to its logs and copy the multiaddress displayed.</p>
@@ -4622,7 +4682,7 @@ The trainer keeps purchasing data and training its model until stopped.<br />
 <h3 id="demo-instructions_1">Demo instructions</h3>
 <h4 id="create-data-provider-aea">Create data provider AEA</h4>
 <p>First, fetch the data provider AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_data_provider:0.30.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_data_provider:0.31.0
 <span class="nb">cd</span> ml_data_provider
 aea install
 aea build
@@ -4633,19 +4693,19 @@ aea build
 The following steps create the data provider from scratch:
 <div class="highlight"><pre><span></span><code>aea create ml_data_provider
 <span class="nb">cd</span> ml_data_provider
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/ml_data_provider:0.25.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
+aea add skill fetchai/ml_data_provider:0.26.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4656,7 +4716,7 @@ aea build
 
 <h4 id="create-model-trainer-aea">Create model trainer AEA</h4>
 <p>Then, fetch the model trainer AEA:
-<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_model_trainer:0.31.0
+<div class="highlight"><pre><span></span><code>aea fetch fetchai/ml_model_trainer:0.32.0
 <span class="nb">cd</span> ml_model_trainer
 aea install
 aea build
@@ -4667,19 +4727,19 @@ aea build
 The following steps create the model trainer from scratch:
 <div class="highlight"><pre><span></span><code>aea create ml_model_trainer
 <span class="nb">cd</span> ml_model_trainer
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea add connection fetchai/soef:0.25.0
-aea add connection fetchai/ledger:0.18.0
-aea add skill fetchai/ml_train:0.27.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea add connection fetchai/soef:0.26.0
+aea add connection fetchai/ledger:0.19.0
+aea add skill fetchai/ml_train:0.28.0
 aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <span class="s1">&#39;{</span>
 <span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <span class="s1">}&#39;</span>
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <span class="s1">&#39;{</span>
-<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.18.0&quot;,</span>
-<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.25.0&quot;</span>
+<span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
+<span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
 <span class="s1">}&#39;</span>
 aea install
 aea build
@@ -4690,7 +4750,7 @@ aea build
 </details>
 
 <h4 id="add-keys-for-the-data-provider-aea">Add keys for the data provider AEA</h4>
-<p>First, create the private key for the data provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
+<p>First, create the private key for the data provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
@@ -4703,11 +4763,11 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 </code></pre></div></p>
 <h4 id="add-keys-and-generate-wealth-for-the-model-trainer-aea">Add keys and generate wealth for the model trainer AEA</h4>
 <p>The model trainer needs to have some wealth to purchase the data from the data provider.</p>
-<p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>AgentLand</code> use:
+<p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
 <div class="highlight"><pre><span></span><code>aea generate-key fetchai
 aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
-<p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>AgentLand</code> network:
+<p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>StargateWorld</code> network:
 <div class="highlight"><pre><span></span><code>aea generate-wealth fetchai
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
@@ -4722,13 +4782,13 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 <p>First, run the data provider AEA:</p>
 <div class="highlight"><pre><span></span><code>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.24.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.25.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the ML data provider.</p>
 <!--
 Then, in the model trainer, update the configuration of the model trainer AEA's p2p connection by appending the following YAML text at the end of the `aea-config.yaml` file:
 
 <div class="highlight"><pre><span></span><code><span class="nn">---</span>
-<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.24.0</span>
+<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.25.0</span>
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
 <span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>

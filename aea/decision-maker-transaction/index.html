@@ -1255,6 +1255,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1660,6 +1672,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2353,6 +2377,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2769,6 +2805,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3318,6 +3366,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4385,6 +4445,8 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.signing.message</span> <span class="kn">import</span> <span class="n">SigningMessage</span>
 
+<span class="kn">from</span> <span class="nn">tests.conftest</span> <span class="kn">import</span> <span class="n">get_wealth_if_needed</span>
+
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
@@ -4439,10 +4501,12 @@
     <span class="p">)</span>
 
     <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">get_wealth_if_needed</span><span class="p">(</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="s2">&quot;fetchai&quot;</span><span class="p">])</span>
 
     <span class="n">counterparty_identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;counterparty_aea&quot;</span><span class="p">,</span>
         <span class="n">addresses</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">,</span>
+        <span class="n">public_keys</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">public_keys</span><span class="p">,</span>
         <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div>
@@ -4458,6 +4522,8 @@
         <span class="n">nonce</span><span class="o">=</span><span class="s2">&quot;some_nonce&quot;</span><span class="p">,</span>
         <span class="n">fee_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
     <span class="p">)</span>
+    <span class="n">get_wealth_if_needed</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">sender_address</span><span class="p">)</span>
+
     <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
     <span class="n">stub_transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
         <span class="n">terms</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span>
@@ -4653,6 +4719,8 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">packages.fetchai.protocols.signing.message</span> <span class="kn">import</span> <span class="n">SigningMessage</span>
 
+<span class="kn">from</span> <span class="nn">tests.conftest</span> <span class="kn">import</span> <span class="n">get_wealth_if_needed</span>
+
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;aea&quot;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
@@ -4706,10 +4774,12 @@
     <span class="p">)</span>
 
     <span class="n">counterparty_wallet</span> <span class="o">=</span> <span class="n">Wallet</span><span class="p">({</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">:</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE_2</span><span class="p">})</span>
+    <span class="n">get_wealth_if_needed</span><span class="p">(</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">[</span><span class="s2">&quot;fetchai&quot;</span><span class="p">])</span>
 
     <span class="n">counterparty_identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;counterparty_aea&quot;</span><span class="p">,</span>
         <span class="n">addresses</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">addresses</span><span class="p">,</span>
+        <span class="n">public_keys</span><span class="o">=</span><span class="n">counterparty_wallet</span><span class="o">.</span><span class="n">public_keys</span><span class="p">,</span>
         <span class="n">default_address_key</span><span class="o">=</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span>
     <span class="p">)</span>
 
@@ -4723,6 +4793,8 @@
         <span class="n">nonce</span><span class="o">=</span><span class="s2">&quot;some_nonce&quot;</span><span class="p">,</span>
         <span class="n">fee_by_currency_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;FET&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
     <span class="p">)</span>
+    <span class="n">get_wealth_if_needed</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">sender_address</span><span class="p">)</span>
+
     <span class="n">signing_dialogues</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SigningDialogues</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">.</span><span class="n">signing_dialogues</span><span class="p">)</span>
     <span class="n">stub_transaction</span> <span class="o">=</span> <span class="n">LedgerApis</span><span class="o">.</span><span class="n">get_transfer_transaction</span><span class="p">(</span>
         <span class="n">terms</span><span class="o">.</span><span class="n">ledger_id</span><span class="p">,</span>

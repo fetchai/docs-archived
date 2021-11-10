@@ -1,0 +1,5618 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Everything you need to know about Fetch.ai.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.fetch.ai/aea/acn-internals/">
+      
+      
+        <meta name="author" content="developer@fetch.ai">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
+    
+    
+      
+        <title>ACN Internals - Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19753c6b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-118969813-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#messages-and-data-structures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-header-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Developer Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              ACN Internals
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.fetch.ai/" title="Developer Documentation" class="md-nav__button md-logo" aria-label="Developer Documentation">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Developer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fetchai/docs" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    <label class="md-nav__link" for="nav-2">
+      Agent Framework
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Framework" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Framework
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrading/" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" >
+    <label class="md-nav__link" for="nav-2-4">
+      Concepts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Concepts" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        Concepts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../language-agnostic-definition/" class="md-nav__link">
+      Language Agnostic Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../agent-oriented-development/" class="md-nav__link">
+      Agent-oriented development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vision/" class="md-nav__link">
+      Vision
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../app-areas/" class="md-nav__link">
+      Application areas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../oef-ledger/" class="md-nav__link">
+      Relation to OEF and Ledger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../identity/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../trust/" class="md-nav__link">
+      Trust minimisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" >
+    <label class="md-nav__link" for="nav-2-5">
+      Demos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Demos" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        Demos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../demos/" class="md-nav__link">
+      Demos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aries-cloud-agent-demo/" class="md-nav__link">
+      Aries Cloud Agents Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../car-park-skills/" class="md-nav__link">
+      Car park skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gym-example/" class="md-nav__link">
+      Gym example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gym-skill/" class="md-nav__link">
+      Gym skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ml-skills/" class="md-nav__link">
+      ML skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../oracle-demo/" class="md-nav__link">
+      Oracle skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aggregation-demo/" class="md-nav__link">
+      Aggegation skill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac-skills/" class="md-nav__link">
+      TAC skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac-skills-contract/" class="md-nav__link">
+      TAC skills ledger-based
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tac/" class="md-nav__link">
+      TAC external app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thermometer-skills/" class="md-nav__link">
+      Thermometer skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../weather-skills/" class="md-nav__link">
+      Weather skills
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" >
+    <label class="md-nav__link" for="nav-2-6">
+      Development - Beginner
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Beginner" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Beginner
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" class="md-nav__link">
+      AEA quick start
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core-components-1/" class="md-nav__link">
+      Core components - Part 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aea-vs-mvc/" class="md-nav__link">
+      AEA and web frameworks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill-guide/" class="md-nav__link">
+      Build your first skill - search & discovery
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core-components-2/" class="md-nav__link">
+      Core components - Part 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interaction-protocol/" class="md-nav__link">
+      How AEAs talk to each other - interaction protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-skills-step-by-step/" class="md-nav__link">
+      Trade between two AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../development-setup/" class="md-nav__link">
+      Development setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" checked>
+    <label class="md-nav__link" for="nav-2-7">
+      Development - Advanced
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Advanced" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-1" type="checkbox" id="nav-2-7-1" >
+    <label class="md-nav__link" for="nav-2-7-1">
+      Topic guides
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Topic guides" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-1">
+        <span class="md-nav__icon md-icon"></span>
+        Topic guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../step-one/" class="md-nav__link">
+      Ways to build an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-aea-step-by-step/" class="md-nav__link">
+      Build an AEA with the CLI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scaffolding/" class="md-nav__link">
+      Scaffolding packages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocol-generator/" class="md-nav__link">
+      Generating protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multiplexer-standalone/" class="md-nav__link">
+      Use multiplexer stand-alone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../standalone-transaction/" class="md-nav__link">
+      Create stand-alone transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../decision-maker-transaction/" class="md-nav__link">
+      Create decision-maker transaction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill-testing/" class="md-nav__link">
+      Testing Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../12-factor/" class="md-nav__link">
+      12-Factor app and AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prometheus/" class="md-nav__link">
+      Prometheus monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../known-limits/" class="md-nav__link">
+      Known limitations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-aea-programmatically/" class="md-nav__link">
+      Build an AEA programmatically
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-vs-programmatic-aeas/" class="md-nav__link">
+      CLI vs programmatic AEAs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../agent-vs-aea/" class="md-nav__link">
+      AEAs vs agents
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../modes/" class="md-nav__link">
+      Modes of running an AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-storage/" class="md-nav__link">
+      Generic Storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multi-agent-manager/" class="md-nav__link">
+      Multi agent manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../debug/" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime-cost/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../por/" class="md-nav__link">
+      Proof of Representation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-2" type="checkbox" id="nav-2-7-2" >
+    <label class="md-nav__link" for="nav-2-7-2">
+      Architecture & component deep-dives
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Architecture & component deep-dives" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-2">
+        <span class="md-nav__icon md-icon"></span>
+        Architecture & component deep-dives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../design-principles/" class="md-nav__link">
+      Design principles
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../diagram/" class="md-nav__link">
+      Architectural diagram
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connection/" class="md-nav__link">
+      Connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../protocol/" class="md-nav__link">
+      Protocols
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../skill/" class="md-nav__link">
+      Skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contract/" class="md-nav__link">
+      Contracts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../decision-maker/" class="md-nav__link">
+      Decision Maker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ledger-integration/" class="md-nav__link">
+      Ledger & Crypto APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../message-routing/" class="md-nav__link">
+      Message routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config/" class="md-nav__link">
+      Configurations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../limits/" class="md-nav__link">
+      Limitations of v1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-3" type="checkbox" id="nav-2-7-3" checked>
+    <label class="md-nav__link" for="nav-2-7-3">
+      Agent Communication
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Agent Communication" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-3">
+        <span class="md-nav__icon md-icon"></span>
+        Agent Communication
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn/" class="md-nav__link">
+      Agent Communication Network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        ACN Internals
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      ACN Internals
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#messages-and-data-structures" class="md-nav__link">
+    Messages and Data Structures
+  </a>
+  
+    <nav class="md-nav" aria-label="Messages and Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-record" class="md-nav__link">
+    Agent Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-message" class="md-nav__link">
+    ACN Message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookuprequest" class="md-nav__link">
+    LookupRequest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookupresponse" class="md-nav__link">
+    LookupResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aeaenvelope" class="md-nav__link">
+    AeaEnvelope
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn-protocol-interactions" class="md-nav__link">
+    ACN Protocol Interactions
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN Protocol Interactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registration-interaction" class="md-nav__link">
+    "Registration" Interaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#look-up-interaction" class="md-nav__link">
+    "Look-up" Interaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-interaction" class="md-nav__link">
+    "Routing" Interaction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joining-the-acn-network" class="md-nav__link">
+    Joining the ACN network
+  </a>
+  
+    <nav class="md-nav" aria-label="Joining the ACN network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay-connections" class="md-nav__link">
+    Relay connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delegate-connections" class="md-nav__link">
+    Delegate connections
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn-transport" class="md-nav__link">
+    ACN transport
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN transport">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-entrance-agent-peer" class="md-nav__link">
+    ACN Envelope Entrance: Agent -&gt; Peer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-routing" class="md-nav__link">
+    ACN Envelope Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-exit-peer-agent" class="md-nav__link">
+    ACN Envelope Exit: Peer -&gt; Agent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-your-aea-to-the-acn" class="md-nav__link">
+    Connect your AEA to the ACN
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect your AEA to the ACN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fetchaip2p_libp2p-connection" class="md-nav__link">
+    The fetchai/p2p_libp2p connection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fetchaip2p_libp2p_delegate-connection" class="md-nav__link">
+    The fetchai/p2p_libp2p_delegate connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-limitations" class="md-nav__link">
+    Known issues and limitations
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues and limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delegate-client-on-client-disconnectionreconnection" class="md-nav__link">
+    Delegate client on client disconnection/reconnection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-node-python-client-libp2p-connection" class="md-nav__link">
+    Golang Node &lt;&gt; Python Client libp2p connection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error" class="md-nav__link">
+    What a peer should do if it receives an acknowledgement with an error?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-possibility-of-switching-peers" class="md-nav__link">
+    No possibility of switching peers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-4" type="checkbox" id="nav-2-7-4" >
+    <label class="md-nav__link" for="nav-2-7-4">
+      Search & Discovery
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search & Discovery" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-4">
+        <span class="md-nav__icon md-icon"></span>
+        Search & Discovery
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simple-oef/" class="md-nav__link">
+      Simple OEF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../defining-data-models/" class="md-nav__link">
+      Defining Data Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../query-language/" class="md-nav__link">
+      The Query Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5" type="checkbox" id="nav-2-7-5" >
+    <label class="md-nav__link" for="nav-2-7-5">
+      Developer Interfaces
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Interfaces" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-5">
+        <span class="md-nav__icon md-icon"></span>
+        Developer Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-5-1" type="checkbox" id="nav-2-7-5-1" >
+    <label class="md-nav__link" for="nav-2-7-5-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-how-to/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cli-commands/" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../package-imports/" class="md-nav__link">
+      File structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wealth/" class="md-nav__link">
+      Generating wealth
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-6" type="checkbox" id="nav-2-7-6" >
+    <label class="md-nav__link" for="nav-2-7-6">
+      Benchmarks
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Benchmarks" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-6">
+        <span class="md-nav__icon md-icon"></span>
+        Benchmarks
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../performance-benchmark/" class="md-nav__link">
+      Performance benchmark
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7" type="checkbox" id="nav-2-7-7" >
+    <label class="md-nav__link" for="nav-2-7-7">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-7-7">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/abstract_agent/" class="md-nav__link">
+      AbstractAgent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/aea/" class="md-nav__link">
+      AEA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/aea_builder/" class="md-nav__link">
+      AEA Builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/agent/" class="md-nav__link">
+      Agent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/agent_loop/" class="md-nav__link">
+      Agent Loop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/launcher/" class="md-nav__link">
+      Launcher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/multiplexer/" class="md-nav__link">
+      Multiplexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/runner/" class="md-nav__link">
+      Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/runtime/" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-12" type="checkbox" id="nav-2-7-7-12" >
+    <label class="md-nav__link" for="nav-2-7-7-12">
+      Components
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Components" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-12">
+        <span class="md-nav__icon md-icon"></span>
+        Components
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-13" type="checkbox" id="nav-2-7-7-13" >
+    <label class="md-nav__link" for="nav-2-7-7-13">
+      Configurations
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configurations" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-13">
+        <span class="md-nav__icon md-icon"></span>
+        Configurations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/data_types/" class="md-nav__link">
+      Data Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/loader/" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/pypi/" class="md-nav__link">
+      Pypi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/configurations/validation/" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-14" type="checkbox" id="nav-2-7-7-14" >
+    <label class="md-nav__link" for="nav-2-7-7-14">
+      Connections
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Connections" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-14">
+        <span class="md-nav__icon md-icon"></span>
+        Connections
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/connections/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/context/base/" class="md-nav__link">
+      Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-16" type="checkbox" id="nav-2-7-7-16" >
+    <label class="md-nav__link" for="nav-2-7-7-16">
+      Contracts
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Contracts" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-16">
+        <span class="md-nav__icon md-icon"></span>
+        Contracts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/contracts/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17" type="checkbox" id="nav-2-7-7-17" >
+    <label class="md-nav__link" for="nav-2-7-7-17">
+      Crypto
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Crypto" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-17">
+        <span class="md-nav__icon md-icon"></span>
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/helpers/" class="md-nav__link">
+      Helpers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/ledger_apis/" class="md-nav__link">
+      LedgerApis
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/plugin/" class="md-nav__link">
+      Plugin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/wallet/" class="md-nav__link">
+      Wallet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-17-6" type="checkbox" id="nav-2-7-7-17-6" >
+    <label class="md-nav__link" for="nav-2-7-7-17-6">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-17-6">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/crypto/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-18" type="checkbox" id="nav-2-7-7-18" >
+    <label class="md-nav__link" for="nav-2-7-7-18">
+      Decision Maker
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Decision Maker" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-18">
+        <span class="md-nav__icon md-icon"></span>
+        Decision Maker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/decision_maker/gop/" class="md-nav__link">
+      GOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-19" type="checkbox" id="nav-2-7-7-19" >
+    <label class="md-nav__link" for="nav-2-7-7-19">
+      Error Handler
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Error Handler" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-19">
+        <span class="md-nav__icon md-icon"></span>
+        Error Handler
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/error_handler/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/error_handler/default/" class="md-nav__link">
+      Default
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20" type="checkbox" id="nav-2-7-7-20" >
+    <label class="md-nav__link" for="nav-2-7-7-20">
+      Helpers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Helpers" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-20">
+        <span class="md-nav__icon md-icon"></span>
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-1" type="checkbox" id="nav-2-7-7-20-1" >
+    <label class="md-nav__link" for="nav-2-7-7-20-1">
+      ACN
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="ACN" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-1">
+        <span class="md-nav__icon md-icon"></span>
+        ACN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/acn/agent_record/" class="md-nav__link">
+      Agent Record
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/acn/uri/" class="md-nav__link">
+      URI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/async_friendly_queue/" class="md-nav__link">
+      Async Friendly Queue
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/async_utils/" class="md-nav__link">
+      Async Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/env_vars/" class="md-nav__link">
+      Env Vars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/exception_policy/" class="md-nav__link">
+      Exception Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/exec_timeout/" class="md-nav__link">
+      Exec Timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/file_io/" class="md-nav__link">
+      File IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/file_lock/" class="md-nav__link">
+      File Lock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/http_requests/" class="md-nav__link">
+      HttpRequests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/install_dependency/" class="md-nav__link">
+      Install Dependency
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/io/" class="md-nav__link">
+      IO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-14" type="checkbox" id="nav-2-7-7-20-14" >
+    <label class="md-nav__link" for="nav-2-7-7-20-14">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-14">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-16" type="checkbox" id="nav-2-7-7-20-16" >
+    <label class="md-nav__link" for="nav-2-7-7-20-16">
+      MultiAddress
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MultiAddress" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-16">
+        <span class="md-nav__icon md-icon"></span>
+        MultiAddress
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/multiaddr/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/multiple_executor/" class="md-nav__link">
+      MultipleExecutor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/pipe/" class="md-nav__link">
+      Pipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-19" type="checkbox" id="nav-2-7-7-20-19" >
+    <label class="md-nav__link" for="nav-2-7-7-20-19">
+      Preferences
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Preferences" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-19">
+        <span class="md-nav__icon md-icon"></span>
+        Preferences
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/preference_representations/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/profiling/" class="md-nav__link">
+      Profiling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-21" type="checkbox" id="nav-2-7-7-20-21" >
+    <label class="md-nav__link" for="nav-2-7-7-20-21">
+      Search
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-21">
+        <span class="md-nav__icon md-icon"></span>
+        Search
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/search/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/search/models/" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/serializers/" class="md-nav__link">
+      Serializers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23" type="checkbox" id="nav-2-7-7-20-23" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23">
+      Storage
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Storage" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-23">
+        <span class="md-nav__icon md-icon"></span>
+        Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/generic_storage/" class="md-nav__link">
+      GenericStorage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-23-2" type="checkbox" id="nav-2-7-7-20-23-2" >
+    <label class="md-nav__link" for="nav-2-7-7-20-23-2">
+      Backends
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Backends" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-20-23-2">
+        <span class="md-nav__icon md-icon"></span>
+        Backends
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/backends/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/storage/backends/sqlite/" class="md-nav__link">
+      Sqlite
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/sym_link/" class="md-nav__link">
+      Sym Link
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-20-25" type="checkbox" id="nav-2-7-7-20-25" >
+    <label class="md-nav__link" for="nav-2-7-7-20-25">
+      Transaction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Transaction" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-20-25">
+        <span class="md-nav__icon md-icon"></span>
+        Transaction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/transaction/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/win32/" class="md-nav__link">
+      Win32
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/yaml_utils/" class="md-nav__link">
+      YamlUtils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/identity/base/" class="md-nav__link">
+      Identity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/mail/base/" class="md-nav__link">
+      Mail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-23" type="checkbox" id="nav-2-7-7-23" >
+    <label class="md-nav__link" for="nav-2-7-7-23">
+      Manager
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Manager" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-23">
+        <span class="md-nav__icon md-icon"></span>
+        Manager
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/manager/" class="md-nav__link">
+      Manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/project/" class="md-nav__link">
+      Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24" type="checkbox" id="nav-2-7-7-24" >
+    <label class="md-nav__link" for="nav-2-7-7-24">
+      Protocols
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Protocols" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-24">
+        <span class="md-nav__icon md-icon"></span>
+        Protocols
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-2" type="checkbox" id="nav-2-7-7-24-2" >
+    <label class="md-nav__link" for="nav-2-7-7-24-2">
+      Dialogue
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dialogue" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-2">
+        <span class="md-nav__icon md-icon"></span>
+        Dialogue
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/dialogue/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-3" type="checkbox" id="nav-2-7-7-24-3" >
+    <label class="md-nav__link" for="nav-2-7-7-24-3">
+      Generator
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Generator" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-3">
+        <span class="md-nav__icon md-icon"></span>
+        Generator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/common/" class="md-nav__link">
+      Common
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/extract_specification/" class="md-nav__link">
+      Extract Specification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/generator/validate/" class="md-nav__link">
+      Validate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-4" type="checkbox" id="nav-2-7-7-24-4" >
+    <label class="md-nav__link" for="nav-2-7-7-24-4">
+      Default Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Default Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-4">
+        <span class="md-nav__icon md-icon"></span>
+        Default Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/default/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-5" type="checkbox" id="nav-2-7-7-24-5" >
+    <label class="md-nav__link" for="nav-2-7-7-24-5">
+      Signing Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Signing Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-5">
+        <span class="md-nav__icon md-icon"></span>
+        Signing Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/custom_types/" class="md-nav__link">
+      Custom Types
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/signing/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-24-6" type="checkbox" id="nav-2-7-7-24-6" >
+    <label class="md-nav__link" for="nav-2-7-7-24-6">
+      State Update Protocol
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="State Update Protocol" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-24-6">
+        <span class="md-nav__icon md-icon"></span>
+        State Update Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/dialogues/" class="md-nav__link">
+      Dialogues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/message/" class="md-nav__link">
+      Message
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/protocols/state_update/serialization/" class="md-nav__link">
+      Serialization
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-25" type="checkbox" id="nav-2-7-7-25" >
+    <label class="md-nav__link" for="nav-2-7-7-25">
+      Registries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Registries" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-25">
+        <span class="md-nav__icon md-icon"></span>
+        Registries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/filter/" class="md-nav__link">
+      Filter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/registries/resources/" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-26" type="checkbox" id="nav-2-7-7-26" >
+    <label class="md-nav__link" for="nav-2-7-7-26">
+      Skills
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Skills" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-26">
+        <span class="md-nav__icon md-icon"></span>
+        Skills
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/base/" class="md-nav__link">
+      Base
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/behaviours/" class="md-nav__link">
+      Behaviors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/skills/tasks/" class="md-nav__link">
+      Task
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-27" type="checkbox" id="nav-2-7-7-27" >
+    <label class="md-nav__link" for="nav-2-7-7-27">
+      Test Tools
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Test Tools" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-27">
+        <span class="md-nav__icon md-icon"></span>
+        Test Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/constants/" class="md-nav__link">
+      Constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/exceptions/" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/generic/" class="md-nav__link">
+      Generic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_cases/" class="md-nav__link">
+      Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_skill/" class="md-nav__link">
+      Test Skill
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28" type="checkbox" id="nav-2-7-7-28" >
+    <label class="md-nav__link" for="nav-2-7-7-28">
+      Plugins
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Plugins" data-md-level="4">
+      <label class="md-nav__title" for="nav-2-7-7-28">
+        <span class="md-nav__icon md-icon"></span>
+        Plugins
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1" type="checkbox" id="nav-2-7-7-28-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1">
+      CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-1">
+        <span class="md-nav__icon md-icon"></span>
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-1-1" type="checkbox" id="nav-2-7-7-28-1-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-1-1">
+      IPFS
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="IPFS" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-1-1">
+        <span class="md-nav__icon md-icon"></span>
+        IPFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_cli_ipfs/core/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_cli_ipfs/ipfs_utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2" type="checkbox" id="nav-2-7-7-28-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="5">
+      <label class="md-nav__title" for="nav-2-7-7-28-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-1" type="checkbox" id="nav-2-7-7-28-2-1" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-1">
+      Cosmos
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Cosmos" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-1">
+        <span class="md-nav__icon md-icon"></span>
+        Cosmos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_cosmos/cosmos/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-2" type="checkbox" id="nav-2-7-7-28-2-2" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-2">
+      Ethereum
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ethereum" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-2">
+        <span class="md-nav__icon md-icon"></span>
+        Ethereum
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_ethereum/ethereum/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7-7-28-2-3" type="checkbox" id="nav-2-7-7-28-2-3" >
+    <label class="md-nav__link" for="nav-2-7-7-28-2-3">
+      Fetchai
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Fetchai" data-md-level="6">
+      <label class="md-nav__title" for="nav-2-7-7-28-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        Fetchai
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_fetchai/fetchai/" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/plugins/aea_ledger_fetchai/_cosmos/" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8" >
+    <label class="md-nav__link" for="nav-2-8">
+      Development - Use Case
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development - Use Case" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        Development - Use Case
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../generic-skills/" class="md-nav__link">
+      Generic skills
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connect-a-frontend/" class="md-nav__link">
+      Front-end intergration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../http-connection-and-skill/" class="md-nav__link">
+      HTTP Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orm-integration/" class="md-nav__link">
+      ORM integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../erc1155-skills/" class="md-nav__link">
+      Contract deploy and interact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../p2p-connection/" class="md-nav__link">
+      P2P Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../raspberry-set-up/" class="md-nav__link">
+      Build an AEA on a Raspberry Pi
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../glossary/" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../questions-and-answers/" class="md-nav__link">
+      Q&A
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Search and Discovery (SOEF)
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Search and Discovery (SOEF)" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Search and Discovery (SOEF)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../soef/simple-oef/" class="md-nav__link">
+      Simple OEF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../soef/simple-oef-usage/" class="md-nav__link">
+      SOEF Connection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Ledger
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ledger" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Ledger
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/building/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/versions/" class="md-nav__link">
+      Versions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/networks/" class="md-nav__link">
+      Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" >
+    <label class="md-nav__link" for="nav-4-5">
+      Commandline Client
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commandline Client" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commandline Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-introduction/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-keys/" class="md-nav__link">
+      Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-multisig/" class="md-nav__link">
+      Multisig Keys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-tokens/" class="md-nav__link">
+      Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/delegator-guide-cli/" class="md-nav__link">
+      Delegator Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/cli-governance/" class="md-nav__link">
+      Governance Proposals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" >
+    <label class="md-nav__link" for="nav-4-6">
+      Validators
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Validators" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-6">
+        <span class="md-nav__icon md-icon"></span>
+        Validators
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/overview/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/security/" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/validators/setup/" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/joining-a-testnet/" class="md-nav__link">
+      Joining a Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/single-node-network/" class="md-nav__link">
+      Single Node Testnet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/block-explorer/" class="md-nav__link">
+      Block Explorer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/governance/" class="md-nav__link">
+      Governance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ledger_v2/faucet/" class="md-nav__link">
+      Faucet
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Collective Learning
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Collective Learning" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Collective Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/" class="md-nav__link">
+      Colearn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/about/" class="md-nav__link">
+      Collective Learning Protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3" >
+    <label class="md-nav__link" for="nav-5-3">
+      Getting Started
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        <span class="md-nav__icon md-icon"></span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_keras/" class="md-nav__link">
+      Keras
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_pytorch/" class="md-nav__link">
+      PyTorch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/intro_tutorial_mli/" class="md-nav__link">
+      The MachineLearningInterface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/differential_privacy/" class="md-nav__link">
+      Differential Privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/grpc_tutorial/" class="md-nav__link">
+      gRPC server
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" >
+    <label class="md-nav__link" for="nav-5-4">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/demo/" class="md-nav__link">
+      Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/examples/" class="md-nav__link">
+      Standalone examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../colearn/grpc_examples/" class="md-nav__link">
+      gRPC example
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#messages-and-data-structures" class="md-nav__link">
+    Messages and Data Structures
+  </a>
+  
+    <nav class="md-nav" aria-label="Messages and Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-record" class="md-nav__link">
+    Agent Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-message" class="md-nav__link">
+    ACN Message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookuprequest" class="md-nav__link">
+    LookupRequest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookupresponse" class="md-nav__link">
+    LookupResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aeaenvelope" class="md-nav__link">
+    AeaEnvelope
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn-protocol-interactions" class="md-nav__link">
+    ACN Protocol Interactions
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN Protocol Interactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registration-interaction" class="md-nav__link">
+    "Registration" Interaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#look-up-interaction" class="md-nav__link">
+    "Look-up" Interaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-interaction" class="md-nav__link">
+    "Routing" Interaction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joining-the-acn-network" class="md-nav__link">
+    Joining the ACN network
+  </a>
+  
+    <nav class="md-nav" aria-label="Joining the ACN network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay-connections" class="md-nav__link">
+    Relay connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delegate-connections" class="md-nav__link">
+    Delegate connections
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acn-transport" class="md-nav__link">
+    ACN transport
+  </a>
+  
+    <nav class="md-nav" aria-label="ACN transport">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-entrance-agent-peer" class="md-nav__link">
+    ACN Envelope Entrance: Agent -&gt; Peer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-routing" class="md-nav__link">
+    ACN Envelope Routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acn-envelope-exit-peer-agent" class="md-nav__link">
+    ACN Envelope Exit: Peer -&gt; Agent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-your-aea-to-the-acn" class="md-nav__link">
+    Connect your AEA to the ACN
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect your AEA to the ACN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fetchaip2p_libp2p-connection" class="md-nav__link">
+    The fetchai/p2p_libp2p connection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fetchaip2p_libp2p_delegate-connection" class="md-nav__link">
+    The fetchai/p2p_libp2p_delegate connection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-limitations" class="md-nav__link">
+    Known issues and limitations
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues and limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delegate-client-on-client-disconnectionreconnection" class="md-nav__link">
+    Delegate client on client disconnection/reconnection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-node-python-client-libp2p-connection" class="md-nav__link">
+    Golang Node &lt;&gt; Python Client libp2p connection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error" class="md-nav__link">
+    What a peer should do if it receives an acknowledgement with an error?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-possibility-of-switching-peers" class="md-nav__link">
+    No possibility of switching peers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>ACN Internals</h1>
+                
+                <p>The aim of this document is to describe at a high-level
+the main implementation of the Agent Communication Network (ACN).</p>
+<p>In particular:</p>
+<ul>
+<li><a href="https://github.com/fetchai/agents-aea/tree/main/libs/go/libp2p_node" target="_blank">the <code>libp2p_node</code> Golang library<a/>;</li>
+<li><a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p" target="_blank">the <code>p2p_libp2p</code> AEA connection, written in Python, that implements the <em>direct connection</em> with an ACN peer<a/>;</li>
+<li><a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p_client" target="_blank">the <code>p2p_libp2p_client</code> AEA connection, written in Python, which implements the <em>delegate connection</em> with an ACN peer<a/>.</li>
+</ul>
+<p>It is assumed the reader already knows what is the ACN and
+its purposes; if not, we suggest reading <a href="../acn">this page<a/>.</p>
+<p>This documentation page is structured as follows:</p>
+<ul>
+<li>Firstly, the ACN protocol is described: all the messages
+and data structures involved, as well as some example of interaction
+protocol with these messages;</li>
+<li>Then, it is explained how a peer can join an existing ACN network,
+and the message exchange involved;</li>
+<li>It follows the description of the journey of an envelope
+  in the ACN network: from the agent connection to its contact
+  peer, between ACN peers, and then from the contact peer of the
+  destination agent to the target agent;</li>
+<li>The following section describes the functionalities
+  of the AEA connections that allow to communicate through
+  the ACN: <code>fetchai/p2p_libp2p</code> and <code>fetchia/p2p_libp2p_delegate</code>;</li>
+<li>The documentation ends with a section of known issues and limitations
+  of the current implementation.</li>
+</ul>
+<h2 id="messages-and-data-structures">Messages and Data Structures</h2>
+<p>At the foundation of the ACN there is the <em>ACN protocol</em>.
+The protocol messages and the reply structure are generated from this 
+<a href="https://github.com/fetchai/agents-aea/blob/develop/libs/go/libp2p_node/protocols/acn/v1_0_0/acn.yaml" target="_blank">protocol specification</a>,
+using the <a href="../protocol-generator" target="_blank">protocol generator</a>.
+Therefore, it uses <a href="https://developers.google.com/protocol-buffers" target="_blank">Protocol Buffers</a>
+as a serialization format,
+and the definition of the data structures involved is defined in this
+<a href="https://github.com/fetchai/agents-aea/blob/develop/libs/go/libp2p_node/protocols/acn/v1_0_0/acn.proto" target="_blank"><code>.proto</code> file</a>.</p>
+<p>To know more about the protocol generator, refer to the relevant
+section of the documentation:
+<a href="../protocol-generator" target="_blank">Protocol Generator</a>.</p>
+<h3 id="agent-record">Agent Record</h3>
+<p>An <em>agent record</em> is a data structure containing information about an
+agent and its Proof-of-Representation (PoR) to be used by a peer for other peers.
+This data structure is used as a payload in other ACN messages (see below).</p>
+<p>The <code>AgentRecord</code> data structure contains the following fields:</p>
+<ul>
+<li><code>service_id</code>: a string describing the service identifier.</li>
+<li><code>ledger_id</code>: a string. It is the identifier of the ledger 
+    this agent record is associated to.
+    Currently, the allowed values are:<ul>
+<li><code>fetchai</code>, the identifier for the Fetch.AI ledger;</li>
+<li><code>ethereum</code>, the identifier for the Ethereum ledger;</li>
+<li><code>cosmos</code>, the identifier for the Cosmos ledger;</li>
+</ul>
+</li>
+<li><code>address</code>: a string. It is the public key of a public-private key pair.
+    It is used as an identifier for routing purposes.</li>
+<li><code>public_key</code>: a string. The representative's public key. Used in case of (PoR).</li>
+<li><code>peer_public_key</code>: a string. The public key of the peer.</li>
+<li><code>signature</code>: a string. The signature for PoR.</li>
+<li><code>not_before</code>: a string. Specify the lower bound for certificate validity.
+    If it is a string, it must follow the format: <code>YYYY-MM-DD</code>. It will be interpreted as time zone UTC-0</li>
+<li><code>not_after</code>: a string. Specify the upper bound for certificate validity. 
+    If it is a string, it must follow the format: <code>YYYY-MM-DD</code>. It will be interpreted as time zone UTC-0.</li>
+</ul>
+<h3 id="acn-message">ACN Message</h3>
+<p>Entities in the ACN (i.e. either agents or peers) exchange <em>ACN messages</em>.
+An ACN message contains a <code>payload</code> field,
+which is the actual content of the message.</p>
+<p>There are different types of payloads:</p>
+<ul>
+<li><code>Status</code></li>
+<li><code>Register</code></li>
+<li><code>LookupRequest</code></li>
+<li><code>LookupResponse</code></li>
+<li><code>AeaEnvelope</code></li>
+</ul>
+<h3 id="status">Status</h3>
+<p>The <code>Status</code> payload is used as a response message to inform 
+the sender about the handling of certain requests.
+The payload contains:</p>
+<ul>
+<li>the <code>status_code</code>, a positive integer among the ones in the 
+  <a href="https://github.com/fetchai/agents-aea/blob/develop/libs/go/libp2p_node/protocols/acn/v1_0_0/acn.proto" target="_blank">Protobuf file</a>.</li>
+<li>a list of error messages (string).</li>
+</ul>
+<p>A status code <code>0</code>, identified as <code>SUCCESS</code>, 
+means that the request has been processed successfully.
+Status codes greater than <code>0</code> can be:</p>
+<ul>
+<li>
+<p>Generic errors: errors that occur under generic circumstances.</p>
+<ul>
+<li><code>ERROR_UNSUPPORTED_VERSION</code>, with integer value <code>1</code>: the receiver of the message
+     does not support the protocol version of the sender;</li>
+<li><code>ERROR_UNEXPECTED_PAYLOAD</code>, with integer value <code>2</code>: the payload could not be
+     deserialised on the receiver side;</li>
+<li><code>ERROR_GENERIC</code>, with integer value <code>3</code>: an internal error;</li>
+<li><code>ERROR_SERIALIZATION</code>, with integer value <code>4</code>: a serialization error occurred
+     on the receiving end;</li>
+</ul>
+</li>
+<li>
+<p>Register errors: errors that occur during agent registration operations in the ACN. </p>
+<ul>
+<li><code>ERROR_WRONG_AGENT_ADDRESS</code>, with integer value <code>10</code>:
+     the PoR by a peer from another peer does not match the destination address of
+     the envelope to be routed by the receiving peer.</li>
+<li><code>ERROR_WRONG_PUBLIC_KEY</code>, with integer value <code>11</code>: the
+     representative peer public key does not match the one in the agent record;</li>
+<li><code>ERROR_INVALID_PROOF</code>, with integer value <code>12</code>: the signature is invalid;</li>
+<li><code>ERROR_UNSUPPORTED_LEDGER</code>, with integer value <code>13</code>: the ledger of the PoR is not supported by the peer;</li>
+</ul>
+</li>
+<li>
+<p>Lookup and delivery errors: errors that occur during lookup to the DHT and envelope delivery operations in the ACN.</p>
+<ul>
+<li><code>ERROR_UNKNOWN_AGENT_ADDRESS</code>, with integer value <code>20</code>: the requested agent address has not been found in the local DHT of the peer;</li>
+<li><code>ERROR_AGENT_NOT_READY</code>, with integer value <code>21</code>: the agent is not ready for envelope delivery.</li>
+</ul>
+</li>
+</ul>
+<h3 id="register">Register</h3>
+<p>The <code>Register</code> payload is used to request a peer to register an agent among his known ones.
+The payload contains the field <code>record</code>, which is an instance of <code>AgentRecord</code>.</p>
+<h3 id="lookuprequest">LookupRequest</h3>
+<p>The <code>LookupRequest</code> payload is sent between peer to look-up addresses in the Distributed Hash Table (DHT).
+It contains the agent address (a string) that the sender needs to correctly route an envelope.</p>
+<h3 id="lookupresponse">LookupResponse</h3>
+<p>The <code>LookupResponse</code> payload is the response sent by a peer that received a <code>LookupRequest</code>.
+It contains the <code>AgentRecord</code> associated to the requested address.</p>
+<h3 id="aeaenvelope">AeaEnvelope</h3>
+<p>The <code>AeaEnvelope</code> payload contains the envelope sent by an agent and to be delivered to another agent.
+It contains:</p>
+<ul>
+<li><code>envelope</code>: the envelope to be forwarded, in byte representation;</li>
+<li>an <code>AgentRecord</code> (see above).</li>
+</ul>
+<h2 id="acn-protocol-interactions">ACN Protocol Interactions</h2>
+<p>The ACN protocol specifies three different possible interactions:</p>
+<ul>
+<li>the <em>registration</em> interaction</li>
+<li>the <em>look-up</em> interaction</li>
+<li>the <em>routing</em> interaction</li>
+</ul>
+<h3 id="registration-interaction">"Registration" Interaction</h3>
+<p>The registration interaction is used by delegate agents or relayed peers
+to register themselves to another peer.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent/RelayedPeer
+        participant Peer
+        Agent/RelayedPeer->>Peer: Register(AgentRecord)
+        alt success
+            note over Peer: check PoR
+            Peer->>Agent/RelayedPeer: Status(SUCCESS)
+        else wrong agent address
+            Peer->>Agent/RelayedPeer: Status(ERROR_WRONG_AGENT_ADDRESS)
+        else wrong public key
+            Peer->>Agent/RelayedPeer: Status(ERROR_WRONG_PUBLIC_KEY)
+        else invalid proof of representation
+            Peer->>Agent/RelayedPeer: Status(ERROR_INVALID_PROOF)
+        else unsupported ledger
+            Peer->>Agent/RelayedPeer: Status(ERROR_UNSUPPORTED_LEDGER)
+        end
+</div>
+
+<h3 id="look-up-interaction">"Look-up" Interaction</h3>
+<p>The look-up interaction is used by a peer
+to request information to another peer about an agent address.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Peer1
+        participant Peer2
+        Peer1->>Peer2: LookupRequest(address)
+        alt success
+            Peer2->>Peer1: LookupResponse(AgentRecord)
+        else unknown agent address
+            Peer2->>Peer1: Status(ERROR_UNKNOWN_AGENT_ADDRESS)
+        end
+</div>
+
+<h3 id="routing-interaction">"Routing" Interaction</h3>
+<p>The routing interaction is used by agents
+and peers to route the envelope through the ACN.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Peer1
+        participant Peer2
+        Peer1->>Peer2: AeaEnvelope(envelope, AgentRecord)
+        alt success
+            note over Peer2: check PoR
+            Peer2->>Peer1: Status(SUCCESS)
+        else error on decoding of Envelope payload
+            Peer2->>Peer1: Status(ERROR_SERIALIZATION)
+        else PoR errors
+            note over Peer1,Peer2: see above 
+        end
+
+</div>
+
+<h2 id="joining-the-acn-network">Joining the ACN network</h2>
+<p>When an ACN peer wants to join the network, it has
+to start from a list of <em>bootstrap peers</em>, i.e.
+a list of ACN peers to connect with (at least one).</p>
+<p>Each node handles four different types of <a href="https://docs.libp2p.io/concepts/stream-multiplexing/" target="_blank">libp2p streams</a>:</p>
+<ul>
+<li>the <em>notification stream</em>, identified by the URI <code>/aea-notif/</code>:
+  this stream is used by new peers to notify their existence to</li>
+<li>the <em>address stream</em>, identified by the URI <code>/aea-address/</code>:
+  used to send look-up requests and look-up responses;</li>
+<li>the <em>envelope stream</em>, identified by the URI <code>/aea/</code>:
+  used to forward and to receive ACN envelopes;</li>
+<li>the <em>register relay stream</em>, identified by the URI <code>/aea-register/</code>:
+  this is to receive messages from clients that want to register their agents addresses;
+  this peer, and then it can register their addresses.</li>
+</ul>
+<p>To begin with, the node process initializes
+the transport connections with the bootstrap peers,
+the local copy of the Kademlia Distributed
+Hash Table (DHT), 
+the persistent storage for agent records,
+and performs other non-functional operations 
+like setting up the <a href="https://prometheus.io/" target="_blank"> Prometheus monitoring system</a>.
+Optionally, can also start listening for relay connections
+and delegate connections.</p>
+<p>Then, it sets up the notification stream and notifies the bootstrap peers (if any).</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Peer1
+        participant Peer2
+        participant Peer3
+        note over Peer1: notify<br/>bootstrap peers
+        Peer1->>Peer2: notify
+        Peer2->>Peer2: wait until notifying peer <br/>added to DHT
+        activate Peer2
+        Peer1->>Peer3: notify
+        Peer3->>Peer3: wait until notifying peer <br/>added to DHT
+        activate Peer3
+        note over Peer2,Peer3: Peer1 registered to DHT
+        deactivate Peer2
+        deactivate Peer3
+        loop for each local/relay/delegate address 
+            Peer1->>Peer1: compute CID from address
+            Peer1->>Peer2: register address
+            Peer1->>Peer3: register address
+        end
+        note over Peer1: set up:<br/>- address stream<br/>- envelope stream<br/>- register relay stream
+</div>
+
+<h3 id="relay-connections">Relay connections</h3>
+<p>If the ACN node is configured to run the relay service,
+it sets up the register relay stream, waiting for registration
+requests.</p>
+<p>The following diagram shows an example of the message exchanged
+during a registration request:</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer
+        Agent->>Peer: Register
+        alt decoding error of ACN message
+            Peer->>Agent: Status(ERROR_SERIALIZATION)
+        else wrong payload
+            Peer->>Agent: Status(ERROR_UNEXPECTED_PAYLOAD)
+        else PoR check fails
+            alt wrong agent address
+                Peer->>Agent: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else unsupported ledger
+                Peer->>Agent: Status(ERROR_UNSUPPORTED_LEDGER)
+            else agent address and public key don't match
+                Peer->>Agent: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else invalid proof
+                Peer->>Agent: Status(ERROR_INVALID_PROOF)
+            end
+        else PoR check succeeds
+            Peer->>Agent: Status(SUCCESS)
+            note over Peer: announce agent address<br/>to other peers
+        end
+</div>
+
+<h3 id="delegate-connections">Delegate connections</h3>
+<p>If the ACN node is configured to run the delegate service,
+it start listening from a TCP socket at a configurable URI.</p>
+<p>To see a diagram of the message exchanged
+during a registration request read 
+<a href="../acn-internals#registration-interaction" target="_blank">this section</a>.</p>
+<h2 id="acn-transport">ACN transport</h2>
+<p>In the following sections, we describe the main three steps of the routing
+of an envelope through the ACN:</p>
+<ul>
+<li><em>ACN entrance</em>: when an envelope sent by an agent enters 
+  the peer-to-peer network via the peer the agent is connected to
+  i.e. agent-to-peer communication;</li>
+<li><em>ACN routing</em>: when an envelope gets routed through the peer-to-peer network,
+  i.e. peer-to-peer communication;</li>
+<li><em>ACN exit</em>: when an envelope gets delivered to the receiving agent
+  through its representative peer, i.e. peer-to-agent communication.</li>
+</ul>
+<h3 id="acn-envelope-entrance-agent-peer">ACN Envelope Entrance: Agent -&gt; Peer</h3>
+<p>In this section, we will describe the interaction protocols between agents and peers 
+for the messages sent by the agent to the ACN network;
+in particular, the communication from the contact peer of an agent to the agent.</p>
+<p>The following diagram explains the exchange of messages on entering an envelope in the ACN.</p>
+<p>In the case of <em>direct connection</em>, 
+<code>Agent</code> is a Python process, whereas <code>Peer</code> is in a separate (Golang) process.
+The logic of the Python Agent client is implemented in 
+the <a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p" target="_blank">AEA connection <code>fetchai/p2p_libp2p</code></a>
+The communication between <code>Agent</code> and <code>Peer</code> is done through 
+an OS pipe for Inter-Process Communication (IPC) between the AEA's process and the libp2p node process;
+then, the message gets enqueued to an output queue by an input coroutine.
+Finally, the envelope ends up in an output queue, 
+which is processed by an output coroutine and routed to the next peer.</p>
+<p>In the case of <em>delegate connection</em>, 
+the message exchange is very similar; however, instead of using 
+pipes, the communication is done through the network, i.e. TCP,
+with a peer which has the delegate service enabled.
+The logic of the <code>Agent</code> client connected with a delegate connection
+is implemented in 
+the <a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p_client" target="_blank">AEA connection <code>fetchai/p2p_libp2p_client</code></a> </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer
+        loop until Status(success) received
+            Agent->>Peer: AeaEnvelope
+            Agent->>Agent: wait
+            note left of Agent: Wait until<br/>Status(success)
+            alt successful case
+                Peer->>Agent: Status(success)
+                note over Agent: break loop
+            else ack-timeout OR conn-error
+                note left of Agent: continue: Try to<br/>resend/reconnect
+            else version not supported
+                Peer->>Agent: Status(ERROR_UNSUPPORTED_VERSION)
+            else error on decoding of ACN message
+                Peer->>Agent: Status(ERROR_SERIALIZATION)
+            else error on decoding of Envelope payload
+                Peer->>Agent: Status(ERROR_SERIALIZATION)
+            else the payload cannot be handled
+                Peer->>Agent: Status(ERROR_UNEXPECTED_PAYLOAD)
+            end
+        end
+        note over Peer: route envelope<br/>to next peer
+</div>
+
+<h3 id="acn-envelope-routing">ACN Envelope Routing</h3>
+<p>In this section, we describe the interaction between peers
+when it comes to envelope routing.</p>
+<p>Assume an envelope arrives from an agent to peer <code>Peer1</code>,
+i.e. <code>Peer1</code> is the first hop 
+of the routing.
+Let <code>Agent</code> be the local agent directly connected
+to <code>Peer1</code>, <code>Peer2</code> a direct peer
+of peer <code>Peer1</code>.</p>
+<p>When the envelope is leaving <code>Peer1</code>,
+we may have different scenario:</p>
+<p>1) In case of direct connection,
+   and the field <code>sender</code> of the envelope
+   is not the local agent address: 
+   the message is considered invalid, and it is dropped. </p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer1
+        participant Peer2
+        Agent->>Peer1: AeaEnvelope
+        alt envelope sender not registered locally
+            note over Peer1: stop, log error
+        end
+</div>
+
+<p>2) the <code>target</code> of the envelope is 
+   the local agent connected to the peer:
+   the envelope is routed to the local agent.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer1
+        participant Peer2
+        Agent->>Peer1: AeaEnvelope
+        alt target == peer1.my_agent
+            note over Peer1: envelope destinated<br/> to local agent,<br/> not routing
+            loop agent not ready
+                note over Peer1: sleep for 100ms
+            end
+            Peer1->>Agent: AeaEnvelope
+            Agent->>Peer1: Status(Success)
+        end
+</div>
+
+<p>3) the <code>target</code> is a delegate client.
+   Send the envelope via TCP.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Delegate
+        participant Peer1
+        participant Peer2
+        Delegate->>Peer1: AeaEnvelope
+        alt destination is a delegate
+            note over Peer1: send envelope<br/> to delegate via TCP
+            Peer1->>Delegate: AeaEnvelope
+            Delegate->>Peer1: Status(Success)
+        end
+</div>
+
+<p>4) Otherwise, look up the local DHT.
+  If an entry is found, use it;
+   otherwise, send a look-up request
+   to connected peers.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer1
+        participant Peer2
+        Agent->>Peer1: AeaEnvelope
+        alt address found in DHT
+            note over Peer1: destination is a<br/>relay client
+        else lookup address in DHT
+            note over Peer1: send lookup request<br/> to all peers
+            Peer1->>Peer2: LookupRequest
+            alt generic error
+                Peer2->>Peer1: Status(GENERIC_ERROR)
+            else look-up response
+                Peer2->>Peer1: LookupResponse
+                note over Peer1: Check PoR
+            else not found
+                Peer2->>Peer1:Status(UNKNOWN_AGENT_ADDRESS)
+            end
+        end
+        note over Peer1,Peer2: Now Peer1 knows the contact peer<br/>is PeerX
+</div>
+
+<p>In particular, when a peer receives a LookupRequest message,
+it does the following:</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Peer1
+        participant Peer2
+        Peer1->>Peer2: LookupRequest
+        alt error
+            Peer2->>Peer1: Status(Error)
+        else local agent/relay/delegate
+            note over Peer2: requested address is<br/>a local agent<br/>OR<br/>requested address is<br/>in my relay clients<br/>OR<br/>requested address is<br/>in my delegate clients
+            Peer2->>Peer1: LookupResponse
+            note over Peer1: Check PoR
+        else not found locally
+            note over Peer2: send lookup request<br/>to other peers...
+            alt found
+                Peer2->>Peer1: LookupResponse
+                note over Peer1: Check PoR
+            else not found
+                Peer2->>Peer1:Status(UNKNOWN_AGENT_ADDRESS)
+            end
+        end
+</div>
+
+<p>Let <code>Peer3</code> the contact peer of the recipient of the envelope. 
+The following diagram shows how the contact peer of the 
+envelope recipient handles the incoming envelope:</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Peer1
+        participant Peer3
+        Peer1->>Peer3: AeaEnvelope
+        alt decoding error of ACN message
+            Peer3->>Peer1: Status(ERROR_SERIALIZATION)
+        else unexpected payload
+            Peer3->>Peer1: Status(ERROR_UNEXPECTED_PAYLOAD)
+        else decoding error of envelope payload
+            Peer3->>Peer1: Status(ERROR_SERIALIZATION)        
+        else PoR check fails
+            alt wrong agent address
+                Peer3->>Peer1: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else unsupported ledger
+                Peer3->>Peer1: Status(ERROR_UNSUPPORTED_LEDGER)
+            else agent address and public key don't match
+                Peer3->>Peer1: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else invalid proof
+                Peer3->>Peer1: Status(ERROR_INVALID_PROOF)
+            end
+        else PoR check succeeds
+            alt target is delegate, not ready
+                Peer3->>Peer1: Status(ERROR_AGENT_NOT_READY)
+            else exists delegate, ready
+                note over Peer3: forward envelope via<br/>delegate connection
+                Peer3->>Peer1: Status(SUCCESS)
+            else target is local agent, not ready
+                Peer3->>Peer1: Status(ERROR_AGENT_NOT_READY)
+            else target is local agent, ready
+                note over Peer3: forward envelope via<br/>direct connection
+                Peer3->>Peer1: Status(SUCCESS)
+            else agent does not exist
+                Peer3->>Peer1: Status(ERROR_UNKNOWN_AGENT_ADDRESS)
+            end
+        end
+</div>
+
+<h3 id="acn-envelope-exit-peer-agent">ACN Envelope Exit: Peer -&gt; Agent</h3>
+<p>The following diagram explains the exchange of messages on exiting an envelope in the ACN.
+That is, the communication from the contact peer of an agent to the agent.</p>
+<p>The same message exchange is done 
+both in the case of direct connection and
+delegate connection,
+similarly for what has been described for the envelope entrance
+<a href="../acn-internals#acn-envelope-entrance-agent-peer">(see above)</a>.</p>
+<div class="mermaid">
+    sequenceDiagram
+        participant Agent
+        participant Peer
+        Peer->>Agent: AeaEnvelope
+        alt successful case
+            Agent->>Peer: Status(success)
+        else ack-timeout OR conn-error
+            note left of Peer: do nothing
+        else error on decoding of ACN message
+            Agent->>Peer: Status(GENERIC_ERROR)
+        else error on decoding of Envelope payload
+            Agent->>Peer: Status(GENERIC_ERROR)
+        else wrong payload
+            Agent->>Peer: Status(GENERIC_ERROR)
+        end
+</div>
+
+<h2 id="connect-your-aea-to-the-acn">Connect your AEA to the ACN</h2>
+<p>To connect the AEA to the ACN network,
+there are two AEA connections available:</p>
+<ul>
+<li>the <code>fetchai/p2p_libp2p</code>, that implements
+  a direct connection, and</li>
+<li>the <code>fetchai/p2p_libp2p_delegate</code> connection,
+  that implements the delegate connection.</li>
+</ul>
+<p>For more information on the AEA connection package type,
+refer to <a href="../connection/" target="_blank">this guide</a>.</p>
+<h3 id="the-fetchaip2p_libp2p-connection">The <code>fetchai/p2p_libp2p</code> connection</h3>
+<p>The source code of the <code>fetchai/p2p_libp2p</code> connection<br />
+can be downloaded from 
+<a href="https://aea-registry.fetch.ai/details/connection/fetchai/p2p_libp2p/latest" target="_blank">the AEA Registry</a>,
+or from <a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p" target="_blank">the main AEA framework repository.</a></p>
+<p>The package provides the connection class <code>P2PLibp2pConnection</code>,
+which implements the <code>Connection</code> interface and
+therefore can be used by the Multiplexer as any other connection.</p>
+<ul>
+<li>The <code>connect</code> method of this connection spawns a new instance
+  of the <a href="https://github.com/fetchai/agents-aea/blob/main/libs/go/libp2p_node/libp2p_node.go" target="_blank"><code>libp2p_node</code> program</a>
+(i.e. an ACN peer node) and connects to it through OS pipes. 
+Then, it sets up the <em>message receiving loop</em>,
+  which enqueues messages in the input queue to be read by <code>read</code> method calls,
+  and the <em>message sending loop</em>, 
+  which dequeues messages from the output queue and forwards them to the Libp2p node. 
+The loops are run concurrently in the Multiplexer thread, 
+  using the Python asynchronous programming library <code>asyncio</code>.  </li>
+</ul>
+<div class="mermaid">
+    sequenceDiagram
+        participant Libp2p Connection
+        participant sending loop
+        participant receiving loop
+        participant Libp2p Node
+        Libp2p Connection->>Libp2p Node: spawn process
+        activate Libp2p Node
+        Libp2p Connection->>sending loop: start recv loop
+        sending loop->>sending loop: wait messages from output queue
+        activate sending loop
+        Libp2p Connection->>receiving loop: start send loop
+        receiving loop->>receiving loop: wait messages from input queue
+        activate receiving loop
+        deactivate Libp2p Node
+        deactivate sending loop
+        deactivate receiving loop
+</div>
+
+<ul>
+<li>The <code>send</code> method enqueues a message in the output queue.
+The message is then dequeued by the sending loop,
+and then sent to the Libp2p node. </li>
+</ul>
+<div class="mermaid">
+    sequenceDiagram
+        participant Libp2p Connection
+        participant sending loop
+        participant Libp2p Node
+        activate sending loop
+        Libp2p Connection->>Libp2p Connection: enqueue message to output queue
+        sending loop->>sending loop: dequeue message from output queue
+        deactivate sending loop
+        sending loop->>Libp2p Node: AeaEnvelope
+        sending loop->>sending loop: wait for status
+        activate sending loop
+        alt success
+            note over Libp2p Node: route envelope
+            Libp2p Node->>sending loop: Status(SUCCESS)
+            deactivate sending loop
+            note over sending loop: OK
+        else timed out
+            note over sending loop: raise with error
+        else acn message decoding error 
+            Libp2p Node->>sending loop: Status(ERROR_SERIALIZATION)
+        else unexpected payload
+            Libp2p Node->>sending loop: Status(ERROR_UNEXPECTED_PAYLOAD)
+        else envelope decoding error 
+            Libp2p Node->>sending loop: Status(ERROR_SERIALIZATION)
+        end
+</div>
+
+<ul>
+<li>The <code>receive</code> method dequeues a message from the input queue.
+The queue is populated by the receiving loop,
+which receives messages from the Libp2p node. </li>
+</ul>
+<div class="mermaid">
+    sequenceDiagram
+        participant Libp2p Connection
+        participant receiving loop
+        participant Libp2p Node
+        activate receiving loop
+        Libp2p Node->>receiving loop: AeaEnvelope
+        deactivate receiving loop
+        Libp2p Node->>Libp2p Node: wait for status
+        activate Libp2p Node
+        alt success
+            note over receiving loop: enqueue envelope<br/>to input queue
+            receiving loop->>Libp2p Node: Status(SUCCESS)
+            deactivate Libp2p Node
+            note over receiving loop: OK
+        else timed out
+            note over Libp2p Node: ignore
+        else acn message decoding error 
+            receiving loop->>Libp2p Node: Status(ERROR_SERIALIZATION)
+        else unexpected payload
+            receiving loop->>Libp2p Node: Status(ERROR_UNEXPECTED_PAYLOAD)
+        else envelope decoding error 
+            receiving loop->>Libp2p Node: Status(ERROR_SERIALIZATION)
+        end
+        Libp2p Connection->>receiving loop: read message from output queue
+        note over Libp2p Connection: return message<br/>to Multiplexer
+</div>
+
+<ul>
+<li>the <code>disconnect</code> method stops both the receiving loop and the sending loop,
+  and stops the Libp2p node.</li>
+</ul>
+<h3 id="the-fetchaip2p_libp2p_delegate-connection">The <code>fetchai/p2p_libp2p_delegate</code> connection</h3>
+<p>The source code of the <code>fetchai/p2p_libp2p_delegate</code> connection<br />
+can be downloaded from
+<a href="https://aea-registry.fetch.ai/details/connection/fetchai/p2p_libp2p_client/latest" target="_blank">the main AEA framework repository.</a>
+or from <a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/connections/p2p_libp2p_client" target="_blank">the main AEA framework repository.</a></p>
+<p>The package provides the connection class <code>P2PLibp2pClientConnection</code>,
+which implements the <code>Connection</code> interface and
+therefore can be used by the Multiplexer as any other connection.</p>
+<ul>
+<li>The <code>connect</code> method of this connection will set up a TCP
+  connection to the URI of the delegate peer. Then, it will
+  send a <code>Register</code> request to register the agent among the peer's
+  client connections.
+  On registration success, it sets up the <em>message receiving loop</em>, 
+  which enqueues messages in the input queue to be read by read method calls, 
+  and the <em>message sending loop</em>, which dequeues messages from the output queue 
+  and forwards them to the Libp2p node. 
+  The loops are run concurrently in the Multiplexer thread, 
+  using the Python asynchronous programming library <code>asyncio</code>.</li>
+</ul>
+<div class="mermaid">
+    sequenceDiagram
+        participant Libp2p Client Connection
+        participant Libp2p Node
+        activate Libp2p Node
+        Libp2p Node->>Libp2p Node: listening for TCP connections
+        Libp2p Client Connection->>Libp2p Node: Register (via TCP)
+        deactivate Libp2p Node
+        alt decoding error of ACN message
+            Libp2p Node->>Libp2p Client Connection: Status(ERROR_SERIALIZATION)
+        else wrong payload
+            Libp2p Node->>Libp2p Client Connection: Status(ERROR_UNEXPECTED_PAYLOAD)
+        else PoR check fails
+            alt wrong agent address
+                Libp2p Node->>Libp2p Client Connection: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else unsupported ledger
+                Libp2p Node->>Libp2p Client Connection: Status(ERROR_UNSUPPORTED_LEDGER)
+            else agent address and public key don't match
+                Libp2p Node->>Libp2p Client Connection: Status(ERROR_WRONG_AGENT_ADDRESS)
+            else invalid proof
+                Libp2p Node->>Libp2p Client Connection: Status(ERROR_INVALID_PROOF)
+            end
+        else PoR check succeeds
+            Libp2p Node->>Libp2p Client Connection: Status(SUCCESS)
+            note over Libp2p Node: announce agent<br/>address to<br/>other peers
+            Libp2p Node->>Libp2p Node: wait data from socket 
+            activate Libp2p Node
+            deactivate Libp2p Node
+        end
+</div>
+
+<ul>
+<li>
+<p>The <code>send</code> method and the <code>receive</code> methods behave similarly to
+  the <code>send</code> and <code>receive</code> methods of the
+  <a href="../acn-internals#the-fetchaip2p_libp2p-connection" target="_blank"><code>p2p_libp2p connection</code></a>, 
+  in terms of message exchange;
+  however, the communication is done via TCP rather than pipes.</p>
+</li>
+<li>
+<p>The <code>disconnect</code> method interrupts the connection with the delegate peer,
+  without explicitly unregistering.</p>
+</li>
+</ul>
+<h2 id="known-issues-and-limitations">Known issues and limitations</h2>
+<p>In this section, we provide a list of known issues
+and limitations of the current implementation
+of the ACN, considering both the ACN nodes (written in Golang)
+and the AEA connections, for the Python AEA framework, to interact with them.</p>
+<h3 id="delegate-client-on-client-disconnectionreconnection">Delegate client on client disconnection/reconnection</h3>
+<p>In case of disconnection/reconnection, delegate client record will be removed.
+This can cause two problems: either the delegate client is not found, 
+or connection is closed during the send operation.</p>
+<p>Possible solutions:</p>
+<ul>
+<li>Create more complicated structure for clients storage;</li>
+<li>Keep the delegate client record for longer; </li>
+<li>Clean up the record by timeout, per client queues.</li>
+</ul>
+<p>Code references:</p>
+<ul>
+<li>record removed: <a href="https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L864" target="_blank">https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L864</a></li>
+<li>send code: <a href="https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L955" target="_blank">https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L955</a></li>
+</ul>
+<h3 id="golang-node-python-client-libp2p-connection">Golang Node &lt;&gt; Python Client <code>libp2p</code> connection</h3>
+<p>In case of connection between the Golang side (i.e. ACN node) 
+and the Python side (i.e. the <code>libp2p</code> AEA connection) is broken, 
+there is no reconnection attempt.
+The Golang side connect to the Python server opened, 
+but if the connection is broken Golang can try to reconnect; 
+however, the Python side does not know about this and will restart
+the node completely.</p>
+<p>Possible solutions: the problem requires updates on both sides and assume possible timeouts on broken connection.
+If connection is broken, the Python side awaits for reconnection from Golang side, 
+and restart node completely after timeout.</p>
+<h3 id="what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error">What a peer should do if it receives an acknowledgement with an error?</h3>
+<p>If an ACN response is the <code>Status</code> with error code different from <code>SUCCESS</code>,
+the forwarding to other peers is not repeated. </p>
+<p>A possible solution is to resend the message; however,
+not clear why it should help in case of healthy connection,
+how many times the sender should retry, and how it would help.</p>
+<p>Discussion on GitHub: 
+<a href="https://github.com/fetchai/agents-aea/pull/2509#discussion_r642628983" target="_blank">https://github.com/fetchai/agents-aea/pull/2509#discussion_r642628983</a></p>
+<h3 id="no-possibility-of-switching-peers">No possibility of switching peers</h3>
+<p>In case of a peer becoming unavailable, a delegate client or relay client currently has no means to automatically switch the peer. In particular, the DHT should be updated when a client switches peers.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../acn/" title="Agent Communication Network" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Agent Communication Network
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../simple-oef/" title="Simple OEF" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Simple OEF
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://fetch.ai/" target=_blank>Fetch.AI &copy 2021</a>
+        and the
+        <a href="https://github.com/fetchai/docs/" target=_blank>
+          Fetch.AI Documentation Suite</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

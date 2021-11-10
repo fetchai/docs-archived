@@ -1182,6 +1182,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../acn-internals/" class="md-nav__link">
+      ACN Internals
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1587,6 +1599,18 @@
   <li class="md-nav__item">
     <a href="../api/components/loader/" class="md-nav__link">
       Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/components/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -2280,6 +2304,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/helpers/ipfs/utils/" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2696,6 +2732,18 @@
   <li class="md-nav__item">
     <a href="../api/manager/project/" class="md-nav__link">
       Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/manager/utils/" class="md-nav__link">
+      Utils
     </a>
   </li>
 
@@ -3245,6 +3293,18 @@
   <li class="md-nav__item">
     <a href="../api/test_tools/test_cases/" class="md-nav__link">
       Test Cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/test_tools/test_contract/" class="md-nav__link">
+      Test Contract
     </a>
   </li>
 
@@ -4383,7 +4443,7 @@
                 
                   <h1>P2P Connection</h1>
                 
-                <p>The <code>fetchai/p2p_libp2p:0.24.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
+                <p>The <code>fetchai/p2p_libp2p:0.25.0</code> connection allows AEAs to create a peer-to-peer communication network. In particular, the connection creates an overlay network which maps agents' public keys to IP addresses.</p>
 <h2 id="local-demo">Local demo</h2>
 <p>First, make sure you have installed the crypto plugin
 of the target test-net. E.g. for Fetch.AI:
@@ -4393,8 +4453,8 @@ of the target test-net. E.g. for Fetch.AI:
 <p>Create one AEA as follows:</p>
 <div class="highlight"><pre><span></span><code>aea create my_genesis_aea
 <span class="nb">cd</span> my_genesis_aea
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea install
 aea build
 </code></pre></div>
@@ -4406,16 +4466,16 @@ aea add-key fetchai fetchai_connection_private_key.txt --connection
 aea issue-certificates
 </code></pre></div>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.24.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.25.0
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.24.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.25.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the genesis AEA.</p>
 <h3 id="create-and-run-another-aea">Create and run another AEA</h3>
 <p>Create a second AEA:</p>
 <div class="highlight"><pre><span></span><code>aea create my_other_aea
 <span class="nb">cd</span> my_other_aea
-aea add connection fetchai/p2p_libp2p:0.24.0
-aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.24.0
+aea add connection fetchai/p2p_libp2p:0.25.0
+aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
 aea install
 aea build
 </code></pre></div>
@@ -4438,7 +4498,7 @@ aea issue-certificates
 </code></pre></div>
 Here <code>SOME_ADDRESS</code> needs to be replaced with the list of multi addresses displayed in the log output of the genesis AEA.</p>
 <p>Run the AEA:</p>
-<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.24.0
+<div class="highlight"><pre><span></span><code>aea run --connections fetchai/p2p_libp2p:0.25.0
 </code></pre></div>
 <p>You can inspect the <code>libp2p_node.log</code> log files of the AEA to see how they discover each other.</p>
 <div class="admonition note">
@@ -4457,7 +4517,7 @@ Here <code>SOME_ADDRESS</code> needs to be replaced with the list of multi addre
 </code></pre></div></p>
 <p>Specifically, in an AEA's configuration <code>aea-config.yaml</code> add the above addresses for <code>entry_peers</code> as follows:
 <div class="highlight"><pre><span></span><code><span class="nn">---</span>
-<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.24.0</span>
+<span class="nt">public_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.25.0</span>
 <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">connection</span>
 <span class="nt">config</span><span class="p">:</span>
   <span class="nt">delegate_uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
@@ -4467,7 +4527,7 @@ Here <code>SOME_ADDRESS</code> needs to be replaced with the list of multi addre
 </code></pre></div></p>
 <p>Note, this configuration change must be made for all agents attempting to communicate with each other via the Agent Communication Network. For example, in demos involving two agents, both agents will need the above modifications to their respective <code>aea-config.yaml</code> file. However, remember to use different ports in <code>local_uri.</code> This will allow both agents to default to this communication network without the added overhead of opening ports and specifying hosts on the individual host machines running each agent.</p>
 <h2 id="configuring-the-connectionyaml-entries">Configuring the <code>connection.yaml</code> entries:</h2>
-<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.24.0</code> connection consult the <code>README.md</code> file supplied with the connection package.</p>
+<p>To learn more about how to configure your <code>fetchai/p2p_libp2p:0.25.0</code> connection consult the <code>README.md</code> file supplied with the connection package.</p>
 <h2 id="running-go-peer-standalone">Running Go peer standalone</h2>
 <p>You can run a peer node in <em>standalone mode</em>; that is, as a Go process with no dependency on the AEA framework. To facilitate such a deployment, we provide a script
  <a href="https://github.com/fetchai/agents-aea/blob/main/scripts/acn/run_acn_node_standalone.py" target="_blank"><code>run_acn_node_standalone.py</code></a>
