@@ -4482,7 +4482,77 @@ Below we will discuss the MLI factory interface and then talk about how to use t
 <h2 id="mli-factory-interface">MLI Factory interface</h2>
 <p>The MLI Factory (as the name suggests) is a factory class for creating objects that implement the machine learning 
 interface:
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="err">!</span><span class="o">../</span><span class="n">colearn_grpc</span><span class="o">/</span><span class="n">mli_factory_interface</span><span class="o">.</span><span class="n">py</span><span class="err">!</span><span class="p">}</span> 
+<div class="highlight"><pre><span></span><code><span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1">#</span>
+<span class="c1">#   Copyright 2021 Fetch.AI Limited</span>
+<span class="c1">#</span>
+<span class="c1">#   Licensed under the Creative Commons Attribution-NonCommercial International</span>
+<span class="c1">#   License, Version 4.0 (the &quot;License&quot;); you may not use this file except in</span>
+<span class="c1">#   compliance with the License. You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#       http://creativecommons.org/licenses/by-nc/4.0/legalcode</span>
+<span class="c1">#</span>
+<span class="c1">#   Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#   See the License for the specific language governing permissions and</span>
+<span class="c1">#   limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">colearn.ml_interface</span> <span class="kn">import</span> <span class="n">MachineLearningInterface</span>
+
+
+<span class="k">class</span> <span class="nc">MliFactory</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface a class must implement to be used as a factory by the GRPC Server</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the models this factory produces.</span>
+<span class="sd">        The key is the name of the model and the values are their default parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_dataloaders</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the dataloaders this factory produces.</span>
+<span class="sd">        The key is the name of the dataloader and the values are their default parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_compatibilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A model is compatible with a dataloader if they can be used together to</span>
+<span class="sd">        construct a MachineLearningInterface with the get_MLI function.</span>
+
+<span class="sd">        Returns a dictionary that defines which model is compatible</span>
+<span class="sd">        with which dataloader.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_mli</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_params</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">dataloader_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_params</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MachineLearningInterface</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param model_name: name of a model, must be in the set return by get_models</span>
+<span class="sd">        @param model_params: user defined parameters for the model</span>
+<span class="sd">        @param dataloader_name: name of a dataloader to be used:</span>
+<span class="sd">            - must be in the set returned by get_dataloaders</span>
+<span class="sd">            - must be compatible with model_name as defined by get_compatibilities</span>
+<span class="sd">        @param dataset_params: user defined parameters for the dataset</span>
+<span class="sd">        @return: Instance of MachineLearningInterface</span>
+<span class="sd">        Constructs an object that implements MachineLearningInterface whose</span>
+<span class="sd">        underlying model is model_name and dataset is loaded by dataloader_name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span> 
 </code></pre></div>
 The MLI Factory stores the constructors for dataloaders and models and also a list of the dataloaders that 
 are compatible with each model.
