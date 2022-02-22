@@ -4442,30 +4442,21 @@
 # equal to 2 hours, instead of the standard 2 days (in nanoseconds).
 
 {
-  &quot;title&quot;: &quot;Deposit Value Proposal&quot;,
-  &quot;description&quot;: &quot;Update min proposal threshold and deposit period&quot;,
+  &quot;title&quot;: &quot;Staking Param Change&quot;,
+  &quot;description&quot;: &quot;Update max validators&quot;,
   &quot;changes&quot;: [
     {
-      &quot;subspace&quot;: &quot;deposit_params&quot;,
-      &quot;key&quot;: &quot;min_deposit&quot;,
-      &quot;value&quot;: [
-        {
-          &quot;denom&quot;:&quot;stake&quot;,
-          &quot;amount&quot;:&quot;1000&quot;
-        }
-      ]
-    },
-    {
-      &quot;subspace&quot;: &quot;deposit_params&quot;,
-      &quot;key&quot;: &quot;max_deposit_period&quot;,
-      &quot;value&quot;: &quot;7200000000000&quot;
+      &quot;subspace&quot;: &quot;staking&quot;,
+      &quot;key&quot;: &quot;MaxValidators&quot;,
+      &quot;value&quot;: 105
     }
-  ]
+  ],
+  &quot;deposit&quot;: &quot;1000000000000000000atestfet&quot;
 }
 </code></pre></div>
 <div class="highlight"><pre><span></span><code># Create initial proposal by uploading the JSON file
 # this is signed by a key &#39;proposer&#39; that provides a portion of the current threshold deposit
-fetchd tx gov submit-proposal --proposal ~/json_path/proposal.json --deposit &lt;deposit_value&gt; --from proposer
+fetchd tx gov submit-proposal --proposal ~/json_path/proposal.json --from proposer
 
 # In order to later refer to this proposal, the proposal_id can be determined
 fetchd query gov proposals
@@ -4473,7 +4464,10 @@ fetchd query gov proposals
 <h3 id="proposal-deposit-phase">Proposal deposit phase</h3>
 <p>The characteristics of the deposit phase are described by a set of network governance parameters, where the deposit period is two days from the initial proposal deposit until expiration, and a minimum threshold of 10000000denom as default. The minimum threshold must be met during this deposit period in order to proceed to the voting phase. The proposer may provide all of this threshold, or just some. In which case, supporters of the proposal may donate additional funding towards the goal of meeting the threshold.</p>
 <p>At any point of the deposit stage, the deposit pot can be queried.</p>
-<div class="highlight"><pre><span></span><code># This command returns a text representation of the current total deposit value of a proposal
+<div class="highlight"><pre><span></span><code># To get the proposal ID, use the txhash obtained when the proposal was submitted and run the following command:
+fetchd query tx &lt;txhash&gt;
+
+# This command returns a text representation of the current total deposit value of a proposal
 fetchd query gov deposits &lt;proposal_id&gt;
 
 # Other users may contribute to funding the proposal using
