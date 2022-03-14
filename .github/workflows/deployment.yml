@@ -1,0 +1,53 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Docs Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
+
+      - name: Use python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install Dependencies
+        run: pip3 install pipenv && pipenv install
+
+      - name: Build
+        run: pipenv run mkdocs build
+
+      - name: Deploy
+        run: pipenv run mkdocs gh-deploy
+
+  custom_dns:
+    name: Correct DNS
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'gh-pages'
+          fetch-depth: 0
+
+      - run: |
+          echo "docs.fetch.ai" > CNAME
+          git add CNAME
+          git config --global user.name "Fetch Bot"
+          git config --global user.email "fetchbot@fetch.ai"
+          git commit -m "Add CNAME configuration"
+          git remote -v
+          git push origin gh-pages
+
+
+
