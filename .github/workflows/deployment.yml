@@ -31,4 +31,23 @@ jobs:
       - name: Deploy
         run: pipenv run mkdocs gh-deploy
 
+  custom_dns:
+    name: Correct DNS
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'gh-pages'
+          fetch-depth: 0
+
+      - run: |
+          echo "docs.fetch.ai" > CNAME
+          git add CNAME
+          git commit -m "Add CNAME configuration"
+          git remote -v
+          git push origin gh-pages
+
+
 
