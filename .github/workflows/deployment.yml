@@ -1,0 +1,33 @@
+name: Deployment
+
+on:
+  pull_request:
+    branches:
+      - feature/automatic-deployment
+    # paths:
+    #   - 'docs/**'
+
+jobs:
+  build:
+    name: Docs Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: cd docs && pip3 install pipenv && pipenv install
+
+      - name: Build
+        run: cd docs && pipenv run mkdocs build
+
+      - name: Deploy
+        run: cd docs && pipenv run mkdocs gh-deploy
+
+
