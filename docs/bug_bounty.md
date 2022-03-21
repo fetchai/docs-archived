@@ -1,6 +1,6 @@
 # Fetch Bug Bounty Program
 
-The Fetch bounty program provides incentives for developers and security experts to report vulnerabilities in the Fetch ecosystem. The Fetch team has undertaken risk mitigation measures to limit the potential impacts of bugs or intentional misuse of the software and to ensure that all software has been internally audited and thoroughly tested. In addition to the implemented safety measures, we are offering a  bug bounty  for the core components of the Fetch ecosystem as outlined under the 'Scope of the bug bounty program' section below. The bug bounty program ensures that the software lives up to the highest standards possible and to make sure that the risk of users losing funds is at a minimum.
+The Fetch bounty program provides incentives for developers and security experts to report vulnerabilities in the Fetch ecosystem. The Fetch team has undertaken risk mitigation measures to limit the potential impacts of bugs or intentional misuse of the software and to ensure that all software has been internally audited and thoroughly tested. In addition to the implemented safety measures, we are offering a bug bounty for the core components of the Fetch ecosystem as outlined under the 'Scope of the bug bounty program' section below. The bug bounty program ensures that the software lives up to the highest standards possible and to make sure that the risk of users losing funds is at a minimum.
 
 ## Scope of the bug bounty program
 
@@ -10,7 +10,7 @@ The scope of the bounty program extends to:
 - Browser Extension Wallet: <https://github.com/fetchai/keplr-extension>
 - The Block explorer: <https://github.com/fetchai/cosmos-explorer>
 - Documentation:: <https://github.com/fetchai/docs>
-- cosmpy: <https://github.com/fetchai/cosmpy>
+- CosmPy: <https://github.com/fetchai/cosmpy>
 - AEA Framework, including the ACN and packages authored by Fetchai: <https://github.com/fetchai/agents-aea> and <https://pypi.org/project/aea>
 - AEA Manager Website: <https://github.com/fetchai/agents-manager-app-site>
 
@@ -18,7 +18,7 @@ The scope of the bounty program extends to:
 
 ### Tier-1 / Critical Bugs (awards up to 20,000 FET tokens)
 
-Critical Bugs that result in loss of funds or lead to a lack of availability of the network. This may be as a result of  vulnerabilities found in the deployed and supported versions of the blockchain client, smart contracts or any of the other software included within the section - ‘Scope of the bug bounty program’.
+Critical Bugs that result in loss of funds or lead to a lack of availability of the network. This may be as a result of vulnerabilities found in the deployed and supported versions of the blockchain client, smart contracts or any of the other software included within the section - ‘Scope of the bug bounty program’.
 
 ### Tier-2 / Non-critical Bugs (awards up to 10,000 FET tokens)
 
