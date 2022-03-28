@@ -4467,7 +4467,7 @@ fetchd keys add &lt;multisig_key_name&gt; --multisig &lt;list_of_key_names&gt; -
 </code></pre></div>
 <h3 id="example-instantiation-of-a-multisig-key">Example instantiation of a multisig key</h3>
 <p>This example represents a shared multisig key that could be used within a business amongst three account holders - where at least two of three (K=2) must sign off on each transaction.</p>
-<div class="highlight"><pre><span></span><code># Create the three keys owned by the separate account holders
+<p><div class="highlight"><pre><span></span><code># Create the three keys owned by the separate account holders
 fetchd keys add fred
 fetchd keys add ted
 fetchd keys add ned 
@@ -4475,10 +4475,13 @@ fetchd keys add ned
 # Create the multisig key from keys above
 fetchd keys add business_key --multisig fred,ted,ned --multisig-threshold 2
 </code></pre></div>
+You will need the address of the business_key later in the example. Here just a reminder how to get it:</p>
+<div class="highlight"><pre><span></span><code>fetchd keys show -a business_key
+</code></pre></div>
 <h2 id="signing-and-broadcasting-multisig-transactions">Signing and broadcasting multisig transactions</h2>
 <p>Transactions must be signed and broadcast before they are carried out.</p>
-<p>In order to sign a multisig transaction, the transaction itself must not be immediately broadcast; but instead, the keyholders must each sign until a the minimum threshold K signatures are present.</p>
-<p><em>For this example we will be representing the transaction on the <a href="https://explore-stargateworld.fetch.ai/">Stargate</a> network and will therefore will be using <code>atestfet</code> as the denomination - this should be changed relative to the currency used on the relevant network</em></p>
+<p>In order to sign a multisig transaction, the transaction itself must not be immediately broadcast; but instead, the keyholders must each sign until a minimum threshold K signatures are present.</p>
+<p><em>For this example we will be performing the transaction on the <a href="https://explore-stargateworld.fetch.ai/">Stargate</a> network and therefore will be using <code>atestfet</code> as the denomination (this should be changed depending on the actual currency and network used).</em></p>
 <h3 id="multisig-transaction-example">Multisig transaction example</h3>
 <p><div class="highlight"><pre><span></span><code># Create a key to represent a vendor that the business must pay
 fetchd keys add vendor
@@ -4487,12 +4490,15 @@ fetchd keys add vendor
 # the keyholders, &#39;ted&#39; and &#39;fred&#39; in this example
 fetchd tx bank send &lt;business_key address&gt; &lt;vendor address&gt; 1000atestfet --generate-only &gt; transfer.json
 
+# you&#39;ll get &quot;account &lt;address of business_key&gt; not found&quot; error for missing funds 
+# add funds to &lt;address of business_key&gt; using block explorer
+
 # This transaction file (transfer.json) is then made available for
 # the first keyholder to sign, &#39;fred&#39;
-fetchd tx sign transfer.json --chain-id stargateworld-1 --from fred --multisig &lt;address of business_key&gt; &gt; transfer_fredsigned.json
+fetchd tx sign transfer.json --chain-id capricorn-1 --from fred --multisig &lt;address of business_key&gt; &gt; transfer_fredsigned.json
 
 # This is repeated for &#39;ted&#39;
-fetchd tx sign transfer.json --chain-id stargateworld-1 --from ted --multisig &lt;address of business_key&gt; &gt; transfer_tedsigned.json
+fetchd tx sign transfer.json --chain-id capricorn-1 --from ted --multisig &lt;address of business_key&gt; &gt; transfer_tedsigned.json
 
 # These two files are then collated together and used as inputs to the
 # multisign command to create a fully signed transaction
