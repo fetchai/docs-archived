@@ -6,9 +6,9 @@
 generate-docs:
 	mkdocs build
 
-################################
+###############################
 ### Clean and init commands
-################################
+###############################
 
 .PHONY: clean
 clean: clean-build clean-pyc clean-test
