@@ -38,6 +38,7 @@ Decentralised systems are useful because they are open and democratic, more tran
 
 ## Positive characteristics
 There are 4 key positive characteristics of decentralized systems:
+
 * **Democratic** Decentralized systems require participation in order to successfully function, and therefore they are intrinsically democratic systems.
 * **Open**
 Participants can freely join or leave as they wish,. The system is open to new participants and does not stop existing ones leaving.
@@ -57,6 +58,7 @@ Also it takes more engineering to create the decentralised architecture for a sy
 For example a company payroll system would not make sense to decentralize as you want central authority over it and need a system that is simple to manage and quick to operate.
 
 Some of the limitations of decentralised systems:
+
 * **Speed**: Decentralized systems are often slower than centralized systems, as there is no single authority with an interest in making the system as fast as possible and individual participants may not have the incentive to prioritize overall speed of the system. 
 * **Efficiency**: Decision making about the system requires participation, which makes it far slower to make changes to the system as it takes time for participants to agree to changes.
 * **Control**: As control is shared by participants, controlling and managing the system is more complicated and slower.
