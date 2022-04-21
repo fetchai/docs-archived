@@ -8,7 +8,7 @@ Fetch.ai is an ecosystem built to bring value to data, by connecting devices and
 
 ### Joining our networks
 
-Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2
+Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
 
 ### Here to build agents?
 
