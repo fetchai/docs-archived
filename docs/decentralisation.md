@@ -32,20 +32,21 @@ Some examples of centralized systems:
 * Expedia: Hotel owners and people looking for hotel rooms connect to each other through Expedia, rather than communicating and transacting directly together.
 * Messaging services such as WhatsApp: People communicate with each other through a centrally controlled and owned messaging service.
 * Amazon: Buyers and sellers interact commercially through Amazon.
+* Client-server model: Clients interact with each other only through the server, a great example of this is email where communication between two users goes through a server.  
 
 ## Why are decentralized systems useful?
-Decentralised systems are useful because they are open and democratic, more transparent, and thye are run solely in the interests of their participants by their participants.  
+Decentralised systems are useful because they are open and democratic, more transparent, and they are run solely in the interests of their participants by their participants.  
 
 ## Positive characteristics
 There are 4 key positive characteristics of decentralized systems:
 
-* **Democratic** Decentralized systems require participation in order to successfully function, and therefore they are intrinsically democratic systems.
+* **Democratic** Decentralized systems require participation in order to successfully function, and therefore they are naturally democratic systems.
 * **Open**
 Participants can freely join or leave as they wish,. The system is open to new participants and does not stop existing ones leaving.
 * **Public**
 Because decentralized systems are managed and run by their participants (Democratic) and anyone can in principle join the system or leave (Open), these systems tend to be public and their inner workings are not kept confidential.
 * **Transparent**
-In order for the participants of a decentralized system to contribute to its liveliness, they must be aware of how the system works, how it is managed, and so on. Therefore, decentralized systems tend to be quite transparent. 
+In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. Decentralized systems therefore tend to be quite transparent. 
 * **Trust minimisation** The fact that in decentralised systems, participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed and (due to Transparency) this is typically well known.
 
 
@@ -53,13 +54,15 @@ In order for the participants of a decentralized system to contribute to its liv
 ## Limitations
 The main limitations of decentralized systems are speed/efficiency and simplicity. A decentralized version of a centralized system is almost always less efficient at achieving the same result (exactly because there is not a single decision maker, rather a collection of decision makers). 
 
-Also it takes more engineering to create the decentralised architecture for a system compared to a centralised one. 
+Compared with a centralized system, decentralized architechture is more complex and therefore it takes more engineering to  create the decentralised architecture for a system compared to a centralised one, with its associated cost and time implications.
 
 For example a company payroll system would not make sense to decentralize as you want central authority over it and need a system that is simple to manage and quick to operate.
 
 Some of the limitations of decentralised systems:
 
-* **Speed**: Decentralized systems are often slower than centralized systems, as there is no single authority with an interest in making the system as fast as possible and individual participants may not have the incentive to prioritize overall speed of the system. 
-* **Efficiency**: Decision making about the system requires participation, which makes it far slower to make changes to the system as it takes time for participants to agree to changes.
-* **Control**: As control is shared by participants, controlling and managing the system is more complicated and slower.
-* **Simplicity**: It takes more engineering to enable openness and allow a decentralized system to achieve the same result a centralized one achieves with a single authority, via a group of (maybe heterogeneous) nodes. Moreover, providing the same guarantees that a centralized system ensures via the central enforcer, but via a proper mechanism design makes for a far more complicated system design.
+* **Speed**: Decentralized systems are often slower than centralized systems, because there is more than one decision maker, decisions have to be made by consensus in the group and arriving at that consensus takes more time than a single entity making the decision.  
+* **Efficiency**: Decision making about the system requires participation, which makes it far slower to make changes to the system as it takes time for participants to agree to changes. Also because the system is open, so participants can leave/join as they wish, then the system has to be designed to cope with an often changing number of participants. All this added complexity inevitably affects the efficiency of the operation of the system.
+* **Control**: Because a decentralized system is often run collectively by its participants, controlling how the system is managed and the development direction it takes is difficult.
+* **Simplicity**: It is more complex to engineer a decentralized system to enable openness and allow a decentralized system to achieve the same result that a centralized one achieves with a single authority. The system design is more complicated as a mechanism has to be designed that achieves the same result as a central enforcer in a centralized system.
+
+
