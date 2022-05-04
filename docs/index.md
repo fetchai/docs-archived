@@ -1,6 +1,6 @@
 # Welcome to Fetch.ai developer resources
 
-### What is Fetch.ai
+### What is Fetch.ai?
 
 There are billions of devices, processes and pipelines around the world that are desperate for automation and communication. Most blockchains aren't built to handle such a large number of transactions, and none enable their clients to learn from the data generated and exchanged.
 
