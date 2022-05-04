@@ -60,3 +60,208 @@ color: white;
 .black-link{
 	color: black!important;
 }
+
+
+/* Form Styling */
+/* VARIABLES */
+:root {
+	--md-primary-fg-color-dark: #3949a2;
+	--muted-color: #c6c6c6;
+	--trans-time: 300ms;
+	--width: 320px;
+}
+/* Responsive variables */
+@media (max-width: 480px) {
+	:root {
+		--width: 100%
+	}
+}
+
+/* FORM */
+.form-wrapper h1 {
+	font-size: 3em;
+	font-weight: 300;
+	text-align: center;
+	color: var(--md-primary-fg-color);
+}
+.form-wrapper h5 {
+	text-align: center;
+	text-transform: uppercase;
+	color: var(--muted-color);
+}
+.form-wrapper hr.sep {
+	background: var(--md-primary-fg-color);
+	box-shadow: none;
+	border: none;
+	height: 2px;
+	width: 25%;
+	margin: 0px auto 45px auto;
+}
+.form-wrapper .emoji {
+	font-size: 1.2em;
+}
+
+.form-wrapper .group {
+  position: relative;
+  margin: 45px 0;
+}
+
+/* INPUTS */
+.form-wrapper textarea {
+  resize: none;
+}
+
+.form-wrapper input[type="text"],
+.form-wrapper textarea {
+  background: none;
+  color: var(--muted-color);
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: var(--width);
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--muted-color);
+}
+.form-wrapper input[type="text"]:focus,
+.form-wrapper textarea:focus {
+	outline: none;
+}
+.form-wrapper input[type="text"]:focus ~ label.input-label,
+.form-wrapper input[type="text"]:valid ~ label.input-label,
+.form-wrapper textarea:focus ~ label.input-label,
+.form-wrapper textarea:valid ~ label.input-label {
+	top: -14px;
+	font-size: 12px;
+	color: var(--md-primary-fg-color);
+}
+.form-wrapper input[type="text"]:focus ~ .bar:before,
+.form-wrapper textarea:focus ~ .bar:before {
+	width: var(--width);
+}
+
+.form-wrapper label.input-label {
+  color: var(--muted-color);
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: var(--trans-time) ease all;
+}
+
+.form-wrapper .bar {
+  position: relative;
+  display: block;
+  width: var(--width);
+}
+.form-wrapper .bar:before {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 0px;
+	position: absolute;
+	background: var(--md-primary-fg-color);
+	transition: var(--trans-time) ease all;
+	left: 0%;
+}
+
+/* BUTTONS */
+.btn {
+  background: #fff;
+  color: #959595;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+.btn:hover {
+	color: #8b8b8b;
+	box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
+}
+.btn.btn-link {
+	background: var(--md-primary-fg-color);
+	color: #e2e5f4;
+}
+.btn.btn-link:hover {
+	background: var(--md-primary-fg-color-dark);
+	color: #fff;
+}
+
+.btn.btn-submit {
+	background: var(--md-primary-fg-color);
+	color: #e2e5f4;
+}
+.btn.btn-submit:hover {
+	background: var(--md-primary-fg-color-dark);
+	color: #fff;
+}
+
+.btn.btn-cancel {
+	background: #eee;
+}
+.btn.btn-cancel:hover {
+	background: #e1e1e1;
+	color: #8b8b8b;
+}
+
+/* Radio */
+.radio {
+  display: inline-block;
+  position: relative;
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.radio input {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 36px;
+  height: 20px;
+  opacity: 0;
+  z-index: 0;
+}
+.radio label {
+  display: block;
+  padding: 0 0 0 24px;
+  cursor: pointer;
+}
+.radio label:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.54);
+  border-radius: 14px;
+  z-index: 1;
+  transition: border-color var(--trans-time) cubic-bezier(0.4, 0, 0.2, 1);
+}
+.radio label:after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 50%;
+  z-index: 2;
+  transform: scale(0, 0);
+  transition: transform var(--trans-time) cubic-bezier(0.4, 0, 0.2, 1);
+}
+.radio input:checked + label:before {
+  border-color: var(--md-primary-fg-color);
+}
+.radio input:checked + label:after {
+  transform: scale(1, 1);
+}
