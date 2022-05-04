@@ -33,6 +33,13 @@ If you run in `--strict` mode, you will receive warnings about any broken links.
 
 - For docs on the `docs` repo, make changes directly and open a PR against `master` branch of the docs repo. Then deploy.
 
+## Previews and Staging
+
+- Any changes made to a PR will generate an ephemeral preview site on firebase, which will disappear after a couple of days.
+The URL of this temporary site will be added to the PR's conversation.
+
+- Any changes pushed to the `staging` branch will be deployed to the [staging](https://fetch-docs-preview--staging-ulmb7yew.web.app/) website, and will not expire.
+
 ## Deployment
 
 Request the `deploy.sh` script from a maintainer and run it.
