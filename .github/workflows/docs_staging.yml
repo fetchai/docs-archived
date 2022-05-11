@@ -1,13 +1,13 @@
-name: Documentation Preview
+name: Documentation Staging Preview
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
+      - staging
 
 jobs:
   build:
-    name: Docs Ephemerial Build
+    name: Docs Staging Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
           path: site
 
   deploy:
-    name: Docs Ephemerial Deploy
+    name: Docs Staging Deploy
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +50,5 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          expires: 2d
           projectId: fetch-docs-preview
-          # entryPoint: docs/
+          channelId: live
