@@ -55,6 +55,7 @@
         required="required"
       />
       <span class="bar"></span>
+      <span id="emailError"></span>
     </div>
     <div class="group">
       <div class="form-label">
@@ -81,38 +82,53 @@
       <div class="radio-group">
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="dApps" />
-            <label>dApps</label>
+            <input type="radio" name="category" value="dApps" id="dApps" />
+            <label for="dApps">dApps</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="On-chain analytics" />
-            <label>On-chain analytics</label>
+            <input
+              type="radio"
+              name="category"
+              value="On-chain analytics"
+              id="analytics"
+            />
+            <label for="analytics">On-chain analytics</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="Automation" />
-            <label>Automation</label>
+            <input
+              type="radio"
+              name="category"
+              value="Automation"
+              id="automation"
+            />
+            <label for="automation">Automation</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="DeFi" />
-            <label>DeFi</label>
+            <input type="radio" name="category" value="DeFi" id="DeFi" />
+            <label for="DeFi">DeFi</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="Infrastructure" />
-            <label>Infrastructure</label>
+            <input
+              type="radio"
+              name="category"
+              value="Infrastructure"
+              id="infrastructure"
+            />
+            <label for="infrastructure">Infrastructure</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="category" value="NFTs" />
-            <label>NFTs</label>
+            <input type="radio" name="category" value="NFTs" id="nfts" />
+            <label for="nfts">NFTs</label>
           </div>
         </label>
         <label>
@@ -123,7 +139,7 @@
               name="category"
               value="Other"
             />
-            <label>Other:</label>
+            <label for="otherRadioButton">Other:</label>
           </div>
           <div class="extra">
             <input
@@ -145,13 +161,14 @@
         >
         <span class="required-mark">*</span>
       </div>
-      <input
-        type="text"
+      <textarea
         id="projectDescription"
         name="projectDescription"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -159,14 +176,39 @@
         <label>Have you received any funding previously?</label>
         <span class="required-mark">*</span>
       </div>
-      <input
-        type="text"
-        id="receivedFund"
-        name="receivedFund"
-        placeholder="Your answer"
-        required="required"
-      />
-      <span class="bar"></span>
+      <div class="radio-group">
+        <label>
+          <div class="radio">
+            <input
+              type="radio"
+              id="receivedFundOne"
+              name="receivedFund"
+              value="Yes"
+            />
+            <label for="receivedFundOne">Yes:</label>
+          </div>
+          <div class="extra">
+            <input
+              type="text"
+              id="receivedFundOneFieldValue"
+              value=""
+              onkeypress="selectReceivedFundOneRadioButton()"
+            />
+            <span class="bar"></span>
+          </div>
+        </label>
+        <label>
+          <div class="radio">
+            <input
+              type="radio"
+              name="receivedFund"
+              value="No"
+              id="receivedFundTwo"
+            />
+            <label for="receivedFundTwo">No</label>
+          </div>
+        </label>
+      </div>
     </div>
     <div class="group">
       <div class="form-label">
@@ -176,13 +218,14 @@
         >
         <span class="required-mark">*</span>
       </div>
-      <input
-        type="text"
+      <textarea
         id="projectTokenomics"
         name="projectTokenomics"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -190,13 +233,15 @@
         <label>What do you want to achieve through your project?</label>
         <span class="required-mark">*</span>
       </div>
-      <input
+      <textarea
         type="text"
         id="achievementGoal"
         name="achievementGoal"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -204,13 +249,15 @@
         <label>Project development timelines</label>
         <span class="required-mark">*</span>
       </div>
-      <input
+      <textarea
         type="text"
         id="projectTimelines"
         name="projectTimelines"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -218,13 +265,15 @@
         <label>Project Milestones</label>
         <span class="required-mark">*</span>
       </div>
-      <input
+      <textarea
         type="text"
         id="projectMilestones"
         name="projectMilestones"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -234,20 +283,35 @@
       <div class="radio-group">
         <label>
           <div class="radio">
-            <input type="radio" name="projectFunding" value="50000" />
-            <label>Around $50,000</label>
+            <input
+              type="radio"
+              name="projectFunding"
+              value="50000"
+              id="projectFunding1"
+            />
+            <label for="projectFunding1">Less than $50,000</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="projectFunding" value="50000-150000" />
-            <label>Between $50,000 to $150,000</label>
+            <input
+              type="radio"
+              name="projectFunding"
+              value="50000-150000"
+              id="projectFunding2"
+            />
+            <label for="projectFunding2">Between $50,000 to $150,000</label>
           </div>
         </label>
         <label>
           <div class="radio">
-            <input type="radio" name="projectFunding" value="+150000" />
-            <label>More than $150,000</label>
+            <input
+              type="radio"
+              name="projectFunding"
+              value="+150000"
+              id="projectFunding3"
+            />
+            <label for="projectFunding3">More than $150,000</label>
           </div>
         </label>
       </div>
@@ -260,13 +324,15 @@
         >
         <span class="required-mark">*</span>
       </div>
-      <input
+      <textarea
         type="text"
         id="fundingBreakdown"
         name="fundingBreakdown"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -277,13 +343,15 @@
         >
         <span class="required-mark">*</span>
       </div>
-      <input
+      <textarea
         type="text"
         id="additionalAttachments"
         name="additionalAttachments"
         placeholder="Your answer"
         required="required"
-      />
+        cols="5"
+        rows="5"
+      ></textarea>
       <span class="bar"></span>
     </div>
     <div class="group">
@@ -304,7 +372,6 @@
   const contactEmailInput = document.getElementById("contactEmail");
   const projectLinksInput = document.getElementById("projectLinks");
   const projectDescriptionInput = document.getElementById("projectDescription");
-  const receivedFundInput = document.getElementById("receivedFund");
   const projectTokenomicsInput = document.getElementById("projectTokenomics");
   const achievementGoalInput = document.getElementById("achievementGoal");
   const projectTimelinesInput = document.getElementById("projectTimelines");
@@ -313,20 +380,25 @@
   const additionalAttachmentsInput = document.getElementById(
     "additionalAttachments"
   );
+  const emailErrorField = document.getElementById("emailError");
+  const submitButton = document.getElementById("submit_btn");
+  const submitButtonText = submitButton.innerText;
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    const submitButton = document.getElementById("submit_btn");
-    const submitButtonText = submitButton.innerText;
-    submitButton.disabled = true;
-    submitButton.innerHTML = `<svg class="spinner" viewBox="0 0 25 25">
-  <circle class="path" cx="12.5" cy="12.5" r="10" fill="none" stroke-width="2"></circle>
-</svg>`;
-
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData);
     let categoryValue = "";
+    let receivedFundValue = "";
 
     if (formProps.category === "Other") {
       categoryValue = document.getElementById("otherCategoryFieldValue").value;
@@ -334,12 +406,44 @@
       categoryValue = formProps.category;
     }
 
-    fetch("http://localhost:7105/api/docs", {
+    if (formProps.receivedFund === "Yes") {
+      receivedFundValue = document.getElementById(
+        "receivedFundOneFieldValue"
+      ).value;
+    } else {
+      receivedFundValue = formProps.receivedFund;
+    }
+
+    if (formProps.contactEmail.trim() === "") {
+      emailErrorField.innerText = "Email address is required";
+      return;
+    } else {
+      emailErrorField.innerText = "";
+    }
+
+    if (!validateEmail(formProps.contactEmail)) {
+      emailErrorField.innerText = "Please enter a valid email address";
+      return;
+    } else {
+      emailErrorField.innerText = "";
+    }
+
+  
+    submitButton.disabled = true;
+    submitButton.innerHTML = `<svg class="spinner" viewBox="0 0 25 25">
+  <circle class="path" cx="12.5" cy="12.5" r="10" fill="none" stroke-width="2"></circle>
+</svg>`;
+
+    fetch("{{fund_form_api}}/api/docs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...formProps, category: categoryValue }),
+      body: JSON.stringify({
+        ...formProps,
+        category: categoryValue,
+        receivedFund: receivedFundValue,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -362,7 +466,10 @@
     contactEmailInput.value = "";
     projectLinksInput.value = "";
     projectDescriptionInput.value = "";
-    receivedFundInput.value = "";
+     document.querySelector(
+      'input[name="receivedFund"]:checked'
+    ).checked = false;
+    document.getElementById("receivedFundOneFieldValue").value = "";
     projectTokenomicsInput.value = "";
     achievementGoalInput.value = "";
     projectTimelinesInput.value = "";
@@ -378,6 +485,10 @@
 
   function selectCategoryOtherRadioButton() {
     document.getElementById("otherRadioButton").checked = true;
+  }
+
+  function selectReceivedFundOneRadioButton() {
+    document.getElementById("receivedFundOne").checked = true;
   }
 
   function showSnackBar(text = "", variant = "normal") {
