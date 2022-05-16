@@ -1,25 +1,52 @@
-# Welcome to Fetch.ai developer resources
+![Image title](./images/Header.png){ align=left }
+
+#
 
 ### What is Fetch.ai
 
-There are billions of devices, processes and pipelines around the world that are desperate for automation and communication. Most blockchains aren't built to handle such a large number of transactions, and none enable their clients to learn from the data generated and exchanged.
+There are billions of devices, processes and pipelines around the world that are desperate for **automation** and **communication**. Most blockchains aren't built to handle such a large number of transactions, and none enable their clients to learn from the data generated and exchanged.
 
-Fetch.ai is an ecosystem built to bring value to data, by connecting devices and facilitating the creation of new markets based on what they learn from each other. It is where truly autonomous decisions can be made.
-
-### Joining our networks
-
-Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
+Fetch.ai is an **ecosystem** built to bring value to data, by connecting devices and facilitating the **creation of new markets** based on what they learn from each other. It is where truly **autonomous decisions** can be made.
 
 ### Here to build agents?
 
-Speed up the development of Autonomous Economic Agents using our AEA framework.
+Speed up the development of **Autonomous Economic Agents** using our **AEA framework**.
 
-* Learn the [basics](../aea/agent-oriented-development).
-* [Build](../aea/quickstart) your first agent.
-* Once you’ve built your agent, you’ll want to use the SOEF to perform search and discovery to find other agents to trade with.
-    * Learn about the [SOEF](soef/simple-oef) and [how to use it in your agents](../aea/simple-oef-usage).
-    * Learn about how to [trade with other agents](../aea/generic-skills-step-by-step). Proceed to the beginner or advanced guides to learn more.
-    * Learn about the agent framework's [architecture](../aea/diagram).
+<div class="card-button-container">
+    <a class="card-button" href="../aea/agent-oriented-development">
+    <span class="card-button-icon">🔵</span>
+    <span class="card-button-text">Learn the basics</span>
+    </a>
+    <a class="card-button" href="../aea/quickstart">
+    <span class="card-button-icon">🤖</span>
+    <span class="card-button-text">Build your first agent</span>
+    </a>
+</div>
+
+Once you’ve built your agent, you’ll want to use the **SOEF** to perform **search and discovery** to find other **agents to trade with**.
+
+<div class="card-button-container">
+    <a class="card-button" href="soef/simple-oef">
+    <span class="card-button-icon">👀</span>
+    <span class="card-button-text">Learn SOEF</span>
+    </a>
+    <a class="card-button" href="../aea/simple-oef-usage">
+    <span class="card-button-icon">🔎</span>
+    <span class="card-button-text">Using SOEF</span>
+    </a>
+    <a class="card-button" href="../aea/generic-skills-step-by-step">
+    <span class="card-button-icon">📈</span>
+    <span class="card-button-text">Trading with agents</span>
+    </a>
+    <a class="card-button" href="../aea/diagram">
+    <span class="card-button-icon">🏛</span>
+    <span class="card-button-text">Framework Architecture</span>
+    </a>
+</div>
+    
+### Joining our networks
+
+Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
 
 ### Versions and release notes
 
