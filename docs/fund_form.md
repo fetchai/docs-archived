@@ -183,7 +183,7 @@
               type="radio"
               id="receivedFundOne"
               name="receivedFund"
-              value="Yes"
+              value="Yes [provide the source(s)]"
             />
             <label for="receivedFundOne">Yes:</label>
           </div>
