@@ -6005,7 +6005,7 @@ The <code>aea install</code> command installs all dependencies an AEA needs that
 <p>Add another new AEA called <code>ml_model_trainer</code> with public id <code>fetchai/ml_model_trainer:0.29.0</code>.</p>
 </li>
 <li>
-<p>Copy the address from the <code>ml_model_trainer</code> into your clip board. Then go to the <a href="https://explore-stargateworld.fetch.ai" target="_blank">StargateWorld block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
+<p>Copy the address from the <code>ml_model_trainer</code> into your clip board. Then go to the <a href="https://explore-dorado.fetch.ai" target="_blank">Dorado block explorer</a> and request some test tokens via <code>Get Funds</code>.</p>
 </li>
 <li>
 <p>Run the <code>ml_data_provider</code> AEA. Navigate to its logs and copy the multiaddress displayed.</p>
@@ -6036,7 +6036,7 @@ The trainer keeps purchasing data and training its model until stopped.<br />
 <h3 id="demo-instructions_1">Demo instructions</h3>
 <h4 id="create-data-provider-aea">Create data provider AEA</h4>
 <p>First, fetch the data provider AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea fetch fetchai/ml_data_provider:0.31.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea fetch fetchai/ml_data_provider:0.32.0
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> ml_data_provider
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea install
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea build
@@ -6047,19 +6047,19 @@ The trainer keeps purchasing data and training its model until stopped.<br />
 The following steps create the data provider from scratch:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea create ml_data_provider
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> ml_data_provider
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea add connection fetchai/p2p_libp2p:0.25.0
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea add connection fetchai/soef:0.26.0
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>aea add connection fetchai/ledger:0.19.0
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>aea add skill fetchai/ml_data_provider:0.26.0
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea add connection fetchai/p2p_libp2p:0.27.0
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea add connection fetchai/soef:0.27.1
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>aea add connection fetchai/ledger:0.21.0
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>aea add skill fetchai/ml_data_provider:0.27.1
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.0
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s1">&#39;{</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.1&quot;: &quot;fetchai/ledger:0.21.0&quot;,</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.1&quot;: &quot;fetchai/soef:0.27.1&quot;</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s1">}&#39;</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>aea install
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>aea build
@@ -6070,7 +6070,7 @@ The following steps create the data provider from scratch:
 
 <h4 id="create-model-trainer-aea">Create model trainer AEA</h4>
 <p>Then, fetch the model trainer AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea fetch fetchai/ml_model_trainer:0.32.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea fetch fetchai/ml_model_trainer:0.33.0
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> ml_model_trainer
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea install
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea build
@@ -6081,19 +6081,19 @@ The following steps create the data provider from scratch:
 The following steps create the model trainer from scratch:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea create ml_model_trainer
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span> ml_model_trainer
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>aea add connection fetchai/p2p_libp2p:0.25.0
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>aea add connection fetchai/soef:0.26.0
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>aea add connection fetchai/ledger:0.19.0
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>aea add skill fetchai/ml_train:0.28.0
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>aea add connection fetchai/p2p_libp2p:0.27.0
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>aea add connection fetchai/soef:0.27.1
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>aea add connection fetchai/ledger:0.21.0
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>aea add skill fetchai/ml_train:0.29.1
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.25.0
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.0
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="s1">&#39;{</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.0.0&quot;: &quot;fetchai/ledger:0.19.0&quot;,</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s1">  &quot;fetchai/oef_search:1.0.0&quot;: &quot;fetchai/soef:0.26.0&quot;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.1&quot;: &quot;fetchai/ledger:0.21.0&quot;,</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.1&quot;: &quot;fetchai/soef:0.27.1&quot;</span>
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s1">}&#39;</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>aea install
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>aea build
@@ -6104,7 +6104,7 @@ The following steps create the model trainer from scratch:
 </details>
 
 <h4 id="add-keys-for-the-data-provider-aea">Add keys for the data provider AEA</h4>
-<p>First, create the private key for the data provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
+<p>First, create the private key for the data provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea generate-key fetchai
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
@@ -6117,11 +6117,11 @@ The following steps create the model trainer from scratch:
 </code></pre></div></p>
 <h4 id="add-keys-and-generate-wealth-for-the-model-trainer-aea">Add keys and generate wealth for the model trainer AEA</h4>
 <p>The model trainer needs to have some wealth to purchase the data from the data provider.</p>
-<p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>StargateWorld</code> use:
+<p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea generate-key fetchai
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>aea add-key fetchai fetchai_private_key.txt
 </code></pre></div></p>
-<p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>StargateWorld</code> network:
+<p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>Dorado</code> network:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea generate-wealth fetchai
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
@@ -6136,13 +6136,13 @@ The following steps create the model trainer from scratch:
 <p>First, run the data provider AEA:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.25.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.0 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the ML data provider.</p>
 <!--
 Then, in the model trainer, update the configuration of the model trainer AEA's p2p connection by appending the following YAML text at the end of the `aea-config.yaml` file:
 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nn">---</span><span class="w"></span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">public_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.25.0</span><span class="w"></span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">public_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.27.0</span><span class="w"></span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection</span><span class="w"></span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nt">config</span><span class="p">:</span><span class="w"></span>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">delegate_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span><span class="w"></span>
