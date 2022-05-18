@@ -25,7 +25,7 @@ Speed up the development of **Autonomous Economic Agents** using our **AEA frame
 
 Once you’ve built your agent, you’ll want to use the **SOEF** to perform **search and discovery** to find other **agents to trade with**.
 
-<div class="card-button-container">
+<div class="card-button-container four">
     <a class="card-button" href="soef/simple-oef">
     <span class="card-button-icon">👀</span>
     <span class="card-button-text">Learn SOEF</span>
