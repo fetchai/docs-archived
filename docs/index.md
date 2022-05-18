@@ -8,45 +8,20 @@ There are billions of devices, processes and pipelines around the world that are
 
 Fetch.ai is an **ecosystem** built to bring value to data, by connecting devices and facilitating the **creation of new markets** based on what they learn from each other. It is where truly **autonomous decisions** can be made.
 
+### Joining our networks
+
+Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
+
 ### Here to build agents?
 
 Speed up the development of **Autonomous Economic Agents** using our **AEA framework**.
 
-<div class="card-button-container">
-    <a class="card-button" href="../aea/agent-oriented-development">
-    <span class="card-button-icon">🔵</span>
-    <span class="card-button-text">Learn the basics</span>
-    </a>
-    <a class="card-button" href="../aea/quickstart">
-    <span class="card-button-icon">🤖</span>
-    <span class="card-button-text">Build your first agent</span>
-    </a>
-</div>
-
-Once you’ve built your agent, you’ll want to use the **SOEF** to perform **search and discovery** to find other **agents to trade with**.
-
-<div class="card-button-container four">
-    <a class="card-button" href="soef/simple-oef">
-    <span class="card-button-icon">👀</span>
-    <span class="card-button-text">Learn SOEF</span>
-    </a>
-    <a class="card-button" href="../aea/simple-oef-usage">
-    <span class="card-button-icon">🔎</span>
-    <span class="card-button-text">Using SOEF</span>
-    </a>
-    <a class="card-button" href="../aea/generic-skills-step-by-step">
-    <span class="card-button-icon">📈</span>
-    <span class="card-button-text">Trading with agents</span>
-    </a>
-    <a class="card-button" href="../aea/diagram">
-    <span class="card-button-icon">🏛</span>
-    <span class="card-button-text">Framework Architecture</span>
-    </a>
-</div>
-    
-### Joining our networks
-
-Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
+* Learn the [basics](../aea/agent-oriented-development)
+* [Build](../aea/quickstart) your first agent
+* Once you’ve built your agent, you’ll want to use the **SOEF** to perform **search and discovery** to find other agents to trade with.
+    * Learn about the [SOEF](../soef/simple-oef) and [how to use it in your agents](../aea/simple-oef-usage)
+    * Learn about to [trade with other agents](../aea/generic-skills-step-by-step). Proceed to the beginner or advanced guides to learn
+    * Learn about the agent framework's [architecture](../aea/diagram)
 
 ### Versions and release notes
 
