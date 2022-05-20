@@ -20,7 +20,7 @@ Speed up the development of **Autonomous Economic Agents** using our **AEA frame
 * [Build](../aea/quickstart) your first agent
 * Once you’ve built your agent, you’ll want to use the **SOEF** to perform **search and discovery** to find other agents to trade with.
     * Learn about the [SOEF](../soef/simple-oef) and [how to use it in your agents](../aea/simple-oef-usage)
-    * Learn about to [trade with other agents](../aea/generic-skills-step-by-step). Proceed to the beginner or advanced guides to learn
+    * Learn how to [trade with other agents](../aea/generic-skills-step-by-step). Proceed to the beginner or advanced guides to learn
     * Learn about the agent framework's [architecture](../aea/diagram)
 
 ### Versions and release notes
