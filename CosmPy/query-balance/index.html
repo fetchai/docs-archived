@@ -19,7 +19,7 @@
     
     
       
-        <title>Query the balance - Developer Documentation</title>
+        <title>Querying balances - Developer Documentation</title>
       
     
     
@@ -80,11 +80,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#querying-balance" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -124,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Query the balance
+              Querying balances
             
           </span>
         </div>
@@ -826,11 +821,9 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Query the balance
+        Querying balances
       </a>
       
     </li>
@@ -949,14 +942,14 @@
       
       
         <label class="md-nav__link" for="__nav_4_3">
-          Advanced (coming soon!)
+          Advanced
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Advanced (coming soon!)" data-md-level="2">
+      <nav class="md-nav" aria-label="Advanced" data-md-level="2">
         <label class="md-nav__title" for="__nav_4_3">
           <span class="md-nav__icon md-icon"></span>
-          Advanced (coming soon!)
+          Advanced
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -966,8 +959,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../governance/" class="md-nav__link">
-        Governance
+      <a href="../low-level-api/" class="md-nav__link">
+        Low-level API
       </a>
     </li>
   
@@ -5640,8 +5633,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -5659,14 +5650,20 @@
 
 
 
-<h1 id="querying-balance">️Querying balance</h1>
-<p>To query the balance of an account using a <a href="../connect-to-network/"><code>LedgerClient</code></a> object <code>ledger_client</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">balance</span> <span class="o">=</span> <span class="n">ledger_client</span><span class="o">.</span><span class="n">query_bank_balance</span><span class="p">(</span><span class="s1">&#39;fetch1h2l3cnu7e23whmd5yrfeunacez9tv0plv5rxqy&#39;</span><span class="p">)</span>
+  <h1>Querying balances</h1>
+
+<p>A  <a href="../connect-to-network/"><code>LedgerClient</code></a> object can be used to query the balances associated with a particular address:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;fetch12q5gw9l9d0yyq2th77x6pjsesczpsly8h5089x&#39;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">balances</span> <span class="o">=</span> <span class="n">ledger_client</span><span class="o">.</span><span class="n">query_bank_all_balances</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
 </code></pre></div>
-<p><code>fetch1h2l3cnu7e23whmd5yrfeunacez9tv0plv5rxqy</code> in the above code is the account's address.</p>
-<p>By default, this will query the fee denomination that is in the network config associated with <code>ledger_client</code>. To explicitly specify the denomination value:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">balance</span> <span class="o">=</span> <span class="n">ledger_client</span><span class="o">.</span><span class="n">query_bank_balance</span><span class="p">(</span><span class="s1">&#39;cosmos1h2l3cnu7e23whmd5yrfeunacez9tv0plv5rxqy&#39;</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="s1">&#39;uatom&#39;</span><span class="p">)</span>
+<p>This will return a <code>List</code> of <code>Coin</code> objects that contain <code>amount</code> and  <code>denom</code> variables that correspond to all of the funds held at the address and their denominations. This list includes all natively defined coins along with any tokens transferred using the inter-blockchain communication (<a href="https://ibcprotocol.org/">IBC</a>) protocol.  </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">balances</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">[</span><span class="n">Coin</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="s1">&#39;29263221445595384075&#39;</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="s1">&#39;afet&#39;</span><span class="p">)]</span>
 </code></pre></div>
+<p>It's also possible to query the funds associated with a particular denomination by calling  </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">balance</span> <span class="o">=</span> <span class="n">ledger_client</span><span class="o">.</span><span class="n">query_bank_balance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="s1">&#39;afet&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>which will return the value of the (integer) funds held by the address with the specified denomination. If the <code>denom</code> argument is omitted the function will return the fee denomination specified in the <code>NetworkConfig</code> object used to initialise the <code>LedgerClient</code>.</p>
 
               
             </article>
