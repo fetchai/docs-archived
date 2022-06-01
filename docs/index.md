@@ -16,7 +16,7 @@ The fetch ecosystem is made up of various tools, frameworks and systems. Select 
 
 You can also jump straight into our Github repos:
 
-- [Ledger (FetchD)](https://github.com/fetchai/fetchd)
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd)
 - [CosmPy](https://github.com/fetchai/cosmpy)
 - [AEA (& ACN)](https://github.com/fetchai/agents-aea)
 - [Fetch Wallet](https://github.com/fetchai/keplr-extension)
@@ -34,9 +34,10 @@ Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fet
 
 ## For general technical questions or discussions
 
-- Visit fetch.ai developer forums:
-  - [Ledger (FetchD)](https://github.com/fetchai/fetchd/discussions)
+Visit fetch.ai developer forums:
+  - [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
   - [CosmPy](https://github.com/fetchai/cosmpy/discussions)
   - [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
   - [Wallet](https://github.com/fetchai/keplr-extension/discussions)
-- Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI)
+
+Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI)
