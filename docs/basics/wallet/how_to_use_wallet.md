@@ -60,16 +60,24 @@ Then click on "Settings"._
 ![Enable IBC tramsfer](../../images/enable_IBC_transfer.jpg)
 
 Ensure that the desired origin network is selected on the dashboard (top-center).
-If the origin network supports IBC, an "IBC Transfer" section will be visible towards the bottom of the dashboard.\
+If the origin network supports IBC, an "IBC Transfer" section will be visible towards the bottom of the dashboard.
 
 ![IBC tramsfer enabled](../../images/IBC_transfer_enabled.jpg)
 
 Click the "Transfer" button in the "IBC Transfer" section.
 
-Enter the recipient's address.
-Select the type of token to send.
-Enter the amount to send.
-Click "send".
+Enter your mainnet destination chain address in the Recipient field, a MEMO (Optional), and click on Next to proceed.
+
+![IBC tramsfer details](../../images/IBC_transfer_details.jpg)
+
+Now enter the number of token you’d like to send to destination chain on the Amount field, select the preferred transaction fee then click Submit.
+I suggest using Average or High fees at this time.
+
+![IBC tramsfer amount details](../../images/IBC_transfer_amount.jpg)
+
+On the transaction confirmation page, you can review the details of your transaction. Click on [Approve] to confirm.
+
+![IBC tramsfer approve](../../images/IBC_transfer_approve.jpg)
 
 ### ⚛️ Congratulations & Welcome to the IBC Gang! ⚛️
 
