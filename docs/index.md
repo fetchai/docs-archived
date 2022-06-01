@@ -1,9 +1,9 @@
-# WELCOME TO FETCH.AI ECOSYSTEM
+# Welcome to Fetch.ai ecosystem
 
-## What is fetch.ai?
 
 ![what is fetch.ai](./images/fetchai.png)
 
+## What is fetch.ai?
 Our mission is to build the infrastructure required for developing modern decentralized & peer-to-peer (P2P) applications that are free from centralized rent-seeking.
 
 We achieve this by providing open-source software tools that can be used with our interoperable Fetch decentralized network. Using these tools and the Fetch.ai blockchain network, you can harness the power of AI and automation to carry out complex coordination in the digital economy.
@@ -12,7 +12,51 @@ We achieve this by providing open-source software tools that can be used with ou
 
 The fetch ecosystem is made up of various tools, frameworks and systems. Select any of them below to jump right in:
 
-![Fetch.ai Tools](./images/fetchai_tools.png)
+<div id="diagram-container">
+    <div class="diagram-row">
+        <p class="diagram-label">User facing tools</p>
+        <div class="diagram-row-container">
+            <a href="/soef/simple-oef" class="diagram-item"><div>AEA Registry</div></a>
+            <a href="/aea/multi-agent-manager/" class="diagram-item"><div>AEA Manager</div></a>
+            <a href="getting-started/how-to-use-browser-wallet" class="diagram-item"><div>Fetch Wallet</div></a>
+            <a href="/ledger_v2/block-explorer" class="diagram-item"><div>Explorer</div></a>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">Tools that use the chain</p>
+        <div class="diagram-row-container">
+            <div class="diagram-item">
+            <a href="/aea" >
+                AEA</br/>Framework
+                <a href="/aea/acn" class="diagram-item-child">
+                    <div>ACN</div>
+                </a>
+            </a>
+            </div>
+            <div class="diagram-item upcoming-feature">Upcoming feature</div>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">Tools to directly interact with the chain</p>
+        <div class="diagram-row-container">
+            <a href="/CosmPy" class="diagram-item">CosmPy</a>
+            <div class="diagram-item upcoming-feature">Upcoming feature</div>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">The chain</p>
+        <div class="diagram-row-container">
+            <div class="diagram-item">
+            <a href="/ledger_v2">
+                Ledger
+                <a class="diagram-item-child-disabled">
+                    <div>Cosmwasm</div>
+                </a>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 You can also jump straight into our Github repos:
 
@@ -35,9 +79,10 @@ Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fet
 ## For general technical questions or discussions
 
 Visit fetch.ai developer forums:
-  - [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
-  - [CosmPy](https://github.com/fetchai/cosmpy/discussions)
-  - [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
-  - [Wallet](https://github.com/fetchai/keplr-extension/discussions)
+
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
+- [CosmPy](https://github.com/fetchai/cosmpy/discussions)
+- [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
+- [Wallet](https://github.com/fetchai/keplr-extension/discussions)
 
 Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI)
