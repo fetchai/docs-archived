@@ -1,14 +1,15 @@
 # Welcome to Fetch.ai ecosystem
 
 <div id="header-image-div"><img id="header-image" src="./images/fetchai.png" alt="interconnected systems such as parking, cloud, robots, and data"></div>
+
 ## What is fetch.ai?
-Our mission is to build the infrastructure required for developing modern decentralized & peer-to-peer (P2P) applications that are free from centralized rent-seeking.
+Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking. 
 
-We achieve this by providing open-source software tools that can be used with our interoperable Fetch decentralized network. Using these tools and the Fetch.ai blockchain network, you can harness the power of AI and automation to carry out complex coordination in the digital economy.
+We achieve this by providing open-source software tools which you can use together with our interoperable decentralized network, to harness the power of AI and automation, and carry out complex tasks in the _digital economy_.
 
-## Get started with Fetch.ai and build your decentralized apps
+## Get started
 
-The fetch ecosystem is made up of various tools, frameworks and systems. Select any of them below to jump right in:
+The fetch ecosystem is made up of various tools and frameworks that help you build and jump-start your very own decentralized applications. Select one below to dive right in!
 
 <div id="diagram-container">
     <div class="diagram-row">
@@ -31,14 +32,14 @@ The fetch ecosystem is made up of various tools, frameworks and systems. Select 
                 </a>
             </a>
             </div>
-            <div class="diagram-item upcoming-feature">Upcoming feature</div>
+            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
         </div>
     </div>
     <div class="diagram-row">
         <p class="diagram-label">Tools to directly interact with the chain</p>
         <div class="diagram-row-container">
             <a href="/CosmPy" class="diagram-item">CosmPy</a>
-            <div class="diagram-item upcoming-feature">Upcoming feature</div>
+            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
         </div>
     </div>
     <div class="diagram-row">
@@ -56,16 +57,16 @@ The fetch ecosystem is made up of various tools, frameworks and systems. Select 
     </div>
 </div>
 
-You can also jump straight into our Github repos:
+You can also jump straight into our GitHub repos:
 
 - [Ledger (fetchd)](https://github.com/fetchai/fetchd)
 - [CosmPy](https://github.com/fetchai/cosmpy)
-- [AEA (& ACN)](https://github.com/fetchai/agents-aea)
+- [AEA Framework (& ACN)](https://github.com/fetchai/agents-aea)
 - [Fetch Wallet](https://github.com/fetchai/keplr-extension)
 
-## For Help & Support
+## Help & Support
 
-If you want to report a bug or request a feature on one of our public projects:
+If you want to report a bug or request a feature:
 
 - [Ledger (fetchd)](https://github.com/fetchai/fetchd/issues/new/choose)
 - [Cosmpy](https://github.com/fetchai/cosmpy/issues/new/choose)
@@ -74,7 +75,7 @@ If you want to report a bug or request a feature on one of our public projects:
 
 Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fetch.ai/bug_bounty/).
 
-## For general technical questions or discussions
+## Questions & General Discussions  
 
 Visit fetch.ai developer forums:
 
@@ -83,4 +84,4 @@ Visit fetch.ai developer forums:
 - [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
 - [Wallet](https://github.com/fetchai/keplr-extension/discussions)
 
-Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI)
+Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI).
