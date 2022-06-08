@@ -3,19 +3,25 @@
 <a href="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests">
 <img alt="Docs sanity checks and tests" src="https://github.com/fetchai/docs/workflows/Docs%20sanity%20checks%20and%20tests/badge.svg?branch=master"></a>
 
-### Cloning
+### Clone
 
 This repository contains submodules. Clone with recursive strategy:
 
     git clone https://github.com/fetchai/docs.git --recursive && cd docs
 
-## Updating submodules
+### Retrieve submodules
 
-Ensure you have the latest submodules by running:
+Ensure you retrieve all the submodules by running:
 
     git submodule update --init --recursive
 
-## Instructions for building the documentation locally
+### Update submodules
+
+To update all your submodules to the latest versions of the main branch in their respective remote repos: 
+
+    git submodule update --remote
+
+## To build the documentation locally
 
 To compile and build the documentation site locally, download and install pipenv. Instructions are <a href="https://github.com/pypa/pipenv#installation" target=_blank>here</a>.
 
@@ -29,9 +35,9 @@ If you run in `--strict` mode, you will receive warnings about any broken links.
 
 ## Making changes
 
-- For docs in submodules (i.e. `aea`) open a PR against the relevant repo (`develop` branch) and wait until the changes hit `master`. Then deploy.
+- For docs in submodules (e.g. `aea`) open a PR against the relevant repo (`develop` branch) and wait until the changes hit `master`. Then in this repo, open a PR containing an update to the aea submodule (see [update submodule](#update-submodules) above).
 
-- For docs on the `docs` repo, make changes directly and open a PR against `master` branch of the docs repo. Then deploy.
+- For docs on the `docs` repo, make changes directly and open a PR against `master` branch of the docs repo.
 
 ## Previews and Staging
 

@@ -1,28 +1,87 @@
-# Welcome to Fetch.ai developer resources
+# Welcome to Fetch.ai ecosystem
 
-### What is Fetch.ai
+<div id="header-image-div"><img id="header-image" src="./images/fetchai.png" alt="interconnected systems such as parking, cloud, robots, and data"></div>
 
-There are billions of devices, processes and pipelines around the world that are desperate for automation and communication. Most blockchains aren't built to handle such a large number of transactions, and none enable their clients to learn from the data generated and exchanged.
+## What is fetch.ai?
+Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking. 
 
-Fetch.ai is an ecosystem built to bring value to data, by connecting devices and facilitating the creation of new markets based on what they learn from each other. It is where truly autonomous decisions can be made.
+We achieve this by providing open-source software tools which you can use together with our interoperable decentralized network, to harness the power of AI and automation, and carry out complex tasks in the _digital economy_.
 
-### Joining our networks
+## Get started
 
-Learn how to use our [ledger technologies](../ledger_v2) to join our mainnet v2.
+The fetch ecosystem is made up of various tools and frameworks that help you build and jump-start your very own decentralized applications. Select one below to dive right in!
 
-### Here to build agents?
+<div id="diagram-container">
+    <div class="diagram-row">
+        <p class="diagram-label">User facing tools</p>
+        <div class="diagram-row-container">
+            <a href="/soef/simple-oef" class="diagram-item"><div>AEA Registry</div></a>
+            <a href="/aea/multi-agent-manager/" class="diagram-item"><div>AEA Manager</div></a>
+            <a href="getting-started/how-to-use-browser-wallet" class="diagram-item"><div>Fetch Wallet</div></a>
+            <a href="/ledger_v2/block-explorer" class="diagram-item"><div>Explorer</div></a>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">Tools that use the chain</p>
+        <div class="diagram-row-container">
+            <div class="diagram-item">
+            <a href="/aea" >
+                AEA</br/>Framework
+                <a href="/aea/acn" class="diagram-item-child">
+                    <div>ACN</div>
+                </a>
+            </a>
+            </div>
+            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">Tools to directly interact with the chain</p>
+        <div class="diagram-row-container">
+            <a href="/CosmPy" class="diagram-item">CosmPy</a>
+            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
+        </div>
+    </div>
+    <div class="diagram-row">
+        <p class="diagram-label">The chain</p>
+        <div class="diagram-row-container">
+            <div class="diagram-item">
+            <a href="/ledger_v2">
+                Ledger
+                <a class="diagram-item-child-disabled">
+                    <div>Cosmwasm</div>
+                </a>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
 
-Speed up the development of Autonomous Economic Agents using our AEA framework.
+You can also jump straight into our GitHub repos:
 
-* Learn the [basics](../aea/agent-oriented-development).
-* [Build](../aea/quickstart) your first agent.
-* Once you’ve built your agent, you’ll want to use the SOEF to perform search and discovery to find other agents to trade with.
-    * Learn about the [SOEF](soef/simple-oef) and [how to use it in your agents](../aea/simple-oef-usage).
-    * Learn about how to [trade with other agents](../aea/generic-skills-step-by-step). Proceed to the beginner or advanced guides to learn more.
-    * Learn about the agent framework's [architecture](../aea/diagram).
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd)
+- [CosmPy](https://github.com/fetchai/cosmpy)
+- [AEA Framework (& ACN)](https://github.com/fetchai/agents-aea)
+- [Fetch Wallet](https://github.com/fetchai/keplr-extension)
 
-### Versions and release notes
+## Help & Support
 
-As with any software and its documentation, things do change and evolve. We at Fetch.ai try to support backwards compatibility as much as possible, but deprecations will occur. Keep an eye our release notes, as these list all major changes.
+If you want to report a bug or request a feature:
 
-Upgrading from a previous version of the agent framework? Here’s our [helpful guide](../aea/upgrading).
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd/issues/new/choose)
+- [Cosmpy](https://github.com/fetchai/cosmpy/issues/new/choose)
+- [AEA Framework](https://github.com/fetchai/agents-aea/issues/new/choose)
+- [Documentation](https://github.com/fetchai/docs/issues/new/choose)
+
+Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fetch.ai/bug_bounty/).
+
+## Questions & General Discussions  
+
+Visit fetch.ai developer forums:
+
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
+- [CosmPy](https://github.com/fetchai/cosmpy/discussions)
+- [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
+- [Wallet](https://github.com/fetchai/keplr-extension/discussions)
+
+Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI).
