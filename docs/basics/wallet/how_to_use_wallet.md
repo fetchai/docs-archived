@@ -1,83 +1,74 @@
-# How to deposit your Tokens
+## Deposit Tokens
 
-To transfer funds to the active account you will need to copy its address to the sending wallet or application.
+To transfer funds to your account on the Fetch wallet, you need to use its address as the destination account in the wallet or application you are using to send the funds. 
 
-Clicking on the account address towards the top of the dashboard (below the account name) will copy it to the clipboard. This address can be used to send supported tokens using the (native) fetch network.
+This address can be used to send supported tokens using the (native) fetch network.
 
-![Copy active account address](../../images/address_copy.jpg)
+### To copy your account's address
 
-Clicking on the **Deposit** button opens a modal with a QR code which contains the address of the active account.
+1. Either click on the account address at the top of the dashboard (below the account name):
+![Copy active account address](../../images/wallet/address_copy.jpg)
+2. Or select **Deposit** and scan the QR code.
 
-![desposit button](../../images/deposit.jpg)
+Once you send the tokens, the balance should be updated.
 
-![account QR Code](../../images/account_qr.jpg)
+!!! note
+    If your origin wallet says that the address (which should start with "fetch") is invalid, it is probably expecting an ethereum address (beginning with "0x") and is most likely trying to send ERC20 FET. In this case, you need to use the [token bridge](https://token-bridge.fetch.ai/) to swap your ERC20 FET for native FET.
 
-Once you’ve sent your tokens to your active account address, you will visualize the available balance.
+!!! warning
+    You should **not** send ERC20 FET to this wallet. If you do, you will lose your tokens. The Fetch wallet can only hold native FET tokens and not ERC20 FET tokens.
 
-![account available balance](../../images/balance.jpg)
+## Send Tokens
 
-## Troubleshooting
+To send tokens from your account:
 
-If your origin wallet says that the address (which should start with the word "fetch") is invalid, it is probably expecting an ethereum address (beginning with "0x") and is most likely trying to send ERC20 FET.
-In this case, you need to use the [token bridge](https://token-bridge.fetch.ai/) to swap your ERC20 FET for native FET.
+Select **Send**.
 
-# How to send your Tokens
+Fill in the details of your transaction:
 
-From the dashboard, click on the **Send**
+- **Recipient**: the address you want to send the tokens to.
+- **Token**: the token denomination (the default should be ok).
+- **Amount**: the number of tokens you want to send with this transaction (you can see how much funds you have above the Amount).
+- **Memo** (Optional): some transactions (e.g. to/from some exchanges) require need to have a specific memo. If not needed, you can leave it blank.
+- **Fee**: the transaction fee which you can choose from **Low**, **Average** and **High**.
 
-![send button](../../images/send.jpg)
+!!! tip
+    Usually, the lower the transaction fee, the longer you need to wait for your transaction to be settled on the network.
 
-You will visualize multiple fields:
+Press **Send**.
 
-- Recipient: the address you want to send tokens.
-- Token: Select the type of token to send.
-- Amount: the number of tokens you want to send with this transaction
-- Balance: this displays the funds at your disposition
-- Memo (Optional): as you know, transaction to/from exchanges most of the time requires a specific memo. Please check carefully if this is your case. If not, you can leave it white.
-- Fee: you can choose between [Low], [Average] and [High].
+In the summary screen, review the details and if everything is correct, select **Approve**.
 
-Only a few validators admit low fee transactions, so that might translate to a longer waiting time to have the process done.
+!!! tip
+    You can check the status of your transaction via [the explorer](https://explore-fetchhub.fetch.ai).
 
-![token send form](../../images/token_Send_form.jpg)
-
-When all fields are accurately entered, Click sent. 
-
-![token send form filled](../../images/token_send_form_filled.jpg)
-
-A summary screen will now appear.
-If all the information are correct, click **Approve** to complete the operation.
-
-![transaction approve operation](../../images/transaction_approve.jpg)
-
-You can easily check the status of your transaction via explorer.
-
-# IBC transfer
+## IBC transfer
 
 _NOTE: In order to send IBC transactions, the "Show Advanced IBC Transfers" setting must be toggled on.
 To navigate to the settings page from the dashboard, click on the hamburger menu (top-left).
 Then click on "Settings"._
 
-![Enable IBC tramsfer](../../images/enable_IBC_transfer.jpg)
+![Enable IBC tramsfer](../../images/wallet/enable_IBC_transfer.jpg)
 
 Ensure that the desired origin network is selected on the dashboard (top-center).
 If the origin network supports IBC, an "IBC Transfer" section will be visible towards the bottom of the dashboard.
 
-![IBC tramsfer enabled](../../images/IBC_transfer_enabled.jpg)
+![IBC tramsfer enabled](../../images/wallet/IBC_transfer_enabled.jpg)
 
 Click the "Transfer" button in the "IBC Transfer" section.
 
 Enter your mainnet destination chain address in the Recipient field, a MEMO (Optional), and click on Next to proceed.
 
-![IBC tramsfer details](../../images/IBC_transfer_details.jpg)
+![IBC tramsfer details](../../images/wallet/IBC_transfer_details.jpg)
 
 Now enter the number of token you’d like to send to destination chain on the Amount field, select the preferred transaction fee then click Submit.
 I suggest using Average or High fees at this time.
 
-![IBC tramsfer amount details](../../images/IBC_transfer_amount.jpg)
+![IBC tramsfer amount details](../../images/wallet/IBC_transfer_amount.jpg)
 
 On the transaction confirmation page, you can review the details of your transaction. Click on [Approve] to confirm.
 
-![IBC tramsfer approve](../../images/IBC_transfer_approve.jpg)
+![IBC tramsfer approve](../../images/wallet/IBC_transfer_approve.jpg)
 
 ### ⚛️ Congratulations & Welcome to the IBC Gang! ⚛️
 
@@ -94,7 +85,7 @@ Before transferring between any given origin and destination combination for the
 Click the "Select Chain" drop-down.
 Click "+ New IBC Transfer Channel".
 
-![Add IBC channel](../../images/add_IBC_channel.jpg)
+![Add IBC channel](../../images/wallet/add_IBC_channel.jpg)
 
 Select the **destination** chain and enter the **source** channel ID (e.g. "channel-100").
 Click "Save".
