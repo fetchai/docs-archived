@@ -25,12 +25,12 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
         <p class="diagram-label">Tools that use the chain</p>
         <div class="diagram-row-container">
             <div class="diagram-item">
-            <a href="/aea" >
-                AEA</br/>Framework
-                <a href="/aea/acn" class="diagram-item-child">
-                    <div>ACN</div>
+                <a class="item-link" href="/aea" >
+                    AEA</br/>Framework
+                    <a href="/aea/acn" class="diagram-item-child">
+                        <div>ACN</div>
+                    </a>
                 </a>
-            </a>
             </div>
             <div class="diagram-item upcoming-feature">Upcoming Tool</div>
         </div>
@@ -45,13 +45,11 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
     <div class="diagram-row">
         <p class="diagram-label">The chain</p>
         <div class="diagram-row-container">
-            <div class="diagram-item">
-            <a href="/ledger_v2">
-                Ledger
-                <a class="diagram-item-child-disabled">
-                    <div>Cosmwasm</div>
-                </a>
+            <a class="diagram-item" href="/ledger_v2">
+                    Ledger
             </a>
+            <div class="diagram-item-child-disabled">
+                    <div>Cosmwasm</div>
             </div>
         </div>
     </div>
