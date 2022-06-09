@@ -1,6 +1,6 @@
 # How to Convert Native Fet to Erc20 Fet Using Fetch.ai Browser Extension Wallet
 
-This is an easy step-by-step guide explaining how to convert your native FET tokens to ERC20 FET tokens using the [Fetch browser wallet](https://bit.ly/3G31QII).
+This is an easy step-by-step guide explaining how to convert your native FET tokens to ERC20 FET tokens using the [Fetch Wallet](https://bit.ly/3G31QII).
 
 
 

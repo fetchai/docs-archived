@@ -7,7 +7,7 @@ The Fetch bounty program provides incentives for developers and security experts
 The scope of the bounty program extends to:
 
 - FetchD: <https://github.com/fetchai/fetchd>
-- Browser Extension Wallet: <https://github.com/fetchai/keplr-extension>
+- Fetch Wallet: <https://github.com/fetchai/fetch-wallet>
 - The Block explorer: <https://github.com/fetchai/cosmos-explorer>
 - Documentation:: <https://github.com/fetchai/docs>
 - CosmPy: <https://github.com/fetchai/cosmpy>

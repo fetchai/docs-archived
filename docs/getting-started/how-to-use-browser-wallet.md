@@ -1,10 +1,10 @@
 
 
 
-# How to Use the Browser Extension Wallet
+# How to Use the Fetch Wallet
 
 
-Open the Browser Extension Wallet.
+Open the Fetch Wallet.
 
    <img src="../../images/browser_wallet.png" alt="FetchHub" class="center" style="display: block; margin-left: auto; margin-right: auto; width: 300px">
 
@@ -49,9 +49,9 @@ To see previous transactions you can also check out one of many different [block
 
     No. The token bridge will continue to exist. The wallet will make the process easier to send native to ERC20 tokens without relying on a ledger.
 
-4. **When can I download the Browser extension wallet?**
+4. **When can I download the Fetch wallet?**
 
-      Browser extension wallet is available now on [Chrome webstore](https://chrome.google.com/webstore/detail/fetchai-network-wallet/ellkdbaphhldpeajbepobaecooaoafpg?hl=en-GB).
+      Fetch wallet is available now on [Chrome webstore](https://chrome.google.com/webstore/detail/fetchai-network-wallet/ellkdbaphhldpeajbepobaecooaoafpg?hl=en-GB).
 
 5. **What are TESTFET tokens?**
 
