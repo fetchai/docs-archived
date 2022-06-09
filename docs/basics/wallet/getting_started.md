@@ -19,11 +19,9 @@ When you open the Fetch wallet for the first time, you can create a new account 
 
 * Select `Create new account`
 * Backup your mnemonic seed securely.
-
 !!! warning
     KEEP IT SAFE & DON'T LOSE IT! Anyone with your mnemonic seed can access your wallet and take your assets.<br />
     Lost mnemonic seed cannot be recovered! If you lose your mnemonic seed you will lose access to your wallet.
-
 * Give your account a name and set a password. This password will be used the next time you want to use the wallet or make important changes to your account.
 * In the next screen, rearrange the mnemonic phrases in the correct order to confirm it.
 
@@ -35,10 +33,8 @@ If you have an account on the Fetch network, for example having had one already 
 
 * Select `Import existing account`
 * Enter your mnemonic seed or private key.
-
 !!! warning
     KEEP IT SAFE! Anyone with your mnemonic seed or private key can access your wallet and take your assets.
-
 * Give your account a name and set a password. This password will be used the next time you want to use the wallet or make important changes to your account.
 
 ### Use ledger hardware wallet
