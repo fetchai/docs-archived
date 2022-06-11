@@ -3,7 +3,8 @@
 <div id="header-image-div"><img id="header-image" src="./images/fetchai.png" alt="interconnected systems such as parking, cloud, robots, and data"></div>
 
 ## What is fetch.ai?
-Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking. 
+
+Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking.
 
 We achieve this by providing open-source software tools which you can use together with our interoperable decentralized network, to harness the power of AI and automation, and carry out complex tasks in the _digital economy_.
 
