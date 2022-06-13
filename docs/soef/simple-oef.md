@@ -4,7 +4,7 @@ This documentation has been produced for the Simple-OEF version `0.3.4`.
 
 ## Concepts
 
-The Simple-OEF, or soef, is a **search and discovery** mechanism for **autonomous economic agents**. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world. 
+The Simple-OEF, or soef, is a **search and discovery** mechanism for **autonomous economic agents**. Agents register with the soef and are then able to conduct searches around them to find other agents that may be able to help. It is a relatively simple implementation focussing on functionality, performance and ease-of-use. As it develops, it will evolve into a full-scale decentralised, multi-dimensional digital world.
 
 The work-flow is:
 
@@ -12,27 +12,27 @@ The work-flow is:
 * *Communicate* using the Agent Framework's peer-to-peer network,
 * *Negotiate* and then transact on the ledger in order to exchange value for tokens
 
-When an agent registers with the soef, it is issued with a _unique reference_ which is quoted in all subsequent transactions. This way, the soef knows who its talking to. The soef is transaction based, so it does not need a permanent connection to be maintained in order to work with it. If it does not hear from an agent for a period of time, that agent will be timed out and automatically unregistered. This period of time is typically about one hour, but you can see the soef's configuration at:
+When an agent registers with the soef, it is issued with a *unique reference* which is quoted in all subsequent transactions. This way, the soef knows who its talking to. The soef is transaction based, so it does not need a permanent connection to be maintained in order to work with it. If it does not hear from an agent for a period of time, that agent will be timed out and automatically unregistered. This period of time is typically about one hour, but you can see the soef's configuration at:
 
-<a href="https://s-oef.fetch.ai:443" target="_blank">https://s-oef.fetch.ai:443</a>
+<a href="<https://s-oef.fetch.ai:443>" target="_blank">https://s-oef.fetch.ai:443</a>
 
-Agents identify themselves in a number of ways. These include their address, their given name, their classification and their genus. They can also describe how they "look" in other ways, and specify the services that they provide. 
+Agents identify themselves in a number of ways. These include their address, their given name, their classification and their genus. They can also describe how they "look" in other ways, and specify the services that they provide.
 
-In order to register, agents _must_ provide a valid address and a given name. The address can be for the Fetch.ai native ledger, the Fetch.ai Cosmos ledger or the Ethereum ledger. It is this that uniquely identifies them, and addresses cannot be duplicated or shared. The given name can be anything and it is not used for search filtering. Typically, it can be thought of as a debugging aid or a context. Names could be Alice, Bob or Jim, as well as they could be a flight number, train identity or reference code. They _appear_ in find results, but are not used to find by.
+In order to register, agents *must* provide a valid address and a given name. The address can be for the Fetch.ai native ledger, the Fetch.ai Cosmos ledger or the Ethereum ledger. It is this that uniquely identifies them, and addresses cannot be duplicated or shared. The given name can be anything and it is not used for search filtering. Typically, it can be thought of as a debugging aid or a context. Names could be Alice, Bob or Jim, as well as they could be a flight number, train identity or reference code. They *appear* in find results, but are not used to find by.
 
 ## Describing an Agent
 
 Agents describe themselves in three ways:
 
 1. **Identity**: their address and ledger type along with their given name
-2. **Personality pieces**: how they _look_
-3. **Service keys**: what they _do_, _sell_ or _want_. 
+2. **Personality pieces**: how they *look*
+3. **Service keys**: what they *do*, *sell* or *want*.
 
 We cover all of these in this next section. It's important to understand the difference between personality pieces and service keys, as agents only have one appearance, but they can provide many services. Search results can be filtered by a number of both, and wildcards are permitted where relevant.
 
 ### Personality Pieces
 
-Agents can have a number of personality pieces. These describe how an agent appears, where it is, and other properties such as heading, supported protocols and types of transactions. All personality pieces are optional, but **the more you set, the easier it is for searchers to narrow you down accurately**. 
+Agents can have a number of personality pieces. These describe how an agent appears, where it is, and other properties such as heading, supported protocols and types of transactions. All personality pieces are optional, but **the more you set, the easier it is for searchers to narrow you down accurately**.
 
 | Piece               | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
@@ -54,17 +54,17 @@ A genus is a coarse agent class. It is the roughest description of what an agent
 | ----------- | ------------------------------------------------------------ |
 | `test` | Agent is a test agent, and should be generally ignored. |
 | `vehicle`   | Moving objects such as trains, planes and automobiles        |
-| `avatar`    | An agent that _represents_ a human being                     |
+| `avatar`    | An agent that *represents* a human being                     |
 | `service`   | An agent that provides a service                             |
 | `iot`       | An agent that represents an Internet of Things device        |
 | `data`      | An agent that represents data                                |
 | `furniture` | Small fixed location items such as signs, mobile masts       |
 | `building`  | Large fixed location item such as house, railway station, school |
-| `buyer`     | Indicates the agent is a buyer _only_ and does not have value to deliver |
+| `buyer`     | Indicates the agent is a buyer *only* and does not have value to deliver |
 | `viewer` |The agent is a view in the world, acting as a "camera" to view content |
 | `financial` |Financial agent: service, exchange, autonomous market maker,  etc. |
 
-The best way to use genus is to pick the **best fit** choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Discord (see <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>). 
+The best way to use genus is to pick the **best fit** choice. If there isn't one for you, then do not specify it. If you feel that a high-level genus is missing, please make the suggestion in our Developer Discord (see <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>).
 
 #### Architectures
 
@@ -86,11 +86,11 @@ mobility.road.taxi
 infrastructure.road.sign
 ```
 
-When filtering by classifications, the `*` wildcard can be used to, for example, capture all mobility related agents with a wildcard of `mobility.*`. 
+When filtering by classifications, the `*` wildcard can be used to, for example, capture all mobility related agents with a wildcard of `mobility.*`.
 
 ### Service Keys
 
-Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent _looks_, service keys are what an agent _has_ or _does_. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's discretion. As this changes, the documentation will be updated. However, for _buyer_ agents, three suggested keys are:
+Agents can have a number of service keys. Service keys are simple key/value pairs that describe the list of services that the agent provides. Whilst personality pieces can be thought of as how an agent *looks*, service keys are what an agent *has* or *does*. Service keys are user defined and as with personality pieces, currently have no convention for formatting. They are at the agent builder's discretion. As this changes, the documentation will be updated. However, for *buyer* agents, three suggested keys are:
 
 ```bash
 buying_genus
@@ -100,11 +100,11 @@ data_type
 si_unit
 ```
 
-This allows searches to look for potential buyers of classifications, genus or with a compatible architecture. 
+This allows searches to look for potential buyers of classifications, genus or with a compatible architecture.
 
 ## Finding Agents
 
-The soef is designed for **geographic searches** where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. However, it also allows for **positionless searches** on a single node. Future versions of the soef will support searches across nodes, and dimensional reduction-based fuzzy searches. 
+The soef is designed for **geographic searches** where agents are able to find other agents near to them that are able to provide them with the value that they want, or who might wish to have the value they provide. However, it also allows for **positionless searches** on a single node. Future versions of the soef will support searches across nodes, and dimensional reduction-based fuzzy searches.
 
 Geographic searches are performed using the  `find_around_me` operation. This allows searches that:
 
@@ -120,11 +120,11 @@ Positionless searches are performed using the `find_on_this_node` operation. Thi
 * That have a specified set of service keys (with wildcards)
 * Where chain identifiers match
 
-**At least one** filter must be supplied in positionless searches. Positionless searches are not boundless, they are capped at a specific number. The tighter the filters, the less likely that you will be capped. 
+**At least one** filter must be supplied in positionless searches. Positionless searches are not boundless, they are capped at a specific number. The tighter the filters, the less likely that you will be capped.
 
 Some limits apply to the maximum number of filters, range and returned results. This may vary from soef instance to soef instance. You can see (and parse if required) these by getting the soef status at:
 
-<a href="https://s-oef.fetch.ai:443" target="_blank">https://s-oef.fetch.ai:443</a>
+<a href="<https://s-oef.fetch.ai:443>" target="_blank">https://s-oef.fetch.ai:443</a>
 
 The soef returns XML that includes information about all found agents. An example of that, unparsed, looks like this:
 
@@ -160,7 +160,7 @@ The soef returns XML that includes information about all found agents. An exampl
 
 ## Technical Details
 
-For the majority of use cases, the soef will be used from the Agent Framework. As a result, talking to it directly will not be needed. There are some occasions where interacting with the soef directly may be required, and this section documents the API functionality. 
+For the majority of use cases, the soef will be used from the Agent Framework. As a result, talking to it directly will not be needed. There are some occasions where interacting with the soef directly may be required, and this section documents the API functionality.
 
 Until version 1.0 and main-net version 2 (expected in early 2021), some of the security and paid-for-services are not implemented and where they are, they generally not enforced. Digital signatures for the sign-on process and unique identity recovery will be implemented, as will encryption on sensitive data transport, for example. Thus the API is likely to change substantially in the coming months, particularly the initial registration process. It is not recommended that you invest in substantial code that talks to the soef directly until after 1.0, and it is always preferred to go through the Agent Framework.
 
@@ -169,9 +169,9 @@ Until version 1.0 and main-net version 2 (expected in early 2021), some of the s
 Agents register at the `/register` page on the soef. They are expected to provide four pieces of information:
 
 1. An API key
-2. A chain identifier, which can be either `fetchai_v1` for the Fetch native network (testnet or mainnet), `fetchai_v2_*` for the Fetch version 2 network or `ethereum` for the Ethereum network. See the "Chain identifiers" table below for a complete list of supported chain identifiers. 
+2. A chain identifier, which can be either `fetchai_v1` for the Fetch native network (testnet or mainnet), `fetchai_v2_*` for the Fetch version 2 network or `ethereum` for the Ethereum network. See the "Chain identifiers" table below for a complete list of supported chain identifiers.
 3. An address, which must be a valid address for the specified chain identifier
-4. A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context. It must not exceed 128 characters. 
+4. A "given name" (see "Concepts", above), which can be anything from Alice to Bob, or a flight number, or any other user-given context. It must not exceed 128 characters.
 
 If registration is successful, the soef will return a result like this:
 
@@ -185,7 +185,7 @@ oef_AEC97453A80FFFF5F11E612594585F611D1728FFCD74BBF4FE915BBBB052
 </response>
 ```
 
-This indicates success and that the agent is now in the **Lobby**. The lobby is a temporary holding pen where newly registered agents wait until the negotiation is complete. If an agent does not respond and complete its registration within 60 seconds, it is removed from the lobby and registration is cancelled. 
+This indicates success and that the agent is now in the **Lobby**. The lobby is a temporary holding pen where newly registered agents wait until the negotiation is complete. If an agent does not respond and complete its registration within 60 seconds, it is removed from the lobby and registration is cancelled.
 
 The `<page_address>` is the **unique URL** for the new agent. This must be quoted in all subsequent interactions and is how the soef identifies that specific agent. To complete registration, use the unique URL and specify the parameters:
 
@@ -200,13 +200,13 @@ If this works, you will receive a success response:
 </response>
 ```
 
-At this point, your agent is now fully registered and can then communicate with the soef. 
+At this point, your agent is now fully registered and can then communicate with the soef.
 
 Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.
 
 #### Chain identifiers
 
-The soef supports a selection of chain identifiers designed to allow agents to distinguish networks in searches, but also to identify the type of address used for verification purposes. 
+The soef supports a selection of chain identifiers designed to allow agents to distinguish networks in searches, but also to identify the type of address used for verification purposes.
 
 | Chain identifier                  | Network                                                      |
 | --------------------------------- | ------------------------------------------------------------ |
@@ -232,7 +232,7 @@ The soef has a number of commands that can be used to set or update personality 
 | `find_on_this_node`                     | Positionless finding of agents on this node. Various filters such as personality pieces and service keys can narrow the search. See below for more information. |
 | `set_position`                          | This is a direct internal mapping to `set_personality_piece` with a piece of `dynamics.position`. It existed in the earliest versions of the soef and remains as a short-cut. It expects `longitude` and `latitude` as parameters. |
 | `set_declared_name`                     | This allows an agent's declared name to be changed after registration. It takes one parameter, `name`, to specify the replacement name. Names cannot exceed 128 characters and must not contain illegal characters. |
-| `set_user_context`                      | Sets an __optional__ user-context for an agent to what is specified in the `value` parameter. This can be optionally disclosed in `find_around_me` if enabled. See `set_disclose_user_context`, below. The user context must not contain illegal characters and is limited to 160 maximum. |
+| `set_user_context`                      | Sets an **optional** user-context for an agent to what is specified in the `value` parameter. This can be optionally disclosed in `find_around_me` if enabled. See `set_disclose_user_context`, below. The user context must not contain illegal characters and is limited to 160 maximum. |
 | `set_disclose_user_context`             | If the `disclose` parameter is set to `true`, the optional user context is disclosed if it has been set. Default is `false`. |
 
 #### Find commands in detail
@@ -250,7 +250,7 @@ The soef has a number of commands that can be used to set or update personality 
 
 #### SK Filters: filter modes
 
-The `skfilter` parameter for `find_around_me` also supports a _mode_. Four modes are supported:
+The `skfilter` parameter for `find_around_me` also supports a *mode*. Four modes are supported:
 
 | Mode string | Description                                    |
 | ----------- | ---------------------------------------------- |
@@ -265,13 +265,12 @@ For example:
 command=find_around_me&range_in_km=50&skfilter=type,fruit,PS&skfilter=size,large,OF
 ```
 
-In this example, the key `type` must be present, and it must match to `fruit`. If the `size` key is present, and it is set to `large`, then do not match. I.e., return everything that's a fruit within 50km except where the size is large. 
+In this example, the key `type` must be present, and it must match to `fruit`. If the `size` key is present, and it is set to `large`, then do not match. I.e., return everything that's a fruit within 50km except where the size is large.
 
 ## Further information
 
 You can find further information, or talk to us, in the #agents channel on our official developer Discord server, which you can access <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>.
 
-We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without `find_around_me` being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches. 
+We welcome your feedback and strive to deliver the best decentralised search and discovery service for agents that is possible. There are many upcoming features, including the operation incentive mechanisms, additional security and encryption, active searches (where results happen without `find_around_me` being issued), non-geographic searches across one and many soef nodes and dimensional-reduction based approximate searches.
 
 [Docs: issue 15, `0.3.4`, `28-Dec-2020`, TWS]
-
