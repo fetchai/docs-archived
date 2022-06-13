@@ -15,10 +15,10 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
     <div class="diagram-row">
         <p class="diagram-label">User facing tools</p>
         <div class="diagram-row-container">
-            <a href="/soef/simple-oef" class="diagram-item"><div>AEA Registry</div></a>
-            <a href="/aea/multi-agent-manager/" class="diagram-item"><div>AEA Manager</div></a>
-            <a href="getting-started/how-to-use-browser-wallet" class="diagram-item"><div>Fetch Wallet</div></a>
-            <a href="/ledger_v2/block-explorer" class="diagram-item"><div>Explorer</div></a>
+            <a href="https://aea-registry.fetch.ai/" target="_blank" class="diagram-item"><div>AEA Registry</div></a>
+            <a href="https://aea-manager.fetch.ai/" target="_blank"  class="diagram-item"><div>AEA Manager</div></a>
+            <a href="basics/wallet/getting_started" class="diagram-item"><div>Fetch Wallet</div></a>
+            <a href="https://explore-fetchhub.fetch.ai/" target="_blank" class="diagram-item"><div>Explorer</div></a>
         </div>
     </div>
     <div class="diagram-row">
@@ -45,11 +45,13 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
     <div class="diagram-row">
         <p class="diagram-label">The chain</p>
         <div class="diagram-row-container">
-            <a class="diagram-item" href="/ledger_v2">
+            <div class="diagram-item">
+                <a class="item-link" href="/ledger_v2" >
                     Ledger
-            </a>
-            <div class="diagram-item-child-disabled">
+                    <a class="diagram-item-child-disabled">
                     <div>Cosmwasm</div>
+                    </a>
+                </a>
             </div>
         </div>
     </div>
