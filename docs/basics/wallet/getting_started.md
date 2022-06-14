@@ -1,4 +1,4 @@
-The Fetch.ai Network Wallet allows you to interact with the Fetch network through your browser. 
+The Fetch.ai Network Wallet allows you to interact with the Fetch network through your browser.
 
 [comment]: <> (There are many other wallets you can use. The Fetch.ai Network Wallet is a non-custodial browser-extension wallet that is maintained by the Fetch.ai team. )
 

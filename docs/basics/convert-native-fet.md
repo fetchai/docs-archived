@@ -2,10 +2,8 @@
 
 This is an easy step-by-step guide explaining how to convert your native FET tokens to ERC20 FET tokens using the [Fetch browser wallet](https://bit.ly/3G31QII).
 
-
-
-1. Create an account on the Fetch browser wallet if you do not have one. 
-   Save your 12/24 word mnemonic safely somewhere. 
+1. Create an account on the Fetch browser wallet if you do not have one.
+   Save your 12/24 word mnemonic safely somewhere.
     **Do not share this with anyone! If you lose this, you cannot recover your assets.**
      
      <img src="../../images/native_and_erc20/keplr_wallet.png" alt="Keplr Wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
@@ -21,7 +19,7 @@ This is an easy step-by-step guide explaining how to convert your native FET tok
     **Make sure those are correct.**
      
      <img src="../../images/native_and_erc20/token_bridge.png" alt="Token bridge" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
-     
+
 7. Enter the amount.
 8. Click **Transfer**.
 
