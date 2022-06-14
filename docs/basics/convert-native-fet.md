@@ -15,7 +15,7 @@ This is an easy step-by-step guide explaining how to convert your native FET tok
 
     <img src="../../images/native_and_erc20/connect_to_keplr.png" alt="Requesting connection" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
 
-6. The Token bridge will be automatically populated with your currently selected metamask address on ERC20 and your fetch wallet address on native. 
+6. The Token bridge will be automatically populated with your currently selected metamask address on ERC20 and your fetch wallet address on native.
     **Make sure those are correct.**
 
      <img src="../../images/native_and_erc20/token_bridge.png" alt="Token bridge" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
