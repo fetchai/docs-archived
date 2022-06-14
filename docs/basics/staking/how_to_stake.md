@@ -24,7 +24,7 @@ Here you will find a list of every active validator to whom you can stake your F
 1. To claim your staking rewards, from the Fetch wallet dashboard select **Claim**.
 2. You will then be prompted by a transaction request. Choose the gas fee.
 3. Click **Approve**.
-4. Wallet balance should be updated.
+4. You can now see your rewards added to your Total Balance.
 
 !!! info
     Rewards are paid on a per-block basis. They accrue to your pending staking reward which you can claim using the 'Claim Staking Reward' transaction.
