@@ -2,7 +2,7 @@
 
 ## Deposit Tokens
 
-To transfer funds to your account on the Fetch wallet, you need to use its address as the destination account in the wallet or application you are using to send the funds. 
+To transfer funds to your account on the Fetch wallet, you need to use its address as the destination account in the wallet or application you are using to send the funds.
 
 This address can be used to send supported tokens using the (native) fetch network.
 
@@ -24,7 +24,7 @@ Once you send the tokens, the balance should be updated.
 
 To send tokens from your account:
 
-1. Select **Send**. 
+1. Select **Send**.
 2. Fill in the details of your transaction:
     * **Recipient**: the address you want to send the tokens to
     * **Token**: the token denomination (the default should be ok)
@@ -32,8 +32,8 @@ To send tokens from your account:
     * **Memo (Optional)**: some transactions (e.g. to/from some exchanges) require a specific memo. If not needed, you can leave it blank.
     * **Fee**: the transaction fee. Choose from **Low**, **Average** and **High**
     !!! tip
-        Usually, the lower the transaction fee, the longer you need to wait for your transaction to be settled on the network. 
-3. Press **Send**. 
+        Usually, the lower the transaction fee, the longer you need to wait for your transaction to be settled on the network.
+3. Press **Send**.
 4. In the summary screen, review the details and if everything is correct, select **Approve**.
 !!! tip
     You can check the status of your transaction via [the explorer](https://explore-fetchhub.fetch.ai).
