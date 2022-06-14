@@ -34,7 +34,7 @@ When you select a validator to delegate with, that is essentially your vote to t
 ## To redelegate using the Cosmostation App
 
 
-<img src="../../images/redel_to_cosmo.png" alt="Redelegating on Cosmostation App" class="center" style="display: block; margin-left: auto; margin-right: auto;width :700px;">
+<img src="../../images/archives/redel_to_cosmo.png" alt="Redelegating on Cosmostation App" class="center" style="display: block; margin-left: auto; margin-right: auto;width :700px;">
 
 
 1. On the main screen, click **Delegate**.
@@ -54,7 +54,7 @@ When you select a validator to delegate with, that is essentially your vote to t
 
 ## To redelegate using Keystation/Cosmostation Web Wallet
 
-<img src="../../images/redel_to_keystation.png" alt="How to redelegate on Keystation/Cosmostation web wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
+<img src="../../images/archives/redel_to_keystation.png" alt="How to redelegate on Keystation/Cosmostation web wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
 
 1. Connect your Fetch.ai wallet to the [Cosmostation web wallet](https://wallet.cosmostation.io/?network=fetchai).
 2. Select **Reward** from the options on the left side panel.
@@ -70,7 +70,7 @@ When you select a validator to delegate with, that is essentially your vote to t
 
 ## To redelegate using the Fetch.ai Browser Extension Wallet:
 
-<img src="../../images/redel_to_browser_extension_wallet.png" alt="How to redelegate with the Fetch.ai browser extension wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
+<img src="../../images/archives/redel_to_browser_extension_wallet.png" alt="How to redelegate with the Fetch.ai browser extension wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
 
 
 First you must ensure that you have the Fetch.ai wallet that you're staking with connected to the [Fetch.ai Browser Extension Wallet](https://bit.ly/3G31QII).
