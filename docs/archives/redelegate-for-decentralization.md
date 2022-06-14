@@ -29,7 +29,6 @@ When you select a validator to delegate with, that is essentially your vote to t
 
 ## To redelegate using the Cosmostation App
 
-
 <img src="../../images/archives/redel_to_cosmo.png" alt="Redelegating on Cosmostation App" class="center" style="display: block; margin-left: auto; margin-right: auto;width :700px;">
 
 
