@@ -9,7 +9,6 @@ Here you will find a list of every active validator with whom you can stake your
     !!! info
         The validators on this page are ordered according to the number of FETs delegated to them and not their reputation or benefits. See [choosing a validator](/basics/staking/redelegation/#choosing-a-validator) for more details.
 
-
 3. Connect your wallet, if it is not yet connected, by pressing **Connect Wallet** at the top right.
     ![Wallet extension web version](../../images/staking/wallet_web_version.jpg)
 4. Choose a validator to stake your FETs with and hit **Stake**.
@@ -25,26 +24,26 @@ Here you will find a list of every active validator with whom you can stake your
 6. Your Fetch Wallet shows you a summary of the transaction. Review it, select a transaction fee, and if you are happy, hit **Approve** to complete the operation.
 
 ## To Claim your Rewards
- 
+
 ### Using the Fetch Wallet
 
 1. Ensure you are logged into your [Fetch wallet](/basics/wallet/getting_started).
 2. From the wallet dashboard select **Claim**.
 
     !!! info
-        This will claim the total rewards accrued for your stakes across every validator. 
+        This will claim the total rewards accrued for your stakes across every validator.
 
-3. The wallet shows you a summary of the transaction. Review it, select a transaction fee, and if you are happy, hit **Approve** to complete the operation. 
+3. The wallet shows you a summary of the transaction. Review it, select a transaction fee, and if you are happy, hit **Approve** to complete the operation.
 
 You should now see the rewards added to your **Total Balance**.
 
 ### Using the Staking dashboard
 
-1. Go to the [ledger browser page](https://browse-fetchhub.fetch.ai/validators). 
+1. Go to the [ledger browser page](https://browse-fetchhub.fetch.ai/validators).
 2. Connect your wallet, if it is not yet connected, by pressing **Connect Wallet** at the top right.
   ![Wallet extension web version](../../images/staking/wallet_web_version.jpg)
 3. Click on your wallet address at the top right of the page to go to your **staking dashboard**.
-4. In the **Rewards** section, click **Claim Rewards** for any validator to withdraw the rewards from your stakes with this particular validator. 
+4. In the **Rewards** section, click **Claim Rewards** for any validator to withdraw the rewards from your stakes with this particular validator.
 5. The wallet shows you a summary of the transaction. Review it, select a transaction fee, and if you are happy, hit **Approve** to complete the operation.
 
 You should now see the rewards added to your **Total Balance**.
@@ -54,7 +53,7 @@ You should now see the rewards added to your **Total Balance**.
 
 ## To Remove your Stake
 
-1. Go to the [ledger browser page](https://browse-fetchhub.fetch.ai/validators). 
+1. Go to the [ledger browser page](https://browse-fetchhub.fetch.ai/validators).
 2. Connect your wallet, if it is not yet connected, by pressing **Connect Wallet** at the top right.
   ![Wallet extension web version](../../images/staking/wallet_web_version.jpg)
 3. Click on your wallet address at the top right of the page to go to your **staking dashboard**.
