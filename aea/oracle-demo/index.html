@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6009,14 +6023,14 @@
   <h1>Oracle skills</h1>
 
 <p>This demo shows how an AEA can be used to maintain an oracle and how another AEA can request the oracle value.</p>
-<h2 id="discussion">Discussion</h2>
+<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
 <p><strong>Oracle agents</strong> are agents that have permission to update or validate updates to state variables in a smart contract and whose goal is to accurately estimate or predict some real world quantity or quantities.</p>
 <p>This demonstration shows how to set up a simple oracle agent who deploys an oracle contract and updates the contract with a token price fetched from a public API. It also shows how to create an oracle client agent that can request the value from the oracle contract.</p>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<h2 id="preparation-instructions">Preparation instructions<a class="headerlink" href="#preparation-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="demo">Demo</h2>
-<h3 id="create-the-oracle-aea">Create the oracle AEA</h3>
+<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-oracle-aea">Create the oracle AEA<a class="headerlink" href="#create-the-oracle-aea" title="Permanent link">&para;</a></h3>
 <p>Fetch the AEA that will deploy and update the oracle contract.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/coin_price_oracle:0.17.0
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> coin_price_oracle
@@ -6104,7 +6118,7 @@ Otherwise, if running on an Ethereum-based ledger:
 <p>Finally, certify the keys for use by the connections that request them:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h3 id="create-the-oracle-client-aea">Create the oracle client AEA</h3>
+<h3 id="create-the-oracle-client-aea">Create the oracle client AEA<a class="headerlink" href="#create-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
 <p>From a new terminal (in the same top-level directory), fetch the AEA that will deploy the oracle client contract and call the function that requests the coin price from the oracle contract.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea fetch fetchai/coin_price_oracle_client:0.12.0
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span> coin_price_oracle_client
@@ -6163,7 +6177,7 @@ Otherwise, if running on an Ethereum-based ledger:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>aea generate-wealth <span class="nv">$LEDGER_ID</span>
 </code></pre></div></p>
 <p>The oracle AEAs require either a locally running test node or a connection to a remote testnet.</p>
-<h3 id="setting-up-with-a-local-ganache-node-ethereum-ledger-only">Setting up with a local Ganache node (Ethereum ledger only)</h3>
+<h3 id="setting-up-with-a-local-ganache-node-ethereum-ledger-only">Setting up with a local Ganache node (Ethereum ledger only)<a class="headerlink" href="#setting-up-with-a-local-ganache-node-ethereum-ledger-only" title="Permanent link">&para;</a></h3>
 <p>The easiest way to test the oracle agents on an Ethereum-based ledger to set up a local test node using Ganache. This can be done by running the following docker command from the directory you started from (in a new terminal). This command will also fund the accounts of the AEAs:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>docker run -p <span class="m">8545</span>:8545 trufflesuite/ganache-cli:latest --verbose --gasPrice<span class="o">=</span><span class="m">0</span> --gasLimit<span class="o">=</span>0x1fffffffffffff --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat coin_price_oracle/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span> --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat coin_price_oracle_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
 </code></pre></div>
@@ -6224,11 +6238,11 @@ Otherwise, if running on an Ethereum-based ledger:
 </p>
 </details>
 
-<h3 id="set-the-erc20-contract-address-for-the-oracle-aea-ethereum-ledger-only">Set the ERC20 contract address for the oracle AEA (Ethereum ledger only):</h3>
+<h3 id="set-the-erc20-contract-address-for-the-oracle-aea-ethereum-ledger-only">Set the ERC20 contract address for the oracle AEA (Ethereum ledger only):<a class="headerlink" href="#set-the-erc20-contract-address-for-the-oracle-aea-ethereum-ledger-only" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.erc20_address ERC20_ADDRESS
 </code></pre></div>
 where <code>ERC20_ADDRESS</code> is in the output of the script above.</p>
-<h3 id="run-the-oracle-aea">Run the oracle AEA</h3>
+<h3 id="run-the-oracle-aea">Run the oracle AEA<a class="headerlink" href="#run-the-oracle-aea" title="Permanent link">&para;</a></h3>
 <p>Run the oracle agent. This will deploy a contract to the testnet, grant oracle permissions to the AEA's wallet address, and periodically update the contract with the latest price of FET (or whichever coin was specified).
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>aea run
 </code></pre></div></p>
@@ -6240,14 +6254,14 @@ where <code>ERC20_ADDRESS</code> is in the output of the script above.</p>
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>info: <span class="o">[</span>coin_price_oracle<span class="o">]</span> Oracle value successfully updated!
 </code></pre></div>
 The oracle contract will continue to be updated with the latest retrieved coin price at the default time interval (every 15 seconds).</p>
-<h3 id="set-the-erc20-and-oracle-contract-addresses-for-the-oracle-client-aea">Set the ERC20 and oracle contract addresses for the oracle client AEA:</h3>
+<h3 id="set-the-erc20-and-oracle-contract-addresses-for-the-oracle-client-aea">Set the ERC20 and oracle contract addresses for the oracle client AEA:<a class="headerlink" href="#set-the-erc20-and-oracle-contract-addresses-for-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.erc20_address ERC20_ADDRESS
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.oracle_contract_address ORACLE_ADDRESS
 </code></pre></div>
 where <code>ORACLE_ADDRESS</code> should be set to the address shown in the oracle AEA logs:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Oracle contract successfully deployed at address: ORACLE_ADDRESS
 </code></pre></div></p>
-<h3 id="run-the-oracle-client-aea">Run the oracle client AEA</h3>
+<h3 id="run-the-oracle-client-aea">Run the oracle client AEA<a class="headerlink" href="#run-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
 <p>Run the oracle client agent. This will deploy an oracle client contract to the testnet, approve the contract to spend tokens on behalf of the AEA, and periodically call the contract function that requests the latest price of FET (or whichever coin was specified).
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>aea run
 </code></pre></div></p>

@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6013,18 +6027,18 @@
 <li>The <code>erc1155_deploy</code> skill deploys the smart contract, creates and mints items. </li>
 <li>The <code>erc1155_client</code> skill signs a transaction to complete a trustless trade with its counterparty.</li>
 </ul>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<h2 id="preparation-instructions">Preparation instructions<a class="headerlink" href="#preparation-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="discussion">Discussion</h2>
+<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
 <p>The scope of this guide is demonstrating how you can deploy a smart contract and interact with it using AEAs. In this specific demo, you create two AEAs. One deploys and creates tokens inside a smart contract. The other signs a transaction to complete an atomic swap. The smart contract used is ERC1155 with a one-step atomic swap functionality. This means the trade between the two AEAs can be trustless.</p>
 <div class="admonition note">
   <p class="admonition-title">Note</p>
   <p>This is only for demonstrative purposes since the AEA deploying the contract also has the ability to mint tokens. In reality, the transfer of tokens from the AEA signing the transaction is worthless.</p>
 </div>
 
-<h2 id="demo">Demo</h2>
-<h3 id="create-the-deployer-aea">Create the deployer AEA</h3>
+<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-deployer-aea">Create the deployer AEA<a class="headerlink" href="#create-the-deployer-aea" title="Permanent link">&para;</a></h3>
 <p>Fetch the AEA that will deploy the contract:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/erc1155_deployer:0.34.0
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> erc1155_deployer
@@ -6079,7 +6093,7 @@ And change the default ledger:
 <p>Finally, certify the key for use by the connections that request that:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea issue-certificates
 </code></pre></div>
-<h3 id="create-the-client-aea">Create the client AEA</h3>
+<h3 id="create-the-client-aea">Create the client AEA<a class="headerlink" href="#create-the-client-aea" title="Permanent link">&para;</a></h3>
 <p>In another terminal, fetch the client AEA which will receive some tokens from the deployer.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea fetch fetchai/erc1155_client:0.34.0
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span> erc1155_client
@@ -6134,7 +6148,7 @@ And change the default ledger:
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h2 id="run-ganache">Run Ganache</h2>
+<h2 id="run-ganache">Run Ganache<a class="headerlink" href="#run-ganache" title="Permanent link">&para;</a></h2>
 <p>Execute the following command to run Ganache:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker run -p <span class="m">8545</span>:8545 trufflesuite/ganache-cli:latest --verbose --gasPrice<span class="o">=</span><span class="m">0</span> --gasLimit<span class="o">=</span>0x1fffffffffffff --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat erc1155_deployer/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span> --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat erc1155_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
 </code></pre></div></p>
@@ -6148,11 +6162,11 @@ And change the default ledger:
   <p>If no wealth appears after a while, then try funding the private key directly using a web faucet.</p>
 </div>
 
-<h2 id="update-soef-configurations-for-both-aeas">Update SOEF configurations for both AEAs</h2>
+<h2 id="update-soef-configurations-for-both-aeas">Update SOEF configurations for both AEAs<a class="headerlink" href="#update-soef-configurations-for-both-aeas" title="Permanent link">&para;</a></h2>
 <p>Update the SOEF configuration in both AEA projects:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.soef.config.chain_identifier ethereum
 </code></pre></div></p>
-<h2 id="run-the-aeas">Run the AEAs</h2>
+<h2 id="run-the-aeas">Run the AEAs<a class="headerlink" href="#run-the-aeas" title="Permanent link">&para;</a></h2>
 <p>First, run the deployer AEA:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
 </code></pre></div>
@@ -6190,13 +6204,13 @@ And change the default ledger:
   </p>
 </div>
 
-<h2 id="delete-the-aeas">Delete the AEAs</h2>
+<h2 id="delete-the-aeas">Delete the AEAs<a class="headerlink" href="#delete-the-aeas" title="Permanent link">&para;</a></h2>
 <p>When you're done, stop the agents (<code>CTRL+C</code>), go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span> ..
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea delete erc1155_deployer
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>aea delete erc1155_client
 </code></pre></div>
-<h2 id="communication">Communication</h2>
+<h2 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">&para;</a></h2>
 <p>This diagram shows the communication between the various entities in this interaction:</p>
 <div class="mermaid">
     sequenceDiagram

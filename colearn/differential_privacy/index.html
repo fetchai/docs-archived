@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5862,7 +5876,7 @@
 
 
 
-<h1 id="what-is-differential-privacy">What is differential privacy?</h1>
+<h1 id="what-is-differential-privacy">What is differential privacy?<a class="headerlink" href="#what-is-differential-privacy" title="Permanent link">&para;</a></h1>
 <p>To make a machine learning system that protects privacy we first need to have a definition of what privacy is. 
 Differential privacy (DP) is one such definition. 
 First we need to have three concepts: the <em>database</em> is a collection of data about <em>individuals</em> (for example, their medical records), and we want to make a <em>query</em> about that data (for example "How much does smoking increase someone's risk of cancer?").
@@ -5872,7 +5886,7 @@ DP says that privacy is preserved if the result of the query cannot be used to d
 <p>From this comes the idea of <em>sensitivity</em> of a query. 
 The <em>sensitivity</em> of a query determines how much the result of the query depends on an individual's data. 
 For example, the query "How much does smoking increase the risk of cancer for adults in the UK?" is less sensitive than the query "How much does smoking increase the risk of cancer for men aged 50-55 in Cambridge?" because the second query uses a smaller set of individuals.</p>
-<h2 id="epsilon-differential-privacy">Epsilon-differential privacy</h2>
+<h2 id="epsilon-differential-privacy">Epsilon-differential privacy<a class="headerlink" href="#epsilon-differential-privacy" title="Permanent link">&para;</a></h2>
 <p>EDP is a scheme for preserving differential privacy. 
 In EDP all queries have random noise added to them, so they are no longer deterministic.
 So if the query was "What fraction of people in the database are male", and the true result is 0.5 then the results of calling this query three times might be 0.53, 0.49 and 0.51. 
@@ -5882,11 +5896,11 @@ The amount of personal information that is revealed isn't zero, but it is guaran
 <p>The level of privacy that is provided is controlled by the parameter epsilon; the greater epsilon is the more noise is added and the more privacy is preserved.
 Queries that are more sensitive have more noise added, because they reveal more information about individuals.
 It is important to add as little noise as possible, because adding more noise obscures the patterns that you want to extract from the data.</p>
-<h2 id="differential-privacy-when-training-neural-networks">Differential privacy when training neural networks</h2>
+<h2 id="differential-privacy-when-training-neural-networks">Differential privacy when training neural networks<a class="headerlink" href="#differential-privacy-when-training-neural-networks" title="Permanent link">&para;</a></h2>
 <p>Each training step for a neural network can be though of as a complicated query on a database of training data.
 Differential privacy mechanisms tell you how much noise you need to add to guarantee a certain level of privacy.
 The <code>opacus</code> and <code>tensorflow-privacy</code> libraries implement epsilon-differential privacy for training neural networks for pytorch and keras respectively.</p>
-<h1 id="how-to-use-differential-privacy-with-colearn">How to use differential privacy with colearn</h1>
+<h1 id="how-to-use-differential-privacy-with-colearn">How to use differential privacy with colearn<a class="headerlink" href="#how-to-use-differential-privacy-with-colearn" title="Permanent link">&para;</a></h1>
 <p>By using <code>opacus</code> and <code>tensorflow-privacy</code> we can make collective learning use differential privacy.
 The learner that is proposing weights does so using a DP-enabled optimiser.</p>
 <p>To see an example of using this see <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/pytorch_mnist_diffpriv.py">dp_pytorch</a> 

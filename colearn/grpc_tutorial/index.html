@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5946,12 +5960,12 @@
 
 
 
-<h1 id="grpc-tutorial">gRPC tutorial</h1>
+<h1 id="grpc-tutorial">gRPC tutorial<a class="headerlink" href="#grpc-tutorial" title="Permanent link">&para;</a></h1>
 <p>This tutorial explains how to set up the gRPC learner server.
 It assumes that you can already run colearn locally, and that you have already defined your own models and dataloaders 
 (if you're going to do so).
 If you haven't done this then see the tutorials in the <a href="../intro_tutorial_mli/">Getting Started</a> section.</p>
-<h2 id="architecture-of-colearn">Architecture of colearn</h2>
+<h2 id="architecture-of-colearn">Architecture of colearn<a class="headerlink" href="#architecture-of-colearn" title="Permanent link">&para;</a></h2>
 <p>There are two main parts to a collective learning system: the learner and the backend.
 The backend controls the learner, and manages the smart contracts and IPFS, and acts as a control hub for 
 all the associated learners.
@@ -5961,7 +5975,7 @@ The learner and the backend communicate via <a href="https://grpc.io">gRPC</a>;
 the learner runs a gRPC server, and the backend runs a gRPC client that makes requests of the learner.
 This separation means that the learner can run on specialised hardware (e.g. a compute server) and does not need to 
 be co-located with the backend.</p>
-<h2 id="architecture-of-grpc-server">Architecture of gRPC server</h2>
+<h2 id="architecture-of-grpc-server">Architecture of gRPC server<a class="headerlink" href="#architecture-of-grpc-server" title="Permanent link">&para;</a></h2>
 <p>The gRPC interface is defined in 
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/proto/interface.proto">colearn_grpc/proto/interface.proto</a>.
 This defines the functions that the gRPC server exposes and the format for messages between the server and the client.</p>
@@ -5976,7 +5990,7 @@ the <code>MachineLearningInterface</code>.
 The MLI factory needs to implement the MLI factory interface.
 You could write your own MLI factory, but it's easier to use the one we provide.
 Below we will discuss the MLI factory interface and then talk about how to use the example factory.</p>
-<h2 id="mli-factory-interface">MLI Factory interface</h2>
+<h2 id="mli-factory-interface">MLI Factory interface<a class="headerlink" href="#mli-factory-interface" title="Permanent link">&para;</a></h2>
 <p>The MLI Factory (as the name suggests) is a factory class for creating objects that implement the machine learning 
 interface:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
@@ -6087,7 +6101,7 @@ The MLI Factory needs to implement four methods:</p>
 <li>get_mli - takes the name and parameters for the model and dataloader and constructs the MLI object. 
   Returns the MLI object.</li>
 </ul>
-<h2 id="using-the-example-mli-factory">Using the example MLI Factory</h2>
+<h2 id="using-the-example-mli-factory">Using the example MLI Factory<a class="headerlink" href="#using-the-example-mli-factory" title="Permanent link">&para;</a></h2>
 <p>The example MLI factory is defined in 
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/example_mli_factory.py">colearn_grpc/example_mli_factory.py</a>.
 It stores the models and dataloaders that it knows about in factoryRegistry.py
@@ -6136,7 +6150,7 @@ before constructing the gRPC server (more on that later). </p>
    <a href="https://docs.python.org/3.7/library/json.html">JSON-encodable</a>.
    Native python types are fine (e.g. str, dict, list, float). </li>
 </ol>
-<h2 id="making-it-all-work-together">Making it all work together</h2>
+<h2 id="making-it-all-work-together">Making it all work together<a class="headerlink" href="#making-it-all-work-together" title="Permanent link">&para;</a></h2>
 <p>It can be challenging to ensure that all the parts talk to each other, so we have provided some examples and 
 helper scripts.
 It is recommended to first make an all-in-one script following the example of 
@@ -6157,7 +6171,7 @@ This can be done in a python script (before importing tensorflow) by using:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">os</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
 </code></pre></div></p>
-<h2 id="testing-locally-with-an-all-in-one-script">Testing locally with an all-in-one script</h2>
+<h2 id="testing-locally-with-an-all-in-one-script">Testing locally with an all-in-one script<a class="headerlink" href="#testing-locally-with-an-all-in-one-script" title="Permanent link">&para;</a></h2>
 <p>You can test this locally by following the example in 
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/grpc/mnist_grpc.py">colearn_examples/grpc/mnist_grpc.py</a>.
 Define your dataloader and model functions as specified above, and register them with the factory.
@@ -6193,7 +6207,7 @@ as before:
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                                  <span class="n">vote_threshold</span><span class="p">,</span> <span class="n">round_index</span><span class="p">)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="p">)</span>
 </code></pre></div></p>
-<h2 id="testing-remotely">Testing remotely</h2>
+<h2 id="testing-remotely">Testing remotely<a class="headerlink" href="#testing-remotely" title="Permanent link">&para;</a></h2>
 <p>We expect that the gRPC learner part will often be on a compute cluster and be separate from the gRPC client side.
 To test the gRPC in a setup like this you can start the servers on the computer side and the client part separately.
 For one gRPC server:
@@ -6261,7 +6275,7 @@ and the data location for each learner.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python -m colearn_examples.grpc.run_grpc_demo --n_learners <span class="m">5</span> --dataloader_tag KERAS_MNIST --model_tag KERAS_MNIST <span class="se">\</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>--data_locations /tmp/mnist/0,/tmp/mnist/1,/tmp/mnist/2,/tmp/mnist/3,/tmp/mnist/4
 </code></pre></div></p>
-<h2 id="using-the-mli-factory-interface">Using the MLI Factory interface</h2>
+<h2 id="using-the-mli-factory-interface">Using the MLI Factory interface<a class="headerlink" href="#using-the-mli-factory-interface" title="Permanent link">&para;</a></h2>
 <p>An alternative method of using your own dataloaders and models with the gRPC server is to use the MLI Factory interface.
 This is defined in <code>colearn_grpc/mli_factory_interface.py</code>.
 An example is given in <code>colearn_examples/grpc/mlifactory_grpc_mnist.py</code>.

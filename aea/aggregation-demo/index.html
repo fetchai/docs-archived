@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5967,13 +5981,13 @@
   <h1>Aggegation skill</h1>
 
 <p>This demo shows how AEAs can aggregate values over the peer-to-peer network.</p>
-<h2 id="discussion">Discussion</h2>
+<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
 <p>This demonstration shows how to set up a simple aggregation network in which several AEAs take an average of values fetched from different sources for the same real-world quantity. For this particular example, we take an average of Bitcoin prices from four public APIs.</p>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<h2 id="preparation-instructions">Preparation instructions<a class="headerlink" href="#preparation-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="demo">Demo</h2>
-<h3 id="create-the-aeas">Create the AEAs</h3>
+<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-aeas">Create the AEAs<a class="headerlink" href="#create-the-aeas" title="Permanent link">&para;</a></h3>
 <p>Repeat the following process four times in four different terminals (for each {<code>i=0</code>, <code>i=1</code>, <code>i=2</code>, <code>i=3</code>}):</p>
 <p>Fetch the aggregator AEA:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">agent_name</span><span class="o">=</span><span class="s2">&quot;agg</span><span class="nv">$i</span><span class="s2">&quot;</span>
@@ -6045,7 +6059,7 @@ Disable the http server since it is not used in this demo:
 <p>Finally, certify the keys for use by the connections that request them:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h3 id="configure-the-peer-to-peer-network">Configure the peer-to-peer network</h3>
+<h3 id="configure-the-peer-to-peer-network">Configure the peer-to-peer network<a class="headerlink" href="#configure-the-peer-to-peer-network" title="Permanent link">&para;</a></h3>
 <p>Set the multi-address of the first AEA as an initial peer to help the remaining AEAs find each other on the network. Also, if these AEAs are all running on the same machine, set different ports for their connections to ensure there are no conflicts (from the <code>agg1</code>, <code>agg2</code>, and <code>agg3</code> directories):
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">MULTIADDR</span><span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> ../agg0 <span class="o">&amp;&amp;</span> aea get-multiaddress fetchai --connection<span class="k">)</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
@@ -6059,7 +6073,7 @@ Disable the http server since it is not used in this demo:
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.prometheus.config.port <span class="k">$((</span><span class="m">20000</span><span class="o">+</span>i<span class="k">))</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.port <span class="k">$((</span><span class="m">8000</span><span class="o">+</span>i<span class="k">))</span>
 </code></pre></div></p>
-<h3 id="oracle-integration-optional">Oracle integration (optional)</h3>
+<h3 id="oracle-integration-optional">Oracle integration (optional)<a class="headerlink" href="#oracle-integration-optional" title="Permanent link">&para;</a></h3>
 <p>To publish the aggregated value to an oracle smart contract, add the ledger connection and simple oracle skill to one of the aggregators:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea add connection fetchai/ledger:0.21.0
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aea add skill fetchai/simple_oracle:0.16.0
@@ -6074,7 +6088,7 @@ Disable the http server since it is not used in this demo:
 <p>Set the name of the oracle value to match the value collected by the aggregators:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.oracle_value_name price_mean
 </code></pre></div></p>
-<h3 id="run-the-aeas">Run the AEAs</h3>
+<h3 id="run-the-aeas">Run the AEAs<a class="headerlink" href="#run-the-aeas" title="Permanent link">&para;</a></h3>
 <p>Run each of the aggregator AEAs in separate terminals: 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
 </code></pre></div></p>

@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6256,9 +6270,9 @@
 
 <p>This guide is a step-by-step introduction to building AEAs that advertise their static and dynamic data, find other AEAs with required data, negotiate terms of trade, and carry out trades via ledger transactions.</p>
 <p>If you simply want to run the resulting AEAs <a href="../generic-skills">go here</a>.</p>
-<h2 id="dependencies-required">Dependencies (Required)</h2>
+<h2 id="dependencies-required">Dependencies (Required)<a class="headerlink" href="#dependencies-required" title="Permanent link">&para;</a></h2>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="reference-code-optional">Reference code (Optional)</h2>
+<h2 id="reference-code-optional">Reference code (Optional)<a class="headerlink" href="#reference-code-optional" title="Permanent link">&para;</a></h2>
 <p>This step-by-step guide goes through the creation of two AEAs which are already developed by Fetch.ai. You can get the finished AEAs, and compare your code against them, by following the next steps:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/generic_seller:0.29.0
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> generic_seller
@@ -6270,12 +6284,12 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea eject skill fetchai/generic_buyer:0.27.1
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">cd</span> ..
 </code></pre></div>
-<h2 id="simplification-step">Simplification step</h2>
+<h2 id="simplification-step">Simplification step<a class="headerlink" href="#simplification-step" title="Permanent link">&para;</a></h2>
 <p>To keep file paths consistent with the reference code, we suggest you initialize your local author as <code>fetchai</code> for the purpose of this demo only:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea init --reset --local --author fetchai
 </code></pre></div>
-<h2 id="generic-seller-aea">Generic Seller AEA</h2>
-<h3 id="step-1-create-the-aea">Step 1: Create the AEA</h3>
+<h2 id="generic-seller-aea">Generic Seller AEA<a class="headerlink" href="#generic-seller-aea" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-create-the-aea">Step 1: Create the AEA<a class="headerlink" href="#step-1-create-the-aea" title="Permanent link">&para;</a></h3>
 <p>Create a new AEA by typing the following command in the terminal:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea create my_generic_seller
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> my_generic_seller
@@ -6292,7 +6306,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 <li><code>my_model.py</code></li>
 <li><code>skills.yaml</code></li>
 </ul>
-<h3 id="step-2-create-the-behaviour">Step 2: Create the behaviour</h3>
+<h3 id="step-2-create-the-behaviour">Step 2: Create the behaviour<a class="headerlink" href="#step-2-create-the-behaviour" title="Permanent link">&para;</a></h3>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to actions initiated by the AEA, rather than reactions to other events.</p>
 <p>Open the <code>behaviours.py</code> file (<code>my_generic_seller/skills/generic_seller/behaviours.py</code>) and replace the stub code with the following:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
@@ -6459,7 +6473,7 @@ Our newly created AEA is inside the current working directory. Let’s create ou
 </code></pre></div>
 <p>This <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>TickerBehaviour</code></a> registers (see <code>setup</code> method) and deregisters (see <code>teardown</code> method) our AEA’s service on the <a href="../simple-oef">SOEF search node</a> at regular tick intervals (here 60 seconds). By registering, the AEA becomes discoverable to other AEAs.</p>
 <p>In <code>setup</code>, prior to registrations, we send a message to the ledger connection to check the account balance for the AEA's address on the configured ledger.</p>
-<h3 id="step-3-create-the-handler">Step 3: Create the handler</h3>
+<h3 id="step-3-create-the-handler">Step 3: Create the handler<a class="headerlink" href="#step-3-create-the-handler" title="Permanent link">&para;</a></h3>
 <p>So far, we have tasked the AEA with sending register/unregister requests to the <a href="../simple-oef">SOEF search node</a>. However at present, the AEA has no way of handling the responses it receives from the search node, or in fact messages sent by any other AEA.</p>
 <p>We have to specify the logic to negotiate with another AEA based on the strategy we want our AEA to follow. The following diagram illustrates the negotiation flow that we want this AEA to use, as well as interactions with a search node and the blockchain between a <code>seller_AEA</code> and a <code>buyer_AEA</code>.</p>
 <div class="mermaid">
@@ -7070,7 +7084,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <a id="__codelineno-12-308" name="__codelineno-12-308" href="#__codelineno-12-308"></a>        <span class="p">)</span>
 </code></pre></div></p>
 <p>The <code>GenericLedgerApiHandler</code> deals with <code>LedgerApiMessages</code> from the ledger connection and the <code>GenericOefSearchHandler</code> handles <code>OefSearchMessages</code> from the SOEF connection.</p>
-<h3 id="step-4-create-the-strategy">Step 4: Create the strategy</h3>
+<h3 id="step-4-create-the-strategy">Step 4: Create the strategy<a class="headerlink" href="#step-4-create-the-strategy" title="Permanent link">&para;</a></h3>
 <p>Next, we are going to create the strategy that we want our <code>my_generic_seller</code> AEA to follow. Rename the <code>my_model.py</code> file (<code>my_generic_seller/skills/generic_seller/my_model.py</code>) to <code>strategy.py</code> and replace the stub code with the following:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span> <span class="nn">uuid</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
@@ -7322,7 +7336,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <a id="__codelineno-14-139" name="__codelineno-14-139" href="#__codelineno-14-139"></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div>
 <p>The helper private function <code>collect_from_data_source</code> is where we read data from a sensor or if there are no sensor we use some default data provided (see the <code>data_for_sale</code> property).</p>
-<h3 id="step-5-create-the-dialogues">Step 5: Create the dialogues</h3>
+<h3 id="step-5-create-the-dialogues">Step 5: Create the dialogues<a class="headerlink" href="#step-5-create-the-dialogues" title="Permanent link">&para;</a></h3>
 <p>To keep track of the structure and progress of interactions, including negotiations with a buyer AEA and interactions with search nodes and ledgers, we use dialogues. Create a new file in the skill folder (<code>my_generic_seller/skills/generic_seller/</code>) and name it <code>dialogues.py</code>. Inside this file add the following code:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
@@ -7570,7 +7584,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 </code></pre></div>
 <p>The <code>FipaDialogues</code> class contains negotiation dialogues with each <code>my_generic_buyer</code> AEA (and other AEAs) and exposes a number of helpful methods to manage them. This helps us match messages to the dialogues they belong to, access previous messages and enable us to identify possible communications problems between the <code>my_generic_seller</code> AEA and the <code>my_generic_buyer</code> AEA. It also keeps track of the data that we offer for sale during the proposal phase.</p>
 <p>The <code>FipaDialogues</code> class extends <code>BaseFipaDialogues</code>, which itself derives from the base <a href="../api/protocols/dialogue/base#dialogues-objects"><code>Dialogues</code></a> class. Similarly, the <code>FipaDialogue</code> class extends <code>BaseFipaDialogue</code> which itself derives from the base <a href="../api/protocols/dialogue/base#dialogue-objects"><code>Dialogue</code></a> class. To learn more about dialogues have a look <a href="../protocol">here</a>.</p>
-<h3 id="step-6-update-the-yaml-files">Step 6: Update the YAML files</h3>
+<h3 id="step-6-update-the-yaml-files">Step 6: Update the YAML files<a class="headerlink" href="#step-6-update-the-yaml-files" title="Permanent link">&para;</a></h3>
 <p>Since we made so many changes to our AEA we have to update the <code>skill.yaml</code> (at <code>my_generic_seller/skills/generic_seller/skill.yaml</code>). Make sure you update your <code>skill.yaml</code> with the following configuration:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_seller</span><span class="w"></span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
@@ -7648,8 +7662,8 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea fingerprint skill fetchai/generic_seller:0.1.0
 </code></pre></div>
 <p>This will hash each file and save the hash in the fingerprint. This way, in the future we can easily track if any of the files have changed.</p>
-<h2 id="generic-buyer-aea">Generic Buyer AEA</h2>
-<h3 id="step-1-create-the-aea_1">Step 1: Create the AEA</h3>
+<h2 id="generic-buyer-aea">Generic Buyer AEA<a class="headerlink" href="#generic-buyer-aea" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-create-the-aea_1">Step 1: Create the AEA<a class="headerlink" href="#step-1-create-the-aea_1" title="Permanent link">&para;</a></h3>
 <p>In a new terminal, create a new AEA by typing the following command in the terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea create my_generic_buyer
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">cd</span> my_generic_buyer
@@ -7666,7 +7680,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <li><code>my_model.py</code></li>
 <li><code>skills.yaml</code></li>
 </ul>
-<h3 id="step-2-create-the-behaviour_1">Step 2: Create the behaviour</h3>
+<h3 id="step-2-create-the-behaviour_1">Step 2: Create the behaviour<a class="headerlink" href="#step-2-create-the-behaviour_1" title="Permanent link">&para;</a></h3>
 <p>Open the <code>behaviours.py</code> file (<code>my_generic_buyer/skills/generic_buyer/behaviours.py</code>) and replace the stub code with the following:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">cast</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
@@ -7850,7 +7864,7 @@ In the above code, we check the <code>INFORM</code> message. If it contains a tr
 <a id="__codelineno-20-180" name="__codelineno-20-180" href="#__codelineno-20-180"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">waiting</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ledger_api_dialogue</span><span class="o">.</span><span class="n">associated_fipa_dialogue</span><span class="p">)</span>
 </code></pre></div>
 <p>This <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>TickerBehaviour</code></a> will send a search query to the <a href="../simple-oef">SOEF search node</a> at regular tick intervals.</p>
-<h3 id="step-3-create-the-handler_1">Step 3: Create the handler</h3>
+<h3 id="step-3-create-the-handler_1">Step 3: Create the handler<a class="headerlink" href="#step-3-create-the-handler_1" title="Permanent link">&para;</a></h3>
 <p>So far, the AEA is tasked with sending search queries to the <a href="../simple-oef">SOEF search node</a>. However, currently the AEA has no way of handling the responses it receives from the SOEF or messages from other agents.</p>
 <p>Let us now implement <a href="../api/skills/base#handler-objects"><code>Handlers</code></a> to deal with the expected incoming messages. Open the <code>handlers.py</code> file (<code>my_generic_buyer/skills/generic_buyer/handlers.py</code>) and add the following code (replacing the stub code already present in the file):</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span> <span class="nn">pprint</span>
@@ -8562,7 +8576,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <a id="__codelineno-28-332" name="__codelineno-28-332" href="#__codelineno-28-332"></a>            <span class="p">)</span>
 <a id="__codelineno-28-333" name="__codelineno-28-333" href="#__codelineno-28-333"></a>        <span class="p">)</span>
 </code></pre></div>
-<h3 id="step-4-create-the-strategy_1">Step 4: Create the strategy</h3>
+<h3 id="step-4-create-the-strategy_1">Step 4: Create the strategy<a class="headerlink" href="#step-4-create-the-strategy_1" title="Permanent link">&para;</a></h3>
 <p>We are going to create the strategy that we want our AEA to follow. Rename the <code>my_model.py</code> file (in <code>my_generic_buyer/skills/generic_buyer/</code>) to <code>strategy.py</code> and replace the stub code with the following:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
@@ -8826,7 +8840,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <a id="__codelineno-32-67" name="__codelineno-32-67" href="#__codelineno-32-67"></a>    <span class="k">def</span> <span class="nf">update_search_query_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-32-68" name="__codelineno-32-68" href="#__codelineno-32-68"></a>        <span class="sd">&quot;&quot;&quot;Update agent location and query for search.&quot;&quot;&quot;</span>
 </code></pre></div>
-<h3 id="step-5-create-the-dialogues_1">Step 5: Create the dialogues</h3>
+<h3 id="step-5-create-the-dialogues_1">Step 5: Create the dialogues<a class="headerlink" href="#step-5-create-the-dialogues_1" title="Permanent link">&para;</a></h3>
 <p>As mentioned during the creation of the seller AEA, we should keep track of the various interactions an AEA has with others and this is done via dialogues. Create a new file and name it <code>dialogues.py</code> (in <code>my_generic_buyer/skills/generic_buyer/</code>). Inside this file add the following code:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
@@ -9160,7 +9174,7 @@ When we receive a message from the <a href="../simple-oef">SOEF search node</a> 
 <a id="__codelineno-33-330" name="__codelineno-33-330" href="#__codelineno-33-330"></a>        <span class="p">)</span>
 </code></pre></div>
 <p>The various dialogues classes in the above code snippet store dialogues with other AEAs, services and components, (e.g. SOEF search node via the <code>fetchai/soef</code> connection, ledgers via the <code>fetchai/ledger</code> connection and the decision maker). They expose useful methods to manipulate these interactions, access previous messages, and enable us to identify possible communications problems between <code>my_generic_seller</code> and <code>my_generic_buyer</code> AEAs.</p>
-<h3 id="step-6-update-the-yaml-files_1">Step 6: Update the YAML files</h3>
+<h3 id="step-6-update-the-yaml-files_1">Step 6: Update the YAML files<a class="headerlink" href="#step-6-update-the-yaml-files_1" title="Permanent link">&para;</a></h3>
 <p>After making so many changes to our skill, we have to update the <code>skill.yaml</code> configuration file so it reflects our newly created classes, and contains the values used by the strategy. Make sure <code>skill.yaml</code> contains the following configuration:</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_buyer</span><span class="w"></span>
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
@@ -9252,8 +9266,8 @@ We must pay attention to the models and the strategy’s variables. Here we can 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>aea fingerprint skill fetchai/generic_buyer:0.1.0
 </code></pre></div>
 <p>This will hash each file and save the hash in the fingerprint. This way, in the future we can easily track if any of the files have changed.</p>
-<h2 id="run-the-aeas">Run the AEAs</h2>
-<h3 id="create-private-keys">Create private keys</h3>
+<h2 id="run-the-aeas">Run the AEAs<a class="headerlink" href="#run-the-aeas" title="Permanent link">&para;</a></h2>
+<h3 id="create-private-keys">Create private keys<a class="headerlink" href="#create-private-keys" title="Permanent link">&para;</a></h3>
 <p>For each AEA, create a private key:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>aea generate-key fetchai
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>aea add-key fetchai fetchai_private_key.txt
@@ -9265,7 +9279,7 @@ We must pay attention to the models and the strategy’s variables. Here we can 
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h3 id="update-the-aea-configurations">Update the AEA configurations</h3>
+<h3 id="update-the-aea-configurations">Update the AEA configurations<a class="headerlink" href="#update-the-aea-configurations" title="Permanent link">&para;</a></h3>
 <p>In both AEAs run:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="s1">&#39;{</span>
@@ -9273,11 +9287,11 @@ We must pay attention to the models and the strategy’s variables. Here we can 
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="s1">  &quot;fetchai/oef_search:1.1.1&quot;: &quot;fetchai/soef:0.27.1&quot;</span>
 <a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="s1">}&#39;</span>
 </code></pre></div></p>
-<h3 id="fund-the-buyer-aea">Fund the buyer AEA</h3>
+<h3 id="fund-the-buyer-aea">Fund the buyer AEA<a class="headerlink" href="#fund-the-buyer-aea" title="Permanent link">&para;</a></h3>
 <p>Create some wealth for your buyer on the Fetch.ai testnet (this operation might take a while).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>aea generate-wealth fetchai --sync
 </code></pre></div>
-<h3 id="run-seller-aea">Run seller AEA</h3>
+<h3 id="run-seller-aea">Run seller AEA<a class="headerlink" href="#run-seller-aea" title="Permanent link">&para;</a></h3>
 <p>Add the remaining packages for the seller AEA, then run it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>aea add connection fetchai/p2p_libp2p:0.27.0
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>aea add connection fetchai/soef:0.27.1
@@ -9289,7 +9303,7 @@ We must pay attention to the models and the strategy’s variables. Here we can 
 <a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>aea run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
-<h4 id="run-buyer-aea">Run buyer AEA</h4>
+<h4 id="run-buyer-aea">Run buyer AEA<a class="headerlink" href="#run-buyer-aea" title="Permanent link">&para;</a></h4>
 <p>Add the remaining packages for the buyer AEA:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>aea add connection fetchai/p2p_libp2p:0.27.0
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>aea add connection fetchai/soef:0.27.1
@@ -9315,16 +9329,16 @@ We must pay attention to the models and the strategy’s variables. Here we can 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>aea run
 </code></pre></div></p>
 <p>You will see that the AEAs negotiate and then transact using the Dorado testnet.</p>
-<h2 id="delete-the-aeas">Delete the AEAs</h2>
+<h2 id="delete-the-aeas">Delete the AEAs<a class="headerlink" href="#delete-the-aeas" title="Permanent link">&para;</a></h2>
 <p>When you are done, go up a level and delete the AEAs.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nb">cd</span> ..
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>aea delete my_generic_seller
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>aea delete my_generic_buyer
 </code></pre></div></p>
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>You have completed the "Getting Started" series. Congratulations!</p>
 <p>The following guide provides some hints on <a href="../development-setup">AEA development setup</a>.</p>
-<h3 id="recommended">Recommended</h3>
+<h3 id="recommended">Recommended<a class="headerlink" href="#recommended" title="Permanent link">&para;</a></h3>
 <p>We recommend you build your own AEA next. There are many helpful guides and demos in the documentation, and a developer community on <a href="https://discord.com/invite/btedfjPJTj" target="_blank">Discord</a>. Speak to you there!</p>
 <p><br /></p>
 

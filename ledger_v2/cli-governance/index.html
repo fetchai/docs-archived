@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5916,9 +5930,9 @@
 
 
 
-<h1 id="governance-proposals">Governance Proposals</h1>
+<h1 id="governance-proposals">Governance Proposals<a class="headerlink" href="#governance-proposals" title="Permanent link">&para;</a></h1>
 <p>In order to change any attribute of a network, a governance proposal must be submitted. This could be a simple poll, a software update or a governing parameter change. </p>
-<h3 id="parameter-change">Parameter change</h3>
+<h3 id="parameter-change">Parameter change<a class="headerlink" href="#parameter-change" title="Permanent link">&para;</a></h3>
 <p>This is an example of the process in which network parameters may be changed through the use of a governance proposal.</p>
 <p>The values within this code can be changed in order to alter the minimum deposited fund threshold for a proposal to enter the voting phase, and the length of the deposit stage in which the minimum deposit threshold must be met.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># A JSON file containing the following code should be created to instantiate the proposal.
@@ -5946,7 +5960,7 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a># In order to later refer to this proposal, the proposal_id can be determined
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>fetchd query gov proposals
 </code></pre></div></p>
-<h3 id="proposal-deposit-phase">Proposal deposit phase</h3>
+<h3 id="proposal-deposit-phase">Proposal deposit phase<a class="headerlink" href="#proposal-deposit-phase" title="Permanent link">&para;</a></h3>
 <p>The characteristics of the deposit phase are described by a set of network governance parameters, where the deposit period is two days from the initial proposal deposit until expiration, and a minimum threshold of 10000000denom as default. The minimum threshold must be met during this deposit period in order to proceed to the voting phase. The proposer may provide all of this threshold, or just some. In which case, supporters of the proposal may donate additional funding towards the goal of meeting the threshold.</p>
 <p>At any point of the deposit stage, the deposit pot can be queried.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># To get the proposal ID, use the txhash obtained when the proposal was submitted and run the following command:
@@ -5959,7 +5973,7 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>fetchd tx gov deposit &lt;proposal_id&gt; &lt;deposit_amount&gt; --from contributer
 </code></pre></div>
 <p><a href="https://docs.cosmos.network/master/modules/gov/01_concepts.html#proposal-submission">This</a> documentation provides a more detailed explanation of the deposit funding period.</p>
-<h3 id="proposal-voting-and-querying">Proposal voting and querying</h3>
+<h3 id="proposal-voting-and-querying">Proposal voting and querying<a class="headerlink" href="#proposal-voting-and-querying" title="Permanent link">&para;</a></h3>
 <p>After the deposit period has passed, there are two outcomes: either the current minimum threshold is met, or the value is not met and the funds are returned. In the first case this proposal is submitted and to be voted on, returning a tally at the end of the voting period. </p>
 <p>In order to submit a vote on a proposal that has passed into the voting phase, all staked users except the proposer may do so using this command.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># Submit a vote from a key &#39;voter&#39; with the desired outcome of the voter
@@ -5969,7 +5983,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># The current voting statistics can be printed using
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>fetchd query gov votes &lt;proposal_id&gt;
 </code></pre></div></p>
-<h4 id="example-output">Example output</h4>
+<h4 id="example-output">Example output<a class="headerlink" href="#example-output" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>votes:
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>- option: VOTE_OPTION_YES
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  proposal_id: &quot;1&quot;
@@ -5981,7 +5995,7 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  proposal_id: &quot;1&quot;
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  voter: fetch1k3ee923osju93jm03fkfmewnal39fjdbakje1x
 </code></pre></div>
-<h3 id="voting-outcome">Voting outcome</h3>
+<h3 id="voting-outcome">Voting outcome<a class="headerlink" href="#voting-outcome" title="Permanent link">&para;</a></h3>
 <p>After the voting period has ended, the results are used to determine the next step of the proposal. The potential outcomes include:</p>
 <ul>
 <li><strong>Majority <em>yes</em> vote</strong><ul>

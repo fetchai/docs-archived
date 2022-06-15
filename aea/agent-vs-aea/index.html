@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5958,7 +5972,7 @@
 - <code>teardown()</code></p>
 <p>When we run an agent, <code>start()</code> calls <code>setup()</code> and then the main agent loop. The main agent loop calls <code>act()</code>, <code>react()</code> and <code>update()</code> on each tick. When the agent is stopped via <code>stop()</code> then <code>teardown()</code> is called.</p>
 <p>Such a lightweight agent can be used to implement simple logic.</p>
-<h2 id="code-an-agent">Code an <code>Agent</code></h2>
+<h2 id="code-an-agent">Code an <code>Agent</code><a class="headerlink" href="#code-an-agent" title="Permanent link">&para;</a></h2>
 <p>We define our <code>Agent</code> which simply receives envelopes, prints the sender address and <code>protocol_id</code> and returns it unopened.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input_file&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output_file&quot;</span>
@@ -6008,7 +6022,7 @@
 <a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>        <span class="sd">&quot;&quot;&quot;Teardown the agent.&quot;&quot;&quot;</span>
 </code></pre></div></p>
-<h2 id="instantiate-an-agent">Instantiate an <code>Agent</code></h2>
+<h2 id="instantiate-an-agent">Instantiate an <code>Agent</code><a class="headerlink" href="#instantiate-an-agent" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    <span class="c1"># Ensure the input and output files do not exist initially</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">)</span>
@@ -6033,7 +6047,7 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="c1"># Create our Agent</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="n">my_agent</span> <span class="o">=</span> <span class="n">MyAgent</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="p">[</span><span class="n">stub_connection</span><span class="p">])</span>
 </code></pre></div>
-<h2 id="start-the-agent">Start the agent</h2>
+<h2 id="start-the-agent">Start the agent<a class="headerlink" href="#start-the-agent" title="Permanent link">&para;</a></h2>
 <p>We run the agent from a different thread so that we can still use the main thread to pass it messages.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="c1"># Set the agent running in a different thread</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">try</span><span class="p">:</span>
@@ -6043,7 +6057,7 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="c1"># Wait for everything to start up</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
+<h2 id="send-and-receive-an-envelope">Send and receive an envelope<a class="headerlink" href="#send-and-receive-an-envelope" title="Permanent link">&para;</a></h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the agent</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_agent,other_agent,fetchai/default:1.0.0,</span><span class="se">\x12\r\x08\x01</span><span class="s2">*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
@@ -6058,16 +6072,16 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
 </code></pre></div></p>
-<h2 id="shutdown">Shutdown</h2>
+<h2 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h2>
 <p>Finally stop our agent and wait for it to finish
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        <span class="c1"># Shut down the agent</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">my_agent</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div></p>
-<h2 id="your-turn">Your turn</h2>
+<h2 id="your-turn">Your turn<a class="headerlink" href="#your-turn" title="Permanent link">&para;</a></h2>
 <p>Now it is your turn to develop a simple agent with the <code>Agent</code> class.</p>
-<h2 id="entire-code-listing">Entire code listing</h2>
+<h2 id="entire-code-listing">Entire code listing<a class="headerlink" href="#entire-code-listing" title="Permanent link">&para;</a></h2>
 <p>If you just want to copy and paste the entire script in you can find it here:</p>
 <details><summary>Click here to see full listing</summary>
 <p>

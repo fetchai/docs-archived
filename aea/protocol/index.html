@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5987,7 +6001,7 @@
 <p>The framework provides a <code>default</code> protocol. This protocol provides a bare-bones implementation for an AEA protocol which includes a <a href="../api/protocols/default/message#packages.fetchai.protocols.default.message"><code>DefaultMessage</code></a>  class and associated <a href="../api/protocols/default/serialization#packages.fetchai.protocols.default.serialization"><code>DefaultSerializer</code></a> and <a href="../api/protocols/default/dialogues#packages.fetchai.protocols.default.dialogues"><code>DefaultDialogue</code></a> classes.</p>
 <p>Additional protocols - i.e. a new type of interaction - can be added as packages or generated with the <a href="../protocol-generator">protocol generator</a>.</p>
 <p>We highly recommend you to <strong>not</strong> attempt writing your protocol manually as they tend to have involved logic; always use existing packages or the protocol generator!</p>
-<h2 id="components-of-a-protocol">Components of a protocol</h2>
+<h2 id="components-of-a-protocol">Components of a protocol<a class="headerlink" href="#components-of-a-protocol" title="Permanent link">&para;</a></h2>
 <p>A protocol package contains the following files:</p>
 <ul>
 <li><code>__init__.py</code></li>
@@ -6009,7 +6023,7 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 - Handlers: which handle incoming messages
 - Behaviours: which execute pro-active patterns of one-shot, cyclic or even finite-state-machine-like type. -->
 
-<h2 id="metadata">Metadata</h2>
+<h2 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h2>
 <p>Each <code>Message</code> in an interaction protocol has a set of default fields:</p>
 <ul>
 <li><code>dialogue_reference: Tuple[str, str]</code>, a reference of the dialogue the message is part of. The first part of the tuple is the reference assigned to by the agent who first initiates the dialogue (i.e. sends the first message). The second part of the tuple is the reference assigned to by the other agent. The default value is <code>("", "")</code>.</li>
@@ -6021,15 +6035,15 @@ Protocols are not to be conflated with Interaction Protocols. The latter consist
 </ul>
 <p>The default values for <code>message_id</code> and <code>target</code> assume the message is the first message in a dialogue. Therefore, the <code>message_id</code> is set to <code>1</code> indicating the first message in the dialogue and <code>target</code> is <code>0</code> since the first message is the only message that does not reply to any other.</p>
 <p>By default, the values of <code>dialogue_reference</code>, <code>message_id</code>, <code>target</code> are set. However, most interactions involve more than one message being sent as part of the interaction and potentially multiple simultaneous interactions utilising the same protocol. In those cases, the <code>dialogue_reference</code> allows different interactions to be identified as such. The <code>message_id</code> and <code>target</code> are used to keep track of messages and their replies. For instance, on receiving of a message with <code>message_id=1</code> and <code>target=0</code>, the responding agent could respond with another with <code>message_id=2</code> and <code>target=1</code> replying to the first message. In particular, <code>target</code> holds the id of the message being replied to. This can be the preceding message, or an older one. </p>
-<h2 id="contents">Contents</h2>
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
 <p>Each message may optionally have any number of contents of varying types. </p>
-<h2 id="dialogue-rules">Dialogue rules</h2>
+<h2 id="dialogue-rules">Dialogue rules<a class="headerlink" href="#dialogue-rules" title="Permanent link">&para;</a></h2>
 <p>Protocols can optionally have a dialogue module. A <em>dialogue</em>, respectively <em>dialogues</em> object, maintains the state of a single, respectively, all dialogues associated with a protocol.</p>
 <p>The framework provides a number of helpful classes which implement most of the logic to maintain dialogues, namely the <a href="../api/protocols/dialogue/base#dialogue-objects"><code>Dialogue</code></a> and <a href="../api/protocols/dialogue/base#dialogues-objects"><code>Dialogues</code></a> base classes.</p>
-<h2 id="custom-protocol">Custom protocol</h2>
+<h2 id="custom-protocol">Custom protocol<a class="headerlink" href="#custom-protocol" title="Permanent link">&para;</a></h2>
 <p>The developer can generate custom protocols with the <a href="../protocol-generator">protocol generator</a>. This lets the developer specify the speech-acts as well as optionally the dialogue structure (e.g. roles of agents participating in a dialogue, the states a dialogue may end in, and the reply structure of the speech-acts in a dialogue).</p>
 <p>We highly recommend you <strong>do not</strong> attempt to write your own protocol code; always use existing packages or the protocol generator!</p>
-<h2 id="fetchaidefault111-protocol"><code>fetchai/default:1.1.1</code> protocol</h2>
+<h2 id="fetchaidefault111-protocol"><code>fetchai/default:1.1.1</code> protocol<a class="headerlink" href="#fetchaidefault111-protocol" title="Permanent link">&para;</a></h2>
 <p>The <code>fetchai/default:1.1.1</code> protocol is meant to be implemented by every AEA. It serves AEA to AEA interaction and includes three message performatives:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -6086,7 +6100,7 @@ An example is:
 </li>
 </ul>
 <p>Each AEA's <code>fetchai/error:0.18.1</code> skill utilises the <code>fetchai/default:1.0.0</code> protocol for error handling.</p>
-<h2 id="fetchaioef_search111-protocol"><code>fetchai/oef_search:1.1.1</code> protocol</h2>
+<h2 id="fetchaioef_search111-protocol"><code>fetchai/oef_search:1.1.1</code> protocol<a class="headerlink" href="#fetchaioef_search111-protocol" title="Permanent link">&para;</a></h2>
 <p>The <code>fetchai/oef_search:1.1.1</code> protocol is used by AEAs to interact with an <a href="../simple-oef">SOEF search node</a> to register and unregister their own services and search for services registered by other agents.</p>
 <p>The <code>fetchai/oef_search:1.1.1</code> protocol definition includes an <code>OefSearchMessage</code> with the following message types:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -6203,7 +6217,7 @@ We can then create the message to search these services:
 </code></pre></div></p>
 </li>
 </ul>
-<h2 id="fetchaifipa111-protocol"><code>fetchai/fipa:1.1.1</code> protocol</h2>
+<h2 id="fetchaifipa111-protocol"><code>fetchai/fipa:1.1.1</code> protocol<a class="headerlink" href="#fetchaifipa111-protocol" title="Permanent link">&para;</a></h2>
 <p>This protocol provides classes and functions necessary for communication between AEAs via a variant of the <a href="https://en.wikipedia.org/wiki/Foundation_for_Intelligent_Physical_Agents" target="_blank">FIPA</a> Agent Communication Language.</p>
 <p>The <code>fetchai/fipa:1.1.1</code> protocol definition includes a <code>FipaMessage</code> with the following performatives:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">class</span> <span class="nc">Performative</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -6235,7 +6249,7 @@ We can then create the message to search these services:
 </code></pre></div>
 <p>The <code>fetchai/fipa:1.1.1</code> protocol also defines a <code>FipaDialogue</code> class which specifies the valid reply structure and provides other helper methods to maintain dialogues.</p>
 <p>For examples of the usage of the <code>fetchai/fipa:1.1.1</code> protocol check out the <a href="../generic-skills-step-by-step" target="_blank"> generic skills step by step guide</a>.</p>
-<h3 id="fipa-dialogue">Fipa dialogue</h3>
+<h3 id="fipa-dialogue">Fipa dialogue<a class="headerlink" href="#fipa-dialogue" title="Permanent link">&para;</a></h3>
 <p>Below, we give an example of a dialogue between two agents. In practice; both dialogues would be maintained in the respective agent.</p>
 <p>We first create concrete implementations of <code>FipaDialogue</code> and <code>FipaDialogues</code> for the buyer and seller:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">aea.common</span> <span class="kn">import</span> <span class="n">Address</span>

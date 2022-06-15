@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5919,7 +5933,7 @@ tokens</a>, <a href="../staking/">staking</a>, <a href="../deploy-a-contract/">d
 <p>However, cosmpy also provides low-level access to the entire Cosmos-SDK, enabling the
 full gamut of functionality to be accessed, albeit with a little more boiler-plate.</p>
 <p>Here, we aim to help developers navigate the low-level, protobuf-based API functionality, provided by Cosmpy.</p>
-<h2 id="recap-high-level-api-aerial">Recap: High Level API - Aerial</h2>
+<h2 id="recap-high-level-api-aerial">Recap: High Level API - Aerial<a class="headerlink" href="#recap-high-level-api-aerial" title="Permanent link">&para;</a></h2>
 <p>As a reminder, here is a quick example of using the high level functionality provided by Cosmpy. In this case, we connect to a testnet, create a wallet, stake some tokens with a validator, then claim our rewards:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">cosmpy.aerial.client</span> <span class="kn">import</span> <span class="n">LedgerClient</span><span class="p">,</span> <span class="n">NetworkConfig</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">cosmpy.aerial.wallet</span> <span class="kn">import</span> <span class="n">LocalWallet</span>
@@ -5934,8 +5948,8 @@ full gamut of functionality to be accessed, albeit with a little more boiler-pla
 </code></pre></div>
 <p>The available high-level helper functions provided by cosmpy can be found by browsing for instance
 <a href="" title="https://github.com/fetchai/cosmpy/blob/master/cosmpy/aerial/client/__init__.py">the aerial client package</a>.</p>
-<h2 id="low-level-api">Low Level API</h2>
-<h3 id="simple-messages">Simple Messages</h3>
+<h2 id="low-level-api">Low Level API<a class="headerlink" href="#low-level-api" title="Permanent link">&para;</a></h2>
+<h3 id="simple-messages">Simple Messages<a class="headerlink" href="#simple-messages" title="Permanent link">&para;</a></h3>
 <p>Not all Cosmos-SDK functionality is encapsulated in the high level aerial packages. In which case, it is necessary to locate and use the definition of the relevant protobuf message.</p>
 <p>Analogous to the rewards claim example above, what if a validator operator wanted to claim their commission? At the time of writing, there is no high-level API to achieve this, so the low level API must be used.</p>
 <p>In the <a href="https://github.com/fetchai/cosmpy/tree/master/cosmpy/protos">protos</a> directory, there is a <a href="https://github.com/fetchai/cosmpy/blob/6d7b5f49722b67c803145d55aa291fe426c19994/cosmpy/protos/cosmos/distribution/v1beta1/tx_pb2.py#L160">MsgWithdrawValidatorCommission</a>
@@ -5960,7 +5974,7 @@ message, which is what we need. It takes a single <code>validator_address</code>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">tx</span> <span class="o">=</span> <span class="n">prepare_and_broadcast_basic_transaction</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">wallet</span><span class="p">)</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">tx</span><span class="o">.</span><span class="n">wait_to_complete</span><span class="p">()</span>
 </code></pre></div>
-<h3 id="nested-messages">Nested messages</h3>
+<h3 id="nested-messages">Nested messages<a class="headerlink" href="#nested-messages" title="Permanent link">&para;</a></h3>
 <p>The above example creates and broadcasts a simple <code>MsgWithdrawValidatorCommission</code> message. However, sometimes it is necessary to include one message in another. For example, what if we wanted to use the above message but execute it from a different account using <code>authz</code> (i.e. use an account which holds minimal funds, whose keys need not be treated with the same level of care as those of the validator itself)?</p>
 <p>In this case, we'll need to send an <code>authz</code>
 <a href="https://github.com/fetchai/cosmpy/blob/4abb976753edcab402fcc23d4dce3ab67b73b608/cosmpy/protos/cosmos/authz/v1beta1/tx_pb2.py#L114">MsgExec</a>
@@ -5994,7 +6008,7 @@ This message takes two parameters. The <code>grantee</code> is a simple string a
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="n">tx</span> <span class="o">=</span> <span class="n">prepare_and_broadcast_basic_transaction</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">wallet</span><span class="p">)</span>
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="n">tx</span><span class="o">.</span><span class="n">wait_to_complete</span><span class="p">()</span>
 </code></pre></div>
-<h3 id="more-protobuf-examples">More protobuf examples</h3>
+<h3 id="more-protobuf-examples">More protobuf examples<a class="headerlink" href="#more-protobuf-examples" title="Permanent link">&para;</a></h3>
 <p>Before running the above, the necessary <code>authz</code> grant must first be put in place. For Ledger Nano users (other hardware wallets are also available) that might mean an excursion to the command line. For the Fetchai network using <a href="https://docs.fetch.ai/ledger_v2/">FetchD</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd tx authz grant <span class="k">$(</span>fetchd keys show grantee --output json <span class="p">|</span> jq -r .address<span class="k">)</span> generic --msg-type <span class="s2">&quot;/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission&quot;</span> --from<span class="o">=</span><span class="k">$(</span>fetchd keys show grantor --output json <span class="p">|</span> jq -r .address<span class="k">)</span> --gas auto --gas-adjustment <span class="m">1</span>.5 --gas-prices 5000000000atestfet
 </code></pre></div>

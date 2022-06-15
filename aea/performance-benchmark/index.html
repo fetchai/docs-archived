@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5957,9 +5971,9 @@
   <h1>Performance benchmark</h1>
 
 <p>Test AEA framework performance.</p>
-<h2 id="what-is-it">What is it?</h2>
+<h2 id="what-is-it">What is it?<a class="headerlink" href="#what-is-it" title="Permanent link">&para;</a></h2>
 <p>The benchmark module is a set of tools to measure execution time, CPU load and memory usage of the AEA Python code. It produces text reports and draws charts to present the results.</p>
-<h2 id="how-does-it-work">How does it work?</h2>
+<h2 id="how-does-it-work">How does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">&para;</a></h2>
 <p>The framework:</p>
 <ul>
 <li>spawns a dedicated process for each test run to execute the function to test.</li>
@@ -5967,7 +5981,7 @@
 <li>waits for function exits or terminates them by timeout.</li>
 <li>repeats test execution multiple times to get more accurate results.</li>
 </ul>
-<h2 id="how-to-use">How to use</h2>
+<h2 id="how-to-use">How to use<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h2>
 <p>Steps to run a test:</p>
 <ul>
 <li>Write a function you would like to test with all arguments you would like to parametrise, add some doc strings.</li>
@@ -5976,7 +5990,7 @@
 <li>Import <code>TestCli</code> class,  <code>TestCli().run(function_to_be_tested)</code></li>
 <li>Call it from console to get text results.</li>
 </ul>
-<h3 id="simple-example">Simple example</h3>
+<h3 id="simple-example">Simple example<a class="headerlink" href="#simple-example" title="Permanent link">&para;</a></h3>
 <p><code>cpuburn</code> - simple test of CPU load depends on idle sleep time. Shows how much CPU consumed during the execution.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">time</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -6112,7 +6126,7 @@
 <p><img src="../assets/benchmark_chart.png" alt="Char over argument 1 - sleep value" class="center"></p>
 <p>The most interesting part is CPU usage, as you can see  CPU usage decreases with increasing value of idle sleep.
 Memory usage and execution time can slightly differ per case execution.</p>
-<h2 id="requirements-for-tested-function">Requirements for tested function</h2>
+<h2 id="requirements-for-tested-function">Requirements for tested function<a class="headerlink" href="#requirements-for-tested-function" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The first function's argument has to be <code>benchmark: BenchmarkControl</code> which is passed by default by the framework.</li>
 <li>All arguments except the fist one have to set default values.</li>
@@ -6122,7 +6136,7 @@ Memory usage and execution time can slightly differ per case execution.</p>
 <li>Code to be measured has to go after <code>benchmark.start()</code></li>
 <li>Try to avoid infinitive loops and assume the test should exit after a while.</li>
 </ul>
-<h2 id="execution-options">Execution options</h2>
+<h2 id="execution-options">Execution options<a class="headerlink" href="#execution-options" title="Permanent link">&para;</a></h2>
 <ul>
 <li>To pass an arguments set just provide it as a comma separated string like <code>10,0.1</code></li>
 <li>To pass several argument sets just separate them by white space <code>10,0.1 20,0.2</code></li>
@@ -6131,10 +6145,10 @@ Memory usage and execution time can slightly differ per case execution.</p>
 <li><code>-N, --num-executions INTEGER</code> - how many time to run the same argument set to make result more accurate.</li>
 <li><code>-P, --plot INTEGER</code> -  Draw a chart using, using values of argument specified as values for axis X. argument positions started with 0, argument benchmark does not counted. for example <code>-P 0</code> will use <code>run_time</code> values, <code>-P 1</code> will use <code>sleep</code> values.</li>
 </ul>
-<h2 id="limitations">Limitations</h2>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <p>Currently, the benchmark framework does not measure resources consumed by subprocess spawned in python code. So try to keep one process solutions during tests.</p>
 <p>Asynchronous functions or coroutines are not supported directly. So you have to set up an event loop inside test function and start loop manually.</p>
-<h2 id="testing-aea-handlers-example">Testing AEA: handlers example</h2>
+<h2 id="testing-aea-handlers-example">Testing AEA: handlers example<a class="headerlink" href="#testing-aea-handlers-example" title="Permanent link">&para;</a></h2>
 <p>Test react speed on specific messages amount.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">react_speed_in_loop</span><span class="p">(</span><span class="n">benchmark</span><span class="p">:</span> <span class="n">BenchmarkControl</span><span class="p">,</span> <span class="n">inbox_amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="sd">&quot;&quot;&quot;</span>

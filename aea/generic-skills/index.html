@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6041,11 +6055,11 @@
 <li>An AEA that provides a (data selling) service.</li>
 <li>An AEA that demands this service.</li>
 </ul>
-<h2 id="discussion">Discussion</h2>
+<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
 <p>The scope of this guide is demonstrating how to create easily configurable AEAs. The buyer AEA finds the seller, negotiates the terms of trade, and if successful purchases the data by sending payment. The seller AEA sells the service specified in its <code>skill.yaml</code> file, delivering it to the buyer upon receiving payment. </p>
 <p>Note that these agents do not utilize a smart contract but interact with a ledger to complete a transaction. Moreover, in this setup, the buyer agent has to trust the seller to send the data upon successful payment.</p>
 <p>The corresponding packages can be customised to allow for a database or sensor to be defined from which data is loaded. This is done by first modifying the <code>has_data_source</code> variable in <code>skill.yaml</code> file of the <code>generic_seller</code> skill to <code>True</code>. Then you have to provide an implementation for the <code>collect_from_data_source(self)</code> method in the <code>strategy.py</code> file. More detailed instructions is beyond the scope of this guide.</p>
-<h2 id="communication">Communication</h2>
+<h2 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">&para;</a></h2>
 <p>The following diagram shows the communication between various entities in this interaction.</p>
 <div class="mermaid">
     sequenceDiagram
@@ -6078,11 +6092,11 @@
 
 </div>
 
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<h2 id="preparation-instructions">Preparation instructions<a class="headerlink" href="#preparation-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="demo-instructions">Demo instructions</h2>
-<h3 id="create-the-seller-aea">Create the seller AEA</h3>
+<h2 id="demo-instructions">Demo instructions<a class="headerlink" href="#demo-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-seller-aea">Create the seller AEA<a class="headerlink" href="#create-the-seller-aea" title="Permanent link">&para;</a></h3>
 <p>First, fetch the seller AEA:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/generic_seller:0.29.0 --alias my_seller_aea
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> my_seller_aea
@@ -6116,7 +6130,7 @@ The following steps create the seller from scratch:
 </p>
 </details>
 
-<h3 id="create-the-buyer-aea">Create the buyer AEA</h3>
+<h3 id="create-the-buyer-aea">Create the buyer AEA<a class="headerlink" href="#create-the-buyer-aea" title="Permanent link">&para;</a></h3>
 <p>Then, in another terminal fetch the buyer AEA:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea fetch fetchai/generic_buyer:0.30.0 --alias my_buyer_aea
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> my_buyer_aea
@@ -6150,7 +6164,7 @@ The following steps create the buyer from scratch:
 </p>
 </details>
 
-<h3 id="add-keys-for-the-seller-aea">Add keys for the seller AEA</h3>
+<h3 id="add-keys-for-the-seller-aea">Add keys for the seller AEA<a class="headerlink" href="#add-keys-for-the-seller-aea" title="Permanent link">&para;</a></h3>
 <p>Create the private key for the seller AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea generate-key fetchai
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea add-key fetchai fetchai_private_key.txt
@@ -6162,7 +6176,7 @@ The following steps create the buyer from scratch:
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h3 id="add-keys-and-generate-wealth-for-the-buyer-aea">Add keys and generate wealth for the buyer AEA</h3>
+<h3 id="add-keys-and-generate-wealth-for-the-buyer-aea">Add keys and generate wealth for the buyer AEA<a class="headerlink" href="#add-keys-and-generate-wealth-for-the-buyer-aea" title="Permanent link">&para;</a></h3>
 <p>The buyer needs to have some wealth to purchase the data from the seller.</p>
 <p>First, create the private key for the buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea generate-key fetchai
@@ -6178,7 +6192,7 @@ The following steps create the buyer from scratch:
 <p>Finally, certify the key for use by the connections that request that:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea issue-certificates
 </code></pre></div></p>
-<h3 id="update-the-skill-configurations">Update the skill configurations</h3>
+<h3 id="update-the-skill-configurations">Update the skill configurations<a class="headerlink" href="#update-the-skill-configurations" title="Permanent link">&para;</a></h3>
 <p>The default skill configurations assume that the transaction is settled against the Fetch.ai ledger.</p>
 <p>In the generic seller's skill configuration file (<code>my_seller_aea/vendor/fetchai/skills/generi_seller/skill.yaml</code>) the <code>data_for_sale</code> is the data the seller AEA is offering for sale. In the following case, this is a one item dictionary where key is <code>generic</code> and value is <code>data</code>.</p>
 <p>Furthermore, the <code>service_data</code> is used to register the seller's service in the <a href="../simple-oef">SOEF search node</a> and make your agent discoverable. 
@@ -6224,7 +6238,7 @@ The following steps create the buyer from scratch:
 <a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">      </span><span class="nt">service_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_service</span><span class="w"></span>
 <a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GenericStrategy</span><span class="w"></span>
 </code></pre></div>
-<h3 id="update-the-skill-configurations_1">Update the skill configurations</h3>
+<h3 id="update-the-skill-configurations_1">Update the skill configurations<a class="headerlink" href="#update-the-skill-configurations_1" title="Permanent link">&para;</a></h3>
 <p>Both skills are abstract skills, make them instantiable:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span> my_seller_aea
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.generic_seller.is_abstract <span class="nb">false</span> --type bool
@@ -6232,7 +6246,7 @@ The following steps create the buyer from scratch:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span> my_buyer_aea
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.generic_buyer.is_abstract <span class="nb">false</span> --type bool
 </code></pre></div>
-<h2 id="run-the-aeas">Run the AEAs</h2>
+<h2 id="run-the-aeas">Run the AEAs<a class="headerlink" href="#run-the-aeas" title="Permanent link">&para;</a></h2>
 <p>First, run the seller AEA:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
 </code></pre></div>
@@ -6252,7 +6266,7 @@ This is the entry peer address for the local <a href="../acn">agent communicatio
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea run
 </code></pre></div>
 <p>You will see that the AEAs negotiate and then transact using the Fetch.ai testnet.</p>
-<h2 id="delete-the-aeas">Delete the AEAs</h2>
+<h2 id="delete-the-aeas">Delete the AEAs<a class="headerlink" href="#delete-the-aeas" title="Permanent link">&para;</a></h2>
 <p>When you're done, stop the agents (<code>CTRL+C</code>), go up a level and delete the AEAs.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd</span> ..
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>aea delete my_seller_aea

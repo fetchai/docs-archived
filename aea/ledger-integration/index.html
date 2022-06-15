@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5917,7 +5931,7 @@
   <h1>Ledger & Crypto APIs</h1>
 
 <p>In this section, we show you how to integrate the AEA with the Fetch.ai and third-party ledgers.</p>
-<h2 id="ledger-support">Ledger support</h2>
+<h2 id="ledger-support">Ledger support<a class="headerlink" href="#ledger-support" title="Permanent link">&para;</a></h2>
 <p>For a ledger to be considered <em>supported</em> in the framework, three abstract base classes need to be implemented:</p>
 <ul>
 <li>the <a href="../api/crypto/base#aea.crypto.base.LedgerApi"><code>LedgerApi</code></a> class wraps the API to talk to the ledger and its helper methods</li>
@@ -5925,7 +5939,7 @@
 <li>the <a href="../api/crypto/base#aea.crypto.base.FaucetApi"><code>FaucetApi</code></a> class wraps the API to talk to a faucet on a testnet</li>
 </ul>
 <p>These three classes have their own registries, which allow the developer to import the relevant object where needed.</p>
-<h2 id="ledger-plug-in-architecture">Ledger plug-in architecture</h2>
+<h2 id="ledger-plug-in-architecture">Ledger plug-in architecture<a class="headerlink" href="#ledger-plug-in-architecture" title="Permanent link">&para;</a></h2>
 <p>The AEA framework provides a plug-in mechanism to support ledger functionalities in 
 an easily extendible way. At import time, the framework will load
 all the crypto plug-ins available in the current Python environment.</p>
@@ -5963,7 +5977,7 @@ In the example above, the package name is <code>aea-ledger-myledger</code>,
 and the importable package name is <code>aea_ledger_myledger</code>.</p>
 <p>You can search for AEA ledger plug-ins on PyPI:
 <a href="https://pypi.org/search/?q=aea-ledger" target="_blank">https://pypi.org/search/?q=aea-ledger</a></p>
-<h2 id="maintained-plug-ins">Maintained plug-ins</h2>
+<h2 id="maintained-plug-ins">Maintained plug-ins<a class="headerlink" href="#maintained-plug-ins" title="Permanent link">&para;</a></h2>
 <p>At the moment, the framework natively supports the following three ledgers:</p>
 <ul>
 <li>Fetch.ai: <a href="https://pypi.org/project/aea-ledger-fetchai/" target="_blank">PyPI package: <code>aea-ledger-fetchai</code></a>, and <a href="https://github.com/fetchai/agents-aea/tree/main/plugins/aea-ledger-fetchai" target="_blank">source code</a>.</li>
@@ -5971,7 +5985,7 @@ and the importable package name is <code>aea_ledger_myledger</code>.</p>
 <li>Cosmos: <a href="https://pypi.org/project/aea-ledger-cosmos/" target="_blank">PyPI package: <code>aea-ledger-cosmos</code></a>, and <a href="https://github.com/fetchai/agents-aea/tree/main/plugins/aea-ledger-cosmos" target="_blank">source code</a>.</li>
 </ul>
 <p>However, support for additional ledgers can be added to the framework at runtime.</p>
-<h2 id="examples">Examples</h2>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Examples of how to interact with the crypto registry:</li>
 </ul>
@@ -6027,7 +6041,7 @@ and the importable package name is <code>aea_ledger_myledger</code>.</p>
 </code></pre></div>
 <p>The framework wraps all <code>LedgerApi</code> classes and exposes them in the <a href="../api/crypto/ledger_apis#aea.crypto.base.LedgerApis"><code>LedgerApis</code></a> classes. The framework also wraps the crypto APIs to create identities on both ledgers and exposes them in the <code>Wallet</code>.</p>
 <p>The separation between the <code>Crypto</code> and <code>LedgerApi</code> is fundamental to the framework design. In particular, the object which holds the private key is separated from the object which interacts with the ledger. This design pattern is repeated throughout the framework: the decision maker is the only entity with access to the AEA's <code>Wallet</code> whilst <code>LedgerApis</code> are accessible by all skills.</p>
-<h2 id="stargate-world-fetchai-testnet-for-agents">Stargate World - Fetch.ai testnet for agents</h2>
+<h2 id="stargate-world-fetchai-testnet-for-agents">Stargate World - Fetch.ai testnet for agents<a class="headerlink" href="#stargate-world-fetchai-testnet-for-agents" title="Permanent link">&para;</a></h2>
 <p>Stargate World is our stable, public testnet for the Fetch Ledger v2. As such, most developers will be interacting with this testnet. This is specifically designed and supported for AEA development.</p>
 <table>
 <thead>
@@ -6073,7 +6087,7 @@ and the importable package name is <code>aea_ledger_myledger</code>.</p>
 </table>
 <p>You can access more details on <a href="https://docs.fetch.ai/ledger_v2/networks/" target="_blank">docs section</a>.</p>
 <p>The configurations can be specified for the <code>fetchai/ledger:0.21.0</code> connection.</p>
-<h2 id="cosmwasm-supporting-chains">CosmWasm supporting chains</h2>
+<h2 id="cosmwasm-supporting-chains">CosmWasm supporting chains<a class="headerlink" href="#cosmwasm-supporting-chains" title="Permanent link">&para;</a></h2>
 <p>The Fetch.ai networks use <a href="https://docs.cosmwasm.com" target="_blank">CosmWasm</a> for smart contract support.</p>
 
               

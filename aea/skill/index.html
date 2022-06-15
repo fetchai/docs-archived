@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5997,10 +6011,10 @@
 <p>For instance, an AEA who is trading goods, could subscribe to more than one skill, where each skill corresponds to a different trading strategy.  The skills could then read the preference and ownership state of the AEA, and independently suggest profitable transactions.</p>
 <p>The framework places no limits on the complexity of skills. They can implement simple (e.g. <code>if-this-then-that</code>) or complex (e.g. a deep learning model or reinforcement learning agent).</p>
 <p>The framework provides one default skill, called <code>error</code>. Additional skills can be added as packages.</p>
-<h2 id="independence-of-skills">Independence of skills</h2>
+<h2 id="independence-of-skills">Independence of skills<a class="headerlink" href="#independence-of-skills" title="Permanent link">&para;</a></h2>
 <p>Skills are <code>horizontally layered</code>, that is they run independently of each other. They also cannot access each other's state.</p>
 <p>Two skills can communicate with each other in two ways. The skill context provides access via <code>self.context.shared_state</code> to a key-value store which allows skills to share state. A skill can also define as a callback another skill in <a href="../decision-maker-transaction">a message to the decision maker</a>.</p>
-<h2 id="context">Context</h2>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
 <p>The skill has a <a href="../api/skills/base#skillcontext-objects"><code>SkillContext</code></a> object which is shared by all <code>Handler</code>, <code>Behaviour</code>, and <code>Model</code> objects. The skill context also has a link to the <code>AgentContext</code>. The <code>AgentContext</code> provides read access to AEA specific information like the public key and address of the AEA, its preferences and ownership state. It also provides access to the <code>OutBox</code>.</p>
 <p>This means it is possible to, at any point, grab the <code>context</code> and have access to the code in other parts of the skill and the AEA.</p>
 <p>For example, in the <code>ErrorHandler(Handler)</code> class, the code often grabs a reference to its context and by doing so can access initialised and running framework objects such as an <code>OutBox</code> for putting messages into.</p>
@@ -6008,10 +6022,10 @@
 </code></pre></div>
 <p>Moreover, you can read/write to the <em>agent context namespace</em> by accessing the attribute <code>SkillContext.namespace</code>.</p>
 <p>Importantly, however, a skill does not have access to the context of another skill or protected AEA components like the <code>DecisionMaker</code>.</p>
-<h2 id="what-to-code">What to code</h2>
+<h2 id="what-to-code">What to code<a class="headerlink" href="#what-to-code" title="Permanent link">&para;</a></h2>
 <p>Each of the skill classes has three methods that must be implemented. All of them include a <code>setup()</code> and <code>teardown()</code> method which the developer must implement. </p>
 <p>Then there is a specific method that the framework requires for each class.</p>
-<h3 id="handlerspy"><code>handlers.py</code></h3>
+<h3 id="handlerspy"><code>handlers.py</code><a class="headerlink" href="#handlerspy" title="Permanent link">&para;</a></h3>
 <p>There can be none, one or more <code>Handler</code> class per skill.</p>
 <p><code>Handler</code> classes can receive <code>Message</code> objects of one protocol type only. However, <code>Handler</code> classes can send <code>Envelope</code> objects of any type of protocol they require.</p>
 <ul>
@@ -6026,7 +6040,7 @@
 component we can write:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">new_handlers</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">MyHandler</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_handler&quot;</span><span class="p">,</span> <span class="n">skill_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">))</span>
 </code></pre></div>
-<h3 id="behaviourspy"><code>behaviours.py</code></h3>
+<h3 id="behaviourspy"><code>behaviours.py</code><a class="headerlink" href="#behaviourspy" title="Permanent link">&para;</a></h3>
 <p>Conceptually, a <code>Behaviour</code>  class contains the business logic specific to initial actions initiated by the AEA rather than reactions to other events.</p>
 <p>There can be one or more <code>Behaviour</code> classes per skill. The developer must create a subclass from the abstract class <code>Behaviour</code> to create a new <code>Behaviour</code>.</p>
 <ul>
@@ -6080,7 +6094,7 @@ can always subclass the general-purpose <code>Behaviour</code> class.</p>
 of the <code>act</code> method described above. </p>
 <p>The framework is then in charge of registering the behaviour and scheduling it 
 for execution.</p>
-<h3 id="taskspy"><code>tasks.py</code></h3>
+<h3 id="taskspy"><code>tasks.py</code><a class="headerlink" href="#taskspy" title="Permanent link">&para;</a></h3>
 <p>Conceptually, a <code>Task</code> is where the developer codes any internal tasks the AEA requires.</p>
 <p>There can be one or more <code>Task</code> classes per skill. The developer subclasses abstract class <code>Task</code> to create a new <code>Task</code>.</p>
 <ul>
@@ -6152,7 +6166,7 @@ not be updated.</p>
 <a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>        <span class="sd">&quot;&quot;&quot;Teardown behaviour.&quot;&quot;&quot;</span>
 </code></pre></div></p>
-<h3 id="models">Models</h3>
+<h3 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h3>
 <p>The developer might want to add other classes on the context level which are shared equally across the <code>Handler</code>, <code>Behaviour</code> and <code>Task</code> classes. To this end, the developer can subclass an abstract <a href="../api/skills/base#model-objects"><code>Model</code></a>. These models are made available on the context level upon initialization of the AEA.</p>
 <p>Say, the developer has a class called <code>SomeModel</code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span> <span class="nc">SomeModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -6161,7 +6175,7 @@ not be updated.</p>
 <p>Then, an instance of this class is available on the context level like so:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">some_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">some_model</span>
 </code></pre></div></p>
-<h3 id="skill-configuration">Skill configuration</h3>
+<h3 id="skill-configuration">Skill configuration<a class="headerlink" href="#skill-configuration" title="Permanent link">&para;</a></h3>
 <p>Each skill has a <code>skill.yaml</code> configuration file which lists all <code>Behaviour</code>, <code>Handler</code>, and <code>Task</code> objects pertaining to the skill.</p>
 <p>It also details the protocol types used in the skill and points to shared modules, i.e. modules of type <code>Model</code>, which allow custom classes within the skill to be accessible in the skill context.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo</span><span class="w"></span>
@@ -6183,7 +6197,7 @@ not be updated.</p>
 <a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="nt">protocols</span><span class="p">:</span><span class="w"></span>
 <a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/default:1.1.1</span><span class="w"></span>
 </code></pre></div>
-<h2 id="error-skill">Error skill</h2>
+<h2 id="error-skill">Error skill<a class="headerlink" href="#error-skill" title="Permanent link">&para;</a></h2>
 <p>All AEAs have a default <code>error</code> skill that contains error handling code for a number of scenarios:</p>
 <ul>
 <li>Received envelopes with unsupported protocols </li>
@@ -6192,7 +6206,7 @@ not be updated.</p>
 <li>Invalid messages with respect to the registered protocol</li>
 </ul>
 <p>The error skill relies on the <code>fetchai/default:1.0.0</code> protocol which provides error codes for the above.</p>
-<h2 id="custom-error-handler">Custom Error handler</h2>
+<h2 id="custom-error-handler">Custom Error handler<a class="headerlink" href="#custom-error-handler" title="Permanent link">&para;</a></h2>
 <p>The framework implements a default <a href="../api/error_handler/default#errorhandler-objects"><code>ErrorHandler</code></a>. 
 You can implement your own and mount it. The easiest way to do this is to run the following command to scaffold a custom <code>ErrorHandler</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea scaffold error-handler

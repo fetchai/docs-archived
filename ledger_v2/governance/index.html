@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5930,23 +5944,23 @@
 
 
 
-<h1 id="governance">Governance</h1>
+<h1 id="governance">Governance<a class="headerlink" href="#governance" title="Permanent link">&para;</a></h1>
 <p>In order to be able to take part in the governance you either need to be running a full validator node or you need to have have delegated stake to an existing validator</p>
-<h2 id="stake-delegation">Stake Delegation</h2>
+<h2 id="stake-delegation">Stake Delegation<a class="headerlink" href="#stake-delegation" title="Permanent link">&para;</a></h2>
 <p>In order to delegate stake to a validator the following command should be used:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetchd tx staking delegate &lt;VALOPER_ADDRESS&gt; &lt;AMOUNT&gt; --from &lt;KEY_NAME&gt;
 </code></pre></div>
 <p>Where the <code>&lt;VALOPER_ADDRESS&gt;</code> begins with the prefix <code>fetchvaloper1...</code> and the <code>&lt;AMOUNT&gt;</code> field contains the currency denomination. For example:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fetchd tx staking delegate fetchvaloper1cct4fhhksplu9m9wjljuthjqhjj93z0s97p3g7 1000atestfet --from agent
 </code></pre></div>
-<h2 id="proposals-overview">Proposals Overview</h2>
+<h2 id="proposals-overview">Proposals Overview<a class="headerlink" href="#proposals-overview" title="Permanent link">&para;</a></h2>
 <p>There are three types of proposal:</p>
 <ul>
 <li><strong>Text Proposals</strong>: These are the most basic type of proposal. They can be used to get the opinion from participants of the network on a given topic.</li>
 <li><strong>Parameter Proposals</strong>: These proposals are used to update the value of an existing software parameter of the network.</li>
 <li><strong>Software Upgrade Proposals</strong>: These are used to propose an upgrade of the <code>fetchd</code> software, particularly in cases where the software changes might not necessary be backwards compatible or in some way present a major update to the network.</li>
 </ul>
-<h2 id="the-proposal-process">The Proposal Process</h2>
+<h2 id="the-proposal-process">The Proposal Process<a class="headerlink" href="#the-proposal-process" title="Permanent link">&para;</a></h2>
 <p>Any FET holder can submit a proposal. In order for the proposal to be open for voting, it needs to come with a deposit that is greater than a parameter called <em>minDeposit</em>. The deposit need not be provided in its entirety by the submitter. If the initial proposer's deposit is not sufficient, the proposal enters the <strong>deposit period</strong> status. Then, any FET holder can increase the deposit by sending a <em>depositTx</em> transaction to the network.</p>
 <p>Once the deposit reaches <em>minDeposit</em>, the proposal enters the <strong>voting period</strong>, which lasts 2 weeks. Any bonded FET holder can then cast a vote on this proposal. The user has the following options for voting:</p>
 <ul>
@@ -5956,7 +5970,7 @@
 <li>Abstain</li>
 </ul>
 <p>At the end of the voting period, the proposal is accepted if there are more than 50% Yes votes (excluding Abstain votes) and less than 33.33% of NoWithVeto votes (excluding Abstain votes).</p>
-<h2 id="generating-proposals">Generating Proposals</h2>
+<h2 id="generating-proposals">Generating Proposals<a class="headerlink" href="#generating-proposals" title="Permanent link">&para;</a></h2>
 <p>When creating a proposal, the user will create a proposal JSON file with all the relevant information. An example of a text proposal is shown below:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="w"></span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Switch to semantic commit messages for fetchd&quot;</span><span class="p">,</span><span class="w"></span>
@@ -5968,18 +5982,18 @@
 <p>It is always recommended that the description of a text proposal has a link to a Github issue with the full proposal text along with the discussions about it.</p>
 <p>Once the user has created the JSON file, to generate the text propsal on chain run the following command:</p>
 <p><code>fetchd tx gov submit-proposal --proposal proposal.json --from &lt;name of signing key&gt;</code></p>
-<h2 id="increasing-the-deposit-for-a-proposal">Increasing the deposit for a proposal</h2>
+<h2 id="increasing-the-deposit-for-a-proposal">Increasing the deposit for a proposal<a class="headerlink" href="#increasing-the-deposit-for-a-proposal" title="Permanent link">&para;</a></h2>
 <p>If a user wants to increase the deposit of a proposal they would run the following command:</p>
 <p><code>fetchd tx gov deposit &lt;proposalID&gt; 100atestfet --from &lt;key name&gt;</code></p>
 <p>For example:</p>
 <p><code>fetchd tx gov deposit 2 100atestfet --from validator</code></p>
 <p>To get the proposalID, use the txhash obtained when the proposal was submitted and run the following command:</p>
 <p><code>fetchd query tx &lt;txhash&gt;</code></p>
-<h2 id="listing-current-proposals">Listing current proposals</h2>
+<h2 id="listing-current-proposals">Listing current proposals<a class="headerlink" href="#listing-current-proposals" title="Permanent link">&para;</a></h2>
 <p>Current proposals are visible from the block explorer and using the CLI.</p>
 <p>To get the list of current proposals and their corresponding <em>proposal-ids</em> the run the following command:</p>
 <p><code>fetchd query gov proposals</code></p>
-<h2 id="voting-on-a-proposal">Voting on a proposal</h2>
+<h2 id="voting-on-a-proposal">Voting on a proposal<a class="headerlink" href="#voting-on-a-proposal" title="Permanent link">&para;</a></h2>
 <p>To vote for a proposal run the following command</p>
 <p><code>fetchd tx gov vote &lt;proposalID&gt; &lt;option&gt; --from &lt;delegatorKeyName&gt;</code></p>
 <p>For example:</p>

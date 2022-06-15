@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5983,7 +5997,7 @@
   <h1>Testing Skills</h1>
 
 <p>In this guide we describe some of the tools the framework offers for testing skills.</p>
-<h2 id="the-baseskilltestcase-class">The <code>BaseSkillTestCase</code> class</h2>
+<h2 id="the-baseskilltestcase-class">The <code>BaseSkillTestCase</code> class<a class="headerlink" href="#the-baseskilltestcase-class" title="Permanent link">&para;</a></h2>
 <p>The framework offers a <a href="../api/test_tools/test_skill#baseskilltestcase-objects"><code>BaseSkillTestCase</code></a> class which you can subclass and write your test cases with. </p>
 <p>Let us assume you want to test the <code>my_behaviour</code> behaviour of a <code>CustomSkill</code> skill you have developed. </p>
 <p>You can create a <code>TestMyBehaviour</code> class which inherits <code>BaseSkillTestCase</code> as below:</p>
@@ -6007,9 +6021,9 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">path_to_skill</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;path_to_this_skill&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="specifying-skill-path">Specifying Skill Path</h3>
+<h3 id="specifying-skill-path">Specifying Skill Path<a class="headerlink" href="#specifying-skill-path" title="Permanent link">&para;</a></h3>
 <p>You must then specify the path to your skill directory via <code>path_to_skill</code> to allow the skill to be loaded and tested. This must be the directory in which <code>skill.yaml</code> of your skill resides.</p>
-<h3 id="setting-up-each-test">Setting up Each Test</h3>
+<h3 id="setting-up-each-test">Setting up Each Test<a class="headerlink" href="#setting-up-each-test" title="Permanent link">&para;</a></h3>
 <p>You can add a <code>setup()</code> class method to set the environment up for each of your tests. This code will be executed before every test method. If you do include this method, you must call the <code>setup()</code> method of the <code>BaseSkillTestCase</code> class via <code>super().setup()</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@classmethod</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
@@ -6020,10 +6034,10 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">)</span>
 </code></pre></div>
 <p>In the above, we make the <code>my_behaviour</code> behaviour object accessible for every test.</p>
-<h3 id="skill-and-skill-context">Skill and Skill Context</h3>
+<h3 id="skill-and-skill-context">Skill and Skill Context<a class="headerlink" href="#skill-and-skill-context" title="Permanent link">&para;</a></h3>
 <p>The skill object itself is exposed via a property. So you can access the skill object by <code>self.skill</code> and by extension all of its attributes. This crucially includes the complete <code>skill_context</code>. This means that for example, all of the components of the skill (e.g. behaviours, handlers, models) can be accessed via the skill context. </p>
 <p>In the above code snippet, <code>my_behavior</code> is accessed and exposed as a class attribute. Note accessing the skill context is slightly different in the above because it is a class method. If this was a test method, you could access the behaviour via <code>self.skill.skill_context.behaviours.my_behaviour</code>.</p>
-<h3 id="dummy-agent-context">Dummy Agent Context</h3>
+<h3 id="dummy-agent-context">Dummy Agent Context<a class="headerlink" href="#dummy-agent-context" title="Permanent link">&para;</a></h3>
 <p>The loaded skill is also fed a dummy <code>agent_context</code> complete with an <code>identity</code>, <code>outbox</code>, <code>decision_maker_queue</code> and so on, to allow the skill to be properly loaded and have access to everything it requires to function. The <code>agent_context</code> object fed to the skill is shown below:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">_multiplexer</span> <span class="o">=</span> <span class="n">AsyncMultiplexer</span><span class="p">()</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">_multiplexer</span><span class="o">.</span><span class="n">_out_queue</span> <span class="o">=</span> <span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">())</span>
@@ -6044,7 +6058,7 @@
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">)</span>
 </code></pre></div>
-<h3 id="some-useful-skill-attributes">Some Useful Skill Attributes</h3>
+<h3 id="some-useful-skill-attributes">Some Useful Skill Attributes<a class="headerlink" href="#some-useful-skill-attributes" title="Permanent link">&para;</a></h3>
 <p>Some of the useful objects you can access in your test class for the loaded skill are below:</p>
 <ul>
 <li><code>self.skill.skill_context.agent_address</code>: this is the agent identity the skill uses and is set to <code>"test_agent_address"</code>.</li>
@@ -6052,7 +6066,7 @@
 <li><code>self.skill.skill_context.skill_id</code>: this is the id of the skill.</li>
 <li><code>self.skill.skill_context.decision_maker_address</code>: this is the address of the decision maker and is set to <code>"dummy_decision_maker_address"</code>.</li>
 </ul>
-<h3 id="some-useful-baseskilltestcase-methods">Some Useful <code>BaseSkillTestCase</code> Methods</h3>
+<h3 id="some-useful-baseskilltestcase-methods">Some Useful <code>BaseSkillTestCase</code> Methods<a class="headerlink" href="#some-useful-baseskilltestcase-methods" title="Permanent link">&para;</a></h3>
 <p>There are a number of methods that <code>BaseSkillTestCase</code> offers to make testing skills easier. Some of these are mentioned below. For the rest, consult the API for <code>BaseSkillTestCase</code>:</p>
 <ul>
 <li><code>self.get_quantity_in_outbox()</code>: gives you the number of messages which are in the outbox. After running a part of the skill which is expected to send messages, you can use this method to assert the correct number of messages are indeed sent.</li>
@@ -6060,7 +6074,7 @@
 <li><code>self.message_has_attributes(actual_message: Message, message_type: Type[Message], **kwargs,)</code>: you can use this method in tandem with the above method to check that a message has the attributes you expect it to have. You have to supply it with the actual message (e.g. using <code>self.get_message_from_outbox()</code>), specify its expected type (e.g. <code>FipaMessage</code>), and any other attribute you expect the message to have (e.g. <code>message_id</code> is 1) may be provided via keyword arguments.</li>
 <li><code>self.build_incoming_message</code>: this is an especially useful method to test handlers. Since handlers handle incoming messages, you can create an incoming message using this method to feed it to the handler and test its execution.</li>
 </ul>
-<h4 id="checking-logger-output">Checking Logger Output</h4>
+<h4 id="checking-logger-output">Checking Logger Output<a class="headerlink" href="#checking-logger-output" title="Permanent link">&para;</a></h4>
 <p>You can check the output of your skill's <code>logger</code> by mocking it using <code>unittest.mock</code> before executing a part of your skill as such:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">logging</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
@@ -6071,7 +6085,7 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">mock_logger</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s2">&quot;some_logger_message&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>In the above, we mock the logger before running <code>my_behaviour</code>'s <code>act()</code> method and check that  the string <code>"some_logger_message"</code> is indeed passed to the logger.</p>
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>You can consult the <code>fetchai/generic_buyer</code> and <code>fetchai/generic_seller</code> skills and their associated tests <a href="https://github.com/fetchai/agents-aea/tree/main/tests/test_packages/test_skills" target="_blank">here</a> to study how <code>BaseSkillTestCase</code> can help you in testing your skills.</p>
 <p>You can also refer to the API to study the different methods <code>BaseSkillTestCase</code> makes available to make testing your skills easier. </p>
 

@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6028,15 +6042,15 @@
 <p>Although one can imagine scenarios where a single AEA pursues its goals in isolation without interacting with other AEAs, there is no doubt that by working together, AEAs can achieve much more. To do so, an AEA must be seen and found by other AEAs so that they can trade and do other useful things. Fetch.ai’s search-and-discovery mechanism, the <a href="../simple-oef">simple OEF</a> (or SOEF, for short) lets your agents register, be discovered, and find other agents. You can then negotiate using the AEA framework’s <a href="../acn">peer-to-peer network (ACN)</a> and trade. This guide covers getting your AEA connected to the SOEF, and describing your AEA to make itself visible.</p>
 <p>Registering your AEA with the SOEF involves setting a name, a genus (a high-level description of what the agent represents, e.g. <code>vehicle</code>, <code>building</code> or <code>service</code>), a classification (for example <code>infrastructure.railway.train</code>) and other descriptors to further fine-tune the kind of service your AEA offers (for example, the agent's position, whether it buys or sells, and other descriptive items).</p>
 <p>The more you describe your AEA, the easier it is for others to find it using specific filters.</p>
-<h2 id="dependencies-required">Dependencies (Required)</h2>
+<h2 id="dependencies-required">Dependencies (Required)<a class="headerlink" href="#dependencies-required" title="Permanent link">&para;</a></h2>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="step-1-setup">Step 1: Setup</h2>
+<h2 id="step-1-setup">Step 1: Setup<a class="headerlink" href="#step-1-setup" title="Permanent link">&para;</a></h2>
 <p>We will first create an AEA and add a scaffold skill, which we call <code>my_search</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea create my_aea <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my_aea
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>aea scaffold skill my_search
 </code></pre></div>
 <p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../simple-oef">SOEF search node</a> and process the resulting response.</p>
-<h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour</h2>
+<h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour<a class="headerlink" href="#step-2-develop-a-behaviour" title="Permanent link">&para;</a></h2>
 <p>A <a href="../api/skills/base#behaviour-objects"><code>Behaviour</code></a> class contains the business logic specific to actions initiated by the AEA rather than reactions to other events.</p>
 <p>In this example, we implement a simple search behaviour. Each time, <code>act()</code> gets called by the main agent loop, we will send a search request to the <a href="../simple-oef">SOEF search node</a> via the <a href="../oef-ledger">P2P communication network</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span>
@@ -6129,7 +6143,7 @@
   <p> Note that the import paths to agent packages, for example <code>packages.fetchai.skills.my_search.dialogues</code> above, are not actual paths. Package files always reside in your AEA's folder, either under a specific package directory (e.g. connection, protocol, skill) if the package is custom built, or under <code>vendor</code> if it is pulled from the registry. These paths are virtual and created automatically when an AEA is run. See <a href="../package-imports"> this page </a> for more details. </p>
 </div>
 
-<h2 id="step-3-develop-a-handler">Step 3: Develop a Handler</h2>
+<h2 id="step-3-develop-a-handler">Step 3: Develop a Handler<a class="headerlink" href="#step-3-develop-a-handler" title="Permanent link">&para;</a></h2>
 <p>So far, we have tasked the AEA with sending search requests to the <a href="../simple-oef">SOEF search node</a>. However, we have no way of handling the responses sent to the AEA by the <a href="../simple-oef">SOEF search node</a> at the moment. The AEA would simply respond to the <a href="../simple-oef">SOEF search node</a> via the default <code>error</code> skill which sends all unrecognised envelopes back to the sender.</p>
 <p>Let us now implement a <a href="../api/skills/base#handler-objects"><code>Handler</code></a> to deal with the incoming search responses.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
@@ -6270,7 +6284,7 @@
 <p>Note, how the handler simply reacts to incoming events (i.e. messages). It could initiate further actions, however, they are still reactions to the upstream search event.</p>
 <p>Also note, how we have access to other objects in the skill via <code>self.context</code>, the <a href="../api/skills/base#skillcontext-objects"><code>SkillContext</code></a>.</p>
 <p>We place this code in <code>my_aea/skills/my_search/handlers.py</code>. Ensure you replace the <code>fetchai</code> author in this line <code>from packages.fetchai.skills.my_search.dialogues import (</code> with your author handle (run <code>aea init</code> to set or check the author name).</p>
-<h2 id="step-4-add-dialogues-model">Step 4: Add dialogues model</h2>
+<h2 id="step-4-add-dialogues-model">Step 4: Add dialogues model<a class="headerlink" href="#step-4-add-dialogues-model" title="Permanent link">&para;</a></h2>
 <p>We have implemented a behaviour and a handler. We now implement a <a href="../api/skills/base#model-objects"><code>Model</code></a>, in particular we implement the <a href="../api/protocols/dialogue/base#dialogue-objects"><code>Dialogue</code></a> and <a href="../api/protocols/dialogue/base#dialogues-objects"><code>Dialogues</code></a> classes. These ensure that the message flow satisfies the <code>fetchai/oef_search:1.0.0</code> protocol and keep track of the individual messages being sent and received.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">aea.protocols.base</span> <span class="kn">import</span> <span class="n">Message</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">aea.protocols.dialogue.base</span> <span class="kn">import</span> <span class="n">Dialogue</span> <span class="k">as</span> <span class="n">BaseDialogue</span>
@@ -6317,7 +6331,7 @@
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        <span class="p">)</span>
 </code></pre></div>
 <p>We add this code in the file <code>my_aea/skills/my_search/my_model.py</code>, replacing its original content. We then rename <code>my_aea/skills/my_search/my_model.py</code> to <code>my_aea/skills/my_search/dialogues.py</code>.</p>
-<h2 id="step-5-create-the-configuration-file">Step 5: Create the configuration file</h2>
+<h2 id="step-5-create-the-configuration-file">Step 5: Create the configuration file<a class="headerlink" href="#step-5-create-the-configuration-file" title="Permanent link">&para;</a></h2>
 <p>Based on our skill components above, we create the following configuration file.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_search</span><span class="w"></span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
@@ -6390,12 +6404,12 @@
 <a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="n">PUBLIC_ID</span> <span class="o">=</span> <span class="n">PublicId</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;fetchai/my_search:0.1.0&quot;</span><span class="p">)</span>
 </code></pre></div>
 Again, ensure the author field matches your own.</p>
-<h2 id="step-6-update-fingerprint">Step 6: Update fingerprint</h2>
+<h2 id="step-6-update-fingerprint">Step 6: Update fingerprint<a class="headerlink" href="#step-6-update-fingerprint" title="Permanent link">&para;</a></h2>
 <p>To run an AEA with new or modified code, you need to update the fingerprint of the new/modified components. In this case, we need to fingerprint our skill:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea fingerprint skill fetchai/my_search:0.1.0
 </code></pre></div>
 Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
-<h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the OEF protocol and connection</h2>
+<h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the OEF protocol and connection<a class="headerlink" href="#step-7-add-the-oef-protocol-and-connection" title="Permanent link">&para;</a></h2>
 <p>Our AEA does not have the OEF protocol yet so let's add it.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea add protocol fetchai/oef_search:1.1.1
 </code></pre></div></p>
@@ -6412,7 +6426,7 @@ Ensure, you use the correct author name to reference your skill (here we use <co
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s1">}&#39;</span>
 </code></pre></div></p>
 <p>The last command will ensure that search requests are processed by the correct connection.</p>
-<h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA</h2>
+<h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA<a class="headerlink" href="#step-8-run-a-service-provider-aea" title="Permanent link">&para;</a></h2>
 <p>In order for this AEA to find another AEA when searching, the second AEA (let's call it the service provider AEA) must exist and have been registered with the SOEF. </p>
 <p>From a different terminal window, we fetch a finished service provider AEA and install its Python dependencies:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea fetch fetchai/simple_service_registration:0.32.0 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration <span class="o">&amp;&amp;</span> aea install <span class="o">&amp;&amp;</span> aea build
@@ -7020,7 +7034,7 @@ The associated <code>skill.yaml</code> is:
 </p>
 </details>
 
-<h2 id="step-9-run-the-search-aea">Step 9: Run the Search AEA</h2>
+<h2 id="step-9-run-the-search-aea">Step 9: Run the Search AEA<a class="headerlink" href="#step-9-run-the-search-aea" title="Permanent link">&para;</a></h2>
 <p>First, create the private key for the search AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea generate-key fetchai
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea add-key fetchai fetchai_private_key.txt
@@ -7048,13 +7062,13 @@ This allows the search AEA to connect to the same local agent communication netw
 </code></pre></div>
 <p>We can see that the AEA sends search requests to the <a href="../simple-oef">SOEF search node</a> and receives search responses from the <a href="../simple-oef">SOEF search node</a>. The search response returns one or more agents (the service provider and potentially other agents which match the query).</p>
 <p>We stop the AEA with <code>CTRL + C</code>.</p>
-<h2 id="next-steps">Next steps</h2>
-<h3 id="recommended">Recommended</h3>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="recommended">Recommended<a class="headerlink" href="#recommended" title="Permanent link">&para;</a></h3>
 <p>We recommend you continue with the next step in the 'Getting Started' series:</p>
 <ul>
 <li><a href="../core-components-2">Core components (Part 2)</a></li>
 </ul>
-<h3 id="relevant-deep-dives">Relevant deep-dives</h3>
+<h3 id="relevant-deep-dives">Relevant deep-dives<a class="headerlink" href="#relevant-deep-dives" title="Permanent link">&para;</a></h3>
 <p><a href="../generic-skills-step-by-step"> This guide </a> goes through a more elaborate scenario than the one on this page, where after finding each other, the two AEAs negotiate and trade via a ledger. </p>
 <p><br /></p>
 

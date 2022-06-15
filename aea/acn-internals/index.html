@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6309,7 +6323,7 @@ and the message exchange involved;</li>
 <li>The documentation ends with a section of known issues and limitations
   of the current implementation.</li>
 </ul>
-<h2 id="messages-and-data-structures">Messages and Data Structures</h2>
+<h2 id="messages-and-data-structures">Messages and Data Structures<a class="headerlink" href="#messages-and-data-structures" title="Permanent link">&para;</a></h2>
 <p>At the foundation of the ACN there is the <em>ACN protocol</em>.
 The protocol messages and the reply structure are generated from this 
 <a href="https://github.com/fetchai/agents-aea/blob/develop/libs/go/libp2p_node/protocols/acn/v1_0_0/acn.yaml" target="_blank">protocol specification</a>,
@@ -6321,7 +6335,7 @@ and the definition of the data structures involved is defined in this
 <p>To know more about the protocol generator, refer to the relevant
 section of the documentation:
 <a href="../protocol-generator" target="_blank">Protocol Generator</a>.</p>
-<h3 id="agent-record">Agent Record</h3>
+<h3 id="agent-record">Agent Record<a class="headerlink" href="#agent-record" title="Permanent link">&para;</a></h3>
 <p>An <em>agent record</em> is a data structure containing information about an
 agent and its Proof-of-Representation (PoR) to be used by a peer for other peers.
 This data structure is used as a payload in other ACN messages (see below).</p>
@@ -6346,7 +6360,7 @@ This data structure is used as a payload in other ACN messages (see below).</p>
 <li><code>not_after</code>: a string. Specify the upper bound for certificate validity. 
     If it is a string, it must follow the format: <code>YYYY-MM-DD</code>. It will be interpreted as time zone UTC-0.</li>
 </ul>
-<h3 id="acn-message">ACN Message</h3>
+<h3 id="acn-message">ACN Message<a class="headerlink" href="#acn-message" title="Permanent link">&para;</a></h3>
 <p>Entities in the ACN (i.e. either agents or peers) exchange <em>ACN messages</em>.
 An ACN message contains a <code>payload</code> field,
 which is the actual content of the message.</p>
@@ -6358,7 +6372,7 @@ which is the actual content of the message.</p>
 <li><code>LookupResponse</code></li>
 <li><code>AeaEnvelope</code></li>
 </ul>
-<h3 id="status">Status</h3>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <p>The <code>Status</code> payload is used as a response message to inform 
 the sender about the handling of certain requests.
 The payload contains:</p>
@@ -6403,30 +6417,30 @@ Status codes greater than <code>0</code> can be:</p>
 </ul>
 </li>
 </ul>
-<h3 id="register">Register</h3>
+<h3 id="register">Register<a class="headerlink" href="#register" title="Permanent link">&para;</a></h3>
 <p>The <code>Register</code> payload is used to request a peer to register an agent among his known ones.
 The payload contains the field <code>record</code>, which is an instance of <code>AgentRecord</code>.</p>
-<h3 id="lookuprequest">LookupRequest</h3>
+<h3 id="lookuprequest">LookupRequest<a class="headerlink" href="#lookuprequest" title="Permanent link">&para;</a></h3>
 <p>The <code>LookupRequest</code> payload is sent between peer to look-up addresses in the Distributed Hash Table (DHT).
 It contains the agent address (a string) that the sender needs to correctly route an envelope.</p>
-<h3 id="lookupresponse">LookupResponse</h3>
+<h3 id="lookupresponse">LookupResponse<a class="headerlink" href="#lookupresponse" title="Permanent link">&para;</a></h3>
 <p>The <code>LookupResponse</code> payload is the response sent by a peer that received a <code>LookupRequest</code>.
 It contains the <code>AgentRecord</code> associated to the requested address.</p>
-<h3 id="aeaenvelope">AeaEnvelope</h3>
+<h3 id="aeaenvelope">AeaEnvelope<a class="headerlink" href="#aeaenvelope" title="Permanent link">&para;</a></h3>
 <p>The <code>AeaEnvelope</code> payload contains the envelope sent by an agent and to be delivered to another agent.
 It contains:</p>
 <ul>
 <li><code>envelope</code>: the envelope to be forwarded, in byte representation;</li>
 <li>an <code>AgentRecord</code> (see above).</li>
 </ul>
-<h2 id="acn-protocol-interactions">ACN Protocol Interactions</h2>
+<h2 id="acn-protocol-interactions">ACN Protocol Interactions<a class="headerlink" href="#acn-protocol-interactions" title="Permanent link">&para;</a></h2>
 <p>The ACN protocol specifies three different possible interactions:</p>
 <ul>
 <li>the <em>registration</em> interaction</li>
 <li>the <em>look-up</em> interaction</li>
 <li>the <em>routing</em> interaction</li>
 </ul>
-<h3 id="registration-interaction">"Registration" Interaction</h3>
+<h3 id="registration-interaction">"Registration" Interaction<a class="headerlink" href="#registration-interaction" title="Permanent link">&para;</a></h3>
 <p>The registration interaction is used by delegate agents or relayed peers
 to register themselves to another peer.</p>
 <div class="mermaid">
@@ -6448,7 +6462,7 @@ to register themselves to another peer.</p>
         end
 </div>
 
-<h3 id="look-up-interaction">"Look-up" Interaction</h3>
+<h3 id="look-up-interaction">"Look-up" Interaction<a class="headerlink" href="#look-up-interaction" title="Permanent link">&para;</a></h3>
 <p>The look-up interaction is used by a peer
 to request information to another peer about an agent address.</p>
 <div class="mermaid">
@@ -6463,7 +6477,7 @@ to request information to another peer about an agent address.</p>
         end
 </div>
 
-<h3 id="routing-interaction">"Routing" Interaction</h3>
+<h3 id="routing-interaction">"Routing" Interaction<a class="headerlink" href="#routing-interaction" title="Permanent link">&para;</a></h3>
 <p>The routing interaction is used by agents
 and peers to route the envelope through the ACN.</p>
 <div class="mermaid">
@@ -6482,7 +6496,7 @@ and peers to route the envelope through the ACN.</p>
 
 </div>
 
-<h2 id="joining-the-acn-network">Joining the ACN network</h2>
+<h2 id="joining-the-acn-network">Joining the ACN network<a class="headerlink" href="#joining-the-acn-network" title="Permanent link">&para;</a></h2>
 <p>When an ACN peer wants to join the network, it has
 to start from a list of <em>bootstrap peers</em>, i.e.
 a list of ACN peers to connect with (at least one).</p>
@@ -6531,7 +6545,7 @@ and delegate connections.</p>
         note over Peer1: set up:<br/>- address stream<br/>- envelope stream<br/>- register relay stream
 </div>
 
-<h3 id="relay-connections">Relay connections</h3>
+<h3 id="relay-connections">Relay connections<a class="headerlink" href="#relay-connections" title="Permanent link">&para;</a></h3>
 <p>If the ACN node is configured to run the relay service,
 it sets up the register relay stream, waiting for registration
 requests.</p>
@@ -6562,13 +6576,13 @@ during a registration request:</p>
         end
 </div>
 
-<h3 id="delegate-connections">Delegate connections</h3>
+<h3 id="delegate-connections">Delegate connections<a class="headerlink" href="#delegate-connections" title="Permanent link">&para;</a></h3>
 <p>If the ACN node is configured to run the delegate service,
 it start listening from a TCP socket at a configurable URI.</p>
 <p>To see a diagram of the message exchanged
 during a registration request read 
 <a href="../acn-internals#registration-interaction" target="_blank">this section</a>.</p>
-<h2 id="acn-transport">ACN transport</h2>
+<h2 id="acn-transport">ACN transport<a class="headerlink" href="#acn-transport" title="Permanent link">&para;</a></h2>
 <p>In the following sections, we describe the main three steps of the routing
 of an envelope through the ACN:</p>
 <ul>
@@ -6580,7 +6594,7 @@ of an envelope through the ACN:</p>
 <li><em>ACN exit</em>: when an envelope gets delivered to the receiving agent
   through its representative peer, i.e. peer-to-agent communication.</li>
 </ul>
-<h3 id="acn-envelope-entrance-agent-peer">ACN Envelope Entrance: Agent -&gt; Peer</h3>
+<h3 id="acn-envelope-entrance-agent-peer">ACN Envelope Entrance: Agent -&gt; Peer<a class="headerlink" href="#acn-envelope-entrance-agent-peer" title="Permanent link">&para;</a></h3>
 <p>In this section, we will describe the interaction protocols between agents and peers 
 for the messages sent by the agent to the ACN network;
 in particular, the communication from the contact peer of an agent to the agent.</p>
@@ -6627,7 +6641,7 @@ the <a href="https://github.com/fetchai/agents-aea/tree/main/packages/fetchai/co
         note over Peer: route envelope<br/>to next peer
 </div>
 
-<h3 id="acn-envelope-routing">ACN Envelope Routing</h3>
+<h3 id="acn-envelope-routing">ACN Envelope Routing<a class="headerlink" href="#acn-envelope-routing" title="Permanent link">&para;</a></h3>
 <p>In this section, we describe the interaction between peers
 when it comes to envelope routing.</p>
 <p>Assume an envelope arrives from an agent to peer <code>Peer1</code>,
@@ -6779,7 +6793,7 @@ envelope recipient handles the incoming envelope:</p>
         end
 </div>
 
-<h3 id="acn-envelope-exit-peer-agent">ACN Envelope Exit: Peer -&gt; Agent</h3>
+<h3 id="acn-envelope-exit-peer-agent">ACN Envelope Exit: Peer -&gt; Agent<a class="headerlink" href="#acn-envelope-exit-peer-agent" title="Permanent link">&para;</a></h3>
 <p>The following diagram explains the exchange of messages on exiting an envelope in the ACN.
 That is, the communication from the contact peer of an agent to the agent.</p>
 <p>The same message exchange is done 
@@ -6805,7 +6819,7 @@ similarly for what has been described for the envelope entrance
         end
 </div>
 
-<h2 id="connect-your-aea-to-the-acn">Connect your AEA to the ACN</h2>
+<h2 id="connect-your-aea-to-the-acn">Connect your AEA to the ACN<a class="headerlink" href="#connect-your-aea-to-the-acn" title="Permanent link">&para;</a></h2>
 <p>To connect the AEA to the ACN network,
 there are two AEA connections available:</p>
 <ul>
@@ -6816,7 +6830,7 @@ there are two AEA connections available:</p>
 </ul>
 <p>For more information on the AEA connection package type,
 refer to <a href="../connection/" target="_blank">this guide</a>.</p>
-<h3 id="the-fetchaip2p_libp2p-connection">The <code>fetchai/p2p_libp2p</code> connection</h3>
+<h3 id="the-fetchaip2p_libp2p-connection">The <code>fetchai/p2p_libp2p</code> connection<a class="headerlink" href="#the-fetchaip2p_libp2p-connection" title="Permanent link">&para;</a></h3>
 <p>The source code of the <code>fetchai/p2p_libp2p</code> connection<br />
 can be downloaded from 
 <a href="https://aea-registry.fetch.ai/details/connection/fetchai/p2p_libp2p/latest" target="_blank">the AEA Registry</a>,
@@ -6924,7 +6938,7 @@ which receives messages from the Libp2p node. </li>
 <li>the <code>disconnect</code> method stops both the receiving loop and the sending loop,
   and stops the Libp2p node.</li>
 </ul>
-<h3 id="the-fetchaip2p_libp2p_delegate-connection">The <code>fetchai/p2p_libp2p_delegate</code> connection</h3>
+<h3 id="the-fetchaip2p_libp2p_delegate-connection">The <code>fetchai/p2p_libp2p_delegate</code> connection<a class="headerlink" href="#the-fetchaip2p_libp2p_delegate-connection" title="Permanent link">&para;</a></h3>
 <p>The source code of the <code>fetchai/p2p_libp2p_delegate</code> connection<br />
 can be downloaded from
 <a href="https://aea-registry.fetch.ai/details/connection/fetchai/p2p_libp2p_client/latest" target="_blank">the main AEA framework repository.</a>
@@ -6988,12 +7002,12 @@ therefore can be used by the Multiplexer as any other connection.</p>
   without explicitly unregistering.</p>
 </li>
 </ul>
-<h2 id="known-issues-and-limitations">Known issues and limitations</h2>
+<h2 id="known-issues-and-limitations">Known issues and limitations<a class="headerlink" href="#known-issues-and-limitations" title="Permanent link">&para;</a></h2>
 <p>In this section, we provide a list of known issues
 and limitations of the current implementation
 of the ACN, considering both the ACN nodes (written in Golang)
 and the AEA connections, for the Python AEA framework, to interact with them.</p>
-<h3 id="delegate-client-on-client-disconnectionreconnection">Delegate client on client disconnection/reconnection</h3>
+<h3 id="delegate-client-on-client-disconnectionreconnection">Delegate client on client disconnection/reconnection<a class="headerlink" href="#delegate-client-on-client-disconnectionreconnection" title="Permanent link">&para;</a></h3>
 <p>In case of disconnection/reconnection, delegate client record will be removed.
 This can cause two problems: either the delegate client is not found, 
 or connection is closed during the send operation.</p>
@@ -7008,7 +7022,7 @@ or connection is closed during the send operation.</p>
 <li>record removed: <a href="https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L864" target="_blank">https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L864</a></li>
 <li>send code: <a href="https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L955" target="_blank">https://github.com/fetchai/agents-aea/blob/1db1720081969bcec1be5a2000ca176475d2b487/libs/go/libp2p_node/dht/dhtpeer/dhtpeer.go#L955</a></li>
 </ul>
-<h3 id="golang-node-python-client-libp2p-connection">Golang Node &lt;&gt; Python Client <code>libp2p</code> connection</h3>
+<h3 id="golang-node-python-client-libp2p-connection">Golang Node &lt;&gt; Python Client <code>libp2p</code> connection<a class="headerlink" href="#golang-node-python-client-libp2p-connection" title="Permanent link">&para;</a></h3>
 <p>In case of connection between the Golang side (i.e. ACN node) 
 and the Python side (i.e. the <code>libp2p</code> AEA connection) is broken, 
 there is no reconnection attempt.
@@ -7019,7 +7033,7 @@ the node completely.</p>
 <p>Possible solutions: the problem requires updates on both sides and assume possible timeouts on broken connection.
 If connection is broken, the Python side awaits for reconnection from Golang side, 
 and restart node completely after timeout.</p>
-<h3 id="what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error">What a peer should do if it receives an acknowledgement with an error?</h3>
+<h3 id="what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error">What a peer should do if it receives an acknowledgement with an error?<a class="headerlink" href="#what-a-peer-should-do-if-it-receives-an-acknowledgement-with-an-error" title="Permanent link">&para;</a></h3>
 <p>If an ACN response is the <code>Status</code> with error code different from <code>SUCCESS</code>,
 the forwarding to other peers is not repeated. </p>
 <p>A possible solution is to resend the message; however,
@@ -7027,7 +7041,7 @@ not clear why it should help in case of healthy connection,
 how many times the sender should retry, and how it would help.</p>
 <p>Discussion on GitHub: 
 <a href="https://github.com/fetchai/agents-aea/pull/2509#discussion_r642628983" target="_blank">https://github.com/fetchai/agents-aea/pull/2509#discussion_r642628983</a></p>
-<h3 id="no-possibility-of-switching-peers">No possibility of switching peers</h3>
+<h3 id="no-possibility-of-switching-peers">No possibility of switching peers<a class="headerlink" href="#no-possibility-of-switching-peers" title="Permanent link">&para;</a></h3>
 <p>In case of a peer becoming unavailable, a delegate client or relay client currently has no means to automatically switch the peer. In particular, the DHT should be updated when a client switches peers.</p>
 
               

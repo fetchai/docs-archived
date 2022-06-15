@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5973,14 +5987,14 @@
   <h1>Build an AEA programmatically</h1>
 
 <p>These instructions detail the Python code you need for running an AEA outside the <code>cli</code> tool, using the code interface.</p>
-<h2 id="preparation">Preparation</h2>
+<h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h2>
 <p>Get the packages directory from the AEA repository:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
 </code></pre></div>
 <p>Also, install <code>aea-ledger-fetchai</code> plug-in:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip install aea-ledger-fetchai
 </code></pre></div></p>
-<h2 id="imports">Imports</h2>
+<h2 id="imports">Imports<a class="headerlink" href="#imports" title="Permanent link">&para;</a></h2>
 <p>First, import the necessary common Python libraries and classes.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">os</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span> <span class="nn">time</span>
@@ -6001,12 +6015,12 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output_file&quot;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">FETCHAI_PRIVATE_KEY_FILE</span> <span class="o">=</span> <span class="n">PRIVATE_KEY_PATH_SCHEMA</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="create-a-private-key">Create a private key</h2>
+<h2 id="create-a-private-key">Create a private key<a class="headerlink" href="#create-a-private-key" title="Permanent link">&para;</a></h2>
 <p>We need a private key to populate the AEA's wallet.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="c1"># Create a private key</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="clearing-the-input-and-output-files">Clearing the input and output files</h2>
+<h2 id="clearing-the-input-and-output-files">Clearing the input and output files<a class="headerlink" href="#clearing-the-input-and-output-files" title="Permanent link">&para;</a></h2>
 <p>We will use the stub connection to pass envelopes in and out of the AEA. Ensure that any input and output text files are removed before we start.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    <span class="c1"># Ensure the input and output files do not exist initially</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
@@ -6014,7 +6028,7 @@
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">):</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="initialise-the-aea">Initialise the AEA</h2>
+<h2 id="initialise-the-aea">Initialise the AEA<a class="headerlink" href="#initialise-the-aea" title="Permanent link">&para;</a></h2>
 <p>We use the <a href="../api/aea_builder#aeabuilder-objects"><code>AEABuilder</code></a> to readily build an AEA. By default, the <code>AEABuilder</code> adds the <code>fetchai/default:1.1.1</code>, <code>fetchai/state_update:1.1.1</code> and <code>fetchai/signing:1.1.1</code> protocols.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    <span class="c1"># Instantiate the builder and build the AEA</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="c1"># By default, the default protocol, error skill and stub connection are added</span>
@@ -6067,7 +6081,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>    <span class="c1"># Create our AEA</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">my_aea</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </code></pre></div></p>
-<h2 id="start-the-aea">Start the AEA</h2>
+<h2 id="start-the-aea">Start the AEA<a class="headerlink" href="#start-the-aea" title="Permanent link">&para;</a></h2>
 <p>We run the AEA from a different thread so that we can still use the main thread to pass it messages.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>    <span class="c1"># Set the AEA running in a different thread</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">try</span><span class="p">:</span>
@@ -6077,7 +6091,7 @@
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="c1"># Wait for everything to start up</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
+<h2 id="send-and-receive-an-envelope">Send and receive an envelope<a class="headerlink" href="#send-and-receive-an-envelope" title="Permanent link">&para;</a></h2>
 <p>We use the input and output text files to send an envelope to our AEA and receive a response (from the echo skill)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it on to the echo skill</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        <span class="n">message_text</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;my_aea,other_agent,fetchai/default:1.0.0,</span><span class="se">\x12\x10\x08\x01\x12\x01</span><span class="s2">1*</span><span class="se">\t</span><span class="s2">*</span><span class="se">\x07\n\x05</span><span class="s2">hello,&quot;</span>
@@ -6092,7 +6106,7 @@
 <a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;output message: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
 </code></pre></div></p>
-<h2 id="shutdown">Shutdown</h2>
+<h2 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h2>
 <p>Finally stop our AEA and wait for it to finish
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>    <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>        <span class="c1"># Shut down the AEA</span>
@@ -6100,12 +6114,12 @@
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>        <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></p>
-<h2 id="running-the-aea">Running the AEA</h2>
+<h2 id="running-the-aea">Running the AEA<a class="headerlink" href="#running-the-aea" title="Permanent link">&para;</a></h2>
 <p>If you now run this python script file, you should see this output:</p>
 <div class="highlight"><pre><span></span><code>input message: my_aea,other_agent,fetchai/default:1.0.0,\x12\x10\x08\x01\x12\x011*\t*\x07\n\x05hello,
 output message: other_agent,my_aea,fetchai/default:1.0.0,...\x05hello
 </code></pre></div>
-<h2 id="entire-code-listing">Entire code listing</h2>
+<h2 id="entire-code-listing">Entire code listing<a class="headerlink" href="#entire-code-listing" title="Permanent link">&para;</a></h2>
 <p>If you just want to copy and past the entire script in you can find it here:</p>
 <details><summary>Click here to see full listing</summary>
 <p>

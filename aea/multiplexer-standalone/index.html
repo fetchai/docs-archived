@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5937,7 +5951,7 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">INPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;input.txt&quot;</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">OUTPUT_FILE</span> <span class="o">=</span> <span class="s2">&quot;output.txt&quot;</span>
 </code></pre></div></p>
-<h2 id="instantiate-a-multiplexer">Instantiate a <code>Multiplexer</code></h2>
+<h2 id="instantiate-a-multiplexer">Instantiate a <code>Multiplexer</code><a class="headerlink" href="#instantiate-a-multiplexer" title="Permanent link">&para;</a></h2>
 <p>A <code>Multiplexer</code> only needs a list of connections. The <code>StubConnection</code> is a simple connection which reads from and writes to file.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="c1"># Ensure the input and output files do not exist initially</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">INPUT_FILE</span><span class="p">):</span>
@@ -5958,7 +5972,7 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="p">)</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">multiplexer</span> <span class="o">=</span> <span class="n">Multiplexer</span><span class="p">([</span><span class="n">stub_connection</span><span class="p">],</span> <span class="n">protocols</span><span class="o">=</span><span class="p">[</span><span class="n">DefaultMessage</span><span class="p">])</span>
 </code></pre></div>
-<h2 id="start-the-multiplexer">Start the <code>Multiplexer</code></h2>
+<h2 id="start-the-multiplexer">Start the <code>Multiplexer</code><a class="headerlink" href="#start-the-multiplexer" title="Permanent link">&para;</a></h2>
 <p>We can run a multiplexer by calling, <code>connect()</code> which starts the receive and sending loops. We run the multiplexer from a different thread so that we can still use the main thread to pass it messages.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    <span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        <span class="c1"># Set the multiplexer running in a different thread</span>
@@ -5973,7 +5987,7 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Not connected&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="send-and-receive-an-envelope">Send and receive an envelope</h2>
+<h2 id="send-and-receive-an-envelope">Send and receive an envelope<a class="headerlink" href="#send-and-receive-an-envelope" title="Permanent link">&para;</a></h2>
 <p>We use the input and output text files to send an envelope to our agent and receive a response
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>        <span class="c1"># Create a message inside an envelope and get the stub connection to pass it into the multiplexer</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="n">message_text</span> <span class="o">=</span> <span class="p">(</span>
@@ -6016,16 +6030,16 @@
 <a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Envelope received from Multiplexer: &quot;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
 </code></pre></div></p>
-<h2 id="shutdown">Shutdown</h2>
+<h2 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h2>
 <p>Finally stop our multiplexer and wait for it to finish
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        <span class="c1"># Shut down the multiplexer</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">multiplexer</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div></p>
-<h2 id="your-turn">Your turn</h2>
+<h2 id="your-turn">Your turn<a class="headerlink" href="#your-turn" title="Permanent link">&para;</a></h2>
 <p>Now it is your turn to develop a simple use case which utilises the <code>Multiplexer</code> to send and receive Envelopes.</p>
-<h2 id="entire-code-listing">Entire code listing</h2>
+<h2 id="entire-code-listing">Entire code listing<a class="headerlink" href="#entire-code-listing" title="Permanent link">&para;</a></h2>
 <p>If you just want to copy and paste the entire script in you can find it here:</p>
 <details><summary>Click here to see full listing</summary>
 <p>

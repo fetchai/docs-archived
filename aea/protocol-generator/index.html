@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6025,7 +6039,7 @@
   <p>This is currently an experimental feature. To try it follow this guide.</p>
 </div>
 
-<h2 id="how-to-run">How to run</h2>
+<h2 id="how-to-run">How to run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h2>
 <p>First make sure you are inside your AEA's folder (see <a href="../quickstart">here</a> on how to create a new agent).</p>
 <p>Then run</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea generate protocol &lt;path-to-protocol-specification&gt;
@@ -6041,7 +6055,7 @@
 <li><code>sample_pb2.py</code>: the generated protocol buffer implementation</li>
 <li><code>custom_types.py</code>: stub implementations for custom types (created only if the specification contains custom types)</li>
 </ol>
-<h3 id="full-mode-vs-protobuf-only-mode">Full mode vs Protobuf Only mode</h3>
+<h3 id="full-mode-vs-protobuf-only-mode">Full mode vs Protobuf Only mode<a class="headerlink" href="#full-mode-vs-protobuf-only-mode" title="Permanent link">&para;</a></h3>
 <p>Currently, the generator can operate in <em>full mode</em> for Python, creating a complete protocol package (files 1 to 7 above) from a protocol specification. The generator also has a <em>protobuf only mode</em> which only creates the protocol buffer schema and implementation files (files 5 and 6 above). The languages supported in the <em>protobuf only mode</em> and their respective ids are below:</p>
 <ul>
 <li>go: <code>go</code></li>
@@ -6062,7 +6076,7 @@
   <p>Note the protocol buffer compiler <code>protoc</code> that the generator uses requires a plugin to produce <code>go</code> code. Follow <a href="../protocol-generator/#protocol-specification">this instruction</a>.</p>
 </div>
 
-<h2 id="protocol-specification">Protocol Specification</h2>
+<h2 id="protocol-specification">Protocol Specification<a class="headerlink" href="#protocol-specification" title="Permanent link">&para;</a></h2>
 <p>A protocol can be described in a YAML file. This is called a <em>protocol specification</em>. The following is an example protocol specification:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nn">---</span><span class="w"></span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">two_party_negotiation</span><span class="w"></span>
@@ -6100,7 +6114,7 @@
 <a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="nn">...</span><span class="w"></span>
 </code></pre></div>
 <p>Each protocol specification must follow the <a href="https://pyyaml.org/wiki/PyYAMLDocumentation" target="_blank">YAML format</a>, and have a minimum of one and a maximum of three YAML documents (each YAML document is enclosed within --- and ...). </p>
-<h3 id="basic-protocol-detail-and-messages-syntax">Basic Protocol Detail and Messages Syntax</h3>
+<h3 id="basic-protocol-detail-and-messages-syntax">Basic Protocol Detail and Messages Syntax<a class="headerlink" href="#basic-protocol-detail-and-messages-syntax" title="Permanent link">&para;</a></h3>
 <p>The first YAML document is mandatory in any protocol specification. It contains some basic information about the protocol and describes the syntax of communicative messages allowed under this protocol. </p>
 <p>The allowed fields and what they represent are:</p>
 <ul>
@@ -6117,7 +6131,7 @@
 <p>A <em>performative</em> defines the type of a message (e.g. propose, accept) and has a set of <em>contents</em> (or parameters) of varying types.</p>
 <p>The format of the <code>speech-act</code> is as follows: <code>speech-act</code> is a dictionary, where each key is a <strong>unique</strong> <em>performative</em> (YAML string), and the value is a <em>content</em> dictionary. If a performative does not have any content, then its content dictionary is empty, for instance <code>accept</code> and <code>decline</code> in the specification above.</p>
 <p>A content dictionary in turn has key/value pairs, where each key is the name of a content (YAML string) and the value is its <a href="../protocol-generator/#types">type</a> (YAML string). For example, the <code>cfp</code> (short for 'call for proposal') performative has one content whose name is <code>query</code> and whose type is <code>ct:Query</code>.</p>
-<h4 id="types">Types</h4>
+<h4 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h4>
 <p>The specific types which could be assigned to contents in a protocol specification are described in the table below.</p>
 <p>Types are either user defined (i.e. custom types) or primitive: </p>
 <ul>
@@ -6221,11 +6235,11 @@
 </tbody>
 </table>
 <p>&#42; This is how variable length tuples containing elements of the same type are declared in Python; see <a href="https://docs.python.org/3/library/typing.html#typing.Tuple" target="_blank">here</a>.</p>
-<h3 id="protocol-buffer-schema">Protocol Buffer Schema</h3>
+<h3 id="protocol-buffer-schema">Protocol Buffer Schema<a class="headerlink" href="#protocol-buffer-schema" title="Permanent link">&para;</a></h3>
 <p>Currently, the AEA framework does not officially support describing custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required serialisation logic must be provided manually.</p>
 <p>Therefore, if any of the contents declared in <code>speech-acts</code> is of a custom type, the specification must then have a second YAML document, containing the protocol buffer schema code for each custom type.</p>
 <p>You can see an example of the second YAML document in the above protocol specification.</p>
-<h3 id="dialogues">Dialogues</h3>
+<h3 id="dialogues">Dialogues<a class="headerlink" href="#dialogues" title="Permanent link">&para;</a></h3>
 <p>You can optionally specify the structure of dialogues conforming to your protocol in a third YAML document in the specification.</p>
 <p>The allowed fields and what they represent are:</p>
 <ul>
@@ -6245,7 +6259,7 @@ For example, valid replies to <code>cfp</code> are <code>propose</code> and <cod
 <p><code>roles</code> is a YAML set, containing the roles  players participating in dialogues can take. <code>roles</code> may contain one or two roles, each role being a YAML string. If there are two roles, each participant has a distinguished role in the dialogue (e.g. buyer and seller in the above specification). If there is only one role, then both participants in a dialogue have this same role.</p>
 <p><code>end_states</code> lists the final states a terminated dialogue may have. <code>end_states</code> is a YAML list of strings. </p>
 <p><code>keep_terminal_state_dialogues</code> has a boolean value and specifies whether the terminated dialogues of this protocol are to be kept or discarded. </p>
-<h2 id="design-guidelines">Design Guidelines</h2>
+<h2 id="design-guidelines">Design Guidelines<a class="headerlink" href="#design-guidelines" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p><code>initiation</code> and <code>termination</code> cannot be empty.</p>
@@ -6260,7 +6274,7 @@ For example, valid replies to <code>cfp</code> are <code>propose</code> and <cod
 <p>If a speech-act replies to no other speech-acts, it should be listed in <code>initiation</code> otherwise it could never be used in a dialogue (neither to a start a dialogue with, nor as a reply to another speech-act). </p>
 </li>
 </ol>
-<h3 id="notes">Notes</h3>
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Currently, there is no way to describe custom types in a programming language independent format. This means that if a protocol specification includes custom types, the required implementations must be provided manually.<ul>
 <li>Before generating the protocol, the protocol buffer schema code for every custom type must be provided in the protocol specification.    </li>
@@ -6272,7 +6286,7 @@ For example, valid replies to <code>cfp</code> are <code>propose</code> and <cod
 <li>In protocol buffer version 3, which is the version used by the generator, there is no way to check whether an optional field (i.e. contents of type <code>pt:optional[...]</code>) has been set or not (see discussion <a href="https://github.com/protocolbuffers/protobuf/issues/1606" target="_blank">here</a>). In proto3, all optional fields are assigned a default value (e.g. <code>0</code> for integers types, <code>false</code> for boolean types, etc). Therefore, given an optional field whose value is the default value, there is no way to know from the optional field itself, whether it is not set, or in fact is set but its value happens to be the default value. Because of this, in the generated protocol schema file (the <code>.proto</code> file), for every optional content there is a second field that declares whether this field is set or not. We will maintain this temporary solution until a cleaner alternative is found.</li>
 <li>Be aware that currently, using the generated protocols in python, there might be some rounding errors when serialising and then deserialising values of <code>pt:float</code> contents.</li>
 </ol>
-<h2 id="demo-instructions">Demo instructions</h2>
+<h2 id="demo-instructions">Demo instructions<a class="headerlink" href="#demo-instructions" title="Permanent link">&para;</a></h2>
 <p>First, create a new AEA project:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea create my_aea
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> my_aea

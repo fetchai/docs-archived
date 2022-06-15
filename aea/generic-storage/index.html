@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5943,32 +5957,32 @@
   <h1>Generic Storage</h1>
 
 <p>The AEA generic storage: description and usage.</p>
-<h2 id="aea-generic-storage">AEA Generic Storage</h2>
+<h2 id="aea-generic-storage">AEA Generic Storage<a class="headerlink" href="#aea-generic-storage" title="Permanent link">&para;</a></h2>
 <p>AEA generic storage allows AEA skill's components to store data permanently and use it any time.
 The primary scenario: to save AEA data on shutdown and load back on startup.
 Generic storage provides an API for general data manipulation in key-object style.</p>
-<h2 id="configuration">Configuration</h2>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Storage is enabled by providing in the agent configuration (<code>aea-config.yaml</code>) an optional <code>storage_uri</code>. The storage URI consists of the backend name and string data provided to selected backend.</p>
 <p>The storage URI schema is <code>&lt;BACKEND_NAME&gt;://[Optional string]</code>
 Example: <code>storage_uri: sqlite://./some_file.db</code> tells the AEA to use SQLite backend and store data in <code>./some_file.db</code>.</p>
 <p>Supported backends:
 * SQLite - bundled with python simple SQL engine that uses file or in-memory storage.</p>
-<h2 id="dialogues-and-storage-integration">Dialogues and Storage integration</h2>
+<h2 id="dialogues-and-storage-integration">Dialogues and Storage integration<a class="headerlink" href="#dialogues-and-storage-integration" title="Permanent link">&para;</a></h2>
 <p>One of the most useful cases is the integration of the dialogues subsystem and storage. It helps maintain dialogues state during agent restarts and reduced memory requirements due to the offloading feature.</p>
-<h3 id="keep-terminal-state-dialogues">Keep terminal state dialogues</h3>
+<h3 id="keep-terminal-state-dialogues">Keep terminal state dialogues<a class="headerlink" href="#keep-terminal-state-dialogues" title="Permanent link">&para;</a></h3>
 <p>The Dialogues class has the optional boolean argument <code>keep_terminal_state_dialogues</code>
 which specifies whether a dialogue which has reached its terminal state is kept in memory or not. If <code>keep_terminal_state_dialogues</code> is <code>False</code>, dialogues that reach a terminal state are removed from memory and can not be used any more. If <code>keep_terminal_state_dialogues</code> is <code>True</code>, dialogues that reach a terminal state are kept in memory or storage (if configured). If storage is configured, all dialogues in memory are stored on agent stop and restored on agent start.</p>
 <p>It useful to save memory with dialogues that are in terminal state and probably will be never used again.</p>
 <p>Default behaviour on keep terminals state dialogues is set according to the protocol specification but can be set explicitly with skill configuration section.</p>
 <p>Skill configuration to keep terminated dialogues for <code>DefaultDialogues</code>.
 Example:</p>
-<h3 id="dialogues-dumprestore-on-agent-restart">Dialogues dump/restore on agent restart</h3>
+<h3 id="dialogues-dumprestore-on-agent-restart">Dialogues dump/restore on agent restart<a class="headerlink" href="#dialogues-dumprestore-on-agent-restart" title="Permanent link">&para;</a></h3>
 <p>If storage is enabled then all the dialogues present in memory will be stored on agent's teardown and loaded on agent's start.</p>
-<h3 id="offload-terminal-state-dialogues">Offload terminal state dialogues</h3>
+<h3 id="offload-terminal-state-dialogues">Offload terminal state dialogues<a class="headerlink" href="#offload-terminal-state-dialogues" title="Permanent link">&para;</a></h3>
 <p>If keep options is set and storage is available dialogues in terminal state will be dumped to generic storage and removed from memory. This option helps to save memory and handle terminated dialogues with the same functionality as when they are kept in memory.</p>
 <p>All the active dialogues will be stored and loaded during agent restart. All the terminated offloaded dialogues will stay in storage on agent restart.</p>
 <p>To enable dialogues offloading <code>keep_terminal_state_dialogues</code> has to be enabled and storage configured.</p>
-<h2 id="manual-usage-with-skill-components">Manual usage with skill components</h2>
+<h2 id="manual-usage-with-skill-components">Manual usage with skill components<a class="headerlink" href="#manual-usage-with-skill-components" title="Permanent link">&para;</a></h2>
 <p>Handlers, Behaviours and Models are able to use storage if enabled.</p>
 <p>Storage is available with skill context: <code>self.context.storage</code>
 if <code>self.context.storage</code> is not None, storage is enabled and ready to use.</p>

@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5947,7 +5961,7 @@
   <h1>File structure</h1>
 
 <p>An agent that is generated using the AEA framework is a modular system with different connections, contracts, protocols and skills.</p>
-<h2 id="file-structure">File structure</h2>
+<h2 id="file-structure">File structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h2>
 <p>The file structure of an AEA is fixed.</p>
 <p>The top level directory has the AEA's name. Below is a <code>aea-config.yaml</code> configuration file, then directories containing the connections, contracts, protocols, and skills developed by the developer as part of the given project. The connections, contracts, protocols and skills used from the registry (local or remote - added via <code>aea fetch</code> or <code>aea add</code>) are located in <code>vendor</code> and sorted by author. Build artefacts are placed in the <code>.build/</code> directory and certificates are placed in the <code>.certs/</code> directory. Finally, there are files containing the private keys of the AEA.</p>
 <p>When we create a new agent with the command <code>aea create my_aea</code> we create the file structure that looks like the following:</p>
@@ -5980,31 +5994,31 @@
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        ...             ...
 </code></pre></div>
 <p>The developer can create new directories where necessary but the core structure must remain the same.</p>
-<h2 id="aea-configuration-yaml">AEA Configuration YAML</h2>
+<h2 id="aea-configuration-yaml">AEA Configuration YAML<a class="headerlink" href="#aea-configuration-yaml" title="Permanent link">&para;</a></h2>
 <p>The <code>aea-config.yaml</code> is the top level configuration file of an AEA. It defines the global configurations as well as the component/package dependencies of the AEA. In some sense, the AEA can therefore be understood as an orchestrator of components.</p>
 <p>For the AEA to use a package, the <code>public_id</code> for the package must be listed in the <code>aea-config.yaml</code> file, e.g.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">connections</span><span class="p">:</span><span class="w"></span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/stub:0.21.1</span><span class="w"></span>
 </code></pre></div></p>
 <p>The above shows a part of the <code>aea-config.yaml</code>. If you see the connections, you will see that we follow a pattern of <code>author/name_package:version</code> to identify each package, also referred to as <code>public_id</code>. Here the <code>author</code> is the author of the package.</p>
-<h2 id="vendor-and-package-directories">Vendor and package directories</h2>
+<h2 id="vendor-and-package-directories">Vendor and package directories<a class="headerlink" href="#vendor-and-package-directories" title="Permanent link">&para;</a></h2>
 <p>The <code>vendor</code> folder contains the packages from the registry (local or remote) which have been developed by ourselves, other authors or Fetch.ai and are namespaced by author name.</p>
 <p>The packages we develop as part of the given AEA project are in the respective <code>connections/</code>, <code>contracts/</code>, <code>protocols/</code>, and <code>skills/</code> folders.</p>
 <p>In the above configuration example, the package is authored by Fetch.ai and is located inside the <code>vendor/fetchai/connections</code> folder.</p>
-<h2 id="importing-modules-from-packages">Importing modules from packages</h2>
+<h2 id="importing-modules-from-packages">Importing modules from packages<a class="headerlink" href="#importing-modules-from-packages" title="Permanent link">&para;</a></h2>
 <p>The way we import modules from packages inside the agent is in the form of <code>packages.{author}.{package_type}.{package_name}.{module_name}</code>. So for the above example, the import path is <code>packages.fetchai.connections.stub.{module_name}</code>.</p>
 <p>The framework loads the modules from the local agent project and adds them to Python's <code>sys.modules</code> under the respective path.</p>
 <p>We use a custom package management approach for the AEAs rather than the default Python one as it provides us with more flexibility, especially when it comes to extension beyond the Python ecosystem.</p>
-<h2 id="python-dependencies-of-packages">Python dependencies of packages</h2>
+<h2 id="python-dependencies-of-packages">Python dependencies of packages<a class="headerlink" href="#python-dependencies-of-packages" title="Permanent link">&para;</a></h2>
 <p>Python dependencies of packages are specified in their respective configuration files under <code>dependencies</code>. They will be installed when <code>aea install</code> is run on an agent project.</p>
-<h2 id="create-a-package">Create a package</h2>
+<h2 id="create-a-package">Create a package<a class="headerlink" href="#create-a-package" title="Permanent link">&para;</a></h2>
 <p>If you want to create a package, you can use the <a href="../scaffolding/">CLI command</a> <code>aea scaffold connection/contract/protocol/skill [name]</code> and this will create the package and put it inside the respective folder based on the command for example if we <code>scaffold</code> skill with the name <code>my_skill</code>
 it will be located inside the folder skills in the root directory of the agent (<code>my_aea/skills/my_skill</code>).</p>
-<h2 id="use-published-packages-from-the-registry">Use published packages from the registry</h2>
+<h2 id="use-published-packages-from-the-registry">Use published packages from the registry<a class="headerlink" href="#use-published-packages-from-the-registry" title="Permanent link">&para;</a></h2>
 <p>If you want to use a finished package, you can use a package from the registry.</p>
 <p>There or two registries. The remote registry operated by Fetch.ai and a local registry stub. The local registry stub is a directory called <code>packages</code> which contains packages in a nested structure with authors on the top level, followed by the package type, then package name. An example of such a directory is the <code>packages</code> directory located in the AEA repository. The local registry is useful for development.</p>
 <p>You can use the CLI to interact with the registry. By default the CLI points to the remote registry. You can point it to the local registry via the flag <code>--local</code>.</p>
-<h2 id="package-versioning">Package versioning</h2>
+<h2 id="package-versioning">Package versioning<a class="headerlink" href="#package-versioning" title="Permanent link">&para;</a></h2>
 <p>By default, the AEA can only handle one version per package. That is, a project should never use both <code>some_author/some_package_name:0.1.0</code> and <code>some_author/some_package_name:0.2.0</code>.</p>
 <p>If two AEA packages with the same author and name but different versions are used in the same Python process, then only the code from one of the packages (generally not deterministic) will be available in <code>sys.modules</code>. This can lead to inconsistencies and exceptions at runtime.</p>
 

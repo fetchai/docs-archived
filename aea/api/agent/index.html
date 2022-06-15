@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6157,15 +6171,15 @@
 
 
 <p><a name="aea.agent"></a></p>
-<h1 id="aeaagent">aea.agent</h1>
+<h1 id="aeaagent">aea.agent<a class="headerlink" href="#aeaagent" title="Permanent link">&para;</a></h1>
 <p>This module contains the implementation of a generic agent.</p>
 <p><a name="aea.agent.Agent"></a></p>
-<h2 id="agent-objects">Agent Objects</h2>
+<h2 id="agent-objects">Agent Objects<a class="headerlink" href="#agent-objects" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="n">AbstractAgent</span><span class="p">,</span>  <span class="n">WithLogger</span><span class="p">)</span>
 </code></pre></div>
 <p>This class provides an abstract base class for a generic agent.</p>
 <p><a name="aea.agent.Agent.__init__"></a></p>
-<h4 id="__init__"><code>__</code>init<code>__</code></h4>
+<h4 id="__init__"><code>__</code>init<code>__</code><a class="headerlink" href="#__init__" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> <span class="o">|</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Connection</span><span class="p">],</span> <span class="n">loop</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractEventLoop</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">loop_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">runtime_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">storage_uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span> <span class="o">=</span> <span class="n">_default_logger</span><span class="p">,</span> <span class="n">task_manager_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Instantiate the agent.</p>
@@ -6183,31 +6197,31 @@
 <li><code>task_manager_mode</code>: mode of the task manager.</li>
 </ul>
 <p><a name="aea.agent.Agent.storage_uri"></a></p>
-<h4 id="storage_uri">storage<code>_</code>uri</h4>
+<h4 id="storage_uri">storage<code>_</code>uri<a class="headerlink" href="#storage_uri" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> <span class="o">|</span> <span class="n">storage_uri</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </code></pre></div>
 <p>Return storage uri.</p>
 <p><a name="aea.agent.Agent.is_running"></a></p>
-<h4 id="is_running">is<code>_</code>running</h4>
+<h4 id="is_running">is<code>_</code>running<a class="headerlink" href="#is_running" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> <span class="o">|</span> <span class="n">is_running</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 <p>Get running state of the runtime and agent.</p>
 <p><a name="aea.agent.Agent.is_stopped"></a></p>
-<h4 id="is_stopped">is<code>_</code>stopped</h4>
+<h4 id="is_stopped">is<code>_</code>stopped<a class="headerlink" href="#is_stopped" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a> <span class="o">|</span> <span class="n">is_stopped</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 <p>Get running state of the runtime and agent.</p>
 <p><a name="aea.agent.Agent.identity"></a></p>
-<h4 id="identity">identity</h4>
+<h4 id="identity">identity<a class="headerlink" href="#identity" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a> <span class="o">|</span> <span class="n">identity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Identity</span>
 </code></pre></div>
 <p>Get the identity.</p>
 <p><a name="aea.agent.Agent.inbox"></a></p>
-<h4 id="inbox">inbox</h4>
+<h4 id="inbox">inbox<a class="headerlink" href="#inbox" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> <span class="o">|</span> <span class="n">inbox</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InBox</span>
 </code></pre></div>
@@ -6217,7 +6231,7 @@ The agent can pick these messages for processing.</p>
 <p><strong>Returns</strong>:</p>
 <p>InBox instance</p>
 <p><a name="aea.agent.Agent.outbox"></a></p>
-<h4 id="outbox">outbox</h4>
+<h4 id="outbox">outbox<a class="headerlink" href="#outbox" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a> <span class="o">|</span> <span class="n">outbox</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OutBox</span>
 </code></pre></div>
@@ -6227,13 +6241,13 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p><strong>Returns</strong>:</p>
 <p>OutBox instance</p>
 <p><a name="aea.agent.Agent.name"></a></p>
-<h4 id="name">name</h4>
+<h4 id="name">name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a> <span class="o">|</span> <span class="n">name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </code></pre></div>
 <p>Get the agent name.</p>
 <p><a name="aea.agent.Agent.tick"></a></p>
-<h4 id="tick">tick</h4>
+<h4 id="tick">tick<a class="headerlink" href="#tick" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a> <span class="o">|</span> <span class="n">tick</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </code></pre></div>
@@ -6242,7 +6256,7 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p><strong>Returns</strong>:</p>
 <p>tick count</p>
 <p><a name="aea.agent.Agent.state"></a></p>
-<h4 id="state">state</h4>
+<h4 id="state">state<a class="headerlink" href="#state" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a> <span class="o">|</span> <span class="n">state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RuntimeStates</span>
 </code></pre></div>
@@ -6250,24 +6264,24 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <p><strong>Returns</strong>:</p>
 <p>RuntimeStates</p>
 <p><a name="aea.agent.Agent.period"></a></p>
-<h4 id="period">period</h4>
+<h4 id="period">period<a class="headerlink" href="#period" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a> <span class="o">|</span> <span class="n">period</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">float</span>
 </code></pre></div>
 <p>Get a period to call act.</p>
 <p><a name="aea.agent.Agent.runtime"></a></p>
-<h4 id="runtime">runtime</h4>
+<h4 id="runtime">runtime<a class="headerlink" href="#runtime" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a> <span class="o">|</span> <span class="nd">@property</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a> <span class="o">|</span> <span class="n">runtime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">BaseRuntime</span>
 </code></pre></div>
 <p>Get the runtime.</p>
 <p><a name="aea.agent.Agent.setup"></a></p>
-<h4 id="setup">setup</h4>
+<h4 id="setup">setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a> <span class="o">|</span> <span class="n">setup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Set up the agent.</p>
 <p><a name="aea.agent.Agent.start"></a></p>
-<h4 id="start">start</h4>
+<h4 id="start">start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a> <span class="o">|</span> <span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Start the agent.</p>
@@ -6277,7 +6291,7 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li>waits for runtime to complete running (blocking)</li>
 </ul>
 <p><a name="aea.agent.Agent.handle_envelope"></a></p>
-<h4 id="handle_envelope">handle<code>_</code>envelope</h4>
+<h4 id="handle_envelope">handle<code>_</code>envelope<a class="headerlink" href="#handle_envelope" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a> <span class="o">|</span> <span class="n">handle_envelope</span><span class="p">(</span><span class="n">envelope</span><span class="p">:</span> <span class="n">Envelope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Handle an envelope.</p>
@@ -6286,12 +6300,12 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li><code>envelope</code>: the envelope to handle.</li>
 </ul>
 <p><a name="aea.agent.Agent.act"></a></p>
-<h4 id="act">act</h4>
+<h4 id="act">act<a class="headerlink" href="#act" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a> <span class="o">|</span> <span class="n">act</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Perform actions on period.</p>
 <p><a name="aea.agent.Agent.stop"></a></p>
-<h4 id="stop">stop</h4>
+<h4 id="stop">stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a> <span class="o">|</span> <span class="n">stop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Stop the agent.</p>
@@ -6301,26 +6315,26 @@ Envelopes placed in the Outbox are processed by the Multiplexer.</p>
 <li>waits for runtime to stop (blocking)</li>
 </ul>
 <p><a name="aea.agent.Agent.teardown"></a></p>
-<h4 id="teardown">teardown</h4>
+<h4 id="teardown">teardown<a class="headerlink" href="#teardown" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a> <span class="o">|</span> <span class="n">teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Tear down the agent.</p>
 <p><a name="aea.agent.Agent.get_periodic_tasks"></a></p>
-<h4 id="get_periodic_tasks">get<code>_</code>periodic<code>_</code>tasks</h4>
+<h4 id="get_periodic_tasks">get<code>_</code>periodic<code>_</code>tasks<a class="headerlink" href="#get_periodic_tasks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a> <span class="o">|</span> <span class="n">get_periodic_tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]]]</span>
 </code></pre></div>
 <p>Get all periodic tasks for agent.</p>
 <p><strong>Returns</strong>:</p>
 <p>dict of callable with period specified</p>
 <p><a name="aea.agent.Agent.get_message_handlers"></a></p>
-<h4 id="get_message_handlers">get<code>_</code>message<code>_</code>handlers</h4>
+<h4 id="get_message_handlers">get<code>_</code>message<code>_</code>handlers<a class="headerlink" href="#get_message_handlers" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a> <span class="o">|</span> <span class="n">get_message_handlers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span>
 </code></pre></div>
 <p>Get handlers with message getters.</p>
 <p><strong>Returns</strong>:</p>
 <p>List of tuples of callables: handler and coroutine to get a message</p>
 <p><a name="aea.agent.Agent.exception_handler"></a></p>
-<h4 id="exception_handler">exception<code>_</code>handler</h4>
+<h4 id="exception_handler">exception<code>_</code>handler<a class="headerlink" href="#exception_handler" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a> <span class="o">|</span> <span class="n">exception_handler</span><span class="p">(</span><span class="n">exception</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
 <p>Handle exception raised during agent main loop execution.</p>

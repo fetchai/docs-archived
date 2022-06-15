@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -6049,14 +6063,14 @@
   <h1>Gym skill</h1>
 
 <p>The AEA gym skill demonstrates how a custom Reinforcement Learning agent, that uses OpenAI's <a href="https://gym.openai.com" target="_blank">gym</a> library, may be embedded into an AEA skill and connection.</p>
-<h3 id="discussion">Discussion</h3>
+<h3 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h3>
 <p>The gym skills demonstrate how to wrap a Reinforcement Learning agent in a skill.
 The example decouples the RL agent from the <code>gym.Env</code> allowing them to run in separate execution environments, potentially owned by different entities.</p>
-<h2 id="preparation-instructions">Preparation instructions</h2>
-<h3 id="dependencies">Dependencies</h3>
+<h2 id="preparation-instructions">Preparation instructions<a class="headerlink" href="#preparation-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
-<h2 id="demo-instructions">Demo instructions</h2>
-<h3 id="create-the-aea">Create the AEA</h3>
+<h2 id="demo-instructions">Demo instructions<a class="headerlink" href="#demo-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-aea">Create the AEA<a class="headerlink" href="#create-the-aea" title="Permanent link">&para;</a></h3>
 <p>First, fetch the gym AEA:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/gym_aea:0.26.0 --alias my_gym_aea
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> my_gym_aea
@@ -6088,29 +6102,29 @@ To install the `gym` package, a dependency of the gym skill, from PyPI run
 </p>
 </details>
 
-<h3 id="set-up-the-training-environment">Set up the training environment</h3>
-<h4 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory</h4>
+<h3 id="set-up-the-training-environment">Set up the training environment<a class="headerlink" href="#set-up-the-training-environment" title="Permanent link">&para;</a></h3>
+<h4 id="copy-the-gym-environment-to-the-aea-directory">Copy the gym environment to the AEA directory<a class="headerlink" href="#copy-the-gym-environment-to-the-aea-directory" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir gyms
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>cp -a ../examples/gym_ex/gyms/. gyms/
 </code></pre></div>
-<h4 id="update-the-connection-configuration">Update the connection configuration</h4>
+<h4 id="update-the-connection-configuration">Update the connection configuration<a class="headerlink" href="#update-the-connection-configuration" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.gym.config.env <span class="s1">&#39;gyms.env.BanditNArmedRandom&#39;</span>
 </code></pre></div>
-<h4 id="create-and-add-a-private-key">Create and add a private key</h4>
+<h4 id="create-and-add-a-private-key">Create and add a private key<a class="headerlink" href="#create-and-add-a-private-key" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea generate-key fetchai
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>aea add-key fetchai
 </code></pre></div>
-<h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection</h3>
+<h3 id="run-the-aea-with-the-gym-connection">Run the AEA with the gym connection<a class="headerlink" href="#run-the-aea-with-the-gym-connection" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea run
 </code></pre></div>
 <p>You will see the gym training logs.</p>
 <p><img src="../assets/gym-training.png" alt="AEA gym training logs" class="center"></p>
-<h3 id="delete-the-aea">Delete the AEA</h3>
+<h3 id="delete-the-aea">Delete the AEA<a class="headerlink" href="#delete-the-aea" title="Permanent link">&para;</a></h3>
 <p>When you're done, you can go up a level and delete the AEA.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span> ..
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>aea delete my_gym_aea
 </code></pre></div>
-<h2 id="communication">Communication</h2>
+<h2 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">&para;</a></h2>
 <p>This diagram shows the communication between the AEA and the gym environment</p>
 <div class="mermaid">
     sequenceDiagram
@@ -6130,7 +6144,7 @@ To install the `gym` package, a dependency of the gym skill, from PyPI run
         deactivate Environment
 </div>
 
-<h2 id="skill-architecture">Skill Architecture</h2>
+<h2 id="skill-architecture">Skill Architecture<a class="headerlink" href="#skill-architecture" title="Permanent link">&para;</a></h2>
 <p>The skill consists of two core components: <code>GymHandler</code> and <code>GymTask</code>.</p>
 <p>In the <code>setup</code> method of the <code>GymHandler</code> the <code>GymTask</code> is initialized, as well as its <code>setup</code> and <code>execute</code> methods called. The handler, which is registered against the <code>GymMessage.protocol_id</code> then filters for messages of that protocol with the performative <code>GymMessage.Performative.PERCEPT</code>. These messages are passed to the <code>proxy_env_queue</code> of the task.</p>
 <p>The <code>GymTask</code> is responsible for training the RL agent. In particular, <code>MyRLAgent</code> is initialized and trained against <code>ProxyEnv</code>. The <code>ProxyEnv</code> instantiates a <code>gym.Env</code> class and therefore implements its API. This means the proxy environment is compatible with any <code>gym</code> compatible RL agent. However, unlike other environments it only acts as a proxy and does not implement an environment of its own. It allows for the decoupling of the process environment of the <code>gym.env</code> from the process environment of the RL agent. The actual <code>gym.env</code> against which the agent is trained is wrapped by the <code>gym</code> connection. The proxy environment and gym connection communicate via a protocol, the <code>gym</code> protocol. Note, it would trivially be possible to implement the <code>gym</code> environment in another AEA; this way one AEA could provide <code>gym</code> environments as a service. Naturally, the overhead created by the introduction of the extra layers causes a higher latency when training the RL agent.</p>

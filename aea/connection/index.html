@@ -380,8 +380,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/how-to-stake-with-browser/" class="md-nav__link">
-        Staking
+      <a href="../../basics/staking/what_is_staking/" class="md-nav__link">
+        What is Staking?
       </a>
     </li>
   
@@ -394,8 +394,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/redelegate-for-decentralization/" class="md-nav__link">
-        Re-delegation
+      <a href="../../basics/staking/how_to_stake/" class="md-nav__link">
+        How to Stake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/staking/redelegation/" class="md-nav__link">
+        Re-Delegation
       </a>
     </li>
   
@@ -415,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/convert-native-fet/" class="md-nav__link">
+      <a href="../../basics/convert-native-fet/" class="md-nav__link">
         Convert Ethereum to Native Tokens
       </a>
     </li>
@@ -5931,7 +5945,7 @@
 <p><img src="../assets/multiplexer.png" alt="Multiplexer of an AEA" class="center" style="display: block; margin-left: auto; margin-right: auto;width:50%;"></p>
 <p>An <code>AEA</code> can interact with multiple connections at the same time via the <a href="../api/connections/base#connection-objects"><code>Multiplexer</code></a>. Connections are passive in terms of multiplexer interactions (its methods are called by the Multiplexer), but they can run their own asynchronous or threaded tasks.</p>
 <p>The <code>Multiplexer</code> maintains an <a href="../api/multiplexer#inbox-objects"><code>InBox</code></a> and <a href="../api/multiplexer#outbox-objects"><code>OutBox</code></a>, which are, respectively, queues for incoming and outgoing envelopes and their contained messages.</p>
-<h2 id="developing-your-connection">Developing your connection</h2>
+<h2 id="developing-your-connection">Developing your connection<a class="headerlink" href="#developing-your-connection" title="Permanent link">&para;</a></h2>
 <p>The easiest way to get started developing your own connection is by using the <a href="../scaffolding">scaffold</a> command:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea scaffold connection my_new_connection
 </code></pre></div>
@@ -5942,7 +5956,7 @@
 <li><code>connection.yaml</code> containing the scaffolded configuration file</li>
 </ul>
 <p>As a developer you have the choice between implementing a sync or asynchronous interface. The scaffolded <code>connection.py</code> file contains two classes: the <code>MyScaffoldAsyncConnection</code> inherited from the <a href="../api/connections/base#connection-objects"><code>Connection</code></a> base class and the <code>MyScaffoldSyncConnection</code> inherited from the <a href="../api/connections/base#connection-objects"><code>BaseSyncConnection</code></a>. Remove the unused class.</p>
-<h3 id="primary-methods-to-develop-asynchronous-connection-interface">Primary methods to develop - asynchronous connection interface</h3>
+<h3 id="primary-methods-to-develop-asynchronous-connection-interface">Primary methods to develop - asynchronous connection interface<a class="headerlink" href="#primary-methods-to-develop-asynchronous-connection-interface" title="Permanent link">&para;</a></h3>
 <p>The developer needs to implement four public coroutines:</p>
 <ul>
 <li>
@@ -5959,7 +5973,7 @@
 </li>
 </ul>
 <p>The framework provides a demo <code>stub</code> connection which implements an I/O reader and writer to send and receive messages between the agent and a local file. To gain inspiration and become familiar with the structure of connection packages, you may find it useful to check out <code>fetchai/stub:0.21.1</code>, <code>fetchai/http_server:0.23.1</code> or <code>fetchai/http_client:0.24.1</code> connections. The latter two connections are for external clients to connect with an agent, and for the agent to connect with external servers, respectively.</p>
-<h3 id="primary-methods-to-develop-sync-connection-interface">Primary methods to develop - sync connection interface</h3>
+<h3 id="primary-methods-to-develop-sync-connection-interface">Primary methods to develop - sync connection interface<a class="headerlink" href="#primary-methods-to-develop-sync-connection-interface" title="Permanent link">&para;</a></h3>
 <p>The <a href="../api/connections/base#connection-objects"><code>BaseSyncConnection</code></a> uses executors to execute synchronous code from the asynchronous context of the <code>Multiplexer</code> in executors/threads, which are limited by the amount of configured workers.</p>
 <p>The asynchronous methods <code>connect</code>, <code>disconnect</code> and <code>send</code> are converted to callbacks which the developer implements:
 * <code>on_connect</code>
@@ -5968,9 +5982,9 @@
 <p>All of these methods will be executed in the executor pool.</p>
 <p>Every method can create a message by putting it into the thread/asynchronous friendly queue that is consumed by the <code>Multiplexer</code>.</p>
 <p>The <code>receive</code> coroutine has no direct equivalent. Instead, the developer implements a <code>main</code> method which runs synchronously in the background.</p>
-<h2 id="configuration">Configuration</h2>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Every connection must have a configuration file in <code>connection.yaml</code>, containing meta-information about the connection as well as all the required configuration details. For more details, have a look <a href="../config">here</a>.</p>
-<h3 id="configuration-options">Configuration options</h3>
+<h3 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h3>
 <p>The <code>connection.yaml</code> file contains a number of fields that must be edited by the developer of the connection:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">connections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">protocols</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
