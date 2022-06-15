@@ -17,7 +17,7 @@ Ensure you retrieve all the submodules by running:
 
 ### Update submodules
 
-To update all your submodules to the latest versions of the main branch in their respective remote repos: 
+To update all your submodules to the latest versions of the main branch in their respective remote repos:
 
     git submodule update --remote
 

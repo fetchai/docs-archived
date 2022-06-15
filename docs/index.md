@@ -3,7 +3,8 @@
 <div id="header-image-div"><img id="header-image" src="./images/fetchai.png" alt="interconnected systems such as parking, cloud, robots, and data"></div>
 
 ## What is fetch.ai?
-Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking. 
+
+Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking.
 
 We achieve this by providing open-source software tools which you can use together with our interoperable decentralized network, to harness the power of AI and automation, and carry out complex tasks in the _digital economy_.
 
@@ -17,7 +18,7 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
         <div class="diagram-row-container">
             <a href="https://aea-registry.fetch.ai/" target="_blank" class="diagram-item"><div>AEA Registry</div></a>
             <a href="https://aea-manager.fetch.ai/" target="_blank"  class="diagram-item"><div>AEA Manager</div></a>
-            <a href="basics/wallet/getting_started" class="diagram-item"><div>Fetch Wallet</div></a>
+            <a href="basics/wallet/getting_started/" class="diagram-item"><div>Fetch Wallet</div></a>
             <a href="https://explore-fetchhub.fetch.ai/" target="_blank" class="diagram-item"><div>Explorer</div></a>
         </div>
     </div>
