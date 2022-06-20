@@ -58,13 +58,13 @@ When you select a validator to delegate with, that is essentially your vote to t
    On the pop-up select **Allow**.
 7. Enter your PIN.
 
-## To redelegate using the Fetch.ai Browser Extension Wallet
+## To redelegate using the Fetch Wallet
 
-<img src="/images/archives/redel_to_browser_extension_wallet.png" alt="How to redelegate with the Fetch.ai browser extension wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
+<img src="/images/archives/redel_to_browser_extension_wallet.png" alt="How to redelegate with the Fetch wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
 
-First you must ensure that you have the Fetch.ai wallet that you're staking with connected to the [Fetch.ai Browser Extension Wallet](https://bit.ly/3G31QII).
+First you must ensure that you have the Fetch.ai wallet that you're staking with connected to the [Fetch Wallet](https://bit.ly/3G31QII).
 
-1. Connect to the Browser Extension Wallet.
+1. Connect to the Fetch Wallet.
 2. In the [Fetch.ai Validator Explorer page.](https://browse-fetchhub.fetch.ai/validators), click **Connect** in the top right of the web page.
    Once you're connected, click on your wallet address that is now listed in the top right on the web page.
 3. From there, scroll down to the **Delegations** section.

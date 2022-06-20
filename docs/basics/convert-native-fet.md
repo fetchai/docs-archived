@@ -1,20 +1,17 @@
-# How to Convert Native Fet to Erc20 Fet Using Fetch.ai Browser Extension Wallet
+# How to Convert Native Fet to Erc20 Fet Using Fetch Wallet
 
-This is an easy step-by-step guide explaining how to convert your native FET tokens to ERC20 FET tokens using the [Fetch browser wallet](https://bit.ly/3G31QII).
+This is an easy step-by-step guide explaining how to convert your native FET tokens to ERC20 FET tokens using the [Fetch Wallet](https://docs.fetch.ai/basics/wallet/getting_started/).
 
-1. Create an account on the Fetch browser wallet if you do not have one.
+1. Create an account on the Fetch wallet if you do not have one.
    Save your 12/24 word mnemonic safely somewhere.
     **Do not share this with anyone! If you lose this, you cannot recover your assets.**
 
-     <img src="/images/native_and_erc20/keplr_wallet.png" alt="Keplr Wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
+     <img src="/images/native_and_erc20/keplr_wallet.png" alt="Fetch Wallet" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
 
-2. Send the amount of tokens you wish to transfer from your cosmostation mobile wallet or your ledger to the generated address on your fetch browser wallet.
+2. Send the amount of tokens you wish to transfer from your cosmostation mobile wallet or your ledger to the generated address on your fetch wallet.
 3. Once you have done so, browse to [https://token-bridge.fetch.ai/](https://token-bridge.fetch.ai/)
 4. Switch to the **Native to ERC20** tab.
 5. Click on **connect browser wallet** and allow the token bridge to connect to your browser wallet.
-
-    <img src="/images/native_and_erc20/connect_to_keplr.png" alt="Requesting connection" class="center" style="display: block; margin-left: auto; margin-right: auto;width:400px;">
-
 6. The Token bridge will be automatically populated with your currently selected metamask address on ERC20 and your fetch wallet address on native.
     **Make sure those are correct.**
 

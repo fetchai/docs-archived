@@ -63,7 +63,7 @@ You can also jump straight into our GitHub repos:
 - [Ledger (fetchd)](https://github.com/fetchai/fetchd)
 - [CosmPy](https://github.com/fetchai/cosmpy)
 - [AEA Framework (& ACN)](https://github.com/fetchai/agents-aea)
-- [Fetch Wallet](https://github.com/fetchai/keplr-extension)
+- [Fetch Wallet](https://github.com/fetchai/fetch-wallet)
 
 ## Help & Support
 
@@ -83,6 +83,6 @@ Visit fetch.ai developer forums:
 - [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
 - [CosmPy](https://github.com/fetchai/cosmpy/discussions)
 - [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
-- [Wallet](https://github.com/fetchai/keplr-extension/discussions)
+- [Fetch Wallet](https://github.com/fetchai/fetch-wallet/discussions)
 
 Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI).

@@ -1,17 +1,17 @@
-The Fetch.ai Network Wallet allows you to interact with the Fetch network through your browser.
+The Fetch Wallet allows you to interact with the Fetch network through your browser.
 
-[comment]: <> (There are many other wallets you can use. The Fetch.ai Network Wallet is a non-custodial browser-extension wallet that is maintained by the Fetch.ai team. )
+[comment]: <> (There are many other wallets you can use. The Fetch Wallet is a non-custodial wallet that is maintained by the Fetch.ai team. )
 
 ## Compatibility
 
-The Fetch.ai Network Wallet works on all Chromium-based web browsers, including [Chrome](https://www.google.com/chrome/), [Brave](https://brave.com), [Edge](https://www.microsoft.com/edge) and [Decentr](https://decentr.net).
+The Fetch Wallet works on all Chromium-based web browsers, including [Chrome](https://www.google.com/chrome/), [Brave](https://brave.com), [Edge](https://www.microsoft.com/edge) and [Decentr](https://decentr.net).
 
 ## Get the Wallet
 
-Get the Fetch.ai Network Wallet from the [Chrome web store](https://chrome.google.com/webstore/detail/fetchai-network-wallet/ellkdbaphhldpeajbepobaecooaoafpg/related?hl=en-GB).
+Get the Fetch Wallet from the [Chrome web store](https://chrome.google.com/webstore/detail/fetchai-network-wallet/ellkdbaphhldpeajbepobaecooaoafpg/related?hl=en-GB).
 
 !!! info
-    At this time, you cannot run the [Keplr browser wallet](https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap?hl=en) and Fetch Network browser wallet together, as they interfere. Please disable the Keplr wallet in extensions before using the Fetch wallet.
+    At this time, you cannot run the [Keplr browser wallet](https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap?hl=en) and Fetch wallet together, as they interfere. Please disable the Keplr wallet in extensions before using the Fetch wallet.
 
 ## To Create a New Account
 
