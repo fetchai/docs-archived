@@ -17,8 +17,12 @@ jobs:
       - uses: actions/setup-python@master
         with:
           python-version: '3.7'
-      - name: Install Dependencies
-        run: pip3 install pipenv && pipenv install --skip-lock --clear
+      - name: Install dependencies (ubuntu-latest)
+        run: |
+          sudo apt-get update --fix-missing
+          sudo apt-get autoremove
+          sudo apt-get autoclean
+          pip install tox
       - name: Build
         run: pipenv run mkdocs build --clean
       - name: Archive Production Artifact
