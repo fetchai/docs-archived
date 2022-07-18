@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6145,25 +6192,25 @@
 
 
 <h1 id="how-to-run-the-demo">How to run the demo<a class="headerlink" href="#how-to-run-the-demo" title="Permanent link">&para;</a></h1>
-<p>You can try collective learning for yourself using the simple demo in <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/run_demo.py">run_demo</a>. 
+<p>You can try collective learning for yourself using the simple demo in <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/run_demo.py">run_demo</a>.
 This demo creates n learners for one of six learning tasks and co-ordinates the collective learning between them.</p>
 <p>There are six potential models for the demo</p>
 <ul>
 <li>KERAS_MNIST is the Tensorflow implementation of a small model for the standard handwritten digits recognition dataset</li>
 <li>KERAS_MNIST_RESNET is the Tensorflow implementation of a Resnet model for the standard handwritten digits recognition dataset</li>
 <li>KERAS_CIFAR10 is the Tensorflow implementation of the classical image recognition dataset</li>
-<li>PYTORCH_XRAY is Pytorch implementation of a binary classification task that requires predicting pneumonia from images of chest X-rays. 
+<li>PYTORCH_XRAY is Pytorch implementation of a binary classification task that requires predicting pneumonia from images of chest X-rays.
   The data need to be downloaded from <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">Kaggle</a></li>
-<li>PYTORCH_COVID_XRAY is Pytorch implementation of a 3 class classification task that requires predicting no finding, covid or pneumonia from images of chest X-rays. 
+<li>PYTORCH_COVID_XRAY is Pytorch implementation of a 3 class classification task that requires predicting no finding, covid or pneumonia from images of chest X-rays.
   This dataset is not currently publicly available.</li>
-<li>FRAUD The fraud dataset consists of information about credit card transactions, and the task is to predict whether 
-  transactions are fraudulent or not. 
+<li>FRAUD The fraud dataset consists of information about credit card transactions, and the task is to predict whether
+  transactions are fraudulent or not.
   The data need to be downloaded from <a href="https://www.kaggle.com/c/ieee-fraud-detection">Kaggle</a></li>
 </ul>
-<p>Use the -h flag to see the options:
+<p>Use the -h flag to see the options:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python -m colearn_examples.ml_interface.run_demo -h
-</code></pre></div></p>
-<p>Arguments to run the demo:
+</code></pre></div>
+<p>Arguments to run the demo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>--data_dir:       Directory containing training data, not required for MNIST and CIFAR10
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>--test_dir:       Optional directory containing test data. A fraction of the training set will be used as a test set when not specified
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>--model:          Model to train, options are KERAS_MNIST KERAS_MNIST_RESNET KERAS_CIFAR10 PYTORCH_XRAY PYTORCH_COVID_XRAY FRAUD
@@ -6174,29 +6221,29 @@ This demo creates n learners for one of six learning tasks and co-ordinates the 
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>--seed:           Seed for initialising model and shuffling datasets
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>--learning_rate:  Learning rate for optimiser
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>--batch_size:     Size of training batch
-</code></pre></div></p>
+</code></pre></div>
 <h2 id="running-mnist">Running MNIST<a class="headerlink" href="#running-mnist" title="Permanent link">&para;</a></h2>
 <p>The simplest task to run is MNIST because the data are downloaded automatically from <code>tensorflow_datasets</code>.
-The command below runs the MNIST task with five learners for 15 rounds.
+The command below runs the MNIST task with five learners for 15 rounds.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m colearn_examples.ml_interface.run_demo --model KERAS_MNIST --n_learners <span class="m">5</span> --n_rounds <span class="m">15</span>
 </code></pre></div>
-You should see a graph of the vote score and the test score (the score used here is categorical accuracy).
-The new model is accepted if the fraction of positive votes (green colour) is higher than 0.5. 
-The new model is rejected if the fraction of negative votes (red color) is lower than 0.5. </p>
+<p>You should see a graph of the vote score and the test score (the score used here is categorical accuracy).
+The new model is accepted if the fraction of positive votes (green colour) is higher than 0.5.
+The new model is rejected if the fraction of negative votes (red color) is lower than 0.5.</p>
 <p><img alt="Alt text" src="../images/mnist_plot.png?raw=true" title="Collective learning graph" /></p>
 <p>As you can see, there are five learners, and initially they perform poorly.
 In round one, learner 0 is selected to propose a new set of weights.</p>
 <h2 id="other-datasets">Other datasets<a class="headerlink" href="#other-datasets" title="Permanent link">&para;</a></h2>
-<p>To run the CIFAR10 dataset:
+<p>To run the CIFAR10 dataset:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python -m colearn_examples.ml_interface.run_demo --model KERAS_CIFAR10 --n_learners <span class="m">5</span> --n_rounds <span class="m">15</span>
 </code></pre></div>
-The Fraud and X-ray datasets need to be downloaded from kaggle (this requires a kaggle account).
-To run the fraud dataset:
+<p>The Fraud and X-ray datasets need to be downloaded from kaggle (this requires a kaggle account).
+To run the fraud dataset:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python -m colearn_examples.ml_interface.run_demo --model FRAUD --n_learners <span class="m">5</span> --n_rounds <span class="m">15</span> --data_dir ./data/fraud
 </code></pre></div>
-To run the X-ray dataset:
+<p>To run the X-ray dataset:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python -m colearn_examples.ml_interface.run_demo --model PYTORCH_XRAY --n_learners <span class="m">5</span> --n_rounds <span class="m">15</span> --data_dir ./data/xray
-</code></pre></div></p>
+</code></pre></div>
 
               
             </article>

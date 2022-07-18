@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -5799,7 +5846,7 @@
       
         <li class="md-nav__item">
   <a href="#algorithms-that-work-with-colearn" class="md-nav__link">
-    Algorithms that work with colearn:
+    Algorithms that work with colearn
   </a>
   
 </li>
@@ -6135,7 +6182,7 @@
       
         <li class="md-nav__item">
   <a href="#algorithms-that-work-with-colearn" class="md-nav__link">
-    Algorithms that work with colearn:
+    Algorithms that work with colearn
   </a>
   
 </li>
@@ -6176,13 +6223,13 @@
 <p>This tutorial is a simple guide to trying out the collective learning protocol with your
 own machine learning code. Everything runs locally.</p>
 <p>The most flexible way to use the collective learning backends is to make a class that implements
-the Collective Learning <code>MachineLearningInterface</code> defined in 
-<a href="https://github.com/fetchai/colearn/tree/master//colearn/ml_interface.py">ml_interface.py</a>. 
+the Collective Learning <code>MachineLearningInterface</code> defined in
+<a href="https://github.com/fetchai/colearn/tree/master//colearn/ml_interface.py">ml_interface.py</a>.
 This tutorial will walk through implementing the <code>MachineLearningInterface</code>.
 If you're already using keras or pytorch you might find it easier to use the <code>KerasLearner</code> or <code>Pytorchlearner</code> classes.
 See the other tutorials for details of how to do that.</p>
 <h2 id="the-machinelearninginterface">The MachineLearningInterface<a class="headerlink" href="#the-machinelearninginterface" title="Permanent link">&para;</a></h2>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">#</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">#   Copyright 2021 Fetch.AI Limited</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">#</span>
@@ -6321,26 +6368,26 @@ See the other tutorials for details of how to do that.</p>
 <a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a>        <span class="k">pass</span> 
 </code></pre></div>
-There are four methods that need to be implemented:</p>
+<p>There are four methods that need to be implemented:</p>
 <ol>
 <li><code>propose_weights</code> causes the model to do some training and then return a
-   new set of weights that are proposed to the other learners. 
+   new set of weights that are proposed to the other learners.
    This method shouldn't charge the current weights of the model - that
    only happens when <code>accept_weights</code> is called.</li>
-<li><code>test_weights</code> - the models takes some new weights and returns a vote on whether the new weights are an improvement. 
-   As in propose_weights, this shouldn't change the current weights of the model - 
+<li><code>test_weights</code> - the models takes some new weights and returns a vote on whether the new weights are an improvement.
+   As in propose_weights, this shouldn't change the current weights of the model -
    that only happens when <code>accept_weights</code> is called.</li>
-<li><code>accept_weights</code> - the model accepts some weights that have been voted on and approved by the set of learners. 
+<li><code>accept_weights</code> - the model accepts some weights that have been voted on and approved by the set of learners.
     The old weighs of the model are discarded and replaced by the new weights.</li>
 <li><code>current_weights</code> should return the current weights of the model.</li>
 </ol>
-<h2 id="algorithms-that-work-with-colearn">Algorithms that work with colearn:<a class="headerlink" href="#algorithms-that-work-with-colearn" title="Permanent link">&para;</a></h2>
+<h2 id="algorithms-that-work-with-colearn">Algorithms that work with colearn<a class="headerlink" href="#algorithms-that-work-with-colearn" title="Permanent link">&para;</a></h2>
 <p>These conditions need to be fulfilled for algorithms to work with collective learning:</p>
 <ul>
-<li>
-<p>Model fitting must be incremental so that the previous model is used as the starting point for training. 
-  This is easy to achieve for neural networks because neural network training is always iterative, but for other 
-  learning algorithms more care must be taken. Some examples of getting this wrong:
+<li>Model fitting must be incremental so that the previous model is used as the starting point for training.
+  This is easy to achieve for neural networks because neural network training is always iterative, but for other
+  learning algorithms more care must be taken. Some examples of getting this wrong:</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -6353,23 +6400,21 @@ There are four methods that need to be implemented:</p>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </code></pre></div>
-  None of the training methods here use the previous result when fit is called for a second time; 
-  instead they start again from scratch. 
-  Good examples of incremental training can be seen in the <a href="../examples/">examples</a>. 
-  Many sklearn models have a <code>warm_start</code> parameter which can be set to <code>True</code> to use the previous training result. 
+<p>None of the training methods here use the previous result when fit is called for a second time;
+  instead they start again from scratch.
+  Good examples of incremental training can be seen in the <a href="../examples/">examples</a>.
+  Many sklearn models have a <code>warm_start</code> parameter which can be set to <code>True</code> to use the previous training result.
   XGBoost has an <code>xgb_model</code> parameter for passing in the previous training results.</p>
-</li>
-<li>
-<p>The model mustn't overfit when propose_weights() is called. 
+<ul>
+<li>The model mustn't overfit when propose_weights() is called.
   You should limit training so that a learner will not overfit their training data in one round.
-  For example, if a learner overfits their own training data then the other learners will reject the 
-  proposed update because it is not a good fit for their data. 
-  For a neural network a good approach is to restrict the number of batches that are used each round; 
-  for  random forest, restrict the trees that are added each round.</p>
-</li>
+  For example, if a learner overfits their own training data then the other learners will reject the
+  proposed update because it is not a good fit for their data.
+  For a neural network a good approach is to restrict the number of batches that are used each round;
+  for  random forest, restrict the trees that are added each round.</li>
 </ul>
 <h2 id="implementation-for-fraud-detection-task">Implementation for fraud detection task<a class="headerlink" href="#implementation-for-fraud-detection-task" title="Permanent link">&para;</a></h2>
-<p>Here is the class that implements the <code>MachineLearningInterface</code> for the task of detecting fraud in bank transactions.
+<p>Here is the class that implements the <code>MachineLearningInterface</code> for the task of detecting fraud in bank transactions.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span> <span class="nc">FraudSklearnLearner</span><span class="p">(</span><span class="n">MachineLearningInterface</span><span class="p">):</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                 <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
@@ -6438,11 +6483,11 @@ There are four methods that need to be implemented:</p>
 <a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 <a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>        <span class="k">except</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">NotFittedError</span><span class="p">:</span>
 <a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>            <span class="k">return</span> <span class="mi">0</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>Let's step through this and see how it works.
 The propose_weights method saves the current weights of the model.
 Then it performs some training of the model, and gets the new weights.
-It returns the new weights, and resets the model weights to be the old weights.
+It returns the new weights, and resets the model weights to be the old weights.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="k">def</span> <span class="nf">mli_propose_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Weights</span><span class="p">:</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        <span class="n">current_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mli_get_current_weights</span><span class="p">()</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
@@ -6455,7 +6500,7 @@ It returns the new weights, and resets the model weights to be the old weights.
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">new_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mli_get_current_weights</span><span class="p">()</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">current_weights</span><span class="p">)</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="k">return</span> <span class="n">new_weights</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>The test_weights method takes as a parameter the proposed weights that it needs to vote on.
 It saves the current weights of the model, and then sets the model weights to be the proposed weights.
 It tests the model and votes based on whether the score that it is monitoring has improved.
@@ -6464,7 +6509,7 @@ You could use loss, accuracy, mean squared error or any custom metric.
 If the vote score is the loss then the model would only vote True if the score has decreased.
 Here we're using accuracy, so the vote is true if the score increases.
 This method then resets the weights to the old values and returns the vote
-along with some scores for monitoring purposes.
+along with some scores for monitoring purposes.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    <span class="k">def</span> <span class="nf">mli_test_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">Weights</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProposedWeights</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        <span class="n">current_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mli_get_current_weights</span><span class="p">()</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
@@ -6482,12 +6527,12 @@ along with some scores for monitoring purposes.
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>                               <span class="n">vote</span><span class="o">=</span><span class="n">vote</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>                               <span class="p">)</span>
 </code></pre></div>
-The accept_weights method sets the weights of the model to be the new weights.
+<p>The accept_weights method sets the weights of the model to be the new weights.
 It also updates the vote score to be the current performance.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You could implement a cache here. 
-These weights will already have been tested in test_weights, so the vote 
+<p>You could implement a cache here.
+These weights will already have been tested in test_weights, so the vote
 score could be retrieved from the cache instead of recomputed.</p>
 </div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    <span class="k">def</span> <span class="nf">mli_accept_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">Weights</span><span class="p">):</span>
@@ -6513,14 +6558,14 @@ Then a list of FraudLearner instances is created, each with its own dataset.  </
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>                <span class="n">test_labels</span><span class="o">=</span><span class="n">learner_test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>            <span class="p">))</span>
 </code></pre></div>
-<p>Then we give all the models the same weights to start off with:
+<p>Then we give all the models the same weights to start off with:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">set_equal_weights</span><span class="p">(</span><span class="n">all_learner_models</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>And then we can move on to the final stage, which is training with Collective Learning.
 The function <code>collective_learning_round</code> performs one round of collective learning.
 One learner is selected to train and propose an update.
 The other learners vote on the update, and if the vote passes then the update is accepted.
-Then a new round begins.
+Then a new round begins.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Train the model using Collective Learning</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">results</span> <span class="o">=</span> <span class="n">Results</span><span class="p">()</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">results</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initial_result</span><span class="p">(</span><span class="n">all_learner_models</span><span class="p">))</span>
@@ -6538,7 +6583,7 @@ Then a new round begins.
 <a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="n">plot_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">n_learners</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>             <span class="n">score_name</span><span class="o">=</span><span class="n">all_learner_models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">criterion</span><span class="p">)</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="n">plot_votes</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 
               
             </article>

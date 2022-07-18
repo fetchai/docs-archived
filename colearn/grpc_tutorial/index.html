@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6230,37 +6277,37 @@
 
 <h1 id="grpc-tutorial">gRPC tutorial<a class="headerlink" href="#grpc-tutorial" title="Permanent link">&para;</a></h1>
 <p>This tutorial explains how to set up the gRPC learner server.
-It assumes that you can already run colearn locally, and that you have already defined your own models and dataloaders 
+It assumes that you can already run colearn locally, and that you have already defined your own models and dataloaders
 (if you're going to do so).
 If you haven't done this then see the tutorials in the <a href="../intro_tutorial_mli/">Getting Started</a> section.</p>
 <h2 id="architecture-of-colearn">Architecture of colearn<a class="headerlink" href="#architecture-of-colearn" title="Permanent link">&para;</a></h2>
 <p>There are two main parts to a collective learning system: the learner and the backend.
-The backend controls the learner, and manages the smart contracts and IPFS, and acts as a control hub for 
+The backend controls the learner, and manages the smart contracts and IPFS, and acts as a control hub for
 all the associated learners.
-The learner is the part that executes machine learning code. 
+The learner is the part that executes machine learning code.
 This consists of proposing, evaluating and accepting new weights as detailed in the Machine Learning Interface.
-The learner and the backend communicate via <a href="https://grpc.io">gRPC</a>; 
+The learner and the backend communicate via <a href="https://grpc.io">gRPC</a>;
 the learner runs a gRPC server, and the backend runs a gRPC client that makes requests of the learner.
-This separation means that the learner can run on specialised hardware (e.g. a compute server) and does not need to 
+This separation means that the learner can run on specialised hardware (e.g. a compute server) and does not need to
 be co-located with the backend.</p>
 <h2 id="architecture-of-grpc-server">Architecture of gRPC server<a class="headerlink" href="#architecture-of-grpc-server" title="Permanent link">&para;</a></h2>
-<p>The gRPC interface is defined in 
+<p>The gRPC interface is defined in
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/proto/interface.proto">colearn_grpc/proto/interface.proto</a>.
 This defines the functions that the gRPC server exposes and the format for messages between the server and the client.</p>
 <p>As we covered in the earlier tutorials, the machine learning part of colearn is contained inside the
 <code>MachineLearningInterface</code> (MLI).
 To recap: the MLI provides methods for proposing, evaluating and accepting weights.
-If you want to use your own models with colearn then you need to write an object that implements the MLI 
+If you want to use your own models with colearn then you need to write an object that implements the MLI
 (for example, an instance of a python class that inherits from <code>MachineLearningInterface</code>).
 For more about the MLI see the <a href="../intro_tutorial_mli/">MLI tutorial</a>.</p>
-<p>The gRPC server has an MLI factory, and it uses its MLI factory to make objects that implement 
+<p>The gRPC server has an MLI factory, and it uses its MLI factory to make objects that implement
 the <code>MachineLearningInterface</code>.
 The MLI factory needs to implement the MLI factory interface.
 You could write your own MLI factory, but it's easier to use the one we provide.
 Below we will discuss the MLI factory interface and then talk about how to use the example factory.</p>
 <h2 id="mli-factory-interface">MLI Factory interface<a class="headerlink" href="#mli-factory-interface" title="Permanent link">&para;</a></h2>
-<p>The MLI Factory (as the name suggests) is a factory class for creating objects that implement the machine learning 
-interface:
+<p>The MLI Factory (as the name suggests) is a factory class for creating objects that implement the machine learning
+interface:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">#</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">#   Copyright 2021 Fetch.AI Limited</span>
@@ -6356,7 +6403,7 @@ interface:
 <a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>        <span class="k">pass</span> 
 </code></pre></div>
-The MLI Factory stores the constructors for dataloaders and models and also a list of the dataloaders that 
+<p>The MLI Factory stores the constructors for dataloaders and models and also a list of the dataloaders that
 are compatible with each model.
 Each constructor is stored under a specific name.
 For example, "KERAS_MNIST_MODEL" is the model for keras mnist.
@@ -6366,84 +6413,84 @@ The MLI Factory needs to implement four methods:</p>
 <li>get_models - returns the names of the models that are registered with the factory and their parameters.</li>
 <li>get_dataloaders - returns the names of the dataloaders that are registered with the factory and their parameters.</li>
 <li>get_compatibilities - returns a list of dataloaders for each model that can be used with that model.</li>
-<li>get_mli - takes the name and parameters for the model and dataloader and constructs the MLI object. 
+<li>get_mli - takes the name and parameters for the model and dataloader and constructs the MLI object.
   Returns the MLI object.</li>
 </ul>
 <h2 id="using-the-example-mli-factory">Using the example MLI Factory<a class="headerlink" href="#using-the-example-mli-factory" title="Permanent link">&para;</a></h2>
-<p>The example MLI factory is defined in 
+<p>The example MLI factory is defined in
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/example_mli_factory.py">colearn_grpc/example_mli_factory.py</a>.
 It stores the models and dataloaders that it knows about in factoryRegistry.py
 To add a new model and dataloader to the factory you need to do the following things:</p>
 <ol>
 <li>Define a function that loads the dataset given the location of the dataset.</li>
-<li>Define a function that takes in the dataset and loads the MLI model. </li>
-<li>Register both these functions with the factory registry. </li>
+<li>Define a function that takes in the dataset and loads the MLI model.</li>
+<li>Register both these functions with the factory registry.</li>
 </ol>
-<p>Registering a dataloader looks like this:
+<p>Registering a dataloader looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@FactoryRegistry</span><span class="o">.</span><span class="n">register_dataloader</span><span class="p">(</span><span class="n">dataloader_tag</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">def</span> <span class="nf">prepare_data_loaders</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                         <span class="n">train_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                         <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PrefetchDataset</span><span class="p">,</span> <span class="n">PrefetchDataset</span><span class="p">]:</span>
 </code></pre></div>
-Registering a model is similar, but you additionally have to specify the dataloaders that this model is compatible with.
+<p>Registering a model is similar, but you additionally have to specify the dataloaders that this model is compatible with.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@FactoryRegistry</span><span class="o">.</span><span class="n">register_model_architecture</span><span class="p">(</span><span class="n">model_tag</span><span class="p">,</span> <span class="p">[</span><span class="n">dataloader_tag</span><span class="p">])</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span> <span class="nf">prepare_learner</span><span class="p">(</span><span class="n">data_loaders</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PrefetchDataset</span><span class="p">,</span> <span class="n">PrefetchDataset</span><span class="p">],</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                    <span class="n">steps_per_epoch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                    <span class="n">vote_batches</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                    <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KerasLearner</span><span class="p">:</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>You can see an example of how to do this in <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/grpc/mnist_grpc.py">colearn_examples/grpc/mnist_grpc.py</a>.
-The FactoryRegistry decorators get evaluated when the functions are imported, so ensure that the functions are imported 
-before constructing the gRPC server (more on that later). </p>
+The FactoryRegistry decorators get evaluated when the functions are imported, so ensure that the functions are imported
+before constructing the gRPC server (more on that later).</p>
 <p>Constraints on the dataloader function:</p>
 <ol>
 <li>The first parameter should be a mandatory parameter called "location" which stores the location of the dataset.</li>
 <li>The subsequent parameters should have default arguments.</li>
-<li>The return type should be specified with a type annotation, and this should be the same type that is expected by the 
+<li>The return type should be specified with a type annotation, and this should be the same type that is expected by the
    model functions that use this dataloader.</li>
-<li>The arguments that you pass to the dataloader function must be 
-   <a href="https://docs.python.org/3.7/library/json.html">JSON-encodable</a>. 
-   Native python types are fine (e.g. str, dict, list, float). </li>
+<li>The arguments that you pass to the dataloader function must be
+   <a href="https://docs.python.org/3.7/library/json.html">JSON-encodable</a>.
+   Native python types are fine (e.g. str, dict, list, float).</li>
 </ol>
 <p>Constraints on the model function:</p>
 <ol>
-<li>The first parameter should be a mandatory parameter called "data_loaders". 
+<li>The first parameter should be a mandatory parameter called "data_loaders".
    This must have the same type as the return type of the compatible dataloaders.</li>
 <li>The subsequent parameters should have default arguments.</li>
 <li>The return type of model_function should be <code>MachineLearningInterface</code> or a subclass of it (e.g. <code>KerasLearner</code>).</li>
 <li>The dataloaders listed as being compatible with the model should already be registered with FactoryRegistry before
-   the model is registered. </li>
-<li>The arguments that you pass to the model function must be 
+   the model is registered.</li>
+<li>The arguments that you pass to the model function must be
    <a href="https://docs.python.org/3.7/library/json.html">JSON-encodable</a>.
-   Native python types are fine (e.g. str, dict, list, float). </li>
+   Native python types are fine (e.g. str, dict, list, float).</li>
 </ol>
 <h2 id="making-it-all-work-together">Making it all work together<a class="headerlink" href="#making-it-all-work-together" title="Permanent link">&para;</a></h2>
-<p>It can be challenging to ensure that all the parts talk to each other, so we have provided some examples and 
+<p>It can be challenging to ensure that all the parts talk to each other, so we have provided some examples and
 helper scripts.
-It is recommended to first make an all-in-one script following the example of 
+It is recommended to first make an all-in-one script following the example of
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/grpc/mnist_grpc.py">colearn_examples/grpc/mnist_grpc.py</a>.
-Once this is working you can run <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/scripts/run_n_servers.py">colearn_grpc/scripts/run_n_servers.py</a> or 
+Once this is working you can run <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/scripts/run_n_servers.py">colearn_grpc/scripts/run_n_servers.py</a> or
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/scripts/run_server.py">colearn_grpc/scripts/run_grpc_server.py</a> to run the server(s).
-The script <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/scripts/probe_grpc_server.py">colearn_grpc/scripts/probe_grpc_server.py</a> will connect to a 
+The script <a href="https://github.com/fetchai/colearn/tree/master//colearn_grpc/scripts/probe_grpc_server.py">colearn_grpc/scripts/probe_grpc_server.py</a> will connect to a
 gRPC server and print the dataloaders and models that are registered on it (pass in the address as a parameter).
-The client side of the gRPC communication can then be run using 
+The client side of the gRPC communication can then be run using
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/grpc/run_grpc_demo.py">colearn_examples/grpc/run_grpc_demo.py</a>.
 More details are given below.</p>
 <p>A note about running tensorflow in multiple processes: on a system with a GPU, tensorflow will try to get all the GPU
-memory when it starts up. 
+memory when it starts up.
 This means that running tensorflow in multiple processes on the same machine will fail.
 To prevent this happening, tensorflow should be told to use only the CPU by setting the environment variable
 <code>CUDA_VISIBLE_DEVIES</code> to <code>-1</code>.
-This can be done in a python script (before importing tensorflow) by using:
+This can be done in a python script (before importing tensorflow) by using:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">os</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
-</code></pre></div></p>
+</code></pre></div>
 <h2 id="testing-locally-with-an-all-in-one-script">Testing locally with an all-in-one script<a class="headerlink" href="#testing-locally-with-an-all-in-one-script" title="Permanent link">&para;</a></h2>
-<p>You can test this locally by following the example in 
+<p>You can test this locally by following the example in
 <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/grpc/mnist_grpc.py">colearn_examples/grpc/mnist_grpc.py</a>.
 Define your dataloader and model functions as specified above, and register them with the factory.
-Then create n_learners gRPC servers:
+Then create n_learners gRPC servers:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">n_learners</span> <span class="o">=</span> <span class="mi">5</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">first_server_port</span> <span class="o">=</span> <span class="mi">9995</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># make n servers</span>
@@ -6453,7 +6500,7 @@ Then create n_learners gRPC servers:
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                        <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">server_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">server_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>And then create n_learners gRPC clients:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">all_learner_models</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_learners</span><span class="p">):</span>
@@ -6467,41 +6514,41 @@ Then create n_learners gRPC servers:
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>                      <span class="n">model_parameters</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({}))</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>   <span class="n">all_learner_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ml_system</span><span class="p">)</span>
 </code></pre></div>
-<p><code>ExampleGRPCLearnerClient</code> inherits from the <code>MachineLearningInterface</code> so you can use it with the training functions 
-as before:
+<p><code>ExampleGRPCLearnerClient</code> inherits from the <code>MachineLearningInterface</code> so you can use it with the training functions
+as before:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span> <span class="n">round_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_rounds</span><span class="p">):</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">results</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="n">collective_learning_round</span><span class="p">(</span><span class="n">all_learner_models</span><span class="p">,</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                                  <span class="n">vote_threshold</span><span class="p">,</span> <span class="n">round_index</span><span class="p">)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <h2 id="testing-remotely">Testing remotely<a class="headerlink" href="#testing-remotely" title="Permanent link">&para;</a></h2>
 <p>We expect that the gRPC learner part will often be on a compute cluster and be separate from the gRPC client side.
 To test the gRPC in a setup like this you can start the servers on the computer side and the client part separately.
-For one gRPC server:
+For one gRPC server:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python3 ./colearn_grpc/scripts/run_grpc_server.py --port <span class="m">9995</span> --metrics_port <span class="m">9091</span>
-</code></pre></div></p>
-<p>For multiple gRPC servers:
+</code></pre></div>
+<p>For multiple gRPC servers:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python3 ./colearn_grpc/scrips/run_n_grpc_servers.py --n_learners <span class="m">5</span> --port <span class="m">9995</span> --metrics_port <span class="m">9091</span>
 </code></pre></div>
-The servers by default will start on port 9995 and use subsequent ports from there, so if three
+<p>The servers by default will start on port 9995 and use subsequent ports from there, so if three
 servers are required they will run on ports 9995, 9996 and 9997.</p>
-<p>If you have written your own dataloaders and models then you need to make sure that those functions are defined or 
+<p>If you have written your own dataloaders and models then you need to make sure that those functions are defined or
 imported before the server is created.
-These are the imports of the default dataloaders and models in <code>colearn_grpc/scripts/run_grpc_server.py</code>:
+These are the imports of the default dataloaders and models in <code>colearn_grpc/scripts/run_grpc_server.py</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># These are imported so that they are registered in the FactoryRegistry</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">colearn_keras.keras_mnist</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">import</span> <span class="nn">colearn_keras.keras_cifar10</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">import</span> <span class="nn">colearn_pytorch.pytorch_xray</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">import</span> <span class="nn">colearn_pytorch.pytorch_covid_xray</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">import</span> <span class="nn">colearn_other.fraud_dataset</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>Once the gRPC server(s) are running, set up whatever networking and port forwarding is required.
-You can check that the gRPC server is accessible by using the probe script:
+You can check that the gRPC server is accessible by using the probe script:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python3 ./colearn_grpc/scripts/probe_grpc_server.py --port <span class="m">9995</span>
 </code></pre></div>
-If the connection is successful this will print a list of the models and datasets registered on the server.
-These are the defaults that are registered:
+<p>If the connection is successful this will print a list of the models and datasets registered on the server.
+These are the defaults that are registered:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>info: Attempt number 0 to connect to 127.0.0.1:9995
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>info: Successfully connected to 127.0.0.1:9995!
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>{&#39;compatibilities&#39;: {&#39;FRAUD&#39;: [&#39;FRAUD&#39;],
@@ -6536,18 +6583,18 @@ These are the defaults that are registered:
 <a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>                                         &#39;&quot;steps_per_epoch&quot;: 40, &#39;
 <a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>                                         &#39;&quot;vote_batches&quot;: 10, &quot;no_cuda&quot;: &#39;
 <a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>                                         &#39;false, &quot;vote_on_accuracy&quot;: true}&#39;}}
-</code></pre></div></p>
+</code></pre></div>
 <p>Then run <code>python -m colearn_examples.grpc.run_grpc_demo</code> on the other side to run the usual demo.
 The script takes as arguments the model name and dataset name that should be run, along with the number of learners
-and the data location for each learner.
+and the data location for each learner.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python -m colearn_examples.grpc.run_grpc_demo --n_learners <span class="m">5</span> --dataloader_tag KERAS_MNIST --model_tag KERAS_MNIST <span class="se">\</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>--data_locations /tmp/mnist/0,/tmp/mnist/1,/tmp/mnist/2,/tmp/mnist/3,/tmp/mnist/4
-</code></pre></div></p>
+</code></pre></div>
 <h2 id="using-the-mli-factory-interface">Using the MLI Factory interface<a class="headerlink" href="#using-the-mli-factory-interface" title="Permanent link">&para;</a></h2>
 <p>An alternative method of using your own dataloaders and models with the gRPC server is to use the MLI Factory interface.
 This is defined in <code>colearn_grpc/mli_factory_interface.py</code>.
 An example is given in <code>colearn_examples/grpc/mlifactory_grpc_mnist.py</code>.
-The MLI Factory is implemented as shown:
+The MLI Factory is implemented as shown:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">dataloader_tag</span> <span class="o">=</span> <span class="s2">&quot;KERAS_MNIST_EXAMPLE_DATALOADER&quot;</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">model_tag</span> <span class="o">=</span> <span class="s2">&quot;KERAS_MNIST_EXAMPLE_MODEL&quot;</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
@@ -6572,8 +6619,8 @@ The MLI Factory is implemented as shown:
 <a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>        <span class="n">model_params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model_params</span><span class="p">)</span>
 <a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>        <span class="n">mli_model</span> <span class="o">=</span> <span class="n">prepare_learner</span><span class="p">(</span><span class="n">data_loaders</span><span class="o">=</span><span class="n">data_loaders</span><span class="p">,</span> <span class="o">**</span><span class="n">model_params</span><span class="p">)</span>
 <a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>        <span class="k">return</span> <span class="n">mli_model</span>
-</code></pre></div></p>
-<p>An instance of the <code>SimpleFactory</code> class needs to be passed to the gRPC server on creation:
+</code></pre></div>
+<p>An instance of the <code>SimpleFactory</code> class needs to be passed to the gRPC server on creation:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">n_learners</span> <span class="o">=</span> <span class="mi">5</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">first_server_port</span> <span class="o">=</span> <span class="mi">9995</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># make n servers</span>
@@ -6587,7 +6634,7 @@ The MLI Factory is implemented as shown:
 <a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="n">server_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="n">server_processes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">server_process</span><span class="p">)</span>
 </code></pre></div>
-The rest of the example follows the <code>grpc_mnist.py</code> example.</p>
+<p>The rest of the example follows the <code>grpc_mnist.py</code> example.</p>
 
               
             </article>

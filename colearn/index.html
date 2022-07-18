@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6185,7 +6232,7 @@
 <h1 id="welcome-to-the-fetchai-collective-learning-library">Welcome to the Fetch.ai Collective Learning Library<a class="headerlink" href="#welcome-to-the-fetchai-collective-learning-library" title="Permanent link">&para;</a></h1>
 <p>Colearn is a library that enables privacy-preserving decentralized machine learning tasks on the FET network.</p>
 <p>This blockchain-mediated collective learning system enables multiple stakeholders to build a shared machine learning model without needing to rely on a central authority,
-and without revealing their dataset to the other stakeholders. This library is currently in development. </p>
+and without revealing their dataset to the other stakeholders. This library is currently in development.</p>
 <h2 id="how-collective-learning-works">How collective learning works<a class="headerlink" href="#how-collective-learning-works" title="Permanent link">&para;</a></h2>
 <p>A group of <em>learners</em> comes together, each of whom have their own datasets and want to collaborate on training a machine learning model over a set number of rounds. We refer
 to this as an 'experiment'.
@@ -6193,34 +6240,34 @@ In each round of collective learning:</p>
 <ol>
 <li>One learner is selected to train the model and propose a new set of model weights.</li>
 <li>The other learners vote on whether the weights are an improvement.</li>
-<li>If the majority vote that the new weights are better than the old ones then the new weights are accepted by all the learners. 
+<li>If the majority vote that the new weights are better than the old ones then the new weights are accepted by all the learners.
     Otherwise the new weights are discarded.</li>
 <li>The next round begins.
 For more information on the Collective Learning Protocol see <a href="about/">here</a>.</li>
 </ol>
 <h3 id="current-version">Current Version<a class="headerlink" href="#current-version" title="Permanent link">&para;</a></h3>
-<p>We have released <em>v.0.2.8</em> of the Colearn Machine Learning Interface, the first version of an interface that allows 
-developers to define their own model architectures that can then be used in collective learning. 
+<p>We have released <em>v.0.2.8</em> of the Colearn Machine Learning Interface, the first version of an interface that allows
+developers to define their own model architectures that can then be used in collective learning.
 Together with the interface we provide a simple backend for local experiments. This is a prototype backend with upcoming blockchain ledger based backends to follow.<br />
 Future releases will use similar interfaces so that learners built with the current system will work on a different backend that integrates a distributed ledger and provides other improvements.
 The current framework will then be used mainly for model development and debugging.
 We invite all users to experiment with the framework, develop their own models, and provide feedback!</p>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <p>To use the latest stable release we recommend installing the <a href="https://pypi.org/project/colearn/">package from PyPi</a></p>
-<p>To install with support for Keras and Pytorch:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install colearn<span class="o">[</span>all<span class="o">]</span>
+<p>To install with support for Keras and Pytorch:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install colearn<span class="o">[</span>all<span class="o">]</span>
 </code></pre></div>
-To install with just support for Keras or Pytorch:</p>
+<p>To install with just support for Keras or Pytorch:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip install colearn<span class="o">[</span>keras<span class="o">]</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>pip install colearn<span class="o">[</span>pytorch<span class="o">]</span>
 </code></pre></div>
 <p>For more installation options or get the latest (development) version see <a href="installation/">Installation</a></p>
-<p>Then run the standalone demo:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m colearn_examples.ml_interface.run_demo
-</code></pre></div></p>
+<p>Then run the standalone demo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python -m colearn_examples.ml_interface.run_demo
+</code></pre></div>
 <p>For plenty of other examples see the <a href="examples/">Examples</a>.</p>
 <h2 id="writing-your-own-models">Writing your own models<a class="headerlink" href="#writing-your-own-models" title="Permanent link">&para;</a></h2>
-<p>We encourage users to try out the system by writing their own models. 
+<p>We encourage users to try out the system by writing their own models.
 Models need to implement the collective learning interface, which provides functions for training and voting on updates.
 More instructions can be found in the Getting Started section.</p>
 

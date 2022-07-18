@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6088,14 +6135,14 @@
 <p>This tutorial is a simple guide to trying out the collective learning protocol with your
 own machine learning code. Everything runs locally.</p>
 <p>The most flexible way to use the collective learning backends is to make a class that implements
-the Collective Learning <code>MachineLearningInterface</code> defined in <a href="https://github.com/fetchai/colearn/tree/master//colearn/ml_interface.py">ml_interface.py</a>. 
+the Collective Learning <code>MachineLearningInterface</code> defined in <a href="https://github.com/fetchai/colearn/tree/master//colearn/ml_interface.py">ml_interface.py</a>.
 For more details on how to use the <code>MachineLearningInterface</code> see <a href="../intro_tutorial_mli/">here</a></p>
-<p>However, the simpler way is to use one of the helper classes that we have provided that implement 
-most of the interface for popular ML libraries. 
+<p>However, the simpler way is to use one of the helper classes that we have provided that implement
+most of the interface for popular ML libraries.
 In this tutorial we are going to walk through using the <code>PytorchLearner</code>.
-First we are going to define the model architecture, then 
+First we are going to define the model architecture, then
 we are going to load the data and configure the model, and then we will run Collective Learning.</p>
-<p>A standard script for machine learning with Pytorch looks like the one below
+<p>A standard script for machine learning with Pytorch looks like the one below</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">#</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">#   Copyright 2021 Fetch.AI Limited</span>
@@ -6204,14 +6251,14 @@ we are going to load the data and configure the model, and then we will run Coll
 <a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>    <span class="n">avg_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total_score</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_test_batches</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">))</span>
 <a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average loss at round </span><span class="si">{</span><span class="nb">round</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">avg_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-There are three steps:</p>
+<p>There are three steps:</p>
 <ol>
 <li>Load the data</li>
 <li>Define the model</li>
 <li>Train the model</li>
 </ol>
-<p>In this tutorial we are going to see how to modify each step to use collective learning. 
-We'll end up with code like this:
+<p>In this tutorial we are going to see how to modify each step to use collective learning.
+We'll end up with code like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ------------------------------------------------------------------------------</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">#</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">#   Copyright 2021 Fetch.AI Limited</span>
@@ -6369,13 +6416,13 @@ We'll end up with code like this:
 <a id="__codelineno-1-155" name="__codelineno-1-155" href="#__codelineno-1-155"></a><span class="n">plot</span><span class="o">.</span><span class="n">block</span><span class="p">()</span>
 <a id="__codelineno-1-156" name="__codelineno-1-156" href="#__codelineno-1-156"></a>
 <a id="__codelineno-1-157" name="__codelineno-1-157" href="#__codelineno-1-157"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Colearn Example Finished!&quot;</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>The first thing is to modify the data loading code.
 Each learner needs to have their own training and testing set from the data.
-This is easy to do with the pytorch random_split utility:
+This is easy to do with the pytorch random_split utility:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">data_split</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_learners</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_learners</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">learner_test_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">data_split</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>The model definition is the same as before.
 To use collective learning, we need to create an object that implements the MachineLearningInterface.
 To make it easier to use the <code>MachineLearningInterface</code> with pytorch, we've defined <code>PytorchLearner</code>.
@@ -6711,7 +6758,7 @@ To make it easier to use the <code>MachineLearningInterface</code> with pytorch,
 <a id="__codelineno-3-329" name="__codelineno-3-329" href="#__codelineno-3-329"></a>            <span class="n">error_code</span><span class="o">=</span><span class="n">err</span><span class="p">,</span>
 <a id="__codelineno-3-330" name="__codelineno-3-330" href="#__codelineno-3-330"></a>        <span class="p">)</span>
 </code></pre></div>
-<p>We create a set of PytorchLearners by passing in the model and the datasets:
+<p>We create a set of PytorchLearners by passing in the model and the datasets:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">all_learner_models</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_learners</span><span class="p">):</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
@@ -6730,15 +6777,15 @@ To make it easier to use the <code>MachineLearningInterface</code> with pytorch,
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="p">)</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    <span class="n">all_learner_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">learner</span><span class="p">)</span>
-</code></pre></div></p>
-<p>Then we give all the models the same weights to start off with:
+</code></pre></div>
+<p>Then we give all the models the same weights to start off with:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">set_equal_weights</span><span class="p">(</span><span class="n">all_learner_models</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>And then we can move on to the final stage, which is training with Collective Learning.
 The function <code>collective_learning_round</code> performs one round of collective learning.
 One learner is selected to train and propose an update.
 The other learners vote on the update, and if the vote passes then the update is accepted.
-Then a new round begins.
+Then a new round begins.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Train the model using Collective Learning</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">results</span> <span class="o">=</span> <span class="n">Results</span><span class="p">()</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">results</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initial_result</span><span class="p">(</span><span class="n">all_learner_models</span><span class="p">))</span>
@@ -6755,7 +6802,7 @@ Then a new round begins.
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># Plot the final result with votes</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">plot_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">n_learners</span><span class="p">,</span> <span class="n">score_name</span><span class="o">=</span><span class="n">score_name</span><span class="p">)</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">plot_votes</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 
               
             </article>

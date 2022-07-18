@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6366,7 +6413,7 @@
 <h2 id="demo-instructions">Demo instructions<a class="headerlink" href="#demo-instructions" title="Permanent link">&para;</a></h2>
 <h3 id="create-the-seller-aea">Create the seller AEA<a class="headerlink" href="#create-the-seller-aea" title="Permanent link">&para;</a></h3>
 <p>First, fetch the seller AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/generic_seller:0.29.0 --alias my_seller_aea
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/generic_seller:0.29.1 --alias my_seller_aea
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> my_seller_aea
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea install
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>aea build
@@ -6377,19 +6424,19 @@
 The following steps create the seller from scratch:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea create my_seller_aea
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> my_seller_aea
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea add connection fetchai/p2p_libp2p:0.27.0
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea add connection fetchai/soef:0.27.1
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea add connection fetchai/ledger:0.21.0
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea add skill fetchai/generic_seller:0.28.1
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea add connection fetchai/p2p_libp2p:0.27.1
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea add connection fetchai/soef:0.27.2
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea add connection fetchai/ledger:0.21.1
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea add skill fetchai/generic_seller:0.28.2
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.0
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.1
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s1">&#39;{</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.1&quot;: &quot;fetchai/ledger:0.21.0&quot;,</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.1&quot;: &quot;fetchai/soef:0.27.1&quot;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.2&quot;: &quot;fetchai/ledger:0.21.1&quot;,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.2&quot;: &quot;fetchai/soef:0.27.2&quot;</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s1">}&#39;</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>aea install
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>aea build
@@ -6400,7 +6447,7 @@ The following steps create the seller from scratch:
 
 <h3 id="create-the-buyer-aea">Create the buyer AEA<a class="headerlink" href="#create-the-buyer-aea" title="Permanent link">&para;</a></h3>
 <p>Then, in another terminal fetch the buyer AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea fetch fetchai/generic_buyer:0.30.0 --alias my_buyer_aea
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea fetch fetchai/generic_buyer:0.30.1 --alias my_buyer_aea
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> my_buyer_aea
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea install
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea build
@@ -6411,19 +6458,19 @@ The following steps create the seller from scratch:
 The following steps create the buyer from scratch:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea create my_buyer_aea
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> my_buyer_aea
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea add connection fetchai/p2p_libp2p:0.27.0
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea add connection fetchai/soef:0.27.1
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>aea add connection fetchai/ledger:0.21.0
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>aea add skill fetchai/generic_buyer:0.27.1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea add connection fetchai/p2p_libp2p:0.27.1
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea add connection fetchai/soef:0.27.2
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>aea add connection fetchai/ledger:0.21.1
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>aea add skill fetchai/generic_buyer:0.27.2
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.0
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.1
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s1">&#39;{</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.1&quot;: &quot;fetchai/ledger:0.21.0&quot;,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.1&quot;: &quot;fetchai/soef:0.27.1&quot;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.2&quot;: &quot;fetchai/ledger:0.21.1&quot;,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.2&quot;: &quot;fetchai/soef:0.27.2&quot;</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s1">}&#39;</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>aea install
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>aea build
@@ -6496,7 +6543,7 @@ The following steps create the buyer from scratch:
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span><span class="w"></span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span><span class="w"></span>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">      </span><span class="nt">max_negotiations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">      </span><span class="nt">max_tx_fee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">      </span><span class="nt">max_tx_fee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3550000000000000</span><span class="w"></span>
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="nt">max_unit_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
 <a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">      </span><span class="nt">search_query</span><span class="p">:</span><span class="w"></span>
 <a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">constraint_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">==</span><span class="w"></span>
@@ -6518,7 +6565,7 @@ The following steps create the buyer from scratch:
 <p>First, run the seller AEA:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
 </code></pre></div>
-<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.0 -u public_uri</code> to retrieve the address.)
+<p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.1 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the seller.</p>
 <p>Then, configure the buyer to connect to this same local ACN by running the following command in the buyer terminal, replacing <code>SOME_ADDRESS</code> with the value you noted above:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>

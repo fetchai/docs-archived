@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6145,19 +6192,19 @@
 
 
 <h1 id="what-is-differential-privacy">What is differential privacy?<a class="headerlink" href="#what-is-differential-privacy" title="Permanent link">&para;</a></h1>
-<p>To make a machine learning system that protects privacy we first need to have a definition of what privacy is. 
-Differential privacy (DP) is one such definition. 
+<p>To make a machine learning system that protects privacy we first need to have a definition of what privacy is.
+Differential privacy (DP) is one such definition.
 First we need to have three concepts: the <em>database</em> is a collection of data about <em>individuals</em> (for example, their medical records), and we want to make a <em>query</em> about that data (for example "How much does smoking increase someone's risk of cancer?").
 DP says that privacy is preserved if the result of the query cannot be used to determine if any particular individual is present in the database.</p>
-<p>So if person A has their medical data in a database, and the query that we want to make on that database is 
+<p>So if person A has their medical data in a database, and the query that we want to make on that database is
 "How much does smoking increase someone's risk of cancer" then the result of that query shouldn't disclose whether or not person A's details are in the database.</p>
-<p>From this comes the idea of <em>sensitivity</em> of a query. 
-The <em>sensitivity</em> of a query determines how much the result of the query depends on an individual's data. 
+<p>From this comes the idea of <em>sensitivity</em> of a query.
+The <em>sensitivity</em> of a query determines how much the result of the query depends on an individual's data.
 For example, the query "How much does smoking increase the risk of cancer for adults in the UK?" is less sensitive than the query "How much does smoking increase the risk of cancer for men aged 50-55 in Cambridge?" because the second query uses a smaller set of individuals.</p>
 <h2 id="epsilon-differential-privacy">Epsilon-differential privacy<a class="headerlink" href="#epsilon-differential-privacy" title="Permanent link">&para;</a></h2>
-<p>EDP is a scheme for preserving differential privacy. 
+<p>EDP is a scheme for preserving differential privacy.
 In EDP all queries have random noise added to them, so they are no longer deterministic.
-So if the query was "What fraction of people in the database are male", and the true result is 0.5 then the results of calling this query three times might be 0.53, 0.49 and 0.51. 
+So if the query was "What fraction of people in the database are male", and the true result is 0.5 then the results of calling this query three times might be 0.53, 0.49 and 0.51.
 This makes it harder to tell if an individual's data is in the database, because the effect of adding a person can't be distinguished from the effect of the random noise.
 Intuitively this is a bit like blurring an image: adding noise obscures personal information.
 The amount of personal information that is revealed isn't zero, but it is guaranteed to be below a certain threshold.</p>
@@ -6171,7 +6218,7 @@ The <code>opacus</code> and <code>tensorflow-privacy</code> libraries implement 
 <h1 id="how-to-use-differential-privacy-with-colearn">How to use differential privacy with colearn<a class="headerlink" href="#how-to-use-differential-privacy-with-colearn" title="Permanent link">&para;</a></h1>
 <p>By using <code>opacus</code> and <code>tensorflow-privacy</code> we can make collective learning use differential privacy.
 The learner that is proposing weights does so using a DP-enabled optimiser.</p>
-<p>To see an example of using this see <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/pytorch_mnist_diffpriv.py">dp_pytorch</a> 
+<p>To see an example of using this see <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/pytorch_mnist_diffpriv.py">dp_pytorch</a>
 and <a href="https://github.com/fetchai/colearn/tree/master//colearn_examples/ml_interface/keras_mnist_diffpriv.py">dp_keras</a>.</p>
 
               

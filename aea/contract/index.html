@@ -697,10 +697,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_4">
+          Networks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Networks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../ledger_v2/networks/" class="md-nav__link">
-        Networks
+      <a href="../../ledger_v2/live-networks/" class="md-nav__link">
+        Active Networks
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ledger_v2/archived-networks/" class="md-nav__link">
+        Mainnet Archive
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6155,9 +6202,9 @@
 <h2 id="interacting-with-contracts-from-skills">Interacting with contracts from skills<a class="headerlink" href="#interacting-with-contracts-from-skills" title="Permanent link">&para;</a></h2>
 <p>Interacting with contracts in almost all cases requires network access. Therefore, the framework executes contract related logic in a <a href="../connection">Connection</a>.</p>
 <p><img src="../assets/message-flow-contract-ledger.jpg" alt="Message flow for contract and ledger interactions" class="center" style="display: block; margin-left: auto; margin-right: auto;width:80%;"></p>
-<p>In particular, the <code>fetchai/ledger:0.21.0</code> connection can be used to execute contract related logic. The skills communicate with the <code>fetchai/ledger:0.21.0</code> connection via the <code>fetchai/contract_api:1.0.0</code> protocol. This protocol implements a request-response pattern to serve the four types of methods listed above:</p>
+<p>In particular, the <code>fetchai/ledger:0.21.1</code> connection can be used to execute contract related logic. The skills communicate with the <code>fetchai/ledger:0.21.1</code> connection via the <code>fetchai/contract_api:1.0.0</code> protocol. This protocol implements a request-response pattern to serve the four types of methods listed above:</p>
 <ul>
-<li>the <code>get_deploy_transaction</code> message is used to request a deploy transaction for a specific contract. For instance, to request a deploy transaction for the deployment of the smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.0</code>:</li>
+<li>the <code>get_deploy_transaction</code> message is used to request a deploy transaction for a specific contract. For instance, to request a deploy transaction for the deployment of the smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.1</code>:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">contract_api_msg</span> <span class="o">=</span> <span class="n">ContractApiMessage</span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">performative</span><span class="o">=</span><span class="n">ContractApiMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">GET_DEPLOY_TRANSACTION</span><span class="p">,</span>
@@ -6171,7 +6218,7 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
 </code></pre></div>
 <p>Any additional arguments needed by the contract's constructor method should be added to <code>kwargs</code>.</p>
-<p>This message will be handled by the <code>fetchai/ledger:0.21.0</code> connection and then a <code>raw_transaction</code> message will be returned with the matching raw transaction. To send this transaction to the ledger for processing, we first sign the message with the decision maker and then send the signed transaction to the <code>fetchai/ledger:0.21.0</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. For details on how to implement the message handling, see the handlers in the <code>erc1155_deploy</code> skill.</p>
+<p>This message will be handled by the <code>fetchai/ledger:0.21.1</code> connection and then a <code>raw_transaction</code> message will be returned with the matching raw transaction. To send this transaction to the ledger for processing, we first sign the message with the decision maker and then send the signed transaction to the <code>fetchai/ledger:0.21.1</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. For details on how to implement the message handling, see the handlers in the <code>erc1155_deploy</code> skill.</p>
 <div class="admonition note">
   <p class="admonition-title">CosmWasm based smart contract deployments</p>
   <p>When using CosmWasm based smart contracts two types of deployment transactions exist. The first transaction stores the code on the chain. The second transaction initialises the code. This way, the same contract code can be initialised many times.<br>Both the <code>store</code> and <code>init</code> messages use the <code>ContractApiMessage.Performative.GET_DEPLOY_TRANSACTION</code> performative. The ledger API automatically detects the type of transactions based on the provided keyword arguments. In particular, an <code>init</code> transaction requires the keyword arguments <code>code_id</code> (integer), <code>label</code> (string), <code>amount</code> (integer) and <code>init_msg</code> (JSON).<br>For an example look at the <code>fetchai/erc1155:0.23.1</code> package.
@@ -6179,7 +6226,7 @@
 </div>
 
 <ul>
-<li>the <code>get_raw_transaction</code> message is used to request any transaction for a specific contract which changes state in the contract. For instance, to request a transaction for the creation of token in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.0</code>:</li>
+<li>the <code>get_raw_transaction</code> message is used to request any transaction for a specific contract which changes state in the contract. For instance, to request a transaction for the creation of token in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.1</code>:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">contract_api_msg</span> <span class="o">=</span> <span class="n">ContractApiMessage</span><span class="p">(</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">performative</span><span class="o">=</span><span class="n">ContractApiMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">GET_RAW_TRANSACTION</span><span class="p">,</span>
@@ -6196,9 +6243,9 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="p">),</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">)</span>
 </code></pre></div>
-<p>This message will be handled by the <code>fetchai/ledger:0.21.0</code> connection and then a <code>raw_transaction</code> message will be returned with the matching raw transaction. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_create_batch_transaction</code> method with the specified key word arguments (see example in <em>Deploy your own</em>, below). Similarly to above, to send this transaction to the ledger for processing, we first sign the message with the decision maker and then send the signed transaction to the <code>fetchai/ledger:0.21.0</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol.</p>
+<p>This message will be handled by the <code>fetchai/ledger:0.21.1</code> connection and then a <code>raw_transaction</code> message will be returned with the matching raw transaction. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_create_batch_transaction</code> method with the specified key word arguments (see example in <em>Deploy your own</em>, below). Similarly to above, to send this transaction to the ledger for processing, we first sign the message with the decision maker and then send the signed transaction to the <code>fetchai/ledger:0.21.1</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol.</p>
 <ul>
-<li>the <code>get_raw_message</code> message is used to request any contract method call for a specific contract which does not change state in the contract. For instance, to request a call to get a hash from some input data in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.0</code>:</li>
+<li>the <code>get_raw_message</code> message is used to request any contract method call for a specific contract which does not change state in the contract. For instance, to request a call to get a hash from some input data in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.1</code>:</li>
 </ul>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">contract_api_msg</span> <span class="o">=</span> <span class="n">ContractApiMessage</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">performative</span><span class="o">=</span><span class="n">ContractApiMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">GET_RAW_MESSAGE</span><span class="p">,</span>
@@ -6220,9 +6267,9 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="p">),</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">)</span>
 </code></pre></div>
-This message will be handled by the <code>fetchai/ledger:0.21.0</code> connection and then a <code>raw_message</code> message will be returned with the matching raw message. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_hash_single</code> method with the specified key word arguments. We can then send the raw message to the <code>fetchai/ledger:0.21.0</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. In this case, signing is not required.</p>
+This message will be handled by the <code>fetchai/ledger:0.21.1</code> connection and then a <code>raw_message</code> message will be returned with the matching raw message. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_hash_single</code> method with the specified key word arguments. We can then send the raw message to the <code>fetchai/ledger:0.21.1</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. In this case, signing is not required.</p>
 <ul>
-<li>the <code>get_state</code> message is used to request any contract method call to query state in the deployed contract. For instance, to request a call to get the balances in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.0</code>:</li>
+<li>the <code>get_state</code> message is used to request any contract method call to query state in the deployed contract. For instance, to request a call to get the balances in the deployed <code>erc1155</code> smart contract wrapped in the <code>fetchai/erc1155:0.23.1</code> package, we send the following message to the <code>fetchai/ledger:0.21.1</code>:</li>
 </ul>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">contract_api_msg</span> <span class="o">=</span> <span class="n">ContractApiMessage</span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">performative</span><span class="o">=</span><span class="n">ContractApiMessage</span><span class="o">.</span><span class="n">Performative</span><span class="o">.</span><span class="n">GET_STATE</span><span class="p">,</span>
@@ -6236,7 +6283,7 @@ This message will be handled by the <code>fetchai/ledger:0.21.0</code> connectio
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="p">),</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
 </code></pre></div>
-This message will be handled by the <code>fetchai/ledger:0.21.0</code> connection and then a <code>state</code> message will be returned with the matching state. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_balance</code> method with the specified key word arguments. We can then send the raw message to the <code>fetchai/ledger:0.21.0</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. In this case, signing is not required.</p>
+This message will be handled by the <code>fetchai/ledger:0.21.1</code> connection and then a <code>state</code> message will be returned with the matching state. For this to be executed correctly, the <code>fetchai/erc1155:0.23.1</code> contract package needs to implement the <code>get_balance</code> method with the specified key word arguments. We can then send the raw message to the <code>fetchai/ledger:0.21.1</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. In this case, signing is not required.</p>
 <h2 id="developing-your-own">Developing your own<a class="headerlink" href="#developing-your-own" title="Permanent link">&para;</a></h2>
 <p>The easiest way to get started developing your own contract is by using the <a href="../scaffolding">scaffold</a> command:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea scaffold contract my_new_contract
@@ -6296,8 +6343,8 @@ where <code>ethereum</code> is the ledger id and <code>my_contract.json</code> i
 <a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>        <span class="n">tx</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_try_estimate_gas</span><span class="p">(</span><span class="n">ledger_api</span><span class="p">,</span> <span class="n">tx</span><span class="p">)</span>
 <a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>        <span class="k">return</span> <span class="n">tx</span>
 </code></pre></div>
-Above, we implement a method to create a transaction, in this case a transaction to create a batch of tokens. The method will be called by the framework, specifically the <code>fetchai/ledger:0.21.0</code> connection once it receives a message (see bullet point 2 above). The method first gets the latest transaction nonce of the <code>deployer_address</code>, then constructs the contract instance, then uses the instance to build the transaction and finally updates the gas on the transaction.</p>
-<p>It helps to look at existing contract packages, like <code>fetchai/erc1155:0.23.1</code>, and skills using them, like <code>fetchai/erc1155_client:0.11.0</code> and <code>fetchai/erc1155_deploy:0.31.1</code>, for inspiration and guidance.</p>
+Above, we implement a method to create a transaction, in this case a transaction to create a batch of tokens. The method will be called by the framework, specifically the <code>fetchai/ledger:0.21.1</code> connection once it receives a message (see bullet point 2 above). The method first gets the latest transaction nonce of the <code>deployer_address</code>, then constructs the contract instance, then uses the instance to build the transaction and finally updates the gas on the transaction.</p>
+<p>It helps to look at existing contract packages, like <code>fetchai/erc1155:0.23.1</code>, and skills using them, like <code>fetchai/erc1155_client:0.11.0</code> and <code>fetchai/erc1155_deploy:0.31.2</code>, for inspiration and guidance.</p>
 
               
             </article>
