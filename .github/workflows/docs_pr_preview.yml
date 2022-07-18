@@ -14,19 +14,13 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'recursive'
-
-
-      - name: Use python 3.7
-        uses: actions/setup-python@v3
+      - uses: actions/setup-python@master
         with:
-          python-version: '3.9'
-
+          python-version: '3.7'
       - name: Install Dependencies
         run: pip3 install pipenv && pipenv install --skip-lock --clear
-
       - name: Build
         run: pipenv run mkdocs build
-
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
