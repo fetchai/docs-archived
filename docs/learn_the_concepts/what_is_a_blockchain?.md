@@ -39,7 +39,7 @@ Each blockchain network has various participants, each one playing a different r
 
 4. **Certificate authorities**: individuals who issue and manage the different types of certificates required to run a permissioned blockchain.
 
-## Benefits
+## Benefits 
 
 Blockchains have the following key positive features:
 
@@ -49,7 +49,7 @@ Blockchains have the following key positive features:
 
 3. **Trust**: blockchains are decentralized systems so they have the same benefit of lacking a central authority that behaves in its own interest. Therefore there is a high degree of trust between the participants; the system is run by the participants for the participants.
 
-## Drawbacks
+## Drawbacks 
 
 There are some important negative features of blockchains:
 
