@@ -1,7 +1,7 @@
-The block validation procedure is one of the essential elements that makes blockchain functioning possible. The block validation procedure used by the two primary blockchain architectures, Proof-of-Work (PoW) and Proof-of-Stake (PoS), differs noticeably from one another. A network node known as a **blockchain validator** assists in processing and validating transaction blocks on the platform so that they may be added to the blockchain's permanent ledger. **Validator nodes take on the responsibility of validating, voting on, and keeping a record of transactions by taking part in the consensus process**.
+
+The **block validation** procedure is one of the essential elements that makes blockchain functioning possible. The block validation procedure used by the two primary blockchain architectures, **Proof-of-Work** (**PoW**) and **Proof-of-Stake** (**PoS**), differ noticeably from one another. A network node known as a **blockchain validator** assists in processing and validating transaction blocks on the platform so that they may be added to the blockchain's permanent ledger. **Validator nodes take on the responsibility of validating, voting on, and keeping a record of transactions by taking part in the consensus process**.
 
 ## How Are Blocks Validated on the Blockchain?
-
 ### Validation on Proof-of-Work (PoW) blockchains 
 
 One of the most prominent blockchain technologies is the **Proof-of-Work** (**PoW**) consensus process, which was initially made popular by Bitcoin. **Miners** (i.e. **validators**) and the power they need to do the computations required to validate transactions are the key elements that distinguish PoW systems. Miners use computer hardware to power network nodes that use processing power to solve algorithmic mathematical computational puzzles, known as proofs of work. The miner who completes the puzzle first validates the blockchain's most recent block of transactions. 
@@ -14,7 +14,7 @@ For instance, the Bitcoin network consumed as much power as Chile and had a carb
 
 PoW blockchains have typically offered stronger security while preserving significant decentralization, despite their speed and scalability restrictions. Due to the distributed nature of PoW systems, it would be very expensive for a bad actor to seize control of the majority of the network's computer power and take over the blockchain.
 
-### Validation on Proof-of-Stake (PoS) Blockchains 
+### Validation on Proof-of-Stake (PoS) Blockchains
 
 The second-most popular consensus method, **Proof-of-Stake** (**PoS**), addresses many of the problems of Proof-of-Work blockchains, including their slowness, lack of scalability, wasteful energy use, and high entry barriers. Polkadot, Avalanche, and Cardano are a few instances of contemporary market-dominating PoS blockchains.
 

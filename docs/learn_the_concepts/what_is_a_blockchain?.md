@@ -27,7 +27,7 @@ Blockchain technology has progressively gained popularity since the invention of
 
 7. **Blockchain for healthcare**: the healthcare industry may benefit greatly from the use of blockchain. Blockchains are being used by healthcare payers and providers to handle clinical trial data and electronic medical records while upholding regulatory compliance.
 
-## Who can participate in a blockchain network?
+## Who can participate in a blockchain network? 
 
 Each blockchain network has various participants, each one playing a different role:
 
@@ -41,7 +41,7 @@ Each blockchain network has various participants, each one playing a different r
 
 ## Benefits 
 
-Blockchains have the following key positive features:
+Blockchains have the following key _positive features_:
 
 1. **Security**: blockchains are very secure, as the data is cryptographically encrypted and it is very difficult and obvious if someone is trying to hack into a blockchain. To delete a record in the blockchain would require the whole chain to be hacked and this would be an immense, obvious, and impractical undertaking.
 
@@ -51,7 +51,7 @@ Blockchains have the following key positive features:
 
 ## Drawbacks 
 
-There are some important negative features of blockchains:
+There are some important _negative features_ of blockchains:
 
 1. **Complexity of setup**: setting up a blockchain is not a simple task, there are networks of nodes to set-up, the participatory framework established, and numerous components to bring together before you can even begin to store any information on the blockchain. Compared to setting up a traditional database, blockchains are much more complex to set up.
 
