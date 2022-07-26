@@ -18,16 +18,15 @@ In essence, a distributed network of users maintains a P2P system. Because each 
 
 P2P systems can be grouped based on their architecture into the following _three primary subtypes_: 
 
-### **Unstructured P2P networks**
+### Unstructured P2P networks
 
 P2P networks that are unstructured lack a defined node organization. Participants communicate with one another in a random fashion. These systems are thought to be resistant to high churn activity (i.e. several nodes frequently joining and leaving the network). Unstructured P2P networks are simpler to set up, but because search requests are sent to as many peers as possible, they may utilize more CPU and memory. This frequently causes the network to get overrun with requests, especially when only a few nodes are providing the needed material.
 
-### **Structured P2P networks**
-
+### Structured P2P networks
 Unlike the unstructured network, the structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). DHT is an advanced form of lookup or search system that allows nodes to access data, such as files, through the use of a key instead of having to make a copy of the data on every node. These keys are formed through hashing, whereby data of varying sizes are assigned generated values of the same size (e.g. a mix of 10 digits and letters). This contrasts with the idea behind unstructured P2P networks in which whole files may be stored on more than one node.
 Consistent hashing, a kind of hashing, is the method used by DHT to assign ownership of a certain file to a particular peer. In a P2P network, conventional hashing demands that all keys be produced whenever a new peer joins. Consistent hashing uses less electricity since just a small portion of the keys must be generated. In general, searching for material in a structured network is simpler and uses less power and memory than searching in an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change. High churn rates make this sort of network more difficult.
 
-### **Hybrid P2P networks**
+### Hybrid P2P networks
 
 In hybrid P2P networks, some elements of the peer-to-peer architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some of the key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
