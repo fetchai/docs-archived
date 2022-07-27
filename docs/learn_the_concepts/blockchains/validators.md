@@ -1,3 +1,4 @@
+# Validators
 
 The **block validation** procedure is one of the essential elements that makes blockchain functioning possible. The block validation procedure used by the two primary blockchain architectures, **Proof-of-Work** (**PoW**) and **Proof-of-Stake** (**PoS**), differ noticeably from one another. A network node known as a **blockchain validator** assists in processing and validating transaction blocks on the platform so that they may be added to the blockchain's permanent ledger. **Validator nodes take on the responsibility of validating, voting on, and keeping a record of transactions by taking part in the consensus process**.
 

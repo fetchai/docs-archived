@@ -1,3 +1,5 @@
+# Blockchains
+
 A **blockchain** is a series of data records that functions as a distributed, replicated digital ledger of transactions across a network of computer systems. The information is divided into chunks that are sorted chronologically and are encrypted. When a new transaction occurs, a record of that transaction is added to every participant’s ledger. 
 
 If we compare a blockchain to a conventional database, this latter one records are written in tables which might be on one or more servers in numerous different locations, but they are all centrally administered by a database administrator. 

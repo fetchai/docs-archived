@@ -1,3 +1,4 @@
+# Agent-based and multi-agents systems
 # Agent-Based Systems
 
 An **agent** is a computer program that performs various actions _continuously_ and _autonomously_  (with limited or no interference) on behalf of an individual or an organization. Agents have behaviors, often described by simple rules, and interactions with other agents, which in turn influence their behaviors. The most important defining characteristic of an agent is its capability to act autonomously, that is, to act on its own without external direction in response to situations it encounters. Agents are endowed with behaviors that allow them to make independent decisions. Typically, agents are active, initiating their actions to achieve their internal goals, rather than merely passive, reactively responding to other agents and the environment. Agents have _five key characteristics_:
