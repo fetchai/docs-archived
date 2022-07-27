@@ -20,9 +20,9 @@ There are different _positive features_ of smart contracts:
 1. **Speed, efficiency, and precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually. 
 
 2. **Transparency and trust**: there is no need to wonder whether information has been changed for one participant's personal gain because there is no third party engaged and participants exchange encrypted records of transactions. Smart contracts are written in a way that does make disputes extremely rare, indeed they are designed to avoid them entirely. 
-
+ 
 3. **Security**: because the blockchain transaction records are encrypted, these are incredibly difficult to hack. Additionally, hackers would need to alter the entire chain in order to change a single record on a distributed ledger since each record is linked to the records that came before and after it.
-
+ 
 ## Drawbacks of smart contracts
 
 There are three key _negative features_ about smart contracts:

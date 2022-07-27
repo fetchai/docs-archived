@@ -35,8 +35,3 @@ This is an easy step-by-step guide explaining how to convert your native FET tok
 5.	Insert your Fetch wallet address in “Native Address” section and enter the amount of ERC-20 tokens you wish to convert.
 
 6.	Press Transfer and allow the Token Bridge to connect with your wallet.
-
-
-
-
-

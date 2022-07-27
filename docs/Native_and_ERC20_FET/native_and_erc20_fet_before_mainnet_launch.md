@@ -15,4 +15,3 @@ _ERC-20 FET token holders can easily convert their ERC-20 FET tokens into native
 - FetchHub block explorer: <https://explore-fetchhub.fetch.ai/>.
 
 - BSCscan: <https://bscscan.com/token/0x031b41e504677879370e9dbcf937283a8691fa7f>.
-
