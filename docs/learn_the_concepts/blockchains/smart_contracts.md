@@ -59,13 +59,12 @@ The ability of smart contracts to serve as legally enforceable contracts, the so
 
 The capacity of blockchain technology and related smart contract technology to simplify difficult computing operations like those involved in machine learning and artificial intelligence is one of the most interesting uses of these technologies (AI). There is potential to develop AI-powered smart contracts by fusing the data-intensive processing of AI with the decentralized security and immutability of blockchain technology. Applications for smart contracts will need to develop into increasingly complicated systems as they are used by more and more sectors of the economy. While simple smart contract use cases may be created manually, AI-enabled smart contracts may make it possible to create far more complicated, responsive, enterprise-grade smart contracts and dApps, which might greatly increase the technology's potential.
 
-###Real Estate
+### Real Estate
 
 By fusing blockchain and real estate transactions, smart contracts are increasing fractional ownership of assets and decreasing the entry barrier for investing for many. Particularly, there have been a number of successful attempts to tokenize real estate assets, particularly through real estate-focused blockchain platforms like RealT and SolidBlock. By adding blockchain into real estate deals, smart contract technology may also remodel the paperwork and transaction procedures. When a piece of property is tokenized, much of the required record-keeping can take place via associated smart contracts, which can save the parties time and money
 
-###Supply Chain Management
+### Supply Chain Management
 
 A fantastic use case for blockchain smart contracts is supply chain management. The supply chain may be significantly enhanced by the use of smart contracts. It may be used, for instance, to track things in the supply chain completely transparently. A company may employ supply networks that are enabled by smart contracts to track its inventory more precisely. Additionally, it enhances corporate operations in other areas that are directly related to the supply chain. Additionally, adopting smart contracts leads to less verification work, improved traceability, and fewer frauds and thefts. However, in order for it to function, the institutions must upgrade their supply chain with new hardware, such as sensors.
-
 
 Smart contracts and dApps are poised to continue revolutionizing the world of digital agreements. Numerous more businesses will benefit greatly from smart contract technology in the future. Researchers and developers are increasingly keen to take use of smart contract technology to meet the demands of the expanding Internet of Things (IoT). While IoT devices are currently given security and transparency by blockchain technology in general, the benefits of smart contracts might make this integration much more seamless.
