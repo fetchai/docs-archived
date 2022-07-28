@@ -1,12 +1,17 @@
 # Agent-based and multi-agents systems
+
 # Agent-Based Systems
 
 An **agent** is a computer program that performs various actions _continuously_ and _autonomously_  (with limited or no interference) on behalf of an individual or an organization. Agents have behaviors, often described by simple rules, and interactions with other agents, which in turn influence their behaviors. The most important defining characteristic of an agent is its capability to act autonomously, that is, to act on its own without external direction in response to situations it encounters. Agents are endowed with behaviors that allow them to make independent decisions. Typically, agents are active, initiating their actions to achieve their internal goals, rather than merely passive, reactively responding to other agents and the environment. Agents have _five key characteristics_:
 
 1. **Representation**: The first key characteristic of agents is that they operate on behalf of an individual or organization. Agents are always operating for an entity. 
+
 2. **Autonomy**: Agents operate with limited or no interference, they do not need to be told what to do constantly but perform actions continuously according to the rules they have been given.
+
 3. **Self-interested**: They operate in their own interests and not necessarily in the interests of other agents.
+
 4. **Goal-oriented**:  agents have goals to achieve with respect to their behaviors. This allows an agent to compare the outcome of its behaviors relative to its goals and adjust its responses and behaviors in future interactions.
+
 5. **Reactive**: Agents are reactive. This is because they react to the circumstances around them and act consequently. A great example of this is an automatic thermostat, that turns the heating on or off when the temperature changes.
 
 _Agent characteristics and behaviors may vary in their extent and sophistication_. An agent may differ from other agents, for instance, in the amount of information considered in the agent’s decisions process, the agent’s internal models of the external world, the agent’s view of the possible reactions of other agents in response to its actions, and the extent of memory of past events the agent retains and uses in making its decisions. Agents may also be endowed with different amounts of resources or accumulate different levels of resources as a result of agent interactions, further differentiating agents.
@@ -36,7 +41,6 @@ However, there are some _negative features_ characterizing such systems:
 - **Complexity**: multi-agent systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions.
 
 - **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different. 
-
 
 The _complexity of MASs_ can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. System composition depends on the characteristics of individual agents and whether they are homogeneous or heterogeneous in physical and/or programming structure. Homogeneous agents are similar to each other or they are of the same type, whereas, heterogeneous agents are different and diverse in kind. 
 
