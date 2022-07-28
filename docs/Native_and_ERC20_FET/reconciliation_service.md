@@ -7,7 +7,7 @@ access their funds anymore. In order to tackle this issue, the reconciliation se
 latest system upgrade to restore access of the migrated funds to their owners. 
 
 **Such service is specifically for those users who opted to not use the guides to gain access to their staked funds 
-during the stake migration.** This means that if you are unable to access your funds for any other reason (e.g. being 
+during the stake migration**. This means that if you are unable to access your funds for any other reason (e.g. being 
 hacked), then the reconciliation service is not applicable to you and we advise you to do not fill in the form to regain 
 access to your funds.
 
@@ -18,9 +18,9 @@ In order to access to this service, some prerequisites need to be satisfied. In 
 - the **Fetch wallet** which needs to be configured with the destination address towards which the funds should be 
   recovered to and which will be used when connecting to the reconciliation site. 
 
-   **NOTE: This must have at least one transaction previously recorded on the network from your address to be able to 
-   submit the form. If you have never used it in a transaction before, the reconciliation tool and the network have no 
-   way of knowing your wallet exists and will not allow you to complete the final submission.** 
+  **NOTE: This must have at least one transaction previously recorded on the network from your address to be able to 
+  submit the form. If you have never used it in a transaction before, the reconciliation tool and the network have no 
+  way of knowing your wallet exists and will not allow you to complete the final submission.** 
 
 - at least **1 Native FET token** in your wallet so you can pay the transaction fee associated with the reconciliation 
   tool. If you are unable to acquire them, you can get some native FET from Indacoin (visit: 
