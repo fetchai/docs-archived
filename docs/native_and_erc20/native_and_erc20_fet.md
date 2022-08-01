@@ -4,5 +4,5 @@ The Fetch.ai team initially developed the FET utility token on an ERC-20 contrac
 
 With the launch of the **Fetch.ai Main-net**, the native FET became available. This meant that users operating on the Fetch.ai network no longer needed to hold any token (e.g. ETH or BTC) associated with any other network. It is only the native FET tokens that fuel the Fetch.ai ecosystem and its applications.
 
-Learn [how to convert ERC-20 and native FETs to each other](../how_to_convert_fet)
+Learn [how to convert ERC-20 and native FETs to each other](../how_to_convert_fet).
 
