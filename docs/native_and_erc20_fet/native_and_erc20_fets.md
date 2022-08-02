@@ -13,15 +13,14 @@ FET, as an ERC20 token on the Ethereum contract has never been Fetch.ai's end ga
 offer the degree of scalability needed by the kinds of applications the fetch.ai ecosystem aims for. 
 For example, think of the high gas fees you face when executing a transaction on the Ethereum main-net.  
 
-With the launch of the **Fetch.ai Main-net**, the native FET became available. This meant that users operating on the 
-Fetch.ai network no longer needed to hold any token (e.g. ETH or BTC) associated with any other network. It is only the 
-native FET tokens that fuel the Fetch.ai ecosystem and its applications.
+With the launch of the **Fetch.ai main-net**, the native FET became available. This meant that users operating on the 
+Fetch.ai network no longer needed to hold any other token (e.g. ETH or BTC) associated with any other network. It is 
+only the native FET tokens that fuel the Fetch.ai ecosystem and its applications.
 
 ERC20 FET tokens are still in circulation and currently co-exist with native FET tokens and can be transferred from one 
 to the other easily on the Fetch.ai network. All of FET ERC20 tokens will ultimately become native FET tokens, but in 
 the foreseeable future both will live side by side. FET tokens can be purchased from different 
-[centralized or decentralized exchanges](https://fetch-ai.network/get-fet/). However, certain exchanges may buy or sell 
-one type of FET token or the other.
+[centralized or decentralized exchanges](https://fetch-ai.network/get-fet/). 
+However, certain exchanges may buy or sell one type of FET token or the other.
 
-Learn [how to convert ERC-20 and native FETs to each other](../how_to_convert_fet).
-
+Learn [how to convert ERC-20 and native FETs to each other](../how_to_convert_fet). 
