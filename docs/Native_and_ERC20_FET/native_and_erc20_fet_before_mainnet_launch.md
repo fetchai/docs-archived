@@ -1,4 +1,4 @@
-The **Fetch.ai token (FET)** is a utility token and the key medium of exchange on the Fetch.ai network. FET is used to pay for network transaction fees, deploy AI, and pay for services. Users can also choose to stake FET to participate in securing the network via its Proof-of-Stake consensus mechanism and earn rewards in return for contributing to validator nodes. FET tokens can be purchased in different centralized or decentralized exchanges. A list of all exchanges is available at: <https://fetch-ai.network/get-fet/>. 
+The **Fetch.ai token (FET)** is a utility token and the key medium of exchange on the Fetch.ai network. FET is used to pay for network transaction fees, deploy AI, and pay for services. Users can also choose to stake FET to participate in securing the network via its Proof-of-Stake consensus mechanism and earn rewards in return for contributing to validator nodes. FET tokens can be purchased in different centralized or decentralized exchanges. A list of all exchanges is available at: <https://fetch-ai.network/get-fet/>.
 
 The Fetch.ai team initially developed the FET utility token on the ERC-20 blockchain ecosystem due to the centrality of the Ethereum network in the crypto space. This has helped for developing innovative solutions and helped developers across the world to get their hands on the Fetch.ai ecosystem. However, Ethereum is not capable of scaling in the way necessary to allow Fetch.ai to be truly scalable. Think of the high gas fees you face when executing a transaction on the Ethereum Mainnet. This is the reason which led to the creation of the native FET token.
 
@@ -15,4 +15,3 @@ _ERC-20 FET token holders can easily convert their ERC-20 FET tokens into native
 - FetchHub block explorer: <https://explore-fetchhub.fetch.ai/>.
 
 - BSCscan: <https://bscscan.com/token/0x031b41e504677879370e9dbcf937283a8691fa7f>.
-

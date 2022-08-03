@@ -32,7 +32,7 @@ MAS systems have different **key characteristics**:
 
 3. **Scalability**: multi-agent systems are easy to scale, you simply add agents to the system to grow the system.
 
-4. **Robustness**: multi-agent systems are intrinsically very robust as no single failure point takes down the system. 
+4. **Robustness**: multi-agent systems are intrinsically very robust as no single failure point takes down the system.
 
 5. **Adaptability**: multi-agent systems adapt to changing circumstances very effectively as each agent autonomously adjusts to changing circumstances.
 
@@ -44,7 +44,7 @@ However, there are some negative features_ characterizing such systems:
 
 The _complexity of MASs_ can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. System composition depends on the characteristics of individual agents and whether they are _homogeneous_ or _heterogeneous_ in physical and/or programming structure. Homogeneous agents are similar to each other or they are of the same type, whereas, heterogeneous agents are different and diverse in kind. 
 
-MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal). 
+MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal).
 
 A good example of a MAS is represented by _smart-grids_, in which different agents work together collaboratively, but independently and in a self-interested manner. Another important application of such systems is found in _computer gaming_ and _computer simulations_. Such fields increasingly adopted MASs. Here, each participant has its own agent and interacts in the environment populated also by other agents. _Self-driving vehicles_ are another great example of an agent based system. In this respect, each vehicle acts as an agent, directed by their user and acting independently from other agents within a set of rules, such as not exceeding the speed limits, and being responsive to the environment around them. 
 

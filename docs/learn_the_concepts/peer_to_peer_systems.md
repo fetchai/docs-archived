@@ -10,9 +10,9 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 
 P2P networks enable the sharing of files stored on linked devices' hard drives. Using software tools designed to mediate data sharing, users may look for and download files from other networked devices. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, in actuality, both operations can be carried out concurrently (e.g., downloading file A, and uploading file B).
 
-In essence, a distributed network of users maintains a P2P system. Because each node has a copy of the data and serves as both a client and a server to other nodes, they often do not have a central administrator or server. Therefore, each node has the ability to download files from and upload files to other nodes. P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models. 
+In essence, a distributed network of users maintains a P2P system. Because each node has a copy of the data and serves as both a client and a server to other nodes, they often do not have a central administrator or server. Therefore, each node has the ability to download files from and upload files to other nodes. P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models.
 
-P2P systems can be grouped based on their architecture into the following _three primary subtypes_: 
+P2P systems can be grouped based on their architecture into the following _three primary subtypes_:
 
 #### Unstructured P2P networks
 
@@ -24,7 +24,7 @@ Unlike the unstructured network, the structured P2P network is organized into an
 
 Consistent hashing is the method used by DHT to assign ownership of a certain file to a particular peer. In a P2P network, conventional hashing demands that all keys be produced whenever a new peer joins. Consistent hashing uses less electricity since just a small portion of the keys must be generated. In general, searching for material in a structured network is simpler and uses less power and memory than searching in an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change. High churn rates make this sort of network more difficult.
 
-### Hybrid P2P networks
+#### Hybrid P2P networks
 
 In hybrid P2P networks, some elements of the peer-to-peer architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some of the key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
@@ -74,7 +74,7 @@ The distribution of blockchains over large numbers of nodes renders them virtual
 
 An additional example of P2P architecture is represented by **P2P crypto exchanges**, on which users can immediately buy or sell cryptos from/to other users directly. The majority of P2P exchanges let you send and receive cryptocurrencies without requesting identity verification, in contrast to centralized exchanges where you must complete KYC in order to fulfill an order. Also, unlike centralized exchanges, P2P-based exchanges do not have a single point of failure. In most cases, a user may sign up for the exchange without having to undergo identification verification. A password and an email address are all that are needed for registration. A user may browse various purchases and sell offers made by users on the platform after logging in. Each offer varies in terms of rate, payment choices, and often the minimum or maximum purchase amount. A buyer might choose an offer and get in touch with the seller to arrange a deal. You can provide the accepted payment method and any associated fees if you're a vendor. To protect the security of the platform, P2P crypto exchanges typically employ an escrow account to deposit cryptocurrency or other forms of user collateral. Examples of P2P-based crypto exchanges include:  
 
-- [Paxful](https://paxful.com/) 
+- [Paxful](https://paxful.com/)
 - [Binance P2P](https://p2p.binance.com/en/trade/all-payments/USDT?fiat=CNY)
 - [HODL HODL](https://hodlhodl.com/)
 - [Bisq](https://bisq.network/)
