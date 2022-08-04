@@ -1,6 +1,7 @@
 # Smart contracts
 
 ## What is a smart contract?
+
 A **smart contract** (or **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when certain circumstances are satisfied. For example, smart contracts may be used to mediate the trade of cryptocurrencies (or any other digital asset) between two parties. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**. 
 
 The agreements and underlying code are spread throughout a decentralized blockchain network. Transactions are traceable and irreversible, and the code regulates their execution. **Smart contracts enable trustworthy transactions and agreements to be made between dispersed, anonymous participants, without the need for a centralized authority, a legal system, or an external enforcement mechanism**. Hence, a smart contract may describe the transaction's mechanics and serve as the final arbitrator of the terms. Because of this, smart contracts have evolved into the foundation of a complete ecosystem of **decentralized apps** (i.e. **dApps**) and are now a key area of focus for blockchain development as a whole. 
