@@ -11,7 +11,7 @@ Before using the [reconciliation service](https://browse-fetchhub.fetch.ai/recon
 
 * Your [Fetch wallet](/fetch-wallet/) is set up and you have access to it. 
 
-    !!! inf
+    !!! info
         The address of the account on your Fetch wallet must have recorded at least one transaction on the network. If you have never made a transaction using this address before, the reconciliation tool and the network have no way of knowing your wallet exists and will not allow you to complete the final submission.
 
 * You have at least 1 Native FET token in your wallet to pay the transaction fee associated with the reconciliation tool.
