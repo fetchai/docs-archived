@@ -22,9 +22,9 @@ On this page, you can find instructions on how to convert ERC-20 and native FETs
 
 ## ERC-20 to Native FET 
 
-1. Ensure you have the [Fetch wallet installed](/basics/wallet/getting_started) and that your Fetch.ai account is set up on it. This is where the native FETs will go to.
+1. Ensure you have the [Metamask wallet installed](https://metamask.io) and that the ERC-20 FETs you want to convert are in this wallet.
 
-2. Ensure you have the [Metamask wallet installed](https://metamask.io) and that the ERC-20 FETs you want to convert are in this wallet.
+2.  Ensure you have the [Fetch wallet installed](/basics/wallet/getting_started) and that your Fetch.ai account is set up on it. This is where the native FETs will go to.
 
 3. Go to the [Token Bridge](https://token-bridge.fetch.ai).
 
@@ -34,11 +34,8 @@ On this page, you can find instructions on how to convert ERC-20 and native FETs
  
 6. The **Ethereum address** should be automatically filled in with the address of the active account on your Metamask wallet. Ensure that it is correct.
 
-7. Insert your [Fetch wallet address](/fetch-wallet/deposit/#to-copy-your-accounts-address) in **Native Address** section.
+7. Insert your [Fetch wallet address](/fetch-wallet/deposit/#to-copy-your-accounts-address) in the **Native Address** section.
 
 8. Under **Amount**, enter the amount of tokens you wish to convert. 
 
 9. Hit **Transfer** and allow the Token Bridge to connect with your wallet.
-
-
-
