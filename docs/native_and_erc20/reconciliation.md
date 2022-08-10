@@ -23,4 +23,6 @@ If the above conditions are satisfied, head over to the [reconciliation service]
 !!! info
     The reconciliation service is activated at certain times so users can register with it. For economic safety, the fund transfers only happen during network upgrades.
 
+If the above conditions are satisfied, head over to the [reconciliation service](https://browse-fetchhub.fetch.ai/reconciliation) and follow the instructions.
+
 Once your registered transaction is successful and your reconciliation request is deemed valid, the funds will be automatically released to the main-net address on your Fetch wallet.
