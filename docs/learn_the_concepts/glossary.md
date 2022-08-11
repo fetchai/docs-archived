@@ -1,0 +1,161 @@
+# Glossary
+
+**Address and public key**: it is used on a blockchain network to transmit and receive transactions. An address is a string of alphanumeric characters that may also be seen as a QR code that can be read by a smartphone. The address in Ethereum starts with 0x (e.g. ) and is also called public key.
+
+**Airdrop**: it is a mean of distributing tokens to wallet addresses using digital money or tokens. Airdrops are occasionally used for marketing in return for easy actions like sharing, referring, or downloading an app.
+
+**Altcoin**: any cryptocurrency alternative to Bitcoin. Many alternative cryptocurrencies are modified forks of Bitcoin (e.g. Litecoin).
+
+**AML (Anti-Money Laundering)**: this refers to a group of international rules implemented to reduce the likelihood that criminal organizations or individuals would use money laundering. In different countries, these guidelines and legislation are applied to cryptocurrencies with diverse results.
+
+**Arbitrage**: arbitrage is the simultaneous purchase and sale of the same asset in different markets in order to profit from tiny differences in the asset's listed price.
+
+**API (Application Programming Interface)**: it is a software bridge that enables communication between two independent programmes. APIs specify how different components will communicate with one another.
+
+**BEP-20**: according to Binance Academy:
+
+"BEP-20 is a token standard on Binance Smart Chain that extends ERC-20, the most common Ethereum token standard. You can think of it as a blueprint for tokens that defines how they can be spent, who can spend them, and other rules for their usage. Due to its similarity to Binance Chain’s BEP-2 and Ethereum’s ERC-20, it’s compatible with both.BEP-20 was conceived as a technical specification for Binance Smart Chain, with the goal of providing a flexible format for developers to launch a range of different tokens. These could represent anything from shares in a business to dollars stored in a bank vault."
+
+**Bid and Ask Prices**: the term bid and ask refers to a two-way price quotation that indicates the best potential price at which a security can be sold and bought at a given point in time. The bid price represents the maximum price that a buyer is willing to pay for a share of stock or other security. The ask price represents the minimum price that a seller is willing to take for that same security. A trade or transaction occurs when a buyer in the market is willing to pay the best offer available, or is willing to sell at the highest bid. The difference between bid and ask prices, or the spread, is a key indicator of the liquidity of the asset. In general, the smaller the spread, the better the liquidity.
+
+**Block**: it is an essential part of every blockchain. Imagine a blockchain as a continuously updated ledger that is synchronized between any number of distinct nodes (in fact, the term "distributed ledger technology" is also used to describe it). A block of transactions is cryptographically locked together and formally recorded when a predetermined number of transactions have been added to the ledger and consensus has been obtained among the nodes that the transactions are authentic. This "block" serves as the foundation for the following one. As a result, they are all connected in a chain, thus the name "blockchain."
+
+**Block height**: the amount of blocks on a blockchain that are interconnected. For instance, the initial block, commonly known as the Genesis Block, would be Height 0.
+
+**Block reward**: the payment made to a miner for successfully hashing a block of transactions. Cryptocurrencies and transaction fees are two possible types of block rewards. Whether or not all of the coins have previously been successfully mined depends on the policy followed by the relevant cryptocurrency.
+
+**Block period**: the length of time it takes for a block of transactions to be confirmed by the network, either by miners under PoW or by validators under PoS, is referred to as "block time." Also see "Proof of Work" and "Proof of Stake."
+
+**Blockchain**: the blockchain is a digital ledger of all the transactions ever made in a particular cryptocurrency. It’s composed of individual blocks that are chained to each other through a cryptographic signature. Each time a block’s capacity is reached, a new block is added to the chain. The blockchain is repeatedly copied and saved onto thousands of computers all around the world, and it must always match each copy. As there is no master copy stored in one location, it’s considered decentralized.
+
+**Bug bounty/Bounty**: a reward given for disclosing bugs and vulnerabilities in computer programming.
+
+**Circulating Supply**: this term refers to the number of cryptocurrency coins or tokens that are publicly available and circulating in a specific market. The circulating supply of a cryptocurrency can increase or decrease over time.
+
+**Cold wallet**: a physical storage device used to store cryptocurrencies offline (e.g. a flash drive, hard disk).
+
+**Collateral**: a collateral is something of value given as a guarantee to obtain something else. For instance, a borrower may offer their car as a collateral to a lender when taking out a loan. The vehicle acts as a safeguard or warranty in case the borrower fails to pay their debts. Usually, collateralized loans present much lower interest rates when compared to non-collateralized ones. Collateral can come in different forms. Some of the most common types include mortgage collaterals, invoice financing and margin trading collaterals.
+
+**Collateralization Ratio**: to borrow tokens from a DeFi protocol, one must put up more collateral than the loan is worth. Each protocol can use different collateralization ratios. However, users must maintain the designated ratio to prevent liquidation (i.e. liquidation ratio).
+
+**Confirmation**: when the blockchain transaction has been validated by the network, a confirmation occurs. This occurs through a process called mining under a Proof of Work (PoW) consensus mechanism and as validation under a Proof of Stake (PoS) consensus mechanism. Theoretically, a transaction that has been successfully confirmed cannot be changed or double spent. The difficulty of a double spend assault increases with the number of confirmations a transaction has.
+
+**Consensus**: the process through which a number of peers, also known as nodes, on a blockchain network come to an agreement over the legitimacy of transactions presented to the network. Proof of Work (PoW) and Proof of Stake are the two main consensus procedures (PoS).
+
+**Cryptocurrency**: It is a digital currency which has a mathematical foundation that controls the generation of units of currency and using encryption methods to confirm the transfer of payments. Distributed ledger technology is used to keep track of cryptocurrency transactions, which are carried out without the assistance of a central bank.
+
+**Cryptography**: it is the  process of encoding data into unintelligible codes to make it secure and hidden. Only the required key may be used to decode and read the data.
+
+**Crypto wallet**: these wallets store public and private keys allowing users to send, receive, and store tokens. The tokens reside on the blockchain and the wallet accesses them.
+
+**Decentralization**: it is the term used to describe the transition of power and control to a decentralized system from a centralized structure, government, or party.
+
+**Decentralized Application (DApp)**: a computer program that utilizes a blockchain for data storage, runs autonomously, is not controlled or operated from a single entity, is open source and has its use incentivized by the reward of fees or tokens.
+
+**Decentralized Exchange (DEX)**: this is a platform which uses smart contracts to exchange cryptocurrencies. Peer-to-peer trading takes place between liquidity pools. This contrasts with centralised exchanges, which are more comparable to cryptocurrency-focused banks or financial firms. The two have significant, ever-changing technological and regulatory variances from one another.
+
+**Decentralized Finance (DeFi)**: traditional finance has always relied on a reputable middlemen, and because of this it has always been centralized. For instance, if you need to send money to a friend or family, you depend on your bank to transfer the funds to their account. DeFi, on the other hand, does not need any  middlemen. Direct asset transfers are possible between participants. Theoretically, this speeds up and reduces the cost of transactions.
+
+**Deflationary token**: tokens are deflationary if a percentage is permanently removed from the marketplace over time. Buybacks and burns are a popular way of destroying tokens. This causes scarcity which hopefully makes the price rise.
+
+**Digital asset**: a scarce, electronically transferred, intangible digital asset having a market price.
+
+**Digital identity**: a networked or online identity that a person, business, or technological item adopts.
+
+**Digital signature**:a public key encryption-generated code that is added to an electronic document transmission to validate the document's contents.
+
+**Distributed Denial of Service (DDoS) attack**: a cyberattack strategy where the attacker repeatedly floods the system with requests in an effort to block the fulfillment of valid requests.
+
+**ERC-20**: it is the standard to which each Ethereum token complies. This standard defines the way each token behaves so that transactions are predictable. Other cryptocurrencies also use the ERC-20 standard, piggybacking on the Ethereum network in the process.
+
+**ERC-721*: this is an additional standard for Ethereum smart contracts that permits the creation of non-fungible tokens, or NFTs. This token standard is used to symbolize a distinct digital asset that cannot be exchanged.
+
+**Fiat**: according to the Investopedia's definition:
+
+"Fiat money is a government-issued currency that is not backed by a physical commodity, such as gold or silver, but rather by the government that issued it. It usually requires fiat exchanged at a CEX or through local means such as Bitcoin ATMs to be able to purchase cryptocurrency with fiat currency."
+
+**Fork**: afork establishes a different version of a blockchain and is frequently purposefully carried out to update a network. _Hard forks_ result in a new version of the chain that must be embraced in order to continue participating, whereas _soft forks_ result in two chains that are somewhat compatible. A disputed hard fork may result in the creation of two distinct blockchain networks.
+
+**Gas fees**: gas fees (i.e. transaction fees) are rewards paid to miners to incentivize them to support the network's transactions which become written to the blockchain. On the Ethereum network this gas fee unit amount is expressed in gwei. Operations to or from CEXs, DEXs Liquidity Pools and wallets require gas fees. The cost users incur due to gas fees will vary depending on the current supply and demand: when demand on Ethereum or an ERC-20 network is at its highest, these gas fees are at their highest.
+
+**Gas limit**: you can only spend a certain amount of gas each transaction on the Ethereum network, according to the gas limit. It may also be seen as a "rough estimate" of the amount of computer power your transaction will require.
+
+**Gas price**: the gas price is the amount paid to the network for the computational labour completed during a particular transaction. It is paid in ETH units known as Gwei. The price of gas may fluctuate dramatically depending on network congestion.
+
+**Governance tokens**: governance tokens are cryptocurrencies that represent voting power on a blockchain project. Governance tokens are used to vote on system parameters such as choice of autonomous market makers to back with liquidity from the liquidity pool, borrowing rates from the liquidity pool, usage of exchange fees, etc. Governance tokens are minted at an exponentially decreasing rate to incentivise early liquidity providers in the system. Minted tokens are distributed in proportion to the amount of liquidity supplied to the system at each block. Some fraction of the exchange fees and autonomous market maker spreads is used to buy back these tokens and burn them in order to reduce the quantity of tokens circulating and thus increasing their value.
+
+**Hash**: a programmatic function that accepts an input and produces the "hash value" or "digital fingerprint," which is an alphanumeric string. Each block in the blockchain has its own hash value as well as the hash value used to validate the transaction that came before it. Transactions on the blockchain are verified via hashes.
+
+**Hot wallet**: a wallet that is continuously linked to the internet, such as one that is kept on a major exchange. Compared to hardware wallets or cold storage solutions, hot wallets are thought to offer less security.
+
+**KYC (Know-Your-Customer)**: KYC guidelines fit into the broader scope of _Anti-Money Laundering (AML)_ policies in traditional finance. There is no KYC or AML in DeFi.
+
+**Liquidation**: liquidation is applied to borrowers. They can have their collateral liquidated if they do not maintain the set collateralization ratio.
+
+**Liquidation Ratio**: this is the level at which the collateralization ratio dips that can trigger liquidation. 
+
+**Liquidity Provider**: a liquidity provider (LP) is a user who funds a liquidity pool with own crypto assets so as to facilitate trading on the platform and earn passive income on the liquidity deposited.
+
+**Mainnet**: it represents the main network on which transactions on a certain distributed ledger actually occur. The Ethereum mainnet, for instance, serves as the public blockchain for network verification and transaction processing.
+
+**Metamask**: Metamask is a popular Web 3.0 wallet used in DeFi. Other wallets you may hear about are the Binance Wallet and Torus.
+
+**Mining**: mining is the process through which cryptocurrency transactions are gathered, verified and recorded into a digital ledger known as blockchain. The work done by miners is essential for maintaining the integrity of the network and is also responsible for introducing new coins into the system. It is the method used by a Proof of Work (PoW) consensus mechanism to verify blocks or transactions before adding them to a blockchain. A miner must use a computer to solve a cryptographic puzzle in order to validate a block. The block is regarded as having been "mined" or validated after the computer has figured out the issue. The first computer to mine or verify the block receives a reward represented by cryptocurrencies (e.g. BTC, ETH).
+
+**Node**: anode is any computer that is a part of the blockchain network. A _full node_ is a computer able to completely verify transactions and download all of the data associated with a particular blockchain. A _lightweight_ or _light_ node, in contrast, utilizes a separate validation mechanism and does not download the entire blockchain's data.
+
+**Nonce**: this term has a variety of connotations, and depending on the situation, it is employed in many different ways. On the Ethereum mainnet, it refers to a distinct transaction identification number that rises in value with each subsequent transaction to assure different safety measures. It was originally created from a contraction of a term meaning "not more than once" (e.g. preventing a double-spend).
+
+**NFT**: Non-Fungible Tokens  are cryptographic assets built on a blockchain with unique identification codes and metadata that distinguish them from each other. These were born as ERC-721 crypto assets representing a unique or rare digital or real world item. They let us tokenize things like art, collectibles, even real estate through a securitization process that takes place on the blockchain. Unlike cryptocurrencies which are identical to each other and can be used as a medium for commercial transactions, NFTs represent unique and irreplaceable tokens, thereby making it impossible for one non-fungible token to be equal to another (i.e. NFTs are not fungible). This ensures a highly transparent and flexible record of ownership. An NFT can only have one owner at a time. Ownership is managed through the unique ID and metadata that no other token can replicate. NFTs are minted through smart contracts which assign ownership and manage the transferability of the NFT itself. When someone mints an NFT, they execute a code stored in the smart contracts that conform to different standards (i.e. ERC-721). This information is added to the blockchain where the NFT will be managed.
+
+**Oracle**: within the blockchain context, an oracle is a data source used as a bridge between smart contracts and other external sources. More specifically, an oracle is an agent that not only communicates with external data sources but also verifies and authenticates that the data being provided is accurate. Thus, oracles are responsible for providing vital and reliable information to smart contracts, which in turn perform certain tasks.
+
+**P2P (Peer-to-peer)**: P2P describes interactions that take place between two parties, often two different people. Any number of users can be a part of a P2P network. People may conduct transactions or connect with one another over a blockchain network without depending on a middleman or a single point of failure.
+
+**Private blockchain**: a blockchain or distributed ledger with a closed network whose users are all under the supervision of the same organization. For new members on a private blockchain, there must be a verification procedure. Additionally, a private blockchain may place restrictions on who may take part in the network's consensus.
+
+**Private key**: this is effectively the encrypted password to someone's cryptocurrency assets, and it is also known as a secret key. It is an impossible-to-guess number that is really lengthy. By signing a transaction with your private key, you approve it. You can access and control your crypto assets using private keys.
+
+**Proof of Stake (PoS)**: this is a consensus mechanism in which transactions or blocks are verified by a single validator. Those that validate transactions, stake their cryptocurrencies (e.g. ETH), on those particular transactions. If someone accurately verifies a block (or collection of transactions), they are rewarded. A validator often forfeits the cryptocurrency they staked if they verify an invalid transaction. Comparatively speaking to Proof of Work consensus, PoS takes a tiny amount of computational power.
+
+**Proof of Work (PoW)**: this is a consensus mechanism in which a network's nodes or individuals collectively mine each block. Each miner in a PoW network must compete to solve a computational puzzle in order to hash a block.  The complexity of successfully hashing each block is increased by the inclusion of solving for a target. The whole hashing procedure will have required some time and computing effort for each block that was hashed. The miner who successfully hashes the block first earns a reward in the form of cryptocurrency. As a result, a hashed block is regarded as Proof of Work. PoW requires a disproportionately higher amount of energy than other consensus processes.
+
+**Public blockchain**: a network that is completely open to the public, allowing anybody to take part in transactions, run the consensus protocol to help decide which blocks should be added to the chain, and keep track of the shared ledger.
+
+**Public key**: the wallet address that is visible to the whole public. You must provide your public key in order to receive funds into your account. It is paired with a private key.
+
+**Scalability**: a change in scale or size to meet the demands of a network This term is used to describe a blockchain project's capacity in its intended use as well as its capability to manage network traffic and future expansion.
+
+**Slippage**: Investopedia's definition says:
+
+"Slippage refers to the difference between the expected price of a trade and the price at which the trade is executed. Slippage can occur at any time but is most prevalent during periods of higher volatility when market orders are used. It can also occur when a large order is executed but there isn't enough volume at the chosen price to maintain the current bid/ask spread. Slippage occurs in all market venues, including equities, bonds, currencies and futures."
+
+**Smart contracts**: these are programs having their terms encoded in computer code. These are not legal documents, even if they sometimes include agreements or agreements between parties that resemble a regular legal contract. On the Ethereum Virtual Machine, smart contracts are the most common type of programming. Smart contracts contains a series of automated operations that may be programmed and executed if a series of criteria are satisfied.
+
+**Spread**: when an order is made on an exchange or market, the disagreement of the difference in price between potential buy and sell offers of an asset is called the spread. A wide spread in price can lead to higher slippage.
+
+**Stablecoin**: astablecoin is a type of cryptocurrency that is designed to maintain a stable market price. Recently, this type of digital currency has grown in popularity, and we now have numerous stablecoin projects. Although the exact mechanisms vary from one coin to another, stablecoins are supposed to be somewhat resistant to market volatility, so they should not experience significant price changes.
+
+**Timing risk**: according to Investopedia's definition:
+
+"Timing risk is the speculation that an investor enters into when trying to buy or sell an asset based on future price predictions. Timing risk explains the potential for missing out on beneficial movements in price due to an error in timing."
+
+**Testnet**: a testing network for a new coin, project, product or for potential improvements to an existing product or offering. Testnets (e.g. Kovan Test Network) are used to test the viability and vulnerability of new ideas, concepts, code, and processes prior to moving on to a production network.
+
+**Token**: a unique form of cryptocurrency. It is a method to specifically refer to a cryptocurrency that utilizes a certain blockchain. There are many types (see also ERC-20 and ERC-721).
+
+**Trustless**: in the context of decentralized technology, everyone has a copy of the ledger of every transaction, so there is no need for a third-party repository of truth where confidence is anchored. This means that everyone can independently verify the transactions. Because the system functions uniformly for everyone, the rules and protections incorporated into the blockchain in some ways serve as the foundation for increased trust amongst members.
+
+**Validator**: it is a computer node in charge of validating blocks on a blockchain. It is a person who owns the ability to verify transactions and earn cryptocurrency on a proof-of-stake blockchain as part a reward for validating such blocks.
+
+**Volatility**: volatility describes how quickly and how much the price of an asset changes. It is usually calculated in terms of standard deviations in the annual return of an asset over a set period of time. Because it is a measure of the rapidity and degree of price changes, volatility is often used as an effective measure of the investment risk associated with an asset.
+
+**Yield Farming**: yield farming is the practice of staking or lending crypto assets in order to generate high returns or rewards in the form of additional cryptocurrency. Yield farming protocols incentivize liquidity providers to stake or lock up their crypto assets in a smart contract-based liquidity pool. These incentives can be a percentage of transaction fees or a governance token. These returns are expressed as an annual percentage yield (APY). As more investors add funds to the related liquidity pool, the value of the issued returns rise in value. 
+
+**Volume**: volume Volume in cryptocurrency marketplaces is sometimes expressed as a 24-hour period.
+Wallet
+A safe digital place or storage device for cryptographic assets. Wallets can be offline or online (see hot and cold wallets). 
+
+**Web3**: it is a notion for a new version of the World Wide Web (WWW) that integrates ideas like decentralization, blockchain technology, and token-based economics is known as Web3 or Web 3.0. It has been likened to Web 2.0 by some engineers and journalists, who claim that data and information are consolidated in a limited number of businesses frequently referred to as "Big Tech". Gavin Wood, a co-founder of Ethereum, first used the phrase Web3 in 2014, and in 2021 venture capital firms, major technological companies, and cryptocurrency enthusiasts began to show interest in the concept.
+
+**51% Attack**: a 51% attack is occurring if one person or one group of individuals control more than half of the network's computing power or mining hash rate. By taking over mining activities, blocking or altering transactions, and double-spending coins, this organisation effectively has complete control over the network and the ability to disrupt a cryptocurrency.
