@@ -1,4 +1,4 @@
-# Blockchains
+# What is a blockchain?
 
 A  **blockchain** is a series of data records that functions as a distributed, replicated digital ledger of transactions across a network of computer systems. 
 
