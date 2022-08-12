@@ -20,7 +20,7 @@
 
 **Block**: it is an essential part of every blockchain. Imagine a blockchain as a continuously updated ledger that is synchronized between any number of distinct nodes (in fact, the term "distributed ledger technology" is also used to describe it). A block of transactions is cryptographically locked together and formally recorded when a predetermined number of transactions have been added to the ledger and consensus has been obtained among the nodes that the transactions are authentic. This "block" serves as the foundation for the following one. As a result, they are all connected in a chain, thus the name "blockchain."
 
-**Block height**: the amount of blocks on a blockchain that are interconnected. For instance, the initial block, commonly known as the Genesis Block, would be Height 0.
+**Block height**: the number of blocks on a blockchain that are interconnected. For instance, the initial block, commonly known as the Genesis Block, would be Height 0.
 
 **Block reward**: the payment made to a miner for successfully hashing a block of transactions. Cryptocurrencies and transaction fees are two possible types of block rewards. Whether or not all of the coins have previously been successfully mined depends on the policy followed by the relevant cryptocurrency.
 
@@ -42,9 +42,9 @@
 
 **Consensus**: the process through which a number of peers, also known as nodes, on a blockchain network come to an agreement over the legitimacy of transactions presented to the network. Proof of Work (PoW) and Proof of Stake are the two main consensus procedures (PoS).
 
-**Cryptocurrency**: It is a digital currency which has a mathematical foundation that controls the generation of units of currency and using encryption methods to confirm the transfer of payments. Distributed ledger technology is used to keep track of cryptocurrency transactions, which are carried out without the assistance of a central bank.
+**Cryptocurrency**: it is a digital currency which has a mathematical foundation that controls the generation of units of currency and using encryption methods to confirm the transfer of payments. Distributed ledger technology is used to keep track of cryptocurrency transactions, which are carried out without the assistance of a central bank.
 
-**Cryptography**: it is the  process of encoding data into unintelligible codes to make it secure and hidden. Only the required key may be used to decode and read the data.
+**Cryptography**: it is the process of encoding data into unintelligible codes to make it secure and hidden. Only the required key may be used to decode and read the data.
 
 **Crypto wallet**: these wallets store public and private keys allowing users to send, receive, and store tokens. The tokens reside on the blockchain and the wallet accesses them.
 
@@ -54,7 +54,7 @@
 
 **Decentralized Exchange (DEX)**: this is a platform which uses smart contracts to exchange cryptocurrencies. Peer-to-peer trading takes place between liquidity pools. This contrasts with centralised exchanges, which are more comparable to cryptocurrency-focused banks or financial firms. The two have significant, ever-changing technological and regulatory variances from one another.
 
-**Decentralized Finance (DeFi)**: traditional finance has always relied on a reputable middlemen, and because of this it has always been centralized. For instance, if you need to send money to a friend or family, you depend on your bank to transfer the funds to their account. DeFi, on the other hand, does not need any  middlemen. Direct asset transfers are possible between participants. Theoretically, this speeds up and reduces the cost of transactions.
+**Decentralized Finance (DeFi)**: traditional finance has always relied on a reputable middlemen, and because of this it has always been centralized. For instance, if you need to send money to a friend or family, you depend on your bank to transfer the funds to their account. DeFi, on the other hand, does not need any middlemen. Direct asset transfers are possible between participants. Theoretically, this speeds up and reduces the cost of transactions.
 
 **Deflationary token**: tokens are deflationary if a percentage is permanently removed from the marketplace over time. Buybacks and burns are a popular way of destroying tokens. This causes scarcity which hopefully makes the price rise.
 
@@ -62,19 +62,19 @@
 
 **Digital identity**: a networked or online identity that a person, business, or technological item adopts.
 
-**Digital signature**:a public key encryption-generated code that is added to an electronic document transmission to validate the document's contents.
+**Digital signature**: a public key encryption-generated code that is added to an electronic document transmission to validate the document's contents.
 
 **Distributed Denial of Service (DDoS) attack**: a cyberattack strategy where the attacker repeatedly floods the system with requests in an effort to block the fulfillment of valid requests.
 
 **ERC-20**: it is the standard to which each Ethereum token complies. This standard defines the way each token behaves so that transactions are predictable. Other cryptocurrencies also use the ERC-20 standard, piggybacking on the Ethereum network in the process.
 
-**ERC-721*: this is an additional standard for Ethereum smart contracts that permits the creation of non-fungible tokens, or NFTs. This token standard is used to symbolize a distinct digital asset that cannot be exchanged.
+**ERC-721**: this is an additional standard for Ethereum smart contracts that permits the creation of non-fungible tokens, or NFTs. This token standard is used to symbolize a distinct digital asset that cannot be exchanged.
 
 **Fiat**: according to the Investopedia's definition:
 
 "Fiat money is a government-issued currency that is not backed by a physical commodity, such as gold or silver, but rather by the government that issued it. It usually requires fiat exchanged at a CEX or through local means such as Bitcoin ATMs to be able to purchase cryptocurrency with fiat currency."
 
-**Fork**: afork establishes a different version of a blockchain and is frequently purposefully carried out to update a network. _Hard forks_ result in a new version of the chain that must be embraced in order to continue participating, whereas _soft forks_ result in two chains that are somewhat compatible. A disputed hard fork may result in the creation of two distinct blockchain networks.
+**Fork**: a fork establishes a different version of a blockchain and is frequently purposefully carried out to update a network. _Hard forks_ result in a new version of the chain that must be embraced in order to continue participating, whereas _soft forks_ result in two chains that are somewhat compatible. A disputed hard fork may result in the creation of two distinct blockchain networks.
 
 **Gas fees**: gas fees (i.e. transaction fees) are rewards paid to miners to incentivize them to support the network's transactions which become written to the blockchain. On the Ethereum network this gas fee unit amount is expressed in gwei. Operations to or from CEXs, DEXs Liquidity Pools and wallets require gas fees. The cost users incur due to gas fees will vary depending on the current supply and demand: when demand on Ethereum or an ERC-20 network is at its highest, these gas fees are at their highest.
 
@@ -102,11 +102,11 @@
 
 **Mining**: mining is the process through which cryptocurrency transactions are gathered, verified and recorded into a digital ledger known as blockchain. The work done by miners is essential for maintaining the integrity of the network and is also responsible for introducing new coins into the system. It is the method used by a Proof of Work (PoW) consensus mechanism to verify blocks or transactions before adding them to a blockchain. A miner must use a computer to solve a cryptographic puzzle in order to validate a block. The block is regarded as having been "mined" or validated after the computer has figured out the issue. The first computer to mine or verify the block receives a reward represented by cryptocurrencies (e.g. BTC, ETH).
 
-**Node**: anode is any computer that is a part of the blockchain network. A _full node_ is a computer able to completely verify transactions and download all of the data associated with a particular blockchain. A _lightweight_ or _light_ node, in contrast, utilizes a separate validation mechanism and does not download the entire blockchain's data.
+**Node**: a node is any computer that is a part of the blockchain network. A _full node_ is a computer able to completely verify transactions and download all of the data associated with a particular blockchain. A _lightweight_ or _light_ node, in contrast, utilizes a separate validation mechanism and does not download the entire blockchain's data.
 
 **Nonce**: this term has a variety of connotations, and depending on the situation, it is employed in many different ways. On the Ethereum mainnet, it refers to a distinct transaction identification number that rises in value with each subsequent transaction to assure different safety measures. It was originally created from a contraction of a term meaning "not more than once" (e.g. preventing a double-spend).
 
-**NFT**: Non-Fungible Tokens  are cryptographic assets built on a blockchain with unique identification codes and metadata that distinguish them from each other. These were born as ERC-721 crypto assets representing a unique or rare digital or real world item. They let us tokenize things like art, collectibles, even real estate through a securitization process that takes place on the blockchain. Unlike cryptocurrencies which are identical to each other and can be used as a medium for commercial transactions, NFTs represent unique and irreplaceable tokens, thereby making it impossible for one non-fungible token to be equal to another (i.e. NFTs are not fungible). This ensures a highly transparent and flexible record of ownership. An NFT can only have one owner at a time. Ownership is managed through the unique ID and metadata that no other token can replicate. NFTs are minted through smart contracts which assign ownership and manage the transferability of the NFT itself. When someone mints an NFT, they execute a code stored in the smart contracts that conform to different standards (i.e. ERC-721). This information is added to the blockchain where the NFT will be managed.
+**NFT**: Non-Fungible Tokens are cryptographic assets built on a blockchain with unique identification codes and metadata that distinguish them from each other. These were born as ERC-721 crypto assets representing a unique or rare digital or real world item. They let us tokenize things like art, collectibles, even real estate through a securitization process that takes place on the blockchain. Unlike cryptocurrencies which are identical to each other and can be used as a medium for commercial transactions, NFTs represent unique and irreplaceable tokens, thereby making it impossible for one non-fungible token to be equal to another (i.e. NFTs are not fungible). This ensures a highly transparent and flexible record of ownership. An NFT can only have one owner at a time. Ownership is managed through the unique ID and metadata that no other token can replicate. NFTs are minted through smart contracts which assign ownership and manage the transferability of the NFT itself. When someone mints an NFT, they execute a code stored in the smart contracts that conform to different standards (i.e. ERC-721). This information is added to the blockchain where the NFT will be managed.
 
 **Oracle**: within the blockchain context, an oracle is a data source used as a bridge between smart contracts and other external sources. More specifically, an oracle is an agent that not only communicates with external data sources but also verifies and authenticates that the data being provided is accurate. Thus, oracles are responsible for providing vital and reliable information to smart contracts, which in turn perform certain tasks.
 
@@ -126,7 +126,7 @@
 
 **Scalability**: a change in scale or size to meet the demands of a network This term is used to describe a blockchain project's capacity in its intended use as well as its capability to manage network traffic and future expansion.
 
-**Slippage**: Investopedia's definition says:
+**Slippage**: the Investopedia's definition says:
 
 "Slippage refers to the difference between the expected price of a trade and the price at which the trade is executed. Slippage can occur at any time but is most prevalent during periods of higher volatility when market orders are used. It can also occur when a large order is executed but there isn't enough volume at the chosen price to maintain the current bid/ask spread. Slippage occurs in all market venues, including equities, bonds, currencies and futures."
 
@@ -134,7 +134,7 @@
 
 **Spread**: when an order is made on an exchange or market, the disagreement of the difference in price between potential buy and sell offers of an asset is called the spread. A wide spread in price can lead to higher slippage.
 
-**Stablecoin**: astablecoin is a type of cryptocurrency that is designed to maintain a stable market price. Recently, this type of digital currency has grown in popularity, and we now have numerous stablecoin projects. Although the exact mechanisms vary from one coin to another, stablecoins are supposed to be somewhat resistant to market volatility, so they should not experience significant price changes.
+**Stablecoin**: a stablecoin is a type of cryptocurrency that is designed to maintain a stable market price. Recently, this type of digital currency has grown in popularity, and we now have numerous stablecoin projects. Although the exact mechanisms vary from one coin to another, stablecoins are supposed to be somewhat resistant to market volatility, so they should not experience significant price changes.
 
 **Timing risk**: according to Investopedia's definition:
 
@@ -152,9 +152,9 @@
 
 **Yield Farming**: yield farming is the practice of staking or lending crypto assets in order to generate high returns or rewards in the form of additional cryptocurrency. Yield farming protocols incentivize liquidity providers to stake or lock up their crypto assets in a smart contract-based liquidity pool. These incentives can be a percentage of transaction fees or a governance token. These returns are expressed as an annual percentage yield (APY). As more investors add funds to the related liquidity pool, the value of the issued returns rise in value. 
 
-**Volume**: volume Volume in cryptocurrency marketplaces is sometimes expressed as a 24-hour period.
-Wallet
-A safe digital place or storage device for cryptographic assets. Wallets can be offline or online (see hot and cold wallets). 
+**Volume**: a market's volume, also known as trading volume, is the total number of units exchanged during a specific period of time. It is a calculation of the quantity of separate assets that were traded throughout the course of that time. A buyer and a seller are involved in every transaction. The facilitating exchange records the transaction whenever they come to an agreement at a particular price. The trade volume is then calculated using this data. Any trade asset, such as stocks, bonds, fiat money, or cryptocurrencies, may be used to measure trading volume.
+
+**Wallet**: a safe digital place or storage device for cryptographic assets. Wallets can be offline or online (e.g. hot and cold wallets). 
 
 **Web3**: it is a notion for a new version of the World Wide Web (WWW) that integrates ideas like decentralization, blockchain technology, and token-based economics is known as Web3 or Web 3.0. It has been likened to Web 2.0 by some engineers and journalists, who claim that data and information are consolidated in a limited number of businesses frequently referred to as "Big Tech". Gavin Wood, a co-founder of Ethereum, first used the phrase Web3 in 2014, and in 2021 venture capital firms, major technological companies, and cryptocurrency enthusiasts began to show interest in the concept.
 
