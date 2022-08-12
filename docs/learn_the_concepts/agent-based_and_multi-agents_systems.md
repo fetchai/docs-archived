@@ -51,4 +51,3 @@ A good example of a MAS is represented by _smart-grids_, in which different agen
 As we can see, MAS have found multiple applications including _modeling complex systems_, _smart grids_ and _computer networks_. The main application domains of MAS are _ambient intelligence_, _grid computing_, _electronic business_, _the semantic web_, _bioinformatics and computational biology_, _monitoring and control_, _resource management_, _education_, _space_, _military_ and _manufacturing applications_, and so on.
  
 **Despite their wide applicability, there are still several challenges faced by MAS including coordination between agents, security, and task allocation.**
-
