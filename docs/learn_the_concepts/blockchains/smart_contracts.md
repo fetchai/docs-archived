@@ -1,5 +1,4 @@
 # Smart contracts
-
 ## What is a smart contract?
 
 A **smart contract** (or **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when certain circumstances are satisfied. For example, smart contracts may be used to mediate the trade of cryptocurrencies (or any other digital asset) between two parties. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**. 
@@ -10,7 +9,7 @@ Simple _if/when, then_ words encoded into code on a blockchain are the basis for
 
 What makes these contracts _smart_ is their _ability to execute a well-defined logic in response to particular conditions which are explicitly stated in the contract_, and, because such conditions to be met are visible to everyone and can not be modified. This leads people to have confidence in the smart contracts, even in circumstances where they do not otherwise know each other. 
 
-In the context of the blockchain and cryptocurrency markets, smart contracts are crucial, especially in relation to ERC-20 tokens, which are a subset of tokens produced on the Ethereum network that adhere to the ERC-20 standard. The financial services sector is another use for smart contracts. For instance, this technology might be used to automate the computation and payment of insurance claims as well as the clearing and settlement of trades. Smart contracts, although their apparent uses in finance, are adaptable enough to be used in almost any sector where money, digital assets, or any type of digital information has to be moved between parties. For example, the equipment leasing sector has extensively used these contracts in the real world to streamline lease arrangements. 
+In the context of the blockchain and cryptocurrency markets, smart contracts are crucial, especially in relation to ERC-20 tokens, which are a subset of tokens produced on the Ethereum network that adhere to the ERC-20 standard. The financial services sector is another use for smart contracts. For instance, this technology might be used to automate the computation and payment of insurance claims as well as the clearing and settlement of trades. Smart contracts, although their apparent uses in finance, are adaptable enough to be used in almost any sector where money, digital assets, or any type of digital information has to be moved between parties. For example, the equipment leasing sector has extensively used these contracts in the real world to streamline lease arrangements.  
 
 Their application is also being investigated in the healthcare industry as a defense against data tampering in clinical studies. By creating a clear record of shared ownership rights and dividing all royalties and revenues from intellectual property accordingly, smart contracts may even be used to enforce intellectual property agreements.
 
@@ -35,7 +34,6 @@ There are three key **negative features** about smart contracts:
 3. **Need for precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
 
 ## Use cases
-
 ### Finance
 
 DeFi dApps are a strong substitute for conventional financial services, and their acceptance is rising as a result of the irreversible, transparent, and trustless properties of blockchain and smart contract technology. 
