@@ -4,7 +4,7 @@ Any transaction involving the transfer of cryptocurrency will incur fees, whethe
 
 1. **Transaction** or **miner fees**: these vary depending on how many transactions are awaiting their inclusion in the current block and are intended to motivate miners and validators to validate cryptocurrency transactions.
 
-2. **Service** or **network fees**: these are applied by third-party providers that enable transactions (e.g. cryptocurrency exchange). These fees are made in addition to any network-generated fee paid to miners.
+2. **Service** or **network fees**: these are applied by third-party providers that enable transactions (e.g. cryptocurrency exchange). These fees are made in addition to any network-generated fee paid to miners. 
    
 Transaction fees serve **two crucial functions**: 
 
@@ -24,7 +24,7 @@ There are several options available for reducing fees. First of all, you may low
 
 On the Ethereum network, transaction fees are referred to as **gas**. The gas cost accounts for the amount of processing power required to complete a transaction. The native currency of the network, ether (i.e. ETH), is used to monitor the fluctuating price of gas. Like other blockchains, the gas costs can go up or down, and miners are more likely to give your transaction priority if you pay more for gas. The gas limit here specifies the maximum price to be paid for a specific transaction and it should also be taken into account when proceeding with a transaction. 
 
-The cost of an Ethereum transaction or smart contract execution is determined by the relationship between these two and the gas limit. In fact, gas costs are anticipated to drop as Ethereum moves closer to a Proof-of-Stake mechanism. The network will require less processing power to validate transactions, resulting in a reduction in the amount of gas required to confirm transactions. Although validators prefer higher-paying transactions, network traffic might still have an impact on transaction costs. Visit the following link for further details about _Ethereum 2.0_ and the "_Serenity_" upgrade: 
+The cost of an Ethereum transaction or smart contract execution is determined by the relationship between these two and the gas limit. In fact, gas costs are anticipated to drop as Ethereum moves closer to a Proof-of-Stake mechanism. The network will require less processing power to validate transactions, resulting in a reduction in the amount of gas required to confirm transactions. Although validators prefer higher-paying transactions, network traffic might still have an impact on transaction costs. Visit the following link for further details about _Ethereum 2.0_ and the _Serenity_ upgrade: 
 
 [What is Casper, the Latest Ethereum Upgrade?](https://www.investopedia.com/news/what-casper-latest-ethereum-upgrade/#:~:text=Under%20the%20Casper%20protocol%2C%20as,on%20that%20block%20in%20ether)
 
