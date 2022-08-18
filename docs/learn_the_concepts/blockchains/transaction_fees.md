@@ -13,7 +13,7 @@ Transaction fees serve **two crucial functions**:
 2. **Defend the network against spam assaults**: this because transaction fees lead to a decrease in spam on the network, and large-scale spam assaults become more expensive and more difficult to execute. 
     
     _Transaction fees thus serve as a basic but efficient spam filter_.
-
+ 
 Transaction fees are generally affordable for most blockchains, but they can become fairly expensive depending on network activity. Transaction fees might be _modest_ or _substantial_. The fees you pay might also be influenced by market forces. It is important to highlight that the amount of fees you pay impacts your transaction's priority for inclusion in the following validated block. In fact, users who wish to execute their transaction more quickly can even increase the transaction cost to enhance the likelihood that their transaction will be added to the following block of transactions on the blockchain. 
 
    _The confirmation procedure moves along more quickly the more money that is spent._
