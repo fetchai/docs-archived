@@ -1,6 +1,6 @@
 # Glossary
 
-**Address and public key**: it is used on a blockchain network to transmit and receive transactions. An address is a string of alphanumeric characters that may also be seen as a QR code that can be read by a smartphone. The address in Ethereum starts with 0x (e.g. ) and is also called public key.
+**Address and public key**: it is used on a blockchain network to transmit and receive transactions. An address is a string of alphanumeric characters that may also be seen as a QR code that can be read by a smartphone. The address in Ethereum starts with 0x (e.g. ) and is also called public key. 
 
 **Airdrop**: it is a mean of distributing tokens to wallet addresses using digital money or tokens. Airdrops are occasionally used for marketing in return for easy actions like sharing, referring, or downloading an app.
 
