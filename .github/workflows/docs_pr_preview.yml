@@ -1,0 +1,53 @@
+name: Documentation Preview
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Docs Ephemerial Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
+      - uses: actions/setup-python@master
+        with:
+          python-version: '3.7'
+      - name: Install dependencies (ubuntu-latest)
+        run: |
+          sudo apt-get update --fix-missing
+          sudo apt-get autoremove
+          sudo apt-get autoclean
+          pip install tox
+      - name: Generate Documentation
+        run: tox -e docs
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: site
+
+  deploy:
+    name: Docs Ephemerial Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: site
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          expires: 2d
+          projectId: fetch-docs-preview
+          # entryPoint: docs/
