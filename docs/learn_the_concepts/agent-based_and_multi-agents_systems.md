@@ -1,18 +1,21 @@
 # Agent-Based Systems
 
-An **agent** is a computer program that performs various actions _continuously_ and _autonomously_  (with limited or no interference) on behalf of an individual or an organization. Agents have behaviors, often described by simple rules, and interactions with other agents, which in turn influence their behaviors. The most important defining characteristic of an agent is its capability to act autonomously, that is, to act on its own without external direction in response to situations it encounters. Agents are endowed with behaviors that allow them to make independent decisions. Typically, agents are active, initiating their actions to achieve their internal goals, rather than merely passive, reactively responding to other agents and the environment. 
+An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and performs various actions _continuously_ and _autonomously_  (with limited or no interference) on their behalf. 
+
+The most important defining characteristic of an agent is its ability to act autonomously, that is, to act on its own without external direction in response to situations it encounters. Agents are endowed with behaviours that allow them to make independent decisions. 
+What differentiates agents with other software paradigms (e.g. smart contracts, web apps) is that they are _reactive_, they respond to other agents and changes in their environments, and also _proactive_, meaning they take the initiative and perform actions to achieve their goals.
 
 Agents have **five key characteristics**:
 
-1. **Representation**: The first key characteristic of agents is that they operate on behalf of an individual or organization. Agents are always operating for an entity. 
+1. **Representation**: Agents are owned by and operate on behalf of an entity, for example an individual, family, company, government, or object, and look after their owner's interests. 
 
-2. **Autonomy**: Agents operate with limited or no interference, they do not need to be told what to do constantly but perform actions continuously according to the rules they have been given.
+2. **Autonomy**: Agents operate with limited or no interference, they do not need to be told what to do constantly but perform actions continuously according to their internal reasoning system.
 
-3. **Self-interested**: They operate in their own interests and not necessarily in the interests of other agents.
+3. **Self-interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
 
-4. **Goal-oriented**:  agents have goals to achieve with respect to their behaviors. This allows an agent to compare the outcome of its behaviors relative to its goals and adjust its responses and behaviors in future interactions.
+4. **Proactive**:  Agents have goals to achieve allowing them to take the initiative and perform actions that get them closer to achieving their goals. This means an agent typically compares the outcome of different actions relative to its goals and selects the one that takes it closer to them.
 
-5. **Reactive**: Agents are reactive. This is because they react to the circumstances around them and act consequently. A great example of this is an automatic thermostat, that turns the heating on or off when the temperature changes.
+5. **Reactive**: Agents respond to other agents, services, etc., and changes in their environments. A great example of this behaviour is a heating system with thermostat that constantly monitors the environment and turns the heating on or off when the temperature changes.
 
 _Agent characteristics and behaviors may vary in their extent and sophistication_. An agent may differ from other agents, for instance, in the amount of information considered in the agent’s decisions process, the agent’s internal models of the external world, the agent’s view of the possible reactions of other agents in response to its actions, and the extent of memory of past events the agent retains and uses in making its decisions. Agents may also be endowed with  different amounts of resources or accumulate different levels of resources as a result of agent interactions, further differentiating agents.
 
