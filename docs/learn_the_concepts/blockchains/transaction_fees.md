@@ -8,7 +8,7 @@ Any transaction involving the transfer of cryptocurrency will incur fees, whethe
    
 Transaction fees serve **two crucial functions**: 
 
-1. **Compensate miners or validators assisting and confirming the transactions**. 
+1. **Compensate miners or validators** assisting and confirming the transactions. 
    
 2. **Defend the network against spam assaults**: this because transaction fees lead to a decrease in spam on the network, and large-scale spam assaults become more expensive and more difficult to execute. 
     
