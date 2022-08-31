@@ -1,25 +1,32 @@
-# Agent-Based Systems
+# Agent
 
-An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and performs various actions _continuously_ and _autonomously_  (with limited or no interference) on their behalf. 
+An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and acts _continuously_ and _autonomously_  (with limited or no interference) on their behalf.
 
-The most important defining characteristic of an agent is its ability to act autonomously, that is, to act on its own without external direction in response to situations it encounters. Agents are endowed with behaviours that allow them to make independent decisions. 
-What differentiates agents with other software paradigms (e.g. smart contracts, web apps) is that they are _reactive_, they respond to other agents and changes in their environments, and also _proactive_, meaning they take the initiative and perform actions to achieve their goals.
+The most important defining characteristic of an agent is its autonomy; that is, to act on its own without external direction from its owner in response to situations it encounters. Agents are endowed with behaviours that allow them to make independent decisions. 
+ 
+What differentiates agents with other software paradigms (e.g. smart contracts, web apps) is that as well as being _reactive_, meaning they respond to other agents and changes in their environments, they are also _proactive_, which means that they take the initiative and perform actions to achieve their goals.
 
 Agents have **five key characteristics**:
 
-1. **Representation**: Agents are owned by and operate on behalf of an entity, for example an individual, family, company, government, or object, and look after their owner's interests. 
+1. **Representation**: Agents are owned by and operate on behalf of an entity, for example an individual, family, company, government, or object, and look after their owner's interests.
 
-2. **Autonomy**: Agents operate with limited or no interference, they do not need to be told what to do constantly but perform actions continuously according to their internal reasoning system.
+2. **Autonomy**: Agents operate with limited or no interference and do not need to be constantly told what to do. They perform actions continuously according to their internal reasoning system.
 
 3. **Self-interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
 
 4. **Proactive**:  Agents have goals to achieve allowing them to take the initiative and perform actions that get them closer to achieving their goals. This means an agent typically compares the outcome of different actions relative to its goals and selects the one that takes it closer to them.
 
-5. **Reactive**: Agents respond to other agents, services, etc., and changes in their environments. A great example of this behaviour is a heating system with thermostat that constantly monitors the environment and turns the heating on or off when the temperature changes.
+5. **Reactive**: Agents respond to other agents, services, etc., and changes in their environments. A great example of this behaviour is a heating system with a thermostat that constantly monitors its environment and turns the heating on or off when the temperature changes.
 
-_Agent characteristics and behaviors may vary in their extent and sophistication_. An agent may differ from other agents, for instance, in the amount of information considered in the agent’s decisions process, the agent’s internal models of the external world, the agent’s view of the possible reactions of other agents in response to its actions, and the extent of memory of past events the agent retains and uses in making its decisions. Agents may also be endowed with  different amounts of resources or accumulate different levels of resources as a result of agent interactions, further differentiating agents.
+_Agent characteristics and behaviors may vary in their extent and sophistication_. An agent may differ from other agents, for instance, in the amount of information considered in the agent’s decisions process, its internal models of the external world, its view of the possible reactions of other agents in response to its actions, and the size of the memory of past events the agent retains and uses in making its decisions. Further differentiating factors are the amounts of resources used by agents or accumulated as a result of their interactions.
 
-Agent-based modeling has been used in an enormous variety of applications spanning the physical, biological, social, and management sciences. In the biological sciences, agent-based modeling is used to model cell behavior and interaction, the workings of the immune system, tissue growth, and disease processes. Archaeology and anthropology make use of large scale agent-based modeling by providing a virtual environment for long-vanished civilizations. In ecology, agent-based modeling is used to model diverse populations of individuals and their interactions (e.g. Agent-based epidemic and pandemic models). Agent-based models have also been developed in the fields of economics, sociology, anthropology, and cognitive science. Various social phenomena have been investigated using agent-based models that are not easily modeled using other approaches. Here, agent-based models are being used to analyze existing and hypothetical markets (e.g. agent-based simulation to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market).
+## Agent-Based Modelling
+
+In agent-based modelling (ABM), a system is represented as a group of independent decision-making units known as agents. Each agent evaluates its own circumstances and decides based on a set of rules. Agents can act in a variety of ways that are suitable for the system they are representing (e.g. producing, consuming, or selling). An agent-based model, at its most basic, consists of a system of agents and the connections between them. Even a straightforward agent-based model has the potential to display intricate behavioural patterns and provide important details about the behaviour of the emulated real-world system. As a result, we aim at simulating a composite, self-emerging behaviour and gain an understanding of the potential dynamics of the real-world systems we are trying to replicate using such models.
+
+Agent-based modelling has been used in enormous kinds of applications spanning the physical, biological, social, and management sciences. In biological sciences, agent-based modelling is used to simulate cell behavior and interaction, the workings of the immune system, tissue growth, and disease processes. Archaeology and anthropology make use of large scale agent-based modeling by providing a virtual environment for long-vanished civilizations. In ecology, agent-based modeling is used to model diverse populations of individuals and their interactions (e.g. Agent-based epidemic and pandemic models). 
+
+Agent-based models have also been developed in the fields of economics, sociology, anthropology, and cognitive science. Various social phenomena have been investigated using agent-based models that are not easily modeled using other approaches. Here, agent-based models are being used to analyze existing and hypothetical markets. For example, agent-based simulation is is used to model possible futures for a market that is directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
 
 As it is possible to think, there are a growing number of agent-based applications in a variety of fields and disciplines directed towards the study of a large number of real-world applications. Examples of agent-based systems, for which large-scale agent-based models have been developed, include: traffic, air traffic control, military command and control, physical infrastructures and markets, such as electric power and integrated energy markets. 
 
