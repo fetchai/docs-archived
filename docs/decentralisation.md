@@ -8,7 +8,7 @@ Another great example is when you fly internationally from one place to another.
 
 **There are two key characteristics of decentralized systems:**
 
-* **Equality of participants**: All participants contribute towards the system's decision-making and control, and each of them takes an active equal role in managing the system.
+* **Equality of participants**: all participants contribute towards the system's decision-making and control, and each of them takes an active equal role in managing the system.
 
 * **Lack of central authorities**: It is not that decentralized systems lack the authority to make changes to the management of the network, rather this authority is distributed among the participants. The system is run by the participants for the benefit of the participants.
 
