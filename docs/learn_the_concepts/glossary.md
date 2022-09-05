@@ -56,7 +56,7 @@
 
 * **Decentralized Exchange (DEX)**: this is a platform which uses smart contracts to exchange cryptocurrencies. Peer-to-peer trading takes place between liquidity pools. This contrasts with centralised exchanges, which are more comparable to cryptocurrency-focused banks or financial firms. The two have significant, ever-changing technological and regulatory variances from one another.
 
-* **Decentralized Finance (DeFi)**: traditional finance has always relied on a reputable middlemen, and because of this it has always been centralized. For instance, if you need to send money to a friend or family, you depend on your bank to transfer the funds to their account. DeFi, on the other hand, does not need any middlemen. Direct asset transfers are possible between participants. Theoretically, this speeds up and reduces the cost of transactions.
+* **Decentralized Finance (DeFi)**: DeFi stands for decentralized finance. Traditional finance has always relied on a reputable middleman, and because of this, it has always been centralized. For instance, if you need to send money to a friend or family, you depend on your bank to transfer the funds to their account. DeFi, on the other hand, does not need any middlemen. Direct asset transfers are possible between participants. Theoretically, this speeds up and reduces the cost of transactions.
 
 * **Deflationary token**: tokens are deflationary if a percentage is permanently removed from the marketplace over time. Buybacks and burns are a popular way of destroying tokens. This causes scarcity which hopefully makes the price rise.
 
