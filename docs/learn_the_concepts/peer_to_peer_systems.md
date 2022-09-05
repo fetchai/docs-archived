@@ -6,7 +6,7 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 
 2. **Direct links**: direct communication between both parties can be established only in the presence of direct links between them.
 
-3. **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. In the hotel room booking example, making a booking with the hotel with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
+3. **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
 
 P2P networks enable the sharing of files stored on linked devices' hard drives. Using software tools designed to mediate data sharing, users may look for and download files from other networked devices. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, in actuality, both operations can be carried out concurrently (e.g. downloading file A, and uploading file B).
 
@@ -29,7 +29,6 @@ Consistent hashing is the method used by DHT to assign ownership of a certain fi
 In hybrid P2P networks, some elements of the peer-to-peer architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some of the key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
 ## Benefits and drawbacks of a P2P system
-
 ### Benefits
 
 * **No need for a specific operating system or software**: Individual peers can be on any OS and in most cases do not need specialized software to share files. This is especially useful in remote P2P networks where users might not have the same hardware.
@@ -64,7 +63,7 @@ In hybrid P2P networks, some elements of the peer-to-peer architecture are combi
 
 One of the most popular uses of P2P systems is represented by file sharing networks which allow members to directly share files with each other. [Napster](https://www.napster.com/it) and [LimeWire](https://limewire.com/), are great examples of a P2P system. These were P2P music sharing networks backed by the idea that peers connected through the internet could find and download any song they wanted, from several other users. Peers could also upload songs to Napster themselves, then share their files with others. These have come under a great deal of scrutiny with numerous lawsuits as the lack of a central authority has resulted in the inability to enforce copyright legislation, and numerous copyright infringements have been alleged. In fact, both Napster and LimeWire soon came under fire as the songs placed in the depository for download infringed on the copyright of the record labels and musicians.
 
-Another example of P2P networking is given by some online gaming platforms which adopt  a P2P structure for downloading games between users. The company [Blizzard Entertainment](https://www.blizzard.com/en-gb/) distributed Diablo III, StarCraft II, and World of Warcraft using P2P. Another large publisher, Wargaming, does the same with their World of Tanks, World of Warships, and World of Warplanes games.
+Another example of P2P networking is given by some online gaming platforms which adopt a P2P structure for downloading games between users. The company [Blizzard Entertainment](https://www.blizzard.com/en-gb/) distributed Diablo III, StarCraft II, and World of Warcraft using P2P. Another large publisher, Wargaming, does the same with their World of Tanks, World of Warships, and World of Warplanes games.
 
 A perhaps more successful use for P2P systems was developed in the crypto world thanks to the concept of blockchains and how these relate to P2P networks. Bitcoin, Ether and many other cryptocurrencies were developed following the P2P mechanism. Indeed, when Bitcoin was created, Satoshi Nakamoto defined it as a “peer-to-peer electronic cash system” built with the aim to create a P2P digital form of money without banks. In the context of P2P blockchains, these rely on a shared and reliable record of transactions provided by the underlying blockchain technology, which makes use of the strength of P2P networks. 
 
