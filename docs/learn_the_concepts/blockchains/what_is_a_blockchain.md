@@ -70,7 +70,7 @@ The architecture of blockchain systems varies greatly, especially in terms of th
 
 We can distinguish among: **public**, **private**, **consortium** and **hybrid** blockchains.  
 
-1. **Public blockchains** are entirely decentralised, permissionless, and open to everybody. Public blockchains allow all nodes to have equal access to the blockchain, the ability to add new blocks of data, and the ability to validate existing blocks of data.are largely utilised nowadays for bitcoin mining and trading. These blockchains include Bitcoin, Ethereum, and Litecoin as examples. The majority of public blockchain networks use processes known as _Proof-of-Work_ (_PoW_) or _Proof-of-Stake_ (_PoS_) to provide consensus. 
+1. **Public blockchains** are entirely decentralised, permissionless, and open to everybody. Public blockchains allow all nodes to have equal access to the blockchain, the ability to add new blocks of data, and the ability to validate existing blocks of data are largely utilised nowadays for bitcoin mining and trading. These blockchains include Bitcoin, Ethereum, and Litecoin as examples. The majority of public blockchain networks use processes known as _Proof-of-Work_ (_PoW_) or _Proof-of-Stake_ (_PoS_) to provide consensus. 
 
 2. **Private blockchains** are blockchains with permissions that are managed by a single company. Who is permitted to be a node on a private blockchain is decided by the central authority. Additionally, the central authority may not always accord each node an equal right to execute certain responsibilities. Due to restrictions on public access, private blockchains are only partially decentralised. Permissioned blockchains can be structured in various ways to prioritize speed, security, and scalability.
 
