@@ -45,9 +45,9 @@ These are some of the key benefits of decentralized systems:
 
 * **Democratic**: Decentralized systems require participation in order to successfully function, and therefore they are naturally democratic.
 
-* **Open**: Participants can freely join or leave as they wish,. The system is open to new participants and does not stop existing ones leaving.
+* **Open**: Participants can freely join or leave as they wish. The system is open to new participants and does not stop existing ones leaving.
 
-* **Public**: Because decentralized systems need to be  managed and run by their participants (Democratic) and anyone can in principle join the system or leave (Open), these systems are __often__ public and their inner workings are not kept confidential.
+* **Public**: Because decentralized systems need to be managed and run by their participants (Democratic) and anyone can in principle join the system or leave (Open), these systems are __often__ public and their inner workings are not kept confidential.
 
 * **Transparent**: In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. Decentralized systems therefore tend to be quite transparent.
 
