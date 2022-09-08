@@ -10,6 +10,8 @@
 
 * **API (Application Programming Interface)**: it is a software bridge that enables communication between two independent programmes. APIs specify how different components will communicate with one another.
 
+* **Automated Market Maker**: an automated market maker (AMM) is a system that automatically facilitates buy and sell orders on a decentralized exchange. In contrast to regular market makers, AMMs function by using self-executing computer programs, also known as smart contracts. These smart contracts automatically clear transactions between buyers and sellers.
+
 * **BEP-20**: according to Binance Academy, "BEP-20 is a token standard on Binance Smart Chain that extends ERC-20, the most common Ethereum token standard. You can think of it as a blueprint for tokens that defines how they can be spent, who can spend them, and other rules for their usage. Due to its similarity to Binance Chain’s BEP-2 and Ethereum’s ERC-20, it’s compatible with both.BEP-20 was conceived as a technical specification for Binance Smart Chain, with the goal of providing a flexible format for developers to launch a range of different tokens. These could represent anything from shares in a business to dollars stored in a bank vault".
 
 * **Bid and Ask Prices**: the term bid and ask refers to a two-way price quotation that indicates the best potential price at which a security can be sold and bought at a given point in time. The bid price represents the maximum price that a buyer is willing to pay for a share of stock or other security. The ask price represents the minimum price that a seller is willing to take for that same security. A trade or transaction occurs when a buyer in the market is willing to pay the best offer available, or is willing to sell at the highest bid. The difference between bid and ask prices, or the spread, is a key indicator of the liquidity of the asset. In general, the smaller the spread, the better the liquidity.
@@ -28,9 +30,13 @@
 
 * **Blockchain**: the blockchain is a digital ledger of all the transactions ever made in a particular cryptocurrency. It’s composed of individual blocks that are chained to each other through a cryptographic signature. Each time a block’s capacity is reached, a new block is added to the chain. The blockchain is repeatedly copied and saved onto thousands of computers all around the world, and it must always match each copy. As there is no master copy stored in one location, it’s considered decentralized.
 
+* **Bug**: mistakes in software or other aspects of a program. These mistakes may produce an error in the form of unexpected results or erratic behavior. In the best case, a bug may only affect software performance. In the worst case, it may make the software crash.
+
 * **Bug bounty/Bounty**: a reward given for disclosing bugs and vulnerabilities in computer programming.
 
 * **Circulating Supply**: this term refers to the number of cryptocurrency coins or tokens that are publicly available and circulating in a specific market. The circulating supply of a cryptocurrency can increase or decrease over time.
+
+* **CLI**: A command-line interface (CLI) is a text-based user interface (UI) used to run programs, manage computer files and interact with the computer. CLIs accept as input commands that are entered by keyboard; the commands invoked at the command prompt are then run by the computer.
 
 * **Cold wallet**: a physical storage device used to store cryptocurrencies offline (e.g. a flash drive, hard disk).
 
@@ -49,6 +55,8 @@
 * **Cryptography**: it is the process of encoding data into unintelligible codes to make it secure and hidden. Only the required key may be used to decode and read the data.
 
 * **Crypto wallet**: these wallets store public and private keys allowing users to send, receive, and store tokens. The tokens reside on the blockchain and the wallet accesses them.
+
+* **DAO**: a Decentralized Autonomous Organization (DAO) is a collection of individuals that get together without having any decisions made for them by a centralised authority figure or corporation. These are constructed using smart contracts on a blockchain. Members of DAOs frequently pay their way in by buying a governance token designed just for the DAO, which gives them the right to vote on decisions affecting how the money fund is used and handled. People from all around the world may be a part of these organisations, and they frequently interact on Discord channels.
 
 * **Decentralization**: it is the term used to describe the transition of power and control to a decentralized system from a centralized structure, government, or party.
 
@@ -96,15 +104,23 @@
 
 * **Hash**: a programmatic function that accepts an input and produces the "hash value" or "digital fingerprint," which is an alphanumeric string. Each block in the blockchain has its own hash value as well as the hash value used to validate the transaction that came before it. Transactions on the blockchain are verified via hashes.
 
+* **Hard fork**: in accordance to Binance Academy, "Hard forks are backward-incompatible software updates. Typically, these occur when nodes add new rules in a way that conflicts with the rules of old nodes. New nodes can only communicate with others that operate the new version. As a result, the blockchain splits, creating two separate networks: one with the old rules, and one with the new rules".
+
 * **Hot wallet**: a wallet that is continuously linked to the internet, such as one that is kept on a major exchange. Compared to hardware wallets or cold storage solutions, hot wallets are thought to offer less security.
+
+* **IBC Transfers**: the Inter-Blockchain Communication protocol (IBC) is an inter-module communication protocol that bridges different blockchains to facilitate communication and feature exchanges between networks with different infrastructure designs and consensus algorithms. 
 
 * **Initial Coin Offering (ICO)**: it is like an initial public offering (IPO) of stock, an initial coin offering is a way for a tokenized business to generate investment from the public. ICOs are regulated by the Securities and Exchange Commission (SEC), even if the tokens are not specifically securities because the language used in promoting a sale can serve to classify tokens as a security offering.
 
 * **KYC (Know-Your-Customer)**: KYC guidelines fit into the broader scope of _Anti-Money Laundering (AML)_ policies in traditional finance. There is no KYC or AML in DeFi.
 
+* **Ledger**: a book or collection of accounts in which account transactions are recorded. 
+
 * **Liquidation**: liquidation is applied to borrowers. They can have their collateral liquidated if they do not maintain the set collateralization ratio.
 
 * **Liquidation Ratio**: this is the level at which the collateralization ratio dips that can trigger liquidation. 
+
+* **Liquidity pool**: a liquidity pool is a crowd sourced pool of cryptocurrencies or tokens locked in a smart contract that is used to facilitate trades between the assets on a decentralized exchange (DEX). Many decentralised finance (DeFi) platforms use automated market makers (AMMs), which enable digital assets to be traded in an automatic and permissionless manner through the use of liquidity pools, in place of traditional markets of buyers and sellers.
 
 * **Liquidity Provider**: a liquidity provider (LP) is a user who funds a liquidity pool with own crypto assets so as to facilitate trading on the platform and earn passive income on the liquidity deposited.
 
@@ -146,9 +162,15 @@
 
 * **Scalability**: a change in scale or size to meet the demands of a network This term is used to describe a blockchain project's capacity in its intended use as well as its capability to manage network traffic and future expansion.
 
+* **SDK**: a Software Development Kit (SDK) is a set of tools provided by the manufacturer of (usually) a hardware platform, operating system (OS), or programming language. SDKs help software developers create applications for that specific platform, system, or programming language.
+
 * **Slippage**: in accordance to Investopedia's definition, "slippage refers to the difference between the expected price of a trade and the price at which the trade is executed. Slippage can occur at any time but is most prevalent during periods of higher volatility when market orders are used. It can also occur when a large order is executed but there isn't enough volume at the chosen price to maintain the current bid/ask spread. Slippage occurs in all market venues, including equities, bonds, currencies and futures".
 
 * **Smart contracts**: these are programs having their terms encoded in computer code. These are not legal documents, even if they sometimes include agreements or agreements between parties that resemble a regular legal contract. On the Ethereum Virtual Machine, smart contracts are the most common type of programming. Smart contracts contains a series of automated operations that may be programmed and executed if a series of criteria are satisfied.
+
+* **Soft fork**: A soft fork is an update that is backward-compatible, allowing upgraded nodes to continue connect with not upgraded ones. A soft fork often involves the insertion of a new rule that does not conflict with the existing ones.
+
+* **Snapshot**: in the context of cryptocurrencies, the process of capturing the state of a blockchain at a specific block height is frequently referred to as taking a snapshot. In this instance, the snapshot captures the entirety of the blockchain ledger, including all of the current addresses and the information linked with them (i.e. transactions, fees, balance, metadata, and so on). Prior to each round of an airdrop event, snapshots are frequently employed. Tokens are given during an airdrop based on the balance of each blockchain address. In this instance, snapshots are made to capture each token holder's balance at a certain moment in time (i.e. block height). Snapshots are also important during blockchain hard forks, as they mark the block height in which the main chain will be recorded before giving birth to the new chain.
 
 * **Spread**: when an order is made on an exchange or market, the disagreement of the difference in price between potential buy and sell offers of an asset is called the spread. A wide spread in price can lead to higher slippage.
 
