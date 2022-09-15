@@ -1,0 +1,38 @@
+@startuml
+component "SubQuery Node" as subql {
+    component "Fetch service" as subql_fetch
+'    () "mappingHandler.ts" as subql_handlers
+'    component "Sandbox service" as sandbox
+
+'    sandbox  --> subql_handlers
+
+    component "Store service" as store
+    component "Indexer manager" as manager
+
+    manager --> store
+}
+
+component "Graphql API" as gql {
+    port "public gql endpoint" as gql_port
+
+    component "Apollo server" as apollo
+    gql_port -> apollo
+
+    component Postgraphile
+
+    apollo -> Postgraphile
+}
+
+component "Postgres DB" as db {
+    port "private DB endpoint    " as db_port
+}
+
+Postgraphile ..> db_port
+
+component "Fetch Node" as fetchd {
+    port "public rpc endpoint" as rpc
+}
+
+store ..> db_port
+subql_fetch ...> rpc
+@enduml

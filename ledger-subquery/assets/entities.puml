@@ -1,0 +1,67 @@
+@startuml
+entity Block {
+  +id
+  +chainId
+  +height
+  timestamp
+  ..relations..
+  transactions
+  messages
+  events
+}
+
+entity Transaction {
+  +id
+  gasUsed
+  gasWanted
+  fees
+  memo
+  status
+  log
+  +timeoutHeight
+  +signerAddress
+  ..relations..
+  block
+  messages
+  events
+}
+
+Transaction }|--|| Block
+Transaction::block ...|| Block
+
+entity Message {
+  +id
+  +typeUrl
+  json
+  ..relations..
+  transaction
+  block
+}
+
+Transaction::messages ..|{ Message
+
+Transaction ||--|{ Message
+Message::block ..|| Block
+Message::transaction .|| Transaction
+
+entity Event {
+  +id
+  +type
+  attributes
+  log
+  ..relations..
+  block
+  transaction
+}
+
+object EventAttribute {
+  key
+  value
+}
+
+Event::attributes -|{ EventAttribute
+
+Event }|--|| Transaction
+Event::transaction ..|| Transaction
+Event::block ..|| Block
+@enduml
