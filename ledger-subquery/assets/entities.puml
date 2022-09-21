@@ -21,13 +21,14 @@ entity Transaction {
   +timeoutHeight
   +signerAddress
   ..relations..
-  block
-  messages
   events
+  messages
+  block
+
 }
 
 Transaction }|--|| Block
-Transaction::block ...|| Block
+Transaction::block ..|| Block
 
 entity Message {
   +id
@@ -38,11 +39,11 @@ entity Message {
   block
 }
 
-Transaction::messages ..|{ Message
-
 Transaction ||--|{ Message
+Transaction::messages ...|{ Message
+
 Message::block ..|| Block
-Message::transaction .|| Transaction
+Message::transaction ..|| Transaction
 
 entity Event {
   +id
@@ -50,8 +51,9 @@ entity Event {
   attributes
   log
   ..relations..
-  block
   transaction
+  block
+
 }
 
 object EventAttribute {
@@ -59,6 +61,7 @@ object EventAttribute {
   value
 }
 
+Transaction::events .|{ Event
 Event::attributes -|{ EventAttribute
 
 Event }|--|| Transaction
