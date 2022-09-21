@@ -1,10 +1,10 @@
-**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied.
+**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied. 
 
 A smart contract's code is difficult to alter or eliminate after it has been published on the blockchain. Therefore, consumers may still access the DApp even if the DApp's development team has split.
 
 Thanks to the underlying blockchain and smart contracts technology, decentralized applications provide a wide range of services and activities, from gaming to financial, social networking, and much more, and appear and feel identical to ordinary mobile applications on your smartphone. 
 
-DApps share the following characteristics:
+DApps share the following features:
 
 * **Open-sourceness**: This allows anybody to access, verify, use, copy, and edit their source code. The vast majority of the DApp tokens are not controlled by a single entity. Users are also able to suggest and vote on DApp improvements.
 
