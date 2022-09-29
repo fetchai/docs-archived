@@ -1186,8 +1186,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#endpoints" class="md-nav__link">
-    Endpoints
+  <a href="#endpoints-playground-uis" class="md-nav__link">
+    Endpoints / Playground UIs
   </a>
   
 </li>
@@ -1216,6 +1216,53 @@
   <a href="#querying" class="md-nav__link">
     Querying
   </a>
+  
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregation" class="md-nav__link">
+    Aggregation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests-as-examples" class="md-nav__link">
+    Tests as examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6513,8 +6560,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#endpoints" class="md-nav__link">
-    Endpoints
+  <a href="#endpoints-playground-uis" class="md-nav__link">
+    Endpoints / Playground UIs
   </a>
   
 </li>
@@ -6543,6 +6590,53 @@
   <a href="#querying" class="md-nav__link">
     Querying
   </a>
+  
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregation" class="md-nav__link">
+    Aggregation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests-as-examples" class="md-nav__link">
+    Tests as examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6596,7 +6690,19 @@
 This indexer provides a <a href="https://www.subquery.network/">Graphql</a> API for querying tracked entities.
 For a list of tracked entities, see the <a href="https://github.com/fetchai/ledger-subquery/blob/main/schema.graphql">schema.graphql file</a>.</p>
 <p>To learn more about how to <a href="https://academy.subquery.network/run_publish/run.html">run</a> or <a href="https://academy.subquery.network/quickstart/quickstart_chains/cosmos.html">change this SubQuery Project</a> to get your own custom GraphQL API for your app, <a href="https://academy.subquery.network/">visit the SubQuery Academy for documentation</a>. </p>
-<h2 id="endpoints">Endpoints<a class="headerlink" href="#endpoints" title="Permanent link">&para;</a></h2>
+<h2 id="endpoints-playground-uis">Endpoints / Playground UIs<a class="headerlink" href="#endpoints-playground-uis" title="Permanent link">&para;</a></h2>
+<p>The graphql API endpoints also serve a playground UI to browsers for convenience.
+This UI is useful for rapid experimentation and iteration of queries as well as just getting some results, features include:</p>
+<ul>
+<li>real-time query results</li>
+<li>query editor:</li>
+<li>auto-complete &amp; validation via schema introspection</li>
+<li>can store multiple, named queries</li>
+<li>supports graphql variables</li>
+<li>local persistence of query editor contents</li>
+<li>schema reference</li>
+<li>graphql docs reference</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -6620,15 +6726,78 @@ For a list of tracked entities, see the <a href="https://github.com/fetchai/ledg
 <p><img alt="subquery architecture component diagram legend" src="../assets/architecture_legend.svg" />
 <img alt="subquery architecture component diagram" src="../assets/architecture.svg" /></p>
 <h2 id="querying">Querying<a class="headerlink" href="#querying" title="Permanent link">&para;</a></h2>
-<p>The graphql API relies heavily on <a href="https://www.graphile.org/postgraphile/usage-library/">postgraphile (as a library)</a>.
-Postgraphile plugins also play a critical role; in particular, the <a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter">connection-filter</a> and <a href="https://github.com/graphile/pg-aggregates">pg-aggregates</a> plugins.
-For more information, please refer to their documentation:</p>
+<p>The graphql API relies heavily on <a href="https://www.graphile.org/postgraphile/usage-library/">postgraphile (as a library)</a> to resolve graphql requests.</p>
+<p>Postgraphile plugins also play a critical role; in particular, the <a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter">connection-filter</a> and <a href="https://github.com/graphile/pg-aggregates">pg-aggregates</a> plugins.</p>
+<h3 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h3>
+<p>The graphql API implements <a href="https://relay.dev/graphql/connections.htm">the connections specification</a> for pagination (see: <a href="https://graphql.org/learn/pagination/#end-of-list-counts-and-connections">GraphQL pagination docs</a> for more).</p>
+<p>!!! tip It is recommended to prefer using pagination operators by default (e.g. <code>first: &lt;limit&gt;</code>) to avoid unnecessary delays in query responses. </p>
+<h3 id="filtering">Filtering<a class="headerlink" href="#filtering" title="Permanent link">&para;</a></h3>
+<p>Filtering is facilitated by postgraphile and its plugins. For specifics on supported operators and how to use them, please refer to their documentation:</p>
 <ul>
 <li><a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter">connection-filter plugin</a></li>
 <li><a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter/blob/master/docs/operators.md#json-jsonb">operators</a></li>
 <li><a href="https://github.com/graphile-contrib/postgraphile-plugin-connection-filter/blob/master/docs/examples.md">query examples</a></li>
-<li><a href="https://github.com/graphile/pg-aggregates">pg-aggregates plugin</a></li>
 </ul>
+<h4 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h4>
+<p>Filtering <code>NativeTransfer</code>s for a given sender address:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>query nativeTransfersFromAddress {
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  nativeTransfers(first: 5, filter: {
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    fromAddress: {
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      equalTo: &quot;fetch1t3qet68dr0qkmrjtq89lrx837qa2t05265qy6s&quot;
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    }
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  }) {
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    nodes {
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      toAddress
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      amounts
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    }
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  }
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>}
+</code></pre></div>
+<p>Filtering for <code>Message</code>s from a given sender address:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>query messagesFromAddress {
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  messages (first: 5, filter:  {
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    transaction: {
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>      signerAddress: {
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        equalTo: &quot;fetch1t3qet68dr0qkmrjtq89lrx837qa2t05265qy6s&quot;
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>      }
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    }
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  }) {
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    nodes {
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>      transaction {
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        signerAddress
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      }
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    }
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  }
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>}
+</code></pre></div>
+<p>Filtering on <code>Events</code>s within a given timeframe and with a given type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>query transferEventsDuring {
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  events(first: 5, filter:  {
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    block: {
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      timestamp: {
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        greaterThanOrEqualTo: &quot;2022-09-15T01:44:13.719&quot;,
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        lessThanOrEqualTo: &quot;2022-09-19T02:15:28.632&quot;
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>      }
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    },
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    type: {equalTo: &quot;transfer&quot;},
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  }) {
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    nodes {
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>      attributes
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    }
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  }
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>}
+</code></pre></div>
+<h3 id="aggregation">Aggregation<a class="headerlink" href="#aggregation" title="Permanent link">&para;</a></h3>
+<p>Aggregation is facilitated by the <a href="https://github.com/graphile/pg-aggregates">pg-aggregates plugin</a>.
+Features include:</p>
+<ul>
+<li>calculating aggregates</li>
+<li>grouped aggregates</li>
+<li>applying conditions to grouped aggregates</li>
+<li>ordering by relational aggregates</li>
+<li>filtering by the results of aggregates on related connections</li>
+</ul>
+<h3 id="tests-as-examples">Tests as examples<a class="headerlink" href="#tests-as-examples" title="Permanent link">&para;</a></h3>
 <p>Additional examples of queries and use cases can be found in the <a href="https://github.com/fetchai/ledger-subquery/blob/main/test">end-to-end test suite</a>.</p>
 <h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
 <p>Entities tracked by the indexer exist at varying levels of abstraction. "Lower-level" entities include the <a href="#primitive-entities">primitives</a> (i.e. blocks, transactions, messages, and events), upon which "higher-level" entities are constructed (e.g. LegacyBridgeSwaps).</p>
