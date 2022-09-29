@@ -41,7 +41,6 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
         <div class="diagram-row-container">
             <a href="/CosmPy" class="diagram-item">CosmPy</a>
             <a href="/Jenesis" class="diagram-item">Jenesis</a>
-            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
         </div>
     </div>
     <div class="diagram-row">
