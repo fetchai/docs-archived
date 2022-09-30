@@ -8,7 +8,7 @@ Another great example is when you fly internationally from one place to another.
 
 **There are two key characteristics of decentralized systems:**
 
-* **Equality of participants**: all participants contribute towards the system's decision-making and control, and each of them takes an active equal role in managing the system.
+* **Equality of participants**: all participants contribute towards the system's decision-making and control, and each of them takes an active role in managing the system.
 
 * **Lack of central authorities**: It is not that decentralized systems lack the authority to make changes to the management of the network, rather this authority is distributed among the participants. The system is run by the participants for the benefit of the participants.
 
@@ -37,7 +37,7 @@ Some examples of centralized systems:
 
 ## Why are decentralized systems useful?
 
-Decentralised systems are useful because they are open and democratic, more transparent, and they are run solely in the interests of their participants by their participants.  
+Decentralized systems are useful because they are open and democratic, more transparent, and they are run solely in the interests of their participants by their participants.  
 
 ## Positive characteristics
 
@@ -47,15 +47,15 @@ These are some of the key benefits of decentralized systems:
 
 * **Open**: Participants can freely join or leave as they wish. The system is open to new participants and does not stop existing ones leaving.
 
-* **Public**: Because decentralized systems need to be managed and run by their participants (Democratic) and anyone can in principle join the system or leave (Open), these systems are __often__ public and their inner workings are not kept confidential.
+* **Public**: Because decentralized systems need to be managed and run by their participants (democratic) and anyone can in principle join the system or leave (open), these systems are __often__ public and their inner workings are not kept confidential.
 
 * **Transparent**: In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. Decentralized systems therefore tend to be quite transparent.
 
-* **Trust minimisation**: The fact that in decentralised systems, participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to Transparency) this is typically well known.
+* **Trust minimisation**: The fact that in decentralized systems, participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to transparency) this is typically well known.
 
 ## Limitations
 
-Some of the limitations of decentralised systems:
+Some of the limitations of decentralized systems:
 
 * **Speed**: Decentralized systems are often slower than centralized systems. Because there is more than one decision maker, decisions have to be made by consensus in the group and arriving at that consensus takes more time than a single entity making the decision. 
 
