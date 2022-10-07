@@ -2,7 +2,7 @@
 
 A decentralized system is an interconnected system if no single entity (individual, organization, or group) is the sole authority. In a decentralized system, control and decision-making is in the hands of those participating in the system and they have (more or less) equal standing in terms of influence. This is in contrast to a centralized system where a single authority is above all others in terms of rights and privileges.
 
-A good example of a decentralized system is an ant colony, where control is distributed among the colony's members. Without any form of central control, an ant colony successfully achieves its goals, performs all its required tasks, and effectively responds to the ever changing conditions on the colony's environment through the collective contribution of the individual ants.
+A good example of a decentralized system is an ant colony, where control is distributed among the colony's members. Without any form of central control, an ant colony successfully achieves its goals, performs all its required tasks, and effectively responds to the ever changing conditions on the colony's environment through the collective contribution of the individual ants. 
 
 Another great example is when you fly internationally from one place to another. There are numerous participants working together and communicating efficiently to make that a seamless experience without there being a central unit that manages and plans it all.
 
