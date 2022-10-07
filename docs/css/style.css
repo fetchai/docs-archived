@@ -1,3 +1,15 @@
+/* overriding colours */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #4051b5;
+  --md-typeset-color: #525252;
+  --md-a-color:#1d6ff5;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #fff;
+  --md-typeset-color: #d0d6fc;
+  --md-a-color:#5997fd;
+}
+
 /*overriding the header*/
 .md-header-nav__button.md-logo img {
   width: auto !important;
@@ -25,18 +37,189 @@
 }
 
 /*home page styling*/
+
+#header-image-div {
+  display: flex;
+}
+
+#header-image {
+  max-height: 35vh;
+  margin: 0 auto;
+}
+
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto auto auto;
-  grid-column-gap: 6px;
-  grid-row-gap: 6px;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
   color: white;
 }
 
 .grid_item {
   padding: 15px;
   border-radius: 5px;
+}
+
+#diagram-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  margin-bottom: 40px;
+  margin-top: 32px;
+}
+
+.diagram-label {
+  width: 167px;
+}
+
+.diagram-row {
+  display: flex;
+  width: auto;
+  align-items: center;
+}
+
+.diagram-row > p {
+  margin-bottom: 0;
+}
+
+.diagram-row-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: calc(100% - 167px - 16px);
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .diagram-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .diagram-row-container {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .diagram-label {
+    width: 100%;
+  }
+}
+
+.diagram-item {
+  position: relative;
+  height: 76px;
+  /* padding: 8px; */
+  background: #edf2fb;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  color: #3b82f6;
+  flex: 1 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+  transform: scale(1);
+}
+
+.diagram-item:hover {
+  bottom: 2px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.20);
+  transform: scale(1.001);
+}
+
+.item-link {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagram-item-child {
+  cursor: pointer;
+  height: 60px;
+  position: absolute;
+  right: 8px;
+  border: 1px dashed #3c81f6;
+  padding: 8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  color: #3b82f6;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 25%;
+  transition: all 0.1s ease-out;
+  transform: scale(1);
+}
+
+@media screen and (max-width: 76.1875em) {
+  .diagram-item-child {
+  position: relative;
+  word-break: keep-all !important;
+  }
+}
+
+.diagram-item-child:hover {
+  transition: all 0.1s ease-out;
+  transform: scale(1.05);
+}
+
+.diagram-item-child-disabled {
+  cursor: default;
+  height: 60px;
+  position: absolute;
+  right: 8px;
+  border: 1px dashed #3c81f6;
+  padding: 8px;
+  border: 1px dashed rgba(50, 50, 50, 0.5);
+  opacity: 0.8;
+  border-radius: 4px;
+  color: #525252 !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 35%;
+}
+
+.diagram-item-child-disabled:hover {
+  box-shadow: none;
+  transform: scale(1);
+}
+
+.upcoming-feature {
+  background: #e6e6e6;
+  opacity: 0.5;
+  color: #525252;
+  box-shadow: none;
+  cursor: default;
+}
+
+.upcoming-feature:hover {
+  bottom: 0;
+  box-shadow: none;
+  transform: scale(1);
+}
+
+/* Overriding font header, link, paragraph stylings  */
+.md-typeset h3,
+.md-typeset h1,
+.md-typeset h2 {
+  margin-bottom: 0.4em;
+  color: var(--md-primary-fg-color);
+  font-weight: 400;
+}
+
+.md-typeset a {
+  color: var(--md-a-color);
 }
 
 .div1 {
@@ -85,19 +268,73 @@
   color: black !important;
 }
 
+.md-nav__item .md-nav__link--active {
+  padding: 4px 8px;
+  position: relative;
+  left: -8px;
+  background: #E9EBFC;
+  border-radius: 16px;
+  width: fit-content;
+  color: rgb(64, 81, 181)
+}
+
+@media screen and (max-width: 76.1875em) {
+  .md-nav__item .md-nav__link--active {
+    left: 0;
+  }
+}
+
+
+
 /*overriding the announcement style*/
 .md-banner {
-	color: white;
-	background-color: #3B82F6;
-	text-align: center;
+  color: white;
+  background-color: #3b82f6;
+  text-align: center;
 }
 
 .md-banner .announcement-link {
-	color: white;
+  color: white;
 }
 
 .md-banner .announcement-link:hover {
-	color: hsla(0, 100%, 100%, 0.7);
+  color: hsla(0, 100%, 100%, 0.7);
+}
+
+/* Adding card styling */
+
+.card-button {
+  height: 154px;
+  width: 248px;
+  padding: 12px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 16px;
+  transition: all 100ms ease-out !important;
+  transform: scale(1);
+}
+
+.card-button:hover {
+  transform: scale(1.05);
+}
+
+.card-button-text {
+  align-self: flex-end;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  text-align: right;
+}
+.card-button-icon {
+  font-size: 48px;
+  line-height: 100%;
+}
+
+.card-button-container {
+  color: hsla(0, 100%, 100%, 0.7);
 }
 
 /* Form Styling */
@@ -263,176 +500,17 @@
 /* Radio */
 .radio-group > label {
   display: flex;
-}
-.radio-group.horizontal > label {
-  display: inline-block;
-}
-.radio-group > label > .extra {
-  display: inline-block;
-  padding-left: 16px;
-}
-.radio-group > label > .extra input {
-  padding-top: 0;
-}
-.radio {
-  display: inline-block;
-  position: relative;
-  margin: 0 0 10px;
-  font-size: 16px;
-  line-height: 24px;
-}
-.radio input[type="radio"] {
-  position: absolute;
-  top: 2px;
-  left: 0;
   width: 100%;
-  height: 22px;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  z-index: 0;
-}
-.radio label {
-  display: inline-block;
-  padding: 0 0 0 24px;
-  cursor: pointer;
-}
-.radio label:before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 0;
-  width: 16px;
-  height: 16px;
-  background-color: transparent;
-  border: 2px solid rgba(0, 0, 0, 0.54);
-  border-radius: 14px;
-  z-index: 1;
-  transition: border-color var(--trans-time) cubic-bezier(0.4, 0, 0.2, 1);
-}
-.radio label:after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 4px;
-  width: 8px;
-  height: 8px;
-  background-color: var(--md-primary-fg-color);
-  border-radius: 50%;
-  z-index: 2;
-  transform: scale(0, 0);
-  transition: transform var(--trans-time) cubic-bezier(0.4, 0, 0.2, 1);
-}
-.radio input[type="radio"]:checked + label:before {
-  border-color: var(--md-primary-fg-color);
-}
-.radio input[type="radio"]:checked + label:after {
-  transform: scale(1, 1);
 }
 
-/* Error message */
-#emailError {
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial,
-    sans-serif;
-  color: red;
-  font-size: 16px;
-}
-
-/* snackbar */
-
-/* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar {
-  visibility: hidden;
-  min-width: 288px;
-  margin-left: -125px;
-  background-color: #202943;
-  color: #fff;
-  text-align: start;
-  border-radius: 4px;
-  padding: 6px 16px;
-  position: fixed;
-  z-index: 9999;
-  right: 10px;
-  top: 80px;
-}
-
-#snackbar_text {
-  padding: 8px 0px;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.43;
-  letter-spacing: 0.01071em;
-}
-
-.snackbar__danger {
-  background-color: rgb(211, 47, 47) !important;
-}
-
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
-.snackbar__show {
-  visibility: visible !important; /* Show the snackbar */
-
-  -webkit-animation: fadein 0.2s;
-  animation: fadein 0.2s;
-}
-
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-  from {
-    top: 0;
-    opacity: 0;
+@media screen and (max-width: 665px) {
+  .card-button-container .four {
+    display: grid;
+    grid-template-columns: auto auto;
   }
-  to {
-    top: 80px;
-    opacity: 1;
-  }
-}
 
-@keyframes fadein {
-  from {
-    top: 0;
-    opacity: 0;
-  }
-  to {
-    top: 80px;
-    opacity: 1;
-  }
-}
-
-/* spinner */
-
-.spinner {
-  animation: rotate 2s linear infinite;
-  z-index: 2;
-  width: 18px;
-  height: 18px;
-}
-
-.spinner .path {
-  stroke: #fff;
-  stroke-linecap: round;
-  animation: dash 1.5s ease-in-out infinite;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
+  .card-button-container .four > .card-button {
+    margin-right: 8px;
   }
 }
 

@@ -3,6 +3,11 @@ site_url: https://docs.fetch.ai/
 site_description: Everything you need to know about Fetch.ai.
 edit_uri: ""
 site_author: developer@fetch.ai
+copyright: > # Copyright notice in footer + trigger cookie consent settings
+  Copyright &copy; 2018 - 2022 Fetch.ai -
+  <a href="#__consent">Change cookie settings</a>
+
+strict: true
 
 theme:
   name: material
@@ -30,16 +35,29 @@ theme:
     - search.share # Show share button for copying deep link to the current search query and result
   custom_dir: overrides # Needed for announcements
 
-copyright: Copyright &copy; 2018 - 2022 Fetch.ai # Copyright notice in footer
-
 nav:
   - Home : "index.md"
   - Bug Bounty Program: "bug_bounty.md"
-  - Apply for $150M Developer Fund: "fund_form.md"
+  - Basics:
+    - Wallet:
+        - Getting Started: "basics/wallet/getting_started.md"
+        - How to Use: "basics/wallet/how_to_use_wallet.md"
+    - Staking:
+      - What is Staking?: 'basics/staking/what_is_staking.md'
+      - How to Stake: 'basics/staking/how_to_stake.md'
+      - Re-Delegation: 'basics/staking/redelegation.md'
+  - Native and ERC-20 FET:
+    - Native and ERC-20 FET: 'native_and_erc20/native_and_erc20_fet.md'
+    - How to convert: 'native_and_erc20/how_to_convert_fet.md'
+    - Reconciliation service: 'native_and_erc20/reconciliation.md'
+  - Fetch wallet: '!include ./fetch-wallet/mkdocs.yml'
   - Ledger: '!include ./ledger/docs/mkdocs.yml'
+  - Indexer: '!include ./ledger-subquery/mkdocs.yml'
   - Cosmpy: '!include ./cosmpy/mkdocs.yml'
   - AEA Framework: '!include ./aea/mkdocs.yml'
   - Collective Learning: '!include ./colearn/mkdocs.yml'
+  - Create React App template: '!include ./cra-template-cosmjs-keplr/mkdocs.yml'
+  - Jenesis: '!include ./jenesis/mkdocs.yml'
   - Archives:
     - Search and Discovery (SOEF):
       - Simple OEF: 'soef/simple-oef.md'
@@ -51,6 +69,7 @@ extra_css:  # Required for the Fetchy design style
   - css/style.css
 
 markdown_extensions:
+  - attr_list # Required by images
   - admonition # Required by admonitions
   - pymdownx.superfences # Required by admonitions, annotations, tabs. Enables arbitrary nesting of code and content blocks
   - pymdownx.highlight: # Required by code blocks
@@ -64,6 +83,8 @@ markdown_extensions:
   - pymdownx.tabbed: # Required by tabs
       alternate_style: true
   - tables # # Required by tables
+  - toc:
+      permalink: true
   - markdown_include.include:
       base_path: ./colearn/docs
 
@@ -82,6 +103,30 @@ extra:
   analytics:
     provider: google
     property: UA-118969813-3
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            <a href="https://github.com/fetchai/docs/issues/new?labels=feedback&template=improve-docs.yml&title=[feedback]+{title}+-+{url}" target="_blank" rel="noopener">reporting what's wrong</a>.
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your preferences and measure the effectiveness of our 
+      documentation via the feedback widget at the bottom of every docs page.
+      With your consent, you're helping us make this documentation better.
+    actions:
+      - accept
+      - manage
+      - reject
   social:
     - icon: fontawesome/brands/twitter
       link: https://bit.ly/3oDuI3f
