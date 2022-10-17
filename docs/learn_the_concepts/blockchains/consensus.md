@@ -1,5 +1,5 @@
 # Consensus Mechanisms
-
+ 
 A blockchain is a decentralized distributed network that offers immutability, privacy, security, and transparency. Despite the absence of a central authority to confirm and authenticate the transactions, every Blockchain transaction is regarded as being totally safe and validated. Only the presence of the consensus protocol, a fundamental component of every Blockchain network, makes this feasible. A consensus algorithm is a process that allows every peer in the Blockchain network to agree on the distributed ledger's current state. Consensus algorithms accomplish dependability in the Blockchain network and build confidence amongst unidentified peers in a distributed computing setting in this way.  
 
 Hence, the consensus mechanism ensures that every new block added to the Blockchain is the sole version of the truth that has been accepted by every node. The following are the most utilized consensus mechanisms nowadays:
