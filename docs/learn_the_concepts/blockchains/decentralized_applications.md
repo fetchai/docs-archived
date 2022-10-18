@@ -9,7 +9,7 @@ DApps share the following features:
 * **Open-sourceness**: This allows anybody to access, verify, use, copy, and edit their source code. The vast majority of the DApp tokens are not controlled by a single entity. Users are also able to suggest and vote on DApp improvements.
 
 * **Decentralization** and **cryptography**: To protect data, the DApp stores all of its data on a public, decentralized blockchain that is maintained by a number of users (or nodes).
-
+ 
 * **Tokenization**: A cryptographic token is required to access DApps. They can use native tokens created using a consensus mechanism like Proof of Work (PoW) or Proof of Stake (PoS), or they can adopt cryptocurrencies like ETH. Additionally, contributors like miners and stakers can be rewarded with this token.
 
 Most DApps are present on the _Ethereum network_ as of June 2022. It provides a strong framework for DApp developers to increase the use cases already in place. On other blockchains, such as BNB Smart Chain (BSC), Solana (SOL), Polygon (MATIC), Avalanche (AVAX), EOS, and so on, developers have begun to construct DApps as they become more advanced. To interact with a DApp, you’ll first need a compatible browser extension wallet like MetaMask, or Trust Wallet.
