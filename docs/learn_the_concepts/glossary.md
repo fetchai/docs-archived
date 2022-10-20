@@ -36,8 +36,6 @@
 
 * **Circulating Supply**: this term refers to the number of cryptocurrency coins or tokens that are publicly available and circulating in a specific market. The circulating supply of a cryptocurrency can increase or decrease over time.
 
-* **CLI**: A command-line interface (CLI) is a text-based user interface (UI) used to run programs, manage computer files and interact with the computer. CLIs accept as input commands that are entered by keyboard; the commands invoked at the command prompt are then run by the computer.
-
 * **Cold wallet**: a physical storage device used to store cryptocurrencies offline (e.g. a flash drive, hard disk).
 
 * **Collateral**: a collateral is something of value given as a guarantee to obtain something else. For instance, a borrower may offer their car as a collateral to a lender when taking out a loan. The vehicle acts as a safeguard or warranty in case the borrower fails to pay their debts. Usually, collateralized loans present much lower interest rates when compared to non-collateralized ones. Collateral can come in different forms. Some of the most common types include mortgage collaterals, invoice financing and margin trading collaterals.
