@@ -4,7 +4,7 @@
 
 * **AEA (Autonomous Economic Agent)**: it is an intelligent agent acting on an owner's behalf, with limited or no interference, and whose goal is to generate economic value to its owner. AEAs are a special type of agent.
 
-* **AEA Registry**: it is a repository of packages for the Autonomous Economic Agent (AEA) framework. Five types of packages are currently supported: entire agents and four agent components, including skills, connections, protocols and contracts.
+* **AEA Registry**: it is a repository of packages for the Autonomous Economic Agent (AEA) framework. Five types of packages are currently supported: entire agents and four agent components, including skills, connections, protocols and contracts. 
 
 * **Airdrop**: it is a mean of distributing tokens to wallet addresses using digital money or tokens. Airdrops are occasionally used for marketing in return for easy actions like sharing, referring, or downloading an app.
 
