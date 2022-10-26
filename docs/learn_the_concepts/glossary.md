@@ -1,7 +1,13 @@
+* **ACN (Agent Communication Network)**: it is a peer-to-peer communication network for autonomous economic agents.
+
 * **Address**: an address is a string of alphanumeric characters (that may also be seen as a QR code that can be read by a smartphone) and it is used on a blockchain network to transmit and receive transactions. The address in Ethereum starts with 0x (e.g. ) and is also called public key.
 
+* **AEA (Autonomous Economic Agent)**: it is an intelligent agent acting on an owner's behalf, with limited or no interference, and whose goal is to generate economic value to its owner. AEAs are a special type of agent.
+
+* **AEA Registry**: it is a repository of packages for the Autonomous Economic Agent (AEA) framework. Five types of packages are currently supported: entire agents and four agent components, including skills, connections, protocols and contracts.
+
 * **Airdrop**: it is a mean of distributing tokens to wallet addresses using digital money or tokens. Airdrops are occasionally used for marketing in return for easy actions like sharing, referring, or downloading an app.
- 
+
 * **Altcoin**: any cryptocurrency alternative to Bitcoin. Many alternative cryptocurrencies are modified forks of Bitcoin (e.g. Litecoin).
 
 * **AML (Anti-Money Laundering)**: this refers to a group of international rules implemented to reduce the likelihood that criminal organizations or individuals would use money laundering. In different countries, these guidelines and legislation are applied to cryptocurrencies with diverse results.
@@ -74,7 +80,9 @@
 
 * **Distributed Denial of Service (DDoS) attack**: a cyberattack strategy where the attacker repeatedly floods the system with requests in an effort to block the fulfillment of valid requests.
 
-* **Double spend attack**: It is a malicious attempt to convince two separate parties that one of two conflicting transactions is valid. In such a situation, both transactions appear individually valid, but their combination is not. Thus, only one is included in the blockchain. Due to the nature of blockchain reorganizations, simply showing that a transaction is included in a block is not enough to verify that it is immutable. Transactions are only immutable once they have reached a depth in the chain where a chain reorganization is unlikely to affect them. Double spend attacks can be mitigated by waiting to ensure that a transaction is confirmed by the network and is acceptably immutable before acting on it.
+* **DLT (Distributed Ledger Technology)**: it is a database of data that is duplicated and shared among a network of computers spread out across many locations. It is a flexible way of information recording as opposed to a centralised ledger. Instead of being updated by a centralised authority, the ledger's or record's data is changed by network participants. The information kept on the ledger can be checked and audited, and it can be accessible to some or all users. Value-containing peer-to-peer transfers may be documented on a DLT. The transferred value could be cash, securities, or even private data.
+
+* **Double spend attack**: it is a malicious attempt to convince two separate parties that one of two conflicting transactions is valid. In such a situation, both transactions appear individually valid, but their combination is not. Thus, only one is included in the blockchain. Due to the nature of blockchain reorganizations, simply showing that a transaction is included in a block is not enough to verify that it is immutable. Transactions are only immutable once they have reached a depth in the chain where a chain reorganization is unlikely to affect them. Double spend attacks can be mitigated by waiting to ensure that a transaction is confirmed by the network and is acceptably immutable before acting on it.
 
 * **ERC-20**: it is the standard to which each Ethereum token complies. This standard defines the way each token behaves so that transactions are predictable. Other cryptocurrencies also use the ERC-20 standard, piggybacking on the Ethereum network in the process.
 
@@ -124,13 +132,15 @@
 
 * **Mainnet**: it represents the main network on which transactions on a certain distributed ledger actually occur. The Ethereum mainnet, for instance, serves as the public blockchain for network verification and transaction processing.
 
+* **MAS (Multi-Agent System)**: a Multi-Agent System is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. Interactions between agents may be cooperative or competitive. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
+
 * **Metamask**: Metamask is a popular Web 3.0 wallet used in DeFi. Other wallets you may hear about are the Binance Wallet and Torus.
 
 * **Miner**: a miner is an actor in a blockchain network that has the ability to create and submit new blocks to the chain. Which miner is allowed to produce a specific block may be predetermined, or miners may simultaneously compete to add the next block to the chain.
 
 * **Mining**: mining is the process through which cryptocurrency transactions are gathered, verified and recorded into a digital ledger known as blockchain. The work done by miners is essential for maintaining the integrity of the network and is also responsible for introducing new coins into the system. It is the method used by a Proof of Work (PoW) consensus mechanism to verify blocks or transactions before adding them to a blockchain. A miner must use a computer to solve a cryptographic puzzle in order to validate a block. The block is regarded as having been "mined" or validated after the computer has figured out the issue. The first computer to mine or verify the block receives a reward represented by cryptocurrencies (e.g. BTC, ETH).
 
-* **Multi-signature**: Multisig stands for multi-signature, which is a specific type of digital signature that makes it possible for two or more users to sign documents as a group. Therefore, a multi-signature is produced through the combination of multiple unique signatures. Basically speaking, the funds stored on a multi-signature address can only be accessed by using 2 or more signatures. Therefore, the use of a multisig wallet enables users to create an additional layer of security to their funds.  
+* **Multi-signature**: multisig stands for multi-signature, which is a specific type of digital signature that makes it possible for two or more users to sign documents as a group. Therefore, a multi-signature is produced through the combination of multiple unique signatures. Basically speaking, the funds stored on a multi-signature address can only be accessed by using 2 or more signatures. Therefore, the use of a multisig wallet enables users to create an additional layer of security to their funds.  
 
 * **Network**: it represents a set of actors that are collectively interconnected for a common purpose.
 
@@ -138,7 +148,7 @@
 
 * **Nonce**: this term has a variety of connotations, and depending on the situation, it is employed in many different ways. On the Ethereum mainnet, it refers to a distinct transaction identification number that rises in value with each subsequent transaction to assure different safety measures. It was originally created from a contraction of a term meaning "not more than once" (e.g. preventing a double-spend).
 
-* **NFT**: Non-Fungible Tokens are cryptographic assets built on a blockchain with unique identification codes and metadata that distinguish them from each other. These were born as ERC-721 crypto assets representing a unique or rare digital or real world item. They let us tokenize things like art, collectibles, even real estate through a securitization process that takes place on the blockchain. Unlike cryptocurrencies which are identical to each other and can be used as a medium for commercial transactions, NFTs represent unique and irreplaceable tokens, thereby making it impossible for one non-fungible token to be equal to another (i.e. NFTs are not fungible). This ensures a highly transparent and flexible record of ownership. An NFT can only have one owner at a time. Ownership is managed through the unique ID and metadata that no other token can replicate. NFTs are minted through smart contracts which assign ownership and manage the transferability of the NFT itself. When someone mints an NFT, they execute a code stored in the smart contracts that conform to different standards (i.e. ERC-721). This information is added to the blockchain where the NFT will be managed.
+* **NFT**: Non-Fungible Tokens are cryptographic assets built on a blockchain with unique identification codes and metadata that distinguish them from each other. These were born as ERC-721 crypto assets representing a unique or rare digital or real world item. They let us tokenize things like art, collectibles, even real estate through a securitisation process that takes place on the blockchain. Unlike cryptocurrencies which are identical to each other and can be used as a medium for commercial transactions, NFTs represent unique and irreplaceable tokens, thereby making it impossible for one non-fungible token to be equal to another (i.e. NFTs are not fungible). This ensures a highly transparent and flexible record of ownership. An NFT can only have one owner at a time. Ownership is managed through the unique ID and metadata that no other token can replicate. NFTs are minted through smart contracts which assign ownership and manage the transferability of the NFT itself. When someone mints an NFT, they execute a code stored in the smart contracts that conform to different standards (i.e. ERC-721). This information is added to the blockchain where the NFT will be managed.
 
 * **Open source software**: it is a software for which the source code that is available to the public. One of the benefits of open source software is that people from outside the core development team can support it, collaboratively creating new features or fixing bugs. Open source licenses typically include language that prevents anyone from reselling the core code without significant changes.
 
@@ -158,6 +168,8 @@
 
 * **Public key**: the wallet address that is visible to the whole public. You must provide your public key in order to receive funds into your account. It is paired with a private key.
 
+* **Python**: it is a high-level, all-purpose programming language.
+
 * **Scalability**: a change in scale or size to meet the demands of a network This term is used to describe a blockchain project's capacity in its intended use as well as its capability to manage network traffic and future expansion.
 
 * **SDK**: a Software Development Kit (SDK) is a set of tools provided by the manufacturer of (usually) a hardware platform, operating system (OS), or programming language. SDKs help software developers create applications for that specific platform, system, or programming language.
@@ -166,9 +178,13 @@
 
 * **Smart contracts**: these are programs having their terms encoded in computer code. These are not legal documents, even if they sometimes include agreements or agreements between parties that resemble a regular legal contract. On the Ethereum Virtual Machine, smart contracts are the most common type of programming. Smart contracts contains a series of automated operations that may be programmed and executed if a series of criteria are satisfied.
 
-* **Soft fork**: A soft fork is an update that is backward-compatible, allowing upgraded nodes to continue connect with not upgraded ones. A soft fork often involves the insertion of a new rule that does not conflict with the existing ones.
+* **Soft fork**: a soft fork is an update that is backward-compatible, allowing upgraded nodes to continue connect with not upgraded ones. A soft fork often involves the insertion of a new rule that does not conflict with the existing ones.
 
 * **Snapshot**: in the context of cryptocurrencies, the process of capturing the state of a blockchain at a specific block height is frequently referred to as taking a snapshot. In this instance, the snapshot captures the entirety of the blockchain ledger, including all of the current addresses and the information linked with them (i.e. transactions, fees, balance, metadata, and so on). Prior to each round of an airdrop event, snapshots are frequently employed. Tokens are given during an airdrop based on the balance of each blockchain address. In this instance, snapshots are made to capture each token holder's balance at a certain moment in time (i.e. block height). Snapshots are also important during blockchain hard forks, as they mark the block height in which the main chain will be recorded before giving birth to the new chain.
+
+* **Software Agent**: a software agent is a computer program that acts on behalf of an entity (e.g. individual, organisation, business). 
+
+* **sOEF (Simple Open Economic Framework)**: the simple-OEF, or sOEF, is a search and discovery service for autonomous economic agents. For additional information: [here](https://docs.google.com/document/d/1CFSLKM01cbctdBBPd3izAd_zNabRczaMv2dq1N5bXCg/edit#heading=h.jm6oakj7ls91).
 
 * **Spread**: when an order is made on an exchange or market, the disagreement of the difference in price between potential buy and sell offers of an asset is called the spread. A wide spread in price can lead to higher slippage.
 
