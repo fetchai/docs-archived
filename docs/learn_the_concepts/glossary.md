@@ -8,7 +8,7 @@
 
 * **Airdrop**: it is a mean of distributing tokens to wallet addresses using digital money or tokens. Airdrops are occasionally used for marketing in return for easy actions like sharing, referring, or downloading an app.
 
-* **Altcoin**: any cryptocurrency alternative to Bitcoin. Many alternative cryptocurrencies are modified forks of Bitcoin (e.g. Litecoin).
+* **Altcoin**: any cryptocurrency alternative to Bitcoin. Many alternative cryptocurrencies are modified forks of Bitcoin (e.g. Litecoin). 
 
 * **AML (Anti-Money Laundering)**: this refers to a group of international rules implemented to reduce the likelihood that criminal organizations or individuals would use money laundering. In different countries, these guidelines and legislation are applied to cryptocurrencies with diverse results.
 
