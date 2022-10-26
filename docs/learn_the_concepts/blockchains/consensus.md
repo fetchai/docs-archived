@@ -2,7 +2,7 @@
  
 A blockchain is a decentralized distributed network that offers immutability, privacy, security, and transparency. Despite the absence of a central authority to confirm and authenticate the transactions, every Blockchain transaction is regarded as being totally safe and validated. Only the presence of the consensus protocol, a fundamental component of every Blockchain network, makes this feasible. A consensus algorithm is a process that allows every peer in the Blockchain network to agree on the distributed ledger's current state. Consensus algorithms accomplish dependability in the Blockchain network and build confidence amongst unidentified peers in a distributed computing setting in this way.  
 
-Hence, the consensus mechanism ensures that every new block added to the Blockchain is the sole version of the truth that has been accepted by every node. The following are the most utilized consensus mechanisms nowadays:
+Hence, the consensus mechanism ensures that every new block added to the Blockchain is the sole version of the truth that has been accepted by every node. The following are the most utilized consensus mechanisms nowadays: 
 
 1. **Proof-of-Work (PoW)**: One of the most prominent blockchain technologies is the PoW consensus process, which was initially made popular by Bitcoin. Miners (i.e. validators) and the power they need to do the computations required to validate transactions are the key elements that distinguish PoW systems. Miners use computer hardware to power network nodes that use processing power to solve algorithmic mathematical computational puzzles, known as proofs of work. The miner who completes the puzzle first validates the blockchain's most recent block of transactions. 
     
