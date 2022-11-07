@@ -6,7 +6,7 @@ The most important defining characteristic of an agent is its autonomy; that is,
  
 What differentiates agents with other software paradigms (e.g. smart contracts, web apps) is that as well as being _reactive_, meaning they respond to other agents and changes in their environments, they are also _proactive_, which means that they take the initiative and perform actions to achieve their goals.
 
-Agents have **five key characteristics**:
+Agents have _five key characteristics_: 
 
 1. **Representation**: Agents are owned by and operate on behalf of an entity, for example an individual, family, company, government, or object, and look after their owner's interests.
 
