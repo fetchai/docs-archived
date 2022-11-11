@@ -281,14 +281,14 @@
       
       
         <label class="md-nav__link" for="__nav_3">
-          Learn the concepts
+          Learn the Concepts
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Learn the concepts" data-md-level="1">
+      <nav class="md-nav" aria-label="Learn the Concepts" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
-          Learn the concepts
+          Learn the Concepts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -298,8 +298,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../decentralisation/" class="md-nav__link">
-        Decentralisation
+      <a href="../../learn_the_concepts/peer_to_peer_systems/" class="md-nav__link">
+        Peer-to-Peer Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn_the_concepts/agent-based_and_multi-agents_systems/" class="md-nav__link">
+        Agent-based and Multi-agents based systems
       </a>
     </li>
   
@@ -1609,10 +1623,43 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_1" type="checkbox" id="__nav_10_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_1">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        Introduction
+      <a href="../introduction/what_is_the_aea_framework/" class="md-nav__link">
+        What is the AEA Framework?
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -6562,7 +6609,7 @@
 <p>The HTTP client connection receives request envelops from an agent's skill, translates each into an HTTP request and sends it to a server external to the agent. If it receives an HTTP response from the server within a timeout window, it translates it into a response envelope, and sends this back to the relevant skill inside the agent.</p>
 <p>The HTTP server connection allows you to run a server inside the connection itself which accepts requests from clients external to the agent. The HTTP server connection validates requests it receives against a provided OpenAPI file. It translates each valid request into an envelope and sends it to the skill specified in the connections configuration. If it receives a valid response envelope from the skill within a timeout window, the connection translates the response envelope into an HTTP response and serves it to the client.</p>
 <h2 id="http-client">HTTP Client<a class="headerlink" href="#http-client" title="Permanent link">&para;</a></h2>
-<p>The <code>fetchai/simple_data_request:0.14.3</code> skill demonstrates a simple use case of the HTTP Client connection.</p>
+<p>The <code>fetchai/simple_data_request:0.14.4</code> skill demonstrates a simple use case of the HTTP Client connection.</p>
 <p>The <code>HttpRequestBehaviour</code> in <code>behaviours.py</code> periodically sends HTTP envelops to the HTTP client connection. Its <code>act()</code> method, periodically called, simply calls <code>_generate_http_request</code> which contains the logic for enqueueing an HTTP request envelop.</p>
 <p>The <code>HttpHandler</code> in <code>handler.py</code> is a basic handler for dealing with HTTP response envelops received from the HTTP client connection. In the <code>handle()</code> method, the responses are dealt with by the private <code>_handle_response</code> method which essentially logs the response and adds the body of the response into the skill's shared state. </p>
 <h2 id="http-server">HTTP Server<a class="headerlink" href="#http-server" title="Permanent link">&para;</a></h2>
@@ -6571,10 +6618,10 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> my_aea
 </code></pre></div>
 <p>Add the http server connection package:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea add connection fetchai/http_server:0.23.3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea add connection fetchai/http_server:0.23.4
 </code></pre></div>
 <p>Update the default connection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.23.3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/http_server:0.23.4
 </code></pre></div>
 <p>Modify the <code>api_spec_path</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.http_server.config.api_spec_path <span class="s2">&quot;../examples/http_ex/petstore.yaml&quot;</span>
@@ -6830,7 +6877,7 @@ the author username (i.e. the output of <code>aea config get agent.author</code>
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HttpDialogues</span><span class="w"></span>
 </code></pre></div>
 <p>Run the fingerprinter (note, you will have to replace the author name with your author handle):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea fingerprint skill fetchai/http_echo:0.21.3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea fingerprint skill fetchai/http_echo:0.21.4
 </code></pre></div></p>
 <p>Moreover, we need to tell to the <code>http_server</code> connection to what skill
 the HTTP requests should be forwarded.
