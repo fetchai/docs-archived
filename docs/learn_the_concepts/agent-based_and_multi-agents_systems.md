@@ -1,4 +1,4 @@
-# Agent-base and multi-agents systems
+# Agent-based and multi-agents systems
 
 An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and acts _continuously_ and _autonomously_  (with limited or no interference) on their behalf.
 
