@@ -1,4 +1,4 @@
-## What is a Peer-to-Peer system? port LANG="en_US.UTF-8"
+## What is a Peer-to-Peer system?
 
 A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate with each other without having to go through a middleman. Peer-to-Peer networks consist of a group of devices that collectively store and share files. Every participant (i.e. _node_) functions as a distinct _peer_. Normally, all nodes are equally powerful and carry out the same functions. We can outline three key characteristics featuring a P2P system:
 
