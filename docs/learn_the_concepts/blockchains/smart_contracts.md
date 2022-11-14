@@ -13,7 +13,7 @@ In the context of the blockchain and cryptocurrency markets, smart contracts are
 Their application is also being investigated in the healthcare industry as a defense against data tampering in clinical studies. By creating a clear record of shared ownership rights and dividing all royalties and revenues from intellectual property accordingly, smart contracts may even be used to enforce intellectual property agreements.
 
 ## Benefits of smart contracts
-
+ 
 There are different **positive features** of smart contracts:
 
 1. **Speed, efficiency, and precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually. 
