@@ -1,0 +1,23 @@
+@startuml
+package legend {
+    entity Parent
+    entity Child {
+        parent
+    }
+
+    Child::parent ..|| Parent : "API accessor"
+    Parent ||--|{ Child : "   Foreign Key Relation"
+
+    entity Entity {
+      +indexed field
+      non-indexed field
+    }
+
+    object Object {
+        key
+    }
+
+    Entity -|| Object : "Exactly one"
+    Entity -|{ Object : "One or many"
+}
+@enduml
