@@ -29,6 +29,7 @@ Consistent hashing is the method used by DHT to assign ownership of a certain fi
 In hybrid P2P networks, some elements of the peer-to-peer architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some of the key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
 ## Benefits and drawbacks of a P2P system
+
 ### Benefits
 
 * **No need for a specific operating system or software**: Individual peers can be on any OS and in most cases do not need specialized software to share files. This is especially useful in remote P2P networks where users might not have the same hardware.
