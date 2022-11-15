@@ -8,7 +8,7 @@ The Oracle system must work concurrently on and off the blockchain in order to p
 
 Blockchain Oracles can help to increase the range of possibilities for smart contracts to work, thus, Oracles are essential components of the blockchain ecosystem. Smart contracts would not even be particularly useful without blockchain Oracles as they would only have access to data from their own networks since the vast majority of smart contract use cases, including DeFi, depend on knowledge of real world data and off-chain occurrences. Oracles provide a global gateway to off-chain resources, therefore expanding the sorts of digital agreements that blockchains may support while maintaining the crucial security features of blockchains. Oracles and smart contracts are beneficial for many major businesses, including asset pricing in banking, weather data in insurance, randomness in gaming, IoT sensors in supply chains, identity verification in government, and many more. Because the results of smart contracts are directly determined by the data that oracles supply to blockchains, it is crucial that the Oracle mechanism works accurately for the agreement to operate exactly as intended.
 
-## Types of Blockchain Oracles?
+## Types of Blockchain Oracles
 
 Blockchain Oracles may be categorized based on the following characteristics:
 
@@ -38,7 +38,7 @@ Given this, we can identify the following types of oracles:
 
 Given the variety of Oracle services, selecting between Oracle service providers often comes down to **reputation**. Users and developers may monitor and discriminate amongst Oracles based on criteria they think are significant thanks to reputation in blockchain Oracle systems. _The fact that Oracles sign and distribute their data onto an immutable public blockchain ledger, allowing for the analysis and presentation of their previous performance history to users through interactive dashboards, contributes to Oracle reputation_. Reputation frameworks offer transparency into each Oracle network's and each Oracle node operator's precision and dependability. Then, users may decide for themselves which Oracles they wish to use to support their smart contracts. Oracle service providers may also exploit their reputation in the off-chain business world to provide customers extra assurances about their dependability.
 
-## Blockchain Oracles Use Cases
+## Blockchain Oracles: Use Cases
 
 * **Decentralized Finance (DeFi)**
 
