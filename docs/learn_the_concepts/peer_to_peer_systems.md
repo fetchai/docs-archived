@@ -20,7 +20,7 @@ P2P networks that are unstructured lack a defined node organization. Participant
 
 #### Structured P2P networks
 
-The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). DHT is an advanced form of lookup or search system that allows nodes to access data, such as files, through the use of a key instead of having to make a copy of the data on every node. This contrasts with the idea behind unstructured P2P networks in which whole files may be stored on more than one node.
+The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). DHT is an advanced form of lookup or search system that allows nodes to access data, such as files, through the use of a key instead of having to make a copy of the data on every nodegitgit . This contrasts with the idea behind unstructured P2P networks in which whole files may be stored on more than one node.
 
 Consistent hashing is the method used by DHT to assign ownership of a certain file to a particular peer. In a P2P network, conventional hashing demands that all keys be produced whenever a new peer joins. Consistent hashing uses less electricity since just a small portion of the keys must be generated. In general, searching for material in a structured network is simpler and uses less power and memory than searching in an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change. High churn rates make this sort of network more difficult.
 
