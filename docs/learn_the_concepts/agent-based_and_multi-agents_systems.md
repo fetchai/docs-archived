@@ -30,7 +30,7 @@ Agent-based modelling has been used in various kinds of applications spanning th
 
 !!! example
 
-    Agent-based simulations are used to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
+    Agent-based simulations could be used to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
 
 As it is possible to think, there are a growing number of agent-based applications in a variety of fields and disciplines directed towards the study of a large number of real-world applications. Examples of agent-based systems, for which large-scale agent-based models have been developed, include: traffic, air traffic control, military command and control, physical infrastructures and markets, such as electric power and integrated energy markets. 
 
@@ -46,7 +46,7 @@ A **Multi-Agents System** (**MAS**) is a group of agents that interact with each
 
     Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period. This type of interaction may be **cooperative** or **competitive**. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
 
-MAS systems have different **key characteristics**:
+## Positive features
 
 1. **Decentralization**: multi-agents systems are decentralized. The authority to make management decisions about the system is distributed among the participants. A multi-agents system is run for its participants by its participants.
 
@@ -58,7 +58,7 @@ MAS systems have different **key characteristics**:
 
 5. **Adaptability**: multi-agents systems adapt to changing circumstances very effectively as each agent autonomously adjusts to changing circumstances.
 
-However, there are some negative features characterizing such systems:
+## Drawbacks
 
 1. **Complexity**: multi-agents systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions.
 
@@ -70,12 +70,8 @@ However, there are some negative features characterizing such systems:
 
 MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal).
 
-!!! example
+!!! note
 
-    A good example of a MAS is represented by _smart-grids_, in which different agents work together collaboratively, but independently and in a self-interested manner. Another important application of such systems is found in _computer gaming_ and _computer simulations_. Such fields increasingly adopted MASs. Here, each participant has its own agent and interacts in the environment populated also by other agents. _Self-driving vehicles_ are another great example of an agent based system. In this respect, each vehicle acts as an agent, directed by their user and acting independently from other agents within a set of rules, such as not exceeding the speed limits, and being responsive to the environment around them. 
-
-MAS have found multiple applications including _modeling complex systems_, _smart grids_ and _computer networks_. The main application domains of MAS are _ambient intelligence_, _grid computing_, _electronic business_, _the semantic web_, _bioinformatics and computational biology_, _monitoring and control_, _resource management_, _education_, _space_, _military_ and _manufacturing applications_, and so on.
-
-???+ note 
+    MAS have found multiple applications including _modeling complex systems_, _smart grids_ and _computer networks_. The main application domains of MAS are _ambient intelligence_, _grid computing_, _electronic business_, _the semantic web_, _bioinformatics and computational biology_, _monitoring and control_, _resource management_, _education_, _space_, _military_ and _manufacturing applications_, and so on.
 
     Despite their wide applicability, there are still several challenges faced by MAS including coordination between agents, security, and task allocation.
