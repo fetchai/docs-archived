@@ -37,7 +37,7 @@ After opening the wallet for the first time, you will see the option to:
 If you have an account on the Fetch network, for example having had one already on the Fetch wallet and want to access it again, have an account on another wallet (e.g. Cosmostation, Keplr, ...) and wish to bring it to the Fetch wallet, or having created an address using one of our tools (e.g. the [AEA framework](https://docs.fetch.ai/aea)), you can import it into the Fetch wallet:
 
 * Select `Import existing account`
-* Enter your mnemonic seed (set of words) or private key (hexidecimal)
+* Enter your mnemonic seed (set of words) or private key (hexadecimal)
 
     !!! warning
         **KEEP IT SAFE!** Anyone with your mnemonic seed or private key can access your wallet and take your assets.
