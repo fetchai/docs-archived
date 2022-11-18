@@ -61,7 +61,7 @@ A **Multi-Agents System** (**MAS**) is a group of agents that interact with each
 ## Drawbacks
 
 1. **Complexity**: multi-agents systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions.
- gi
+ 
 2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different. 
 
 ???+ note 
