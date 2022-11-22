@@ -2,25 +2,17 @@
 
 A  **blockchain** is a series of data records that functions as a distributed, replicated digital ledger of transactions across a network of computer systems. 
 
-??? info 
+!!! info 
 
-    In the case of a conventional database, the records are written in tables which might be on one or more servers located in different locations, but theses are all centrally administered by a database administrator. When it comes to blockchains,the records of transactions are compiled into **blocks** which are linked together. A blockchain consists of a stable chain of blocks, and in the context of cryptocurrencies, each one of these blocks stores a list of previously confirmed transactions.
+      On blockchains the records of transactions are compiled into **blocks** which are linked together. A blockchain consists of a stable chain of blocks, and in the context of cryptocurrencies, each one of these blocks stores a list of previously confirmed transactions.
  
- Because blockchain transactions take place inside a P2P global network, these are considered borderless and immune to censorship. Hence, a blockchain network serves as a decentralized ledger since it is maintained by several computers located all over the world. This implies that each participant, namely a node, keeps a copy of the blockchain data and interacts with other participants to make sure that everyone is aware of the same information stored in the block.
+Transactions take place inside a P2P global network, thus, blockchains are considered borderless and immune to censorship. A blockchain network serves as a decentralized ledger since it is maintained by several computers located all over the world. This implies that each participant, namely a **node**, keeps a copy of the blockchain data and interacts with other participants to make sure that everyone is aware of the same information stored in the block.
 
-??? info
-
-    Blockchains also differ from traditional databases in the impossibility for a malicious actor to come in and alter a blockchain record, whereas within traditional databases, this risk is a constant security challenge. In addition to this, blockchains do not need any sort of trust, because these systems are regarded as being trustless because of the absence of supervision by any central authority. On a blockchain system, management is carried out by its participants.
-
-??? info 
-
-    A further distinction between databases and blockchains can be done considering the editing and updating of records: in the context of a traditional database, the database administrator can update and delete records freely, whereas in a blockchain this is impossible. A blockchain record can only be created, but once written, it can not be altered or deleted in any way.
-
-Each block inside the blockchain contains a hash (i.e. a digital fingerprint or unique identifier), timestamped batches of recent valid transactions, and the hash of the previous block. The previous block hash links the blocks together and prevents any block from being altered or a block being inserted between two existing blocks. An additional feature of a blockchain is that all previous records are stored within the current records, and hence,  there is a full history of previous transactions.
+Each block inside the blockchain contains a **hash** (i.e. a digital fingerprint or unique identifier), **timestamped batches of recent valid transactions**, and the **hash of the previous block**. The previous block hash links the blocks together and prevents any block from being altered or a block being inserted between two existing blocks. An additional feature of a blockchain is that all previous records are stored within the current records, so, there is a full history of previous transactions.
 
 ## Blockchains: use cases
 
-Blockchain technology is mostly used to track cryptocurrency transactions, but it is suitable for a variety of different types of digital data and has other potential applications. Alternative uses for blockchains could be the following:
+Blockchain technology is mostly used to track cryptocurrency transactions. Alternative uses for blockchains could be the following:
 
 1. **Blockchain for payment processing and money transfers**: banking transfer fees might be decreased (or eliminated) for transactions handled through a blockchain and paid in a couple of seconds.
 
@@ -36,9 +28,7 @@ Blockchain technology is mostly used to track cryptocurrency transactions, but i
 
 7. **Blockchain for healthcare**: the healthcare industry may benefit greatly from the use of blockchain. Blockchains are being used by healthcare payers and providers to handle clinical trial data and electronic medical records while upholding regulatory compliance.
 
-## Who can participate in a blockchain network? 
-
-Each blockchain network has various participants, each one playing a different role:
+## Who can participate in a blockchain network?
 
 1. **Blockchain users**: participants with permissions to join the blockchain network and conduct transactions with other network participants.
 
@@ -50,11 +40,7 @@ Each blockchain network has various participants, each one playing a different r
 
 ## Benefits 
 
-1. **Security**: blockchains are very secure, as the data is cryptographically encrypted and it is very difficult and obvious if someone is trying to hack into a blockchain. 
-
-??? info 
-
-    Delete a record in a blockchain would require the whole chain to be hacked and this would be an immense, obvious, and impractical undertaking.
+1. **Security**: blockchains are very secure, as the data is cryptographically encrypted and it is very difficult and obvious if someone is trying to hack into a blockchain.
 
 2. **Resiliency**: as the same information is stored in many places on the blockchain then blockchains are very resilient as if any part or indeed even the majority of the network was to catastrophically fail then the information stored on the blockchain is still available in full.
 
@@ -62,49 +48,31 @@ Each blockchain network has various participants, each one playing a different r
 
 ## Drawbacks 
 
-1. **Complexity of setup**. 
+1. **Complexity of setup**:Setting up a blockchain is not a simple task, there are networks of nodes to set-up, the participatory framework established, and numerous components to bring together before you can even begin to store any information on the blockchain. Compared to setting up a traditional database, blockchains are much more complex to set up.
 
-    Setting up a blockchain is not a simple task, there are networks of nodes to set-up, the participatory framework established, and numerous components to bring together before you can even begin to store any information on the blockchain. Compared to setting up a traditional database, blockchains are much more complex to set up.
+2. **Speed**: It takes longer to add a record to a block and add a block to the chain than it does to simply add a record into a traditional database table. This is a challenge for blockchain based payment systems, as blockchains typically handle fewer transactions per second than conventional payment systems.
 
-2. **Speed**.
+3. **Scaling issues**: Blockchains often have scalability issues, because as they grow they get more complex leading to issues of network congestion.
 
-    It takes longer to add a record to a block and add a block to the chain than it does to simply add a record into a traditional database table. This is a challenge for blockchain based payment systems, as blockchains typically handle fewer transactions per second than conventional payment systems.
-
-3. **Scaling issues**.
-
-    Blockchains often have scalability issues, because as they grow they get more complex leading to issues of network congestion.
-
-4. **Participation is required**.
-
-    Blockchains are decentralized systems, so they do need the active participation of members, for example they need to vote on governance proposals affecting the chain and be engaged in order for the blockchain to successfully operate. This means a limited amount of extra work for participants.
+4. **Participation is required**: Blockchains are decentralized systems, so they do need the active participation of members, for example they need to vote on governance proposals affecting the chain and be engaged in order for the blockchain to successfully operate. This means a limited amount of extra work for participants.
 
 ## Types of Blockchain
 
-The architecture of blockchain systems varies greatly, especially in terms of the [consensus protocol](https://docs.fetch.ai/learn_the_concepts/blockchains/consensus/) employed to validate network data. The security, usability, and sustainability of the underlying blockchain are affected differently by their own design. Different blockchain networks operate quite differently from one another. The kind of consensus mechanism each blockchain employs is one fundamental distinction. A blockchain adopts a consensus method to decide on information on the network, such as whether transactions are valid and in what order they should happen. Additionally, the consensus method is essential for protecting the blockchain network from bad actors like hackers.
-
-We can distinguish among: **public**, **private**, **consortium** and **hybrid** blockchains.  
+The architecture of blockchain systems varies greatly, especially in terms of the [consensus protocol](https://docs.fetch.ai/learn_the_concepts/blockchains/consensus/) employed to validate network data. The security, usability, and sustainability of the underlying blockchain are affected differently by their own design. Different blockchain networks operate quite differently from one another. We can identify the following:
 
 * **Public blockchains** are entirely decentralised, permissionless, and open to everybody. All nodes to have equal access and abilities within the blockchain. 
 
-??? example
+!!! example
 
     These blockchains include Bitcoin, Ethereum, and Litecoin as examples. The majority of public blockchain networks use processes known as _Proof-of-Work_ (_PoW_) or _Proof-of-Stake_ (_PoS_) to provide consensus. 
 
-* **Private blockchains** are blockchains within which permissions are managed by a single company. It is the central authority which decides who can be a node. The central authority may not always accord each node an equal right to execute certain responsibilities. 
+* **Private blockchains** are blockchains within which permissions are managed by a single company. It is the central authority which decides who can be a node. The central authority may not always accord each node an equal right to execute certain responsibilities. This makes private blockchains partially decentralised. Private (or permissioned) blockchains can be structured in various ways to prioritize speed, security, and scalability.
 
-??? info
-
-    Due to restrictions on public access, private blockchains are only partially decentralised. Private (or permissioned) blockchains can be structured in various ways to prioritize speed, security, and scalability.
-
-+ **Consortium blockchains** are permissioned blockchains governed by a group of entities, rather than a single one as private blockchains. 
-
-??? info 
-
-    As a result, consortium blockchains are more decentralised than private blockchains, which increases their security. But creating consortiums may be a difficult process since it calls for collaboration between several groups, which poses logistical problems and a possible antitrust risk.
++ **Consortium blockchains** are permissioned blockchains governed by a group of entities, rather than a single one as private blockchains. These blockchains are more decentralised than private blockchains, which increases their security. But creating consortiums may be a difficult process since it calls for collaboration between several groups, which poses logistical problems and a possible antitrust risk.
 
 * **Hybrid blockchains** are blockchains which are managed by a single entity but at the same time have some supervision provided by the public blockchain, which is necessary to carry out specific transaction validations. 
 
-!!! note 
+??? note 
 
     **Private** and **consortium blockchains** are typically used by enterprises that aim to employ blockchain architecture, but want to ensure specific information remains private, for either regulatory or competitive reasons. On the other hand, **public blockchains** are censorship-resistant and offer broad ecosystems for the development of apps and platforms. **Consortium blockchains**, however, may offer faster transaction processing times and are easier to modify, but are restrictive with limited usage outside of the private consortium.
 
