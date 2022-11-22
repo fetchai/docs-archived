@@ -44,7 +44,7 @@ It is challenging for one DApp to stand out and draw a lot of users when there a
 
 ## Use cases
 
-* **GameFi**
+### GameFi
 
 GameFi DApps are becoming more and more well-liked. The majority of gaming DApps give players complete control over their in-game assets, in contrast to conventional video games. They also provide users the chance to earn money from these things outside of the game. For instance, Axie Infinity offers NFT-based game avatars, virtual worlds, and gaming-related merchandise. Players can trade with other players on NFT markets, move them to other Ethereum addresses, or keep them in their digital wallets. Players can compete with one another inside the ecosystem to amass ERC-20 tokens that can be exchanged. Generally speaking, players may earn more in-game incentives the longer they play.
 
@@ -52,7 +52,7 @@ GameFi DApps are becoming more and more well-liked. The majority of gaming DApps
 
     One of the most successful DApp in this sector is the play-to-earn game [Axie Infinity](https://axieinfinity.com/) on the Ethereum blockchain.
 
-* **DEXs - Decentralized Exchanges**
+### DEXs - Decentralized Exchanges
 
 The intermediaries in traditional finance are financial institutions. Everyone may access financial services with DApps without the need for a centralized authority and have total control over their assets. Low-income people can also profit from DeFi since it gives them access to a wide range of financial services at a considerable cost savings.
 
@@ -62,7 +62,7 @@ The most common financial services offered by decentralized apps are borrowing a
 
     [SushiSwap](https://sushi.com/), [PancakeSwap](https://pancakeswap.finance/), and [Uniswap](https://uniswap.org/) are a few of the well-known DEXs.
 
-* **Entertainment**
+### Entertainment
 
 DApps enable the transformation of entertainment daily activities into digital experiences that can also produce financial incentives. 
 
@@ -76,10 +76,10 @@ DApps are addressing problems that users of social media platforms encounter. Tw
 
     An example on decentralized social media platform is given by [Steemit](https://steemit.com/). In there, the community can interact freely and express their opinions with fewer limitations and censorship  while also having more control over their personal data.
 
-* **Governance**
+### Governance
 
 DApps can enable users to participate more actively in the administration of online organizations by establishing a decision-making process that is more focused on the community. Users with governance tokens of a certain blockchain project can make suggestions for the community to vote on and vote on other people's ideas anonymously with the use of smart contracts. 
 
-!!! note
+??? note
     
     Decentralized Autonomous Organizations (DAOs) are one of the decentralized governance models. DAOs are completely autonomous DApps that employ smart contracts to decide for themselves without the need for a central authority. There is no hierarchy there. Instead, economic processes bring the organization's interests into line with those of specific DAO members. 
