@@ -6,7 +6,7 @@ An **agent** is a piece of software that _represents_ an entity (individual, org
 
     What differentiates agents to other software paradigms (e.g. smart contracts, web apps) is that as well as being _reactive_, meaning they respond to other agents and changes in their environments, they are also _proactive_, which means that they take the initiative and perform actions to achieve their goals.
 
-Agents have _five key characteristics_: 
+## Key features of agents
 
 1. **Representation**: Agents are owned by and operate on behalf of an entity, for example an individual, family, company, government, or object, and look after their owner's interests.
 
@@ -30,23 +30,23 @@ Agent-based modelling has been used in various kinds of applications spanning th
 
 !!! example
 
-    Agent-based simulations could be used to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
+    Agent-based modelling finds applicatino into the physical, biological, social, and management sciences. Agent-based models have also been developed in the fields of economics, sociology, anthropology, and cognitive science. Various social phenomena have been investigated using agent-based models that are not easily modeled using other approaches. Here, agent-based models are being used to analyze existing and hypothetical markets. FOr instance, agent-based simulations could be used to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
 
 As it is possible to think, there are a growing number of agent-based applications in a variety of fields and disciplines directed towards the study of a large number of real-world applications. Examples of agent-based systems, for which large-scale agent-based models have been developed, include: traffic, air traffic control, military command and control, physical infrastructures and markets, such as electric power and integrated energy markets. 
 
-???+ note
+!!! warning
 
-    When it comes to consider the Fetch.ai ecosystem, despite some similarities between ABM and the Autonomous Economic Agent (AEA) Framework, the two have fundamentally different goals. ABM's goal is not the design of agents or solving specific practical or engineering problems, but to study the unknown and complex behaviour of systems comprised of agents with known behaviour. On the other hand, the Autonomous Economic Agent (AEA) Framework's goal is to provide the necessary tools to build AEAs which purpose is to create economic value for their owner in clearly defined domains of application and not the study of existing of hypothetical scenarios to gather data.
+    When it comes to consider the Fetch.ai ecosystem, despite some similarities between ABM and the Autonomous Economic Agent (AEA) Framework, the two have fundamentally different goals. ABM's goal is not the design of agents or solving specific practical or engineering problems, but to study the unknown and complex behaviour of systems comprised of agents with known behaviour. On the other hand, the Autonomous Economic Agent (AEA) Framework's goal is to provide the necessary tools to build AEAs which purpose is to create value for their owner in clearly defined domains of application and not the study of existing of hypothetical scenarios to gather data.
 
 ## Multi-Agents Systems
 
 A **Multi-Agents System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. 
 
-???+ info 
+??? info 
 
     Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period. This type of interaction may be **cooperative** or **competitive**. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
 
-## Positive features
+### Benefits
 
 1. **Decentralization**: multi-agents systems are decentralized. The authority to make management decisions about the system is distributed among the participants. A multi-agents system is run for its participants by its participants.
 
@@ -58,19 +58,15 @@ A **Multi-Agents System** (**MAS**) is a group of agents that interact with each
 
 5. **Adaptability**: multi-agents systems adapt to changing circumstances very effectively as each agent autonomously adjusts to changing circumstances.
 
-## Drawbacks
+### Drawbacks
 
-1. **Complexity**: multi-agents systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions.
- 
-2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different. 
+1. **Complexity**: multi-agents systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions. The complexity of MASs can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. 
 
-???+ note 
-
-    The complexity of MASs can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. System composition depends on the characteristics of individual agents and whether they are homogeneous or heterogeneous in physical and/or programming structure. Homogeneous agents are similar to each other or of the same type, whereas, heterogeneous agents are different and diverse in kind.
+2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different.
 
 MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal).
 
-!!! note
+!!! info
 
     MAS have found multiple applications including _modeling complex systems_, _smart grids_ and _computer networks_. The main application domains of MAS are _ambient intelligence_, _grid computing_, _electronic business_, _the semantic web_, _bioinformatics and computational biology_, _monitoring and control_, _resource management_, _education_, _space_, _military_ and _manufacturing applications_, and so on.
 
