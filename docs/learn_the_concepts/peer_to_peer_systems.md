@@ -8,35 +8,39 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 
 3. **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
 
-???+ info
+??? note
 
-    P2P networks enable the sharing of files stored on linked devices' hard drives. Using software tools designed to mediate data sharing, users may look for and download files from other networked devices. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, in actuality, both operations can be carried out concurrently (e.g. downloading file A, and uploading file B).
+    P2P networks enable the sharing of files stored on linked devices' hard drives. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, both operations can be carried out concurrently. Therefore, each node has a copy of the data and serves as both a client and a server to other nodes. This removes the need of a central administrator or server. 
 
-!!! note 
-
-    A distributed network of users maintains a P2P system. Because each node has a copy of the data and serves as both a client and a server to other nodes, they often do not have a central administrator or server. Therefore, each node has the ability to download files from and upload files to other nodes. P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models.
+    P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models.
 
 P2P systems can be grouped based on their architecture into the following _three primary subtypes_:
 
-#### Unstructured P2P networks
+### Unstructured P2P networks
 
 P2P networks that are unstructured lack a defined node organization. Participants communicate with one another in a random fashion. These systems are thought to be resistant to high churn activity (i.e. several nodes frequently joining and leaving the network). 
 
-??? info 
+??? note
 
     Unstructured P2P networks are simpler to set up, but because search requests are sent to as many peers as possible, they may utilize more CPU and memory. This frequently causes the network to get overrun with requests, especially when only a few nodes are providing the needed material.
 
-#### Structured P2P networks
+### Structured P2P networks
 
-The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). DHT is an advanced form of lookup or search system that allows nodes to access data, such as files, through the use of a key instead of having to make a copy of the data on every node. This contrasts with the idea behind unstructured P2P networks in which whole files may be stored on more than one node. Consistent hashing is the method used by DHT to assign ownership of a certain file to a particular peer. In a P2P network, conventional hashing demands that all keys be produced whenever a new peer joins. Consistent hashing uses less electricity since just a small portion of the keys must be generated. 
+The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). 
 
-??? info
+!!! info 
 
-    In general, searching for material in a structured network is simpler and uses less power and memory than searching in an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change. High churn rates make this sort of network more difficult.
+    DHT is an advanced form of lookup or search system that allows nodes to access data, such as files, through the use of a key instead of having to make a copy of the data on every node. 
 
-#### Hybrid P2P networks
+This contrasts with the idea behind unstructured P2P networks in which whole files may be stored on more than one node. 
 
-In hybrid P2P networks, some elements of the peer-to-peer architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
+??? note
+
+    Searching for material in a structured network is simpler and uses less power and memory than an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change.
+
+### Hybrid P2P networks
+
+In hybrid P2P networks, some elements of the P2P architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
 ## Benefits and drawbacks of a P2P system
 
@@ -64,7 +68,7 @@ In hybrid P2P networks, some elements of the peer-to-peer architecture are combi
 
 * **No oversight**: in most of P2P networks, the decentralized nature makes it hard for a single administrator to monitor contents, and these can be at risk from malware and viruses. Sharing files with an infected node can transmit malware through the network and could cause problems over several affected peers.
 
-* **Slow transmission**: simultaneous uploading and downloading of files can lead to a slower rate of transmission. While the idea is that it is more reliable and usually faster to utilize the processing power of multiple peers, the double function of uploading content while downloading other resources might actually make it slower.
+* **Slow transmission**: simultaneous uploading and downloading of files can lead to a slower rate of transmission. The double function of uploading content while downloading other resources might actually make it slower.
 
 * **Poor internet performance**: file sharing through P2P networks uses a lot of bandwidth and CPU, which can slow the computer performance for the individual user, especially when it comes to the internet. If multiple files are being shared, there is a risk that productivity in other areas could be reduced.
 
@@ -72,14 +76,18 @@ In hybrid P2P networks, some elements of the peer-to-peer architecture are combi
 
 ## Examples of Peer-to-Peer Systems 
 
-One of the most popular uses of P2P systems is represented by file sharing networks which allow members to directly share files with each other. [Napster](https://www.napster.com/it) and [LimeWire](https://limewire.com/), are great examples of a P2P system. These were P2P music sharing networks backed by the idea that peers connected through the internet could find and download any song they wanted, from several other users.
+One of the most popular uses of P2P systems is represented by file sharing networks which allow members to directly share files with each other.
 
-Another example of P2P networking is given by some online gaming platforms which adopt a P2P structure for downloading games between users, such as [Blizzard Entertainment](https://www.blizzard.com/en-gb/) which distributed Diablo III, StarCraft II, and World of Warcraft using P2P.
+!!! example
 
-A perhaps more successful use for P2P systems was developed in the crypto world thanks to **blockchains** and how these relate to P2P networks. Bitcoin, Ether and many other cryptocurrencies were developed following the P2P mechanism. 
+    [Napster](https://www.napster.com/it) and [LimeWire](https://limewire.com/) were P2P music sharing networks backed by the idea that peers connected through the internet could find and download any song they wanted, from several other users.
 
-??? info
+    There exist also online gaming platforms which adopt a P2P structure for downloading games between users, such as [Blizzard Entertainment](https://www.blizzard.com/en-gb/) which distributed Diablo III, StarCraft II, and World of Warcraft using P2P.
 
-    When Bitcoin was created, Satoshi Nakamoto defined it as a _peer-to-peer electronic cash system_ built with the aim to create a P2P digital form of money without banks. In the context of P2P blockchains, these rely on a shared and reliable record of transactions provided by the underlying blockchain technology, which makes use of the strength of P2P networks.
+A more successful use for P2P systems was developed in the crypto world thanks to **blockchains** and how these relate to P2P networks. Bitcoin, Ether and many other cryptocurrencies were developed following the P2P mechanism. 
 
-An additional example of P2P architecture is represented by **P2P crypto exchanges**, on which users can immediately buy or sell cryptos from/to other users directly. The majority of P2P exchanges let you send and receive cryptocurrencies without requesting identity verification, in contrast to centralized exchanges where you must complete KYC in order to fulfill an order. Also, unlike centralized exchanges, P2P-based exchanges do not have a single point of failure. In most cases, a user may sign up for the exchange without having to undergo identification verification. A password and an email address are all that are needed for registration. Examples of P2P-based crypto exchanges include [Paxful](https://paxful.com/) and [Binance P2P](https://p2p.binance.com/en/trade/all-payments/USDT?fiat=CNY).
+An additional example of P2P architecture is represented by **P2P crypto exchanges**, on which users can immediately buy or sell cryptos from/to other users directly. The majority of P2P exchanges let you send and receive cryptocurrencies without requesting identity verification, in contrast to centralized exchanges where you must complete KYC in order to fulfill an order. Also, unlike centralized exchanges, P2P-based exchanges do not have a single point of failure. In most cases, a user may sign up for the exchange without having to undergo identification verification. A password and an email address are all that are needed for registration. 
+
+!!! example
+
+    P2P-based crypto exchanges include [Paxful](https://paxful.com/) and [Binance P2P](https://p2p.binance.com/en/trade/all-payments/USDT?fiat=CNY).
