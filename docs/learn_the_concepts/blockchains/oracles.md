@@ -1,20 +1,18 @@
-Blockchains get their most significant positive features by being purposefully segregated from external systems. However, off-chain data cannot be accessed by blockchains or smart contracts directly, and these need such data to perform any contractual agreement between any party on the blockchain itself. This is known as the core of **the oracle dilemma**. 
+Blockchains get their most significant positive features by being purposefully segregated from external systems. However, off-chain data cannot be accessed by blockchains or smart contracts directly, and these need such data to perform any contractual agreement between any party on the blockchain itself.
 
-This issue comes from the following limitation: blockchains are unable to draw data from or push data out to any external systems as part of their built-in functionality. A blockchain's isolation is precisely what makes it so safe and dependable since the network just needs to come to consensus on a very simple set of questions using information that has already been written in the ledger,
+!!! info
+
+    This is known as the core of **the oracle dilemma**. In fact,git blockchains are unable to draw data from or push data out to any external systems as part of their built-in functionality. A blockchain's isolation is precisely what makes it so safe and dependable since the network just needs to come to consensus on a very simple set of questions using information that has already been written in the ledger.
 
 A blockchain needs an additional piece of infrastructure, an **oracle**, to connect the blockchain to the off-chain services in a secure manner.  A blockchain oracle is a safe piece of middleware that makes it easier for blockchains to communicate with any off-chain system, such as data providers, online APIs, business backends, cloud providers, IoT devices, e-signatures, payment systems, other blockchains, and more. This is, a blockchain Oracle is the element that links the blockchain to the external system, making it possible for smart contracts to operate on the basis of inputs and outputs from the real world. 
 
-??? info 
+??? note 
 
-    The oracle system must work concurrently on and off the blockchain in order to perform these tasks. The **on-chain component** is used to connect to the blockchain to listen for requests, broadcast messages, submit proofs, extract blockchain data, and perhaps even carry out computation on the blockchain. The **off-chain component** is used to execute requests, retrieve and prepare external data, transport blockchain data to other systems, and carry out off-chain computation for improved smart contract scalability, privacy, security, and other features.
+    The oracle system must work concurrently on and off the blockchain in order to perform these tasks. The _on-chain component_ is used to connect to the blockchain to listen for requests, broadcast messages, submit proofs, extract blockchain data, and perhaps even carry out computation on the blockchain. The _off-chain component_ is used to execute requests, retrieve and prepare external data, transport blockchain data to other systems, and carry out off-chain computation for improved smart contract scalability, privacy, security, and other features.
 
-Blockchain oracles can help to increase the range of possibilities for smart contracts to work, thus, oracles are essential components of the blockchain ecosystem. Smart contracts would not even be particularly useful without blockchain oracles as they would only have access to data from their own networks since the vast majority of smart contract use cases, including DeFi, depend on knowledge of real world data and off-chain occurrences. 
+Blockchain oracles can help to increase the range of possibilities for smart contracts to work, thus, oracles are essential components of the blockchain ecosystem. Smart contracts would not even be particularly useful without blockchain oracles as they would only have access to data from their own networks since the vast majority of smart contract use cases, including DeFi, depend on knowledge of real world data and off-chain occurrences.
 
-??? note
-
-    Oracles provide a global gateway to off-chain resources, therefore expanding the sorts of digital agreements that blockchains may support while maintaining the crucial security features of blockchains. oracles and smart contracts are beneficial for many major businesses, including asset pricing in banking, weather data in insurance, randomness in gaming, IoT sensors in supply chains, identity verification in government, and many more. Because the results of smart contracts are directly determined by the data that oracles supply to blockchains, it is crucial that the Oracle mechanism works accurately for the agreement to operate exactly as intended.
-
-## Types of Blockchain oracles
+## Types of blockchain oracles
 
 Blockchain oracles may be categorized based on the following characteristics:
 
