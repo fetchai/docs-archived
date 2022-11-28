@@ -18,15 +18,13 @@ Blockchain technology is mostly used to track cryptocurrency transactions. Alter
 
 2. **Blockchain for monitoring of supply chains**: businesses may easily identify inefficiencies in their supply chains using blockchain, as well as find products in real time and monitor their quality as they move from producers to retailers.
 
-3. **Blockchain for digital IDs**: Microsoft is experimenting with blockchain technology to help people control their digital identities, while also giving users control over who accesses that data.
-
-4. **Blockchain for data sharing**: blockchain could act as an intermediary to securely store and move enterprise data among industries.
+3. **Blockchain for data sharing**: blockchain could act as an intermediary to securely store and move enterprise data among industries.
  
-5. **Blockchain for copyright and royalties protection**: blockchain technology has the potential to be utilized to build a decentralized database that guarantees the preservation of music rights and rewards musicians with transparent and real-time royalties. Blockchain may potentially benefit open source programmers in a similar way.
+4. **Blockchain for copyright and royalties protection**: blockchain technology has the potential to be utilized to build a decentralized database that guarantees the preservation of music rights and rewards musicians with transparent and real-time royalties.
 
-6. **Blockchain for Internet of Things (IoT) network management**: blockchain has the potential to regulate IoT networks by identifying connected devices, tracking their behavior, assessing their dependability, and automatically determining the dependability of new devices that are linked to the network, such as smartphones and vehicles.
+5. **Blockchain for Internet of Things (IoT) network management**: blockchain has the potential to regulate IoT networks by identifying connected devices, tracking their behavior, assessing their dependability, and automatically determining the dependability of new devices that are linked to the network, such as smartphones and vehicles.
 
-7. **Blockchain for healthcare**: the healthcare industry may benefit greatly from the use of blockchain. Blockchains are being used by healthcare payers and providers to handle clinical trial data and electronic medical records while upholding regulatory compliance.
+6. **Blockchain for healthcare**: the healthcare industry may benefit greatly from the use of blockchain. Blockchains are being used by healthcare payers and providers to handle clinical trial data and electronic medical records while upholding regulatory compliance.
 
 ## Who can participate in a blockchain network?
 
