@@ -10,13 +10,13 @@ A smart contract may describe the transaction's mechanics and serve as the final
 
 When predefined circumstances have been verified to have been satisfied, a network of computers will carry out the actions. These can entail paying out money to the right people, registering a car, sending out notices, or writing a ticket. When the transaction is finished, the blockchain is then updated.
 
-??? info
+!!! info
 
      As a result, the transaction cannot be modified, and only parties to whom permission has been granted can view the outcome. Smart contacts, therefore, allow intermediaries such as banks and central authorities to be bypassed, as the contract is written onto the blockchain, and once written on the blockchain, these are irreversible. This means they are ideal for _automating_ and _decentralizing_ transactions and deals, and indeed are really the key to making dApps work on the blockchain.
 
 ??? example
-
-    In the context of the blockchain and cryptocurrency markets, smart contracts are crucial. The financial services sector is another use for smart contracts. For instance, this technology might be used to automate the computation and payment of insurance claims as well as the clearing and settlement of trades. Smart contracts, although their apparent uses in finance, are adaptable enough to be used in almost any sector where money, digital assets, or any type of digital information has to be moved between parties. For example, the equipment leasing sector has extensively used these contracts in the real world to streamline lease arrangements. Their application is also being investigated in the healthcare industry as a defense against data tampering in clinical studies. By creating a clear record of shared ownership rights and dividing all royalties and revenues from intellectual property accordingly, smart contracts may even be used to enforce intellectual property agreements.
+ 
+    Smart contracts are adaptable to be used in almost any sector where money, digital assets, or any type of digital information has to be moved between parties. Their application is also being investigated in the healthcare industry and to enforce intellectual property agreements.
 
 ## Benefits
 
@@ -35,12 +35,11 @@ When predefined circumstances have been verified to have been satisfied, a netwo
 3. **Need for precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
 
 ## Use cases
-
 ### Finance
 
 Thanks to the irreversible, transparent, and trustless properties of blockchain and smart contract technology, DeFi dApps provide whole new sorts of goods and decentralized business models that may be of great use and utility for consumers, in addition to parallel services to the banking and financial services sector like lending, borrowing, trading, and a variety of other financial activities. 
 
-??? info
+??? note
 
     DApps have the ability to lower the barriers to entry into the financial services industry for individuals all over the world because of the improved transparency provided by smart contracts (combined with 24/7 functioning, and cheaper prices). The implications of smart-contract-powered dApps on the financial industry are already apparent, despite the DeFi sector's relative youth given the amount of creative dApps that are currently offering users value and usefulness.
 
@@ -48,7 +47,7 @@ Thanks to the irreversible, transparent, and trustless properties of blockchain 
 
 Blockchain and smart contract technologies in gaming can help gamers more effectively realize the value and usefulness of in-game purchases and asset purchases. Non-fungible tokens (NFTs), which are distinctive digital assets that stand in for in-game content, are frequently the engine behind blockchain technology in the gaming industry. Smart contracts are crucial to NFTs. The blockchain networks that support NFTs provide player ownership, proved scarcity, interoperability, and immutability, while these tokens are unique, uncommon, and indivisible. These features of blockchain in gaming might promote widespread adoption and a more equal value model when taken as a whole.
 
-??? info 
+??? note 
 
     The worldwide gaming market is a $100 billion ecosystem that is expanding swiftly, yet the way wealth is produced and dispersed within the market may often be unfair. Games are created and released by developers, and users pay to access and participate in such games. As a result, gamers continue to pay money to gain access to in-game resources and gaming options, perpetuating a one-way flow of value. 
 
@@ -58,7 +57,7 @@ Another sector that has started utilizing blockchain technology for safe, trustl
 
 ### Identity Management
 
-To increase security and lower the likelihood of data mismanagement or a breach, Digital Identifier (DIDs) smart contracts built on distributed ledger technologies offer people complete ownership over their data and let them share the content of their data as they see fit. For identity management, smart contracts help to ensure and facilitate: identity protection, the information the user wants to share, and KYC verification
+To increase security and lower the likelihood of data mismanagement or a breach, Digital Identifier (DIDs) smart contracts built on distributed ledger technologies offer people complete ownership over their data and let them share the content of their data as they see fit. For identity management, smart contracts help to ensure and facilitate: identity protection, the information the user wants to share, and KYC verification.
 
 ### Machine Learning and Artificial Intelligence 
 
@@ -76,4 +75,4 @@ A fantastic use case for blockchain smart contracts is supply chain management. 
 
     Smart contracts may be used, for instance, to track things in the supply chain completely transparently. A company may employ supply networks that are enabled by smart contracts to track its inventory more precisely. Additionally, it enhances corporate operations in other areas that are directly related to the supply chain. Additionally, adopting smart contracts leads to less verification work, improved traceability, and fewer frauds and thefts. However, in order for it to be functional, the institutions must upgrade their supply chain with new hardware equipments.
 
-Smart contracts and dApps are poised to continue revolutionizing the world of digital agreements. Numerous more businesses will benefit greatly from smart contract technology in the future. Researchers and developers are increasingly keen to take use of smart contract technology to meet the demands of the expanding Internet of Things (IoT). While IoT devices are currently given security and transparency by blockchain technology in general, the benefits of smart contracts might make this integration much more seamless.
+Smart contracts and dApps are poised to continue revolutionizing the world of digital agreements. Numerous businesses will benefit greatly from smart contract technology in the future. Researchers and developers are increasingly keen to take use of smart contract technology to meet the demands of the expanding Internet of Things (IoT). While IoT devices are currently given security and transparency by blockchain technology in general, the benefits of smart contracts might make this integration much more seamless.
