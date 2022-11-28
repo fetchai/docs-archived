@@ -1,10 +1,4 @@
-**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied. 
-
-??? note
-
-    A smart contract's code is difficult to alter or eliminate after it has been published on the blockchain. Therefore, consumers may still access the DApp even if the DApp's development team has split.
-
-    Thanks to the underlying blockchain and smart contracts technology, decentralized applications provide a wide range of services and activities, from gaming to financial, social networking, and much more, and appear and feel identical to ordinary mobile applications on your smartphone. 
+**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied.gi
 
 DApps share the following features:
 
@@ -36,7 +30,7 @@ When it comes to illustrate the **limitations of DApps**, we first need to highl
 
 Another difficult task is modifying a DApp. A DApp does require continual updates to repair problems, update the user interface, and introduce new functions in order to improve user experience and security. 
 
-!!! note
+!!! info
 
     It is challenging to change the backend code of a DApp once it has been put on the blockchain, though. Any modifications or enhancements would need to be approved by a majority of the network's nodes, which would take a while to put into practise.
 
