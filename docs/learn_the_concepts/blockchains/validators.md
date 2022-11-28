@@ -4,7 +4,7 @@ The block validation procedure is one of the essential elements that makes block
 
 !!! info
 
-    On PoS blockchains, these nodes are referred to as **validators**, whereas, on PoW blockchain networks, these are known as **miners**. In essence, validator nodes take on the responsibility of validating, voting on, and keeping a record of transactions by taking part in the consensus process.
+    On PoS blockchains, these nodes are referred to as _validators_, whereas, on PoW blockchain networks, these are known as _miners_. In essence, validator nodes take on the responsibility of validating, voting on, and keeping a record of transactions by taking part in the consensus process.
 
 Block validation is a procedure that both of these blockchain variants may use. Staking, the method of block validation utilized on PoS blockchains, would be a more appropriate alternative to mine when referring to blockchain networks.
 
