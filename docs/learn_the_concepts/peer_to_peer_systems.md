@@ -2,11 +2,19 @@
 
 A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate with each other without having to go through a middleman. Peer-to-Peer networks consist of a group of devices that collectively store and share files. Every participant (i.e. _node_) functions as a distinct _peer_. Normally, all nodes are equally powerful and carry out the same functions. We can outline three key characteristics featuring a P2P system:
 
-1. **No middlemen needed**: One of the key characteristics of peer-to-peer systems is that middlemen are not always required, though they are allowed. For instance, when booking a hotel room with a travel agent, the users will be going through a middleman but if the user books a hotel room directly with the hotel itself, then this depicts a direct communication, and hence, they are communicating on a peer-to-peer basis.
+* **No middlemen needed**: One of the key characteristics of peer-to-peer systems is that middlemen are not always required, though they are allowed. 
 
-2. **Direct links**: direct communication between both parties can be established only in the presence of direct links between them.
+!!! example
 
-3. **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
+        For instance, when booking a hotel room with a travel agent, the users will be going through a middleman but if the user books a hotel room directly with the hotel itself, then this depicts a direct communication, and hence, they are communicating on a peer-to-peer basis.
+
+* **Direct links**: direct communication between both parties can be established only in the presence of direct links between them.
+
+* **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. 
+
+!!! example
+
+        In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
 
 ??? note
 
