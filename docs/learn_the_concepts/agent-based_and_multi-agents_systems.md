@@ -42,9 +42,9 @@ As it is possible to think, there are a growing number of agent-based applicatio
 
 A **Multi-Agents System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. 
 
-??? info 
+??? note 
 
-    Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period. This type of interaction may be **cooperative** or **competitive**. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
+    Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period. This type of interaction may be _cooperative_ or _competitive_. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
 
 ### Benefits
 
@@ -64,9 +64,9 @@ A **Multi-Agents System** (**MAS**) is a group of agents that interact with each
 
 2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different.
 
-MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal).
+MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs.
 
-!!! info
+??? note
 
     MAS have found multiple applications including _modeling complex systems_, _smart grids_ and _computer networks_. The main application domains of MAS are _ambient intelligence_, _grid computing_, _electronic business_, _the semantic web_, _bioinformatics and computational biology_, _monitoring and control_, _resource management_, _education_, _space_, _military_ and _manufacturing applications_, and so on.
 
