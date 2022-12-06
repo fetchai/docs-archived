@@ -1,5 +1,5 @@
 # Transaction fees
-
+## What are transaction fees?
 Any transaction involving the transfer of cryptocurrency will incur fees, whether you are purchasing or withdrawing funds from an exchange or sending or receiving payments in cryptocurrency. Various fee types include: 
 
 * **Transaction** or **miner fees**: these vary depending on how many transactions are awaiting their inclusion in the current block and are intended to motivate miners and validators to validate cryptocurrency transactions.
