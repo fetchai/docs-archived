@@ -50,7 +50,7 @@ Low fees encourages higher network traffic, and this in turn means more transact
 
 !!! info
 
-    As a general comparison, Juno Network, another ecosystem blockchain within the Cosmos ecosystem has fees that on average are $0.05 USD per transfer, whereas Fetch.ai transfers cost $0.000000000000001 USDgi. 
+    As a general comparison, Juno Network, another ecosystem blockchain within the Cosmos ecosystem has fees that on average are $0.05 USD per transfer whereas Fetch.ai transfers cost $0.000000000000001 USDgi. 
 
 These gas fees are calculated in an extremely fair way, with the fee being directly proportional to the computing power needed to complete the process. 
 
