@@ -32,7 +32,7 @@ Miners are in charge of adding transactions to the blockchain and are required f
 
 Depending on how many transactions are awaiting their inclusion, miner fees may change. During periods of high network traffic, miners prioritize the validation of new transactions based on the fee paid by the user. Hence, the user who wants to complete the transaction more quickly can even increase the transaction fee to boost its chances of being included in the next completed block.
 
-## How to reduce transaction fees
+## How to reduce transaction fees 
 
 There are several options available for reducing fees. First of all, you may lower these fees by deciding when you want to complete your transaction. Due to the fact that the majority of cryptocurrency users worldwide are concentrated in the U. S., blockchain networks typically see the highest levels of activity during times when people there are awake. Additionally, traffic is lower during the weekends, particularly on Saturdays. Additionally, the fees you pay depend on how quickly you want your transaction to be validated. If you have a high priority transaction and want it to be confirmed faster, you should expect a higher miner fee. If your transaction is not urgent, then a slower verification time means a lower transaction fee. 
 
