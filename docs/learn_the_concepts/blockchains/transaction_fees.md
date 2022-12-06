@@ -41,7 +41,7 @@ There are several options available for reducing fees. First of all, you may low
 ??? info
 
       On the Ethereum network, transaction fees are referred to as **gas**. Like other blockchains, the gas costs can go up or down depending on demand. Miners are more likely to give your transaction priority if you pay more for gas. The _gas limit_ specifies the maximum price to be paid for a specific transaction and it should also be taken into account when proceeding with a transaction. 
-
+ 
 ## Transaction fees on the Fetch.ai network
 
 **On the Fetch.ai network, the gas mechanism is made simple and gives you an option to pick high, medium, or low fees, in addition to allowing you to manually set the amount you wish to pay**. Fetch.ai does operate some validators on the network, which further gives it influence over the gas fee levels. Even though some constraints are set by Fetch.ai on gas fees, the decentralized nature of the network guarantees that transaction fees are not set by any central authority, and the actual level of gas is set by each of the validators on the Fetch network. Fetch.ai has the philosophy that having high gas fees does no good for anyone, and because of this, the Fetch team wants to encourage everyone to use the network, and trade and transact using $FET tokens. 
