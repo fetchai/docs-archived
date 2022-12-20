@@ -88,9 +88,9 @@ One of the most popular uses of P2P systems is represented by file sharing netwo
 
 !!! example
 
-    [Napster](https://www.napster.com/it) and [LimeWire](https://limewire.com/) were P2P music sharing networks backed by the idea that peers connected through the internet could find and download any song they wanted, from several other users.
+    [Napster](https://www.napster.com/it){:target="\_blank"} and [LimeWire](https://limewire.com/){:target="\_blank"} were P2P music sharing networks backed by the idea that peers connected through the internet could find and download any song they wanted, from several other users.
 
-    There exist also online gaming platforms which adopt a P2P structure for downloading games between users, such as [Blizzard Entertainment](https://www.blizzard.com/en-gb/) which distributed Diablo III, StarCraft II, and World of Warcraft using P2P.
+    There exist also online gaming platforms which adopt a P2P structure for downloading games between users, such as [Blizzard Entertainment](https://www.blizzard.com/en-gb/){:target="\_blank"} which distributed Diablo III, StarCraft II, and World of Warcraft using P2P.
 
 A more successful use for P2P systems was developed in the crypto world thanks to **blockchains** and how these relate to P2P networks. Bitcoin, Ether and many other cryptocurrencies were developed following the P2P mechanism. 
 
@@ -98,4 +98,4 @@ An additional example of P2P architecture is represented by **P2P crypto exchang
 
 !!! example
 
-    P2P-based crypto exchanges include [Paxful](https://paxful.com/) and [Binance P2P](https://p2p.binance.com/en/trade/all-payments/USDT?fiat=CNY).
+    P2P-based crypto exchanges include [Paxful](https://paxful.com/){:target="\_blank"} and [Binance P2P](https://p2p.binance.com/en/trade/all-payments/USDT?fiat=CNY){:target="\_blank"}.
