@@ -40,11 +40,11 @@ It is challenging for one DApp to stand out and draw a lot of users when there a
 
 ### GameFi
 
-GameFi DApps are becoming more and more well-liked. The majority of gaming DApps give players complete control over their in-game assets, in contrast to conventional video games. They also provide users the chance to earn money from these things outside of the game. For instance, Axie Infinity offers NFT-based game avatars, virtual worlds, and gaming-related merchandise. Players can trade with other players on NFT markets, move them to other Ethereum addresses, or keep them in their digital wallets. Players can compete with one another inside the ecosystem to amass ERC-20 tokens that can be exchanged. Generally speaking, players may earn more in-game incentives the longer they play.
+GameFi DApps are becoming more and more well-liked. The majority of gaming DApps give players complete control over their in-game assets, in contrast to conventional video games. They also provide users the chance to earn money from these things outside the game.
 
 ??? example
 
-    One of the most successful DApp in this sector is the play-to-earn game [Axie Infinity](https://axieinfinity.com/) on the Ethereum blockchain.
+    One of the most successful DApp in this sector is the play-to-earn game [Axie Infinity](https://axieinfinity.com/){:target="\_blank"} on the Ethereum blockchain. Axie Infinity offers NFT-based game avatars, virtual worlds, and gaming-related merchandise. Players can trade with other players on NFT markets, move them to other Ethereum addresses, or keep them in their digital wallets. Players can compete with one another inside the ecosystem to amass ERC-20 tokens that can be exchanged. Generally speaking, players may earn more in-game incentives the longer they play.
 
 ### DEXs - Decentralized Exchanges
 
@@ -54,7 +54,7 @@ The most common financial services offered by decentralized apps are borrowing a
 
 ??? example
 
-    [SushiSwap](https://sushi.com/), [PancakeSwap](https://pancakeswap.finance/), and [Uniswap](https://uniswap.org/) are a few of the well-known DEXs.
+    [SushiSwap](https://sushi.com/){:target="\_blank"}, [PancakeSwap](https://pancakeswap.finance/){:target="\_blank"}, and [Uniswap](https://uniswap.org/){:target="\_blank"} are a few of the well-known DEXs.
 
 ### Entertainment
 
@@ -62,13 +62,13 @@ DApps enable the transformation of entertainment daily activities into digital e
 
 ??? example
 
-    For instance, [Audius](https://audius.co/), a decentralized music streaming network built on blockchain, eliminates the middlemen present in the conventional music industry to connect artists and listeners directly. By creating permanent records of their labor on the blockchain, it enables music curators to better monetise their material. 
+    For instance, [Audius](https://audius.co/){:target="\_blank"}, a decentralized music streaming network built on blockchain, eliminates the middlemen present in the conventional music industry to connect artists and listeners directly. By creating permanent records of their labor on the blockchain, it enables music curators to better monetise their material. 
 
 DApps are addressing problems that users of social media platforms encounter. Twitter and Facebook, two centralized social media behemoths, are frequently attacked for editing content and treating user data carelessly. 
 
 ??? example
 
-    An example on decentralized social media platform is given by [Steemit](https://steemit.com/). In there, the community can interact freely and express their opinions with fewer limitations and censorship  while also having more control over their personal data.
+    An example on decentralized social media platform is given by [Steemit](https://steemit.com/){:target="\_blank"}. In there, the community can interact freely and express their opinions with fewer limitations and censorship  while also having more control over their personal data.
 
 ### Governance
 
