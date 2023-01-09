@@ -6838,39 +6838,39 @@ to achieve this we are going to use the weather station skills.
 This demo does not utilize a smart contract or a ledger interaction.</p>
 <h2 id="get-required-packages">Get required packages<a class="headerlink" href="#get-required-packages" title="Permanent link">&para;</a></h2>
 <p>Copy the packages directory into your local working directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>svn <span class="nb">export</span> https://github.com/fetchai/agents-aea.git/trunk/packages
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>svn<span class="w"> </span><span class="nb">export</span><span class="w"> </span>https://github.com/fetchai/agents-aea.git/trunk/packages
 </code></pre></div>
 <p>Also, install <code>aea-ledger-fetchai</code> plug-in:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip install aea-ledger-fetchai
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>aea-ledger-fetchai
 </code></pre></div></p>
 <h2 id="demo-instructions">Demo instructions<a class="headerlink" href="#demo-instructions" title="Permanent link">&para;</a></h2>
 <p>If you want to create the weather station AEA step by step you can follow this guide <a href='/weather-skills/'>here</a></p>
 <h3 id="create-the-weather-station-aea">Create the weather station AEA<a class="headerlink" href="#create-the-weather-station-aea" title="Permanent link">&para;</a></h3>
 <p>Fetch the weather station AEA with the following command :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea fetch fetchai/weather_station:0.32.3
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> weather_station
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea install
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/weather_station:0.32.3
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>weather_station
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea<span class="w"> </span>build
 </code></pre></div>
 <h3 id="update-the-aea-configurations">Update the AEA configurations<a class="headerlink" href="#update-the-aea-configurations" title="Permanent link">&para;</a></h3>
 <p>In the terminal change the configuration:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.weather_station.models.strategy.args.is_ledger_tx False --type bool
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.weather_station.models.strategy.args.is_ledger_tx<span class="w"> </span>False<span class="w"> </span>--type<span class="w"> </span>bool
 </code></pre></div>
 The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.</p>
 <h3 id="add-keys">Add keys<a class="headerlink" href="#add-keys" title="Permanent link">&para;</a></h3>
 <p>Add a private key for the weather station.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea generate-key fetchai
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h3 id="run-the-weather-station-aea">Run the weather station AEA<a class="headerlink" href="#run-the-weather-station-aea" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address.</p>
 <h3 id="create-the-weather-client-aea">Create the weather client AEA<a class="headerlink" href="#create-the-weather-client-aea" title="Permanent link">&para;</a></h3>
@@ -6926,7 +6926,7 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
 <a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>
 <a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>
 <a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
-<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>    <span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
 <a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>
 <a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>    <span class="c1"># Create a private key</span>
 <a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>    <span class="n">create_private_key</span><span class="p">(</span><span class="n">FetchAICrypto</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">FETCHAI_PRIVATE_KEY_FILE</span><span class="p">)</span>
@@ -7111,7 +7111,7 @@ The <code>is_ledger_tx</code> will prevent the AEA to communicate with a ledger.
 <p>For more details on how to create an agent programmatically follow this guide <a href='/build-aea-programmatically/'>here</a>.</p>
 <h3 id="run-the-weather-station-aea_1">Run the weather station AEA<a class="headerlink" href="#run-the-weather-station-aea_1" title="Permanent link">&para;</a></h3>
 <p>In a new terminal window, navigate to the folder that you created the script and run:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python weather_client.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>weather_client.py
 </code></pre></div></p>
 <p>You should see both AEAs interacting now.</p>
 

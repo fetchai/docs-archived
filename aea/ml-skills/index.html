@@ -7017,11 +7017,11 @@ The <code>aea install</code> command installs all dependencies an AEA needs that
 <li>
 <p>Navigate to the settings of the <code>ml_model_trainer</code> and under <code>components &gt; connection &gt;</code> <code>fetchai/p2p_libp2p:0.22.0</code> update as follows (make sure to replace the placeholder with the multiaddress):
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="s2">&quot;delegate_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:11001&quot;</span>,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="s2">&quot;entry_peers&quot;</span>: <span class="o">[</span><span class="s2">&quot;REPLACE_WITH_MULTI_ADDRESS_HERE&quot;</span><span class="o">]</span>,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  <span class="s2">&quot;local_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:9001&quot;</span>,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="s2">&quot;log_file&quot;</span>: <span class="s2">&quot;libp2p_node.log&quot;</span>,
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  <span class="s2">&quot;public_uri&quot;</span>: <span class="s2">&quot;127.0.0.1:9001&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="s2">&quot;delegate_uri&quot;</span>:<span class="w"> </span><span class="s2">&quot;127.0.0.1:11001&quot;</span>,
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="s2">&quot;entry_peers&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;REPLACE_WITH_MULTI_ADDRESS_HERE&quot;</span><span class="o">]</span>,
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="s2">&quot;local_uri&quot;</span>:<span class="w"> </span><span class="s2">&quot;127.0.0.1:9001&quot;</span>,
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="s2">&quot;log_file&quot;</span>:<span class="w"> </span><span class="s2">&quot;libp2p_node.log&quot;</span>,
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="s2">&quot;public_uri&quot;</span>:<span class="w"> </span><span class="s2">&quot;127.0.0.1:9001&quot;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">}</span>
 </code></pre></div></p>
 </li>
@@ -7043,33 +7043,33 @@ The trainer keeps purchasing data and training its model until stopped.<br />
 <h3 id="demo-instructions_1">Demo instructions<a class="headerlink" href="#demo-instructions_1" title="Permanent link">&para;</a></h3>
 <h4 id="create-data-provider-aea">Create data provider AEA<a class="headerlink" href="#create-data-provider-aea" title="Permanent link">&para;</a></h4>
 <p>First, fetch the data provider AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea fetch fetchai/ml_data_provider:0.32.3
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> ml_data_provider
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea install
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/ml_data_provider:0.32.3
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>ml_data_provider
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea<span class="w"> </span>build
 </code></pre></div></p>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the data provider from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea create ml_data_provider
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> ml_data_provider
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>aea add skill fetchai/ml_data_provider:0.27.4
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea<span class="w"> </span>create<span class="w"> </span>ml_data_provider
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>ml_data_provider
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/ml_data_provider:0.27.4
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>aea install
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>aea build
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>aea<span class="w"> </span>install
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 </p>
@@ -7077,33 +7077,33 @@ The following steps create the data provider from scratch:
 
 <h4 id="create-model-trainer-aea">Create model trainer AEA<a class="headerlink" href="#create-model-trainer-aea" title="Permanent link">&para;</a></h4>
 <p>Then, fetch the model trainer AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea fetch fetchai/ml_model_trainer:0.33.3
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> ml_model_trainer
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea install
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/ml_model_trainer:0.33.3
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>ml_model_trainer
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea<span class="w"> </span>build
 </code></pre></div></p>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the model trainer from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea create ml_model_trainer
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span> ml_model_trainer
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>aea add skill fetchai/ml_train:0.29.4
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>create<span class="w"> </span>ml_model_trainer
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span><span class="w"> </span>ml_model_trainer
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/ml_train:0.29.4
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>aea install
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>aea build
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>aea<span class="w"> </span>install
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 
@@ -7112,58 +7112,58 @@ The following steps create the model trainer from scratch:
 
 <h4 id="add-keys-for-the-data-provider-aea">Add keys for the data provider AEA<a class="headerlink" href="#add-keys-for-the-data-provider-aea" title="Permanent link">&para;</a></h4>
 <p>First, create the private key for the data provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea generate-key fetchai
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h4 id="add-keys-and-generate-wealth-for-the-model-trainer-aea">Add keys and generate wealth for the model trainer AEA<a class="headerlink" href="#add-keys-and-generate-wealth-for-the-model-trainer-aea" title="Permanent link">&para;</a></h4>
 <p>The model trainer needs to have some wealth to purchase the data from the data provider.</p>
 <p>First, create the private key for the model trainer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea generate-key fetchai
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Then, create some wealth for your model trainer based on the network you want to transact with. On the Fetch.ai <code>Dorado</code> network:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea generate-wealth fetchai
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea<span class="w"> </span>generate-wealth<span class="w"> </span>fetchai
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h4 id="run-both-aeas">Run both AEAs<a class="headerlink" href="#run-both-aeas" title="Permanent link">&para;</a></h4>
 <p>Run both AEAs from their respective terminals.</p>
 <p>First, run the data provider AEA:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.3 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the ML data provider.</p>
 <!--
 Then, in the model trainer, update the configuration of the model trainer AEA's p2p connection by appending the following YAML text at the end of the `aea-config.yaml` file:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nn">---</span><span class="w"></span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">public_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.27.3</span><span class="w"></span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection</span><span class="w"></span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nt">config</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">delegate_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span><span class="w"></span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">entry_peers</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOME_ADDRESS</span><span class="w"></span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span><span class="nt">local_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span><span class="w"></span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="nt">log_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span><span class="w"></span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="nt">public_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nn">---</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">public_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/p2p_libp2p:0.27.3</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">connection</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nt">config</span><span class="p">:</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">delegate_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:11001</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">entry_peers</span><span class="p">:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOME_ADDRESS</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span><span class="nt">local_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="nt">log_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libp2p_node.log</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="nt">public_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:9001</span>
 </code></pre></div>
 
 where `SOME_ADDRESS` is replaced with the appropriate value.
 -->
 <p>Then, in the ML model trainer, run this command (replace <code>SOME_ADDRESS</code> with the correct value as described above):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11001&quot;,</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s1">  &quot;entry_peers&quot;: [&quot;SOME_ADDRESS&quot;],</span>
@@ -7174,15 +7174,15 @@ where `SOME_ADDRESS` is replaced with the appropriate value.
 </code></pre></div>
 This allows the model trainer to connect to the same local agent communication network as the data provider.</p>
 <p>Then run the model trainer AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea<span class="w"> </span>run
 </code></pre></div></p>
 <p>You can see that the AEAs find each other, negotiate and eventually trade. After the trade, the model trainer AEA trains its ML model using the data it has purchased. 
 This AEA keeps purchasing data and training its model until stopped.</p>
 <h4 id="cleaning-up">Cleaning up<a class="headerlink" href="#cleaning-up" title="Permanent link">&para;</a></h4>
 <p>When you're finished, delete your AEAs:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">cd</span> ..
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>aea delete ml_data_provider
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>aea delete ml_model_trainer
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>aea<span class="w"> </span>delete<span class="w"> </span>ml_data_provider
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>aea<span class="w"> </span>delete<span class="w"> </span>ml_model_trainer
 </code></pre></div></p>
 <p><br /></p>
 

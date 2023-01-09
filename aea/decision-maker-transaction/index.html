@@ -6921,10 +6921,10 @@
 <h2 id="more-details">More details<a class="headerlink" href="#more-details" title="Permanent link">&para;</a></h2>
 <p>To be able to register a handler that reads the internal messages, we have to create a class at the end of the file which processes the signing messages.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span> <span class="nc">SigningDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseSigningDialogues</span><span class="p">):</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="sd">&quot;&quot;&quot;Signing dialogues model.&quot;&quot;&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Signing dialogues model.&quot;&quot;&quot;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">self_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">        Initialize dialogues.</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">        :return: None</span>
@@ -6934,7 +6934,7 @@
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span>  <span class="c1"># pylint: disable=unused-argument</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>            <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">receiver_address</span><span class="p">:</span> <span class="n">Address</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">            </span><span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="sd">            :param message: an incoming/outgoing first message</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="sd">            :param receiver_address: the address of the receiving agent</span>
@@ -6950,15 +6950,15 @@
 <a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>
 <a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
 <a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="k">class</span> <span class="nc">SigningHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>    <span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>
 <a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[PublicId]</span>
 <a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>
 <a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>        <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>
 <a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="sd">        Implement the reaction to a message.</span>
 <a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>
 <a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="sd">        :param message: the message</span>
@@ -6984,14 +6984,14 @@
 <a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
 <a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a>
 <a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a><span class="sd">        Implement the handler teardown.</span>
 <a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a>
 <a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a><span class="sd">        :return: None</span>
 <a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a>
 <a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a><span class="sd">        Handle an unidentified dialogue.</span>
 <a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a>
 <a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a><span class="sd">        :param msg: the message</span>
@@ -7005,7 +7005,7 @@
 <a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a>    <span class="k">def</span> <span class="nf">_handle_signed_transaction</span><span class="p">(</span>
 <a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a><span class="sd">        Handle a signing message.</span>
 <a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a>
 <a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a><span class="sd">        :param signing_msg: the signing message</span>
@@ -7018,7 +7018,7 @@
 <a id="__codelineno-6-96" name="__codelineno-6-96" href="#__codelineno-6-96"></a>    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
 <a id="__codelineno-6-97" name="__codelineno-6-97" href="#__codelineno-6-97"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-6-98" name="__codelineno-6-98" href="#__codelineno-6-98"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-99" name="__codelineno-6-99" href="#__codelineno-6-99"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-99" name="__codelineno-6-99" href="#__codelineno-6-99"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-100" name="__codelineno-6-100" href="#__codelineno-6-100"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-6-101" name="__codelineno-6-101" href="#__codelineno-6-101"></a>
 <a id="__codelineno-6-102" name="__codelineno-6-102" href="#__codelineno-6-102"></a><span class="sd">        :param signing_msg: the signing message</span>
@@ -7034,7 +7034,7 @@
 <a id="__codelineno-6-112" name="__codelineno-6-112" href="#__codelineno-6-112"></a>    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
 <a id="__codelineno-6-113" name="__codelineno-6-113" href="#__codelineno-6-113"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-6-114" name="__codelineno-6-114" href="#__codelineno-6-114"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-115" name="__codelineno-6-115" href="#__codelineno-6-115"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-115" name="__codelineno-6-115" href="#__codelineno-6-115"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-116" name="__codelineno-6-116" href="#__codelineno-6-116"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-6-117" name="__codelineno-6-117" href="#__codelineno-6-117"></a>
 <a id="__codelineno-6-118" name="__codelineno-6-118" href="#__codelineno-6-118"></a><span class="sd">        :param signing_msg: the signing message</span>
@@ -7085,7 +7085,7 @@
 <a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>
 <a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>
 <a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
-<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>    <span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run demo.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>
 <a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>    <span class="c1"># Create a private key</span>
 <a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>    <span class="n">create_private_key</span><span class="p">(</span>
@@ -7188,10 +7188,10 @@
 <a id="__codelineno-7-136" name="__codelineno-7-136" href="#__codelineno-7-136"></a>
 <a id="__codelineno-7-137" name="__codelineno-7-137" href="#__codelineno-7-137"></a>
 <a id="__codelineno-7-138" name="__codelineno-7-138" href="#__codelineno-7-138"></a><span class="k">class</span> <span class="nc">SigningDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseSigningDialogues</span><span class="p">):</span>
-<a id="__codelineno-7-139" name="__codelineno-7-139" href="#__codelineno-7-139"></a>    <span class="sd">&quot;&quot;&quot;Signing dialogues model.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-139" name="__codelineno-7-139" href="#__codelineno-7-139"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Signing dialogues model.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-140" name="__codelineno-7-140" href="#__codelineno-7-140"></a>
 <a id="__codelineno-7-141" name="__codelineno-7-141" href="#__codelineno-7-141"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">self_address</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-142" name="__codelineno-7-142" href="#__codelineno-7-142"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-142" name="__codelineno-7-142" href="#__codelineno-7-142"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-143" name="__codelineno-7-143" href="#__codelineno-7-143"></a><span class="sd">        Initialize dialogues.</span>
 <a id="__codelineno-7-144" name="__codelineno-7-144" href="#__codelineno-7-144"></a>
 <a id="__codelineno-7-145" name="__codelineno-7-145" href="#__codelineno-7-145"></a><span class="sd">        :return: None</span>
@@ -7201,7 +7201,7 @@
 <a id="__codelineno-7-149" name="__codelineno-7-149" href="#__codelineno-7-149"></a>        <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span>  <span class="c1"># pylint: disable=unused-argument</span>
 <a id="__codelineno-7-150" name="__codelineno-7-150" href="#__codelineno-7-150"></a>            <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">receiver_address</span><span class="p">:</span> <span class="n">Address</span>
 <a id="__codelineno-7-151" name="__codelineno-7-151" href="#__codelineno-7-151"></a>        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
-<a id="__codelineno-7-152" name="__codelineno-7-152" href="#__codelineno-7-152"></a>            <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+<a id="__codelineno-7-152" name="__codelineno-7-152" href="#__codelineno-7-152"></a><span class="w">            </span><span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
 <a id="__codelineno-7-153" name="__codelineno-7-153" href="#__codelineno-7-153"></a>
 <a id="__codelineno-7-154" name="__codelineno-7-154" href="#__codelineno-7-154"></a><span class="sd">            :param message: an incoming/outgoing first message</span>
 <a id="__codelineno-7-155" name="__codelineno-7-155" href="#__codelineno-7-155"></a><span class="sd">            :param receiver_address: the address of the receiving agent</span>
@@ -7217,15 +7217,15 @@
 <a id="__codelineno-7-165" name="__codelineno-7-165" href="#__codelineno-7-165"></a>
 <a id="__codelineno-7-166" name="__codelineno-7-166" href="#__codelineno-7-166"></a>
 <a id="__codelineno-7-167" name="__codelineno-7-167" href="#__codelineno-7-167"></a><span class="k">class</span> <span class="nc">SigningHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-<a id="__codelineno-7-168" name="__codelineno-7-168" href="#__codelineno-7-168"></a>    <span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-168" name="__codelineno-7-168" href="#__codelineno-7-168"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement the signing handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-169" name="__codelineno-7-169" href="#__codelineno-7-169"></a>
 <a id="__codelineno-7-170" name="__codelineno-7-170" href="#__codelineno-7-170"></a>    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">SigningMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[PublicId]</span>
 <a id="__codelineno-7-171" name="__codelineno-7-171" href="#__codelineno-7-171"></a>
 <a id="__codelineno-7-172" name="__codelineno-7-172" href="#__codelineno-7-172"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-173" name="__codelineno-7-173" href="#__codelineno-7-173"></a>        <span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-173" name="__codelineno-7-173" href="#__codelineno-7-173"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement the setup for the handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-174" name="__codelineno-7-174" href="#__codelineno-7-174"></a>
 <a id="__codelineno-7-175" name="__codelineno-7-175" href="#__codelineno-7-175"></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-176" name="__codelineno-7-176" href="#__codelineno-7-176"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-176" name="__codelineno-7-176" href="#__codelineno-7-176"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-177" name="__codelineno-7-177" href="#__codelineno-7-177"></a><span class="sd">        Implement the reaction to a message.</span>
 <a id="__codelineno-7-178" name="__codelineno-7-178" href="#__codelineno-7-178"></a>
 <a id="__codelineno-7-179" name="__codelineno-7-179" href="#__codelineno-7-179"></a><span class="sd">        :param message: the message</span>
@@ -7251,14 +7251,14 @@
 <a id="__codelineno-7-199" name="__codelineno-7-199" href="#__codelineno-7-199"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">signing_msg</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">)</span>
 <a id="__codelineno-7-200" name="__codelineno-7-200" href="#__codelineno-7-200"></a>
 <a id="__codelineno-7-201" name="__codelineno-7-201" href="#__codelineno-7-201"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-202" name="__codelineno-7-202" href="#__codelineno-7-202"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-202" name="__codelineno-7-202" href="#__codelineno-7-202"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-203" name="__codelineno-7-203" href="#__codelineno-7-203"></a><span class="sd">        Implement the handler teardown.</span>
 <a id="__codelineno-7-204" name="__codelineno-7-204" href="#__codelineno-7-204"></a>
 <a id="__codelineno-7-205" name="__codelineno-7-205" href="#__codelineno-7-205"></a><span class="sd">        :return: None</span>
 <a id="__codelineno-7-206" name="__codelineno-7-206" href="#__codelineno-7-206"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-7-207" name="__codelineno-7-207" href="#__codelineno-7-207"></a>
 <a id="__codelineno-7-208" name="__codelineno-7-208" href="#__codelineno-7-208"></a>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-209" name="__codelineno-7-209" href="#__codelineno-7-209"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-209" name="__codelineno-7-209" href="#__codelineno-7-209"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-210" name="__codelineno-7-210" href="#__codelineno-7-210"></a><span class="sd">        Handle an unidentified dialogue.</span>
 <a id="__codelineno-7-211" name="__codelineno-7-211" href="#__codelineno-7-211"></a>
 <a id="__codelineno-7-212" name="__codelineno-7-212" href="#__codelineno-7-212"></a><span class="sd">        :param msg: the message</span>
@@ -7272,7 +7272,7 @@
 <a id="__codelineno-7-220" name="__codelineno-7-220" href="#__codelineno-7-220"></a>    <span class="k">def</span> <span class="nf">_handle_signed_transaction</span><span class="p">(</span>
 <a id="__codelineno-7-221" name="__codelineno-7-221" href="#__codelineno-7-221"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-7-222" name="__codelineno-7-222" href="#__codelineno-7-222"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-223" name="__codelineno-7-223" href="#__codelineno-7-223"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-223" name="__codelineno-7-223" href="#__codelineno-7-223"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-224" name="__codelineno-7-224" href="#__codelineno-7-224"></a><span class="sd">        Handle a signing message.</span>
 <a id="__codelineno-7-225" name="__codelineno-7-225" href="#__codelineno-7-225"></a>
 <a id="__codelineno-7-226" name="__codelineno-7-226" href="#__codelineno-7-226"></a><span class="sd">        :param signing_msg: the signing message</span>
@@ -7285,7 +7285,7 @@
 <a id="__codelineno-7-233" name="__codelineno-7-233" href="#__codelineno-7-233"></a>    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
 <a id="__codelineno-7-234" name="__codelineno-7-234" href="#__codelineno-7-234"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-7-235" name="__codelineno-7-235" href="#__codelineno-7-235"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-236" name="__codelineno-7-236" href="#__codelineno-7-236"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-236" name="__codelineno-7-236" href="#__codelineno-7-236"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-237" name="__codelineno-7-237" href="#__codelineno-7-237"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-7-238" name="__codelineno-7-238" href="#__codelineno-7-238"></a>
 <a id="__codelineno-7-239" name="__codelineno-7-239" href="#__codelineno-7-239"></a><span class="sd">        :param signing_msg: the signing message</span>
@@ -7301,7 +7301,7 @@
 <a id="__codelineno-7-249" name="__codelineno-7-249" href="#__codelineno-7-249"></a>    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
 <a id="__codelineno-7-250" name="__codelineno-7-250" href="#__codelineno-7-250"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">signing_msg</span><span class="p">:</span> <span class="n">SigningMessage</span><span class="p">,</span> <span class="n">signing_dialogue</span><span class="p">:</span> <span class="n">SigningDialogue</span>
 <a id="__codelineno-7-251" name="__codelineno-7-251" href="#__codelineno-7-251"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-252" name="__codelineno-7-252" href="#__codelineno-7-252"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-252" name="__codelineno-7-252" href="#__codelineno-7-252"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-7-253" name="__codelineno-7-253" href="#__codelineno-7-253"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-7-254" name="__codelineno-7-254" href="#__codelineno-7-254"></a>
 <a id="__codelineno-7-255" name="__codelineno-7-255" href="#__codelineno-7-255"></a><span class="sd">        :param signing_msg: the signing message</span>

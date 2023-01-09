@@ -6846,7 +6846,7 @@ they're rejected.</p>
 <a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="k">def</span> <span class="nf">convert_model_to_onnx</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="sd">    Helper function to convert a ML model to onnx format</span>
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_classes_keras</span><span class="p">):</span>
@@ -6908,7 +6908,7 @@ they're rejected.</p>
 <a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>
 <a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>
 <a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a><span class="k">def</span> <span class="nf">deser_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">onnx</span><span class="o">.</span><span class="n">ModelProto</span><span class="p">:</span>
-<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a><span class="sd">    Helper function to recover a onnx model from its deserialized form</span>
 <a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>    <span class="k">return</span> <span class="n">onnx</span><span class="o">.</span><span class="n">load_model_from_string</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -6917,20 +6917,20 @@ they're rejected.</p>
 <a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a><span class="k">class</span> <span class="nc">MachineLearningInterface</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
 <a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>    <span class="k">def</span> <span class="nf">mli_propose_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Weights</span><span class="p">:</span>
-<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a><span class="sd">        Trains the model. Returns new weights. Does not change the current weights of the model.</span>
 <a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>        <span class="k">pass</span>
 <a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>
 <a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>    <span class="k">def</span> <span class="nf">mli_test_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">Weights</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProposedWeights</span><span class="p">:</span>
-<a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a><span class="sd">        Tests the proposed weights and fills in the rest of the fields</span>
 <a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>
 <a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>    <span class="k">def</span> <span class="nf">mli_accept_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">Weights</span><span class="p">):</span>
-<a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a><span class="sd">        Updates the model with the proposed set of weights</span>
 <a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a><span class="sd">        :param weights: The new weights</span>
 <a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -6938,14 +6938,14 @@ they're rejected.</p>
 <a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a>
 <a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>    <span class="k">def</span> <span class="nf">mli_get_current_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Weights</span><span class="p">:</span>
-<a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a><span class="sd">        Returns the current weights of the model</span>
 <a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a>        <span class="k">pass</span>
 <a id="__codelineno-1-132" name="__codelineno-1-132" href="#__codelineno-1-132"></a>
 <a id="__codelineno-1-133" name="__codelineno-1-133" href="#__codelineno-1-133"></a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <a id="__codelineno-1-134" name="__codelineno-1-134" href="#__codelineno-1-134"></a>    <span class="k">def</span> <span class="nf">mli_get_current_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColearnModel</span><span class="p">:</span>
-<a id="__codelineno-1-135" name="__codelineno-1-135" href="#__codelineno-1-135"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-135" name="__codelineno-1-135" href="#__codelineno-1-135"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-136" name="__codelineno-1-136" href="#__codelineno-1-136"></a><span class="sd">        Returns the current model</span>
 <a id="__codelineno-1-137" name="__codelineno-1-137" href="#__codelineno-1-137"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-1-138" name="__codelineno-1-138" href="#__codelineno-1-138"></a>        <span class="k">pass</span> 

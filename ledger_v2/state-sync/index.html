@@ -6725,41 +6725,41 @@
 <h2 id="configuring-the-new-node">Configuring the new node<a class="headerlink" href="#configuring-the-new-node" title="Permanent link">&para;</a></h2>
 <p>In order to instruct the node to sync itself using a state sync snapshot, it need some configuration in the <code>~/.fetchd/config/config.toml</code> file.
 Open this file in an editor and lookup for the <code>statesync</code> section. By default, it should looks like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#######################################################</span><span class="w"></span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">###         State Sync Configuration Options        ###</span><span class="w"></span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">#######################################################</span><span class="w"></span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p p-Indicator">[</span><span class="nv">statesync</span><span class="p p-Indicator">]</span><span class="w"></span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># State sync rapidly bootstraps a new node by discovering, fetching, and restoring a state machine</span><span class="w"></span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># snapshot from peers instead of fetching and replaying historical blocks. Requires some peers in</span><span class="w"></span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># the network to take and serve state machine snapshots. State sync is not attempted if the node</span><span class="w"></span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># has any local state (LastBlockHeight &gt; 0). The node will have a truncated block history,</span><span class="w"></span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># starting from the height of the snapshot.</span><span class="w"></span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="l l-Scalar l-Scalar-Plain">enable = false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">###         State Sync Configuration Options        ###</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p p-Indicator">[</span><span class="nv">statesync</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># State sync rapidly bootstraps a new node by discovering, fetching, and restoring a state machine</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># snapshot from peers instead of fetching and replaying historical blocks. Requires some peers in</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># the network to take and serve state machine snapshots. State sync is not attempted if the node</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># has any local state (LastBlockHeight &gt; 0). The node will have a truncated block history,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># starting from the height of the snapshot.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="l l-Scalar l-Scalar-Plain">enable = false</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="l l-Scalar l-Scalar-Plain"># RPC servers (comma-separated) for light client verification of the synced state machine and</span><span class="w"></span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="l l-Scalar l-Scalar-Plain"># retrieval of state data for node bootstrapping. Also needs a trusted height and corresponding</span><span class="w"></span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="l l-Scalar l-Scalar-Plain"># header hash obtained from a trusted source, and a period during which validators can be trusted.</span><span class="w"></span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="l l-Scalar l-Scalar-Plain">#</span><span class="w"></span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="l l-Scalar l-Scalar-Plain"># For Cosmos SDK-based chains, trust_period should usually be about 2/3 of the unbonding time (~2</span><span class="w"></span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="l l-Scalar l-Scalar-Plain"># weeks) during which they can be financially punished (slashed) for misbehavior.</span><span class="w"></span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="l l-Scalar l-Scalar-Plain">rpc_servers = &quot;&quot;</span><span class="w"></span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="l l-Scalar l-Scalar-Plain">trust_height = 0</span><span class="w"></span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="l l-Scalar l-Scalar-Plain">trust_hash = &quot;&quot;</span><span class="w"></span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="l l-Scalar l-Scalar-Plain">trust_period = &quot;168h0m0s&quot;</span><span class="w"></span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="l l-Scalar l-Scalar-Plain"># RPC servers (comma-separated) for light client verification of the synced state machine and</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="l l-Scalar l-Scalar-Plain"># retrieval of state data for node bootstrapping. Also needs a trusted height and corresponding</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="l l-Scalar l-Scalar-Plain"># header hash obtained from a trusted source, and a period during which validators can be trusted.</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="l l-Scalar l-Scalar-Plain">#</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="l l-Scalar l-Scalar-Plain"># For Cosmos SDK-based chains, trust_period should usually be about 2/3 of the unbonding time (~2</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="l l-Scalar l-Scalar-Plain"># weeks) during which they can be financially punished (slashed) for misbehavior.</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="l l-Scalar l-Scalar-Plain">rpc_servers = &quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="l l-Scalar l-Scalar-Plain">trust_height = 0</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="l l-Scalar l-Scalar-Plain">trust_hash = &quot;&quot;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="l l-Scalar l-Scalar-Plain">trust_period = &quot;168h0m0s&quot;</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="l l-Scalar l-Scalar-Plain"># Time to spend discovering snapshots before initiating a restore.</span><span class="w"></span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="l l-Scalar l-Scalar-Plain">discovery_time = &quot;15s&quot;</span><span class="w"></span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="l l-Scalar l-Scalar-Plain"># Time to spend discovering snapshots before initiating a restore.</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="l l-Scalar l-Scalar-Plain">discovery_time = &quot;15s&quot;</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="l l-Scalar l-Scalar-Plain"># Temporary directory for state sync snapshot chunks, defaults to the OS tempdir (typically /tmp).</span><span class="w"></span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="l l-Scalar l-Scalar-Plain"># Will create a new, randomly named directory within, and remove it when done.</span><span class="w"></span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="l l-Scalar l-Scalar-Plain">temp_dir = &quot;&quot;</span><span class="w"></span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="l l-Scalar l-Scalar-Plain"># Temporary directory for state sync snapshot chunks, defaults to the OS tempdir (typically /tmp).</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="l l-Scalar l-Scalar-Plain"># Will create a new, randomly named directory within, and remove it when done.</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="l l-Scalar l-Scalar-Plain">temp_dir = &quot;&quot;</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="l l-Scalar l-Scalar-Plain"># The timeout duration before re-requesting a chunk, possibly from a different</span><span class="w"></span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="l l-Scalar l-Scalar-Plain"># peer (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 minute).</span><span class="w"></span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="l l-Scalar l-Scalar-Plain">chunk_request_timeout = &quot;10s&quot;</span><span class="w"></span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="l l-Scalar l-Scalar-Plain"># The timeout duration before re-requesting a chunk, possibly from a different</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="l l-Scalar l-Scalar-Plain"># peer (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 minute).</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="l l-Scalar l-Scalar-Plain">chunk_request_timeout = &quot;10s&quot;</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="c1"># The number of concurrent chunk fetchers to run (default: 1).</span><span class="w"></span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="l l-Scalar l-Scalar-Plain">chunk_fetchers = &quot;4&quot;</span><span class="w"></span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="c1"># The number of concurrent chunk fetchers to run (default: 1).</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="l l-Scalar l-Scalar-Plain">chunk_fetchers = &quot;4&quot;</span>
 </code></pre></div>
 <p>A few changes are needed:</p>
 <ul>
@@ -6769,19 +6769,19 @@ Open this file in an editor and lookup for the <code>statesync</code> section. B
 <li>And last, set <code>chunk_request_timeout</code> to <code>60s</code> (the <code>10s</code> default value seems too short and can lead to "context deadline exceeded" timeout errors when verifying the hashes)</li>
 </ul>
 <p>To retrieve the correct value for a fetch.ai RPC server, and the current network height, use:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl https://rpc-fetchhub.fetch.ai:443/block <span class="p">|</span> jq -r <span class="s1">&#39;{&quot;trusted_hash&quot;: .result.block_id.hash, &quot;trusted_height&quot;: .result.block.header.height}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>https://rpc-fetchhub.fetch.ai:443/block<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;{&quot;trusted_hash&quot;: .result.block_id.hash, &quot;trusted_height&quot;: .result.block.header.height}&#39;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="s2">&quot;trusted_hash&quot;</span>: <span class="s2">&quot;...some hash...&quot;</span>,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="s2">&quot;trusted_height&quot;</span>: <span class="s2">&quot;...some height...&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="s2">&quot;trusted_hash&quot;</span>:<span class="w"> </span><span class="s2">&quot;...some hash...&quot;</span>,
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="s2">&quot;trusted_height&quot;</span>:<span class="w"> </span><span class="s2">&quot;...some height...&quot;</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">}</span>
 </code></pre></div>
 <p>and set the trusted_hash and trusted_height values in the config file.</p>
 <p>Once this is set, make sure you have the correct genesis by downloading it from the RPC node:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl https://raw.githubusercontent.com/fetchai/genesis-fetchhub/fetchhub-4/fetchhub-4/data/genesis_migrated_5300200.json --output ~/.fetchd/config/genesis.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>https://raw.githubusercontent.com/fetchai/genesis-fetchhub/fetchhub-4/fetchhub-4/data/genesis_migrated_5300200.json<span class="w"> </span>--output<span class="w"> </span>~/.fetchd/config/genesis.json
 </code></pre></div>
 <p>and start the node using the seeds from the chain-registry:</p>
 <!--email_off-->
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd start --p2p.seeds<span class="o">=</span><span class="s2">&quot;17693da418c15c95d629994a320e2c4f51a8069b@connect-fetchhub.fetch.ai:36456,a575c681c2861fe945f77cb3aba0357da294f1f2@connect-fetchhub.fetch.ai:36457,d7cda986c9f59ab9e05058a803c3d0300d15d8da@connect-fetchhub.fetch.ai:36458&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd<span class="w"> </span>start<span class="w"> </span>--p2p.seeds<span class="o">=</span><span class="s2">&quot;17693da418c15c95d629994a320e2c4f51a8069b@connect-fetchhub.fetch.ai:36456,a575c681c2861fe945f77cb3aba0357da294f1f2@connect-fetchhub.fetch.ai:36457,d7cda986c9f59ab9e05058a803c3d0300d15d8da@connect-fetchhub.fetch.ai:36458&quot;</span>
 </code></pre></div>
 <!--/email_off-->
 

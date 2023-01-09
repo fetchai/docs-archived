@@ -6890,8 +6890,8 @@
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start.</p>
 <h2 id="step-1-setup">Step 1: Setup<a class="headerlink" href="#step-1-setup" title="Permanent link">&para;</a></h2>
 <p>We will first create an AEA and add a scaffold skill, which we call <code>my_search</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea create my_aea <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my_aea
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>aea scaffold skill my_search
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea<span class="w"> </span>create<span class="w"> </span>my_aea<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my_aea
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>aea<span class="w"> </span>scaffold<span class="w"> </span>skill<span class="w"> </span>my_search
 </code></pre></div>
 <p>In the following steps, we replace the scaffolded <code>Behaviour</code> and <code>Handler</code> in <code>my_aea/skills/my_search</code> with our implementation. We will build a simple skill which lets the AEA send a search query to the <a href="../simple-oef">SOEF search node</a> and process the resulting response.</p>
 <h2 id="step-2-develop-a-behaviour">Step 2: Develop a Behaviour<a class="headerlink" href="#step-2-develop-a-behaviour" title="Permanent link">&para;</a></h2>
@@ -6915,10 +6915,10 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">class</span> <span class="nc">MySearchBehaviour</span><span class="p">(</span><span class="n">TickerBehaviour</span><span class="p">):</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="sd">&quot;&quot;&quot;This class provides a simple search behaviour.&quot;&quot;&quot;</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class provides a simple search behaviour.&quot;&quot;&quot;</span>
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="sd">&quot;&quot;&quot;Initialize the search behaviour.&quot;&quot;&quot;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the search behaviour.&quot;&quot;&quot;</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="n">search_query</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;search_query&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SEARCH_QUERY</span><span class="p">)</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>        <span class="n">location</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">DEFAULT_LOCATION</span><span class="p">)</span>
@@ -6939,7 +6939,7 @@
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sent_search_count</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>
 <a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="sd">        Implement the setup.</span>
 <a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
 <a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="sd">        :return: None</span>
@@ -6949,7 +6949,7 @@
 <a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>        <span class="p">)</span>
 <a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
 <a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="sd">        Implement the act.</span>
 <a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
 <a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="sd">        :return: None</span>
@@ -6971,7 +6971,7 @@
 <a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">outbox</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">search_request</span><span class="p">)</span>
 <a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
 <a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="sd">        Implement the task teardown.</span>
 <a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
 <a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="sd">        :return: None</span>
@@ -7003,23 +7003,23 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">class</span> <span class="nc">MySearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="sd">&quot;&quot;&quot;This class provides a simple search handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class provides a simple search handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">protocol_id</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="sd">&quot;&quot;&quot;Initialize the handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">received_search_count</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="sd">&quot;&quot;&quot;Set up the handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up the handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>            <span class="s2">&quot;setting up MySearchHandler&quot;</span>
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="p">)</span>
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="sd">        Implement the reaction to a message.</span>
 <a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
 <a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="sd">        :param message: the message</span>
@@ -7047,7 +7047,7 @@
 <a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
 <a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>
 <a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a><span class="sd">        Handle an unidentified dialogue.</span>
 <a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>
 <a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a><span class="sd">        :param msg: the message</span>
@@ -7061,7 +7061,7 @@
 <a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>    <span class="k">def</span> <span class="nf">_handle_error</span><span class="p">(</span>
 <a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
 <a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>
 <a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a><span class="sd">        :param oef_search_msg: the oef search message</span>
@@ -7077,7 +7077,7 @@
 <a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>    <span class="k">def</span> <span class="nf">_handle_search</span><span class="p">(</span>
 <a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
 <a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a><span class="sd">        Handle the search response.</span>
 <a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>
 <a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a><span class="sd">        :param agents: the agents returned by the search</span>
@@ -7100,7 +7100,7 @@
 <a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
 <a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
 <a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a>
 <a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a><span class="sd">        :param oef_search_msg: the oef search message</span>
@@ -7114,7 +7114,7 @@
 <a id="__codelineno-2-122" name="__codelineno-2-122" href="#__codelineno-2-122"></a>        <span class="p">)</span>
 <a id="__codelineno-2-123" name="__codelineno-2-123" href="#__codelineno-2-123"></a>
 <a id="__codelineno-2-124" name="__codelineno-2-124" href="#__codelineno-2-124"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-2-126" name="__codelineno-2-126" href="#__codelineno-2-126"></a><span class="sd">        Teardown the handler.</span>
 <a id="__codelineno-2-127" name="__codelineno-2-127" href="#__codelineno-2-127"></a>
 <a id="__codelineno-2-128" name="__codelineno-2-128" href="#__codelineno-2-128"></a><span class="sd">        :return: None</span>
@@ -7146,10 +7146,10 @@
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">class</span> <span class="nc">OefSearchDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseOefSearchDialogues</span><span class="p">):</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
 <a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="sd">        Initialize dialogues.</span>
 <a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
 <a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
@@ -7160,7 +7160,7 @@
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span>  <span class="c1"># pylint: disable=unused-argument</span>
 <a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>            <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">receiver_address</span><span class="p">:</span> <span class="n">Address</span>
 <a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>            <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">            </span><span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
 <a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="sd">            :param message: an incoming/outgoing first message</span>
 <a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="sd">            :param receiver_address: the address of the receiving agent</span>
@@ -7177,45 +7177,45 @@
 <p>We add this code in the file <code>my_aea/skills/my_search/my_model.py</code>, replacing its original content. We then rename <code>my_aea/skills/my_search/my_model.py</code> to <code>my_aea/skills/my_search/dialogues.py</code>.</p>
 <h2 id="step-5-create-the-configuration-file">Step 5: Create the configuration file<a class="headerlink" href="#step-5-create-the-configuration-file" title="Permanent link">&para;</a></h2>
 <p>Based on our skill components above, we create the following configuration file.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_search</span><span class="w"></span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span><span class="w"></span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skill</span><span class="w"></span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A simple search skill utilising the SOEF search node.</span><span class="w"></span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span><span class="w"></span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nt">aea_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=1.0.0,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span><span class="w"></span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nt">fingerprint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nt">connections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nt">contracts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nt">protocols</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:1.1.4</span><span class="w"></span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nt">skills</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nt">behaviours</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="nt">my_search_behaviour</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span><span class="w"></span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span><span class="w"></span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">      </span><span class="nt">search_query</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">        </span><span class="nt">constraint_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">==</span><span class="w"></span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">        </span><span class="nt">search_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span><span class="w"></span>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">        </span><span class="nt">search_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_service</span><span class="w"></span>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">      </span><span class="nt">search_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w"></span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">      </span><span class="nt">tick_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w"></span>
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MySearchBehaviour</span><span class="w"></span>
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="nt">handlers</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">  </span><span class="nt">my_search_handler</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MySearchHandler</span><span class="w"></span>
-<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="nt">models</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">  </span><span class="nt">oef_search_dialogues</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span><span class="w"></span>
-<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">  </span><span class="nt">aea-ledger-fetchai</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;2.0.0,&gt;=1.0.0</span><span class="w"></span>
-<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="nt">is_abstract</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_search</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skill</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A simple search skill utilising the SOEF search node.</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nt">aea_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=1.0.0,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nt">fingerprint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nt">connections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nt">contracts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nt">protocols</span><span class="p">:</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:1.1.4</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nt">skills</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nt">behaviours</span><span class="p">:</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="nt">my_search_behaviour</span><span class="p">:</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">      </span><span class="nt">search_query</span><span class="p">:</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">        </span><span class="nt">constraint_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">==</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">        </span><span class="nt">search_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">        </span><span class="nt">search_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">      </span><span class="nt">search_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">      </span><span class="nt">tick_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MySearchBehaviour</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="nt">handlers</span><span class="p">:</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">  </span><span class="nt">my_search_handler</span><span class="p">:</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MySearchHandler</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">  </span><span class="nt">oef_search_dialogues</span><span class="p">:</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="nt">dependencies</span><span class="p">:</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">  </span><span class="nt">aea-ledger-fetchai</span><span class="p">:</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;2.0.0,&gt;=1.0.0</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="nt">is_abstract</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>Ensure, you replace the author field with your author name! (Run <code>aea init</code> to set or check the author name.)</p>
 <p>Importantly, the keys <code>my_search_behaviour</code> and <code>my_search_handler</code> are used in the above handler to access these skill components at runtime via the context. We also set the <code>tick_interval</code> of the <code>TickerBehaviour</code> to <code>5</code> seconds.</p>
@@ -7250,21 +7250,21 @@
 Again, ensure the author field matches your own.</p>
 <h2 id="step-6-update-fingerprint">Step 6: Update fingerprint<a class="headerlink" href="#step-6-update-fingerprint" title="Permanent link">&para;</a></h2>
 <p>To run an AEA with new or modified code, you need to update the fingerprint of the new/modified components. In this case, we need to fingerprint our skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea fingerprint skill fetchai/my_search:0.1.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>fingerprint<span class="w"> </span>skill<span class="w"> </span>fetchai/my_search:0.1.0
 </code></pre></div>
 Ensure, you use the correct author name to reference your skill (here we use <code>fetchai</code> as the author.)</p>
 <h2 id="step-7-add-the-oef-protocol-and-connection">Step 7: Add the OEF protocol and connection<a class="headerlink" href="#step-7-add-the-oef-protocol-and-connection" title="Permanent link">&para;</a></h2>
 <p>Our AEA does not have the OEF protocol yet so let's add it.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea add protocol fetchai/oef_search:1.1.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>add<span class="w"> </span>protocol<span class="w"> </span>fetchai/oef_search:1.1.4
 </code></pre></div></p>
 <p>This adds the protocol to our AEA and makes it available on the path <code>packages.fetchai.protocols...</code>.</p>
 <p>At this point we need to add the SOEF and P2P connections to allow the AEA to communicate with the SOEF node and other AEAs, install the AEA's dependencies, and configure the AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>aea install
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>aea build
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>aea<span class="w"> </span>build
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s1">}&#39;</span>
@@ -7273,22 +7273,22 @@ Ensure, you use the correct author name to reference your skill (here we use <co
 <h2 id="step-8-run-a-service-provider-aea">Step 8: Run a service provider AEA<a class="headerlink" href="#step-8-run-a-service-provider-aea" title="Permanent link">&para;</a></h2>
 <p>In order for this AEA to find another AEA when searching, the second AEA (let's call it the service provider AEA) must exist and have been registered with the SOEF. </p>
 <p>From a different terminal window, we fetch a finished service provider AEA and install its Python dependencies:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea fetch fetchai/simple_service_registration:0.32.3 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> simple_service_registration <span class="o">&amp;&amp;</span> aea install <span class="o">&amp;&amp;</span> aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/simple_service_registration:0.32.3<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>simple_service_registration<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>aea<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>aea<span class="w"> </span>build
 </code></pre></div></p>
 <p>This AEA will simply register a location service on the <a href="../simple-oef">SOEF search node</a> so we can search for it.</p>
 <p>We first create the private key for the service provider AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea generate-key fetchai
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <p>Then we run the AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea<span class="w"> </span>run
 </code></pre></div></p>
 <p>Once you see a message of the form <code>To join its network use multiaddr: ['SOME_ADDRESS']</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.3 -u public_uri</code> to retrieve the address.) This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the <code>simple_service_registration</code> (service provider) AEA.</p>
 <details><summary>Click here to see full code and guide for this AEA</summary>
@@ -7313,10 +7313,10 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
 <a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="k">class</span> <span class="nc">ServiceRegistrationBehaviour</span><span class="p">(</span><span class="n">TickerBehaviour</span><span class="p">):</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    <span class="sd">&quot;&quot;&quot;This class implements a behaviour.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class implements a behaviour.&quot;&quot;&quot;</span>
 <a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
 <a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>        <span class="sd">&quot;&quot;&quot;Initialise the behaviour.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the behaviour.&quot;&quot;&quot;</span>
 <a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>        <span class="n">services_interval</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
 <a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>            <span class="s2">&quot;services_interval&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SERVICES_INTERVAL</span>
 <a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>        <span class="p">)</span>  <span class="c1"># type: int</span>
@@ -7329,7 +7329,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_nb_retries</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>
 <a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="sd">        Implement the setup.</span>
 <a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>
 <a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="sd">        :return: None</span>
@@ -7337,7 +7337,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_register_agent</span><span class="p">()</span>
 <a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>
 <a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a><span class="sd">        Implement the act.</span>
 <a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>
 <a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a><span class="sd">        :return: None</span>
@@ -7345,7 +7345,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_retry_failed_registration</span><span class="p">()</span>
 <a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>
 <a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a><span class="sd">        Implement the task teardown.</span>
 <a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a>
 <a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a><span class="sd">        :return: None</span>
@@ -7354,7 +7354,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_unregister_agent</span><span class="p">()</span>
 <a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a>
 <a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a>    <span class="k">def</span> <span class="nf">_retry_failed_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a><span class="sd">        Retry a failed registration.</span>
 <a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a>
 <a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a><span class="sd">        :return: None</span>
@@ -7381,7 +7381,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-83" name="__codelineno-14-83" href="#__codelineno-14-83"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">failed_registration_msg</span> <span class="o">=</span> <span class="kc">None</span>
 <a id="__codelineno-14-84" name="__codelineno-14-84" href="#__codelineno-14-84"></a>
 <a id="__codelineno-14-85" name="__codelineno-14-85" href="#__codelineno-14-85"></a>    <span class="k">def</span> <span class="nf">_register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Description</span><span class="p">,</span> <span class="n">logger_msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-86" name="__codelineno-14-86" href="#__codelineno-14-86"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-86" name="__codelineno-14-86" href="#__codelineno-14-86"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-87" name="__codelineno-14-87" href="#__codelineno-14-87"></a><span class="sd">        Register something on the SOEF.</span>
 <a id="__codelineno-14-88" name="__codelineno-14-88" href="#__codelineno-14-88"></a>
 <a id="__codelineno-14-89" name="__codelineno-14-89" href="#__codelineno-14-89"></a><span class="sd">        :param description: the description of what is being registered</span>
@@ -7401,7 +7401,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-103" name="__codelineno-14-103" href="#__codelineno-14-103"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">logger_msg</span><span class="p">)</span>
 <a id="__codelineno-14-104" name="__codelineno-14-104" href="#__codelineno-14-104"></a>
 <a id="__codelineno-14-105" name="__codelineno-14-105" href="#__codelineno-14-105"></a>    <span class="k">def</span> <span class="nf">_register_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-106" name="__codelineno-14-106" href="#__codelineno-14-106"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-106" name="__codelineno-14-106" href="#__codelineno-14-106"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-107" name="__codelineno-14-107" href="#__codelineno-14-107"></a><span class="sd">        Register the agent&#39;s location.</span>
 <a id="__codelineno-14-108" name="__codelineno-14-108" href="#__codelineno-14-108"></a>
 <a id="__codelineno-14-109" name="__codelineno-14-109" href="#__codelineno-14-109"></a><span class="sd">        :return: None</span>
@@ -7411,7 +7411,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-113" name="__codelineno-14-113" href="#__codelineno-14-113"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent on SOEF.&quot;</span><span class="p">)</span>
 <a id="__codelineno-14-114" name="__codelineno-14-114" href="#__codelineno-14-114"></a>
 <a id="__codelineno-14-115" name="__codelineno-14-115" href="#__codelineno-14-115"></a>    <span class="k">def</span> <span class="nf">register_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-116" name="__codelineno-14-116" href="#__codelineno-14-116"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-116" name="__codelineno-14-116" href="#__codelineno-14-116"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-117" name="__codelineno-14-117" href="#__codelineno-14-117"></a><span class="sd">        Register the agent&#39;s service.</span>
 <a id="__codelineno-14-118" name="__codelineno-14-118" href="#__codelineno-14-118"></a>
 <a id="__codelineno-14-119" name="__codelineno-14-119" href="#__codelineno-14-119"></a><span class="sd">        :return: None</span>
@@ -7421,7 +7421,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-123" name="__codelineno-14-123" href="#__codelineno-14-123"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;registering agent&#39;s service on the SOEF.&quot;</span><span class="p">)</span>
 <a id="__codelineno-14-124" name="__codelineno-14-124" href="#__codelineno-14-124"></a>
 <a id="__codelineno-14-125" name="__codelineno-14-125" href="#__codelineno-14-125"></a>    <span class="k">def</span> <span class="nf">register_genus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-126" name="__codelineno-14-126" href="#__codelineno-14-126"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-126" name="__codelineno-14-126" href="#__codelineno-14-126"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-127" name="__codelineno-14-127" href="#__codelineno-14-127"></a><span class="sd">        Register the agent&#39;s personality genus.</span>
 <a id="__codelineno-14-128" name="__codelineno-14-128" href="#__codelineno-14-128"></a>
 <a id="__codelineno-14-129" name="__codelineno-14-129" href="#__codelineno-14-129"></a><span class="sd">        :return: None</span>
@@ -7433,7 +7433,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-135" name="__codelineno-14-135" href="#__codelineno-14-135"></a>        <span class="p">)</span>
 <a id="__codelineno-14-136" name="__codelineno-14-136" href="#__codelineno-14-136"></a>
 <a id="__codelineno-14-137" name="__codelineno-14-137" href="#__codelineno-14-137"></a>    <span class="k">def</span> <span class="nf">register_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-138" name="__codelineno-14-138" href="#__codelineno-14-138"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-138" name="__codelineno-14-138" href="#__codelineno-14-138"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-139" name="__codelineno-14-139" href="#__codelineno-14-139"></a><span class="sd">        Register the agent&#39;s personality classification.</span>
 <a id="__codelineno-14-140" name="__codelineno-14-140" href="#__codelineno-14-140"></a>
 <a id="__codelineno-14-141" name="__codelineno-14-141" href="#__codelineno-14-141"></a><span class="sd">        :return: None</span>
@@ -7445,7 +7445,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-147" name="__codelineno-14-147" href="#__codelineno-14-147"></a>        <span class="p">)</span>
 <a id="__codelineno-14-148" name="__codelineno-14-148" href="#__codelineno-14-148"></a>
 <a id="__codelineno-14-149" name="__codelineno-14-149" href="#__codelineno-14-149"></a>    <span class="k">def</span> <span class="nf">_unregister_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-150" name="__codelineno-14-150" href="#__codelineno-14-150"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-150" name="__codelineno-14-150" href="#__codelineno-14-150"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-151" name="__codelineno-14-151" href="#__codelineno-14-151"></a><span class="sd">        Unregister service from the SOEF.</span>
 <a id="__codelineno-14-152" name="__codelineno-14-152" href="#__codelineno-14-152"></a>
 <a id="__codelineno-14-153" name="__codelineno-14-153" href="#__codelineno-14-153"></a><span class="sd">        :return: None</span>
@@ -7464,7 +7464,7 @@ We use a <a href="../api/skills/behaviours#tickerbehaviour-objects"><code>Ticker
 <a id="__codelineno-14-166" name="__codelineno-14-166" href="#__codelineno-14-166"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;unregistering service from SOEF.&quot;</span><span class="p">)</span>
 <a id="__codelineno-14-167" name="__codelineno-14-167" href="#__codelineno-14-167"></a>
 <a id="__codelineno-14-168" name="__codelineno-14-168" href="#__codelineno-14-168"></a>    <span class="k">def</span> <span class="nf">_unregister_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-14-169" name="__codelineno-14-169" href="#__codelineno-14-169"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-169" name="__codelineno-14-169" href="#__codelineno-14-169"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-170" name="__codelineno-14-170" href="#__codelineno-14-170"></a><span class="sd">        Unregister agent from the SOEF.</span>
 <a id="__codelineno-14-171" name="__codelineno-14-171" href="#__codelineno-14-171"></a>
 <a id="__codelineno-14-172" name="__codelineno-14-172" href="#__codelineno-14-172"></a><span class="sd">        :return: None</span>
@@ -7505,10 +7505,10 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>
 <a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>
 <a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>    <span class="sd">&quot;&quot;&quot;This class defines a strategy for the agent.&quot;&quot;&quot;</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines a strategy for the agent.&quot;&quot;&quot;</span>
 <a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>
 <a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="sd">        Initialize the strategy of the agent.</span>
 <a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>
 <a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="sd">        :return: None</span>
@@ -7546,7 +7546,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-59" name="__codelineno-15-59" href="#__codelineno-15-59"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <a id="__codelineno-15-60" name="__codelineno-15-60" href="#__codelineno-15-60"></a>
 <a id="__codelineno-15-61" name="__codelineno-15-61" href="#__codelineno-15-61"></a>    <span class="k">def</span> <span class="nf">get_location_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
-<a id="__codelineno-15-62" name="__codelineno-15-62" href="#__codelineno-15-62"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-62" name="__codelineno-15-62" href="#__codelineno-15-62"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-63" name="__codelineno-15-63" href="#__codelineno-15-63"></a><span class="sd">        Get the location description.</span>
 <a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a>
 <a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a><span class="sd">        :return: a description of the agent&#39;s location</span>
@@ -7557,7 +7557,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-70" name="__codelineno-15-70" href="#__codelineno-15-70"></a>        <span class="k">return</span> <span class="n">description</span>
 <a id="__codelineno-15-71" name="__codelineno-15-71" href="#__codelineno-15-71"></a>
 <a id="__codelineno-15-72" name="__codelineno-15-72" href="#__codelineno-15-72"></a>    <span class="k">def</span> <span class="nf">get_register_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
-<a id="__codelineno-15-73" name="__codelineno-15-73" href="#__codelineno-15-73"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-73" name="__codelineno-15-73" href="#__codelineno-15-73"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-74" name="__codelineno-15-74" href="#__codelineno-15-74"></a><span class="sd">        Get the register service description.</span>
 <a id="__codelineno-15-75" name="__codelineno-15-75" href="#__codelineno-15-75"></a>
 <a id="__codelineno-15-76" name="__codelineno-15-76" href="#__codelineno-15-76"></a><span class="sd">        :return: a description of the offered services</span>
@@ -7568,7 +7568,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-81" name="__codelineno-15-81" href="#__codelineno-15-81"></a>        <span class="k">return</span> <span class="n">description</span>
 <a id="__codelineno-15-82" name="__codelineno-15-82" href="#__codelineno-15-82"></a>
 <a id="__codelineno-15-83" name="__codelineno-15-83" href="#__codelineno-15-83"></a>    <span class="k">def</span> <span class="nf">get_register_personality_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
-<a id="__codelineno-15-84" name="__codelineno-15-84" href="#__codelineno-15-84"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-84" name="__codelineno-15-84" href="#__codelineno-15-84"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-85" name="__codelineno-15-85" href="#__codelineno-15-85"></a><span class="sd">        Get the register personality description.</span>
 <a id="__codelineno-15-86" name="__codelineno-15-86" href="#__codelineno-15-86"></a>
 <a id="__codelineno-15-87" name="__codelineno-15-87" href="#__codelineno-15-87"></a><span class="sd">        :return: a description of the personality</span>
@@ -7579,7 +7579,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-92" name="__codelineno-15-92" href="#__codelineno-15-92"></a>        <span class="k">return</span> <span class="n">description</span>
 <a id="__codelineno-15-93" name="__codelineno-15-93" href="#__codelineno-15-93"></a>
 <a id="__codelineno-15-94" name="__codelineno-15-94" href="#__codelineno-15-94"></a>    <span class="k">def</span> <span class="nf">get_register_classification_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
-<a id="__codelineno-15-95" name="__codelineno-15-95" href="#__codelineno-15-95"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-95" name="__codelineno-15-95" href="#__codelineno-15-95"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-96" name="__codelineno-15-96" href="#__codelineno-15-96"></a><span class="sd">        Get the register classification description.</span>
 <a id="__codelineno-15-97" name="__codelineno-15-97" href="#__codelineno-15-97"></a>
 <a id="__codelineno-15-98" name="__codelineno-15-98" href="#__codelineno-15-98"></a><span class="sd">        :return: a description of the classification</span>
@@ -7590,7 +7590,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-15-103" name="__codelineno-15-103" href="#__codelineno-15-103"></a>        <span class="k">return</span> <span class="n">description</span>
 <a id="__codelineno-15-104" name="__codelineno-15-104" href="#__codelineno-15-104"></a>
 <a id="__codelineno-15-105" name="__codelineno-15-105" href="#__codelineno-15-105"></a>    <span class="k">def</span> <span class="nf">get_unregister_service_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Description</span><span class="p">:</span>
-<a id="__codelineno-15-106" name="__codelineno-15-106" href="#__codelineno-15-106"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-106" name="__codelineno-15-106" href="#__codelineno-15-106"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-107" name="__codelineno-15-107" href="#__codelineno-15-107"></a><span class="sd">        Get the unregister service description.</span>
 <a id="__codelineno-15-108" name="__codelineno-15-108" href="#__codelineno-15-108"></a>
 <a id="__codelineno-15-109" name="__codelineno-15-109" href="#__codelineno-15-109"></a><span class="sd">        :return: a description of the to be removed service</span>
@@ -7621,10 +7621,10 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
 <a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
 <a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="k">class</span> <span class="nc">OefSearchDialogues</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">BaseOefSearchDialogues</span><span class="p">):</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>    <span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class keeps track of all oef_search dialogues.&quot;&quot;&quot;</span>
 <a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>
 <a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="sd">        Initialize dialogues.</span>
 <a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>
 <a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="sd">        :param agent_address: the address of the agent for whom dialogues are maintained</span>
@@ -7635,7 +7635,7 @@ We create a <a href="../api/skills/base#model-objects"><code>Model</code></a> ty
 <a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a>        <span class="k">def</span> <span class="nf">role_from_first_message</span><span class="p">(</span>  <span class="c1"># pylint: disable=unused-argument</span>
 <a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a>            <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">receiver_address</span><span class="p">:</span> <span class="n">Address</span>
 <a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a>        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDialogue</span><span class="o">.</span><span class="n">Role</span><span class="p">:</span>
-<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a>            <span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="w">            </span><span class="sd">&quot;&quot;&quot;Infer the role of the agent from an incoming/outgoing first message</span>
 <a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a>
 <a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="sd">            :param message: an incoming/outgoing first message</span>
 <a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="sd">            :param receiver_address: the address of the receiving agent</span>
@@ -7669,15 +7669,15 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 <a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
 <a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
 <a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="k">class</span> <span class="nc">OefSearchHandler</span><span class="p">(</span><span class="n">Handler</span><span class="p">):</span>
-<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>    <span class="sd">&quot;&quot;&quot;This class implements an OEF search handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class implements an OEF search handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>
 <a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>    <span class="n">SUPPORTED_PROTOCOL</span> <span class="o">=</span> <span class="n">OefSearchMessage</span><span class="o">.</span><span class="n">protocol_id</span>  <span class="c1"># type: Optional[PublicId]</span>
 <a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>
 <a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>        <span class="sd">&quot;&quot;&quot;Call to setup the handler.&quot;&quot;&quot;</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Call to setup the handler.&quot;&quot;&quot;</span>
 <a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>
 <a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="sd">        Implement the reaction to a message.</span>
 <a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>
 <a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="sd">        :param message: the message</span>
@@ -7705,14 +7705,14 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 <a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_handle_invalid</span><span class="p">(</span><span class="n">oef_search_msg</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">)</span>
 <a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>
 <a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a><span class="sd">        Implement the handler teardown.</span>
 <a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>
 <a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a><span class="sd">        :return: None</span>
 <a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a>
 <a id="__codelineno-17-60" name="__codelineno-17-60" href="#__codelineno-17-60"></a>    <span class="k">def</span> <span class="nf">_handle_unidentified_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-61" name="__codelineno-17-61" href="#__codelineno-17-61"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-61" name="__codelineno-17-61" href="#__codelineno-17-61"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-62" name="__codelineno-17-62" href="#__codelineno-17-62"></a><span class="sd">        Handle an unidentified dialogue.</span>
 <a id="__codelineno-17-63" name="__codelineno-17-63" href="#__codelineno-17-63"></a>
 <a id="__codelineno-17-64" name="__codelineno-17-64" href="#__codelineno-17-64"></a><span class="sd">        :param msg: the message</span>
@@ -7728,7 +7728,7 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 <a id="__codelineno-17-74" name="__codelineno-17-74" href="#__codelineno-17-74"></a>        <span class="n">oef_search_success_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span>
 <a id="__codelineno-17-75" name="__codelineno-17-75" href="#__codelineno-17-75"></a>        <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span><span class="p">,</span>
 <a id="__codelineno-17-76" name="__codelineno-17-76" href="#__codelineno-17-76"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-77" name="__codelineno-17-77" href="#__codelineno-17-77"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-77" name="__codelineno-17-77" href="#__codelineno-17-77"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-78" name="__codelineno-17-78" href="#__codelineno-17-78"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-17-79" name="__codelineno-17-79" href="#__codelineno-17-79"></a>
 <a id="__codelineno-17-80" name="__codelineno-17-80" href="#__codelineno-17-80"></a><span class="sd">        :param oef_search_success_msg: the oef search message</span>
@@ -7779,7 +7779,7 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 <a id="__codelineno-17-125" name="__codelineno-17-125" href="#__codelineno-17-125"></a>        <span class="n">oef_search_error_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span>
 <a id="__codelineno-17-126" name="__codelineno-17-126" href="#__codelineno-17-126"></a>        <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span><span class="p">,</span>
 <a id="__codelineno-17-127" name="__codelineno-17-127" href="#__codelineno-17-127"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-128" name="__codelineno-17-128" href="#__codelineno-17-128"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-128" name="__codelineno-17-128" href="#__codelineno-17-128"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-129" name="__codelineno-17-129" href="#__codelineno-17-129"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-17-130" name="__codelineno-17-130" href="#__codelineno-17-130"></a>
 <a id="__codelineno-17-131" name="__codelineno-17-131" href="#__codelineno-17-131"></a><span class="sd">        :param oef_search_error_msg: the oef search message</span>
@@ -7807,7 +7807,7 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 <a id="__codelineno-17-153" name="__codelineno-17-153" href="#__codelineno-17-153"></a>    <span class="k">def</span> <span class="nf">_handle_invalid</span><span class="p">(</span>
 <a id="__codelineno-17-154" name="__codelineno-17-154" href="#__codelineno-17-154"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">oef_search_msg</span><span class="p">:</span> <span class="n">OefSearchMessage</span><span class="p">,</span> <span class="n">oef_search_dialogue</span><span class="p">:</span> <span class="n">OefSearchDialogue</span>
 <a id="__codelineno-17-155" name="__codelineno-17-155" href="#__codelineno-17-155"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-17-156" name="__codelineno-17-156" href="#__codelineno-17-156"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-156" name="__codelineno-17-156" href="#__codelineno-17-156"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-17-157" name="__codelineno-17-157" href="#__codelineno-17-157"></a><span class="sd">        Handle an oef search message.</span>
 <a id="__codelineno-17-158" name="__codelineno-17-158" href="#__codelineno-17-158"></a>
 <a id="__codelineno-17-159" name="__codelineno-17-159" href="#__codelineno-17-159"></a><span class="sd">        :param oef_search_msg: the oef search message</span>
@@ -7823,75 +7823,75 @@ Finally, we have a handler, placed in <code>handlers.py</code>. The handler deal
 
 The associated <code>skill.yaml</code> is:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple_service_registration</span><span class="w"></span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.20.0</span><span class="w"></span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skill</span><span class="w"></span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The simple service registration skills is a skill to register a service.</span><span class="w"></span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span><span class="w"></span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nt">aea_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=1.0.0,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span><span class="w"></span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="nt">fingerprint</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="nt">README.md</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmUgCcR7sDBQeeCBRKwDT7tPBTi3t4zSibyEqR3xdQUKmh</span><span class="w"></span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">  </span><span class="nt">__init__.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmZd48HmYDr7FMxNaVeGfWRvVtieEdEV78hd7h7roTceP2</span><span class="w"></span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="nt">behaviours.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmQHf6QL5aBtLJ34D2tdcbjJLbzom9gaA3HWgRn3rWyigM</span><span class="w"></span>
-<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">  </span><span class="nt">dialogues.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmTT9dvFhWt6qvxjwBfMFDTrgEtgWbvgANYafyRg2BXwcR</span><span class="w"></span>
-<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">  </span><span class="nt">handlers.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmZqPt8toGbJgTT6NZBLxjkusrQCZ8GmUEwcmqZ1sd7DpG</span><span class="w"></span>
-<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">  </span><span class="nt">strategy.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmVXfQpk4cjDw576H2ELE12tEiN5brPkwvffvcTeMbsugA</span><span class="w"></span>
-<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="nt">connections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="nt">contracts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="nt">protocols</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:1.1.4</span><span class="w"></span>
-<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="nt">skills</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
-<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="nt">behaviours</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="w">  </span><span class="nt">service</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="w">      </span><span class="nt">max_soef_registration_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w"></span>
-<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="w">      </span><span class="nt">services_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w"></span>
-<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceRegistrationBehaviour</span><span class="w"></span>
-<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="nt">handlers</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="w">  </span><span class="nt">oef_search</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchHandler</span><span class="w"></span>
-<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="nt">models</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="w">  </span><span class="nt">oef_search_dialogues</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span><span class="w"></span>
-<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="w">      </span><span class="nt">classification</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="w">        </span><span class="nt">piece</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classification</span><span class="w"></span>
-<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller</span><span class="w"></span>
-<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span><span class="w"></span>
-<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span><span class="w"></span>
-<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a><span class="w">      </span><span class="nt">personality_data</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a><span class="w">        </span><span class="nt">piece</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">genus</span><span class="w"></span>
-<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span><span class="w"></span>
-<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a><span class="w">      </span><span class="nt">service_data</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span><span class="w"></span>
-<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_service</span><span class="w"></span>
-<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span><span class="w"></span>
-<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a><span class="nt">dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a><span class="nt">is_abstract</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple_service_registration</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.20.0</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skill</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The simple service registration skills is a skill to register a service.</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Apache-2.0</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nt">aea_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=1.0.0,</span><span class="nv"> </span><span class="s">&lt;2.0.0&#39;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="nt">fingerprint</span><span class="p">:</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="nt">README.md</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmUgCcR7sDBQeeCBRKwDT7tPBTi3t4zSibyEqR3xdQUKmh</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">  </span><span class="nt">__init__.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmZd48HmYDr7FMxNaVeGfWRvVtieEdEV78hd7h7roTceP2</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="nt">behaviours.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmQHf6QL5aBtLJ34D2tdcbjJLbzom9gaA3HWgRn3rWyigM</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">  </span><span class="nt">dialogues.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmTT9dvFhWt6qvxjwBfMFDTrgEtgWbvgANYafyRg2BXwcR</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">  </span><span class="nt">handlers.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmZqPt8toGbJgTT6NZBLxjkusrQCZ8GmUEwcmqZ1sd7DpG</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">  </span><span class="nt">strategy.py</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QmVXfQpk4cjDw576H2ELE12tEiN5brPkwvffvcTeMbsugA</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="nt">fingerprint_ignore_patterns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="nt">connections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="nt">contracts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="nt">protocols</span><span class="p">:</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai/oef_search:1.1.4</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="nt">skills</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="nt">behaviours</span><span class="p">:</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="w">  </span><span class="nt">service</span><span class="p">:</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="w">      </span><span class="nt">max_soef_registration_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="w">      </span><span class="nt">services_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceRegistrationBehaviour</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="nt">handlers</span><span class="p">:</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="w">  </span><span class="nt">oef_search</span><span class="p">:</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchHandler</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="w">  </span><span class="nt">oef_search_dialogues</span><span class="p">:</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OefSearchDialogues</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="w">      </span><span class="nt">classification</span><span class="p">:</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="w">        </span><span class="nt">piece</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classification</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a><span class="w">      </span><span class="nt">personality_data</span><span class="p">:</span>
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a><span class="w">        </span><span class="nt">piece</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">genus</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a><span class="w">      </span><span class="nt">service_data</span><span class="p">:</span>
+<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">generic_service</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a><span class="nt">dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a><span class="nt">is_abstract</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 </p>
 </details>
 
 <h2 id="step-9-run-the-search-aea">Step 9: Run the Search AEA<a class="headerlink" href="#step-9-run-the-search-aea" title="Permanent link">&para;</a></h2>
 <p>First, create the private key for the search AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea generate-key fetchai
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <p>Then, in the search AEA, run this command (replace <code>SOME_ADDRESS</code> with the correct value as described above):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11001&quot;,</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="s1">  &quot;entry_peers&quot;: [&quot;/dns4/127.0.0.1/tcp/9000/p2p/16Uiu2HAm1uJpFsqSgHStJdtTBPpDme1fo8uFEvvY182D2y89jQuj&quot;],</span>
@@ -7902,7 +7902,7 @@ The associated <code>skill.yaml</code> is:
 </code></pre></div>
 This allows the search AEA to connect to the same local agent communication network as the service registration AEA.</p>
 <p>We can then launch our AEA.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>We can see that the AEA sends search requests to the <a href="../simple-oef">SOEF search node</a> and receives search responses from the <a href="../simple-oef">SOEF search node</a>. The search response returns one or more agents (the service provider and potentially other agents which match the query).</p>
 <p>We stop the AEA with <code>CTRL + C</code>.</p>

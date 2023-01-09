@@ -6862,45 +6862,45 @@
 <h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
 <h3 id="create-the-oracle-aea">Create the oracle AEA<a class="headerlink" href="#create-the-oracle-aea" title="Permanent link">&para;</a></h3>
 <p>Fetch the AEA that will deploy and update the oracle contract.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/coin_price_oracle:0.17.4
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> coin_price_oracle
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea install
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/coin_price_oracle:0.17.4
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>coin_price_oracle
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea<span class="w"> </span>install
 </code></pre></div>
 <details><summary>Alternatively, create from scratch (and customize the data source)</summary>
 <p>
 
 Create the AEA that will deploy the contract.
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea create coin_price_oracle
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> coin_price_oracle
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea add connection fetchai/http_client:0.24.4
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea add connection fetchai/prometheus:0.9.4
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea add skill fetchai/advanced_data_request:0.7.4
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea add skill fetchai/simple_oracle:0.16.3
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea<span class="w"> </span>create<span class="w"> </span>coin_price_oracle
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>coin_price_oracle
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/http_client:0.24.4
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/prometheus:0.9.4
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/advanced_data_request:0.7.4
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/simple_oracle:0.16.3
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/ledger:0.21.3
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>aea install
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>aea<span class="w"> </span>install
 </code></pre></div>
 
 Set the URL for the data request skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea config <span class="nb">set</span> --type str vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.url <span class="s2">&quot;https://api.coingecko.com/api/v3/simple/price?ids=fetch-ai&amp;vs_currencies=usd&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>str<span class="w"> </span>vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.url<span class="w"> </span><span class="s2">&quot;https://api.coingecko.com/api/v3/simple/price?ids=fetch-ai&amp;vs_currencies=usd&quot;</span>
 </code></pre></div>
 
 Specify the name and JSON path of the data to fetch from the API:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea config <span class="nb">set</span> --type list vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.outputs <span class="s1">&#39;[{&quot;name&quot;: &quot;price&quot;, &quot;json_path&quot;: &quot;fetch-ai.usd&quot;}]&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>list<span class="w"> </span>vendor.fetchai.skills.advanced_data_request.models.advanced_data_request_model.args.outputs<span class="w"> </span><span class="s1">&#39;[{&quot;name&quot;: &quot;price&quot;, &quot;json_path&quot;: &quot;fetch-ai.usd&quot;}]&#39;</span>
 </code></pre></div>
 
 Set the name of the oracle value in the simple oracle skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.oracle_value_name price
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.oracle_value_name<span class="w"> </span>price
 </code></pre></div>
 
 Then update the agent configuration with the default routing:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="s1">&quot;fetchai/contract_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="s1">&quot;fetchai/http:1.1.4&quot;: &quot;fetchai/http_client:0.24.4&quot;,</span>
@@ -6909,12 +6909,12 @@ Then update the agent configuration with the default routing:
 </code></pre></div>
 
 Update the default ledger.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea config <span class="nb">set</span> agent.default_ledger fetchai
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>fetchai
 </code></pre></div>
 
 Set the following configuration for the oracle skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.ledger_id fetchai
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.update_function update_oracle_value
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.ledger_id<span class="w"> </span>fetchai
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.update_function<span class="w"> </span>update_oracle_value
 </code></pre></div>
 
 </p>
@@ -6930,50 +6930,50 @@ Set the following configuration for the oracle skill:
 </code></pre></div>
 
 Update the default ledger.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea config <span class="nb">set</span> agent.default_ledger ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>ethereum
 </code></pre></div>
 
 Set the following configuration for the oracle skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.ledger_id ethereum
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.update_function updateOracleValue
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.ledger_id<span class="w"> </span>ethereum
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.update_function<span class="w"> </span>updateOracleValue
 </code></pre></div>
 
 </p>
 </details>
 
 <p>Additionally, create the private key for the oracle AEA. Generate and add a key for use with the ledger:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea generate-key <span class="nv">$LEDGER_ID</span> --add-key
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span><span class="nv">$LEDGER_ID</span><span class="w"> </span>--add-key
 </code></pre></div></p>
 <p>If running on a testnet (not including Ganache), generate some wealth for your AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea generate-wealth <span class="nv">$LEDGER_ID</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea<span class="w"> </span>generate-wealth<span class="w"> </span><span class="nv">$LEDGER_ID</span>
 </code></pre></div></p>
 <h3 id="create-the-oracle-client-aea">Create the oracle client AEA<a class="headerlink" href="#create-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
 <p>From a new terminal (in the same top-level directory), fetch the AEA that will deploy the oracle client contract and call the function that requests the coin price from the oracle contract.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea fetch fetchai/coin_price_oracle_client:0.12.4
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span> coin_price_oracle_client
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>aea install
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/coin_price_oracle_client:0.12.4
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span><span class="w"> </span>coin_price_oracle_client
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>aea<span class="w"> </span>install
 </code></pre></div>
 <details><summary>Alternatively, create from scratch</summary>
 <p>
 
 Create the AEA that will deploy the contract.
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea create coin_price_oracle_client
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span> coin_price_oracle_client
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>aea add connection fetchai/http_client:0.24.4
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>aea add skill fetchai/simple_oracle_client:0.13.3
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea<span class="w"> </span>create<span class="w"> </span>coin_price_oracle_client
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span>coin_price_oracle_client
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/http_client:0.24.4
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/simple_oracle_client:0.13.3
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/ledger:0.21.3
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>aea install
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>aea<span class="w"> </span>install
 </code></pre></div>
 
 Then update the agent configuration with the default routing:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="s1">&quot;fetchai/contract_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="s1">&quot;fetchai/http:1.1.4&quot;: &quot;fetchai/http_client:0.24.4&quot;,</span>
@@ -6982,11 +6982,11 @@ Then update the agent configuration with the default routing:
 </code></pre></div>
 
 Set the default ledger:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea config <span class="nb">set</span> agent.default_ledger fetchai
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>fetchai
 </code></pre></div>
 Set the following configuration for the oracle client skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.ledger_id fetchai
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.query_function query_oracle_value
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.ledger_id<span class="w"> </span>fetchai
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.query_function<span class="w"> </span>query_oracle_value
 </code></pre></div>
 
 </p>
@@ -6997,21 +6997,21 @@ Set the following configuration for the oracle client skill:
 <p>
 
 Set the default ledger:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea config <span class="nb">set</span> agent.default_ledger ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>ethereum
 </code></pre></div>
 Set the following configuration for the oracle client skill:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.ledger_id ethereum
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.query_function queryOracleValue
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.ledger_id<span class="w"> </span>ethereum
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.query_function<span class="w"> </span>queryOracleValue
 </code></pre></div>
 
 </p>
 </details>
 
 <p>Create the private key for the oracle client AEA. Generate and add a key for use on the ledger:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea generate-key <span class="nv">$LEDGER_ID</span> --add-key
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span><span class="nv">$LEDGER_ID</span><span class="w"> </span>--add-key
 </code></pre></div>
 <p>If running on a testnet (not including Ganache), generate some wealth for your AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea generate-wealth <span class="nv">$LEDGER_ID</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea<span class="w"> </span>generate-wealth<span class="w"> </span><span class="nv">$LEDGER_ID</span>
 </code></pre></div></p>
 <h3 id="configuring-a-ledger">Configuring a ledger<a class="headerlink" href="#configuring-a-ledger" title="Permanent link">&para;</a></h3>
 <p>The oracle AEAs require either a locally running ledger node or a connection to a remote ledger. By default, they are configured to use the latest <code>fetchai</code> testnet.</p>
@@ -7020,7 +7020,7 @@ Set the following configuration for the oracle client skill:
 
 The easiest way to test the oracle agents on an Ethereum-based ledger to set up a local test node using Ganache. This can be done by running the following docker command from the directory you started from (in a new terminal). This command will also fund the accounts of the AEAs:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker run -p <span class="m">8545</span>:8545 trufflesuite/ganache-cli:latest --verbose --gasPrice<span class="o">=</span><span class="m">0</span> --gasLimit<span class="o">=</span>0x1fffffffffffff --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat coin_price_oracle/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span> --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat coin_price_oracle_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8545</span>:8545<span class="w"> </span>trufflesuite/ganache-cli:latest<span class="w"> </span>--verbose<span class="w"> </span>--gasPrice<span class="o">=</span><span class="m">0</span><span class="w"> </span>--gasLimit<span class="o">=</span>0x1fffffffffffff<span class="w"> </span>--account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>coin_price_oracle/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span><span class="w"> </span>--account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>coin_price_oracle_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
 </code></pre></div>
 
 Run the following Python script (with <code>web3</code> installed) from the top-level directory to deploy a mock Fetch ERC20 contract and give some test FET to the client agent.
@@ -7077,10 +7077,10 @@ Run the following Python script (with <code>web3</code> installed) from the top-
 </code></pre></div>
 
 Set the ERC20 contract address for the oracle AEA
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle.models.strategy.args.erc20_address <span class="nv">$ERC20_ADDRESS</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle.models.strategy.args.erc20_address<span class="w"> </span><span class="nv">$ERC20_ADDRESS</span>
 </code></pre></div>
 as well as for the oracle client AEA
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.erc20_address <span class="nv">$ERC20_ADDRESS</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.erc20_address<span class="w"> </span><span class="nv">$ERC20_ADDRESS</span>
 </code></pre></div>
 where `ERC20_ADDRESS` is in the output of the script above.
 
@@ -7089,30 +7089,30 @@ where `ERC20_ADDRESS` is in the output of the script above.
 
 <h3 id="run-the-oracle-aea">Run the oracle AEA<a class="headerlink" href="#run-the-oracle-aea" title="Permanent link">&para;</a></h3>
 <p>Run the oracle agent. This will deploy a contract to the testnet, grant oracle permissions to the AEA's wallet address, and periodically update the contract with the latest price of FET (or whichever coin was specified).
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>aea<span class="w"> </span>run
 </code></pre></div></p>
 <p>After a few moments, you should see the following notices in the logs:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>info: <span class="o">[</span>coin_price_oracle<span class="o">]</span> Oracle contract successfully deployed at address: ...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>info:<span class="w"> </span><span class="o">[</span>coin_price_oracle<span class="o">]</span><span class="w"> </span>Oracle<span class="w"> </span>contract<span class="w"> </span>successfully<span class="w"> </span>deployed<span class="w"> </span>at<span class="w"> </span>address:<span class="w"> </span>...
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>...
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>info: <span class="o">[</span>coin_price_oracle<span class="o">]</span> Oracle role successfully granted!
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>info:<span class="w"> </span><span class="o">[</span>coin_price_oracle<span class="o">]</span><span class="w"> </span>Oracle<span class="w"> </span>role<span class="w"> </span>successfully<span class="w"> </span>granted!
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>...
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>info: <span class="o">[</span>coin_price_oracle<span class="o">]</span> Oracle value successfully updated!
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>info:<span class="w"> </span><span class="o">[</span>coin_price_oracle<span class="o">]</span><span class="w"> </span>Oracle<span class="w"> </span>value<span class="w"> </span>successfully<span class="w"> </span>updated!
 </code></pre></div>
 The oracle contract will continue to be updated with the latest retrieved coin price at the default time interval (every 15 seconds).</p>
 <h3 id="set-the-erc20-and-oracle-contract-addresses-for-the-oracle-client-aea">Set the ERC20 and oracle contract addresses for the oracle client AEA:<a class="headerlink" href="#set-the-erc20-and-oracle-contract-addresses-for-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.simple_oracle_client.models.strategy.args.oracle_contract_address <span class="nv">$ORACLE_ADDRESS</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.simple_oracle_client.models.strategy.args.oracle_contract_address<span class="w"> </span><span class="nv">$ORACLE_ADDRESS</span>
 </code></pre></div>
 where <code>ORACLE_ADDRESS</code> should be set to the address shown in the oracle AEA logs:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Oracle contract successfully deployed at address: ORACLE_ADDRESS
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Oracle<span class="w"> </span>contract<span class="w"> </span>successfully<span class="w"> </span>deployed<span class="w"> </span>at<span class="w"> </span>address:<span class="w"> </span>ORACLE_ADDRESS
 </code></pre></div></p>
 <h3 id="run-the-oracle-client-aea">Run the oracle client AEA<a class="headerlink" href="#run-the-oracle-client-aea" title="Permanent link">&para;</a></h3>
 <p>Run the oracle client agent. This will deploy an oracle client contract to the testnet, approve the contract to spend tokens on behalf of the AEA, and periodically call the contract function that requests the latest price of FET (or whichever coin was specified).
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>aea<span class="w"> </span>run
 </code></pre></div></p>
 <p>After a few moments, you should see the following notices in the logs:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>info: <span class="o">[</span>coin_price_oracle_client<span class="o">]</span> Oracle client contract successfully deployed at address: ...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>info:<span class="w"> </span><span class="o">[</span>coin_price_oracle_client<span class="o">]</span><span class="w"> </span>Oracle<span class="w"> </span>client<span class="w"> </span>contract<span class="w"> </span>successfully<span class="w"> </span>deployed<span class="w"> </span>at<span class="w"> </span>address:<span class="w"> </span>...
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>...
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>info: <span class="o">[</span>coin_price_oracle_client<span class="o">]</span> Oracle value successfully requested!
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>info:<span class="w"> </span><span class="o">[</span>coin_price_oracle_client<span class="o">]</span><span class="w"> </span>Oracle<span class="w"> </span>value<span class="w"> </span>successfully<span class="w"> </span>requested!
 </code></pre></div>
 The AEA will continue to request the latest coin price at the default time interval (every 15 seconds).</p>
 

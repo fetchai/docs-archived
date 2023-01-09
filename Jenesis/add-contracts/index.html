@@ -6662,79 +6662,83 @@
 
 <h1 id="add-contract-templates">Add contract templates<a class="headerlink" href="#add-contract-templates" title="Permanent link">&para;</a></h1>
 <p>Once you have successfully created your project, you can add contract templates. You first need to navigate to your project's directory and run the following command:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>jenesis add contract &lt;TEMPLATE&gt; &lt;NAME&gt;
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>jenesis add contract &lt;TEMPLATE&gt; &lt;CONTRACT NAME&gt;
 </code></pre></div>
 You can find all the contract templates available in <a href="https://github.com/fetchai/jenesis-templates">Jenesis Templates</a>.
-An example of how to add the template <strong>starter</strong> with the name <code>my_first_contract</code> is given below:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>jenesis add contract starter my_first_contract
+An example of how to add the template <strong>cw20-base</strong> with the name <code>my_token</code> is given below:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>jenesis add contract cw20-base my_token
 </code></pre></div>
-<p>This <code>add contract</code> command will add a contract template to your jenesis project inside <code>contracts/my_first_contract/</code> folder. It will also update the <code>jenesis.toml</code> configuration file with the contract information under all existing profiles.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[profile.my_profile.contracts.my_first_contract]
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>contract = &quot;my_first_contract&quot;
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>network = &quot;fetchai-testnet&quot;
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>deployer_key = &quot;&quot;
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>[profile.my_profile.contracts.my_first_contract.init]
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>count = &quot;&quot;
+<p>If you need multiple deployments of the same contract, you can use the <code>-d</code> flag to specify multiple deployments and name them. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>jenesis add contract &lt;TEMPLATE&gt; &lt;CONTRACT NAME&gt; -d &lt;DEPLOYMENTS&gt;
 </code></pre></div>
-The <code>deployer_key</code> field can be manually specified, you can choose any private key locally available to deploy any specific contract. You can also leave this field empty since the <code>deploy</code> command has an optional argument to deploy all contracts inside a specified profile with the same key, overriding this <code>deployer_key</code> argument in the <code>jenesis.toml</code> file. See <a href="../deploy-contracts/">deploy contracts</a> for more information. </p>
-<p>Finally, the <code>init</code> section contains the parameters needed in the instantiation message for this contract to be deployed. The required parameters are taken from the <code>instantiate_msg.json</code> file inside the <code>contracts</code> directory. You will need to manually add the values for these parameters in their correct variable type, which are listed in <code>contracts/my_first_contract/schema/instantiate_msg.json</code>. For this contract <strong>my_first_contract</strong> we need to add an integer value to the <code>count</code> field.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[profile.my_profile.contracts.my_first_contract.init]
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>count = 10
+Jenesis will add the deployments to all profiles for the specified contract. 
+In the example below, <code>token_1</code> and <code>token_2</code> deployments have been added. This will allow you to deploy <code>my_token</code> contract with two different configurations. You can add as many deployments as you wish.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jenesis add contract cw20-base my_token -d token_1 token_2
+</code></pre></div></p>
+<p>If no deployments are selected when adding a contract, the default deployment name will be equal to the contract name.</p>
+<p>This <code>add contract</code> command will add a contract template to your jenesis project inside <code>contracts/my_token/</code> folder. It will also update the <code>jenesis.toml</code> configuration file with the contract information.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[profile.testing.contracts.token_1]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;token_1&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">contract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my_token&quot;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-testnet&quot;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">deployer_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">init_funds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">[profile.testing.contracts.token_2]</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;token_2&quot;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">contract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my_token&quot;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-testnet&quot;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">deployer_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">init_funds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">[profile.testing.contracts.token_1.init]</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="k">[profile.testing.contracts.token_2.init]</span>
+</code></pre></div>
+<p>The <code>deployer_key</code> field can be manually specified, you can choose any private key locally available to deploy any specific contract. You can also leave this field empty since the <code>deploy</code> command has an optional argument to deploy all contracts inside a specified profile with the same key, overriding this <code>deployer_key</code> argument in the <code>jenesis.toml</code> file. See <a href="../deploy-contracts/">deploy contracts</a> for more information. </p>
+<p>Finally, the <code>init</code> section contains the parameters needed in the instantiation message for this contract to be deployed. The required parameters are taken from the schema file inside the <code>contracts</code> directory. Since this contract template doesn't include a schema, it will be generated when <a href="../compile-contracts/">compiling</a> the <code>my_token</code> contract loading the init fields to the <code>jenesis.toml</code> file. You will need to manually add the values for these parameters in their correct variable type, which are listed on the schema file. For this  <strong>my_token</strong> contract, we need to fill the following init fields for each deployment after <a href="../compile-contracts/">compiling</a>. Here is an example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[profile.testing.contracts.token_1.init]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>decimals = 6
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>name = &quot;my_token_name&quot;
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>symbol = &quot;SYMBOL&quot;
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>initial_balances = [{ address = &quot;fetch1d25ap9danl4726uk2nt307y630v87h3h2vq6pl&quot;, amount =  &quot;5000&quot;}]
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>[profile.testing.contracts.token_2.init]
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>decimals = 6
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>name = &quot;my_token_name_2&quot;
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>symbol = &quot;SYMBOL&quot;
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>initial_balances = [{ address = &quot;fetch1d25ap9danl4726uk2nt307y630v87h3h2vq6pl&quot;, amount =  &quot;2000&quot;}]
 </code></pre></div>
 <p>If your contract requires nested instantiation messages you may add fields following this structure:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[profile.testing.contracts.example-nested-contract.init]
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>price = {amount = 1000, denom = DLS}
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>info = {performance = {max_speed = 200, unit = kph}, fuel = {consumption = 7, unit = kmpl}}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[profile.testing.contracts.example-nested-contract.init]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>price = {amount = 1000, denom = DLS}
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>info = {performance = {max_speed = 200, unit = kph}, fuel = {consumption = 7, unit = kmpl}}
 </code></pre></div>
 <blockquote>
-<p><em>NOTE: Before editing the <code>jenesis.toml</code> configuration file with the desired <code>deployer_key</code> and <code>init</code> parameters, make sure to first <a href="../compile-contracts/">compile</a> your contract. All configuration parameters will restart every time a contract is compiled to make sure everything is up to date.</em></p>
+<p><em>NOTE: Before editing the <code>jenesis.toml</code> configuration file with the desired <code>deployer_key</code> and <code>init</code> parameters, make sure to first <a href="../compile-contracts/">compile</a> your contract. All configuration parameters will restart every time a contract is compiled if the schema has changed.</em></p>
 </blockquote>
 <p>You can also add contracts manually by copying and pasting the contract directory from another project you may have, however, they need to follow the same directory structure as the <strong>starter</strong> template mentioned above.</p>
 <p>When you add a contract manually, you need to update the <code>jenesis.toml</code> file with the contract information by running:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>jenesis update
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>jenesis update
 </code></pre></div>
 The <code>update</code> command will automatically detect which contract is missing in the <code>jenesis.toml</code> configuration file by revising the contracts directory.</p>
 <h1 id="add-contract-deployments">Add contract deployments<a class="headerlink" href="#add-contract-deployments" title="Permanent link">&para;</a></h1>
-<p>You can add multiple deployments for any given contract in your project by running:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>jenesis add deployment my_first_contract deployment_name
+<p>You can also add further deployments for a given contract by specifying the contract name and the deployment name. If we want to add a third token called <code>token_3</code> using <code>my_token</code> contract, we can run:  </p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>jenesis add deployment my_token token_3
 </code></pre></div>
-This will automatically create another my_first_contract entry called deployment_name without the need of adding a duplicated contract template to your project. This command will update your jenesis.toml file to:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[profile.testing.contracts.my_first_contract]
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>name = &quot;my_first_contract&quot;
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>contract = &quot;my_first_contract&quot;
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>network = &quot;fetchai-testnet&quot;
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>deployer_key = &quot;alice&quot;
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>init_funds = &quot;&quot;
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>[profile.testing.contracts.my_first_contract.init]
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>count = 1
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>[profile.testing.contracts.deployment_name]
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>name = &quot;deployment_name&quot;
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>contract = &quot;my_first_contract&quot;
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>network = &quot;fetchai-testnet&quot;
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>deployer_key = &quot;alice&quot;
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>init_funds = &quot;&quot;
-<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
-<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>[profile.testing.contracts.deployment_name.init]
-<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>count = 1
-</code></pre></div>
+This will automatically create another deployment entry called <code>token_3</code>.</p>
 <h1 id="attach-deployed-contracts">Attach deployed contracts<a class="headerlink" href="#attach-deployed-contracts" title="Permanent link">&para;</a></h1>
-<p>If you add a contract into the project's contract folder that has already been deployed in the network, you can attach it to your project for future interaction using the <code>attach</code> command.</p>
-<p>To add a contract to yout project you can run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>jenesis add contract starter my_first_contract
-</code></pre></div>
-<p>If you add the contract just by copying and pasting it, you will need to run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>jenesis update
+<p>If you add a contract into the project's contract folder that has already been deployed in the network, you can attach the deployment to your project for future interaction using the <code>attach</code> command.</p>
+<p>To add a deployment to yout project you can run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>jenesis add contract cw20-base my_token -d token_1
 </code></pre></div>
 <p>Then compile the contract:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>jenesis compile
 </code></pre></div>
-<p>To attach the contract, you will need to specify the contract's name and deployment address. You can optionally specify the profile where you wish to insert the contract into. If this is not specified, the deployment will be attached to the default profile, which is the first profile created in your project, unless the <code>default</code> settings are manually changed.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>jenesis attach my_first_contract fetch18xs97q6h9zgh4sz730a42pp0dqa9sh4eef7eutfkv69q3v2y3x8s72pkua
+<p>To attach the contract, you will need to specify the deployment's name and address. You can optionally specify the profile where you wish to insert the contract into. If this is not specified, the deployment will be attached to the default profile, which is the first profile created in your project, unless the <code>default</code> settings are manually changed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>jenesis attach token_1 fetch18xs97q6h9zgh4sz730a42pp0dqa9sh4eef7eutfkv69q3v2y3x8s72pkua
 </code></pre></div>
-<p>This will add the relevant deployment information into a <code>jenesis.lock</code> file and you will now be able to interact with <code>my_first_contract</code> using <a href="../use-contracts/">contract interactions</a> </p>
+<p>This will add the relevant deployment information into a <code>jenesis.lock</code> file and you will now be able to interact with <code>token_1</code> using <a href="../use-contracts/">contract interactions</a> </p>
 
 
   

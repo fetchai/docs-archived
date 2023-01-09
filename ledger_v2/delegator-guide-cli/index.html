@@ -6860,7 +6860,7 @@
 <h2 id="querying-the-state">Querying the state<a class="headerlink" href="#querying-the-state" title="Permanent link">&para;</a></h2>
 <h3 id="querying-the-current-staking-holdings-of-the-validators">Querying the current staking holdings of the validators<a class="headerlink" href="#querying-the-current-staking-holdings-of-the-validators" title="Permanent link">&para;</a></h3>
 <p>The following command can be used to retrieve the current staking holdings of all validators:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetchd query staking validators
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>staking<span class="w"> </span>validators
 </code></pre></div>
 <p>On <code>dorado</code> network, this will produce an output similar to the following, describing the status of all the existing validators:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>- |
@@ -6912,7 +6912,7 @@
 <a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>...
 </code></pre></div>
 <p>To obtain the same information for a single validator, use the following command, providing the <code>operatoraddress</code> of the validator.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fetchd query staking validator fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>staking<span class="w"> </span>validator<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
 </code></pre></div>
 <p>A delegator will be particularly interested in the following keys:</p>
 <ul>
@@ -6923,7 +6923,7 @@
 </ul>
 <h3 id="query-the-delegations-made-to-a-validator">Query the delegations made to a validator<a class="headerlink" href="#query-the-delegations-made-to-a-validator" title="Permanent link">&para;</a></h3>
 <p>From a validator address, we can retrieve the list of delegations it received:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd query staking delegations-to fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>staking<span class="w"> </span>delegations-to<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
 </code></pre></div>
 <p>Here is a sample of delegations <code>validator2</code> received on <code>dorado</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>- delegation:
@@ -6944,7 +6944,7 @@
 <h3 id="query-the-redelegations">Query the redelegations<a class="headerlink" href="#query-the-redelegations" title="Permanent link">&para;</a></h3>
 <p>Delegators can choose to redelegate the tokens they already delegated from one validator to another. Redelegation takes effect immediately, without any waiting period. However, the tokens can't be redelegated until the initial redelegation transaction has completed its 21 day completion time (the unlocking time is indicated by the <code>redelegationentry/completion_time</code> field in the outputs below).</p>
 <p>To obtain the list of redelegations made from a validator, use the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fetchd query staking redelegations-from fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>staking<span class="w"> </span>redelegations-from<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
 </code></pre></div>
 <p>This produces an output similar to the following, where delegator <code>fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m</code> issued 2 redelegations from <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code> to <code>fetchvaloper122veneudkzyalay6gusvrhhpp0560mparpanvu</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fetchd query staking redelegations-from fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
@@ -6968,12 +6968,12 @@
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    balance: &quot;10000&quot;
 </code></pre></div>
 <p>Similarly, the list of redelegations issued by a delegator can be obtained with the following:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fetchd query staking redelegations fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>staking<span class="w"> </span>redelegations<span class="w"> </span>fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m
 </code></pre></div>
 <h3 id="query-the-user-rewards">Query the user rewards<a class="headerlink" href="#query-the-user-rewards" title="Permanent link">&para;</a></h3>
 <p>After having delegated some tokens to a validator, the user is eligible to a share of the rewards the validator collects.</p>
 <p>To retrieve all the outstanding rewards for an address, issue the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fetchd query distribution rewards fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>distribution<span class="w"> </span>rewards<span class="w"> </span>fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m
 </code></pre></div>
 <p>This address having delegated tokens to 2 validators on <code>dorado</code>, produces the following output:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>rewards:
@@ -6990,7 +6990,7 @@
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  amount: &quot;0.000000000001200000&quot;
 </code></pre></div>
 <p>Rewards can also be filtered for a given validator, like <code>validator5</code> here:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fetchd query distribution rewards fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fetchd<span class="w"> </span>query<span class="w"> </span>distribution<span class="w"> </span>rewards<span class="w"> </span>fetch15fn3meky8ktfry3qm73xkpjckzw4dazxpfx34m<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w
 </code></pre></div>
 <p>We now get only the reward from this validator:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>- denom: atestfet
@@ -6999,7 +6999,7 @@
 <h2 id="delegator-operations">Delegator operations<a class="headerlink" href="#delegator-operations" title="Permanent link">&para;</a></h2>
 <h3 id="delegating-tokens">Delegating tokens<a class="headerlink" href="#delegating-tokens" title="Permanent link">&para;</a></h3>
 <p>To delegate <code>1000000 atestfet</code> tokens to  the <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code> validator from the account <code>myKey</code>, the following command can be used:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>fetchd tx staking delegate fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w 1000000atestfet --from myKey
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>fetchd<span class="w"> </span>tx<span class="w"> </span>staking<span class="w"> </span>delegate<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w<span class="w"> </span>1000000atestfet<span class="w"> </span>--from<span class="w"> </span>myKey
 </code></pre></div>
 <p>This will prompt for confirmation before issuing a transaction. After the transaction gets processed, it should appear under the delegations of the <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code> validator.</p>
 <div class="admonition note">
@@ -7010,7 +7010,7 @@
 <h3 id="redelegating-tokens">Redelegating tokens<a class="headerlink" href="#redelegating-tokens" title="Permanent link">&para;</a></h3>
 <p>Redelegating tokens allows to transfer already delegated tokens from one validator to another.</p>
 <p>From the above example where we delegated <code>1000000 atestfet</code> to <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code>, we can now redelegate parts or all of those tokens to another validator. For example, we redelegate <code>400000 atestfet</code> from <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code> to <code>fetchvaloper122veneudkzyalay6gusvrhhpp0560mparpanvu</code> with the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fetchd tx staking redelegate fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w fetchvaloper122veneudkzyalay6gusvrhhpp0560mparpanvu 400000atestfet --from myKey
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fetchd<span class="w"> </span>tx<span class="w"> </span>staking<span class="w"> </span>redelegate<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w<span class="w"> </span>fetchvaloper122veneudkzyalay6gusvrhhpp0560mparpanvu<span class="w"> </span>400000atestfet<span class="w"> </span>--from<span class="w"> </span>myKey
 </code></pre></div>
 <p>This will prompt for confirmation and issue a new transaction once accepted.
 From here, inspecting the delegations from our account, we'll see that our delegated tokens are now:</p>
@@ -7021,16 +7021,16 @@ From here, inspecting the delegations from our account, we'll see that our deleg
 <p>Now those <code>400000 atestfet</code> we redelegated can't be redelegated anymore for 21 days (the exact date can be found by querying the redelegation transaction, under the <code>completion_time</code> key). Note that it's still possible to unbond those tokens if needed. </p>
 <h3 id="unbonding-tokens">Unbonding tokens<a class="headerlink" href="#unbonding-tokens" title="Permanent link">&para;</a></h3>
 <p>At any time, we can transfer parts or all of our delegated tokens back to our account:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>fetchd tx staking unbond fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w 300000atestfet --from myKey
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>fetchd<span class="w"> </span>tx<span class="w"> </span>staking<span class="w"> </span>unbond<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w<span class="w"> </span>300000atestfet<span class="w"> </span>--from<span class="w"> </span>myKey
 </code></pre></div>
 <p>Once again, this will prompt for confirmation and issue a transaction, initiating the transfer of <code>300000 atestfet</code> from our stake on <code>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w</code> validator back to our account. Those tokens will then be available <strong>after a 21 day period</strong> (the exact date can be found by querying the redelegation transaction, under the <code>completion_time</code> key). </p>
 <h3 id="withdrawing-rewards">Withdrawing rewards<a class="headerlink" href="#withdrawing-rewards" title="Permanent link">&para;</a></h3>
 <p>In order to transfer rewards to the wallet, the following command can be used:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>fetchd tx distribution withdraw-rewards fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w --from myKey
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>fetchd<span class="w"> </span>tx<span class="w"> </span>distribution<span class="w"> </span>withdraw-rewards<span class="w"> </span>fetchvaloper1z72rph6l5j6ex83n4urputykawcqg6t98xul2w<span class="w"> </span>--from<span class="w"> </span>myKey
 </code></pre></div>
 <p>It requires the validator address from where the reward is withdrawn, and the name of the account private key having delegated tokens to the validator.</p>
 <p>When having delegated tokens to multiple validators, all rewards can be claimed in a single command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>fetchd tx distribution withdraw-all-rewards --from myKey
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>fetchd<span class="w"> </span>tx<span class="w"> </span>distribution<span class="w"> </span>withdraw-all-rewards<span class="w"> </span>--from<span class="w"> </span>myKey
 </code></pre></div>
 <p>The rewards then appears on the account as soon as the transaction is processed.</p>
 

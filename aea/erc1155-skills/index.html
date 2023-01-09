@@ -6884,121 +6884,121 @@
 <h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
 <h3 id="create-the-deployer-aea">Create the deployer AEA<a class="headerlink" href="#create-the-deployer-aea" title="Permanent link">&para;</a></h3>
 <p>Fetch the AEA that will deploy the contract:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/erc1155_deployer:0.34.3
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> erc1155_deployer
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea install
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/erc1155_deployer:0.34.3
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>erc1155_deployer
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>aea<span class="w"> </span>build
 </code></pre></div>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 Create the AEA that will deploy the contract.
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea create erc1155_deployer
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> erc1155_deployer
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea add skill fetchai/erc1155_deploy:0.31.4
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea<span class="w"> </span>create<span class="w"> </span>erc1155_deployer
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>erc1155_deployer
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/erc1155_deploy:0.31.4
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="s1">  &quot;aea-ledger-cosmos&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s1">  &quot;fetchai/contract_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>aea config <span class="nb">set</span> --type list vendor.fetchai.connections.p2p_libp2p.cert_requests <span class="se">\</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>list<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.cert_requests<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="s1">&#39;[{&quot;identifier&quot;: &quot;acn&quot;, &quot;ledger_id&quot;: &quot;ethereum&quot;, &quot;not_after&quot;: &quot;2023-01-01&quot;, &quot;not_before&quot;: &quot;2022-01-01&quot;, &quot;public_key&quot;: &quot;fetchai&quot;, &quot;save_path&quot;: &quot;.certs/conn_cert.txt&quot;}]&#39;</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>aea install
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>aea build
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>aea<span class="w"> </span>install
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 And change the default ledger:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea config <span class="nb">set</span> agent.default_ledger ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>ethereum
 </code></pre></div>
 
 </p>
 </details>
 
 <p>Create a private key for the deployer AEA and add it for Ethereum use:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea generate-key ethereum
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>aea add-key ethereum ethereum_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>ethereum
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>ethereum<span class="w"> </span>ethereum_private_key.txt
 </code></pre></div>
 <p>Create a private key for the P2P connection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div>
 <p>Finally, certify the key for use by the connections that request that:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div>
 <h3 id="create-the-client-aea">Create the client AEA<a class="headerlink" href="#create-the-client-aea" title="Permanent link">&para;</a></h3>
 <p>In another terminal, fetch the client AEA which will receive some tokens from the deployer.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea fetch fetchai/erc1155_client:0.34.3
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span> erc1155_client
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>aea install
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/erc1155_client:0.34.3
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>erc1155_client
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>aea<span class="w"> </span>build
 </code></pre></div>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 Create the AEA that will get some tokens from the deployer.
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea create erc1155_client
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span> erc1155_client
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>aea add skill fetchai/erc1155_client:0.29.4
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>create<span class="w"> </span>erc1155_client
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>erc1155_client
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/erc1155_client:0.29.4
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="s1">  &quot;aea-ledger-ethereum&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;},</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="s1">  &quot;aea-ledger-cosmos&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="s1">  &quot;fetchai/contract_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>aea config <span class="nb">set</span> --type list vendor.fetchai.connections.p2p_libp2p.cert_requests <span class="se">\</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>list<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.cert_requests<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="s1">&#39;[{&quot;identifier&quot;: &quot;acn&quot;, &quot;ledger_id&quot;: &quot;ethereum&quot;, &quot;not_after&quot;: &quot;2023-01-01&quot;, &quot;not_before&quot;: &quot;2022-01-01&quot;, &quot;public_key&quot;: &quot;fetchai&quot;, &quot;save_path&quot;: &quot;.certs/conn_cert.txt&quot;}]&#39;</span>
-<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>aea install
-<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>aea build
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>aea<span class="w"> </span>install
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 And change the default ledger:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea config <span class="nb">set</span> agent.default_ledger ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_ledger<span class="w"> </span>ethereum
 </code></pre></div>
 
 </p>
 </details>
 
 <p>Create a private key for the client AEA and add it for Ethereum use:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea generate-key ethereum
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>aea add-key ethereum ethereum_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>ethereum
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>ethereum<span class="w"> </span>ethereum_private_key.txt
 </code></pre></div>
 <p>Create a private key for the P2P connection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h2 id="run-ganache">Run Ganache<a class="headerlink" href="#run-ganache" title="Permanent link">&para;</a></h2>
 <p>Execute the following command to run Ganache:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker run -p <span class="m">8545</span>:8545 trufflesuite/ganache-cli:latest --verbose --gasPrice<span class="o">=</span><span class="m">0</span> --gasLimit<span class="o">=</span>0x1fffffffffffff --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat erc1155_deployer/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span> --account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat erc1155_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8545</span>:8545<span class="w"> </span>trufflesuite/ganache-cli:latest<span class="w"> </span>--verbose<span class="w"> </span>--gasPrice<span class="o">=</span><span class="m">0</span><span class="w"> </span>--gasLimit<span class="o">=</span>0x1fffffffffffff<span class="w"> </span>--account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>erc1155_deployer/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span><span class="w"> </span>--account<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>erc1155_client/ethereum_private_key.txt<span class="k">)</span><span class="s2">,1000000000000000000000&quot;</span>
 </code></pre></div></p>
 <p>Wait some time for the wealth creation to be mined on Ropsten.</p>
 <p>Check your wealth:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea get-wealth ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea<span class="w"> </span>get-wealth<span class="w"> </span>ethereum
 </code></pre></div>
 <p>You should get <code>1000000000000000000000</code>.</p>
 <div class="admonition note">
@@ -7008,11 +7008,11 @@ And change the default ledger:
 
 <h2 id="update-soef-configurations-for-both-aeas">Update SOEF configurations for both AEAs<a class="headerlink" href="#update-soef-configurations-for-both-aeas" title="Permanent link">&para;</a></h2>
 <p>Update the SOEF configuration in both AEA projects:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.soef.config.chain_identifier ethereum
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.connections.soef.config.chain_identifier<span class="w"> </span>ethereum
 </code></pre></div></p>
 <h2 id="run-the-aeas">Run the AEAs<a class="headerlink" href="#run-the-aeas" title="Permanent link">&para;</a></h2>
 <p>First, run the deployer AEA:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. </p>
 <p>Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.3 -u public_uri</code> to retrieve the address. The output will be something like <code>/dns4/127.0.0.1/tcp/9000/p2p/16Uiu2HAm2JPsUX1Su59YVDXJQizYkNSe8JCusqRpLeeTbvY76fE5</code>.</p>
@@ -7024,10 +7024,10 @@ And change the default ledger:
 <li>mints a batch of items in the smart contract</li>
 </ul>
 <p>At some point you should see the log output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>registering service on SOEF.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>registering<span class="w"> </span>service<span class="w"> </span>on<span class="w"> </span>SOEF.
 </code></pre></div></p>
 <p>At this point, configure the client AEA to connect to the same local ACN created by the deployer by running the following command in the client's terminal, replacing <code>SOME_ADDRESS</code> with the value you noted above:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11001&quot;,</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="s1">  &quot;entry_peers&quot;: [&quot;SOME_ADDRESS&quot;],</span>
@@ -7037,7 +7037,7 @@ And change the default ledger:
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="s1">}&#39;</span>
 </code></pre></div></p>
 <p>Then, run the client AEA:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>You will see that after discovery, the two AEAs exchange information about the transaction and the client at the end signs and sends the signature to the deployer AEA to send it to the network.</p>
 <div class="admonition note">
@@ -7050,9 +7050,9 @@ And change the default ledger:
 
 <h2 id="delete-the-aeas">Delete the AEAs<a class="headerlink" href="#delete-the-aeas" title="Permanent link">&para;</a></h2>
 <p>When you're done, stop the agents (<code>CTRL+C</code>), go up a level and delete the AEAs.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span> ..
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea delete erc1155_deployer
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>aea delete erc1155_client
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>aea<span class="w"> </span>delete<span class="w"> </span>erc1155_deployer
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>aea<span class="w"> </span>delete<span class="w"> </span>erc1155_client
 </code></pre></div>
 <h2 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">&para;</a></h2>
 <p>This diagram shows the communication between the various entities in this interaction:</p>

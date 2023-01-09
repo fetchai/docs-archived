@@ -6943,33 +6943,33 @@
 <p>This demo involves a true ledger transaction on Fetch.ai's <code>testnet</code> network or Ethereum's <code>ropsten</code>. This demo assumes the buyer trusts the seller AEA to send the data upon successful payment.</p>
 <h3 id="create-the-seller-aea">Create the seller AEA<a class="headerlink" href="#create-the-seller-aea" title="Permanent link">&para;</a></h3>
 <p>First, fetch the seller AEA which provides thermometer data:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea fetch fetchai/thermometer_aea:0.30.3 --alias my_thermometer_aea
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> my_thermometer_aea
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea install
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/thermometer_aea:0.30.3<span class="w"> </span>--alias<span class="w"> </span>my_thermometer_aea
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>my_thermometer_aea
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>aea<span class="w"> </span>build
 </code></pre></div></p>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the seller from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea create my_thermometer_aea
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span> my_thermometer_aea
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea add skill fetchai/thermometer:0.27.4
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aea<span class="w"> </span>create<span class="w"> </span>my_thermometer_aea
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>my_thermometer_aea
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/thermometer:0.27.4
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>aea install
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>aea build
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>aea<span class="w"> </span>install
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 </p>
@@ -6977,33 +6977,33 @@ The following steps create the seller from scratch:
 
 <h3 id="create-the-buyer-client">Create the buyer client<a class="headerlink" href="#create-the-buyer-client" title="Permanent link">&para;</a></h3>
 <p>In another terminal, fetch the buyer AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea fetch fetchai/thermometer_client:0.32.3 --alias my_thermometer_client
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span> my_thermometer_client
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea install
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/thermometer_client:0.32.3<span class="w"> </span>--alias<span class="w"> </span>my_thermometer_client
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>my_thermometer_client
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>aea<span class="w"> </span>install
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>aea<span class="w"> </span>build
 </code></pre></div></p>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create the car data client from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea create my_thermometer_client
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span> my_thermometer_client
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>aea add connection fetchai/ledger:0.21.3
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>aea add skill fetchai/thermometer_client:0.26.4
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>aea config <span class="nb">set</span> --type dict agent.dependencies <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aea<span class="w"> </span>create<span class="w"> </span>my_thermometer_client
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>my_thermometer_client
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/ledger:0.21.3
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/thermometer_client:0.26.4
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.dependencies<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="s1">  &quot;aea-ledger-fetchai&quot;: {&quot;version&quot;: &quot;&lt;2.0.0,&gt;=1.0.0&quot;}</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>aea config <span class="nb">set</span> agent.default_connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>aea config <span class="nb">set</span> --type dict agent.default_routing <span class="se">\</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>agent.default_connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>agent.default_routing<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s1">  &quot;fetchai/ledger_api:1.1.4&quot;: &quot;fetchai/ledger:0.21.3&quot;,</span>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s1">  &quot;fetchai/oef_search:1.1.4&quot;: &quot;fetchai/soef:0.27.4&quot;</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s1">}&#39;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>aea install
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>aea build
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>aea<span class="w"> </span>install
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>aea<span class="w"> </span>build
 </code></pre></div>
 
 </p>
@@ -7011,85 +7011,85 @@ The following steps create the car data client from scratch:
 
 <h3 id="add-keys-for-the-seller-aea">Add keys for the seller AEA<a class="headerlink" href="#add-keys-for-the-seller-aea" title="Permanent link">&para;</a></h3>
 <p>First, create the private key for the seller AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai <code>Dorado</code> use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea generate-key fetchai
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h3 id="add-keys-and-generate-wealth-for-the-buyer-aea">Add keys and generate wealth for the buyer AEA<a class="headerlink" href="#add-keys-and-generate-wealth-for-the-buyer-aea" title="Permanent link">&para;</a></h3>
 <p>The buyer needs to have some wealth to purchase the thermometer data.</p>
 <p>First, create the private key for the buyer AEA based on the network you want to transact. To generate and add a private-public key pair for Fetch.ai use:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea generate-key fetchai
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>aea add-key fetchai fetchai_private_key.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_private_key.txt
 </code></pre></div></p>
 <p>Then, create some wealth for the buyer based on the network you want to transact with. On the Fetch.ai <code>Dorado</code> network:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea generate-wealth fetchai
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea<span class="w"> </span>generate-wealth<span class="w"> </span>fetchai
 </code></pre></div></p>
 <p>Next, create a private key used to secure the AEA's communications:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea generate-key fetchai fetchai_connection_private_key.txt
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>aea add-key fetchai fetchai_connection_private_key.txt --connection
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea<span class="w"> </span>generate-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>aea<span class="w"> </span>add-key<span class="w"> </span>fetchai<span class="w"> </span>fetchai_connection_private_key.txt<span class="w"> </span>--connection
 </code></pre></div></p>
 <p>Finally, certify the key for use by the connections that request that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea issue-certificates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>issue-certificates
 </code></pre></div></p>
 <h3 id="update-the-seller-and-buyer-aea-skill-configurations">Update the seller and buyer AEA skill configurations<a class="headerlink" href="#update-the-seller-and-buyer-aea-skill-configurations" title="Permanent link">&para;</a></h3>
 <p>In <code>my_thermometer_aea/vendor/fetchai/skills/thermometer/skill.yaml</code>, replace the <code>data_for_sale</code> with your data:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">models</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span><span class="w"></span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">currency_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FET</span><span class="w"></span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">data_for_sale</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26</span><span class="w"></span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">has_data_source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">is_ledger_tx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">ledger_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span><span class="w"></span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span><span class="w"></span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">      </span><span class="nt">service_data</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span><span class="w"></span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span><span class="w"></span>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">      </span><span class="nt">service_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span><span class="w"></span>
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">      </span><span class="nt">unit_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
-<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span><span class="w"></span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">  </span><span class="nt">SQLAlchemy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">currency_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FET</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">data_for_sale</span><span class="p">:</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">has_data_source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">is_ledger_tx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">ledger_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">      </span><span class="nt">service_data</span><span class="p">:</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">      </span><span class="nt">service_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">      </span><span class="nt">unit_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="nt">dependencies</span><span class="p">:</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">  </span><span class="nt">SQLAlchemy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
 </code></pre></div>
 The <code>service_data</code> is used to register the service in the <a href="../simple-oef">SOEF search node</a> and make your agent discoverable.</p>
 <p>In <code>my_thermometer_client/vendor/fetchai/skills/thermometer_client/skill.yaml</code>) ensure you have matching data.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">models</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span><span class="w"></span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">currency_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FET</span><span class="w"></span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">is_ledger_tx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">ledger_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span><span class="w"></span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span><span class="w"></span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span><span class="w"></span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">      </span><span class="nt">max_negotiations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">      </span><span class="nt">max_tx_fee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3550000000000000</span><span class="w"></span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="nt">max_unit_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">      </span><span class="nt">search_query</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">constraint_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">==</span><span class="w"></span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="nt">search_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span><span class="w"></span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">        </span><span class="nt">search_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span><span class="w"></span>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">      </span><span class="nt">search_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w"></span>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">      </span><span class="nt">service_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span><span class="w"></span>
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">strategy</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">currency_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FET</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">is_ledger_tx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">ledger_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetchai</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51.5194</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.127</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">      </span><span class="nt">max_negotiations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">      </span><span class="nt">max_tx_fee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3550000000000000</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="nt">max_unit_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">      </span><span class="nt">search_query</span><span class="p">:</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">constraint_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">==</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="nt">search_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seller_service</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">        </span><span class="nt">search_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">      </span><span class="nt">search_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">      </span><span class="nt">service_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermometer_data</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">    </span><span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategy</span>
 </code></pre></div>
 <p>After changing the skill configuration files you should run the following command for both agents to install each dependency:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea install
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea<span class="w"> </span>install
 </code></pre></div></p>
 <h3 id="modify-the-sellers-strategy">Modify the seller's strategy<a class="headerlink" href="#modify-the-sellers-strategy" title="Permanent link">&para;</a></h3>
 <p>Before being able to modify a package we need to eject it from vendor:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea eject skill fetchai/thermometer:0.27.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea<span class="w"> </span>eject<span class="w"> </span>skill<span class="w"> </span>fetchai/thermometer:0.27.4
 </code></pre></div>
 <p>This will move the package to your <code>skills</code> directory and reset the version to <code>0.1.0</code> and the author to your author handle.</p>
 <p>Open <code>strategy.py</code> (in <code>my_thermometer_aea/skills/thermometer/strategy.py</code>) and make the following modifications:</p>
@@ -7098,10 +7098,10 @@ The <code>service_data</code> is used to register the service in the <a href="..
 </code></pre></div>
 Then modify your strategy's <code>__init__</code> function to match the following code:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">GenericStrategy</span><span class="p">):</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="sd">&quot;&quot;&quot;This class defines a strategy for the agent.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines a strategy for the agent.&quot;&quot;&quot;</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="sd">        Initialize the strategy of the agent.</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="sd">        :param register_as: determines whether the agent registers as seller, buyer or both</span>
@@ -7116,7 +7116,7 @@ Then modify your strategy's <code>__init__</code> function to match the followin
 </code></pre></div></p>
 <p>At the end of the file modify the <code>collect_from_data_source</code> function: 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>    <span class="k">def</span> <span class="nf">collect_from_data_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>        <span class="sd">&quot;&quot;&quot;Implement the logic to collect data.&quot;&quot;&quot;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Implement the logic to collect data.&quot;&quot;&quot;</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>        <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">])</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">result_proxy</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
@@ -7125,7 +7125,7 @@ Then modify your strategy's <code>__init__</code> function to match the followin
 </code></pre></div>
 Also, create two new functions, one that creates a connection with the database, and another that populates the database with some fake data. This is needed in the case you do not have access to an actual thermometer sensor that inserts data in the database.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>    <span class="k">def</span> <span class="nf">create_database_and_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>        <span class="sd">&quot;&quot;&quot;Creates a database and a table to store the data if not exists.&quot;&quot;&quot;</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a database and a table to store the data if not exists.&quot;&quot;&quot;</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>        <span class="n">metadata</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="n">tbl</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
@@ -7138,7 +7138,7 @@ Also, create two new functions, one that creates a connection with the database,
 <a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>        <span class="k">return</span> <span class="n">tbl</span>
 <a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
 <a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="k">def</span> <span class="nf">insert_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>        <span class="sd">&quot;&quot;&quot;Insert data in the database.&quot;&quot;&quot;</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Insert data in the database.&quot;&quot;&quot;</span>
 <a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>        <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db_engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>            <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tbl</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>  <span class="c1"># nosec</span>
@@ -7147,16 +7147,16 @@ Also, create two new functions, one that creates a connection with the database,
 <a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>            <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 </code></pre></div>
 <p>After modifying the skill we need to fingerprint it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea fingerprint skill <span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/thermometer:0.1.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea<span class="w"> </span>fingerprint<span class="w"> </span>skill<span class="w"> </span><span class="o">{</span>YOUR_AUTHOR_HANDLE<span class="o">}</span>/thermometer:0.1.0
 </code></pre></div>
 <h3 id="run-both-aeas">Run both AEAs<a class="headerlink" href="#run-both-aeas" title="Permanent link">&para;</a></h3>
 <p>First, run the thermometer (seller) AEA:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of this address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.3 -u public_uri</code> to retrieve the address.)
 This is the entry peer address for the local <a href="../acn">agent communication network</a> created by the thermometer AEA.</p>
 <p>Then, configure the thermometer client (buyer) to connect to this same local ACN by running the following command in the buyer terminal, replacing <code>SOME_ADDRESS</code> with the value you noted above:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11001&quot;,</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="s1">  &quot;entry_peers&quot;: [&quot;SOME_ADDRESS&quot;],</span>
@@ -7166,14 +7166,14 @@ This is the entry peer address for the local <a href="../acn">agent communicatio
 <a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="s1">}&#39;</span>
 </code></pre></div></p>
 <p>Then run the thermometer client AEA:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea<span class="w"> </span>run
 </code></pre></div></p>
 <p>You will see that the AEAs negotiate and then transact using the configured testnet.</p>
 <h2 id="delete-the-aeas">Delete the AEAs<a class="headerlink" href="#delete-the-aeas" title="Permanent link">&para;</a></h2>
 <p>When you're done, stop the agents (<code>CTRL+C</code>), go up a level and delete the AEAs.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">cd</span> ..
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>aea delete my_thermometer_aea
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>aea delete my_thermometer_client
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>aea<span class="w"> </span>delete<span class="w"> </span>my_thermometer_aea
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>aea<span class="w"> </span>delete<span class="w"> </span>my_thermometer_client
 </code></pre></div></p>
 
 

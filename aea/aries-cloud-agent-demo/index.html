@@ -7134,7 +7134,7 @@
 <h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <p>Follow the <a href="../quickstart/#preliminaries">Preliminaries</a> and <a href="../quickstart/#installation">Installation</a> sections from the AEA quick start. </p>
 <p>Install Aries cloud-agents (for more info see <a href="https://github.com/hyperledger/aries-cloudagent-python#install" target="_blank">here</a>) if you do not have it on your machine:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install aries-cloudagent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>aries-cloudagent
 </code></pre></div>
 <p>This demo has been successfully tested with <code>aca-py</code> version <code>0.4.5</code>.</p>
 <p>This demo requires an instance of von network running in docker locally (for more info see <a href="https://github.com/bcgov/von-network#running-the-network-locally" target="_blank">here</a>)</p>
@@ -7144,17 +7144,17 @@
 <h2 id="von-network">VON Network<a class="headerlink" href="#von-network" title="Permanent link">&para;</a></h2>
 <p>In the first terminal move to the <code>von-network</code> directory and run an instance of <code>von-network</code> locally in docker.</p>
 <p>This <a href="https://github.com/bcgov/von-network#running-the-network-locally" target="_blank">tutorial</a> has information on starting (and stopping) the network locally.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./manage build
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./manage start --logs
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./manage<span class="w"> </span>build
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./manage<span class="w"> </span>start<span class="w"> </span>--logs
 </code></pre></div>
 Once the ledger is running, you can see the ledger by going to the web server running on port 9000. On localhost, that means going to <a href="http://localhost:9000" target="_blank">http://localhost:9000</a>.  </p>
 <h2 id="alice-and-faber-acas">Alice and Faber ACAs<a class="headerlink" href="#alice-and-faber-acas" title="Permanent link">&para;</a></h2>
 <p>To learn about the command for starting an ACA and its various options:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aca-py start --help
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>aca-py<span class="w"> </span>start<span class="w"> </span>--help
 </code></pre></div>
 <h3 id="faber_aca">Faber_ACA<a class="headerlink" href="#faber_aca" title="Permanent link">&para;</a></h3>
 <p>In the first terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8021</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8020</span> --outbound-transport http --webhook-url http://127.0.0.1:8022/webhooks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aca-py<span class="w"> </span>start<span class="w"> </span>--admin<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">8021</span><span class="w"> </span>--admin-insecure-mode<span class="w"> </span>--inbound-transport<span class="w"> </span>http<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="m">8020</span><span class="w"> </span>--outbound-transport<span class="w"> </span>http<span class="w"> </span>--webhook-url<span class="w"> </span>http://127.0.0.1:8022/webhooks
 </code></pre></div>
 <p>Make sure the ports above are unused.</p>
 <p>Take note of the specific IP addresses and ports you used in the above command. We will refer to them by the following names:</p>
@@ -7167,7 +7167,7 @@ Once the ledger is running, you can see the ledger by going to the web server ru
 <p>The webhook port is where the ACA will send notifications to. We will expose this from the AEA so it receives this ACA's notifications.</p>
 <h3 id="alice_aca">Alice_ACA<a class="headerlink" href="#alice_aca" title="Permanent link">&para;</a></h3>
 <p>In the second terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aca-py start --admin <span class="m">127</span>.0.0.1 <span class="m">8031</span> --admin-insecure-mode --inbound-transport http <span class="m">0</span>.0.0.0 <span class="m">8030</span> --outbound-transp http --webhook-url http://127.0.0.1:8032/webhooks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aca-py<span class="w"> </span>start<span class="w"> </span>--admin<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">8031</span><span class="w"> </span>--admin-insecure-mode<span class="w"> </span>--inbound-transport<span class="w"> </span>http<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="m">8030</span><span class="w"> </span>--outbound-transp<span class="w"> </span>http<span class="w"> </span>--webhook-url<span class="w"> </span>http://127.0.0.1:8032/webhooks
 </code></pre></div>
 <p>Again, make sure the above ports are unused and take note of the specific IP addresses and ports. In this case:</p>
 <ul>
@@ -7179,20 +7179,20 @@ Once the ledger is running, you can see the ledger by going to the web server ru
 <p>Now you can create <strong>Alice_AEA</strong> and <strong>Faber_AEA</strong> in terminals 3 and 4 respectively.</p>
 <h3 id="alice_aea">Alice_AEA<a class="headerlink" href="#alice_aea" title="Permanent link">&para;</a></h3>
 <p>In the third terminal, fetch <strong>Alice_AEA</strong> and move into its project folder:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea fetch fetchai/aries_alice:0.32.3
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span> aries_alice
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/aries_alice:0.32.3
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span><span class="w"> </span>aries_alice
 </code></pre></div>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create <b>Alice_AEA</b> from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea create aries_alice
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span> aries_alice
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>aea add connection fetchai/http_client:0.24.4
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>aea add connection fetchai/webhook:0.20.4
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>aea add skill fetchai/aries_alice:0.26.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aea<span class="w"> </span>create<span class="w"> </span>aries_alice
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>aries_alice
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/http_client:0.24.4
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/webhook:0.20.4
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/aries_alice:0.26.4
 </code></pre></div>
 </p>
 </details>
@@ -7200,20 +7200,20 @@ The following steps create <b>Alice_AEA</b> from scratch:
 <h4 id="configure-the-aries_alice-skill">Configure the <code>aries_alice</code> skill:<a class="headerlink" href="#configure-the-aries_alice-skill" title="Permanent link">&para;</a></h4>
 <p>(configuration file: <code>alice/vendor/fetchai/skills/aries_alice/skill.yaml</code>) </p>
 <p>Ensure <code>admin_host</code> and <code>admin_port</code> values match with the values you noted above for <strong>Alice_ACA</strong>. You can use the framework's handy <code>config</code> <a href="../cli-commands">CLI command</a> to set these values:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_alice.models.strategy.args.admin_host <span class="m">127</span>.0.0.1
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.aries_alice.models.strategy.args.admin_host<span class="w"> </span><span class="m">127</span>.0.0.1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_alice.models.strategy.args.admin_port <span class="m">8031</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>int<span class="w"> </span>vendor.fetchai.skills.aries_alice.models.strategy.args.admin_port<span class="w"> </span><span class="m">8031</span>
 </code></pre></div></p>
 <h4 id="configure-the-webhook-connection">Configure the <code>webhook</code> connection:<a class="headerlink" href="#configure-the-webhook-connection" title="Permanent link">&para;</a></h4>
 <p>(configuration file: <code>alice/vendor/fetchai/connections/webhook/connection.yaml</code>).</p>
 <p>First ensure the value of <code>webhook_port</code> matches with what you used above for <strong>Alice_ACA</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8032</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>int<span class="w"> </span>vendor.fetchai.connections.webhook.config.webhook_port<span class="w"> </span><span class="m">8032</span>
 </code></pre></div>
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.connections.webhook.config.webhook_url_path<span class="w"> </span>/webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </code></pre></div>
 <h4 id="configure-the-p2p_libp2p-connection">Configure the <code>p2p_libp2p</code> connection:<a class="headerlink" href="#configure-the-p2p_libp2p-connection" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11000&quot;,</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="s1">  &quot;entry_peers&quot;: [],</span>
@@ -7224,29 +7224,29 @@ The following steps create <b>Alice_AEA</b> from scratch:
 </code></pre></div>
 <h3 id="install-the-dependencies-and-run-alice_aea">Install the Dependencies and Run Alice_AEA:<a class="headerlink" href="#install-the-dependencies-and-run-alice_aea" title="Permanent link">&para;</a></h3>
 <p>Now install all the dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea install
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aea<span class="w"> </span>install
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>aea<span class="w"> </span>build
 </code></pre></div>
 <p>Finally run <strong>Alice_AEA</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>Once you see a message of the form <code>To join its network use multiaddr 'SOME_ADDRESS'</code> take note of the address. (Alternatively, use <code>aea get-multiaddress fetchai -c -i fetchai/p2p_libp2p:0.27.3 -u public_uri</code> to retrieve the address.) We will refer to this as <strong>Alice_AEA's P2P address</strong>.</p>
 <h3 id="faber_aea">Faber_AEA<a class="headerlink" href="#faber_aea" title="Permanent link">&para;</a></h3>
 <p>In the fourth terminal, fetch <strong>Faber_AEA</strong> and move into its project folder:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea fetch fetchai/aries_faber:0.32.3
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span> aries_faber
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aea<span class="w"> </span>fetch<span class="w"> </span>fetchai/aries_faber:0.32.3
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span><span class="w"> </span>aries_faber
 </code></pre></div>
 <details><summary>Alternatively, create from scratch.</summary>
 <p>
 
 The following steps create <b>Faber_AEA</b> from scratch:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea create aries_faber
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span> aries_faber
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>aea add connection fetchai/p2p_libp2p:0.27.3
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>aea add connection fetchai/soef:0.27.4
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>aea add connection fetchai/http_client:0.24.4
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>aea add connection fetchai/webhook:0.20.4
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>aea add skill fetchai/aries_faber:0.24.3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aea<span class="w"> </span>create<span class="w"> </span>aries_faber
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span>aries_faber
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/p2p_libp2p:0.27.3
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/soef:0.27.4
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/http_client:0.24.4
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>aea<span class="w"> </span>add<span class="w"> </span>connection<span class="w"> </span>fetchai/webhook:0.20.4
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>aea<span class="w"> </span>add<span class="w"> </span>skill<span class="w"> </span>fetchai/aries_faber:0.24.3
 </code></pre></div>
 </p>
 </details>
@@ -7254,20 +7254,20 @@ The following steps create <b>Faber_AEA</b> from scratch:
 <h4 id="configure-the-aries_faber-skill">Configure the <code>aries_faber</code> skill:<a class="headerlink" href="#configure-the-aries_faber-skill" title="Permanent link">&para;</a></h4>
 <p>(configuration file: <code>faber/vendor/fetchai/skills/aries_alice/skill.yaml</code>)</p>
 <p>Ensure <code>admin_host</code> and <code>admin_port</code> values match with those you noted above for <strong>Faber_ACA</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea config <span class="nb">set</span> vendor.fetchai.skills.aries_faber.models.strategy.args.admin_host <span class="m">127</span>.0.0.1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.skills.aries_faber.models.strategy.args.admin_host<span class="w"> </span><span class="m">127</span>.0.0.1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea config <span class="nb">set</span> --type int vendor.fetchai.skills.aries_faber.models.strategy.args.admin_port <span class="m">8021</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>int<span class="w"> </span>vendor.fetchai.skills.aries_faber.models.strategy.args.admin_port<span class="w"> </span><span class="m">8021</span>
 </code></pre></div>
 <h4 id="configure-the-webhook-connection_1">Configure the <code>webhook</code> connection:<a class="headerlink" href="#configure-the-webhook-connection_1" title="Permanent link">&para;</a></h4>
 <p>(configuration file: <code>faber/vendor/fetchai/connections/webhook/connection.yaml</code>).</p>
 <p>First, ensure the value of <code>webhook_port</code> matches with what you used above for <strong>Faber_ACA</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea config <span class="nb">set</span> --type int vendor.fetchai.connections.webhook.config.webhook_port <span class="m">8022</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>int<span class="w"> </span>vendor.fetchai.connections.webhook.config.webhook_port<span class="w"> </span><span class="m">8022</span>
 </code></pre></div>
 <p>Next, make sure the value of <code>webhook_url_path</code> is <code>/webhooks/topic/{topic}/</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea config <span class="nb">set</span> vendor.fetchai.connections.webhook.config.webhook_url_path /webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vendor.fetchai.connections.webhook.config.webhook_url_path<span class="w"> </span>/webhooks/topic/<span class="o">{</span>topic<span class="o">}</span>/
 </code></pre></div>
 <h4 id="configure-the-p2p_libp2p-connection_1">Configure the <code>p2p_libp2p</code> connection:<a class="headerlink" href="#configure-the-p2p_libp2p-connection_1" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea config <span class="nb">set</span> --type dict vendor.fetchai.connections.p2p_libp2p.config <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>aea<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--type<span class="w"> </span>dict<span class="w"> </span>vendor.fetchai.connections.p2p_libp2p.config<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="s1">&#39;{</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="s1">  &quot;delegate_uri&quot;: &quot;127.0.0.1:11001&quot;,</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="s1">  &quot;entry_peers&quot;: [&quot;SOME_ADDRESS&quot;],</span>
@@ -7279,11 +7279,11 @@ The following steps create <b>Faber_AEA</b> from scratch:
 <p>where <code>SOME_ADDRESS</code> is <strong>Alice_AEA's P2P address</strong> as displayed in the third terminal.</p>
 <h3 id="install-the-dependencies-and-run-faber_aea">Install the Dependencies and Run Faber_AEA:<a class="headerlink" href="#install-the-dependencies-and-run-faber_aea" title="Permanent link">&para;</a></h3>
 <p>Now install all the dependencies:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea install
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>aea build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>aea<span class="w"> </span>install
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>aea<span class="w"> </span>build
 </code></pre></div>
 <p>Finally run <strong>Faber_AEA</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>aea<span class="w"> </span>run
 </code></pre></div>
 <p>You should see <strong>Faber_AEA</strong> running and showing logs of its activities. For example:</p>
 <p><img src="../assets/aries-demo-faber.png" alt="Aries demo: Faber terminal" class="center"></p>
@@ -7293,8 +7293,8 @@ The following steps create <b>Faber_AEA</b> from scratch:
 <h2 id="terminate-and-delete-the-agents">Terminate and Delete the Agents<a class="headerlink" href="#terminate-and-delete-the-agents" title="Permanent link">&para;</a></h2>
 <p>You can terminate each agent by pressing Ctrl+C.</p>
 <p>To delete the AEAs, go to the projects' parent directory and delete the AEAs:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aea delete aries_faber
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>aea delete aries_alice
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aea<span class="w"> </span>delete<span class="w"> </span>aries_faber
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>aea<span class="w"> </span>delete<span class="w"> </span>aries_alice
 </code></pre></div>
 <h2 id="further-developments">Further developments<a class="headerlink" href="#further-developments" title="Permanent link">&para;</a></h2>
 <p>In the next update to this demo, the remaining interactions between AEAs and ACAs must be implemented. This means:</p>

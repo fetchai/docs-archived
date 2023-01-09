@@ -6676,29 +6676,34 @@
 <li><code>deploy</code></li>
 <li><code>run</code></li>
 <li><code>shell</code></li>
+<li><code>network</code></li>
 </ul>
 <h2 id="create-a-new-project">Create a new project<a class="headerlink" href="#create-a-new-project" title="Permanent link">&para;</a></h2>
 <p>Create a project using the <code>new</code> command
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>jenesis new my_project --profile my_profile
 </code></pre></div></p>
 <p>This will create a new directory called <code>my_project</code>. You can use <code>--profile</code> and <code>--network</code> optional arguments, when they aren't used, profile and network will be set to <code>testing</code> and <code>fetchai-testnet</code> respectively. Inside this directory a <code>jenesis.toml</code> file will be created containing the following information:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">[project]</span><span class="w"></span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my_project&quot;</span><span class="w"></span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s">&quot;Alice Tyler &lt;alice@mail.com&gt;&quot;</span><span class="p">,]</span><span class="w"></span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">[profile.my_profile.network]</span><span class="w"></span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-testnet&quot;</span><span class="w"></span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">chain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dorado-1&quot;</span><span class="w"></span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">fee_minimum_gas_price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000000000</span><span class="w"></span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">fee_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span><span class="w"></span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">staking_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span><span class="w"></span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grpc+https://grpc-dorado.fetch.ai&quot;</span><span class="w"></span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">faucet_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://faucet-dorado.fetch.ai&quot;</span><span class="w"></span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">is_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="k">[profile.my_profile.contracts]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">[project]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my_project&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s">&quot;Alice Tyler &lt;alice@mail.com&gt;&quot;</span><span class="p">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">keyring_backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;os&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">[profile.my_profile]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">[profile.my_profile.network]</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-testnet&quot;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">chain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dorado-1&quot;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">fee_minimum_gas_price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000000000</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">fee_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">staking_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grpc+https://grpc-dorado.fetch.ai&quot;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">faucet_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://faucet-dorado.fetch.ai&quot;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">is_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="k">[profile.my_profile.contracts]</span>
 </code></pre></div>
-<p>The project name is the argument passed to the <code>new</code> command while the authors field is populated by querying the user's GitHub username and email address. The profile's network will be filled with the relevant configuration variables. The contracts field will remain empty until new contracts are added.</p>
+<p>The project name is the argument passed to the <code>new</code> command while the authors field is populated by querying the user's GitHub username and email address. The profile's network will be filled with the relevant configuration variables. The contracts field will remain empty until new contracts are added. This <code>my_profile</code> profile will be set as the default profile, this means that every time you use a jenesis command without specifying a profile, <code>my_profile</code> will be used.</p>
 <p>An empty <code>contracts</code> folder will also be created inside <code>my_project</code> directory that will eventually contain all the information needed to compile and deploy the desired contracts.</p>
 <p>The <code>init</code> command is similar to the <code>new</code> command, but in this case, you won't need a project name argument since this command is intended to run inside an existing project directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jenesis init
@@ -6714,21 +6719,21 @@ or
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>jenesis init --network fetchai-localnode
 </code></pre></div></p>
 <p>The configuration can be found under the <code>network</code> heading in the <code>jenesis.toml</code> file and can be changed as desired:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[profile.testing.network]</span><span class="w"></span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-localnode&quot;</span><span class="w"></span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">chain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localnode&quot;</span><span class="w"></span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">fee_minimum_gas_price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000000000</span><span class="w"></span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">fee_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span><span class="w"></span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">staking_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span><span class="w"></span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grpc+http://127.0.0.1:9090/&quot;</span><span class="w"></span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">is_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">keep_running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">cli_binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchd&quot;</span><span class="w"></span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">validator_key_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;validator&quot;</span><span class="w"></span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">mnemonic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gap bomb bulk border original scare assault pelican resemble found laptop skin gesture height inflict clinic reject giggle hurdle bubble soldier hurt moon hint&quot;</span><span class="w"></span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345678&quot;</span><span class="w"></span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">moniker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test-node&quot;</span><span class="w"></span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">genesis_accounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s">&quot;fetch1vas6cc9650z0s08230ytqjphgzl5tcq9crqhhu&quot;</span><span class="p">,]</span><span class="w"></span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[profile.testing.network]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchai-localnode&quot;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">chain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localnode&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">fee_minimum_gas_price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000000000</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">fee_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">staking_denomination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atestfet&quot;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;grpc+http://127.0.0.1:9090/&quot;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">is_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">keep_running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">cli_binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fetchd&quot;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">validator_key_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;validator&quot;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">mnemonic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gap bomb bulk border original scare assault pelican resemble found laptop skin gesture height inflict clinic reject giggle hurdle bubble soldier hurt moon hint&quot;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345678&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">moniker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test-node&quot;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">genesis_accounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s">&quot;fetch1vas6cc9650z0s08230ytqjphgzl5tcq9crqhhu&quot;</span><span class="p">,]</span>
 </code></pre></div>
 In particular, to fund some accounts for testing, replace the <code>genesis_accounts</code>
 field with the addresses to be funded.</p>

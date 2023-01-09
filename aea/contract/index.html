@@ -6815,7 +6815,7 @@ This message will be handled by the <code>fetchai/ledger:0.21.3</code> connectio
 This message will be handled by the <code>fetchai/ledger:0.21.3</code> connection and then a <code>state</code> message will be returned with the matching state. For this to be executed correctly, the <code>fetchai/erc1155:0.23.2</code> contract package needs to implement the <code>get_balance</code> method with the specified key word arguments. We can then send the raw message to the <code>fetchai/ledger:0.21.3</code> connection using the <code>fetchai/ledger_api:1.0.0</code> protocol. In this case, signing is not required.</p>
 <h2 id="developing-your-own">Developing your own<a class="headerlink" href="#developing-your-own" title="Permanent link">&para;</a></h2>
 <p>The easiest way to get started developing your own contract is by using the <a href="../scaffolding">scaffold</a> command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea scaffold contract my_new_contract
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aea<span class="w"> </span>scaffold<span class="w"> </span>contract<span class="w"> </span>my_new_contract
 </code></pre></div>
 <p>This will scaffold a contract package called <code>my_new_contract</code> with three files:</p>
 <ul>
@@ -6824,8 +6824,8 @@ This message will be handled by the <code>fetchai/ledger:0.21.3</code> connectio
 <li><code>contract.yaml</code> containing the scaffolded configuration file</li>
 </ul>
 <p>Once your scaffold is in place, you can create a <code>build</code> folder in the package and copy the smart contract interface (e.g. bytes code and ABI) to it. Then, specify the path to the interfaces in the <code>contract.yaml</code>. For instance, if you use Ethereum, then you might specify the following:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">contract_interface_paths</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">ethereum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build/my_contract.json</span><span class="w"></span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">contract_interface_paths</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">ethereum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build/my_contract.json</span>
 </code></pre></div>
 where <code>ethereum</code> is the ledger id and <code>my_contract.json</code> is the file containing the byte code and ABI.</p>
 <p>Finally, you will want to implement the part of the contract interface you need in <code>contract.py</code>:</p>
@@ -6834,7 +6834,7 @@ where <code>ethereum</code> is the ledger id and <code>my_contract.json</code> i
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">class</span> <span class="nc">MyContract</span><span class="p">(</span><span class="n">Contract</span><span class="p">):</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="sd">&quot;&quot;&quot;The MyContract contract class which acts as a bridge between AEA framework and ERC1155 ABI.&quot;&quot;&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;The MyContract contract class which acts as a bridge between AEA framework and ERC1155 ABI.&quot;&quot;&quot;</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="nd">@classmethod</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">def</span> <span class="nf">get_create_batch_transaction</span><span class="p">(</span>
@@ -6846,7 +6846,7 @@ where <code>ethereum</code> is the ledger id and <code>my_contract.json</code> i
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="n">gas</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300000</span><span class="p">,</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="sd">        Get the transaction to create a batch of tokens.</span>
 <a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
 <a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="sd">        :param ledger_api: the ledger API</span>

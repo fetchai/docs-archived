@@ -6762,49 +6762,49 @@
 <p>In order to join the test network you will need to have the correct version of the fetchd ledger available on your system. </p>
 <h2 id="using-a-local-version">Using a local version<a class="headerlink" href="#using-a-local-version" title="Permanent link">&para;</a></h2>
 <p>Assuming that you have followed the <a href="../building/">installation guide</a>. You should now have <code>fetchd</code> successfully installed in your path. You can check this with the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetchd version
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetchd<span class="w"> </span>version
 </code></pre></div>
 <p>This should print a version number that must be compatible with the network you're connecting to (see the <a href="../live-networks/">network page</a> for the list of supported versions per network).</p>
 <h3 id="configuring-the-client-fetchd">Configuring the client fetchd<a class="headerlink" href="#configuring-the-client-fetchd" title="Permanent link">&para;</a></h3>
 <p>In general to configure the CLI to point at a given network it needs as a minimum the following configuration values</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fetchd config chain-id &lt;chain-id&gt;
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>fetchd config node &lt;rpc url&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fetchd<span class="w"> </span>config<span class="w"> </span>chain-id<span class="w"> </span>&lt;chain-id&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>fetchd<span class="w"> </span>config<span class="w"> </span>node<span class="w"> </span>&lt;rpc<span class="w"> </span>url&gt;
 </code></pre></div>
 <h3 id="dorado-example">Dorado example<a class="headerlink" href="#dorado-example" title="Permanent link">&para;</a></h3>
 <p>In the case of the Dorado network this would be as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fetchd config chain-id dorado-1
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fetchd config node https://rpc-dorado.fetch.ai:443
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fetchd<span class="w"> </span>config<span class="w"> </span>chain-id<span class="w"> </span>dorado-1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fetchd<span class="w"> </span>config<span class="w"> </span>node<span class="w"> </span>https://rpc-dorado.fetch.ai:443
 </code></pre></div>
 <h3 id="configuring-the-server-fetchd">Configuring the server <code>fetchd</code><a class="headerlink" href="#configuring-the-server-fetchd" title="Permanent link">&para;</a></h3>
 <p>Initialize fetchd by running command. This setups a default / empty genesis configuration.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd init &lt;moniker-name&gt; --chain-id &lt;chain id&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fetchd<span class="w"> </span>init<span class="w"> </span>&lt;moniker-name&gt;<span class="w"> </span>--chain-id<span class="w"> </span>&lt;chain<span class="w"> </span>id&gt;
 </code></pre></div>
 <blockquote>
 <p>This will initialize default configuration files under the <code>FETCHD_HOME</code> folder, which default to <code>~/.fetchd/</code>. </p>
 </blockquote>
 <p>Execute the following command to download the latest genesis file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl &lt;rpc url&gt;/genesis <span class="p">|</span> jq <span class="s1">&#39;.result.genesis&#39;</span> &gt; ~/.fetchd/config/genesis.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>&lt;rpc<span class="w"> </span>url&gt;/genesis<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.result.genesis&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>~/.fetchd/config/genesis.json
 </code></pre></div>
 <p>Finally connect fetchd to the network by getting it to connect to a seed node for the given network.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fetchd start --p2p.seeds<span class="o">=</span>&lt;network seed peers&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fetchd<span class="w"> </span>start<span class="w"> </span>--p2p.seeds<span class="o">=</span>&lt;network<span class="w"> </span>seed<span class="w"> </span>peers&gt;
 </code></pre></div>
 <p><strong>Dorado Example</strong></p>
 <p>Less abstractly then, if you wants to connect to the Dorado test net for example, you would need to run the following steps:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># init</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>fetchd init my-first-fetch-node --chain-id dorado-1
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>fetchd<span class="w"> </span>init<span class="w"> </span>my-first-fetch-node<span class="w"> </span>--chain-id<span class="w"> </span>dorado-1
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># genesis</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>curl https://rpc-dorado.fetch.ai:443 <span class="p">|</span> jq <span class="s1">&#39;.result.genesis&#39;</span> &gt; ~/.fetchd/config/genesis.json
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>curl<span class="w"> </span>https://rpc-dorado.fetch.ai:443<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.result.genesis&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>~/.fetchd/config/genesis.json
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># ...or, if that&#39;s too large to download from the rpc interface as a single file...</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>curl https://storage.googleapis.com/fetch-ai-testnet-genesis/genesis-dorado-827201.json --output ~/.fetchd/config/genesis.json
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>curl<span class="w"> </span>https://storage.googleapis.com/fetch-ai-testnet-genesis/genesis-dorado-827201.json<span class="w"> </span>--output<span class="w"> </span>~/.fetchd/config/genesis.json
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># start</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>fetchd start --p2p.seeds<span class="o">=</span>eb9b9717975b49a57e62ea93aa4480e091ae0660@connect-dorado.fetch.ai:36556,46d2f86a255ece3daf244e2ca11d5be0f16cb633@connect-dorado.fetch.ai:36557,066fc564979b1f3173615f101b62448ac7e00eb1@connect-dorado.fetch.ai:36558
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>fetchd<span class="w"> </span>start<span class="w"> </span>--p2p.seeds<span class="o">=</span>eb9b9717975b49a57e62ea93aa4480e091ae0660@connect-dorado.fetch.ai:36556,46d2f86a255ece3daf244e2ca11d5be0f16cb633@connect-dorado.fetch.ai:36557,066fc564979b1f3173615f101b62448ac7e00eb1@connect-dorado.fetch.ai:36558
 </code></pre></div>
 <p>Your local node will then start to synchronise itself with the network, replaying all blocks and transactions up to the current block. Depending on the age of the network and your hard disk speed, this could take a while.  Consider using <a href="../snapshots/">chain snapshots</a> to speed up this process.</p>
 <p>To know when your node as finished syncing, you can query it's status from its RPC API:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl -s <span class="m">127</span>.0.0.1:26657/status <span class="p">|</span>  jq <span class="s1">&#39;.result.sync_info.catching_up&#39;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">true</span> <span class="c1"># this will print &quot;false&quot; once your node is up to date</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-s<span class="w"> </span><span class="m">127</span>.0.0.1:26657/status<span class="w"> </span><span class="p">|</span><span class="w">  </span>jq<span class="w"> </span><span class="s1">&#39;.result.sync_info.catching_up&#39;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">true</span><span class="w"> </span><span class="c1"># this will print &quot;false&quot; once your node is up to date</span>
 </code></pre></div>
 
 
