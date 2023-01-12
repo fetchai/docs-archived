@@ -14,4 +14,4 @@ The process starts with a user sending the transaction on the blockchain, which 
 
     This choice is made depending on the validator's preferences, usually based on the transaction costs involved, and is not necessarily made in chronological sequence. Transactions with _extremely little_ or _no fees_, however, are more likely to be disregarded by validators and, as a result, can hang around in the unconfirmed state for a very long time. The transaction is often removed from the network if it is not put into a block for validation after a certain time period.
 
-The sender of cryptocurrency assets tacks on the fees to every blockchain transaction as a reward for validators. Senders have the option to set their own rates and even transmit transactions completely free of charge.gi
+The sender of cryptocurrency assets tacks on the fees to every blockchain transaction as a reward for validators. Senders have the option to set their own rates and even transmit transactions completely free of charge.
