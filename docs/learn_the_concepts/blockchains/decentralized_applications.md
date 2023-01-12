@@ -1,4 +1,4 @@
-**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied.gi
+**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied.
 
 DApps share the following features:
 
@@ -68,7 +68,7 @@ DApps are addressing problems that users of social media platforms encounter. Tw
 
 ??? example
 
-    An example on decentralized social media platform is given by [Steemit](https://steemit.com/){:target="\_blank"}. In there, the community can interact freely and express their opinions with fewer limitations and censorship  while also having more control over their personal data.
+    An example on decentralized social media platform is given by [Steemit](https://steemit.com/){:target="\_blank"}. In there, the community can interact freely and express their opinions with fewer limitations and censorship while also having more control over their personal data.
 
 ### Governance
 
