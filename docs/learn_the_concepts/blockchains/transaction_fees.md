@@ -11,7 +11,7 @@ Transaction fees serve **two crucial functions**:
 1. **Compensate miners or validators** assisting and confirming the transactions. 
    
 2. **Defend the network against spam assaults**: this is because transaction fees lead to a decrease in spam on the network, and large-scale spam assaults become more expensive and more difficult to execute. 
-
+ 
 !!! info
 
       Transaction fees serve as a basic but efficient spam filter.
