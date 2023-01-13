@@ -2,7 +2,7 @@ Blockchains get their most significant positive features by being purposefully s
 
 !!! info
 
-    This is known as the core of **the oracle dilemma**. In fact,git blockchains are unable to draw data from or push data out to any external systems as part of their built-in functionality. A blockchain's isolation is precisely what makes it so safe and dependable since the network just needs to come to consensus on a very simple set of questions using information that has already been written in the ledger.
+    This is known as the core of **the oracle dilemma**. In fact, blockchains are unable to draw data from or push data out to any external systems as part of their built-in functionality. A blockchain's isolation is precisely what makes it so safe and dependable since the network just needs to come to consensus on a very simple set of questions using information that has already been written in the ledger.
 
 A blockchain needs an additional piece of infrastructure, an **oracle**, to connect the blockchain to the off-chain services in a secure manner.  A blockchain oracle is a safe piece of middleware that makes it easier for blockchains to communicate with any off-chain system, such as data providers, online APIs, business backends, cloud providers, IoT devices, e-signatures, payment systems, other blockchains, and more. This is, a blockchain Oracle is the element that links the blockchain to the external system, making it possible for smart contracts to operate on the basis of inputs and outputs from the real world. 
 
