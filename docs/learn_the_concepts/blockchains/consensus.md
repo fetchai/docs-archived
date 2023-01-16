@@ -78,4 +78,4 @@ This mechanism chooses its validators based on their track record. Validators in
 
       It is a highly favored alternative for private networks since it is also one of the more affordable choices. Although very scalable, the decentralization aspect suffers since only a small number of people may join the network. The necessity that the validators be recognised further raises the danger of fraud and outside interference.
 
-When it comes to confirming the legitimacy of distributed blockchain systems, aach consensus technique has a unique set of benefits and drawbacks. While PoW and PoS are the most common, new algorithms are always emerging.
+When it comes to confirming the legitimacy of distributed blockchain systems, each consensus technique has a unique set of benefits and drawbacks. While PoW and PoS are the most common, new algorithms are always emerging.
