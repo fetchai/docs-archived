@@ -31,13 +31,13 @@ Agent-based modelling has been used in various kinds of applications spanning th
 !!! example
 
     Agent-based modelling finds application into the physical, biological, social, and management sciences. Agent-based models have also been developed in the fields of economics, sociology, anthropology, and cognitive science. Various social phenomena have been investigated using agent-based models that are not easily modeled using other approaches. Here, agent-based models are being used to analyze existing and hypothetical markets. For instance, agent-based simulations could be used to model possible futures for a market directed towards space tourism, to analyze how companies represented by agents would compete and offer products to customers in this hypothetical market.
-
+ 
 As it is possible to think, there are a growing number of agent-based applications in a variety of fields and disciplines directed towards the study of a large number of real-world applications. Examples of agent-based systems, for which large-scale agent-based models have been developed, include: traffic, air traffic control, military command and control, physical infrastructures and markets, such as electric power and integrated energy markets. 
 
 !!! warning
 
     When it comes to consider the Fetch.ai ecosystem, despite some similarities between ABM and the Autonomous Economic Agent (AEA) Framework, the two have fundamentally different goals. ABM's goal is not the design of agents or solving specific practical or engineering problems, but to study the unknown and complex behaviour of systems comprised of agents with known behaviour. On the other hand, the Autonomous Economic Agent (AEA) Framework's goal is to provide the necessary tools to build AEAs which purpose is to create value for their owner in clearly defined domains of application and not the study of existing of hypothetical scenarios to gather data.
-
+ 
 ## Multi-Agents Systems
 
 A **Multi-Agents System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. 
