@@ -11,7 +11,7 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 * **Direct links**: direct communication between both parties can be established only in the presence of direct links between them.
 
 * **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. 
-
+ 
 !!! example
 
         In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
