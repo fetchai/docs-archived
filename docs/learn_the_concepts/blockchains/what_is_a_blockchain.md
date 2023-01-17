@@ -8,7 +8,9 @@ A  **blockchain** is a series of data records that functions as a distributed, r
  
 Transactions take place inside a P2P global network, thus, blockchains are considered borderless and immune to censorship. A blockchain network serves as a decentralized ledger since it is maintained by several computers located all over the world. This implies that each participant, namely a **node**, keeps a copy of the blockchain data and interacts with other participants to make sure that everyone is aware of the same information stored in the block.
 
-Each block inside the blockchain contains a **hash** (i.e. a digital fingerprint or unique identifier), **timestamped batches of recent valid transactions**, and the **hash of the previous block**. The previous block hash links the blocks together and prevents any block from being altered or a block being inserted between two existing blocks. An additional feature of a blockchain is that all previous records are stored within the current records, so, there is a full history of previous transactions.
+!!! note 
+
+    Each block inside the blockchain contains a **hash** (i.e. a digital fingerprint or unique identifier), **timestamped batches of recent valid transactions**, and the **hash of the previous block**. The previous block hash links the blocks together and prevents any block from being altered or a block being inserted between two existing blocks. An additional feature of a blockchain is that all previous records are stored within the current records, so, there is a full history of previous transactions.
 
 ## Blockchains: use cases
 
