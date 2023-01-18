@@ -25,7 +25,7 @@ To update all your submodules to the latest versions of the main branch in their
 
 To compile and build the documentation site locally, download and install pipenv. Instructions are <a href="https://github.com/pypa/pipenv#installation" target=_blank>here</a>.
 
-Then run `make new_env`. This creates a new pipenv virtual environment and installs the required dependencies.
+Then run `make new-env`. This creates a new pipenv virtual environment and installs the required dependencies.
 
 Then `pipenv shell` to enter the pipenv virtual environment.
 
