@@ -3,7 +3,7 @@
 A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate with each other without having to go through a middleman. Peer-to-Peer networks consist of a group of devices that collectively store and share files. Every participant (i.e. _node_) functions as a distinct _peer_. Normally, all nodes are equally powerful and carry out the same functions. We can outline three key characteristics featuring a P2P system:
 
 * **No middlemen needed**: One of the key characteristics of peer-to-peer systems is that middlemen are not always required, though they are allowed. 
- 
+
 !!! example
 
         For instance, when booking a hotel room with a travel agent, the users will be going through a middleman but if the user books a hotel room directly with the hotel itself, then this depicts a direct communication, and hence, they are communicating on a peer-to-peer basis.
