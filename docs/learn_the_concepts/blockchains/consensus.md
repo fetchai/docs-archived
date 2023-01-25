@@ -6,13 +6,13 @@ Despite the absence of a central authority to confirm and authenticate the trans
 
     A consensus algorithm allows every peer in the Blockchain network to agree on the distributed ledger's current state. Consensus algorithms accomplish dependability in the Blockchain network and build confidence amongst unidentified peers in a distributed computing setting in this way.  
 
-Hence, the consensus mechanism ensures that every new block added to the Blockchain is the sole version of the truth that has been accepted by every node. 
+Hence, the consensus mechanism ensures that every new block added to the Blockchain is the sole version of the truth that has been accepted by every node.
 
-The following are the most utilized consensus mechanisms nowadays: 
+When it comes to confirming the legitimacy of distributed blockchain systems, each consensus technique has a unique set of benefits and drawbacks. While PoW and PoS are the most common, new algorithms are always emerging. The following are the most utilized consensus mechanisms nowadays: 
 
 ## Proof-of-Work (PoW)
 
-One of the most prominent blockchain technologies is the PoW consensus process, which was initially made popular by Bitcoin. Miners and the power they need to do the computations required to validate transactions are the key elements that distinguish PoW systems. Miners use computer hardware to power network nodes that use processing power to solve algorithmic mathematical computational puzzles, known as proofs of work. The miner who completes the puzzle first validates the blockchain's most recent block of transactions. The successful miner broadcasts the new block to all other nodes, which in turn authenticate its accuracy and add that block to their copies of the blockchain. This verification procedure establishes consensus. A new block cannot be added to the network until this data has been verified. When a miner validates a new block of data this latter one is then added to the PoW blockchain, with the first miner completing the validation process being rewarded with newly created cryptocurrency, known as the _block reward_ (in the case of Bitcoin, block rewards are in terms of BTC).
+One of the most prominent blockchain technologies is the PoW consensus process, which was initially made popular by Bitcoin. Miners and the power they need to do the computations required to validate transactions are the key elements that distinguish PoW systems. Miners use computer hardware to power network nodes that use processing power to solve algorithmic mathematical computational puzzles, known as proofs of work. The miner who completes the puzzle first validates the blockchain's most recent block of transactions. The successful miner broadcasts the new block to all other nodes, which in turn authenticate its accuracy and add that block to their copies of the blockchain. This verification procedure establishes consensus. A new block cannot be added to the network until this data has been verified. When a miner validates a new block of data this latter one is then added to the PoW blockchain, with the first miner completing the validation process being rewarded with newly created cryptocurrency, known as the _block reward_.
 
 ??? note
 
@@ -40,42 +40,24 @@ The process starts with a new block after the block is confirmed, and the valida
 
 ## Delegated Proof-of-Stake (DPoS)
 
-It is a well-liked development of the Proof of Stake idea in which network users choose delegates to validate the following block. Delegates may also be referred to as block producers or witnesses. By pooling your tokens into a staking pool and tying them to a specific delegate, you may cast a vote for delegates using DPoS. 
-
-!!! info
-
-      The argument for DPoS is that it is a more decentralized and equitable method of reaching consensus than just Proof-of-Stake.
+It is a well-liked development of the Proof of Stake idea in which network users choose delegates to validate the following block. Delegates may also be referred to as block producers or witnesses. By pooling your tokens into a staking pool and tying them to a specific delegate, you may cast a vote for delegates using DPoS. The argument for DPoS is that it is a more decentralized and equitable method of reaching consensus than just Proof-of-Stake.
 
 ## Proof of Burn (PoB)
 
-With PoB, validators burn coins by sending them to an address from which they are irretrievably lost, as opposed to spending money on expensive hardware equipment. Validators obtain the right to mine on the network based on a random selection procedure by sending the coins to an unreachable address. Burning coins here entails a long-term commitment on the part of validators in return for a temporary loss. Miners may burn either the native money of the Blockchain application or the currency of an alternate chain, such as bitcoin, depending on how the PoB is implemented. The more coins they burn, the better are their chances of being selected to mine the next block. 
-
-!!! info
-
-      While PoB is an interesting alternative to PoW, the protocol still wastes resources needlessly. And it is also questioned that mining power simply goes to those who are willing to burn more money.
+With PoB, validators burn coins by sending them to an address from which they are irretrievably lost, as opposed to spending money on expensive hardware equipment. Validators obtain the right to mine on the network based on a random selection procedure by sending the coins to an unreachable address. Burning coins here entails a long-term commitment on the part of validators in return for a temporary loss. Miners may burn either the native money of the Blockchain application or the currency of an alternate chain, such as bitcoin, depending on how the PoB is implemented. The more coins they burn, the better are their chances of being selected to mine the next block.
 
 ## Proof of Capacity (PoC)
 
 PoC, often referred to as Proof-of-Space (PoSpace), is a mining technique that is based on the amount of hard disk space that a miner has available. Here, miners generate a list of all the possible hashes beforehand in a process called plotting. Such plots are then stored on hard drives. The more storage capacity a miner has, the more possible solutions available. The more solutions, the higher the chances of possessing the correct combination of hashes and thus the higher the possibility of winning the reward. 
+ 
+!!! info
 
-??? note
-
-      PoC makes it possible for the typical individual to take part in the network because it does not need expensive or specialized equipment. As a result, it is a more decentralized and less energy-intensive alternative to some of the more widely used consensus mechanisms. However, as of yet not many developers have chosen to adopt the system, and there are concerns about its susceptibility to malware attacks.
+      PoC makes it possible for the typical individual to take part in the network because it does not need expensive or specialized equipment. As a result, this is decentralized and less energy-intensive alternative to some of the more widely used consensus mechanisms. However and there are concerns about its susceptibility to malware attacks.
 
 ## Proof of Activity (PoA)
 
-It is a consensus approach that combines PoW and PoS. Similar to PoW, the mining process starts here with miners vying to use the most powerful processing power to solve a complex mathematical problem. The system then turns to resemble PoS when the block has been mined, with the successfully created block header being sent to the PoA network. The new block is then randomly validated by a number of validators who sign off on the hash. The more crypto a validator possesses, similar to PoS, the better their chances are of being chosen. The block is introduced to the blockchain network and made available to record transactions once each selected validator has signed it. The miner and validators then split the block rewards. 
-
-??? info
-
-      The PoA system has come under fire for its energy-intensive mining phase and inherent favoritism towards validators holding a bigger amount of coins, despite being built with the purpose of integrating the best aspects of PoW and PoS while avoiding their drawbacks.
+It is a consensus approach that combines PoW and PoS. Similar to PoW, the mining process starts here with miners vying to use the most powerful processing power to solve a complex mathematical problem. The system then turns to resemble PoS when the block has been mined, with the successfully created block header being sent to the PoA network. The new block is then randomly validated by a number of validators who sign off on the hash. The more crypto a validator possesses, similar to PoS, the better their chances are of being chosen. The block is introduced to the blockchain network and made available to record transactions once each selected validator has signed it. The miner and validators then split the block rewards.
  
 ## Proof of Authority (PoA) 
 
-This mechanism chooses its validators based on their track record. Validators in PoA do not stake coins. Instead, in order to have the ability to validate blocks, they must risk their reputations. The majority of blockchain systems, in contrast to this, often do not need participants to disclose their identities. This approach is far less resource-intensive than some of its predecessors, especially PoW, as it requires essentially little computational power. 
-
-??? info
-
-      It is a highly favored alternative for private networks since it is also one of the more affordable choices. Although very scalable, the decentralization aspect suffers since only a small number of people may join the network. The necessity that the validators be recognised further raises the danger of fraud and outside interference.
-
-When it comes to confirming the legitimacy of distributed blockchain systems, each consensus technique has a unique set of benefits and drawbacks. While PoW and PoS are the most common, new algorithms are always emerging.
+This mechanism chooses its validators based on their track record. Validators in PoA do not stake coins. Instead, in order to have the ability to validate blocks, they must risk their reputations. The majority of blockchain systems, in contrast to this, often do not need participants to disclose their identities. This approach is far less resource-intensive than some of its predecessors, especially PoW, as it requires essentially little computational power.
