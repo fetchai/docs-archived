@@ -60,21 +60,21 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
 
 You can also jump straight into our GitHub repos:
 
-- [Ledger (fetchd)](https://github.com/fetchai/fetchd)
-- [CosmPy](https://github.com/fetchai/cosmpy)
-- [AEA Framework (& ACN)](https://github.com/fetchai/agents-aea)
-- [Fetch Wallet](https://github.com/fetchai/fetch-wallet)
-- [Jenesis](https://github.com/fetchai/jenesis)
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd){:target="\_blank"}
+- [CosmPy](https://github.com/fetchai/cosmpy){:target="\_blank"}
+- [AEA Framework (& ACN)](https://github.com/fetchai/agents-aea){:target="\_blank"}
+- [Fetch Wallet](https://github.com/fetchai/fetch-wallet){:target="\_blank"}
+- [Jenesis](https://github.com/fetchai/jenesis){:target="\_blank"}
 
 ## Help & Support
 
 If you want to report a bug or request a feature:
 
-- [Ledger (fetchd)](https://github.com/fetchai/fetchd/issues/new/choose)
-- [Cosmpy](https://github.com/fetchai/cosmpy/issues/new/choose)
-- [AEA Framework](https://github.com/fetchai/agents-aea/issues/new/choose)
-- [Jenesis](https://github.com/fetchai/jenesis/issues/new/choose)
-- [Documentation](https://github.com/fetchai/docs/issues/new/choose)
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd/issues/new/choose){:target="\_blank"}
+- [Cosmpy](https://github.com/fetchai/cosmpy/issues/new/choose){:target="\_blank"}
+- [AEA Framework](https://github.com/fetchai/agents-aea/issues/new/choose){:target="\_blank"}
+- [Jenesis](https://github.com/fetchai/jenesis/issues/new/choose){:target="\_blank"}
+- [Documentation](https://github.com/fetchai/docs/issues/new/choose){:target="\_blank"}
 
 Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fetch.ai/bug_bounty/).
 
@@ -82,10 +82,10 @@ Want to report a security vulnerability? Visit our [Bug Bounty](https://docs.fet
 
 Visit fetch.ai developer forums:
 
-- [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions)
-- [CosmPy](https://github.com/fetchai/cosmpy/discussions)
-- [AEA Framework](https://github.com/fetchai/agents-aea/discussions)
-- [Fetch Wallet](https://github.com/fetchai/fetch-wallet/discussions)
-- [Jenesis](https://github.com/fetchai/jenesis/discussions)
+- [Ledger (fetchd)](https://github.com/fetchai/fetchd/discussions){:target="\_blank"}
+- [CosmPy](https://github.com/fetchai/cosmpy/discussions){:target="\_blank"}
+- [AEA Framework](https://github.com/fetchai/agents-aea/discussions){:target="\_blank"}
+- [Fetch Wallet](https://github.com/fetchai/fetch-wallet/discussions){:target="\_blank"}
+- [Jenesis](https://github.com/fetchai/jenesis/discussions){:target="\_blank"}
 
-Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI).
+Chat with Fetch.ai developers on [discord](https://bit.ly/3ra5uMI){:target="\_blank"}.
