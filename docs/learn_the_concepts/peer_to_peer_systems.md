@@ -48,7 +48,7 @@ This contrasts with the idea behind unstructured P2P networks in which whole fil
 
 ### Hybrid P2P networks
 
-In hybrid P2P networks, some elements of the P2P architecture are combined with the traditional client-server approach. For instance, it might provide a central server that streamlines peer communication. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
+In hybrid P2P networks some elements of the P2P architecture are combined with the traditional client-server approach. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
 ## Benefits and drawbacks of a P2P system
 
