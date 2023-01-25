@@ -1,14 +1,14 @@
-#####################
-### Docs generation
-#####################
+########################################
+### Docs
+########################################
 
 .PHONY: generate-docs
 generate-docs:
 	mkdocs build
 
-###############################
-### Clean and init commands
-###############################
+########################################
+### Clear the caches and temporary files
+########################################
 
 .PHONY: clean
 clean: clean-build clean-pyc clean-test
@@ -46,14 +46,18 @@ clean-test:
 	find . -name 'log.txt' -exec rm -fr {} +
 	find . -name 'log.*.txt' -exec rm -fr {} +
 
+########################################
+### Initialise dev environment
+########################################
+
 v := $(shell pip -V | grep virtualenvs)
 
-.PHONY: new_env
-new_env: clean
+.PHONY: new-env
+new-env: clean
 	if [ -z "$v" ];\
 	then\
 		pipenv --rm;\
-		pipenv install --python 3.7 --skip-lock --clear;\
+		pipenv install --python 3.9 --skip-lock --clear;\
 		echo "Enter virtual environment with all development dependencies now: 'pipenv shell'.";\
 	else\
 		echo "In a virtual environment! Exit first: 'exit'.";\
