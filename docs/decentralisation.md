@@ -47,9 +47,7 @@ In a centralized system, there is a central authority that manages the system, m
 
 Decentralized systems are useful because they are open and democratic, more transparent, and they are run solely in the interests of their participants by their participants.  
 
-## Positive characteristics
-
-These are some key benefits of decentralized systems:
+## Benefits
 
 * **Democratic**: Decentralized systems require participation in order to successfully function, and therefore they are naturally democratic.
 
@@ -57,13 +55,11 @@ These are some key benefits of decentralized systems:
 
 * **Public**: Because decentralized systems need to be managed and run by their participants (democratic) and anyone can in principle join the system or leave (open), these systems are _often_ public and their inner workings are not kept confidential.
 
-* **Transparent**: In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. Decentralized systems therefore tend to be quite transparent.
+* **Transparent**: In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. 
 
-* **Trust minimisation**: participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to transparency) this is typically well known.
+* **Trust minimisation**: participants do not have to go through central authorities to interact with others and achieve their goals. Hence, there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to transparency) this is typically well known.
 
-## Limitations
-
-Some limitations of decentralized systems:
+## Drawbacks
 
 * **Speed**: Decentralized systems are often slower than centralized systems. Because there is more than one decision maker, decisions have to be made by consensus in the group and arriving at that consensus takes more time than a single entity making the decision. 
 
