@@ -2,9 +2,10 @@
 ### Docs
 ########################################
 
-.PHONY: generate-docs
-generate-docs:
-	mkdocs build
+# Build documentation
+.PHONY: docs
+docs:
+	mkdocs build --clean
 
 ########################################
 ### Clear the caches and temporary files
