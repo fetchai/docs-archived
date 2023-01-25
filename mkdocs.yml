@@ -4,7 +4,7 @@ site_description: Everything you need to know about Fetch.ai.
 edit_uri: ""
 site_author: developer@fetch.ai
 copyright: > # Copyright notice in footer + trigger cookie consent settings
-  Copyright &copy; 2018 - 2022 Fetch.ai -
+  Copyright &copy; 2018 - 2023 Fetch.ai -
   <a href="#__consent">Change cookie settings</a>
 
 strict: true
@@ -28,11 +28,13 @@ theme:
   features:
     - navigation.instant # Fast page loading
     - navigation.tracking # URL automatically updated with the currently active anchor
-#    - navigation.sections # Top level sections will be visible and grouped in sidebar
     - navigation.top # Back-to-top button
+    - navigation.footer # Add links to the previous and next page of the current page
     - search.suggest # Completion for the searched word (can be accepted with ->).
     - search.highlight # Highlight all occurrences after following a search result link
     - search.share # Show share button for copying deep link to the current search query and result
+    - toc.follow # Follow the table of content
+    - content.code.copy # Shows a button next to code blocks to copy the code into clipboard
   custom_dir: overrides # Needed for announcements
 
 nav:
@@ -80,9 +82,12 @@ extra_css:  # Required for the Fetchy design style
   - css/style.css
 
 markdown_extensions:
-  - attr_list # Required by images
   - admonition # Required by admonitions
-  - pymdownx.superfences # Required by admonitions, annotations, tabs. Enables arbitrary nesting of code and content blocks
+  - pymdownx.superfences: # Required by admonitions, annotations, tabs. Enables arbitrary nesting of code and content blocks
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight: # Required by code blocks
       anchor_linenums: true
   - pymdownx.inlinehilite # Required by code blocks
@@ -99,9 +104,6 @@ markdown_extensions:
   - markdown_include.include:
       base_path: ./colearn/docs
 
-extra_javascript:
-    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
-
 plugins:
   - monorepo
   - search # Enables search
@@ -113,7 +115,7 @@ extra:
   generator: false
   analytics:
     provider: google
-    property: UA-118969813-3
+    property: G-GYC9HYF1LD
     feedback:
       title: Was this page helpful?
       ratings:
@@ -141,22 +143,22 @@ extra:
   social:
     - icon: fontawesome/brands/twitter
       link: https://bit.ly/3oDuI3f
-      name: fetch.ai on twitter
+      name: fetch.ai on Twitter
     - icon: fontawesome/brands/telegram
       link: https://t.me/fetch_ai
-      name: fetch.ai on telegram
+      name: fetch.ai on Telegram
     - icon: fontawesome/brands/discord
       link: https://bit.ly/3ra5uMI
-      name: fetch.ai on discord
+      name: fetch.ai on Discord
     - icon: fontawesome/brands/github
       link: https://bit.ly/3AFCWxl
-      name: fetch.ai on githubs
+      name: fetch.ai on GitHubs
     - icon: fontawesome/brands/reddit
       link: https://bit.ly/30zS1Tg
-      name: fetch.ai on reddit
+      name: fetch.ai on Reddit
     - icon: fontawesome/brands/youtube
       link: https://bit.ly/3DxFazs
-      name: fetch.ai on youtube
+      name: fetch.ai on YouTube
     - icon: fontawesome/brands/linkedin
       link: https://bit.ly/3kNO70p
-      name: fetch.ai on linkedin
+      name: fetch.ai on LinkedIn
