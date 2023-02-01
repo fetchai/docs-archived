@@ -1,4 +1,4 @@
-# Agent-based and multi-agents systems
+# Agent-Based and Multi-Agents Systems
 
 An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and acts _continuously_ and _autonomously_  (with limited or no interference) on their behalf.
 
@@ -12,7 +12,7 @@ Agents have _five key characteristics_:
 
 2. **Autonomy**: Agents operate with limited or no interference and do not need to be constantly told what to do. They perform actions continuously according to their internal reasoning system.
 
-3. **Self-interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
+3. **Self-Interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
 
 4. **Proactive**:  Agents have goals to achieve allowing them to take the initiative and perform actions that get them closer to achieving their goals. This means an agent typically compares the outcome of different actions relative to its goals and selects the one that takes it closer to them.
 
@@ -32,7 +32,7 @@ As it is possible to think, there are a growing number of agent-based applicatio
 
 # Multi-Agents Systems
 
-A **Multi-Agent System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. _Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period_. This type of interaction may be _cooperative_ or _competitive_. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals. 
+A **Multi-Agent System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. _Interactions between agents is an important feature that enables them to use knowledge of other agents and learn more about the environment in a compressed time period_. This type of interaction may be _cooperative_ or _competitive_. In a cooperative interaction, agents work with each other towards a common goal. The aim of this interaction is to enable agents to distribute and share their knowledge and use the intelligence and capabilities of each other to solve problems. In a competitive interaction, agents may compete to obtain individual resources and achieve individual goals.
 
 MAS systems have different **key characteristics**:
 
@@ -50,9 +50,9 @@ However, there are some negative features_ characterizing such systems:
 
 1. **Complexity**: multi-agent systems are quite complex to set up, you have to use a pre-existing framework or build one, and getting all the agents to communicate effectively together can be an operational challenge. As these are decentralized systems (i.e. no central authority), managing the system is more complicated than in a centralized one, as participants need to be involved in management decisions.
 
-2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different. 
+2. **Predictability**: with every agent acting in a self-interested manner with clear goals, it is easy to predict what an individual agent is trying to achieve. However, it is harder to predict the direction of the whole system as that is the result of the interactions between all the agents and each agent is different.
 
-The _complexity of MASs_ can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. System composition depends on the characteristics of individual agents and whether they are _homogeneous_ or _heterogeneous_ in physical and/or programming structure. Homogeneous agents are similar to each other or they are of the same type, whereas, heterogeneous agents are different and diverse in kind. 
+The _complexity of MASs_ can increase rapidly with the number of agents, the interactions among them, or the complexity of their behavior. System composition depends on the characteristics of individual agents and whether they are _homogeneous_ or _heterogeneous_ in physical and/or programming structure. Homogeneous agents are similar to each other or they are of the same type, whereas, heterogeneous agents are different and diverse in kind.
 
 MAS have received tremendous attention from scholars in different disciplines, ranging from computer science to civil engineering, in order to solve complex problems by subdividing them into smaller tasks. The individual tasks are allocated to autonomous agents, and each one of them decides on a proper action to solve the task using multiple inputs (e.g. history of actions, interactions with its neighboring agents, and its goal).
 
