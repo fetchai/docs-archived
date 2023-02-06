@@ -18,7 +18,7 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
         <div class="diagram-row-container">
             <a href="https://aea-registry.fetch.ai/" target="_blank" class="diagram-item"><div>AEA Registry</div></a>
             <a href="https://aea-manager.fetch.ai/" target="_blank"  class="diagram-item"><div>AEA Manager</div></a>
-            <a href="basics/wallet/getting_started/" class="diagram-item"><div>Fetch Wallet</div></a>
+            <a href="/fetch-wallet" class="diagram-item"><div>Fetch Wallet</div></a>
             <a href="https://explore-fetchhub.fetch.ai/" target="_blank" class="diagram-item"><div>Explorer</div></a>
         </div>
     </div>
@@ -26,14 +26,16 @@ The fetch ecosystem is made up of various tools and frameworks that help you bui
         <p class="diagram-label">Tools that use the chain</p>
         <div class="diagram-row-container">
             <div class="diagram-item">
-                <a class="item-link" href="/aea" >
+                <a class="item-link" href="/aea-framework-documentation" >
                     AEA</br/>Framework
-                    <a href="/aea/acn" class="diagram-item-child">
+                    <a href="/aea-framework-documentation/acn" class="diagram-item-child">
                         <div>ACN</div>
                     </a>
                 </a>
             </div>
-            <div class="diagram-item upcoming-feature">Upcoming Tool</div>
+            <div class="diagram-item">
+                <a class="item-link" href="/uAgents" >μAgents</a>
+            </div>
         </div>
     </div>
     <div class="diagram-row">
