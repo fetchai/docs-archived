@@ -37,7 +37,7 @@ Here you will find a list of every active validator with whom you can stake your
 
 You should now see the rewards added to your **Total Balance**.
 
-### Using the Staking dashboard
+### Using the Staking Dashboard
 
 1. Go to the [ledger browser page](https://browse-fetchhub.fetch.ai/validators).
 2. Connect your wallet, if it is not yet connected, by pressing **Connect Wallet** at the top right.

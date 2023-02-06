@@ -1,4 +1,4 @@
-## What is a smart contract?
+## What is a Smart Contract?
 
 A **smart contract** (i.e. **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when the circumstances are satisfied. For instance, smart contracts may be used to mediate the trade of cryptocurrencies (or any other digital asset) between two parties. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**. 
 
@@ -12,27 +12,27 @@ In the context of the blockchain and cryptocurrency markets, smart contracts are
 
 Their application is also being investigated in the healthcare industry as a defense against data tampering in clinical studies. By creating a clear record of shared ownership rights and dividing all royalties and revenues from intellectual property accordingly, smart contracts may even be used to enforce intellectual property agreements.
 
-## Benefits of smart contracts
+## Benefits of Smart Contracts
  
 There are different **positive features** of smart contracts:
 
-1. **Speed, efficiency, and precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually. 
+1. **Speed, Efficiency, and Precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually.
 
-2. **Transparency and trust**: there is no need to wonder whether information has been changed for one participant's personal gain because there is no third party engaged and participants exchange encrypted records of transactions. Smart contracts are written in a way that does make disputes extremely rare, indeed they are designed to avoid them entirely. 
+2. **Transparency and Trust**: there is no need to wonder whether information has been changed for one participant's personal gain because there is no third party engaged and participants exchange encrypted records of transactions. Smart contracts are written in a way that does make disputes extremely rare, indeed they are designed to avoid them entirely. 
 
 3. **Security**: because the blockchain transaction records are encrypted, these are incredibly difficult to hack. Additionally, hackers would need to alter the entire chain in order to change a single record on a distributed ledger since each record is linked to the records that came before and after it.
 
-## Drawbacks of smart contracts
+## Drawbacks of Smart Contracts
 
 There are three key **negative features** about smart contracts:
 
-1. **Legal status**: smart contracts lack any legal status. This may be largely caused because the technology is so new, and most legal jurisdictions have not yet updated their guidance on smart contracts and legislation if required is usually not yet in place. This is an area that is likely to change in coming years.
+1. **Legal Status**: smart contracts lack any legal status. This may be largely caused because the technology is so new, and most legal jurisdictions have not yet updated their guidance on smart contracts and legislation if required is usually not yet in place. This is an area that is likely to change in coming years.
 
-2. **Difficult to change**: once a record has been written to the blockchain it is impossible to change or delete it. Therefore, if a smart contract has been issued in some way incorrectly, then changing it is almost impossible. You would be able to issue another contract that effectively would reverse the effect of the incorrect contract, but that would not necessarily be easy.
+2. **Difficult to Change**: once a record has been written to the blockchain it is impossible to change or delete it. Therefore, if a smart contract has been issued in some way incorrectly, then changing it is almost impossible. You would be able to issue another contract that effectively would reverse the effect of the incorrect contract, but that would not necessarily be easy.
 
-3. **Need for precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
+3. **Need for Precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
 
-## Use cases
+## Use Cases
 ### Finance
 
 DeFi dApps are a strong substitute for conventional financial services, and their acceptance is rising as a result of the irreversible, transparent, and trustless properties of blockchain and smart contract technology. 
@@ -59,7 +59,7 @@ In order to increase security and lower the likelihood of data mismanagement or 
 
 The ability of smart contracts to serve as legally enforceable contracts, the sort that govern the majority of today's commercial interactions, is one of the most exciting real world use cases. Most recently, with the introduction of e-signatures for legally binding agreements, technology has been pushing innovation in the legal sector. Another recent development in this area is the emergence of smart contracts, which might soon provide parties to legal agreements with a choice and perhaps reduce the expense of engaging attorneys and other middlemen.
 
-### Machine Learning and Artificial Intelligence 
+### Machine Learning and Artificial Intelligence
 
 The capacity of blockchain technology and related smart contract technology to simplify difficult computing operations like those involved in machine learning and artificial intelligence is one of the most interesting uses of these technologies (AI). There is potential to develop AI-powered smart contracts by fusing the data-intensive processing of AI with the decentralized security and immutability of blockchain technology. Applications for smart contracts will need to develop into increasingly complicated systems as they are used by more and more sectors of the economy. 
 

@@ -1,14 +1,14 @@
-# Welcome to Fetch.ai ecosystem
+# Welcome to Fetch.ai Ecosystem
 
 <div id="header-image-div"><img id="header-image" src="./images/fetchai.png" alt="interconnected systems such as parking, cloud, robots, and data"></div>
 
-## What is fetch.ai?
+## What is Fetch.ai?
 
 Our mission is to build the infrastructure required for developing modern, decentralized and peer-to-peer (P2P) applications that are free from centralized rent-seeking.
 
 We achieve this by providing open-source software tools which you can use together with our interoperable decentralized network, to harness the power of AI and automation, and carry out complex tasks in the _digital economy_.
 
-## Get started
+## Get Started
 
 The fetch ecosystem is made up of various tools and frameworks that help you build and jump-start your very own decentralized applications. Select one below to dive right in!
 
