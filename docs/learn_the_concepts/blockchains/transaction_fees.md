@@ -1,22 +1,20 @@
-# Transaction fees
+# Transaction Fees
 
-Any transaction involving the transfer of cryptocurrency will incur fees, whether you are purchasing or withdrawing funds from an exchange or sending or receiving payments in cryptocurrency. Various fee types include: 
+Any transaction involving the transfer of cryptocurrency will incur fees, whether you are purchasing or withdrawing funds from an exchange or sending or receiving payments in cryptocurrency. Various fee types include:
 
 * **Transaction** or **miner fees**: these vary depending on how many transactions are awaiting their inclusion in the current block and are intended to motivate miners and validators to validate cryptocurrency transactions.
 
-* **Service** or **network fees**: these are applied by third-party providers that enable transactions (e.g. cryptocurrency exchange). These fees are made in addition to any network-generated fee paid to miners. 
+* **Service** or **network fees**: these are applied by third-party providers that enable transactions (e.g. cryptocurrency exchange). These fees are made in addition to any network-generated fee paid to miners.
    
-Transaction fees serve **two crucial functions**: 
+Transaction fees serve **two crucial functions**:
 
-1. **Compensate miners or validators** assisting and confirming the transactions. 
-   
+1. **Compensate miners or validators** assisting and confirming the transactions.
+
 2. **Defend the network against spam assaults**: this is because transaction fees lead to a decrease in spam on the network, and large-scale spam assaults become more expensive and more difficult to execute. 
 
 !!! info
 
       Transaction fees serve as a basic but efficient spam filter.
- 
-Transaction fees are generally affordable for most blockchains, but they can become fairly expensive depending on network activity. 
 
 ??? note 
 
@@ -26,7 +24,7 @@ Transaction fees are generally affordable for most blockchains, but they can bec
 
 Miners are in charge of adding transactions to the blockchain and are required for confirming and securing these transactions on each network. These payments make the effort of miners and validators profitable. Despite the fact that each blockchain is distinct, they all have a limited quantity of transactions that may fit into a single block.
 
-??? info
+??? example
 
       The Bitcoin network only permits a total of 2,800 transactions per block.
 
@@ -50,6 +48,6 @@ These gas fees are calculated in an extremely fair way, with the fee being direc
 
 !!! example
 
-    A simple purchase transaction takes less computing power than activating a smart contract, therefore the associated fee will be lower. 
+    A simple purchase transaction takes less computing power than activating a smart contract, therefore the associated fee will be lower.
 
 **There is full transparency too, as it is always clear what the gas fee will be before making a transaction, and so there are no hidden surprises.**

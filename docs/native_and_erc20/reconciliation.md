@@ -9,7 +9,7 @@ The [reconciliation service](https://browse-fetchhub.fetch.ai/reconciliation) ha
 
 First, make sure the following conditions are satisfied:
 
-* Your [Fetch wallet](/fetch-wallet/) is set up and you have access to it. 
+* Your [Fetch wallet](/fetch-wallet/) is set up and you have access to it.
 
     !!! info
         The address of the account on your Fetch wallet must have recorded at least one transaction on the network. If you have never made a transaction using this address before, the reconciliation tool and the network have no way of knowing your wallet exists and will not allow you to complete the final submission.

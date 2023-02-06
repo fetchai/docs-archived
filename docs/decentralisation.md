@@ -1,4 +1,4 @@
-## What are decentralized systems?
+## What are Decentralized Systems?
 
 A decentralized system is an interconnected system if no single entity (individual, organization, or group) is the sole authority. In a decentralized system, control and decision-making is in the hands of those participating in the system and they have (more or less) equal standing in terms of influence. This is in contrast to a centralized system where a single authority is above all others in terms of rights and privileges.
 
@@ -12,7 +12,7 @@ Another great example is when you fly internationally from one place to another.
 
 * **Lack of central authorities**: It is not that decentralized systems lack the authority to make changes to the management of the network, rather this authority is distributed among the participants. The system is run by the participants for the benefit of the participants.
 
-## Decentralized vs distributed
+## Decentralized vs Distributed
 
 These are very easy to get confused, and sometimes it seems they are used interchangeably but they are actually quite different.
 
@@ -24,7 +24,7 @@ The most obvious example of a distributed system is cloud computing, where tasks
 
 What determines whether a system is decentralized or not is whether or not there are central authorities. What determines whether a system is distributed is whether the processing is done in one or multiple physical locations.
 
-## Decentralized vs centralized
+## Decentralized vs Centralized
 
 In a centralized system, there is a central authority that manages the system, makes decisions about how it is run and exercises control over the other components of the system. 
 
@@ -35,11 +35,11 @@ Some examples of centralized systems:
 * Amazon: Buyers and sellers interact commercially through Amazon.
 * Client-server model: Clients interact with each other only through the server, a great example of this is email where communication between two users goes through a server.  
 
-## Why are decentralized systems useful?
+## Why are Decentralized Systems Useful?
 
 Decentralized systems are useful because they are open and democratic, more transparent, and they are run solely in the interests of their participants by their participants.  
 
-## Positive characteristics
+## Positive Characteristics
 
 These are some of the key benefits of decentralized systems:
 
@@ -51,7 +51,7 @@ These are some of the key benefits of decentralized systems:
 
 * **Transparent**: In order for the participants of a decentralized system to contribute to its liveliness, they must be made aware of how the system works, how it is managed, and so on. Decentralized systems therefore tend to be quite transparent.
 
-* **Trust minimisation**: The fact that in decentralized systems, participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to transparency) this is typically well known.
+* **Trust Minimisation**: The fact that in decentralized systems, participants do not have to go through central authorities to interact with others and achieve their goals means there is no need to trust central entities to handle your needs. Any guarantees needed by the system has to be provided by the system itself and the way it is designed, and (due to transparency) this is typically well known.
 
 ## Limitations
 
