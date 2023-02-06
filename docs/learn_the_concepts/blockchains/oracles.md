@@ -28,7 +28,9 @@ Given this, we can identify the following types of oracles:
 
 * **Inbound and outbound oracles**: outbound oracles transfer information from smart contracts to the outside world, whereas inbound oracles give information from external sources to smart contracts.
 
-* **Centralized and decentralized oracles**: A _centralized oracle_ is the only source of data for the smart contract and is managed by a single organization. The primary issue with centralized oracles is that they have a single point of failure, which reduces the contracts' resistance to weaknesses and intrusions. On the other hand, public blockchains and _decentralized oracles_ goal is to reduce counterparty risk. By not depending on a single source of truth, decentralized oracles improve the accuracy of the data supplied to smart contracts.
+* **Centralized oracles**: a _centralized oracle_ is the only source of data for the smart contract and is managed by a single organization. The primary issue with centralized oracles is that they have a single point of failure, which reduces the contracts' resistance to weaknesses and intrusions. 
+
+* **Decentralized oracles**: public blockchains and _decentralized oracles_ goal is to reduce counterparty risk. By not depending on a single source of truth, decentralized oracles improve the accuracy of the data supplied to smart contracts.
 
 * **Specialized oracles**: these oracles are created so that a single smart contract can use them. This means that a proportionately large number of contract-specific oracles must be created if one plans to implement numerous smart contracts. These oracles are said to be exceedingly time and money consuming. This strategy can prove to be quite unworkable for businesses that need to pull data from a number of sources. On the other hand, developers have a lot of freedom to customize contract-specific oracles to meet unique needs because they may be created from the ground up to service a particular use case.
 

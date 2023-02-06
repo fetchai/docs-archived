@@ -1,4 +1,4 @@
-**Decentralized applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied. 
+**Decentralized Applications** (**DApps**) are digital applications or programmes that exist and run on a blockchain or peer-to-peer (i.e. P2P) network of computers. DApps, which might resemble ordinary mobile applications on your phone in appearance but have a distinct backend system, as these are not subject to the control of a single authority. DApps function by using smart contracts on a distributed network as opposed to a centralized system. These features make DApps more open, decentralized, and secure as a result. A smart contract functions as a collection of predetermined rules that computer code enforces. The tasks specified in the contract will be carried out by all network nodes when and if specific conditions are satisfied. 
 
 A smart contract's code is difficult to alter or eliminate after it has been published on the blockchain. Therefore, consumers may still access the DApp even if the DApp's development team has split.
  
@@ -8,13 +8,13 @@ DApps share the following features:
 
 * **Open-sourceness**: This allows anybody to access, verify, use, copy, and edit their source code. The vast majority of the DApp tokens are not controlled by a single entity. Users are also able to suggest and vote on DApp improvements.
 
-* **Decentralization** and **cryptography**: To protect data, the DApp stores all of its data on a public, decentralized blockchain that is maintained by a number of users (or nodes).
+* **Decentralization** and **Cryptography**: To protect data, the DApp stores all of its data on a public, decentralized blockchain that is maintained by a number of users (or nodes).
  
 * **Tokenization**: A cryptographic token is required to access DApps. They can use native tokens created using a consensus mechanism like Proof of Work (PoW) or Proof of Stake (PoS), or they can adopt cryptocurrencies like ETH. Additionally, contributors like miners and stakers can be rewarded with this token.
 
 Most DApps are present on the _Ethereum network_ as of June 2022. It provides a strong framework for DApp developers to increase the use cases already in place. On other blockchains, such as BNB Smart Chain (BSC), Solana (SOL), Polygon (MATIC), Avalanche (AVAX), EOS, and so on, developers have begun to construct DApps as they become more advanced. To interact with a DApp, you’ll first need a compatible browser extension wallet like MetaMask, or Trust Wallet.
 
-## Benefits and limitations of DApps
+## Benefits and Limitations of DApps
 
 While DApps and conventional apps may have similar-looking user interfaces, DApps have some advantages over their centralized alternatives. Data is kept on centralized servers by web applications. The entire network of the app might be brought down by a single hacked server, rendering it inoperable for a while or ever. Data leaks or theft may occur in centralized systems as well, endangering businesses and consumers.
 
@@ -26,7 +26,7 @@ When it comes to illustrate the **limitations of DApps**, we first need to highl
 
 It is challenging for one DApp to stand out and draw a lot of users when there are so many others available. A DApp has to have a network effect in order to function properly. This is, the more users a DApp has, the more efficient it becomes at offering services. The DApp may be made more secure and shielded from hackers tampering with the open-source code by having more users.
 
-## Use cases
+## Use Cases
 
 1. **GameFi**
 
@@ -44,4 +44,4 @@ DApps enable the transformation of entertainment daily activities into digital e
 
 4. **Governance**
 
-DApps can enable users to participate more actively in the administration of online organizations by establishing a decision-making process that is more focused on the community. Users with governance tokens of a certain blockchain project can make suggestions for the community to vote on and vote on other people's ideas anonymously with the use of smart contracts. Decentralized Autonomous Organizations (DAOs) are one of the decentralized governance models. DAOs are completely autonomous DApps that employ smart contracts to decide for themselves without the need for a central authority. There is no hierarchy there. Instead, economic processes bring the organization's interests into line with those of specific DAO members. 
+DApps can enable users to participate more actively in the administration of online organizations by establishing a decision-making process that is more focused on the community. Users with governance tokens of a certain blockchain project can make suggestions for the community to vote on and vote on other people's ideas anonymously with the use of smart contracts. Decentralized Autonomous Organizations (DAOs) are one of the decentralized governance models. DAOs are completely autonomous DApps that employ smart contracts to decide for themselves without the need for a central authority. There is no hierarchy there. Instead, economic processes bring the organization's interests into line with those of specific DAO members.
