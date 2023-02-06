@@ -12,7 +12,7 @@ The scope of the bounty program extends to:
 
 - FetchD: <https://github.com/fetchai/fetchd>
 - Fetch Wallet: <https://github.com/fetchai/fetch-wallet>
-- The Block explorer: <https://github.com/fetchai/cosmos-explorer>
+- The Block Explorer: <https://github.com/fetchai/cosmos-explorer>
 - Documentation:: <https://github.com/fetchai/docs>
 - CosmPy: <https://github.com/fetchai/cosmpy>
 - AEA Framework, including the ACN and packages authored by Fetchai: <https://github.com/fetchai/agents-aea> and <https://pypi.org/project/aea>
@@ -46,7 +46,7 @@ For non-critical bugs, the Fetch team will create an issue or a pull request all
 
 For critical bugs that can result in loss of funds, it is important that the Fetch team has an opportunity to deploy a patched version before the exploit is acknowledged publicly. Hence, critical bugs and their fixes will be shared after the code is patched to prevent the targeting of such exploits.
 
-## Terms and conditions
+## Terms and Conditions
 
 These include, but are not limited to:
 

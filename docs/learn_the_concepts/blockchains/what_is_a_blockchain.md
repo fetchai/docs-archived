@@ -1,6 +1,6 @@
-# What is a blockchain?
+# What is a Blockchain?
 
-A  **blockchain** is a series of data records that functions as a distributed, replicated digital ledger of transactions across a network of computer systems. 
+A  **blockchain** is a series of data records that functions as a distributed, replicated digital ledger of transactions across a network of computer systems.
 
 !!! info 
 
@@ -12,13 +12,13 @@ Transactions take place inside a P2P global network, thus, blockchains are consi
 
     Each block inside the blockchain contains a **hash** (i.e. a digital fingerprint or unique identifier), **timestamped batches of recent valid transactions**, and the **hash of the previous block**. The previous block hash links the blocks together and prevents any block from being altered or a block being inserted between two existing blocks. An additional feature of a blockchain is that all previous records are stored within the current records, so, there is a full history of previous transactions.
 
-## Blockchains: use cases
+## Blockchains: Use Cases
 
 Blockchain technology is mostly used to track cryptocurrency transactions. Alternative uses for blockchains could be the following:
 
-1. **Blockchain for payment processing and money transfers**: banking transfer fees might be decreased (or eliminated) for transactions handled through a blockchain and paid in a couple of seconds.
+1. **Blockchain for Payment Processing and Money Transfers**: banking transfer fees might be decreased (or eliminated) for transactions handled through a blockchain and paid in a couple of seconds.
 
-2. **Blockchain for monitoring of supply chains**: businesses may easily identify inefficiencies in their supply chains using blockchain, as well as find products in real time and monitor their quality as they move from producers to retailers.
+2. **Blockchain for Monitoring of Supply Chains**: businesses may easily identify inefficiencies in their supply chains using blockchain, as well as find products in real time and monitor their quality as they move from producers to retailers.
 
 3. **Blockchain for data sharing**: blockchain could act as an intermediary to securely store and move enterprise data among industries.
  
@@ -30,15 +30,16 @@ Blockchain technology is mostly used to track cryptocurrency transactions. Alter
 
 ## Who can participate in a blockchain network?
 
+
 1. **Blockchain users**: participants joining the blockchain network and conducting transactions with other network participants.
 
 2. **Regulators**: users with special permissions to oversee the transactions happening within the network.
 
-3. **Blockchain network operators**: users having special permissions and authority to define, create, manage, and monitor the blockchain network.
+3. **Blockchain Network Operators**: individuals who have special permissions and authority to define, create, manage, and monitor the blockchain network.
 
-4. **Certificate authorities**: users issuing and managing the different types of certificates required to run a permissioned blockchain.
+4. **Certificate Authorities**: individuals who issue and manage the different types of certificates required to run a permissioned blockchain.
 
-## Benefits 
+## Benefits
 
 1. **Security**: blockchains are very secure, as the data is cryptographically encrypted, and it is very difficult and obvious if someone is trying to hack into a blockchain.
 
@@ -46,15 +47,15 @@ Blockchain technology is mostly used to track cryptocurrency transactions. Alter
 
 3. **Trust**: blockchains are decentralized systems and benefit from the lack of a central authority that behaves in its own interest. Therefore, there is a high degree of trust between the participants. The system is run by the participants for the participants.
 
-## Drawbacks 
+## Drawbacks
 
-1. **Complexity of setup**:Setting up a blockchain is not a simple task, there are networks of nodes to set up, the participatory framework established, and numerous components to bring together before you can even begin to store any information on the blockchain. 
+1. **Complexity of setup**:Setting up a blockchain is not a simple task, there are networks of nodes to set up, the participatory framework established, and numerous components to bring together before you can even begin to store any information on the blockchain.
 
 2. **Speed**: It takes longer to add a record to a block and add a block to the chain than it does to simply add a record into a traditional database table. This is a challenge for blockchain based payment systems, as blockchains typically handle fewer transactions per second than conventional payment systems.
 
 3. **Scaling issues**: As blockchains grow, they get more complex leading to issues of network congestion.
 
-4. **Participation is required**: Blockchains are decentralized systems, so they do need the active participation of members, for example they need to vote on governance proposals affecting the chain and be engaged in order for the blockchain to successfully operate. 
+4. **Participation is required**: Blockchains are decentralized systems, so they do need the active participation of members, for example they need to vote on governance proposals affecting the chain and be engaged in order for the blockchain to successfully operate.
 
 ## Types of Blockchain
 
@@ -75,4 +76,3 @@ The architecture of blockchain systems varies greatly, especially in terms of th
 !!! note 
 
     Varying consensus techniques have different effects on accessibility, security, and sustainability, and not all blockchains are created equally. In fact, the most suitable type of blockchain design needs to be fitting the actual use case it wants to serve.
- 
