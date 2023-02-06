@@ -25,8 +25,8 @@ In order to register, agents *must* provide a valid address and a given name. Th
 Agents describe themselves in three ways:
 
 1. **Identity**: their address and ledger type along with their given name
-2. **Personality pieces**: how they *look*
-3. **Service keys**: what they *do*, *sell* or *want*.
+2. **Personality Pieces**: how they *look*
+3. **Service Keys**: what they *do*, *sell* or *want*.
 
 We cover all of these in this next section. It's important to understand the difference between personality pieces and service keys, as agents only have one appearance, but they can provide many services. Search results can be filtered by a number of both, and wildcards are permitted where relevant.
 
@@ -46,7 +46,7 @@ Agents can have a number of personality pieces. These describe how an agent appe
 | `action.buyer`      | Boolean, indicates whether the agent wishes to buy information, i.e., is an agent that requires value from another agent. |
 | `action.seller`     | Boolean, indicates whether the agent sells information, i.e., provides value. Value provided can be zero-cost. |
 
-#### Genus list
+#### Genus List
 
 A genus is a coarse agent class. It is the roughest description of what an agent is, and an easy way of filtering large groups of agents out of searches. The supported genus list is:
 
@@ -75,7 +75,7 @@ An architecture is a clue to other agents to describe how the agent is built. Th
 | `custom`         | Custom agent architecture             |
 | `agentframework` | Built using the Fetch Agent Framework |
 
-#### A note on classifications
+#### A Note on Classifications
 
 There is currently no fixed set of guidelines as to how classifications are used. It is expected that agent builders will converge on a set of standards, and as those become clearer, they will be documented as "by convention" classification uses. Here are some examples of classifications in use:
 
@@ -204,7 +204,7 @@ At this point, your agent is now fully registered and can then communicate with 
 
 Agents that do not contact the soef at least once over a specified interval will be automatically unregistered. The typical setting for this is 60 minutes.
 
-#### Chain identifiers
+#### Chain Identifiers
 
 The soef supports a selection of chain identifiers designed to allow agents to distinguish networks in searches, but also to identify the type of address used for verification purposes.
 
@@ -235,7 +235,7 @@ The soef has a number of commands that can be used to set or update personality 
 | `set_user_context`                      | Sets an **optional** user-context for an agent to what is specified in the `value` parameter. This can be optionally disclosed in `find_around_me` if enabled. See `set_disclose_user_context`, below. The user context must not contain illegal characters and is limited to 160 maximum. |
 | `set_disclose_user_context`             | If the `disclose` parameter is set to `true`, the optional user context is disclosed if it has been set. Default is `false`. |
 
-#### Find commands in detail
+#### Find Commands in Detail
 
 `find_around_me` and `find_on_this_node` are the big commands. Ultimately, they will cost a small amount of tokens to use, depending on the size of the request, as it involves the most computing time. This provides an incentive for soef operators to maintain soef nodes that correspond to subject areas, geographic areas or both. The command has a number of parameters specifying the filtering required. For `find_around_me`, the `range_in_km` is *required*, whereas narrowing down agents to be within a certain angle of a direction is optional. This cannot exceed a certain range, typically between 50 and 75km. This, and other configuration items, are available on the soef's configuration page. There are other parameters that are optional, although for `find_on_this_node` at least one `ppfilter` or `skfilter` must be specified. The parameters are:
 
@@ -267,7 +267,7 @@ command=find_around_me&range_in_km=50&skfilter=type,fruit,PS&skfilter=size,large
 
 In this example, the key `type` must be present, and it must match to `fruit`. If the `size` key is present, and it is set to `large`, then do not match. I.e., return everything that's a fruit within 50km except where the size is large.
 
-## Further information
+## Further Information
 
 You can find further information, or talk to us, in the #agents channel on our official developer Discord server, which you can access <a href="https://discord.com/invite/btedfjPJTj" target="_blank">here</a>.
 

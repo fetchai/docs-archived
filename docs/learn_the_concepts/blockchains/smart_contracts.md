@@ -1,4 +1,4 @@
-## What is a smart contract?
+## What is a Smart Contract?
 
 A **smart contract** (i.e. **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when the circumstances are satisfied. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**. 
 
@@ -20,9 +20,9 @@ When predefined circumstances have been verified to have been satisfied, a netwo
 
 ## Benefits
 
-1. **Speed, efficiency, and precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually. 
+1. **Speed, Efficiency, and Precision**: the contract is promptly carried out if a condition is satisfied. Smart contracts are digital and automated, so there is no paperwork to complete or time wasted fixing mistakes that frequently occur when documents are filled out manually.
 
-2. **Transparency and trust**: there is no need to wonder whether information has been changed for one participant's personal gain because there is no third party engaged and participants exchange encrypted records of transactions. Smart contracts are written in a way that does make disputes extremely rare, indeed they are designed to avoid them entirely. 
+2. **Transparency and Trust**: there is no need to wonder whether information has been changed for one participant's personal gain because there is no third party engaged and participants exchange encrypted records of transactions. Smart contracts are written in a way that does make disputes extremely rare, indeed they are designed to avoid them entirely. 
 
 3. **Security**: because the blockchain transaction records are encrypted, these are incredibly difficult to hack. Additionally, hackers would need to alter the entire chain in order to change a single record on a distributed ledger since each record is linked to the records that came before and after it.
 
@@ -30,11 +30,11 @@ When predefined circumstances have been verified to have been satisfied, a netwo
 
 1. **Legal status**: smart contracts lack any legal status. This may be largely caused because the technology is so new, and most legal jurisdictions have not yet updated their guidance on smart contracts and legislation if required is usually not yet in place.
 
-2. **Difficult to change**: once a record has been written to the blockchain it is impossible to change or delete it. Therefore, if a smart contract has been issued in some way incorrectly, then changing it is almost impossible. You would be able to issue another contract that effectively would reverse the effect of the incorrect contract, but that would not necessarily be easy.
+2. **Difficult to Change**: once a record has been written to the blockchain it is impossible to change or delete it. Therefore, if a smart contract has been issued in some way incorrectly, then changing it is almost impossible. You would be able to issue another contract that effectively would reverse the effect of the incorrect contract, but that would not necessarily be easy.
 
-3. **Need for precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
+3. **Need for Precision**: smart contracts do not work unless they are written in an extremely precise way. In fact, there can not be any ambiguity or vagueness in their terms.
 
-## Use cases
+## Use Cases
 
 ### Finance
 
@@ -64,7 +64,7 @@ To increase security and lower the likelihood of data mismanagement or a breach,
 
     For identity management, smart contracts help to ensure and facilitate: identity protection, the information the user wants to share, and KYC verification.
 
-### Machine Learning and Artificial Intelligence 
+### Machine Learning and Artificial Intelligence
 
 The capacity of blockchain technology and related smart contract technology to simplify difficult computing operations like those involved in machine learning and artificial intelligence is one of the most interesting uses of these technologies (AI). There is potential to develop AI-powered smart contracts by fusing the data-intensive processing of AI with the decentralized security and immutability of blockchain technology. Applications for smart contracts will need to develop into increasingly complicated systems as they are used by more and more sectors of the economy.
 
