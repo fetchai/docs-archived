@@ -1,4 +1,4 @@
-## What is a Peer-to-Peer system?
+## What is a Peer-to-Peer System?
 
 A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate with each other without having to go through a middleman. Peer-to-Peer networks consist of a group of devices that collectively store and share files. Every participant (i.e. _node_) functions as a distinct _peer_. Normally, all nodes are equally powerful and carry out the same functions. We can outline three key characteristics featuring a P2P system:
 
@@ -24,7 +24,7 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 
 P2P systems can be grouped based on their architecture into the following _three primary subtypes_:
 
-### Unstructured P2P networks
+#### Unstructured P2P Networks
 
 P2P networks that are unstructured lack a defined node organization. Participants communicate with one another in a random fashion. These systems are thought to be resistant to high churn activity (i.e. several nodes frequently joining and leaving the network). 
 
@@ -32,9 +32,9 @@ P2P networks that are unstructured lack a defined node organization. Participant
 
     Unstructured P2P networks are simpler to set up, but because search requests are sent to as many peers as possible, they may utilize more CPU and memory. This frequently causes the network to get overrun with requests, especially when only a few nodes are providing the needed material.
 
-### Structured P2P networks
+#### Structured P2P Networks
 
-The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT). 
+The structured P2P network is organized into an arrangement based on a distributed hash table (i.e. DHT).
 
 !!! info 
 
@@ -46,15 +46,15 @@ This contrasts with the idea behind unstructured P2P networks in which whole fil
 
     Searching for material in a structured network is simpler and uses less power and memory than an unstructured network. The routing of requests and information rely on each peer knowing what is available for download and other criteria of the neighboring node, which must be relearned as peers leave or join the network as the neighbors change.
 
-### Hybrid P2P networks
+#### Hybrid P2P Networks
 
 In hybrid P2P networks some elements of the P2P architecture are combined with the traditional client-server approach. Hybrid models typically display better overall performance when compared to the other two categories. They typically incorporate some key benefits of each strategy, attaining notable levels of efficiency and decentralization at the same time.
 
-## Benefits and drawbacks of a P2P system
+## Benefits and Drawbacks of a P2P System
 
 ### Benefits
 
-* **No need for a specific operating system or software**: Individual peers can be on any OS and in most cases do not need specialized software to share files. This is especially useful in remote P2P networks where users might not have the same hardware.
+* **No need for a Specific Operating System or Software**: Individual peers can be on any OS and in most cases do not need specialized software to share files. This is especially useful in remote P2P networks where users might not have the same hardware.
 
 * **Cost**: P2P networks do not need a costly server and can be joined together simply through USB or over the internet. Even more permanent connections (using copper wires in smaller offices, for example) is not as costly as creating a server or buying server software.
 
@@ -64,25 +64,25 @@ In hybrid P2P networks some elements of the P2P architecture are combined with t
 
 * **Scalable**: P2P networks are easy to scale, with more nodes adding performance and giving more power. Adding more peers makes more storage and processing power available to the network and can improve download and upload speeds.
 
-* **Easy searching**: The idea of a peer-to-peer network is that finding the right resources should, in theory, be easy. Even in an unstructured network, if the content you are searching for is not rare, it should be held by several peers and be available to download from multiple sources.
+* **Easy Searching**: The idea of a peer-to-peer network is that finding the right resources should, in theory, be easy. Even in an unstructured network, if the content you are searching for is not rare, it should be held by several peers and be available to download from multiple sources.
 
-* **Aligns with decentralized systems**: Peer-to-peer systems align closely with decentralized systems, as both require trust between parties in order to work effectively, and both do not require central authorities to manage the system. Peer-to-peer communication is the basis of how parties in decentralized systems communicate with each other.
+* **Aligns With Decentralized Systems**: Peer-to-peer systems align closely with decentralized systems, as both require trust between parties in order to work effectively, and both do not require central authorities to manage the system. Peer-to-peer communication is the basis of how parties in decentralized systems communicate with each other.
 
-* **More freedom**: By not having to go through a middleman, it gives users more freedom. They are not limited by the information for example provided by the hotel booking site but can find out far more by being in direct contact with the hotel and likewise the hotel can ask questions directly to their guests.
+* **More Freedom**: By not having to go through a middleman, it gives users more freedom. They are not limited by the information for example provided by the hotel booking site but can find out far more by being in direct contact with the hotel and likewise the hotel can ask questions directly to their guests.
 
 ### Drawbacks
 
 * **Decentralized**: this makes it harder to arrange backups and file archiving. The safety and integrity of the content can be at risk if it is not managed, backed up regularly and deleted once it is obsolete. Due to the decentralized nature of such networks, participants may find it hard to provide themselves those useful services normally provided by the middlemen, such as marketing and promoting services, or market balancing services.
 
-* **No oversight**: in most of P2P networks, the decentralized nature makes it hard for a single administrator to monitor contents, and these can be at risk from malware and viruses. Sharing files with an infected node can transmit malware through the network and could cause problems over several affected peers.
+* **No Oversight**: in most of P2P networks, the decentralized nature makes it hard for a single administrator to monitor contents, and these can be at risk from malware and viruses. Sharing files with an infected node can transmit malware through the network and could cause problems over several affected peers.
 
 * **Slow transmission**: simultaneous uploading and downloading of files can lead to a slower rate of transmission. The double function of uploading content while downloading other resources might actually make it slower.
 
-* **Poor internet performance**: file sharing through P2P networks uses a lot of bandwidth and CPU, which can slow the computer performance for the individual user, especially when it comes to the internet. If multiple files are being shared, there is a risk that productivity in other areas could be reduced.
+* **Poor Internet Performance**: file sharing through P2P networks uses a lot of bandwidth and CPU, which can slow the computer performance for the individual user, especially when it comes to the internet. If multiple files are being shared, there is a risk that productivity in other areas could be reduced.
 
-* **Illegal content**: peer-to-peer networks can be used for downloading pirated music, movies, software and other copyrighted material, even if the sharer is unaware.
+* **Illegal Content**: peer-to-peer networks can be used for downloading pirated music, movies, software and other copyrighted material, even if the sharer is unaware.
 
-## Examples of Peer-to-Peer Systems 
+## Examples of Peer-to-Peer Systems
 
 One of the most popular uses of P2P systems is represented by file sharing networks which allow members to directly share files with each other.
 
