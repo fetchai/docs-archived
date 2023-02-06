@@ -4,7 +4,7 @@ DApps share the following features:
 
 * **Open-sourceness**: This allows anybody to access, verify, use, copy, and edit their source code. The vast majority of the DApp tokens are not controlled by a single entity. Users are also able to suggest and vote on DApp improvements.
 
-* **Decentralization** and **cryptography**: To protect data, the DApp stores all of its data on a public, decentralized blockchain that is maintained by a number of users (or nodes).
+* **Decentralization** and **Cryptography**: To protect data, the DApp stores all of its data on a public, decentralized blockchain that is maintained by a number of users (or nodes).
  
 * **Tokenization**: A cryptographic token is required to access DApps. They can use native tokens created using a consensus mechanism like Proof of Work (PoW) or Proof of Stake (PoS), or they can adopt cryptocurrencies like ETH. Additionally, contributors like miners and stakers can be rewarded with this token.
  
@@ -14,7 +14,7 @@ DApps share the following features:
 
 To interact with a DApp, you first need a compatible browser extension wallet like MetaMask, or Trust Wallet.
 
-## Benefits and limitations of DApps
+## Benefits and Limitations of DApps
 
 While DApps and conventional apps may have similar-looking user interfaces, DApps have some advantages over their centralized alternatives. Data is kept on centralized servers by web applications. The entire network of the app might be brought down by a single hacked server, rendering it inoperable for a while or ever. Data leaks or theft may occur in centralized systems as well, endangering businesses and consumers.
 
@@ -36,7 +36,7 @@ Another difficult task is modifying a DApp. A DApp does require continual update
 
 It is challenging for one DApp to stand out and draw a lot of users when there are so many others available. A DApp has to have a network effect in order to function properly. This is, the more users a DApp has, the more efficient it becomes at offering services. The DApp may be made more secure and shielded from hackers tampering with the open-source code by having more users.
 
-## Use cases
+## Use Cases
 
 ### GameFi
 
