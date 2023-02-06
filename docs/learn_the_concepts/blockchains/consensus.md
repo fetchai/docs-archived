@@ -1,5 +1,5 @@
 # Consensus Mechanisms
- 
+
 Despite the absence of a central authority to confirm and authenticate the transactions, every Blockchain transaction is regarded as being totally safe and validated. Only the presence of the consensus protocol, a fundamental component of every Blockchain network, makes this feasible. 
  
 !!! info 
@@ -17,7 +17,7 @@ One of the most prominent blockchain technologies is the PoW consensus process, 
 ??? note
 
       PoW networks are constrained in terms of their speed and scalability due to how the high energy-intensive process these imply. Massive quantities of processing hash power must be used to solve the computational challenge, which uses a lot of energy. The more intensive the validation process, the more computational power is adopted to solve the puzzle and this leads to a higher competition among validators, which equals harder proofs of work and more energy consuming operations. Technology advancement in the blockchain sector has put a lot of emphasis on addressing the negative environmental effects of crypto mining, and several alternatives have surfaced.
- 
+
       PoW blockchains have typically offered stronger security while preserving significant decentralization, despite their speed and scalability restrictions. Due to the distributed nature of PoW systems, it would be very expensive for a bad actor to seize control of the majority of the network's computing power and take over the blockchain. Typically, it is unable to overcome the high expenses of the hardware, power, and computing.
 
 ## Proof-of-Stake (PoS)
