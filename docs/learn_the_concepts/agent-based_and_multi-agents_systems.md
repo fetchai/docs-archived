@@ -1,4 +1,4 @@
-# Agent-based and multi-agents systems
+# Agent-Based and Multi-Agents Systems
 
 An **agent** is a piece of software that _represents_ an entity (individual, organisation, or object) and acts _continuously_ and _autonomously_  (with limited or no interference) on their behalf. The most important defining characteristic of an agent is its autonomy, that is the ability to act on its own without external direction from its owner in response to situations it encounters..
 
@@ -12,7 +12,7 @@ An **agent** is a piece of software that _represents_ an entity (individual, org
 
 2. **Autonomy**: Agents operate with limited or no interference and do not need to be constantly told what to do. They perform actions continuously according to their internal reasoning system.
 
-3. **Self-interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
+3. **Self-Interested**: Each agent primarily looks after its own interests (which is aligned with those of its owner) and not necessarily the interests of other agents.
 
 4. **Proactive**:  Agents have goals to achieve allowing them to take the initiative and perform actions that get them closer to achieving their goals. This means an agent typically compares the outcome of different actions relative to its goals and selects the one that takes it closer to them.
 
@@ -37,7 +37,7 @@ As it is possible to think, there are a growing number of agent-based applicatio
 !!! warning
 
     When it comes to consider the Fetch.ai ecosystem, despite some similarities between ABM and the Autonomous Economic Agent (AEA) Framework, the two have fundamentally different goals. ABM's goal is not the design of agents or solving specific practical or engineering problems, but to study the unknown and complex behaviour of systems comprised of agents with known behaviour. On the other hand, the Autonomous Economic Agent (AEA) Framework's goal is to provide the necessary tools to build AEAs which purpose is to create value for their owner in clearly defined domains of application and not the study of existing of hypothetical scenarios to gather data.
- 
+
 ## Multi-Agents Systems
 
 A **Multi-Agents System** (**MAS**) is a group of agents that interact with each other and the environment to achieve specific goals. In such systems, agents may not have full knowledge of both the environment and the internal state of other agents. 
