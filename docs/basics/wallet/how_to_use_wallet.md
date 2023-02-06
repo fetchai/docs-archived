@@ -6,7 +6,7 @@ To transfer funds to your account on the Fetch wallet:
 
 In the wallet or application you are using to send the funds, use your account's address as the destination account to which the funds must go.
 
-### To copy your account's address
+### To Copy Your Account's Address
 
 1. Either click on the account address at the top of the dashboard (under the account name):
 ![Copy active account address](../../images/wallet/address_copy.jpg)
