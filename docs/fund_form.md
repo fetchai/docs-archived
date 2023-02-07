@@ -1,15 +1,13 @@
-<h1>Apply for $150M Developer Fund</h1>
+<h1>The Developer Fund</h1>
 <div class="form-wrapper">
   <form onsubmit="onSubmitHandler(event)">
     <p>
-      Following the announcement of the development fund for growing Fetch.ai
-      ecosystem, we are accepting applications from prospective projects either
-      from Cosmos or EVM to build upon Fetch.ai network or scale using
-      Fetch.ai's toolkits.
+      Following the announcement of a new development fund for growing the Fetch.ai
+      ecosystem, we are accepting applications from prospective projects, either
+      from Cosmos or EVM, to build upon the Fetch.ai network or scale using it's tools.
     </p>
     <p>
-      Please fill the form out if you're interested to apply for the developer
-      grant.
+      Please fill the form below to apply for the developer grant.
     </p>
     <div class="group">
       <div class="form-label">
