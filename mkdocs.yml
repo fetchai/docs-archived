@@ -20,7 +20,6 @@ theme:
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -31,6 +30,8 @@ theme:
     - navigation.tracking # URL automatically updated with the currently active anchor
     - navigation.top # Back-to-top button
     - navigation.footer # Add links to the previous and next page of the current page
+    - navigation.tabs # First level of navigation item are in the top menu bar
+    - navigation.tabs.sticky # To hold the top navigation bar in place
     - search.suggest # Completion for the searched word (can be accepted with ->).
     - search.highlight # Highlight all occurrences after following a search result link
     - search.share # Show share button for copying deep link to the current search query and result
@@ -39,42 +40,44 @@ theme:
   custom_dir: overrides # Needed for announcements
 
 nav:
-  - Home : "index.md"
-  - Bug Bounty Program: "bug_bounty.md"
-  - Learn the Concepts:
-    - Decentralization: 'decentralisation.md'
-    - Peer-to-Peer Applications: 'learn_the_concepts/peer_to_peer_systems.md'
-    - Agent-based and Multi-agents based systems: 'learn_the_concepts/agent-based_and_multi-agents_systems.md'
-    - Blockchains:
-        - What is a blockchain?: 'learn_the_concepts/blockchains/what_is_a_blockchain.md'
-        - Smart contracts: 'learn_the_concepts/blockchains/smart_contracts.md'
-        - Decentralized Applications: 'learn_the_concepts/blockchains/decentralized_applications.md'
-        - Consensus: 'learn_the_concepts/blockchains/consensus.md'
-        - Validators: 'learn_the_concepts/blockchains/validators.md'
-        - Transaction fees: 'learn_the_concepts/blockchains/transaction_fees.md'
-        - Oracles: 'learn_the_concepts/blockchains/oracles.md'
+  - Overview:
+    - At a Glance: "index.md"
+    - Learn the Concepts:
+      - Decentralization: 'decentralisation.md'
+      - Peer-to-Peer Applications: 'learn_the_concepts/peer_to_peer_systems.md'
+      - Agent-based and Multi-agents systems: 'learn_the_concepts/agent-based_and_multi-agents_systems.md'
+      - Blockchains:
+          - What is a Blockchain?: 'learn_the_concepts/blockchains/what_is_a_blockchain.md'
+          - Smart Contracts: 'learn_the_concepts/blockchains/smart_contracts.md'
+          - Decentralized Applications: 'learn_the_concepts/blockchains/decentralized_applications.md'
+          - Consensus: 'learn_the_concepts/blockchains/consensus.md'
+          - Validators: 'learn_the_concepts/blockchains/validators.md'
+          - Transaction Fees: 'learn_the_concepts/blockchains/transaction_fees.md'
+          - Oracles: 'learn_the_concepts/blockchains/oracles.md'
+    - Basics:
+      - Wallet:
+          - Getting Started: "basics/wallet/getting_started.md"
+          - How to Use: "basics/wallet/how_to_use_wallet.md"
+      - Staking:
+        - What is Staking?: 'basics/staking/what_is_staking.md'
+        - How to Stake: 'basics/staking/how_to_stake.md'
+        - Re-Delegation: 'basics/staking/redelegation.md'
+      - Native and ERC-20 FET:
+        - Native and ERC-20 FET: 'native_and_erc20/native_and_erc20_fet.md'
+        - How to convert: 'native_and_erc20/how_to_convert_fet.md'
+        - Reconciliation service: 'native_and_erc20/reconciliation.md'
+    - Bug Bounty Program: "bug_bounty.md"
+    - Developer Fund: "fund_form.md"
     - Glossary: 'learn_the_concepts/glossary.md'
-  - Basics:
-    - Wallet:
-        - Getting Started: "basics/wallet/getting_started.md"
-        - How to Use: "basics/wallet/how_to_use_wallet.md"
-    - Staking:
-      - What is Staking?: 'basics/staking/what_is_staking.md'
-      - How to Stake: 'basics/staking/how_to_stake.md'
-      - Re-Delegation: 'basics/staking/redelegation.md'
-  - Native and ERC-20 FET:
-    - Native and ERC-20 FET: 'native_and_erc20/native_and_erc20_fet.md'
-    - How to convert: 'native_and_erc20/how_to_convert_fet.md'
-    - Reconciliation service: 'native_and_erc20/reconciliation.md'
   - Fetch wallet: '!include ./fetch-wallet/mkdocs.yml'
-  - Ledger: '!include ./ledger/docs/mkdocs.yml'
-  - Indexer: '!include ./ledger-subquery/mkdocs.yml'
-  - CosmPy: '!include ./cosmpy/mkdocs.yml'
   - AEA Framework: '!include ./aea/mkdocs.yml'
   - μAgents: '!include ./uAgents/mkdocs.yml'
-  - Collective Learning: '!include ./colearn/mkdocs.yml'
-  - Create React App template: '!include ./cra-template-cosmjs-keplr/mkdocs.yml'
+  - CosmPy: '!include ./cosmpy/mkdocs.yml'
   - Jenesis: '!include ./jenesis/mkdocs.yml'
+  - Ledger: '!include ./ledger/docs/mkdocs.yml'
+  - Indexer: '!include ./ledger-subquery/mkdocs.yml'
+  - Create React App template: '!include ./cra-template-cosmjs-keplr/mkdocs.yml'
+  - Collective Learning: '!include ./colearn/mkdocs.yml'
   - Archives:
     - Search and Discovery (SOEF):
       - Simple OEF: 'soef/simple-oef.md'
@@ -83,6 +86,7 @@ nav:
 extra_css:  # Required for the Fetchy design style
   - css/style.css
   - css/termynal-fast.css
+  - css/admonitions.css
 
 extra_javascript:
   - js/termynal-fast.js
@@ -105,6 +109,7 @@ markdown_extensions:
   - pymdownx.tabbed: # Required by tabs
       alternate_style: true
   - tables # # Required by tables
+  - def_list
   - toc:
       permalink: true
   - markdown_include.include:
