@@ -63,9 +63,9 @@ The architecture of blockchain systems varies greatly, especially in terms of th
 
 * **Public blockchains** are entirely decentralised, permissionless, and open to everybody. All nodes to have equal access and abilities within the blockchain. These are censorship-resistant and offer broad ecosystems for the development of apps and platforms. 
 
-!!! example
+    !!! example
 
-    These blockchains include Bitcoin, Ethereum, and Litecoin as examples. The majority of public blockchain networks use processes known as _Proof-of-Work_ (_PoW_) or _Proof-of-Stake_ (_PoS_) to provide consensus.
+            These blockchains include Bitcoin, Ethereum, and Litecoin as examples. The majority of public blockchain networks use processes known as _Proof-of-Work_ (_PoW_) or _Proof-of-Stake_ (_PoS_) to provide consensus.
 
 * **Private blockchains** are blockchains within which permissions are managed by a single company. It is the central authority which decides who can be a node. The central authority may not always accord each node an equal right to execute certain responsibilities. This makes private blockchains partially decentralised. Private (or permissioned) blockchains can be structured in various ways to prioritize speed, security, and scalability.
 
