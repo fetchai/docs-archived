@@ -4,23 +4,23 @@ A **Peer-to-Peer** (i.e. **P2P**)  system is a network of users who communicate 
 
 * **No middlemen needed**: One of the key characteristics of peer-to-peer systems is that middlemen are not always required, though they are allowed. 
 
-!!! example
-
-        For instance, when booking a hotel room with a travel agent, the users will be going through a middleman but if the user books a hotel room directly with the hotel itself, then this depicts a direct communication, and hence, they are communicating on a peer-to-peer basis.
+    !!! example
+    
+            When booking a hotel room with a travel agent, you are going through a middleman. However, booking a room directly with the hotel itself is direct communication, and an example of peer-to-peer interaction.
 
 * **Direct links**: direct communication between both parties can be established only in the presence of direct links between them.
 
 * **Direct interaction**: It is not enough just for parties to be able to communicate directly, they have to be able to actually interact. Peer-to-peer systems are characterized by direct interaction. 
  
-!!! example
+    !!! example
+    
+            In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
 
-        In the hotel room booking example, making a booking with the hotel sending back a booking confirmation actually consists of a direct interaction between the two parties.
-
-??? note
-
-    P2P networks enable the sharing of files stored on linked devices' hard drives. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, both operations can be carried out concurrently. Therefore, each node has a copy of the data and serves as both a client and a server to other nodes. This removes the need of a central administrator or server. 
-
-    P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models.
+    ??? note
+    
+        P2P networks enable the sharing of files stored on linked devices' hard drives. A user can serve as the source of a file after they have downloaded it. In other words, when a node performs the role of a client, it downloads data from other network nodes. However, while they are acting as a server, they serve as the location for file downloads by other nodes. However, both operations can be carried out concurrently. Therefore, each node has a copy of the data and serves as both a client and a server to other nodes. This removes the need of a central administrator or server. 
+    
+        P2P networks differ from more conventional client-server systems in this way, where client devices receive files from a centralized server.  Since every node sends, receives, and saves data, P2P networks often get quicker and more effective as their user bases expand. P2P networks are also particularly resilient to cyberattacks thanks to their distributed architecture, and P2P networks do not have a single point of failure, in contrast to conventional models.
 
 P2P systems can be grouped based on their architecture into the following _three primary subtypes_:
 
