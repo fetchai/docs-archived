@@ -1,6 +1,6 @@
 ## What is a Smart Contract?
 
-A **smart contract** (i.e. **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when the circumstances are satisfied. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**. 
+A **smart contract** (i.e. **automated self-enforcing contract**) is a piece of computer software that initiates a certain activity when the circumstances are satisfied. **In other words, smart contracts are essentially lines of code that run when certain criteria are satisfied, performing a certain purpose**.
 
 !!! info
 
