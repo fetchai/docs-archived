@@ -48,7 +48,7 @@ With PoB, validators burn coins by sending them to an address from which they ar
 
 ## Proof of Capacity (PoC)
 
-PoC, often referred to as Proof-of-Space (PoSpace), is a mining technique that is based on the amount of hard disk space that a miner has available. Here, miners generate a list of all the possible hashes beforehand in a process called plotting. Such plots are then stored on hard drives. The more storage capacity a miner has, the more possible solutions available. The more solutions, the higher the chances of possessing the correct combination of hashes and thus the higher the possibility of winning the reward. 
+PoC, often referred to as Proof-of-Space (PoSpace) is a mining technique that is based on the amount of hard disk space that a miner has available. Here, miners generate a list of all the possible hashes beforehand in a process called plotting. Such plots are then stored on hard drives. The more storage capacity a miner has, the more possible solutions available. The more solutions, the higher the chances of possessing the correct combination of hashes and thus the higher the possibility of winning the reward. 
  
 !!! info
 
